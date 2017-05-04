@@ -19,5 +19,6 @@
 
 <P>  The time on the server is ${serverTime}. </P>
 <p>test</p>
+<p>test2</p>
 </body>
 </html>
