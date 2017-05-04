@@ -12,11 +12,17 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 .middle-menubar{
-	margin-left:auto;
-	margin-right:auto;
+   margin-left:auto;
+   margin-right:auto;
 }
 a{
-	text-decoration:none;
+   text-decoration:none;
+}
+.fun-menu{
+	color:orange;
+	font-weight:bold;
+	position:relative;
+	top:20px;
 }
 </style>
 
@@ -24,20 +30,27 @@ a{
 
 </head>
 <body>
-	<div class="middle-menubar">
-		<table style="width:1500px">
-			<tr>
-				<td><img src="images/common/logo.png" style="widht:400px;height:70px;"></td>
-				<td style="width:600px;">&nbsp;</td>
-				<td></td>
-				<td></td>
-				<td style="width:150px;"><a href="make.do">프로젝트 등록하기</a></td>
-				<td style="width:150px;"><a href="#">프로젝트 둘러보기</a></td>
-				<td style="width:80px;"><a href="#">고객센터</a></td>
-				<td style="width:50px;"><a href="#">로그인</a></td>
-				<td style="width:150px;"><a href="myinfo.do">회원정보보기</a></td>
-			</tr>
-		</table>
-	</div>
+   <div class="row middle-menubar hidden-xs">
+   
+   <div class="col-lg-2 col-md-2 col-sm-2">
+   	<img src="images/common/logo.png" style="widht:400px;height:70px;">
+   </div>
+   <div class="col-lg-5 col-md-4 col-sm-3">
+   	&nbsp;
+   </div>
+   <div class="col-lg-4 col-md-4 col-sm-4">
+   		<table style="width:430px">
+        	<tr>
+            	<td style="width:150px;"><a class="fun-menu" href="make.do">프로젝트 등록하기</a></td>
+           	 	<td style="width:150px;"><a class="fun-menu" href="#">프로젝트 둘러보기</a></td>
+            	<td style="width:80px;"><a class="fun-menu" href="#">고객센터</a></td>
+            	<td style="width:50px;"><a class="fun-menu" href="#">로그인</a></td>
+         	</tr>
+      </table>
+   </div>
+   
+      
+      
+   </div>
 </body>
 </html>
