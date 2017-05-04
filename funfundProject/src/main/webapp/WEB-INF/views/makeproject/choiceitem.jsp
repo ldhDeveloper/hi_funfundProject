@@ -13,9 +13,8 @@ img{
    padding:0px !important;
 }
 .overwrap{
-   position:relative;
+   position:absolute;
    z-index:100;
-   top:-600px;
    background:rgba(0,0,0,0.5);
    max-width:100%;
    width:100%;
@@ -25,9 +24,13 @@ img{
    max-width:100%;
 }
 .img-menu{
-   position:relative;
+   position:absolute;
    z-index:1;
    height:600px;
+}
+.list-menu{
+	position:relative;
+	height:600px;
 }
 .btn-makeitem{
    background:orangered;
@@ -39,8 +42,9 @@ img{
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/menubar.jsp" flush="true"/>
-<div class="row">
+<div class="row" style="padding:0;">
    <div class="choice col-lg-6 col-md-6 col-sm-12 col-xs-12">
+   	  <div class="list-menu">
       <img class="img-menu" src=images/makeproject/reward.jpg>
       <div class="overwrap">
          <p style="color:white;text-align:center;padding-top:80px;font-size:40px;">리워드형<br>REWARD</p>
@@ -50,8 +54,10 @@ img{
             <button class="btn btn-makeitem" align="center">신청하기</button>
          </p>
       </div>
+      </div>
    </div>
    <div class="choice col-lg-6 col-md-6 col-sm-12 col-xs-12">
+   	  <div class="list-menu">
       <img class="img-menu" src=images/makeproject/donation.jpg>
       <div class="overwrap">
          <p style="color:white;text-align:center;padding-top:80px;font-size:40px;">후원형<br>DONATION</p>
@@ -61,6 +67,7 @@ img{
             <button class="btn btn-makeitem" align="center">신청하기</button>
          </p>
          
+      </div>
       </div>
    </div>
 </div>
