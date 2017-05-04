@@ -35,10 +35,9 @@ a{
 				<td style="width:150px;"><a href="#">프로젝트 둘러보기</a></td>
 				<td style="width:80px;"><a href="#">고객센터</a></td>
 				<td style="width:50px;"><a href="#">로그인</a></td>
+				<td style="width:150px;"><a href="myinfo.do">회원정보보기</a></td>
 			</tr>
 		</table>
-		<button class="btn btn-primary">테스트</button>
-		
 	</div>
 </body>
 </html>
