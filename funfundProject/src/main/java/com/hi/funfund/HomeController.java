@@ -41,6 +41,11 @@ public class HomeController {
 		return "makeproject/choiceitem";
 	}
 	
+
+	@RequestMapping(value = "funding.do")
+	public String funding(){
+		return "funding/funding";
+
 	@RequestMapping(value = "myinfo.do")
 	public String myinfo(){
 		return "myinfo/myinfo";
