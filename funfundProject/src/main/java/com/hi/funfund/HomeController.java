@@ -41,4 +41,9 @@ public class HomeController {
 		return "makeproject/choiceitem";
 	}
 	
+	@RequestMapping(value = "myinfo.do")
+	public String myinfo(){
+		return "myinfo/myinfo";
+	}
+	
 }
