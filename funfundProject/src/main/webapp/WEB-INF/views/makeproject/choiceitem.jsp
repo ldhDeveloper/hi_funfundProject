@@ -51,7 +51,7 @@ img{
          <p style="color:white;text-align:center;padding-top:50px;font-size:15px;">
             리워드형 크라우드펀딩은 제품/서비스를<br>보상으로 주면서 자금을 조달할 수 있는 방법입니다.<br>공익 목적의 캠페인에서부터 하드웨어까지,<br>다양한 아이디어를 알리고 현실로 만들 수 있습니다.
             <br><br><br><br><br><br><br><br>
-            <button class="btn btn-makeitem" align="center">신청하기</button>
+            <button class="btn btn-makeitem" align="center" onclick="location.href='makeproject.do'">신청하기</button>
          </p>
       </div>
       </div>
