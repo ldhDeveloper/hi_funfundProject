@@ -53,4 +53,8 @@ public class HomeController {
 		return "myinfo/myinfo";
 	}
 	
+	@RequestMapping(value = "makeproject.do")
+	public String makeProject(){
+		return "makeproject/primaryinfo";
+	}
 }
