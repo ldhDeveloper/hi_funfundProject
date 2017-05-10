@@ -9,7 +9,7 @@ import com.hi.funfund.account.model.dao.AccountDao;
 import com.hi.funfund.account.model.vo.Account;
 import com.hi.funfund.account.model.vo.Party;
 
-@Service("AccountService")
+@Service("accountService")
 public class AccountServiceIm implements AccountService {
 
 	@Autowired

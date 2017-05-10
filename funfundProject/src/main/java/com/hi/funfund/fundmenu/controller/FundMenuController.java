@@ -1,13 +1,11 @@
-package com.hi.funfund.account.controller;
+package com.hi.funfund.fundmenu.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("account")
-public class AccountController {
-
-
+@RequestMapping("fundMenu")
+public class FundMenuController {
 	
-	
+
 }

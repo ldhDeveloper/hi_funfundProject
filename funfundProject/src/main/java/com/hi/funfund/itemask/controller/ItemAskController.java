@@ -1,13 +1,10 @@
-package com.hi.funfund.account.controller;
+package com.hi.funfund.itemask.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("account")
-public class AccountController {
+@RequestMapping("itemAsk")
+public class ItemAskController {
 
-
-	
-	
 }
