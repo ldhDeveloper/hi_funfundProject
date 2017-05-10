@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="/funfund/lib/font-awesome/font-awesome/css/font-awesome.css">
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
@@ -398,7 +399,7 @@ p.go_signup > a {
    <div class="row middle-menubar hidden-xs">
    
    <div class="col-lg-2 col-md-2 col-sm-2">
-   	<img src="images/common/logo.png" style="widht:400px;height:70px;">
+   	<img src="/funfund/images/common/logo.png" style="widht:400px;height:70px;">
    </div>
    <div class="col-lg-5 col-md-3 col-sm-2">
    	&nbsp;
@@ -408,7 +409,7 @@ p.go_signup > a {
         	<tr>
             	<td style="width:150px;"><a class="fun-menu" href="make.do">프로젝트 등록하기</a></td>
            	 	<td style="width:150px;"><a class="fun-menu" href="funding.do">프로젝트 둘러보기</a></td>
-            	<td style="width:80px;"><a class="fun-menu" href="#">고객센터</a></td>
+            	<td style="width:80px;"><a class="fun-menu" href="notice/nList.do">고객센터</a></td>
             	<td style="width:80px;"><a class="fun-menu" href="#"  data-toggle="modal" data-target="#myModal">로그인</a></td>
             	<td style="width:150px;"><a class="fun-menu" href="myinfo.do">회원정보보기</a></td>
          	</tr>
