@@ -62,4 +62,10 @@ public class HomeController {
 	public String makeProject(){
 		return "makeproject/primaryinfo";
 	}
+	
+	@RequestMapping(value="detail.do")
+	public String fundingdetailList(){
+		return "funding/detailList";
+	}
+	
 }
