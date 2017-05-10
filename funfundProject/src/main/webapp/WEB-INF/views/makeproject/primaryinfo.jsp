@@ -84,6 +84,7 @@ li {
 		</ul>
 	</div>
 	<form>
+	
 		<!-- 기본정보 입력 화면 -->
 		<div id="primary-info" class="input-form">
 			<table>
@@ -552,6 +553,116 @@ li {
 -리워드 수령 **일 이내 제품 하자로 인한 교환/반품/AS는 §메이커 이메일주소§으로 신청 가능합니다.
 								
 							</textarea>
+						</div>
+					</td>
+					<td>&nbsp;</td>
+				</tr>
+			</table>
+		</div>
+		
+		<!-- 메이커 정보 입력 -->
+		<div id="maker-info" class="input-form">
+		<p style="font-size:0.7em;">* 아래에 입력한 모든 정보는 프로젝트 페이지에 노출되는 정보이니, 서포터와의 소통과 응대가 가능한 정확한 정보를 입력해주세요.</p><br><br>
+			<table style="width:900px;">
+				<tr>
+					<td style="width:200px;font-size:0.7em;">프로젝트 메이커 이름(법인명)</td>
+					<td style="width:500px;">
+						<div style="border:1px solid #ddd;background:#f8f8f8;padding:10px;margin-left:10px;width:440px;height:50px;">
+							<input type="text" size="43">
+						</div>
+					</td>
+					<td style="width:200px;">&nbsp;</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td style="font-size:0.7em;">
+						프로젝트 메이커의 프로필 사진<br>참여자들에게 프로젝트의 진정성을 표현하기 위해서 프로젝트 메이커의 사진을 공개합니다.
+					</td>
+					<td>
+						<div style="border:1px solid #ddd;background:#f8f8f8;padding:10px;margin-left:10px;width:440px;height:100px;">
+							<input type="file" size="43" value="클릭하세요"><br><br>
+							<div align="center" style="font-size:0.7em;">
+								3MB 이하의 사진만 사용할 수 있습니다.
+							</div>
+						</div>
+						
+					</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td style="font-size:0.7em;">
+						소셜네트워크<br>프로젝트 메이커(개인/법인)의 소셜 웹주소(Facebook페이지 등)를 기입해 주세요.모두 채우기 힘들다면 최소한 1개 이상은 적어주세요.
+					</td>
+					<td>
+						<div style="border:1px solid #ddd;background:#f8f8f8;padding:10px;margin-left:10px;width:440px;height:110px;">
+							<img src="images/makeproject/facebook.png" width="25px" height="25px">&nbsp;http://www.facebook.com/&nbsp;<input type="text" size="10"><br>
+							<img src="images/makeproject/twitter.png" width="25px" height="25px">&nbsp;http://www.twitter.com/&nbsp;<input type="text" size="10"><br>
+							<img src="images/makeproject/instargram.png" width="25px" height="25px">&nbsp;http://www.instargram.com/&nbsp;<input type="text" size="10"><br>
+						</div>
+					</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td rowspan="3" style="font-size:0.7em;">
+						웹사이트 주소<br>프로젝트 메이커가 운영하는 웹사이트가 있으시다면 http:// 혹은 https://를 붙여 등록 후, 링크확인 버튼을 클릭하여 연결을 확인해 주세요.
+					</td>
+					<td>
+						<div style="border:1px solid #ddd;background:#f8f8f8;padding:10px;margin-left:10px;width:440px;height:60px;">
+							<input type="text" size="25" value="http://">&nbsp;<button class="btn btn-primary btn-xs">링크 확인</button>
+						</div>
+					</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td style="font-size:0.7em;">
+						메이커 이메일<br>서포터 문의 시 소통이 가능하고, 프로젝트 페이지에 노출가능한 이메일을 입력해주세요.
+					</td>
+					<td>
+						<div style="border:1px solid #ddd;background:#f8f8f8;padding:10px;margin-left:10px;width:440px;height:60px;">
+							<input type="text" size="25">
+						</div>
+					</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td style="font-size:0.7em;">
+						메이커 전화번호<br>서포터 문의 시 실시간 연락이 가능하고, 프로젝트 페이지에 노출가능한 대표번호를 입력해주세요.
+					</td>
+					<td>
+						<div style="border:1px solid #ddd;background:#f8f8f8;padding:10px;margin-left:10px;width:440px;height:60px;">
+							<input type="text" size="25">
 						</div>
 					</td>
 					<td>&nbsp;</td>
