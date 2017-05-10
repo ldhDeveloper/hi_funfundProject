@@ -5,10 +5,9 @@ import org.springframework.stereotype.Service;
 
 import com.hi.funfund.attachment.model.dao.AttachmentDao;
 
-@Service("AttachmentService")
+@Service("attachmentService")
 
 public class AttachmentServiceIm implements AttachmentService {
-
 
 	
 @Autowired

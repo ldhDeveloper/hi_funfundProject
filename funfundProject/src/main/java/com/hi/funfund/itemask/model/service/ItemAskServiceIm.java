@@ -1,12 +1,12 @@
-package com.hi.funfund.item.model.service;
+package com.hi.funfund.itemask.model.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hi.funfund.item.model.dao.ItemDao;
 
-@Service("itemService")
-public class ItemServiceIm {
+@Service("itemAskService")
+public class ItemAskServiceIm implements ItemAskService {
 
 	@Autowired
 	private ItemDao itemDao;

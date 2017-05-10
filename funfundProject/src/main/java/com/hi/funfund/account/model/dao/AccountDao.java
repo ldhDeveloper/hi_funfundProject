@@ -5,6 +5,4 @@ import org.springframework.stereotype.Repository;
 @Repository("accountDao")
 public class AccountDao {
 
-	
-	public AccountDao(){}
 }
