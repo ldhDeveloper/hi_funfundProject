@@ -47,6 +47,7 @@ public class HomeController {
 		return "funding/funding";
 	}
 
+
 	@RequestMapping(value = "myinfo.do")
 	public String myinfo(){
 		return "myinfo/myinfo";
