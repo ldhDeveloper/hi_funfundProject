@@ -389,6 +389,35 @@ a.forget_pw:hover {
     border:0px solid #e96931;
     background: #fff;
 }
+
+.modal-body signup {
+    padding:0px;
+}
+#singup-tel-field {
+	margin-top:10px;
+	padding:15px 0 ;
+	border-top:1px dashed #d5d5d5;
+	border-bottom:1px solid #d5d5d5;
+}
+.tel-dsc {
+	font-size:11px;
+	color:#707070;
+}
+.tel-dsc:before {
+	margin-right:5px;
+	font-family: 'fontawesome';
+	content:'\f061';
+	font-size:10px;
+	font-weight:200;
+	color:#ccc;	
+}
+.news-txt {
+	display:block;
+	text-align:right;
+	font-size:11px;
+	color:#707070;
+	margin-top:5px;
+}
 p.go_signup {
     margin-top: 15px;
     text-align: center;
@@ -399,6 +428,69 @@ p.go_signup > a {
     color: #e96931;
     font-weight: 700;
     text-decoration: underline;
+}
+
+.signup-title-txt {
+    font-size:0;
+}
+.modal-body-signup fieldset {
+    display: block;
+}
+label.sign-form_title {
+    padding-right:10px;
+    font-size:12px;
+    font-weight:700;
+    line-height:20px;
+    color:#707070;
+}
+input.sign-form_input {
+    height:40px;
+    margin-bottom: 6px;
+    font-size:14px;
+    text-indent: 10px;
+    line-height: 14px;
+    color:#707070;
+    border:1px solid #d5d5d5;
+    width:100%;
+}
+input.sign-form_input:focus {
+    border:1px solid #e96931;
+    color:#3b3b3b;
+}
+input.sign-form_input:active {
+	border:1px solid #e96931;
+    color:#3b3b3b;
+}
+input.input_tel {
+    width:25%;
+    display: inline-block;
+    margin-right:3px;
+}
+
+@media only screen and (max-width:679px) {
+    input.sign-form_input {
+        height:35px;
+        line-height:23px;
+        font-size:13px;
+    }
+    input.input_tel {
+		width:23%;
+		display: inline-block;
+		margin-right:1px;
+        height:35px;
+        line-height:23px;
+        font-size:13px;
+	}
+}
+.text-center {text-align:center!important;}
+.text-left {text-align:left!important;}
+.text-right {text-align:right!important;}
+label.sign-form_title {
+    padding-right: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 20px;
+    color: #707070;
 }
 </style>
 
@@ -438,7 +530,7 @@ p.go_signup > a {
       	<form id="login_form" action="/auth/login.do" method="post">
 		<!-- <input type="hidden" name="secuToken" value="AMGTeZ912mzkHTrXtwiEPA"/> -->
         <div class="modal-body modal-body-login">
-              <fieldset>
+              <fieldset style="border:0; margin:0; padding:0;">
                 <legend class="login-title-txt">소셜 로그인</legend>
                 <a href="javascript:void(0);" class="signin-social p-login_btn login-social-facebook" data-sns="facebook" alt="페이스북으로 로그인" >페이스북으로 로그인</a>
            		<a href="javascript:void(0);" class="signin-social p-login_btn login-social-kakao"  data-sns="kakao"  alt="카카오로 로그인" >카카오로 로그인</a>
@@ -469,7 +561,11 @@ p.go_signup > a {
 		$("#linkSignup").click(function(){
 			$("#myModal").modal("hide");
 			$("#myModal2").modal("show");
-		})
+		});
+		$("#emailSignup").click(function(){
+			$("#myModal2").modal("hide");
+			$("#myModal3").modal("show");
+		});
 	})
 </script>
 <div id="myModal2" class="modal fade" role="dialog">
@@ -494,11 +590,48 @@ p.go_signup > a {
             <form>
               <fieldset>
                 <legend class="login-title-txt">이메일 회원가입</legend>
-                <a href="javascript:void(0);" class="signup-email p-login_btn" alt="" onclick="signupWithEmail();">이메일로 회원가입</a>
+                <a id="emailSignup" href="javascript:void(0);" class="signup-email p-login_btn" alt="" onclick="signupWithEmail();">이메일로 회원가입</a>
               </fieldset>
             </form>
             <p class="go_signup">이미 펀펀의 회원이신가요?</p>
             <button class="btn-go_login" onclick="switchToLoginBox();">로그인하러가기</button>
+      </div>
+    </div> 
+  </div>
+</div>
+<div id="myModal3" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+           <span class="modal-close"  data-dismiss="modal" onclick="closeEmailSignupBox();">&nbsp;</span>
+          <h2 class="p-t-signup">회원가입</h2>
+       </div>
+      <div class="modal-body" style="padding:30px;">
+      	<form id="join_form" action="/auth/join.do" method="post">
+          	<input type="hidden" name="secuToken" value="7QD6StfHBmmEFvusyATSQA"/>
+          	<input type="hidden" name="nmLast" value=""/>
+          	<input type="hidden" name="mobile" value=""/>
+            <fieldset  style="border:0; margin:0; padding:0;">
+              <legend class="signup-title-txt">기본정보</legend>
+                  <input type="text" id="signup-form_name" value="" name="nmFirst" placeholder="이름" class="sign-form_input">
+                  <input type="email" id="signup-form_email" value="" name="email" placeholder="아이디(이메일)" class="sign-form_input">
+                  <input type="password" id="signup-form_pw" value="" name="pwd" placeholder="영문+숫자포함 6~20자" class="sign-form_input">
+                  <input type="password" id="signup-form_pw" value="" name="pwdCfm" placeholder="비밀번호확인" class="sign-form_input">
+            </fieldset>
+            <fieldset id="singup-tel-field"  style="border:0; margin:0; padding:0;">
+              <legend class="signup-title-txt">핸드폰번호 정보</legend>
+                  <label for="signup-form_tel" class="sign-form_title">핸드폰 번호</label>
+                  <input type="tel" id="signup-form_tel1" value="" class="sign-form_input input_tel">
+                  <input type="tel" id="signup-form_tel2" value=""  class="sign-form_input input_tel">
+                  <input type="tel" id="signup-form_tel3" value=""  class="sign-form_input input_tel">
+                  <p class="text-left tel-dsc">프로젝트의 결제내역과 업데이트 정보를 받을 수 있습니다.</p>
+            </fieldset>
+            <div class="modal-footer">
+            	<button class="btn-login_pop">회원가입하기</button>
+            	<p class="go_signup">위의 버튼을 눌러 약관에 동의하고 회원가입합니다.</p>
+            </div>
+		  </form>          
       </div>
     </div> 
   </div>
