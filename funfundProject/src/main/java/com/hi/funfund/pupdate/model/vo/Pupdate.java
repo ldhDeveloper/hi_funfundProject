@@ -1,6 +1,8 @@
-package com.hi.funfund.item.model.vo;
+package com.hi.funfund.pupdate.model.vo;
 
-public class Pupdate {
+import java.io.Serializable;
+
+public class Pupdate implements Serializable {
 
 	 private int upno;
 	private int pro_no;
