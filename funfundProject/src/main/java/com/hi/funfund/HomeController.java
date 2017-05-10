@@ -53,6 +53,11 @@ public class HomeController {
 		return "myinfo/myinfo";
 	}
 	
+	@RequestMapping(value = "sellerinfo.do")
+	public String sellinfo(){
+		return "myinfo/sellerinfo";
+	}
+	
 	@RequestMapping(value = "makeproject.do")
 	public String makeProject(){
 		return "makeproject/primaryinfo";
