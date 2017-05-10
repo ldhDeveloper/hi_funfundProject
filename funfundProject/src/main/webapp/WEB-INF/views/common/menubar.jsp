@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="/funfund/lib/font-awesome/font-awesome/css/font-awesome.css">
-
+<script type="text/javascript" src="/funfund/lib/js/jquery-3.2.1.min.js" ></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
