@@ -3,13 +3,13 @@
 "-//mybatis.org//DTD Config 3.0//en "
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-<typeAliases>
-<typeAlias type="com.hi.funfund.account.model.vo.Account"
-alias="account"/>
-</typeAliases>
-<mappers>
-<mapper resource="mappers/account-mapper.xml" />
-</mappers>
+	<typeAliases>
+		<typeAlias type="com.hi.funfund.account.model.vo.Account"
+			alias="account" />
+	</typeAliases>
+	<mappers>
+		<mapper resource="mappers/account-mapper.xml" />
+	</mappers>
 
 
 
