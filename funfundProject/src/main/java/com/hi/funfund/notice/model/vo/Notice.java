@@ -1,4 +1,4 @@
-package com.hi.funfund.board.model.vo;
+package com.hi.funfund.notice.model.vo;
 
 import java.io.Serializable;
 import java.sql.Date;

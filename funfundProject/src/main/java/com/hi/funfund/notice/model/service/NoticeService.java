@@ -1,8 +1,9 @@
-package com.hi.funfund.board.model.service;
+package com.hi.funfund.notice.model.service;
 
 import java.util.List;
 
-import com.hi.funfund.board.model.vo.Notice;
+
+import com.hi.funfund.notice.model.vo.Notice;
 
 public interface NoticeService {
 

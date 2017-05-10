@@ -12,7 +12,7 @@ public class AttachmentServiceIm implements AttachmentService {
 
 	
 @Autowired
-AttachmentDao attchmentDao;
+AttachmentDao attachmentDao;
 
 @Override
 public int upload() {

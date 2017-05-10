@@ -1,18 +1,19 @@
-package com.hi.funfund.board.model.service;
+package com.hi.funfund.notice.model.service;
 
 import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hi.funfund.board.model.dao.NoticeDao;
-import com.hi.funfund.board.model.vo.Notice;
+import com.hi.funfund.notice.model.dao.NoticeDao;
+import com.hi.funfund.notice.model.vo.Notice;
 
 @Service()
 public class NoticeServiceIm implements NoticeService{
 
 	@Autowired
-	NoticeDao noticedao;
+	NoticeDao noticeDao;
 
 	@Override
 	public List selectList(int bno, int page, int limit) {
