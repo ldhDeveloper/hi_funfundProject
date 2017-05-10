@@ -70,10 +70,10 @@ img {
 				<!-- 자동슬라이드로 만들어야함 -->
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<ul>
-						<li><img src="images/funding/1.PNG" class="img-responsive"></li>
-						<li><img src="images/funding/2.PNG" class="img-responsive"></li>
-						<li><img src="images/funding/3.PNG" class="img-responsive"></li>
-						<li><img src="images/funding/4.PNG" class="img-responsive"></li>
+						<li><img src="/funfund/images/funding/1.PNG" class="img-responsive"></li>
+						<li><img src="/funfund/images/funding/2.PNG" class="img-responsive"></li>
+						<li><img src="/funfund/images/funding/3.PNG" class="img-responsive"></li>
+						<li><img src="/funfund/images/funding/4.PNG" class="img-responsive"></li>
 					</ul>
 				</div>
 			</div>
@@ -112,7 +112,7 @@ img {
 			<div class="row">
 				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 					<div class="thumbnail" align="center">
-						<a href="" target="_blank"> <img src="images/funding/"
+						<a href="detail.do" target="_blank"> <img src="images/funding/"
 							alt="사진1" style="width: 100%">
 							<p>
 								<span></span> % &nbsp;&nbsp; <span></span>원 달성 &nbsp;&nbsp; <span></span>
