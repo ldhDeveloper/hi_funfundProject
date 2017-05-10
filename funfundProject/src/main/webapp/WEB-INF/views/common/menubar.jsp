@@ -11,14 +11,13 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-<link rel="stylesheet" href="font-awesome/font-awesome/css/font-awesome.css">
-
+<link rel="stylesheet" href="/funfund/font-awesome/font-awesome/css/font-awesome.css">
+  <script type="text/javascript" src="/funfund/js/jquery-3.2.1.min.js" ></script>
 <!-- 편집기사용 -->
-  <script type="text/javascript" src="js/jquery-3.2.1.min.js" ></script>
+
     <!-- Include external CSS. -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
-	<link rel="stylesheet" href="font-awesome/font-awesome/css/font-awesome.css">
     <!-- Include Editor style. -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/css/froala_style.min.css" rel="stylesheet" type="text/css" />
@@ -420,7 +419,7 @@ p.go_signup > a {
    <div class="row middle-menubar hidden-xs">
    
    <div class="col-lg-2 col-md-2 col-sm-2">
-   	<img src="images/common/logo.png" style="widht:400px;height:70px;">
+   	<img src="/funfund/images/common/logo.png" style="widht:400px;height:70px;">
    </div>
    <div class="col-lg-5 col-md-3 col-sm-2">
    	&nbsp;
@@ -430,7 +429,7 @@ p.go_signup > a {
         	<tr>
             	<td style="width:150px;"><a class="fun-menu" href="make.do">프로젝트 등록하기</a></td>
            	 	<td style="width:150px;"><a class="fun-menu" href="funding.do">프로젝트 둘러보기</a></td>
-            	<td style="width:80px;"><a class="fun-menu" href="#">고객센터</a></td>
+            	<td style="width:80px;"><a class="fun-menu" href="notice/nList.do">고객센터</a></td>
             	<td style="width:80px;"><a class="fun-menu" href="#"  data-toggle="modal" data-target="#myModal">로그인</a></td>
             	<td style="width:150px;"><a class="fun-menu" href="myinfo.do">회원정보보기</a></td>
          	</tr>

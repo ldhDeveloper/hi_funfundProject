@@ -3,9 +3,10 @@
 <!DOCTYPE html >
 <html>
 <head>
+<meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<meta charset="UTF-8">
+
 <title>Insert title here</title>
 <style>
 .totalN{
@@ -29,14 +30,10 @@ text-align : center;
 color: white;
 }
 </style>
-<script type="text/javascript">
-function write(){
-	location.href="notice/Nwrite.do"
-}
-</script>
+
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/common/menubar.jsp" flush="true" />
+<jsp:include page="/WEB-INF/views/common/menubar.jsp" flush="true"/>
 
 <div class="noticeTitle" >
  <h2>공지사항</h2> <p/>
@@ -64,7 +61,7 @@ function write(){
  <input type="text" placeholder="내용을 입력하세요">
  <input type="submit" value="검색"> 
  </form>
- <button onclick="write();">글쓰기</button>
+ <a href="nwrite.do">글쓰기</a>
 </div>
 </div>
 </div>

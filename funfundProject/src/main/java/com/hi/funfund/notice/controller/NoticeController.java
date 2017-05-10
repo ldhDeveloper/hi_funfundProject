@@ -13,7 +13,15 @@ public class NoticeController {
 	@Autowired
 	private NoticeService noticeService;
 	
-	@RequestMapping("write.do")
+	
+	@RequestMapping("nList.do")
+	public String notice(){
+		
+		return "notice/notice";
+	}
+	
+	
+	@RequestMapping("nwrite.do")
 	public String Write(){
 		
 		return "notice/ninsert";
