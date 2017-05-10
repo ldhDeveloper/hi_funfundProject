@@ -1,11 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- 편집기사용 -->
+  <script type="text/javascript" src="/funfund/lib/js/jquery-3.2.1.min.js" ></script>
+    <!-- Include external CSS. -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
+	<link rel="stylesheet" href="/funfund/lib/font-awesome/font-awesome/css/font-awesome.css">
+    <!-- Include Editor style. -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1/css/froala_style.min.css" rel="stylesheet" type="text/css" />
+  	<link href="/funfund/lib/froala_editor_2.5.1/css/themes/royal.min.css" rel="stylesheet" type="text/css" />
+   <!-- Include external JS libs. -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
+
+    <!-- Include Editor JS files. -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1//js/froala_editor.pkgd.min.js"></script>
+<!-- 끝 -->
 <script>
-	$(function() { $('#textarea').froalaEditor() }); 
+	$(function() {
+		$('#froala-editor').froalaEditor({
+			theme: 'royal',
+		      zIndex: 2002,
+		      heightMin: 300,
+		      heightMax: 300,
+			  toolbarBottom: false,
+		      toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', '|', 'color', 'emoticons', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', '-', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable', '|', 'quote', 'insertHR', 'undo', 'redo', 'clearFormatting', 'selectAll', 'html']
+		}) 
+	}); 
 </script>
 <style>
 body {
@@ -477,13 +504,58 @@ li {
 					<td>&nbsp;</td>
 				</tr>
 				<tr>
+					<td colspan="3">
+						<div id="froala-editor" style="width:860px;max-height:500px;">
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
 					<td colspan="2">
-						<div id="textarea">
+						<p style="font-size:0.7em;">
+							위험 요인과 해결방안<br>
+							<br>
+							기본으로 입력되어 있는 내용 중 해당 프로젝트에 맞게 하단 6가지를 수정해 주세요.<br>
+							1) 완제품이 아닌 리워드의 발송은 펀딩결과 및 시기에 따라 배송 지연이 발생할 수 있다는 것에 대한 안내<br>
+							2) 리워드 발송이 1달 이내 지연될 경우, 서포터분들에게 공지할 방법 (새소식, SMS 포함)<br>
+							3) 리워드 발송이 1달 이상 지연될 경우, 서포터분들에게 제공할 혜택/서비스<br>
+							4) 약 1달 정도의 리워드 지연을 사유로 펀딩 취소(환불)이 불가한 것에 대한 안내<br>
+							5) 리워드 발송이 *달 이상 지연 시, 100% 환불 가능한 것에 대한 안내 및 환불 신청한 메이커 연락처/이메일<br>
+							6) 해당 프로젝트의 리워드 교환/반품/AS 정책<br>
+						</p>
+					</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td colspan="2" style="">
+						<div style="width:650px;height:340px;padding:15px;border:1px solid #ddd;background:#f8f8f8;">
+							<textarea style="overflow: auto; width: 100%; height:310px;resize: none;width;font-size:0.7em;">
+§업체명/메이커명§은 펀딩해주신 서포터분들께 감사의 표시인 리워드 제공 일정을 준수하기 위해 최선을 다할 것을 약속합니다.
+단, 펀딩을 받아야만 생산을 시작할 수 있는 크라우드펀딩 특성 및 생산과정에서의 예상치못한 상황으로 인하여 리워드 제공일이 다소 지연될 수 있는 점을 알려 드립니다.
+
+약속된 발송일 (yyyy-mm-dd)으로부터 1달 이내 (yyyy-mm-dd) 리워드 제공이 지연될 경우
+-리워드 제공 지연이 예상되는 시점에 즉시 새소식과 SMS으로 변경된 리워드 제공일을 알려 드립니다.
+-단, 리워드 제공 지연 사유로 인한 펀딩 취소는 불가합니다.
+
+약속된 발송일 (yyyy-mm-dd)으로부터 1달 이상 (yyyy-mm-dd) 리워드 제공이 지연될 경우
+-리워드 제공 지연이 예상되는 시점에 즉시 새소식과 SMS으로 변경된 리워드 제공일을 알려 드립니다.
+-§리워드금액§에 해당하는 §리워드명§에 해당하는 추가 리워드를 함께 보내드립니다.
+-예상보다 리워드 제공이 많이 지연되었으므로 §메이커 이메일주소§ 으로 신청해주신 서포터에 한해 펀딩하신 금액의 100%를 본인의 계좌로 환불해 드립니다.
+
+해당 프로젝트의 교환/반품/AS 정책은 다음과 같습니다.
+-펀딩 기간에는 자유롭게 마이페이지에서 펀딩 취소 가능하지만,
+펀딩 기간 이후, 단순 변심으로 인한 교환이나 환불은 불가합니다.
+-리워드 수령 **일 이내 제품 하자로 인한 교환/반품/AS는 §메이커 이메일주소§으로 신청 가능합니다.
+								
+							</textarea>
 						</div>
 					</td>
 					<td>&nbsp;</td>
 				</tr>
-				
 			</table>
 		</div>
 		
