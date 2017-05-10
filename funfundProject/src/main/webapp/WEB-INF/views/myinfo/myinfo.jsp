@@ -119,6 +119,10 @@
 	padding-left : 30%;
 }
 
+.fun-menu{
+	color:teal !important;
+}
+
 .email-input-wrap{padding-top:16px;}
 .email-input-wrap.small{padding-top:0;}
 .email-input-wrap.mid{padding-top:8px;}
@@ -230,12 +234,12 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
       	<li class="active"><a href="#">회원 정보 설정 <span class="sr-only">(current)</span></a></li>
-        							<li><a href="sellerinfo.do" class="w3-hover-purple">판매자 정보 변경 </a></li>
-        							<li><a href="#" class="w3-hover-purple">참여한 프로젝트</a></li>
-        							<li><a href="#" class="w3-hover-purple">찜한 프로젝트</a></li>
-        							<li><a href="#" class="w3-hover-purple">개설한 프로젝트</a></li>
-        							<li><a href="#" class="w3-hover-purple">나의 펀딩 현황</a></li>
-      							</ul>
+        <li><a href="sellerinfo.do" class="w3-hover-teal">판매자 정보 변경 </a></li>
+        <li><a href="joinproject.do" class="w3-hover-teal">참여한 프로젝트</a></li>
+        <li><a href="#" class="w3-hover-teal">찜한 프로젝트</a></li>
+        <li><a href="#" class="w3-hover-teal">개설한 프로젝트</a></li>
+        <li><a href="#" class="w3-hover-teal">나의 펀딩 현황</a></li>
+      </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>

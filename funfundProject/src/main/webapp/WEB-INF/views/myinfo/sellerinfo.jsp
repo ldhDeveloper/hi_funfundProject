@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <style type="text/css">
 .container{
 	width: 100%;
@@ -141,6 +142,7 @@
 .input-div2:after{content:"";clear:both;display:block;}
 .input-div2 li:first-child{float:left;width:49%;padding:0;}
 .input-div2 li:last-child{float:right;width:49%;padding:0;}
+
 
 .btn-bottom{width:100%;padding-top:20px;}
 .btn-wrap{width:100%;margin-bottom:10px;}
@@ -506,6 +508,14 @@ button{cursor:pointer;font-family:Roboto, 'Noto Sans KR', sans-serif;-webkit-fon
 .popup-confirm-point .btn-pop-mint{display:inline-block;}
 }
 
+.fun-menu{
+	color:teal !important;
+}
+
+li{
+	list-style:none;
+}
+
 </style>
 
 <title>Insert title here</title>
@@ -547,12 +557,12 @@ button{cursor:pointer;font-family:Roboto, 'Noto Sans KR', sans-serif;-webkit-fon
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
       	
-        							<li><a href="#" class="w3-hover-purple">회원 정보 설정</a></li>
+        							<li><a href="myinfo.do" class="w3-hover-teal">회원 정보 설정</a></li>
         							<li class="active"><a href="myinfo.do">판매자 정보 변경 <span class="sr-only">(current)</span></a></li>
-        							<li><a href="#" class="w3-hover-purple">참여한 프로젝트</a></li>
-        							<li><a href="#" class="w3-hover-purple">찜한 프로젝트</a></li>
-        							<li><a href="#" class="w3-hover-purple">개설한 프로젝트</a></li>
-        							<li><a href="#" class="w3-hover-purple">나의 펀딩 현황</a></li>
+        							<li><a href="joinproject.do" class="w3-hover-teal">참여한 프로젝트</a></li>
+        							<li><a href="#" class="w3-hover-teal">찜한 프로젝트</a></li>
+        							<li><a href="#" class="w3-hover-teal">개설한 프로젝트</a></li>
+        							<li><a href="#" class="w3-hover-teal">나의 펀딩 현황</a></li>
       							</ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

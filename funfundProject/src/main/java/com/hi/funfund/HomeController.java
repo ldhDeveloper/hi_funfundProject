@@ -54,8 +54,13 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "sellerinfo.do")
-	public String sellinfo(){
+	public String sellerinfo(){
 		return "myinfo/sellerinfo";
+	}
+	
+	@RequestMapping(value = "joinproject.do")
+	public String joinproject(){
+		return "myinfo/joinproject";
 	}
 	
 	@RequestMapping(value = "makeproject.do")
