@@ -2,15 +2,15 @@
 <!DOCTYPE mapper PUBLIC
 "-//mybatis.org//DTD mapper 3.0//en"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace = "account">
-		<select id="login" parameterType="account" resultType="account">
+<mapper namespace = "party">
+	<select id="selectParty" parameterType="account" resultType="party">
 		<![CDATA[
 			SELECT
 				*
 			FROM
-				ACCOUNT
+				PARTY
 			WHERE
-				ID = #{id}	 AND PWD = #{pwd}	
+				ANO = #{ano}	
 		]]>
 	</select>
 </mapper>
