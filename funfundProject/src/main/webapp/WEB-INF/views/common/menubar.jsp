@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <% String cp = request.getContextPath(); %>
 
 <!DOCTYPE html >
@@ -502,7 +503,12 @@ label.sign-form_title {
             	<td style="width:150px;"><a class="fun-menu" href="make.do">프로젝트 등록하기</a></td>
            	 	<td style="width:150px;"><a class="fun-menu" href="funding.do">프로젝트 둘러보기</a></td>
             	<td style="width:80px;"><a class="fun-menu" href="nList.no">고객센터</a></td>
-            	<td style="width:80px;"><a class="fun-menu" href="#"  data-toggle="modal" data-target="#myModal">로그인</a></td>
+            	<c:if test="${empty account.id }">
+            		<td style="width:80px;"><a class="fun-menu" href="#"  data-toggle="modal" data-target="#myModal">로그인</a></td>
+            	</c:if>
+            	<c:if test="${not empty account.id }">
+            		<td style="width:80px;"><a class="fun-menu" href="#">로그아웃</a></td>
+            	</c:if>
             	<td style="width:150px;"><a class="fun-menu" href="myinfo.do">회원정보보기</a></td>
          	</tr>
       </table>
@@ -517,7 +523,7 @@ label.sign-form_title {
             <h2 class="p-t-login">로그인</h2>
        </div>
       <div class="modal-body" style="padding:30px;">
-      	<form id="login_form" action="/auth/login.do" method="post">
+      	<form id="login_form" action="login.ao" method="post">
 		<!-- <input type="hidden" name="secuToken" value="AMGTeZ912mzkHTrXtwiEPA"/> -->
         <div class="modal-body modal-body-login">
               <fieldset style="border:0; margin:0; padding:0;">
@@ -530,7 +536,7 @@ label.sign-form_title {
 
             <p class="lineor_bg"><span class="lineor">또는</span></p>
             <div class="login-email">
-	            <input type="email" name="email" placeholder="이메일주소" autofocus="autofocus" /> <!-- 20160727 autofocus 추가 -->
+	            <input type="email" name="id" placeholder="이메일주소" autofocus="autofocus" /> <!-- 20160727 autofocus 추가 -->
 	            <input type="password" name="pwd" placeholder="영문+숫자포함 6~20자" />
 	            <a href="javascript:void(0);" class="forget_pw" onclick="switchToForgotBox();">비밀번호를 잊으셨나요?</a>
             </div>
@@ -598,24 +604,15 @@ label.sign-form_title {
           <h2 class="p-t-signup">회원가입</h2>
        </div>
       <div class="modal-body" style="padding:30px;">
-      	<form id="join_form" action="/auth/join.do" method="post">
+      	<form id="join_form" action="/signup.ao" method="post">
           	<input type="hidden" name="secuToken" value="7QD6StfHBmmEFvusyATSQA"/>
           	<input type="hidden" name="nmLast" value=""/>
           	<input type="hidden" name="mobile" value=""/>
             <fieldset  style="border:0; margin:0; padding:0;">
               <legend class="signup-title-txt">기본정보</legend>
-                  <input type="text" id="signup-form_name" value="" name="nmFirst" placeholder="이름" class="sign-form_input">
-                  <input type="email" id="signup-form_email" value="" name="email" placeholder="아이디(이메일)" class="sign-form_input">
-                  <input type="password" id="signup-form_pw" value="" name="pwd" placeholder="영문+숫자포함 6~20자" class="sign-form_input">
-                  <input type="password" id="signup-form_pw" value="" name="pwdCfm" placeholder="비밀번호확인" class="sign-form_input">
-            </fieldset>
-            <fieldset id="singup-tel-field"  style="border:0; margin:0; padding:0;">
-              <legend class="signup-title-txt">핸드폰번호 정보</legend>
-                  <label for="signup-form_tel" class="sign-form_title">핸드폰 번호</label>
-                  <input type="tel" id="signup-form_tel1" value="" class="sign-form_input input_tel">
-                  <input type="tel" id="signup-form_tel2" value=""  class="sign-form_input input_tel">
-                  <input type="tel" id="signup-form_tel3" value=""  class="sign-form_input input_tel">
-                  <p class="text-left tel-dsc">프로젝트의 결제내역과 업데이트 정보를 받을 수 있습니다.</p>
+                  <input type="email" id="signup-form_id" name="id" placeholder="아이디(이메일)" class="sign-form_input">
+                  <input type="password" id="signup-form_pw" name="pwd" placeholder="영문+숫자포함 6~20자" class="sign-form_input">
+                  <input type="password" id="signup-form_pw" placeholder="비밀번호확인" class="sign-form_input">
             </fieldset>
             <div class="modal-footer">
             	<button class="btn-login_pop">회원가입하기</button>

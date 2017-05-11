@@ -36,7 +36,7 @@ public interface AccountService {
 	 List selectPartyList(); //판매자리스트보기(관리자)
 	
 	 List selectGradeList(); //등급별리스트보기(관리자)
-	
+
 	
 	//미추가된 함수 : 프로젝트별 후원자 리스트
 

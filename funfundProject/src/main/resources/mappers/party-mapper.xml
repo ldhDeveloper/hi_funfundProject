@@ -2,8 +2,24 @@
 <!DOCTYPE mapper PUBLIC
 "-//mybatis.org//DTD mapper 3.0//en"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace = "party">
-	<select id="selectParty" parameterType="account" resultType="party">
+<mapper namespace = "partyMapper">
+	<resultMap type="party" id="partyResult">
+		<id property="pno" column="pno" />
+		<result property="ano" column="ano" />
+		<result property="pwd" column="pwd" />
+		<result property="pname" column="pname" />
+		<result property="phone" column="phone" />
+		<result property="intro" column="intro" />
+		<result property="account" column="account" />
+		<result property="cname" column="cname" />
+		<result property="id_no" column="id_no" />
+		<result property="com_no" column="com_no" />
+		<result property="president" column="president" />
+		<result property="address" column="address" />
+		<result property="pconfirm" column="pconfirm" />
+		<result property="econfirm" column="econfirm" />
+	</resultMap>
+	<select id="selectParty" parameterType="party" resultMap="partyResult">
 		<![CDATA[
 			SELECT
 				*

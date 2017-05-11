@@ -15,12 +15,21 @@ public class AccountController {
 	@Autowired
 	private AccountService accountService;
 	
-	@RequestMapping("/login.do")
+	@RequestMapping("/login.ao")
 	public ModelAndView login(Account account, ModelAndView mv){
 		account = accountService.login(account);
 		mv.addObject(account);
-		mv.setViewName("/loginSuccess");
+		mv.setViewName("home");
 		return mv;
+	}
+	
+	@RequestMapping("/sinup.ao")
+	public String signup(Account account){
+		int ok = accountService.insert(account);
+		if(ok > 0){
+			
+		}
+		return "home";
 	}
 	
 	
