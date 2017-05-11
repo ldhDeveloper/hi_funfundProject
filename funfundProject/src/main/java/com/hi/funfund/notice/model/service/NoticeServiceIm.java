@@ -16,45 +16,40 @@ public class NoticeServiceIm implements NoticeService{
 	NoticeDao noticeDao;
 
 	@Override
-	public List selectList(int bno, int page, int limit) {
-		// TODO Auto-generated method stub
-		return null;
+	public List selectList(int bno, int page) {
+		
+		return noticeDao.selectList(bno, page);
 	}
 
 	@Override
-	public List searchTitle(int bno, String ntitle) {
-		// TODO Auto-generated method stub
-		return null;
+	public List searchTitle(int bno, int page, String ntitle) {
+	
+		return noticeDao.searchTitle(bno, page, ntitle);
 	}
 
 	@Override
 	public Notice selectOne(int nno) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return noticeDao.selectOne(nno);
 	}
 
 	@Override
 	public int update(Notice notice) {
-		// TODO Auto-generated method stub
-		return 0;
+				
+		return noticeDao.update(notice);
 	}
 
 	@Override
 	public int delete(int nno) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return noticeDao.delete(nno);
 	}
 
 	@Override
 	public int insert(Notice notice) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return noticeDao.insert(notice);
 	}
 
-	@Override
-	public int addReadCount(int nno) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 	
 }
