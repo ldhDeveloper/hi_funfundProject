@@ -1,12 +1,10 @@
 package com.hi.funfund.item.model.dao;
 
-import java.util.List;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.hi.funfund.itemask.model.vo.ItemAsk;
+import com.hi.funfund.item.model.vo.Item;
 
 @Repository("itemDao")
 public class ItemDao {
@@ -15,13 +13,10 @@ public class ItemDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public int insertRewardItem(int ano){
-		int result = sqlSession.insert(nameSpace + "insert", ano);
-		if(result > 0){
-			sqlSession.commit();
-		}else{
-			sqlSession.rollback();
-		}
+	public int insertRewardItem(Item item){
+		System.out.println("실행전 : " + item.getPro_no());
+		int result = sqlSession.insert(nameSpace + "insert", item);
+		System.out.println("실행후 : " + item.getPro_no());
 		return result;
 	}
 
