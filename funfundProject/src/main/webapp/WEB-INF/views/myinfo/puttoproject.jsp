@@ -106,11 +106,51 @@
 	color:teal !important;
 }
 
-.joinproject {
-	padding-top: 10%;
-	padding-left: 40%;
+/* .puttoReward {
+	padding-top: 5%;
+	padding-left: 10%;
+}
+
+.puttoInvest {
+	padding-top: 5%;
+	padding-left : 10%;
+}
+
+.reward {
+	background-color: #25B187;
+	width: 40%;
+	height: 28px;
+	font-size: 1vw;
+	color: #fff;
+	border-radius: 15px 50px;
+}
+
+.invest {
+	background-color: #119DB1;
+	width: 40%;
+	height: 28px;
+	font-size: 1vw;
+	color: #fff;
+	border-radius: 15px 50px;
+}
+
+.notPutReward {
+	padding-top: 4%;
+	padding-left: 10%;
+	padding-bottom: 4%; 
 	color: #787878;
 }
+
+.notPutInvest {
+	padding-top: 4%;
+	padding-left: 10%;
+	padding-bottom: 4%; 
+	color: #787878;
+}
+
+.line{
+	border-bottom: 1px solid #ddd;
+} */
 
 </style>
 
@@ -153,8 +193,8 @@
       							<ul class="nav navbar-nav">
       								<li><a href="myinfo.do" class="w3-hover-teal">회원 정보 설정</a></li>
         							<li><a href="sellerinfo.do" class="w3-hover-teal">판매자 정보 변경</a></li>
-        							<li class="active"><a href="joinproject.do">참여한 프로젝트<span class="sr-only">(current)</span></a></li>      							        							
-        							<li><a href="puttoproject.do" class="w3-hover-teal">찜한 프로젝트</a></li>
+        							<li><a href="joinproject.do" class="w3-hover-teal">참여한 프로젝트</a></li>
+        							<li class="active"><a href="puttoproject.do">찜한 프로젝트<span class="sr-only">(current)</span></a></li>      							        							        							
         							<li><a href="newproject.do" class="w3-hover-teal">개설한 프로젝트</a></li>
         							<li><a href="myfunding.do" class="w3-hover-teal">나의 펀딩 현황</a></li>
       							</ul>
@@ -162,9 +202,23 @@
   						</div>
 					</nav>
 					
-					<div class="row">
-						<div class="joinproject">아직 참여한 프로젝트가 없습니다.</div>
-					</div>									
+					<div class="panel-group">
+						<div class="well">
+	  						<div class="panel panel-success">
+      							<div class="panel-heading">리워드형 프로젝트</div>
+      							<div class="panel-body">아직 찜한 프로젝트가 없습니다.</div>
+    						</div>
+    					</div>
+    		    					
+    					<br>
+    					
+    					<div class="well">  					
+    						<div class="panel panel-info">
+      							<div class="panel-heading">투자형 프로젝트</div>
+      							<div class="panel-body">아직 찜한 프로젝트가 없습니다.</div>
+    						</div>
+    					</div>
+  					</div>										
 				</div>				
 			</div>
 		</div>

@@ -47,7 +47,7 @@ public class HomeController {
 		return "funding/funding";
 	}
 
-
+	// myinfo 회원정보 설정 시작	
 	@RequestMapping(value = "myinfo.do")
 	public String myinfo(){
 		return "myinfo/myinfo";
@@ -62,6 +62,23 @@ public class HomeController {
 	public String joinproject(){
 		return "myinfo/joinproject";
 	}
+	
+	@RequestMapping(value = "puttoproject.do")
+	public String puttoproject(){
+		return "myinfo/puttoproject";
+	}
+	
+	@RequestMapping(value = "newproject.do")
+	public String newproject(){
+		return "myinfo/newproject";
+	}
+	
+	@RequestMapping(value = "myfunding.do")
+	public String myfunding(){
+		return "myinfo/myfunding";
+	}
+	
+	// myinfo 회원 정보 설정 끝
 	
 	@RequestMapping(value = "makeproject.do")
 	public String makeProject(){

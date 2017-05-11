@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <% String cp = request.getContextPath(); %>
 
 <!DOCTYPE html >
@@ -8,13 +9,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-<link rel="stylesheet" href="/funfund/lib/font-awesome/font-awesome/css/font-awesome.css">
-<script type="text/javascript" src="/funfund/lib/js/jquery-3.2.1.min.js" ></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://www.w3schools.com/lib/w3-theme-black.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet"
+	href="/funfund/lib/font-awesome/font-awesome/css/font-awesome.css">
+<script type="text/javascript" src="/funfund/lib/js/jquery-3.2.1.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
 	$(function(){
@@ -42,446 +48,525 @@
 	})
 </script>
 <style>
-.middle-menubar{
-	width:100%;
-   margin-left:auto;
-   margin-right:auto;
-   position:relative;
-   z-index:100;
-}
-a{
-   text-decoration:none;
-}
-a:active, a:hover{
-	text-decoration:none;
-	outline:0;
+.middle-menubar {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	z-index: 100;
 }
 
-.fun-menu{
-	color:orange;
-	font-weight:bold;
-	position:relative;
-	top:20px;
+a {
+	text-decoration: none;
 }
+
+a:active, a:hover {
+	text-decoration: none;
+	outline: 0;
+}
+
+.fun-menu {
+	color: orange;
+	font-weight: bold;
+	position: relative;
+	top: 20px;
+}
+
 .login-title-txt {
-    font-size:0;
+	font-size: 0;
 }
+
 span.login-title_txt {
-    font-size:12px;
-    font-weight:700;
-    border: 0px;
+	font-size: 12px;
+	font-weight: 700;
+	border: 0px;
 }
 
 span.lineor {
-    font-size:12px;
-    padding:0 5px;
-    color:#707070;
-    font-weight:500;
-    text-align:center;
-    background-color: #fff;
+	font-size: 12px;
+	padding: 0 5px;
+	color: #707070;
+	font-weight: 500;
+	text-align: center;
+	background-color: #fff;
 }
+
 p.lineor_bg {
-    width:100%;
-    margin-top:20px;
-    margin-bottom:25px;
-    background-image: url(https://dauuuwinla3.cloudfront.net/resources/v2/img/bg_lineor.gif);
-    background-repeat: repeat-x;
-    height:15px;
-    text-align: center;
+	width: 100%;
+	margin-top: 20px;
+	margin-bottom: 25px;
+	background-image:
+		url(https://dauuuwinla3.cloudfront.net/resources/v2/img/bg_lineor.gif);
+	background-repeat: repeat-x;
+	height: 15px;
+	text-align: center;
 }
+
 .p-login_btn {
-    display: block;
-    width:100%;
-    padding:15px 0;
-    margin: 0 0 5px 0;
-    font-size:14px;
-    font-weight:500;
-    text-indent:45px;
-    border-radius:3px;
-    -webkit-border-radius:3px;
-    -ms-border-radius:3px;
-    -moz-border-radius:3px;
+	display: block;
+	width: 100%;
+	padding: 15px 0;
+	margin: 0 0 5px 0;
+	font-size: 14px;
+	font-weight: 500;
+	text-indent: 45px;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-moz-border-radius: 3px;
 }
+
 .login-social-facebook {
-    color:#fff;
-    background-color:#4e8cbb;
-    background-image: url(https://dauuuwinla3.cloudfront.net/resources/v2/img/icon_login_fb.gif);
-    background-repeat:no-repeat;
-    background-position: 15px center;
-    background-size:23px;
-} 
+	color: #fff;
+	background-color: #4e8cbb;
+	background-image:
+		url(https://dauuuwinla3.cloudfront.net/resources/v2/img/icon_login_fb.gif);
+	background-repeat: no-repeat;
+	background-position: 15px center;
+	background-size: 23px;
+}
+
 .login-social-kakao {
-    color:#3c1e1e;
-    background-color:#ffeb00;
-    background-image: url(https://dauuuwinla3.cloudfront.net/resources/v2/img/icon_login_ka.gif);
-    background-repeat:no-repeat;
-    background-position: 15px center;
-    background-size:23px;
+	color: #3c1e1e;
+	background-color: #ffeb00;
+	background-image:
+		url(https://dauuuwinla3.cloudfront.net/resources/v2/img/icon_login_ka.gif);
+	background-repeat: no-repeat;
+	background-position: 15px center;
+	background-size: 23px;
 }
 
 .login-social-google {
-    color:#3c1e1e;
-    background-color:#e6e6e6;
-    background-image: url(https://dauuuwinla3.cloudfront.net/resources/v2/img/icon_login_g.gif);
-    background-repeat:no-repeat;
-    background-position: 15px center;
-    background-size:23px;
+	color: #3c1e1e;
+	background-color: #e6e6e6;
+	background-image:
+		url(https://dauuuwinla3.cloudfront.net/resources/v2/img/icon_login_g.gif);
+	background-repeat: no-repeat;
+	background-position: 15px center;
+	background-size: 23px;
 }
+
 .login-social-naver {
-    color:#fff;
-    background-color:#2db400;
-    background-image: url(https://dauuuwinla3.cloudfront.net/resources/v2/img/icon_login_na.gif);
-    background-repeat:no-repeat;
-    background-position: 15px center;
-    background-size:23px;
+	color: #fff;
+	background-color: #2db400;
+	background-image:
+		url(https://dauuuwinla3.cloudfront.net/resources/v2/img/icon_login_na.gif);
+	background-repeat: no-repeat;
+	background-position: 15px center;
+	background-size: 23px;
 }
+
 .signup-email {
-    color:#ffffff;
-    background-color:#cccccc;
-    margin-bottom:5px;
-    font-weight:500;
-    text-align: center;
-    text-indent:0;
+	color: #ffffff;
+	background-color: #cccccc;
+	margin-bottom: 5px;
+	font-weight: 500;
+	text-align: center;
+	text-indent: 0;
 }
-.login-email > input {
-    height:40px;
-    margin-bottom: 6px;
-    font-size:14px;
-    text-indent: 10px;
-    line-height: 14px;
-    color:#d5d5d5;
-    border:1px solid #d5d5d5;
-    width:100%;
+
+.login-email>input {
+	height: 40px;
+	margin-bottom: 6px;
+	font-size: 14px;
+	text-indent: 10px;
+	line-height: 14px;
+	color: #d5d5d5;
+	border: 1px solid #d5d5d5;
+	width: 100%;
 }
-.login-email > input:focus {
-    border:1px solid #e96931;
-    color:#3b3b3b;
+
+.login-email>input:focus {
+	border: 1px solid #e96931;
+	color: #3b3b3b;
 }
+
 .btn-login_pop {
-    font-size:15px;
-    font-weight: 700;
-    color:#fff;
-    background-color: #e96931;
-    text-align: center;
-    vertical-align : baseline;
-    border-radius: 20px;
-    border:1px;
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    -ms-border-radius: 20px;
-    margin-bottom:10px;
+	font-size: 15px;
+	font-weight: 700;
+	color: #fff;
+	background-color: #e96931;
+	text-align: center;
+	vertical-align: baseline;
+	border-radius: 20px;
+	border: 1px;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	-ms-border-radius: 20px;
+	margin-bottom: 10px;
 }
+
 a.forget_pw {
-    float:right;
-    padding-top:8px;
-    font-size:11px;
-    line-height:11px;
-    color:#3b3b3b;
+	float: right;
+	padding-top: 8px;
+	font-size: 11px;
+	line-height: 11px;
+	color: #3b3b3b;
 }
+
 a.forget_pw:hover {
-    text-decoration: underline;
+	text-decoration: underline;
 }
 /* popup modal */
 .modal {
-	 box-sizing: border-box;
+	box-sizing: border-box;
 }
+
 .modal-close {
-    display:inline-block;
-    color: white;
-    float: right;
-    width:24px;
-    height:24px;
-    background-image: url(https://dauuuwinla3.cloudfront.net/resources/v2/img/icon_modal_close.png);
-    background-repeat: no-repeat;
-    font-size: 28px;
-    font-weight: bold;
-    padding:5px;
-    z-index: 1000;
+	display: inline-block;
+	color: white;
+	float: right;
+	width: 24px;
+	height: 24px;
+	background-image:
+		url(https://dauuuwinla3.cloudfront.net/resources/v2/img/icon_modal_close.png);
+	background-repeat: no-repeat;
+	font-size: 28px;
+	font-weight: bold;
+	padding: 5px;
+	z-index: 1000;
 }
-.modal-close:hover,
-.modal-close:focus {
-    cursor: pointer;
+
+.modal-close:hover, .modal-close:focus {
+	cursor: pointer;
 }
+
 .modal-header {
-    height:85px;
-    border-radius:5px;
-    -webkit-border-radius:5px;
-    -ms-border-radius:5px;
-    -moz-border-radius:5px;
+	height: 85px;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-moz-border-radius: 5px;
 }
-.modal-header > h2.p-t-login {
-    font-size:0;
-    width:100%;
-    margin:auto;
-    height:71px;
-    background-image: url(https://dauuuwinla3.cloudfront.net/resources/v2/img/title_login.png);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 284px 71px;
+
+.modal-header>h2.p-t-login {
+	font-size: 0;
+	width: 100%;
+	margin: auto;
+	height: 71px;
+	background-image:
+		url(https://dauuuwinla3.cloudfront.net/resources/v2/img/title_login.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 284px 71px;
 }
-.modal-header > h2.p-t-signup {
-    font-size:0;
-    width:100%;
-    margin:auto;
-    height:71px;
-    background-image: url(https://dauuuwinla3.cloudfront.net/resources/v2/img/title_signup.png);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 284px 71px;
+
+.modal-header>h2.p-t-signup {
+	font-size: 0;
+	width: 100%;
+	margin: auto;
+	height: 71px;
+	background-image:
+		url(https://dauuuwinla3.cloudfront.net/resources/v2/img/title_signup.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 284px 71px;
 }
-.modal-header > h2.p-t-fdpw {
-    font-size:0;
-    width:100%;
-    margin:auto;
-    height:71px;
-    background-image: url(https://dauuuwinla3.cloudfront.net/resources/v2/img/title_fdpw.png);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 284px 71px;
+
+.modal-header>h2.p-t-fdpw {
+	font-size: 0;
+	width: 100%;
+	margin: auto;
+	height: 71px;
+	background-image:
+		url(https://dauuuwinla3.cloudfront.net/resources/v2/img/title_fdpw.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 284px 71px;
 }
-.modal-header > h2.p-t-inquire {
-    font-size:0;
-    width:100%;
-    margin:auto;
-    height:71px;
-    background-image: url(https://dauuuwinla3.cloudfront.net/resources/v2/img/title_toopen.png);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 284px 71px;
+
+.modal-header>h2.p-t-inquire {
+	font-size: 0;
+	width: 100%;
+	margin: auto;
+	height: 71px;
+	background-image:
+		url(https://dauuuwinla3.cloudfront.net/resources/v2/img/title_toopen.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 284px 71px;
 }
-.modal-header > h2.p-t-tozr {
-    font-size:0;
-    width:100%;
-    margin:auto;
-    height:71px;
-    background-image: url(https://dauuuwinla3.cloudfront.net/resources/v2/img/title_toorz.png);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 284px 71px;
+
+.modal-header>h2.p-t-tozr {
+	font-size: 0;
+	width: 100%;
+	margin: auto;
+	height: 71px;
+	background-image:
+		url(https://dauuuwinla3.cloudfront.net/resources/v2/img/title_toorz.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 284px 71px;
 }
-.modal-header > h2.p-t-report {
-    font-size:0;
-    width:100%;
-    margin:auto;
-    height:71px;
-    background-image: url(https://dauuuwinla3.cloudfront.net/resources/v2/img/title_report.png);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 284px 71px;
+
+.modal-header>h2.p-t-report {
+	font-size: 0;
+	width: 100%;
+	margin: auto;
+	height: 71px;
+	background-image:
+		url(https://dauuuwinla3.cloudfront.net/resources/v2/img/title_report.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 284px 71px;
 }
-.modal-header > h2.p-t-address {
-    font-size:0;
-    width:100%;
-    margin:auto;
-    height:71px;
-    background-image: url(https://dauuuwinla3.cloudfront.net/resources/v2/img/title_address.png);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 284px 71px;
+
+.modal-header>h2.p-t-address {
+	font-size: 0;
+	width: 100%;
+	margin: auto;
+	height: 71px;
+	background-image:
+		url(https://dauuuwinla3.cloudfront.net/resources/v2/img/title_address.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 284px 71px;
 }
-.modal-header > h2.p-t-numcfm {
-    font-size:0;
-    width:100%;
-    margin:auto;
-    height:71px;
-    background-image: url(https://dauuuwinla3.cloudfront.net/resources/v2/img/title_numcfm.png);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 284px 71px;
+
+.modal-header>h2.p-t-numcfm {
+	font-size: 0;
+	width: 100%;
+	margin: auto;
+	height: 71px;
+	background-image:
+		url(https://dauuuwinla3.cloudfront.net/resources/v2/img/title_numcfm.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 284px 71px;
 }
-.modal-header > h2.p-t-numcfmw {
-    font-size:0;
-    width:100%;
-    margin:auto;
-    height:71px;
-    background-image: url(https://dauuuwinla3.cloudfront.net/resources/v2/img/title_numcfmw.png);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 284px 71px;
+
+.modal-header>h2.p-t-numcfmw {
+	font-size: 0;
+	width: 100%;
+	margin: auto;
+	height: 71px;
+	background-image:
+		url(https://dauuuwinla3.cloudfront.net/resources/v2/img/title_numcfmw.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 284px 71px;
 }
-.modal-header > h2.p-t-comment {
-    font-size:0;
-    width:100%;
-    margin:auto;
-    height:71px;
-    background-image: url(https://dauuuwinla3.cloudfront.net/resources/v2/img/title_comment.png);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 284px 71px;
+
+.modal-header>h2.p-t-comment {
+	font-size: 0;
+	width: 100%;
+	margin: auto;
+	height: 71px;
+	background-image:
+		url(https://dauuuwinla3.cloudfront.net/resources/v2/img/title_comment.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 284px 71px;
 }
-.modal-header > h2.p-t-userprofile {
-    font-size:0;
-    width:100%;
-    margin:auto;
-    height:71px;
-    background-image: url(https://dauuuwinla3.cloudfront.net/resources/v2/img/title_userprofile.png);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 284px 71px;
+
+.modal-header>h2.p-t-userprofile {
+	font-size: 0;
+	width: 100%;
+	margin: auto;
+	height: 71px;
+	background-image:
+		url(https://dauuuwinla3.cloudfront.net/resources/v2/img/title_userprofile.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 284px 71px;
 }
-.modal-header > h2.p-t-signupwr {
-    font-size:0;
-    width:100%;
-    margin:auto;
-    height:71px;
-    background-image: url(https://dauuuwinla3.cloudfront.net/resources/v2/img/title_signupwr.png);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 284px 71px;
+
+.modal-header>h2.p-t-signupwr {
+	font-size: 0;
+	width: 100%;
+	margin: auto;
+	height: 71px;
+	background-image:
+		url(https://dauuuwinla3.cloudfront.net/resources/v2/img/title_signupwr.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 284px 71px;
 }
-.modal-header > h2.p-t-replymsg {
-    font-size:0;
-    width:100%;
-    margin:auto;
-    height:71px;
-    background-image: url(/resources/v2/img/title_replymsg.png);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: 284px 71px;
+
+.modal-header>h2.p-t-replymsg {
+	font-size: 0;
+	width: 100%;
+	margin: auto;
+	height: 71px;
+	background-image: url(/resources/v2/img/title_replymsg.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 284px 71px;
 }
-.modal-body {clear:both;}
-.modal-body > p {
-    display: inline-block;
-    margin-bottom:10px;
-    font-size:12px;
-    line-height: 18px;
-    color:#666666;
+
+.modal-body {
+	clear: both;
 }
-.modal-body > p.question {
-    margin:16px 0 8px 0;
-    font-weight:700;
-    font-size:16px;
-    color:#3b3b3b;
+
+.modal-body>p {
+	display: inline-block;
+	margin-bottom: 10px;
+	font-size: 12px;
+	line-height: 18px;
+	color: #666666;
 }
+
+.modal-body>p.question {
+	margin: 16px 0 8px 0;
+	font-weight: 700;
+	font-size: 16px;
+	color: #3b3b3b;
+}
+
 .modal-input-radio {
-    display:block;
-    font-weight:500;
-    font-size:14px;
-    text-align: left;
-    letter-spacing:-0.5px;
-    color:#707070;
+	display: block;
+	font-weight: 500;
+	font-size: 14px;
+	text-align: left;
+	letter-spacing: -0.5px;
+	color: #707070;
 }
-.modal-input-radio > input {
-    vertical-align: middle;
-    margin:0 8px 0 0;
+
+.modal-input-radio>input {
+	vertical-align: middle;
+	margin: 0 8px 0 0;
 }
+
 .modal-footer {
-    padding: 10px 0 0 0;
-    color: #000;
-    text-align: center;
+	padding: 10px 0 0 0;
+	color: #000;
+	text-align: center;
 }
+
 .btn-go_login {
-    display: inline-block;
-    padding:5px;
-    font-size:12px;
-    font-weight: 700px;
-    text-decoration: underline;
-    color:#e96931;
-    border:0px solid #e96931;
-    background: #fff;
+	display: inline-block;
+	padding: 5px;
+	font-size: 12px;
+	font-weight: 700px;
+	text-decoration: underline;
+	color: #e96931;
+	border: 0px solid #e96931;
+	background: #fff;
 }
 
 .modal-body signup {
-    padding:0px;
+	padding: 0px;
 }
+
 #singup-tel-field {
-	margin-top:10px;
-	padding:15px 0 ;
-	border-top:1px dashed #d5d5d5;
-	border-bottom:1px solid #d5d5d5;
+	margin-top: 10px;
+	padding: 15px 0;
+	border-top: 1px dashed #d5d5d5;
+	border-bottom: 1px solid #d5d5d5;
 }
+
 .tel-dsc {
-	font-size:11px;
-	color:#707070;
+	font-size: 11px;
+	color: #707070;
 }
+
 .tel-dsc:before {
-	margin-right:5px;
+	margin-right: 5px;
 	font-family: 'fontawesome';
-	content:'\f061';
-	font-size:10px;
-	font-weight:200;
-	color:#ccc;	
+	content: '\f061';
+	font-size: 10px;
+	font-weight: 200;
+	color: #ccc;
 }
+
 .news-txt {
-	display:block;
-	text-align:right;
-	font-size:11px;
-	color:#707070;
-	margin-top:5px;
+	display: block;
+	text-align: right;
+	font-size: 11px;
+	color: #707070;
+	margin-top: 5px;
 }
+
 p.go_signup {
-    margin-top: 15px;
-    text-align: center;
-    font-size: 12px;
-    color: #3b3b3b;
+	margin-top: 15px;
+	text-align: center;
+	font-size: 12px;
+	color: #3b3b3b;
 }
-p.go_signup > a {
-    color: #e96931;
-    font-weight: 700;
-    text-decoration: underline;
+
+p.go_signup>a {
+	color: #e96931;
+	font-weight: 700;
+	text-decoration: underline;
 }
 
 .signup-title-txt {
-    font-size:0;
+	font-size: 0;
 }
+
 .modal-body-signup fieldset {
-    display: block;
+	display: block;
 }
+
 label.sign-form_title {
-    padding-right:10px;
-    font-size:12px;
-    font-weight:700;
-    line-height:20px;
-    color:#707070;
+	padding-right: 10px;
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 20px;
+	color: #707070;
 }
+
 input.sign-form_input {
-    height:40px;
-    margin-bottom: 6px;
-    font-size:14px;
-    text-indent: 10px;
-    line-height: 14px;
-    color:#707070;
-    border:1px solid #d5d5d5;
-    width:100%;
+	height: 40px;
+	margin-bottom: 6px;
+	font-size: 14px;
+	text-indent: 10px;
+	line-height: 14px;
+	color: #707070;
+	border: 1px solid #d5d5d5;
+	width: 100%;
 }
+
 input.sign-form_input:focus {
-    border:1px solid #e96931;
-    color:#3b3b3b;
+	border: 1px solid #e96931;
+	color: #3b3b3b;
 }
+
 input.sign-form_input:active {
-	border:1px solid #e96931;
-    color:#3b3b3b;
+	border: 1px solid #e96931;
+	color: #3b3b3b;
 }
+
 input.input_tel {
-    width:25%;
-    display: inline-block;
-    margin-right:3px;
+	width: 25%;
+	display: inline-block;
+	margin-right: 3px;
 }
 
 @media only screen and (max-width:679px) {
-    input.sign-form_input {
-        height:35px;
-        line-height:23px;
-        font-size:13px;
-    }
-    input.input_tel {
-		width:23%;
+	input.sign-form_input {
+		height: 35px;
+		line-height: 23px;
+		font-size: 13px;
+	}
+	input.input_tel {
+		width: 23%;
 		display: inline-block;
-		margin-right:1px;
-        height:35px;
-        line-height:23px;
-        font-size:13px;
+		margin-right: 1px;
+		height: 35px;
+		line-height: 23px;
+		font-size: 13px;
 	}
 }
-.text-center {text-align:center!important;}
-.text-left {text-align:left!important;}
-.text-right {text-align:right!important;}
+
+.text-center {
+	text-align: center !important;
+}
+
+.text-left {
+	text-align: left !important;
+}
+
+.text-right {
+	text-align: right !important;
+}
+
 label.sign-form_title {
-    padding-right: 10px;
-    font-size: 12px;
-    font-weight: 700;
-    line-height: 20px;
-    color: #707070;
+	padding-right: 10px;
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 20px;
+	color: #707070;
 }
 </style>
 
