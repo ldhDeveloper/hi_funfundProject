@@ -12,6 +12,24 @@ public class Account implements Serializable {
 	private String idtype;
 	private String idtoken;
 	private String seller;
+	private String outyn;
+	private String nickname;
+	
+	
+	
+	
+	public String getOutyn() {
+		return outyn;
+	}
+	public void setOutyn(String outyn) {
+		this.outyn = outyn;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 	public int getAno() {
 		return ano;
 	}
@@ -64,7 +82,7 @@ public class Account implements Serializable {
 		super();
 	}
 	public Account(int ano, String id, String pwd, String email, String pimage, String idtype, String idtoken,
-			String seller) {
+			String seller, String outyn, String nickname) {
 		super();
 		this.ano = ano;
 		this.id = id;
@@ -74,10 +92,14 @@ public class Account implements Serializable {
 		this.idtype = idtype;
 		this.idtoken = idtoken;
 		this.seller = seller;
+		this.outyn = outyn;
+		this.nickname = nickname;
 	}
 	@Override
 	public String toString() {
-		return ano + ", " + id + ", " + pwd + ", " + email + ", " + pimage + ", " + idtype + ", " + idtoken + ", "
-				+ seller;
+		return "Account [ano=" + ano + ", id=" + id + ", pwd=" + pwd + ", email=" + email + ", pimage=" + pimage
+				+ ", idtype=" + idtype + ", idtoken=" + idtoken + ", seller=" + seller + ", outyn=" + outyn
+				+ ", nickname=" + nickname + "]";
 	}
+	
 }
