@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script> -->
+
 <style type="text/css">
 .container{
 	width: 100%;
@@ -108,7 +111,7 @@
 }
 
 .fun-menu{
-	color:teal !important;
+	color:#3BBFAB !important;
 }
 
 .email-input-wrap{padding-top:16px;}
@@ -175,12 +178,36 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 	padding-left: 2%;
 }
 
+.act {
+	background-color: #28B5A9;	
+}
+
+.active {
+	color: white !important;
+	font-weight: bold;
+}
+
+.otherAct {
+	background-color: #55CDAE;
+}
+
+.otherActive:hover{
+	background-color: #31C698 !important;
+	color: white !important;
+	font-weight: bold;
+}
+
+.bar:hover {
+
+}
+
 </style>
 
 <title>Insert title here</title>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/menubar.jsp" flush="true"/>
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.4.js"></script>
 
 
 <br><br>
@@ -205,21 +232,19 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 								<div class="navbar-header">
 									<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
 										<span class="sr-only">Toggle navigation</span> 
-										<span class="icon-bar"></span>
-										<span class="icon-bar"></span> 
-										<span class="icon-bar"></span>
+										<span class="bar">▼</span>
 									</button>
-									<a class="navbar-brand">회원 메뉴</a>
+									<a class="hidden-lg hidden-md navbar-brand">회원 메뉴</a>
 								</div>
 
 								<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 									<ul class="nav navbar-nav">
-										<li class="active"><a href="#">회원 정보 설정<span class="sr-only">(current)</span></a></li>
-										<li><a href="sellerinfo.do" class="w3-hover-teal">판매자 정보 변경</a></li>
-										<li><a href="joinproject.do" class="w3-hover-teal">참여한 프로젝트</a></li>
-										<li><a href="puttoproject.do" class="w3-hover-teal">찜한 프로젝트</a></li>
-										<li><a href="newproject.do" class="w3-hover-teal">개설한 프로젝트</a></li>
-										<li><a href="myfunding.do" class="w3-hover-teal">나의 펀딩 현황</a></li>
+										<li class="act"><a class="active" href="myinfo.do">회원 정보 설정<span class="sr-only">(current)</span></a></li>
+										<li><a href="sellerinfo.do" class="otherActive">판매자 정보 변경</a></li>
+										<li><a href="joinproject.do" class="otherActive">참여한 프로젝트</a></li>
+										<li><a href="puttoproject.do" class="otherActive">찜한 프로젝트</a></li>
+										<li><a href="newproject.do" class="otherActive">개설한 프로젝트</a></li>
+										<li><a href="myfunding.do" class="otherActive">나의 펀딩 현황</a></li>
 									</ul>
 								</div>
 							</div>
@@ -252,6 +277,9 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 	                            	<a href="#" onclick="return false;">
 	                                	<span>인증하기</span>
 	                              	</a>
+	                             
+	                                <!-- <span onclick="check();">인증하기</span> -->
+	                              	
 	                          	</div>	                          	
 	                          	<div id="emailRetryBtn" class="emailAuthBtn mbtn" style="display:none;" data-status="retry">
 	                              	<a href="#" onclick="return false;">
@@ -279,9 +307,13 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 	                              <input id="mobileNumber" name="mobileNumber" type="tel" class=" input-text" placeholder="휴대폰 번호" maxlength="11" value="" />
 	                          </div>
 	                          <div id="mobileCheckBtn" class="mobileAuthBtn mbtn"  data-status="check">
-	                              <a href="#" onclick="return false;">
+	                              <a href="#" id="check">
 	                                  <span>인증하기</span>
 	                              </a>
+	                              
+	                              
+	                              <!-- <span onclick="check();">인증하기</span> -->
+	                             
 	                          </div>
 	                          <div id="mobileChangeBtn" class="mobileAuthBtn mbtn" style="display:none;" data-status="change">
 	                              <a href="#" onclick="return false;">
@@ -351,6 +383,44 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 </div>
 
 <br><br>
+
+<script type="text/javascript">
+$(function(){
+	$("#check").click(function() {
+		console.log("오니?");
+		IMP.init('imp55262355');
+
+		IMP.certification({
+		    merchant_uid : 'merchant_' + new Date().getTime() //본인인증과 연관된 가맹점 내부 주문번호가 있다면 넘겨주세요
+		}, function(rsp) {
+		    if ( rsp.success ) {
+		    	 // 인증성공
+		        console.log(rsp.imp_uid);
+		        console.log(rsp.merchant_uid);
+		        
+		        $.ajax({
+						type : 'POST',
+						url : '/certifications/confirm',
+						dataType : 'json',
+						data : {
+							imp_uid : rsp.imp_uid
+						}
+				 }).done(function(rsp) {
+				 		// 이후 Business Logic 처리하시면 됩니다.
+				 });
+		        	
+		    } else {
+		    	 // 인증취소 또는 인증실패
+		        var msg = '인증에 실패하였습니다.';
+		        msg += '에러내용 : ' + rsp.error_msg;
+
+		        alert(msg);
+		    }
+		});		
+	});	
+}); 
+
+</script>
 
 </body>
 </html>

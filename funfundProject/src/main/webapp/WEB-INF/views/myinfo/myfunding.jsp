@@ -105,7 +105,30 @@
 }
 
 .fun-menu{
-	color:teal !important;
+	color:#3BBFAB !important;
+}
+
+.act {
+	background-color: #28B5A9;	
+}
+
+.active {
+	color: white !important;
+	font-weight: bold;
+}
+
+.otherAct {
+	background-color: #55CDAE;
+}
+
+.otherActive:hover{
+	background-color: #31C698 !important;
+	color: white !important;
+	font-weight: bold;
+}
+
+.bar:hover {
+
 }
 </style>
 
@@ -136,22 +159,20 @@
     						<div class="navbar-header">
       							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         							<span class="sr-only">Toggle navigation</span>
-        							<span class="icon-bar"></span>
-        							<span class="icon-bar"></span>
-        							<span class="icon-bar"></span>
+        							<span class="bar">▼</span>
       							</button>
       							
-      							<a class="navbar-brand">회원 메뉴</a>
+      							<a class="hidden-lg hidden-md navbar-brand">회원 메뉴</a>
     						</div>
 
     						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       							<ul class="nav navbar-nav">
-      								<li><a href="myinfo.do" class="w3-hover-teal">회원 정보 설정</a></li>
-        							<li><a href="sellerinfo.do" class="w3-hover-teal">판매자 정보 변경</a></li>
-        							<li><a href="joinproject.do" class="w3-hover-teal">참여한 프로젝트</a></li>
-        							<li><a href="puttoproject.do" class="w3-hover-teal">찜한 프로젝트</a></li>
-        							<li><a href="newproject.do" class="w3-hover-teal">개설한 프로젝트</a></li>
-        							<li class="active"><a href="myfunding.do">나의 펀딩 현황<span class="sr-only">(current)</span></a></li>      							        							        							        							       							
+      								<li><a href="myinfo.do" class="otherActive">회원 정보 설정</a></li>
+        							<li><a href="sellerinfo.do" class="otherActive">판매자 정보 변경</a></li>
+        							<li><a href="joinproject.do" class="otherActive">참여한 프로젝트</a></li>
+        							<li><a href="puttoproject.do" class="otherActive">찜한 프로젝트</a></li>
+        							<li><a href="newproject.do" class="otherActive">개설한 프로젝트</a></li>
+        							<li class="act"><a class="active" href="myfunding.do">나의 펀딩 현황<span class="sr-only">(current)</span></a></li>      							        							        							        							       							
       							</ul>
     						</div>
   						</div>
