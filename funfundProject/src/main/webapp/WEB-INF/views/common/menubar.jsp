@@ -592,6 +592,7 @@ label.sign-form_title {
             		<td style="width:80px;"><a class="fun-menu" href="#"  data-toggle="modal" data-target="#myModal">로그인</a></td>
             	</c:if>
             	<c:if test="${not empty sessionScope.account.id }">
+            		<%-- <td style="width:80px;"><a class="fun-menu" href="#"><c:out value="${sessionScope.account.ano }" /></a></td> --%>
             		<td style="width:80px;"><a class="fun-menu" href="#"><c:out value="${sessionScope.account.nickname }" /></a></td>
             		<td style="width:80px;"><a class="fun-menu" href="logout.ao">로그아웃</a></td>
             		<td style="width:150px;"><a class="fun-menu" href="myinfo.do">회원정보보기</a></td>
@@ -690,7 +691,7 @@ label.sign-form_title {
           <h2 class="p-t-signup">회원가입</h2>
        </div>
       <div class="modal-body" style="padding:30px;">
-      	<form id="join_form" action="/signup.ao" method="post">
+      	<form id="join_form" action="signup.ao" method="post">
           	<input type="hidden" name="secuToken" value="7QD6StfHBmmEFvusyATSQA"/>
           	<input type="hidden" name="nmLast" value=""/>
           	<input type="hidden" name="mobile" value=""/>
@@ -699,6 +700,7 @@ label.sign-form_title {
                   <input type="email" id="signup-form_id" name="id" placeholder="아이디(이메일)" class="sign-form_input">
                   <input type="password" id="signup-form_pw" name="pwd" placeholder="영문+숫자포함 6~20자" class="sign-form_input">
                   <input type="password" id="signup-form_pw" placeholder="비밀번호확인" class="sign-form_input">
+                  <input type="text" id="signup-form_pw" name="nickname" placeholder="닉네임" class="sign-form_input">
             </fieldset>
             <div class="modal-footer">
             	<button class="btn-login_pop">회원가입하기</button>

@@ -17,4 +17,12 @@ public class AccountDao {
 		return account;
 	}
 
+	public int insert(Account account) {
+		int result = sqlSession.insert("signupAccount", account);
+		/*if(result > 0){
+			sqlSession.commit();
+		}*/
+		return result;
+	}
+
 }
