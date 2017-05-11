@@ -52,8 +52,12 @@ li {
 	align: center;
 }
 
+.box2{
+    margin: 10px;
+	padding-top: 10px;
+}
+
 .info {
-	padding-left: 10px;
 	margin-bottom: 20px;
 	text-align: center;
 }
@@ -61,25 +65,27 @@ li {
 .infoBar {
 	display: block;
 	height: 3px;
-	background: #ed6d54;
-	margin-left: 30px;
+	background: #fca84e;
 	margin-bottom: 20px;
-	width: 70%;
+	width: 100%;
+	padding-left:20px;
 }
 
 .btn-fund {
 	display: block;
-	width: 70%;
+	width: 100%;
 	height: 50px;
 	line-height: 50px;
 	text-align: center;
 	font-size: 18px;
 	font-weight: 500;
 	color: #fff;
-	background: #ed6d54;
+	background: #fca84e;
 	border: none;
-	margin-left: 30px;
 	margin-bottom: 20px;
+	padding-left:20px;
+	text-align:center;
+	align:center;
 }
 
 button {
@@ -98,24 +104,49 @@ button {
 	vertical-align: middle;
 }
 
-.makerbox {
+.makerbox{
 	padding: 20px 19px 20px;
 	border: 1px solid #eaeaea;
-	margin-left: 30px;
 	margin-bottom: 20px;
-	width: 80%;
+	width: 100%;
+	align:center;
+	display:block;
+}
+#makerbox1{
+	padding: 20px 19px 20px;
+	border: 1px solid #eaeaea;
+	margin-bottom: 20px;
+	width: 100%;
+	align:center;
+	display:block;
+}
+#makerbox2 {
+	padding: 20px 19px 20px;
+	border: 1px solid #eaeaea;
+	margin-bottom: 20px;
+	width: 100%;
+	align:center;
+	display:block;
+}
+#makerbox3{
+	padding: 20px 19px 20px;
+	border: 1px solid #eaeaea;
+	margin-bottom: 20px;
+	width: 100%;
+	align:center;
+	display:block;
 }
 
 .goal {
-	color: #f45535;
-	background: #FFC4B7;
+	color: #e39402;
+	background: #fedb9a;
 	max-width: 790px;
 	padding:10px;
 }
 
 .guide {
 	color: #423c3b;
-	background: #f2efef;
+	background: #F9F7F5;
 	max-width: 790px;
 	padding:10px;
 }
@@ -133,6 +164,7 @@ button {
 
 .backpink{
 	background-color: #FFC4B7 !important;
+	border-color: #ee7f69 !important;
 }
 
 </style>
@@ -145,9 +177,23 @@ $(function(){
 		} else {
 			$(this).addClass("backpink");
 		}
+	}).hover(function(){
+		if($(this).hasClass("backpink")){
+			$(this).removeClass("backpink");
+		} else {
+			$(this).addClass("backpink");
+		}
 	});
 	
-})
+	$('.btn-fund').hover(function(){
+		  $('.btn-fund').css('background-color','#fedb9a');
+		  }, function(){
+		    $('.btn-fund').css('background-color','#fec250');
+		  }
+		);
+	
+	$('');
+});
   
 </script>
 </head>
@@ -181,13 +227,13 @@ $(function(){
     
 	<div class="container col-lg-2 col-md-2 col-sm-12 col-xs-12"></div>
 
-	<div class="cantainer col-lg-6 col-md-6 col-sm-12 col-xs-12" style="margin:10px;">
-		<div class="row box">
-			<img src="/funfund/images/funding/face.PNG" class="img-responsive"
-				style="align: center">
-			<div class="row box">
-				<h3 style='margin: 50px;'>집에서도 전문 경락 마사지를 즐길 수 있다면?에스테틱 전문샵 경력
+	<div class="cantainer col-lg-6 col-md-6 col-sm-12 col-xs-12 box2"  style="padding:10px;">
+		<div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 box2">
+			<img src="/funfund/images/funding/face.PNG" class="img-responsive">
+				<h3 style="margin: 30px;" class="hidden-sm hidden-xs">집에서도 전문 경락 마사지를 즐길 수 있다면?에스테틱 전문샵 경력
 					20년의 베테랑의 모든 노하우를 집약한 매클러를 소개합니다.</h3>
+				<h5 style="padding: 10px;" class="hidden-lg hidden-md" style="align:center">집에서도 전문 경락 마사지를 즐길 수 있다면?에스테틱 전문샵 경력
+					20년의 베테랑의 모든 노하우를 집약한 매클러를 소개합니다.</h5>
 				<div class="goal">
 					<p>
 						<strong>목표금액</strong>
@@ -218,18 +264,17 @@ $(function(){
 				<div class="content">소개 내용</div>
 			</div>
 		</div>
-	</div>
 
 	<div class="container col-lg-2 col-md-2 col-sm-12 col-xs-12">
-		<div class="row box info">
-			<p style="margin-bottom: 25px; padding-left: 10px; margin-top: 15px;">
+		<div class="row box2 info">
+			<p class="box2">
 				일 남음</p>
 			<em class="infoBar"></em>
 			<p class="info">% 달성</p>
 			<p class="info">원의 펀딩</p>
 			<p class="info">명의 서포터</p>
 			<button class="btn-fund">펀딩하기</button>
-
+         </div>
 			<div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<button class="btn btn-default" id="btn-like">
 					<i class="fa fa-2x fa-heart-o" aria-hidden="true"></i>
@@ -239,7 +284,7 @@ $(function(){
 				</button>
 			</div>
 
-			<div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 box">
+			<div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<p
 					style="font-size: 10pt; text-align: left; padding-top: 20px; padding-bottom: 5px; margin-left: 20px;">메이커
 					정보</p>
@@ -250,41 +295,40 @@ $(function(){
 			<div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
 				<p
 					style="font-size: 10pt; text-align: left; padding-bottom: 5px; margin-left: 20px;">리워드선택</p>
-				<ul class="makerbox">
+				<ul id="makerbox1">
 					<li>원</li>
 					<li>작성자이름</li>
 					<li>품목</li>
 					<li>배송비</li>
-					<li>리워드 제공 예상일</li>
+					<li>리워드제공 예상일</li>
 					<li>제한 수량</li>
 					<li>현재 개 남음</li>
 				</ul>
 			</div>
 			<div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-				<ul class="makerbox">
+				<ul id="makerbox2">
 					<li>원</li>
 					<li>작성자이름</li>
 					<li>품목</li>
 					<li>배송비</li>
-					<li>리워드 제공 예상일</li>
+					<li>리워드제공 예상일</li>
 					<li>제한 수량</li>
 					<li>현재 개 남음</li>
 				</ul>
 			</div>
 			<div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				<ul class="makerbox">
+				<ul id="makerbox3">
 					<li>원</li>
 					<li>작성자이름</li>
 					<li>품목</li>
 					<li>배송비</li>
-					<li>리워드 제공 예상일</li>
+					<li>리워드제공 예상일</li>
 					<li>제한 수량</li>
 					<li>현재 개 남음</li>
 				</ul>
 			</div>
+			<div><button class="btn-fund">펀딩하기</button></div>
 		</div>
-		<div><button class="btn btn-default btn-fund">프로젝트 펀딩하기</button></div>
-	</div>
 
 
 
