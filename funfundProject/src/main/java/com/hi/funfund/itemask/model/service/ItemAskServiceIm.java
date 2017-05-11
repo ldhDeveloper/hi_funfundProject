@@ -2,17 +2,19 @@ package com.hi.funfund.itemask.model.service;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hi.funfund.item.model.dao.ItemDao;
+
+import com.hi.funfund.itemask.model.dao.ItemAskDao;
 import com.hi.funfund.itemask.model.vo.ItemAsk;
 
 @Service("itemAskService")
 public class ItemAskServiceIm implements ItemAskService {
 
 	@Autowired
-	private ItemDao itemAskDao;
+	private ItemAskDao itemAskDao;
 
 	@Override
 	public int insert(ItemAsk itemAsk) {
