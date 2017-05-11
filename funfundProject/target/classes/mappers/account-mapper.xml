@@ -13,6 +13,7 @@
 			<result property="idtoken" column="idtoken" />
 			<result property="seller" column="seller" />
 			<result property="outyn" column="outyn" />
+			<result property="nickname" column="nickname" />
 		</resultMap>
 		<select id="login" parameterType="account" resultMap="accountResult">
 		<![CDATA[
