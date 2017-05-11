@@ -44,10 +44,10 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("nDetail.no")
-	public String selectOne(int nno, ModelAndView model){
-		Notice n = noticeService.selectOne(nno);
-		model.addObject("n", n);
-		return "notice/ndetail";
+	public String selectOne(/*int nno,*/ ModelAndView model){
+		/*Notice n = noticeService.selectOne(nno);
+		model.addObject("n", n);*/
+		return "notice/noticeDetail";
 	}
 	@RequestMapping("nUpdate.no")
 	public String update(Notice notice){

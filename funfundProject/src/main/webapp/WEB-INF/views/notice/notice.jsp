@@ -46,7 +46,7 @@ color: white;
 <p class="totalN">총 건수 </p>
 <button>공지사항</button> <button>FnQ</button> <button>QnA</button>
 <!-- 1.여기서부터  -->
-<a  style="display:block;" href="http://www.naver.com">
+<a  style="display:block;" href="nDetail.no">
 <hr>
 <p> <em>공지사항</em>  <span> 제목</span> </p>
 <p> <span> 작성자</span> <span>작성일</span> </p>
