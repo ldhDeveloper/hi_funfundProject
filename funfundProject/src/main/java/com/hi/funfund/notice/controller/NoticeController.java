@@ -18,11 +18,11 @@ public class NoticeController {
 	
 	
 	@RequestMapping("nList.no")
-	public String notice(int bno, int page, ModelAndView model){
+	public String notice(/*int bno, int page,*/ ModelAndView model){
 		
-		List<Notice> nList = noticeService.selectList(bno, page);
+		//List<Notice> nList = noticeService.selectList(bno, page);
 		
-		model.addObject("nList", nList);
+		//model.addObject("nList", nList);
 				
 		return "notice/notice";
 	}

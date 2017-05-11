@@ -17,7 +17,14 @@ color: white;
 width:970px;
 margin:auto;
 padding:80px;
+text-align: right;
 }
+.ntable {
+width:700px;
+margin:auto;
+
+}
+
 .ntable, th, td {
 
 font-weight:bold;
@@ -27,6 +34,16 @@ border: 1px solid #aaaaaa;
 }
 .column{
 background : #cccccc;
+}
+input {
+width: 100%;
+}
+form {
+
+}
+.submit{
+width: 100px !important;
+
 }
 </style>
 </head>
@@ -43,11 +60,11 @@ background : #cccccc;
 <table class="ntable">
 <tr><td class="column">제목</td><td><input id="ntitle" name="ntitle"> </td></tr>
 <tr><td class="column">이름</td><td><input id="writer" value="" readonly></td></tr>
-<tr><td class="column">내용</td><td></td></tr>
+<tr><td class="column">내용</td><td><div></div></td></tr>
 <tr><td class="column">첨부파일</td><td><input type="file"></td></tr>
 <tr><td class="column"></td><td></td></tr>
 </table>
-<input type="submit" value="작성">
+<input class="submit" type="submit" value="작성">
 </form> 
  </div>
 </div>
