@@ -61,7 +61,7 @@ color: white;
  <input type="text" placeholder="내용을 입력하세요">
  <input type="submit" value="검색"> 
  </form>
- <a href="nwrite.no">글쓰기</a>
+ <a href="nInsertView.no">글쓰기</a>
 </div>
 </div>
 </div>
