@@ -78,6 +78,11 @@ public class HomeController {
 		return "myinfo/myfunding";
 	}
 	
+	@RequestMapping(value = "investRequest.do")
+	public String investRequest(){
+		return "myinfo/investRequest";
+	}
+	
 	// myinfo 회원 정보 설정 끝
 	
 	@RequestMapping(value = "makeproject.do")
