@@ -6,6 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <style>
 .titlebar {
 	background: orange;
@@ -20,7 +25,7 @@
 	background: #F9F7F5;
 	padding: 20px;
 	text-align: center;
-	align:center;
+	align: center;
 	width: 100%;
 }
 
@@ -44,8 +49,16 @@ img {
 	vertical-align: middle;
 }
 
-.background{
- background-color: #F9F7F5;
+.background {
+	background-color: #F9F7F5;
+}
+
+#progressbar1 {
+	width: 300px;
+}
+
+button {
+	curser: pointer;
 }
 </style>
 </head>
@@ -70,10 +83,14 @@ img {
 				<!-- 자동슬라이드로 만들어야함 -->
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<ul>
-						<li><img src="/funfund/images/funding/1.PNG" class="img-responsive"></li>
-						<li><img src="/funfund/images/funding/2.PNG" class="img-responsive"></li>
-						<li><img src="/funfund/images/funding/3.PNG" class="img-responsive"></li>
-						<li><img src="/funfund/images/funding/4.PNG" class="img-responsive"></li>
+						<li><img src="/funfund/images/funding/1.PNG"
+							class="img-responsive"></li>
+						<li><img src="/funfund/images/funding/2.PNG"
+							class="img-responsive"></li>
+						<li><img src="/funfund/images/funding/3.PNG"
+							class="img-responsive"></li>
+						<li><img src="/funfund/images/funding/4.PNG"
+							class="img-responsive"></li>
 					</ul>
 				</div>
 			</div>
@@ -87,14 +104,13 @@ img {
 	<div class="row"
 		style="align: center; padding: 10px; background: white;">
 		<div class="container">
-			<div>
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<button class="btn btn-default">전체</button>
-					<button class="btn btn-default">아이디어</button>
-					<button class="btn btn-default">디자인</button>
-					<button class="btn btn-default">패션/뷰티</button>
-					<button class="btn btn-default">테크</button>
-				</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+				style="display: block; text-align: center;">
+				<button class="btn btn-default">전체</button>
+				<button class="btn btn-default">아이디어</button>
+				<button class="btn btn-default">디자인</button>
+				<button class="btn btn-default">패션/뷰티</button>
+				<button class="btn btn-default">테크</button>
 			</div>
 		</div>
 	</div>
@@ -112,22 +128,32 @@ img {
 			<div class="row">
 				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 					<div class="thumbnail" align="center">
-						<a href="detail.do" target="_blank"> <img src="images/funding/"
-							alt="사진1" style="width: 100%">
+						<a href="detail.do"> <img
+							src="/funfund/images/funding/face.PNG" alt="사진1"
+							style="width: 100%">
+							<div class="progress">
+								<div class="progress-bar progress-bar-warning"
+									role="progressbar" aria-valuenow="60" aria-valuemin="0"
+									aria-valuemax="100" style="width: 60%;">
+									<span class="sr-only"></span>
+								</div>
+							</div>
 							<p>
 								<span></span> % &nbsp;&nbsp; <span></span>원 달성 &nbsp;&nbsp; <span></span>
 								일 남음
 							</p>
+
 							<div class="caption">
 								<p>내용을쓰시오</p>
+								<span >카테고리</span>
 							</div>
 						</a>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 					<div class="thumbnail" align="center">
-						<a href="" target="_blank"> <img src="images/funding/"
-							alt="사진1" style="width: 100%">
+						<a href=""> <img src="images/funding/" alt="사진1"
+							style="width: 100%">
 							<p>
 								<span></span> % &nbsp;&nbsp; <span></span>원 달성 &nbsp;&nbsp; <span></span>
 								일 남음
@@ -140,8 +166,8 @@ img {
 				</div>
 				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 					<div class="thumbnail" align="center">
-						<a href="" target="_blank"> <img src="images/funding/"
-							alt="사진1" style="width: 100%">
+						<a href=""> <img src="images/funding/" alt="사진1"
+							style="width: 100%">
 							<p>
 								<span></span> % &nbsp;&nbsp; <span></span>원 달성 &nbsp;&nbsp; <span></span>
 								일 남음
@@ -166,8 +192,8 @@ img {
 			<div class="row">
 				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 					<div class="thumbnail" align="center">
-						<a href="" target="_blank"> <img src="images/funding/"
-							alt="사진1" style="width: 100%">
+						<a href=""> <img src="images/funding/" alt="사진1"
+							style="width: 100%">
 							<p>
 								<span></span> % &nbsp;&nbsp; <span></span>원 달성 &nbsp;&nbsp; <span></span>
 								일 남음
@@ -180,8 +206,8 @@ img {
 				</div>
 				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 					<div class="thumbnail" align="center">
-						<a href="" target="_blank"> <img src="images/funding/"
-							alt="사진1" style="width: 100%">
+						<a href=""> <img src="images/funding/" alt="사진1"
+							style="width: 100%">
 							<p>
 								<span></span> % &nbsp;&nbsp; <span></span>원 달성 &nbsp;&nbsp; <span></span>
 								일 남음
@@ -194,8 +220,8 @@ img {
 				</div>
 				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 					<div class="thumbnail" align="center">
-						<a href="" target="_blank"> <img src="images/funding/"
-							alt="사진1" style="width: 100%">
+						<a href=""> <img src="images/funding/" alt="사진1"
+							style="width: 100%">
 							<p>
 								<span></span> % &nbsp;&nbsp; <span></span>원 달성 &nbsp;&nbsp; <span></span>
 								일 남음
@@ -217,8 +243,8 @@ img {
 			<div class="row">
 				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 					<div class="thumbnail" align="center">
-						<a href="" target="_blank"> <img src="images/funding/"
-							alt="사진1" style="width: 100%">
+						<a href=""> <img src="images/funding/" alt="사진1"
+							style="width: 100%">
 							<p>
 								<span></span> % &nbsp;&nbsp; <span></span>원 달성 &nbsp;&nbsp; <span></span>
 								일 남음
@@ -231,8 +257,8 @@ img {
 				</div>
 				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 					<div class="thumbnail" align="center">
-						<a href="" target="_blank"> <img src="images/funding/"
-							alt="사진1" style="width: 100%">
+						<a href=""> <img src="images/funding/" alt="사진1"
+							style="width: 100%">
 							<p>
 								<span></span> % &nbsp;&nbsp; <span></span>원 달성 &nbsp;&nbsp; <span></span>
 								일 남음
@@ -245,8 +271,8 @@ img {
 				</div>
 				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 					<div class="thumbnail" align="center">
-						<a href="" target="_blank"> <img src="images/funding/"
-							alt="사진1" style="width: 100%">
+						<a href=""> <img src="images/funding/" alt="사진1"
+							style="width: 100%">
 							<p>
 								<span></span> % &nbsp;&nbsp; <span></span>원 달성 &nbsp;&nbsp; <span></span>
 								일 남음
@@ -271,8 +297,8 @@ img {
 			<div class="row">
 				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 					<div class="thumbnail" align="center">
-						<a href="" target="_blank"> <img src="images/funding/"
-							alt="사진1" style="width: 100%">
+						<a href=""> <img src="images/funding/" alt="사진1"
+							style="width: 100%">
 							<p>
 								<span></span> % &nbsp;&nbsp; <span></span>원 달성 &nbsp;&nbsp; <span></span>
 								일 남음
@@ -285,8 +311,8 @@ img {
 				</div>
 				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 					<div class="thumbnail" align="center">
-						<a href="" target="_blank"> <img src="images/funding/"
-							alt="사진1" style="width: 100%">
+						<a href=""> <img src="images/funding/" alt="사진1"
+							style="width: 100%">
 							<p>
 								<span></span> % &nbsp;&nbsp; <span></span>원 달성 &nbsp;&nbsp; <span></span>
 								일 남음
@@ -299,8 +325,8 @@ img {
 				</div>
 				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 					<div class="thumbnail" align="center">
-						<a href="" target="_blank"> <img src="images/funding/"
-							alt="사진1" style="width: 100%">
+						<a href=""> <img src="images/funding/" alt="사진1"
+							style="width: 100%">
 							<p>
 								<span></span> % &nbsp;&nbsp; <span></span>원 달성 &nbsp;&nbsp; <span></span>
 								일 남음
