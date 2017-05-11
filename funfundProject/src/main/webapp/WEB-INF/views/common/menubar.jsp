@@ -588,13 +588,14 @@ label.sign-form_title {
             	<td style="width:150px;"><a class="fun-menu" href="make.do">프로젝트 등록하기</a></td>
            	 	<td style="width:150px;"><a class="fun-menu" href="funding.do">프로젝트 둘러보기</a></td>
             	<td style="width:80px;"><a class="fun-menu" href="nList.no">고객센터</a></td>
-            	<c:if test="${empty account.id }">
+            	<c:if test="${empty sessionScope.account.id }">
             		<td style="width:80px;"><a class="fun-menu" href="#"  data-toggle="modal" data-target="#myModal">로그인</a></td>
             	</c:if>
-            	<c:if test="${not empty account.id }">
-            		<td style="width:80px;"><a class="fun-menu" href="#">로그아웃</a></td>
-            	</c:if>
-            	<td style="width:150px;"><a class="fun-menu" href="myinfo.do">회원정보보기</a></td>
+            	<c:if test="${not empty sessionScope.account.id }">
+            		<td style="width:80px;"><a class="fun-menu" href="#"><c:out value="${sessionScope.account.nickname }" /></a></td>
+            		<td style="width:80px;"><a class="fun-menu" href="logout.ao">로그아웃</a></td>
+            		<td style="width:150px;"><a class="fun-menu" href="myinfo.do">회원정보보기</a></td>
+            	</c:if>  	
          	</tr>
       </table>
    </div>   
