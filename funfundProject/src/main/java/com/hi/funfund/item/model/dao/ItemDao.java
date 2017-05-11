@@ -15,5 +15,14 @@ public class ItemDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	public int insertRewardItem(int ano){
+		int result = sqlSession.insert(nameSpace + "insert", ano);
+		if(result > 0){
+			sqlSession.commit();
+		}else{
+			sqlSession.rollback();
+		}
+		return result;
+	}
 
 }

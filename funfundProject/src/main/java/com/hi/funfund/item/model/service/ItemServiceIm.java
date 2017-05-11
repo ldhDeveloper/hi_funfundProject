@@ -76,9 +76,10 @@ public class ItemServiceIm implements ItemService{
 	}
 
 	@Override
-	public int enroll(Item item) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertRewardItem(int ano) {
+		int result = itemDao.insertRewardItem(ano);
+		
+		return result;
 	}
 
 	@Override

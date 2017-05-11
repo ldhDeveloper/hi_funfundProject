@@ -27,7 +27,7 @@ public interface ItemService {
 	
 	 List searchItemTitle(String pname); //프로젝트명 검색
 	
-	 int enroll(Item item); //프로젝트 등록신청
+	 int insertRewardItem(int ano); //프로젝트 등록신청
 	
 	 Item selectOne(int pro_no); //프로젝트 상세보기
 	

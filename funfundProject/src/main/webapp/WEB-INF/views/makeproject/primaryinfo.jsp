@@ -171,7 +171,7 @@ li {
 					</td>
 					<td style="width: 500px;">
 						<div
-							style="width: 450px; border: 1px solid #ddd; height: 40px; background: #f8f8f8; margin-left: 10px;">
+							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px;padding:10px;">
 							curryfavour9@gmail.com</div>
 					</td>
 					<td style="width: 200px;"></td>
@@ -180,7 +180,7 @@ li {
 
 					<td>
 						<div
-							style="width: 450px; border: 1px solid #ddd; height: 40px; background: #f8f8f8; margin-left: 10px;">
+							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px;padding:10px;">
 							010-7660-7771</div>
 					</td>
 					<td></td>
@@ -196,7 +196,7 @@ li {
 					</td>
 					<td>
 						<div
-							style="width: 450px; border: 1px solid #ddd; height: 40px; background: #f8f8f8; margin-left: 10px;">
+							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px;padding:10px;">
 							<input type="text">
 						</div>
 					</td>
@@ -213,7 +213,7 @@ li {
 					</td>
 					<td>
 						<div
-							style="width: 450px; border: 1px solid #ddd; height: 40px; background: #f8f8f8; margin-left: 10px;">
+							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px;padding:10px;">
 							<input type="text">원
 						</div>
 					</td>
@@ -230,7 +230,7 @@ li {
 					</td>
 					<td rowspan="10">
 						<div
-							style="width: 450px; border: 1px solid #ddd; height: 350px; background: #f8f8f8; margin-left: 10px;">
+							style="width: 450px; border: 1px solid #ddd; height: 350px; background: #f8f8f8; margin-left: 10px;padding:10px;">
 
 						</div>
 					</td>
@@ -284,7 +284,7 @@ li {
 					</td>
 					<td>
 						<div
-							style="width: 450px; border: 1px solid #ddd; height: 100px; background: #f8f8f8; margin-left: 10px;">
+							style="width: 450px; border: 1px solid #ddd; height: 100px; background: #f8f8f8; margin-left: 10px;padding:10px;">
 							#<input type="text" placeholder="메인해시태그"><br>
 							예시:숙면코창슬립닥, 빅이슈홈리스월드컵, 톤도JUMPUP,30km프로젝트, QueenBeeR
 						</div>
@@ -303,8 +303,8 @@ li {
 					</td>
 					<td>
 						<div
-							style="width: 450px; border: 1px solid #ddd; height: 40px; background: #f8f8f8; margin-left: 10px;">
-							<select style="width: 145px;">
+							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px;padding:10px;">
+							<select style="width: 130px;">
 								<option value="">필수입력입니다</option>
 								<option value="I000000001">얼리어답터</option>
 								<option value="I000000002">IT</option>
@@ -329,7 +329,7 @@ li {
 								<option value="I000000021">친환경</option>
 								<option value="I000000022">공유경제</option>
 								<option value="I000000023">교육/육아</option>
-							</select> <select style="width: 145px;">
+							</select> <select style="width: 130px;">
 								<option value="">필수입력입니다</option>
 								<option value="I000000001">얼리어답터</option>
 								<option value="I000000002">IT</option>
@@ -354,7 +354,7 @@ li {
 								<option value="I000000021">친환경</option>
 								<option value="I000000022">공유경제</option>
 								<option value="I000000023">교육/육아</option>
-							</select> <select style="width: 145px;">
+							</select> <select style="width: 130px;">
 								<option value="">필수입력입니다</option>
 								<option value="I000000001">얼리어답터</option>
 								<option value="I000000002">IT</option>
@@ -403,7 +403,7 @@ li {
 					</td>
 					<td>
 						<div
-							style="width: 450px; border: 1px solid #ddd; height: 40px; background: #f8f8f8; margin-left: 10px;">
+							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px;padding:10px;">
 							<select>
 								<option value="">선택하세요</option>
 								<option value="287">테크</option>
@@ -434,7 +434,7 @@ li {
 					</td>
 					<td>
 						<div
-							style="width: 450px; border: 1px solid #ddd; height: 40px; background: #f8f8f8; margin-left: 10px;">
+							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px;padding:10px;">
 							<input type="date">
 						</div>
 					</td>
@@ -448,7 +448,8 @@ li {
 			</table>
 
 		</div>
-
+		
+		<!-- 리워드 입력화면 -->
 		<div id="primary-info2" class="input-form">
 			<table style="width: 900px;">
 				<tr>

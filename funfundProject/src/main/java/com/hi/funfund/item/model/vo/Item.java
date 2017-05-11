@@ -21,6 +21,7 @@ public class Item implements Serializable {
 	private String pstatus;
 	private int likecount;
 	private String sharelink;
+	
 	public int getPro_no() {
 		return pro_no;
 	}
