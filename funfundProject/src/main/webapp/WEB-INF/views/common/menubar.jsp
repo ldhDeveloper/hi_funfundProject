@@ -501,7 +501,7 @@ label.sign-form_title {
         	<tr>
             	<td style="width:150px;"><a class="fun-menu" href="make.do">프로젝트 등록하기</a></td>
            	 	<td style="width:150px;"><a class="fun-menu" href="funding.do">프로젝트 둘러보기</a></td>
-            	<td style="width:80px;"><a class="fun-menu" href="notice/nList.do">고객센터</a></td>
+            	<td style="width:80px;"><a class="fun-menu" href="nList.no">고객센터</a></td>
             	<td style="width:80px;"><a class="fun-menu" href="#"  data-toggle="modal" data-target="#myModal">로그인</a></td>
             	<td style="width:150px;"><a class="fun-menu" href="myinfo.do">회원정보보기</a></td>
          	</tr>

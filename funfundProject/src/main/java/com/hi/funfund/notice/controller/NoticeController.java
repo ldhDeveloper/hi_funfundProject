@@ -7,21 +7,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.hi.funfund.notice.model.service.NoticeService;
 
 @Controller
-@RequestMapping("notice")
 public class NoticeController {
 
 	@Autowired
 	private NoticeService noticeService;
 	
 	
-	@RequestMapping("nList.do")
+	@RequestMapping("nList.no")
 	public String notice(){
 		
 		return "notice/notice";
 	}
 	
 	
-	@RequestMapping("nwrite.do")
+	@RequestMapping("nwrite.no")
 	public String Write(){
 		
 		return "notice/ninsert";
