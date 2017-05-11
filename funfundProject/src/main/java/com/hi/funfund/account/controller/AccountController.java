@@ -29,13 +29,14 @@ public class AccountController {
 		return mv;
 	}
 	
-	@RequestMapping("/sinup.ao")
+	@RequestMapping(value = "/signup.ao", produces = "text/plain;charset=UTF-8")
 	public String signup(Account account){
 		int ok = accountService.insert(account);
+		String result="";
 		if(ok > 0){
-			
+			result = "home";
 		}
-		return "home";
+		return result;
 	}
 	
 	@RequestMapping("/logout.ao")

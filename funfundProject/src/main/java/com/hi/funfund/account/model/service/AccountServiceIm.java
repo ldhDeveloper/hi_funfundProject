@@ -53,7 +53,7 @@ public class AccountServiceIm implements AccountService {
 	@Override
 	public int insert(Account account) {
 		// TODO Auto-generated method stub
-		return 0;
+		return accountDao.insert(account);
 	}
 
 	@Override
