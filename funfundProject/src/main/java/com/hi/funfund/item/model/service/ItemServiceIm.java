@@ -76,8 +76,8 @@ public class ItemServiceIm implements ItemService{
 	}
 
 	@Override
-	public int insertRewardItem(int ano) {
-		int result = itemDao.insertRewardItem(ano);
+	public int insertRewardItem(Item item) {
+		int result = itemDao.insertRewardItem(item);
 		
 		return result;
 	}
