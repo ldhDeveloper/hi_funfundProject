@@ -28,14 +28,12 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	
-	
-
-		
 	<servlet-mapping>
 		<servlet-name>action</servlet-name>
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 	 
+	<!-- notice servlet --> 
 	<servlet>
 		<servlet-name>notice</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -65,5 +63,21 @@
 	<servlet-mapping>
 		<servlet-name>account</servlet-name>
 		<url-pattern>*.ao</url-pattern>
+	</servlet-mapping>
+	
+	<!-- item 요청 서블릿 -->
+	<servlet>
+		<servlet-name>item</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/config/item-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+		
+	<servlet-mapping>
+		<servlet-name>item</servlet-name>
+		<url-pattern>*.it</url-pattern>
 	</servlet-mapping>
 </web-app>
