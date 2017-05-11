@@ -3,14 +3,30 @@
 "-//mybatis.org//DTD mapper 3.0//en"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace = "itemMapper">
+	<resultMap type="item" id="itemResult">
+			<id property="pro_no" column="pro_no" />
+			<result property="ano" column="ano" />
+			<result property="pname" column="pname" />
+			<result property="pcontent" column="pcontent" />
+			<result property="category" column="category" />
+			<result property="psdate" column="psdate" />
+			<result property="pedate" column="pedate" />
+			<result property="pshort" column="pshort" />
+			<result property="ecost" column="ecost" />
+			<result property="refund" column="refund" />
+			<result property="pvideo" column="pvideo" />
+			<result property="pstatus" column="pstatus" />
+			<result property="likecount" column="likecount" />
+			<result property="sharelink" column="sharelink" />
+	</resultMap>
+
 	<insert id="insert" parameterType="Item">
 		<![CDATA[
-			insert into item values()	
-			
-			<selectKey keyProperty="pro_no" resultType="Integer" order="AFTER"> 
-				SELECT idx_test_seq.currval FROM dual 
-			</selectKey>
-
+			insert into item values(seq_pro_no.nextval, #{ano}, '테스트1', null, null, null, null, null, 0, null, null, null, 0, null)	
 		]]>
+		
+			<selectKey keyProperty="pro_no" resultType="Integer" order="AFTER"> 
+				SELECT seq_pro_no.currval FROM dual 
+			</selectKey>
 	</insert>
 </mapper>

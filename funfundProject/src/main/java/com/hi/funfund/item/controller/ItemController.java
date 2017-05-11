@@ -3,6 +3,7 @@ package com.hi.funfund.item.controller;
 import java.sql.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,28 +101,14 @@ public class ItemController {
 	}
 
 	@RequestMapping("insert.it")
-	public ModelAndView insertRewardItem(ModelAndView model, HttpSession session){
-		int ano = (int)session.getAttribute("ano");
-		
+	public ModelAndView insertRewardItem(ModelAndView model, HttpSession session, HttpServletRequest request){
+		int ano = Integer.parseInt(request.getParameter("ano"));
+		System.out.println("ano : " + ano);
 		Item item = new Item();
 		item.setAno(ano);
-		item.setPname("null");
-		/*pro_no;
-		ano;
-		pname;
-		pcontent;
-		category;
-		psdate;
-		pedate;
-		pshort;
-		ecost;
-		refund;
-		pvideo;
-		pstatus;
-		likecount;
-		sharelink;*/
 		
-		int result = itemService.insertRewardItem(ano);
+		
+		int result = itemService.insertRewardItem(item);
 		
 		
 		
