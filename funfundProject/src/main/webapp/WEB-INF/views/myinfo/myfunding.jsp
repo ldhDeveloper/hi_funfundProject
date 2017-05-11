@@ -5,6 +5,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
+
 <style type="text/css">
 .container{
 	width: 100%;
@@ -105,13 +107,6 @@
 .fun-menu{
 	color:teal !important;
 }
-
-.joinproject {
-	padding-top: 10%;
-	padding-left: 40%;
-	color: #787878;
-}
-
 </style>
 
 <title>Insert title here</title>
@@ -153,18 +148,40 @@
       							<ul class="nav navbar-nav">
       								<li><a href="myinfo.do" class="w3-hover-teal">회원 정보 설정</a></li>
         							<li><a href="sellerinfo.do" class="w3-hover-teal">판매자 정보 변경</a></li>
-        							<li class="active"><a href="joinproject.do">참여한 프로젝트<span class="sr-only">(current)</span></a></li>      							        							
+        							<li><a href="joinproject.do" class="w3-hover-teal">참여한 프로젝트</a></li>
         							<li><a href="puttoproject.do" class="w3-hover-teal">찜한 프로젝트</a></li>
         							<li><a href="newproject.do" class="w3-hover-teal">개설한 프로젝트</a></li>
-        							<li><a href="myfunding.do" class="w3-hover-teal">나의 펀딩 현황</a></li>
+        							<li class="active"><a href="myfunding.do">나의 펀딩 현황<span class="sr-only">(current)</span></a></li>      							        							        							        							       							
       							</ul>
     						</div>
   						</div>
 					</nav>
 					
-					<div class="row">
-						<div class="joinproject">아직 참여한 프로젝트가 없습니다.</div>
-					</div>									
+					<div class="panel-group">
+						<div class="well">
+							<div class="alert alert-success">
+  								<h6>* 참여프로젝트를 클릭하시면 참여상세 내역에서 결제방법/배송지/배송메모 등을 보실 수 있습니다.</h6>
+							</div>
+												
+    						<div class="panel panel-success">
+      							<div class="panel-heading">리워드형 프로젝트</div>
+      							<div class="panel-body">아직 참여한 프로젝트가 없습니다.</div>
+    						</div>
+    					</div>
+    					
+    					<br>
+      					
+      					<div class="well">
+    						<div class="alert alert-info">
+  								<h6>* 참여프로젝트를 클릭하시면 참여상세 내역에서 마감날짜/청약상태 등을 보실 수 있습니다.</h6>
+							</div>
+    					   					
+    						<div class="panel panel-info">
+      							<div class="panel-heading">투자형 프로젝트</div>
+      							<div class="panel-body">아직 참여한 프로젝트가 없습니다.</div>
+    						</div>
+    					</div>
+  					</div>										
 				</div>				
 			</div>
 		</div>

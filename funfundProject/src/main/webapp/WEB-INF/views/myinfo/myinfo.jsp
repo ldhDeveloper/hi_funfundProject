@@ -61,18 +61,6 @@
 	color: #4D525B;
 }
 
-/* .mgrade {
-	width: 70%;
-	position: relation;
-	z-index: 20px;
-	border: 1px solid #8CD4BE;
-	background-color: #fff;
-	text-align: center;
-	padding-top: 2%;
-	color: #4D525B;
-	font-size: 1vw;
-} */
-
 .mgrade {
 	width: 80%;
 	position: relation;
@@ -152,8 +140,8 @@
 .input-btn-wrap .input{width:70%;}
 .input-btn-wrap .input.big{width:100%;}
 .input-btn-wrap .input.small{width:28%;margin-left:4px;}
-.input-btn-wrap .btn{width:28%;margin-left:4px;display:block;background:#8c8881;height:46px;line-heigh:46px;border:none;text-align:center;}
-.input-btn-wrap .mbtn{width:28%;margin-left:4px;display:block;background:#8c8881;height:46px;line-heigh:46px;border:none;text-align:center;}
+.input-btn-wrap .btn{width:28%;margin-left:4px;display:block;background:#50E3C2;height:46px;line-heigh:46px;border:none;text-align:center;}
+.input-btn-wrap .mbtn{width:28%;margin-left:4px;display:block;background:#50E3C2;height:46px;line-heigh:46px;border:none;text-align:center;}
 .input-btn-wrap .btn.post{margin-left:0;margin-bottom:7px;}
 .input-btn-wrap .btn button{border:0;background:none;cursor:pointer;width:100%;}
 .input-text.disable{background:#e7e7e7;}
@@ -187,10 +175,6 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 	padding-left: 2%;
 }
 
-/* .bar {
-	color: #777;
-	padding-top: 12%;
-} */
 </style>
 
 <title>Insert title here</title>
@@ -216,35 +200,32 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 				</div>
 				
 				<div class="mmenu">
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <!-- <label class="bar">기본 정보 설정</label>&nbsp;&nbsp; -->
-      <a class="navbar-brand">회원 메뉴</a>
-    </div>
+						<nav class="navbar navbar-default">
+							<div class="container-fluid">
+								<div class="navbar-header">
+									<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+										<span class="sr-only">Toggle navigation</span> 
+										<span class="icon-bar"></span>
+										<span class="icon-bar"></span> 
+										<span class="icon-bar"></span>
+									</button>
+									<a class="navbar-brand">회원 메뉴</a>
+								</div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-      	<li class="active"><a href="#">회원 정보 설정 <span class="sr-only">(current)</span></a></li>
-        <li><a href="sellerinfo.do" class="w3-hover-teal">판매자 정보 변경 </a></li>
-        <li><a href="joinproject.do" class="w3-hover-teal">참여한 프로젝트</a></li>
-        <li><a href="#" class="w3-hover-teal">찜한 프로젝트</a></li>
-        <li><a href="#" class="w3-hover-teal">개설한 프로젝트</a></li>
-        <li><a href="#" class="w3-hover-teal">나의 펀딩 현황</a></li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-					
-					<div class="account-wrap">
+								<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+									<ul class="nav navbar-nav">
+										<li class="active"><a href="#">회원 정보 설정<span class="sr-only">(current)</span></a></li>
+										<li><a href="sellerinfo.do" class="w3-hover-teal">판매자 정보 변경</a></li>
+										<li><a href="joinproject.do" class="w3-hover-teal">참여한 프로젝트</a></li>
+										<li><a href="puttoproject.do" class="w3-hover-teal">찜한 프로젝트</a></li>
+										<li><a href="newproject.do" class="w3-hover-teal">개설한 프로젝트</a></li>
+										<li><a href="myfunding.do" class="w3-hover-teal">나의 펀딩 현황</a></li>
+									</ul>
+								</div>
+							</div>
+						</nav>
+
+						<div class="account-wrap">
 						<h3 class="mh3">기본 정보 설정</h3>
 						
 						<br>
@@ -362,13 +343,6 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 	                        </div>
 	                     </div>												
 					</div>
-					
-					
-					<!-- <div class="myinfoUpdate">
-						<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"></div>
-						<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">기본 정보 설정</div>
-						<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"></div>				
-					</div> -->
 					</div>
 				</div>				
 			</div>
