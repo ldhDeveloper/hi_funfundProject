@@ -40,6 +40,16 @@
 
 }
 
+.mlabel {
+	color: #fff;
+	font-size: 2vw;
+	padding-top: 2.5%;
+}
+
+.btn-darkgray3{display:inline-block;width:48%;height:44px;font-size:13px;line-height:46px;text-align:center;color:#fff;background:#50E3C2;border:none;box-sizing:border-box}
+.btn-darkgray4{display:inline-block;width:48%;height:44px;font-size:13px;line-height:46px;text-align:center;color:#fff;background:#FBAF2C;border:none;box-sizing:border-box}
+.btn-darkgray5{display:inline-block;width:48%;height:44px;font-size:13px;line-height:46px;text-align:center;color:#fff;background:#50E3C2;border:none;box-sizing:border-box;}
+.input-text1{box-sizing:border-box;display:inline-block;width:48%;margin-bottom:7px;height:45px;line-height:48px;font-size:13px;color:#4a4a4a;background:#fff;border:1px solid #e4e4e4;outline:none;padding-top:1%;padding-left:4.5%}
 </style>
 </head>
 <body>
@@ -50,14 +60,14 @@
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">	
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				<div class="mlabel"></div>
+				<div class="mlabel" align="center">회원 정보 보기</div>
 				
 				<div class="minfo">
 					<div class="row">
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6"><img class="img-circle img-responsive" src="images/육찡.jpg" style="max-width:170px;max-height:170px; width:170px; heigh:150px;"><!-- 사진 값이 들어갈 곳  --></div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow mname" align="center">회원명 | 육성재<!-- 회원 이름이 들어갈 곳 --></div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">개인 일반 회원 <!-- 회원 등급이 들어갈 곳  --></label></div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input type="button" class="mbtn1" value="투자 회원 신청"></div>
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input type="button" class="mbtn1" value="투자 회원 신청" onclick='location.href="investRequest.ao"'></div>
 					</div>
 				</div>
 				
@@ -75,12 +85,12 @@
 
     						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       							<ul class="nav navbar-nav">      	
-        							<li><a href="myinfo.do" class="otherActive">회원 정보 설정</a></li>
+        							<li><a href="myinfo.ao" class="otherActive">회원 정보 설정</a></li>
         							<li class="act"><a class="active" href="myinfo.do">판매자 정보 변경<span class="sr-only">(current)</span></a></li>
-        							<li><a href="joinproject.do" class="otherActive">참여한 프로젝트</a></li>
-        							<li><a href="puttoproject.do" class="otherActive">찜한 프로젝트</a></li>
-        							<li><a href="newproject.do" class="otherActive">개설한 프로젝트</a></li>
-        							<li><a href="myfunding.do" class="otherActive">나의 펀딩 현황</a></li>
+        							<li><a href="joinproject.ao" class="otherActive">참여한 프로젝트</a></li>
+        							<li><a href="puttoproject.ao" class="otherActive">찜한 프로젝트</a></li>
+        							<li><a href="newproject.ao" class="otherActive">개설한 프로젝트</a></li>
+        							<li><a href="myfunding.ao" class="otherActive">나의 펀딩 현황</a></li>
       							</ul>
     						</div>
   						</div>
@@ -111,7 +121,7 @@
 	       					
 	       							<ul class="input-div2">
 		       							<li><input type="tel" class="input-text" value="891025" disabled /></li>
-		       							<li><input autocomplete="new-password" type="password" class="input-text" id="ssn2" name="ssn2" placeholder="주민등록번호 뒷자리" maxlength="7" />	</li>
+		       							<li><input autocomplete="new-password" type="password" class="input-text" id="ssn2" name="ssn2" placeholder="주민등록번호 뒷자리" maxlength="7" /></li>
 		       						</ul>
 	                 		
 	                 				<p id="ssnError" class="error-text">이미 가입한 주민번호입니다.</p>
@@ -120,19 +130,25 @@
 	            
 	                     	
 								<h5>주소</h5>
-		       						<p class="sub-text">본인확인이 가능한 주민등록상의 주소를 입력하세요.</p>
+		       						<p class="sub-text">본인확인이 가능한 주민등록상의 주소를 입력하세요.</p><br>
 		       				
-		       						<div class="btn-wrap post-btn">		       						
-		       							<button type="button" class="btn-darkgray w110" onclick="sample6_execDaumPostcode();">우편번호 검색</button>
+		       						<div class="btn-wrap post-btn">
+		       							<!-- <input type="text" class="input-text1" id="" name="" placeholder="우편번호" />	&nbsp;&nbsp;
+		       							<input type="button" class="btn-darkgray5" onclick="sample6_execDaumPostcode();" value="우편번호 검색"> -->       						
+		       							
+		       							<!-- <button type="button" class="btn-darkgray w110" onclick="sample6_execDaumPostcode();">우편번호 검색</button> -->
 		       						</div>
 		       				
 		       					<div class="input-area">
-		       						<input type="text" id="sample6_postcode" class="input-text" placeholder="우편번호">
-			              			<input type="text" id="sample6_address" name="location1" class="input-text" placeholder="도로명주소" readonly/>
+		       						<!-- <input type="text" id="sample6_postcode" class="input-text" placeholder="우편번호"> -->
+		       						<input type="text" class="input-text1" id="" name="" placeholder="우편번호" />	&nbsp;&nbsp;
+		       						<input type="button" class="btn-darkgray5" onclick="sample6_execDaumPostcode();" value="우편번호 검색">
+			              			<input type="text" id="sample6_address" name="location1" class="input-text" placeholder="도로명주소" readonly/> 
 			              			<input type="text" id="sample6_address2" name="location2" class="input-text" placeholder="상세주소" />
 		       						<!-- <input type="hidden" id="zipCode" name="zipCode" value="" /> -->
 		       						<p id="locationError" class="pwd-text small">본인확인이 가능한 주민등록상의 주소로 입력하세요.</p>
                                 	<p id="addrError" class="error-text">주소를 검색하세요.</p>
+                                	<br>
 		       					</div>	                        
 	                        
 								<h5>실명확인증표 등록</h5>
@@ -142,7 +158,7 @@
 				       				<div class="file-list" id="idCardFileArea" style="display:none;"></div>
 				       				
 				       				<div class="btn-wrap" id="idCardFileUploadBtn">
-				       					<button type="button" class="btn-darkgray" id="btnUploadIdCardImg">이미지 파일 등록</button>
+				       					<input type="button" class="btn-darkgray" id="btnUploadIdCardImg" value="이미지 파일 등록">
 				       				</div>
 				       		
 				       				<p id="idCardImgError" class="error-text" style="margin-bottom:6px;">실명확인증표를 등록하세요.</p>
@@ -164,6 +180,10 @@
 									<input type="hidden" id="incomeDocFiles" name="incomeDocFiles" />
 									<input type="hidden" id="specialtyDocFiles" name="specialtyDocFiles" /> -->
 		        	    		</form>
+		        	    		
+		        	    		<br><br>
+		        	    		
+		        	    		<input type="button" class="btn-darkgray3" id="" value="수정"> &nbsp;&nbsp; <input type="button" class="btn-darkgray4" id="" value="취소">
 							</div>
 					
 						<em class="line"></em>

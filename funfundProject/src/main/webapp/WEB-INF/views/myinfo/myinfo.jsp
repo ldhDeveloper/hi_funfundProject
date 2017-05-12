@@ -28,6 +28,9 @@
 	border-top-right-radius: 10px;
 	width: 100%;
 	height: 100px;
+	color: #fff;
+	font-size: 2vw;
+	padding-top: 2.5%;
 }
 
 .minfo {
@@ -211,14 +214,14 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">	
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				<div class="mlabel"></div>
+				<div class="mlabel" align="center">회원 정보 보기</div>
 				
 				<div class="minfo">
 					<div class="row">
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6"><img class="img-circle img-responsive" src="images/육찡.jpg" style="max-width:170px;max-height:170px; width:170px; heigh:150px;"><!-- 사진 값이 들어갈 곳  --></div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow mname" align="center">회원명 | 육성재<!-- 회원 이름이 들어갈 곳 --></div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">개인 일반 회원 <!-- 회원 등급이 들어갈 곳  --></label></div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input type="button" class="mbtn1" value="투자 회원 신청" onclick='location.href="investRequest.do"'></div>
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input type="button" class="mbtn1" value="투자 회원 신청" onclick='location.href="investRequest.ao"'></div>
 					</div>
 				</div>
 				
@@ -235,148 +238,113 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 
 								<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 									<ul class="nav navbar-nav">
-										<li class="act"><a class="active" href="myinfo.do">회원 정보 설정<span class="sr-only">(current)</span></a></li>
-										<li><a href="sellerinfo.do" class="otherActive">판매자 정보 변경</a></li>
-										<li><a href="joinproject.do" class="otherActive">참여한 프로젝트</a></li>
-										<li><a href="puttoproject.do" class="otherActive">찜한 프로젝트</a></li>
-										<li><a href="newproject.do" class="otherActive">개설한 프로젝트</a></li>
-										<li><a href="myfunding.do" class="otherActive">나의 펀딩 현황</a></li>
+										<li class="act"><a class="active" href="myinfo.ao">회원 정보 설정<span class="sr-only">(current)</span></a></li>
+										<li><a href="sellerinfo.ao" class="otherActive">판매자 정보 변경</a></li>
+										<li><a href="joinproject.ao" class="otherActive">참여한 프로젝트</a></li>
+										<li><a href="puttoproject.ao" class="otherActive">찜한 프로젝트</a></li>
+										<li><a href="newproject.ao" class="otherActive">개설한 프로젝트</a></li>
+										<li><a href="myfunding.ao" class="otherActive">나의 펀딩 현황</a></li>
 									</ul>
 								</div>
 							</div>
 						</nav>
 
 						<div class="account-wrap">
-						<h3 class="mh3">기본 정보 설정</h3>
+							<h3 class="mh3">기본 정보 설정</h3>
 						
-						<br>
+							<br>
 						
-						<div class="mimg" align="center">
-							<img class="img-circle img-responsive" src="images/수현찡.jpg" style="max-width:100px;max-height:100px;"><!-- 사진 값이 들어갈 곳  -->
-						</div>
+							<div class="mimg" align="center">
+								<img class="img-circle img-responsive" src="images/수현찡.jpg" style="max-width:100px;max-height:100px;"><!-- 사진 값이 들어갈 곳  -->
+							</div>
 						
-						<br>
+							<br>
 						
-						<div class="minput" align="center">
-							<div class="email-input-wrap">
-		                 	<input type="text" name="nickName" class="input-text" placeholder="닉네임" value="김진항"/>
-	                        <div class="input-btn-wrap">
-	                        	<div class="input">
-	                            	<input type="text" id="userName" name="userName" class="disable input-text" placeholder="이메일 계정" value="jinhang89@gmail.com" disabled/>
-	                          	</div>
-	                          	<div id="emailChangeBtn" class="emailAuthBtn mbtn" data-status="change">
-	                            	<a href="#" class="mbtnButton" onclick="return false;">
-	                                	<span>변경</span>
-	                              	</a>
-	                          	</div>
-	                          	<div id="emailCheckBtn" class="emailAuthBtn mbtn" style="display:none;" data-status="check">
-	                            	<a href="#" onclick="return false;">
-	                                	<span>인증하기</span>
-	                              	</a>
-	                             
-	                                <!-- <span onclick="check();">인증하기</span> -->
-	                              	
-	                          	</div>	                          	
-	                          	<div id="emailRetryBtn" class="emailAuthBtn mbtn" style="display:none;" data-status="retry">
-	                              	<a href="#" onclick="return false;">
-	                                  	<span>재전송</span>
-	                              	</a>
-	                          	</div>
-	                        </div>
-	                        <div id="emailConfirmArea" class="input-btn-wrap" style="display:none;">
-	                            <div class="input">
-	                                <input type="text" id="emailAuthCode" class="input-text" placeholder="인증번호" />
-	                                <input type="hidden" id="emailConfirmId" value="">
-	                                <time class="limit_time" style="position:relative;top:-39px;left:85%;text-align:right;">
-	                                	<span id="emailMs_timer" style="color:#50e3c2;font-size:13px;"></span>
-	                                </time>
-	                            </div>
-	                            <div id="emailConfirmBtn" class="emailAuthBtn mbtn" data-status="confirm">
-	                                <a href="#" onclick="return false;">
-	                                    <span>인증완료</span>
-	                                </a>
-	                            </div>
-	                        </div>
+							<div class="minput" align="center">
+								<div class="email-input-wrap">
+									
+									<h6 align="left">이름</h6>
+		                 			<input type="text" name="nickName" class="input-text" placeholder="닉네임" value="김진항"/>
+		                 			<br>
+	                       			
+	                       			<div class="input-btn-wrap">
+	                        			<h6 align="left">이메일</h6>
+	                        				<div class="input">
+	                            				<input type="text" id="userName" name="userName" class="disable input-text" placeholder="이메일 계정" value="jinhang89@gmail.com" disabled/>
+	                          				</div>
+	                          	
+	                          				<div id="emailChangeBtn" class="emailAuthBtn mbtn" data-status="change">
+	                            				<a href="#" class="mbtnButton" onclick="return false;">
+	                                				<span>변경</span>
+	                              				</a>
+	                          				</div>
+	                          	
+	                          			<div id="emailCheckBtn" class="emailAuthBtn mbtn" style="display:none;" data-status="check">
+	                            			<a href="#" onclick="return false;">
+	                                			<span>인증하기</span>
+	                              			</a>
+	                              		</div>	                          	
+	                          	
+	                          			<div id="emailRetryBtn" class="emailAuthBtn mbtn" style="display:none;" data-status="retry">
+	                              			<a href="#" onclick="return false;">
+	                                  			<span>재전송</span>
+	                              			</a>
+	                          			</div>
+	                        		</div>
 	                        
-	                        <div class="input-btn-wrap">
-	                          <div class="input">
-	                              <input id="mobileNumber" name="mobileNumber" type="tel" class=" input-text" placeholder="휴대폰 번호" maxlength="11" value="" />
-	                          </div>
-	                          <div id="mobileCheckBtn" class="mobileAuthBtn mbtn"  data-status="check">
-	                              <a href="#" id="check">
-	                                  <span>인증하기</span>
-	                              </a>
-	                              
-	                              
-	                              <!-- <span onclick="check();">인증하기</span> -->
-	                             
-	                          </div>
-	                          <div id="mobileChangeBtn" class="mobileAuthBtn mbtn" style="display:none;" data-status="change">
-	                              <a href="#" onclick="return false;">
-	                                  <span>변경</span>
-	                              </a>
-	                          </div>                          
-	                          <div id="mobileRetryBtn" class="mobileAuthBtn mbtn" style="display:none;" data-status="retry">
-	                              <a href="#" onclick="return false;">
-	                                  <span>재전송</span>
-	                              </a>
-	                          </div>
-	                        </div>
-	                        <div id="mobileConfirmArea" class="input-btn-wrap" style="display:none;">
-	                            <div class="input">
-	                                <input type="text" id="authCode" class="input-text" placeholder="인증번호" />
-	                                <input type="hidden" id="confirmId" value="">
-	                                <time class="limit_time" style="position:relative;top:-39px;left:85%;text-align:right;">
-	                                	<span id="smsMs_timer" style="color:#50e3c2;font-size:13px;"></span>
-	                                </time>
-	                            </div>
-	                            <div id="confirmMobileBtn" class="mobileAuthBtn mbtn" data-status="confirm">
-	                                <a href="#" onclick="return false;">
-	                                    <span>인증완료</span>
-	                                </a>
-	                            </div>
-	                        </div>	                     	              
-						</div>
-						
-						<br>
-						<br>
+	                        		<div id="emailConfirmArea" class="input-btn-wrap" style="display:none;">
+	                            		<div class="input">
+	                                		<input type="text" id="emailAuthCode" class="input-text" placeholder="인증번호" />
+	                                		<input type="hidden" id="emailConfirmId" value="">
+	                                		<time class="limit_time" style="position:relative;top:-39px;left:85%;text-align:right;">
+	                                			<span id="emailMs_timer" style="color:#50e3c2;font-size:13px;"></span>
+	                                		</time>
+	                            		</div>
+	                            
+	                            		<div id="emailConfirmBtn" class="emailAuthBtn mbtn" data-status="confirm">
+	                                		<a href="#" onclick="return false;">
+	                                    		<span>인증완료</span>
+	                                		</a>
+	                            		</div>
+	                        		</div>
+		                    		
+		                    		<br><br>
 												
-						<div id="accountWrap">
-            				<!-- S : #newContainer -->
-            			<div id="newContainer">
-                		<!-- account-wrap -->
-               				 <div class="account-wrap">
-                    <h3 class="mh32">비밀번호 설정</h3>
-                    <div class="email-input-wrap">
-                    <form id="saveForm">
-                        <input type="password" id="oldPassword" name="oldPassword" class="input-text" placeholder="현재 비밀번호" />
-                        <!-- <p id="oldPasswordError" class="error-text">현재 비밀번호가 일치 하지 않습니다.</p> -->
-                        <input type="password" id="newPassword" name="newPassword" class="input-text" placeholder="새 비밀번호" />
-                        <!-- <p id="passwordError" class="pwd-text">영문, 숫자, 특수문자 (!@#$%^&*+=-)를 모두 조합한 8자 이상</p> -->
-                        <input type="password" id="newPasswordConfirm" name="newPasswordConfirm" class="input-text" placeholder="새 비밀번호 확인" />
-                        <!-- <p class="error-text">비밀번호가 같지 않습니다.</p> -->
-                    
-                       </form>
-                    </div>
-                </div>
-            </div>
-            <!-- E : #newContainer -->
-        </div>
+									<div id="accountWrap">
+            	            			<div id="newContainer">
+                							<div class="account-wrap">
+                    							<h3 class="mh32">비밀번호 설정</h3>
+                    							<div class="email-input-wrap">
+                    								<form id="saveForm">
+                        								<input type="password" id="oldPassword" name="oldPassword" class="input-text" placeholder="현재 비밀번호" />
+                        								<!-- <p id="oldPasswordError" class="error-text">현재 비밀번호가 일치 하지 않습니다.</p> -->
+                        								<input type="password" id="newPassword" name="newPassword" class="input-text" placeholder="새 비밀번호" />
+                        								<!-- <p id="passwordError" class="pwd-text">영문, 숫자, 특수문자 (!@#$%^&*+=-)를 모두 조합한 8자 이상</p> -->
+                        								<input type="password" id="newPasswordConfirm" name="newPasswordConfirm" class="input-text" placeholder="새 비밀번호 확인" />
+                        								<!-- <p class="error-text">비밀번호가 같지 않습니다.</p> -->                    
+                       								</form>
+                    							</div>
+                							</div>
+            							</div>
+        							</div>
         
-        <br>
+        							<br>
 						
-						<div class="email-input-wrap small">
-							<div class="btn-wrap">
-								<button id="saveBtn" class="btn-block-purple">확인</button>
-	                        </div>
-	                     </div>												
+									<div class="email-input-wrap small">
+										<div class="btn-wrap">
+											<button id="saveBtn" class="btn-block-purple">확인</button>
+	                        			</div>
+	                     			</div>												
+								
+								</div>
+							</div>
+						</div>				
 					</div>
-					</div>
-				</div>				
+				
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
 <br><br>
 

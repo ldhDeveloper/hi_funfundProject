@@ -45,5 +45,43 @@ public class AccountController {
 		return "home";
 	}
 	
+	// myinfo 회원정보 설정 시작
+	
+	@RequestMapping(value = "myinfo.ao")
+	public String myinfo(){
+		return "myinfo/myinfo";
+	}
+	
+	@RequestMapping(value = "investRequest.ao")
+	public String investRequest(){
+		return "myinfo/investRequest";
+	}
+	
+	@RequestMapping(value = "sellerinfo.ao")
+	public String sellerinfo(){
+		return "myinfo/sellerinfo";
+	}
+	
+	@RequestMapping(value = "joinproject.ao")
+	public String joinproject(){
+		return "myinfo/joinproject";
+	}
+	
+	@RequestMapping(value = "puttoproject.ao")
+	public String puttoproject(){
+		return "myinfo/puttoproject";
+	}
+	
+	@RequestMapping(value = "newproject.ao")
+	public String newproject(){
+		return "myinfo/newproject";
+	}
+	
+	@RequestMapping(value = "myfunding.ao")
+	public String myfunding(){
+		return "myinfo/myfunding";
+	}
+	
+	// myinfo 회원 정보 설정 끝
 	
 }
