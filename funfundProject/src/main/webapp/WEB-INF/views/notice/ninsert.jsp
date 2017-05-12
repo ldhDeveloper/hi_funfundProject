@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html >
 <html>
 <head>
 
@@ -62,7 +62,6 @@ width: 100px !important;
 <tr><td class="column">이름</td><td><input id="writer" value="" readonly></td></tr>
 <tr><td class="column">내용</td><td><div></div></td></tr>
 <tr><td class="column">첨부파일</td><td><input type="file"></td></tr>
-<tr><td class="column"></td><td></td></tr>
 </table>
 <input class="submit" type="submit" value="작성">
 </form> 
