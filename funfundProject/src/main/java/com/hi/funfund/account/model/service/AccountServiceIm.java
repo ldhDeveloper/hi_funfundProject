@@ -67,6 +67,11 @@ public class AccountServiceIm implements AccountService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public Party loginParty(int ano){
+		return accountDao.loginParty(ano);
+	}
 
 	@Override
 	public Account selectAccount(int ano) {

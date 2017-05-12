@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hi.funfund.account.model.vo.Account;
+import com.hi.funfund.account.model.vo.Party;
 
 @Repository("accountDao")
 public class AccountDao {
@@ -23,6 +24,11 @@ public class AccountDao {
 			sqlSession.commit();
 		}*/
 		return result;
+	}
+
+	public Party loginParty(int ano) {
+		Party p  = (Party)sqlSession.selectOne("loginParty", ano);
+		return p;
 	}
 
 }
