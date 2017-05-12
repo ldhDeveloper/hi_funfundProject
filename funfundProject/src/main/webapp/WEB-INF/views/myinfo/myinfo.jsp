@@ -6,8 +6,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script> -->
-
 <style type="text/css">
 .container{
 	width: 100%;
@@ -27,10 +25,10 @@
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 	width: 100%;
-	height: 100px;
+	height: 80px;
 	color: #fff;
 	font-size: 2vw;
-	padding-top: 2.5%;
+	padding-top: 1.5%;
 }
 
 .minfo {
@@ -104,7 +102,7 @@
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 	width: 100%;
-	height : 900px;
+	height : 1180px;
 	padding-top: 2%;
 }
 
@@ -200,14 +198,14 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 
 }
 
+.line{display:block;margin:40px 0;width:100%;height:1px;background:#ddd}
+
 </style>
 
 <title>Insert title here</title>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/menubar.jsp" flush="true"/>
-<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.4.js"></script>
-
 
 <br><br>
 <div class="container">
@@ -255,7 +253,7 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 							<br>
 						
 							<div class="mimg" align="center">
-								<img class="img-circle img-responsive" src="images/수현찡.jpg" style="max-width:100px;max-height:100px;"><!-- 사진 값이 들어갈 곳  -->
+								<img class="img-circle img-responsive" src="images/myinfo/basic.png" style="max-width:100px;max-height:100px;"><!-- 사진 값이 들어갈 곳  -->
 							</div>
 						
 							<br>
@@ -264,8 +262,20 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 								<div class="email-input-wrap">
 									
 									<h6 align="left">이름</h6>
-		                 			<input type="text" name="nickName" class="input-text" placeholder="닉네임" value="김진항"/>
+		                 			<input type="text" name="nickName" class="input-text" placeholder="이름" value="육성재"/>
+		                 			
+		                 			<h6 align="left">닉네임</h6>
+		                 			<input type="text" name="nickName" class="input-text" placeholder="닉네임" value="육찡"/>
+		                 			
 		                 			<br>
+		                 			
+		                 			<div class="email-input-wrap small">
+										<div class="btn-wrap">
+											<button id="saveBtn" class="btn-block-purple"  onclick="location.href='myinfo.ao?ano=${sessionScope.account.ano}'">설정하기</button>
+	                        			</div>
+	                     			</div>
+	                     			
+	                     			<br><br>
 	                       			
 	                       			<div class="input-btn-wrap">
 	                        			<h6 align="left">이메일</h6>
@@ -307,8 +317,10 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 	                                		</a>
 	                            		</div>
 	                        		</div>
-		                    		
-		                    		<br><br>
+	                        		
+	                        		<br>
+	                        		
+	                        		<em class="line"></em>             			                        	                     	
 												
 									<div id="accountWrap">
             	            			<div id="newContainer">
@@ -332,7 +344,7 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 						
 									<div class="email-input-wrap small">
 										<div class="btn-wrap">
-											<button id="saveBtn" class="btn-block-purple">확인</button>
+											<button id="saveBtn" class="btn-block-purple">설정하기</button>
 	                        			</div>
 	                     			</div>												
 								
@@ -347,44 +359,6 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 	</div>
 
 <br><br>
-
-<script type="text/javascript">
-$(function(){
-	$("#check").click(function() {
-		console.log("오니?");
-		IMP.init('imp55262355');
-
-		IMP.certification({
-		    merchant_uid : 'merchant_' + new Date().getTime() //본인인증과 연관된 가맹점 내부 주문번호가 있다면 넘겨주세요
-		}, function(rsp) {
-		    if ( rsp.success ) {
-		    	 // 인증성공
-		        console.log(rsp.imp_uid);
-		        console.log(rsp.merchant_uid);
-		        
-		        $.ajax({
-						type : 'POST',
-						url : '/certifications/confirm',
-						dataType : 'json',
-						data : {
-							imp_uid : rsp.imp_uid
-						}
-				 }).done(function(rsp) {
-				 		// 이후 Business Logic 처리하시면 됩니다.
-				 });
-		        	
-		    } else {
-		    	 // 인증취소 또는 인증실패
-		        var msg = '인증에 실패하였습니다.';
-		        msg += '에러내용 : ' + rsp.error_msg;
-
-		        alert(msg);
-		    }
-		});		
-	});	
-}); 
-
-</script>
 
 </body>
 </html>

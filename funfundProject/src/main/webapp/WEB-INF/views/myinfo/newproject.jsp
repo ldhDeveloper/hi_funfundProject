@@ -24,10 +24,10 @@
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 	width: 100%;
-	height: 100px;
+	height: 80px;
 	color: #fff;
 	font-size: 2vw;
-	padding-top: 2.5%;
+	padding-top: 1.5%;
 }
 
 .minfo {
