@@ -3,6 +3,7 @@ package com.hi.funfund.item.model.dao;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +14,7 @@ public class ItemDao {
 	
 	private static final String nameSpace = "itemMapper.";
 	@Autowired
-	private SqlSession sqlSession;
+	private SqlSessionTemplate sqlSession;
 	
 	public int insertRewardItem(Item item){
 		int pro_no = 0;
@@ -29,8 +30,9 @@ public class ItemDao {
 	}
 
 	public List AllList() {
-		/*List<Item> iList = sqlSession.selectList(,);*/
-		return null;
+		List<Item> iList = (List<Item>) sqlSession.selectList("selectList");
+		System.out.println("iList"+iList.get(0));
+		return iList;
 	}
 	
 }
