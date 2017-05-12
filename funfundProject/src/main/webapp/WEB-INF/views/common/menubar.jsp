@@ -594,7 +594,7 @@ label.sign-form_title {
             	<c:if test="${not empty sessionScope.account.id }">
             		<td style="width:80px;"><a class="fun-menu" href="#"><c:out value="${sessionScope.account.nickname}" /></a></td>
             		<td style="width:80px;"><a class="fun-menu" href="logout.ao">로그아웃</a></td>
-            		<td style="width:150px;"><a class="fun-menu" href="myinfo.do">회원정보보기</a></td>
+            		<td style="width:150px;"><a class="fun-menu" href="myinfo.ao">회원정보보기</a></td>
             	</c:if>  	
          	</tr>
       </table>

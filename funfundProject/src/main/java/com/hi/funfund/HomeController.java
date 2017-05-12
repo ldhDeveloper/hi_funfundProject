@@ -3,6 +3,7 @@ package com.hi.funfund;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Handles requests for the application home page.
@@ -46,44 +48,6 @@ public class HomeController {
 	public String funding(){
 		return "funding/funding";
 	}
-
-	// myinfo 회원정보 설정 시작	
-	@RequestMapping(value = "myinfo.do")
-	public String myinfo(){
-		return "myinfo/myinfo";
-	}
-	
-	@RequestMapping(value = "sellerinfo.do")
-	public String sellerinfo(){
-		return "myinfo/sellerinfo";
-	}
-	
-	@RequestMapping(value = "joinproject.do")
-	public String joinproject(){
-		return "myinfo/joinproject";
-	}
-	
-	@RequestMapping(value = "puttoproject.do")
-	public String puttoproject(){
-		return "myinfo/puttoproject";
-	}
-	
-	@RequestMapping(value = "newproject.do")
-	public String newproject(){
-		return "myinfo/newproject";
-	}
-	
-	@RequestMapping(value = "myfunding.do")
-	public String myfunding(){
-		return "myinfo/myfunding";
-	}
-	
-	@RequestMapping(value = "investRequest.do")
-	public String investRequest(){
-		return "myinfo/investRequest";
-	}
-	
-	// myinfo 회원 정보 설정 끝
 	
 	@RequestMapping(value = "makeproject.do")
 	public String makeProject(){
@@ -94,5 +58,22 @@ public class HomeController {
 	public String fundingdetailList(){
 		return "funding/detailList";
 	}
+	
+	/*// Ajax 추가
+	@RequestMapping(value = "/json/jsonList.do")
+	public ModelAndView outputJsonList(ModelAndView modelAndView) {
+	    SomeDTO someData = someService.someMethod();
+	     
+	    Map map = new HashMap();
+	    map.put("someData", someData);
+	    map.put("strData", "strData");
+	     
+	    modelAndView.addAllObjects(map);
+	 
+	    // Keypoint ! setViewName에 들어갈 String 파라미터는 JsonView bean 설정해줬던 id와 같아야 한다.
+	    modelAndView.setViewName("jsonView");
+	     
+	    return modelAndView;
+	}*/
 	
 }

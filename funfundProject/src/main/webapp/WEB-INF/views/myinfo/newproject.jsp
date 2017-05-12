@@ -25,6 +25,9 @@
 	border-top-right-radius: 10px;
 	width: 100%;
 	height: 100px;
+	color: #fff;
+	font-size: 2vw;
+	padding-top: 2.5%;
 }
 
 .minfo {
@@ -146,14 +149,14 @@
 	<div class="row">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">	
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				<div class="mlabel"></div>
+				<div class="mlabel" align="center">회원 정보 보기</div>
 				
 				<div class="minfo">
 					<div class="row">
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6"><img class="img-circle img-responsive" src="images/육찡.jpg" style="max-width:170px;max-height:170px; width:170px; heigh:150px;"><!-- 사진 값이 들어갈 곳  --></div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow mname" align="center">회원명 | 육성재<!-- 회원 이름이 들어갈 곳 --></div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">개인 일반 회원 <!-- 회원 등급이 들어갈 곳  --></label></div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input type="button" class="mbtn1" value="투자 회원 신청"></div>
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input type="button" class="mbtn1" value="투자 회원 신청" onclick='location.href="investRequest.ao"'></div>
 					</div>
 				</div>
 				
@@ -171,12 +174,12 @@
 
     						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       							<ul class="nav navbar-nav">
-      								<li><a href="myinfo.do" class="otherActive">회원 정보 설정</a></li>
-        							<li><a href="sellerinfo.do" class="otherActive">판매자 정보 변경</a></li>
-        							<li><a href="joinproject.do" class="otherActive">참여한 프로젝트</a></li>
-        							<li><a href="puttoproject.do" class="otherActive">찜한 프로젝트</a></li>
-        							<li class="act"><a class="active" href="newproject.do">개설한 프로젝트<span class="sr-only">(current)</span></a></li>      							        							        							        							
-        							<li><a href="myfunding.do" class="otherActive">나의 펀딩 현황</a></li>
+      								<li><a href="myinfo.ao" class="otherActive">회원 정보 설정</a></li>
+        							<li><a href="sellerinfo.ao" class="otherActive">판매자 정보 변경</a></li>
+        							<li><a href="joinproject.ao" class="otherActive">참여한 프로젝트</a></li>
+        							<li><a href="puttoproject.ao" class="otherActive">찜한 프로젝트</a></li>
+        							<li class="act"><a class="active" href="newproject.ao">개설한 프로젝트<span class="sr-only">(current)</span></a></li>      							        							        							        							
+        							<li><a href="myfunding.ao" class="otherActive">나의 펀딩 현황</a></li>
       							</ul>
     						</div>
   						</div>
