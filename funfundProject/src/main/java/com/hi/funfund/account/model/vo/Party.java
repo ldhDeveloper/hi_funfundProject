@@ -12,8 +12,8 @@ public class Party implements java.io.Serializable {
 	private String com_no;
 	private String president;
 	private String address;
-	private boolean pconfirm;
-	private boolean econfirm;
+	private String pconfirm;
+	private String econfirm;
 	public int getPno() {
 		return pno;
 	}
@@ -80,22 +80,22 @@ public class Party implements java.io.Serializable {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public boolean isPconfirm() {
+	public String isPconfirm() {
 		return pconfirm;
 	}
-	public void setPconfirm(boolean pconfirm) {
+	public void setPconfirm(String pconfirm) {
 		this.pconfirm = pconfirm;
 	}
-	public boolean isEconfirm() {
+	public String isEconfirm() {
 		return econfirm;
 	}
-	public void setEconfirm(boolean econfirm) {
+	public void setEconfirm(String econfirm) {
 		this.econfirm = econfirm;
 	}
 	
 	public Party(){}
 	public Party(int pno, int ano, String pname, String phone, String intro, String account, String cname, String id_no,
-			String com_no, String president, String address, boolean pconfirm, boolean econfirm) {
+			String com_no, String president, String address, String pconfirm, String econfirm) {
 		super();
 		this.pno = pno;
 		this.ano = ano;
