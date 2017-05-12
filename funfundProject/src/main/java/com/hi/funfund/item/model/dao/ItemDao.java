@@ -16,10 +16,16 @@ public class ItemDao {
 	private SqlSession sqlSession;
 	
 	public int insertRewardItem(Item item){
+		int pro_no = 0;
 		System.out.println("실행전 : " + item.getPro_no());
 		int result = sqlSession.insert(nameSpace + "insert", item);
 		System.out.println("실행후 : " + item.getPro_no());
-		return result;
+		
+		if(result > 0){
+			pro_no = item.getPro_no();
+		}
+		
+		return pro_no;
 	}
 
 	public List AllList() {

@@ -107,12 +107,13 @@ public class ItemController {
 		Item item = new Item();
 		item.setAno(ano);
 		
+		int pro_no = itemService.insertRewardItem(item);
 		
-		int result = itemService.insertRewardItem(item);
+		System.out.println("result : " + pro_no);
+		request.setAttribute("pro_no", pro_no);
+		model.setViewName("makeproject/primaryinfo");
 		
-		
-		
-		return null;
+		return model;
 	}
 	
 	@RequestMapping("funding.it")
