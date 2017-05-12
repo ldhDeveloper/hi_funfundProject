@@ -9,6 +9,24 @@
 <script src="/funfund/lib/js/jquery-3.2.1.min.js"></script>
 <link href="/funfund/lib/css/bootstrap.min.css" rel="stylesheet">
 <style>
+@media screen and (min-width: 960px) {
+    body {
+         background-color: lightgreen;
+    }
+}
+
+@media screen and (min-width: 720px) {
+    body {
+         background-color: lightgreen;
+    }
+}
+
+@media screen and (min-width: 540px) {
+    body {
+         background-color: lightgreen;
+    }
+}
+
 .titlebar {
 	background: orange;
 	text-align: center;
@@ -67,6 +85,9 @@ button {
 	background: #fec250;
 	color: white !important;
 }
+.titlebar li{
+	padding : 0 !important;
+}
 </style>
 <script>
 	$(function() {
@@ -80,18 +101,28 @@ button {
 <body>
 	<jsp:include page="/WEB-INF/views/common/menubar.jsp" flush="true" />
 	<div class="titlebar" align="center">
-		<div>
-			<ul class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-				<li><img src="/funfund/images/funding/1.PNG"
+		<div class="col-lg-2 col-md-0 col-sm-0 col-xs-0"></div>
+		<div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+			<ul>
+				<!-- <li class="col-lg-8 col-md-8 col-sm-12 col-xs-12" style="background-image:url('/funfund/images/funding/1.PNG');background-size: 100% 100%;
+   					 background-repeat: no-repeat;"></li>
+				<li class="col-lg-4 col-md-4 col-sm-6 col-xs-12" style="background-image:url('/funfund/images/funding/2.PNG');background-size: 100% 100%;
+    				background-repeat: no-repeat;"></li>
+				<li class="col-lg-4 col-md-4 col-sm-6 col-xs-12" style="background-image:url('/funfund/images/funding/3.PNG');background-size: 100% 100%;
+    				background-repeat: no-repeat;"></li>
+				<li class="col-lg-4 col-md-4 col-sm-6 col-xs-12" style="background-image:url('/funfund/images/funding/4.PNG');background-size: 100% 100%;
+    				background-repeat: no-repeat;"></li> -->
+				<li class="col-lg-8 col-md-8 col-sm-12 col-xs-12"><img src="/funfund/images/funding/1.PNG"
 					class="img-responsive"></li>
-				<li><img src="/funfund/images/funding/2.PNG"
+				<li class="col-lg-4 col-md-4 col-sm-6 col-xs-12"><img src="/funfund/images/funding/2.PNG"
 					class="img-responsive"></li>
-				<li><img src="/funfund/images/funding/3.PNG"
+				<li class="col-lg-4 col-md-4 col-sm-6 col-xs-12"><img src="/funfund/images/funding/3.PNG"
 					class="img-responsive"></li>
-				<li><img src="/funfund/images/funding/4.PNG"
+				<li class="col-lg-4 col-md-4 col-sm-6 col-xs-12"><img src="/funfund/images/funding/4.PNG"
 					class="img-responsive"></li>
 			</ul>
 		</div>
+		<div class="col-lg-2 col-md-0 col-sm-0 col-xs-0"></div>
 	</div>
 
 	<!-- 카테고리바 -->
