@@ -83,8 +83,7 @@ public class ItemServiceIm implements ItemService{
 
 	@Override
 	public Item selectOne(int pro_no) {
-		// TODO Auto-generated method stub
-		return null;
+		return itemDao.selectOne(pro_no);
 	}
 
 	@Override

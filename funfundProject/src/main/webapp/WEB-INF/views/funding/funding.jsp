@@ -158,7 +158,7 @@ button {
 				<c:forEach var="item" items="${iList}">
 					<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 						<div class="thumbnail" align="center">
-							<a href="detail.it"> <img
+							<a href="detail.it?pro_no=<c:out value="${item.pro_no}"/>"> <img
 								src="/funfund/images/funding/face.PNG" alt="사진1"
 								style="width: 100%">
 								<div class="progress">
