@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hi.funfund.fundmenu.model.vo.FundMenu;
 import com.hi.funfund.item.model.service.ItemService;
 import com.hi.funfund.item.model.service.ItemServiceIm;
 import com.hi.funfund.item.model.vo.Item;
@@ -115,6 +116,12 @@ public class ItemController {
 		
 		return null;
 	}
+	@RequestMapping("update.it")
+	public ModelAndView insertRewardItem(Item item, FundMenu fmenu, HttpServletRequest request){
+		
+		return null;
+	}
+	
 	
 	@RequestMapping("funding.it")
 	public ModelAndView funding(ModelAndView model){
