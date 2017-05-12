@@ -55,6 +55,12 @@ public class AccountController {
 		return "myinfo/myinfo";
 	}
 	
+	@RequestMapping(value = "myinfo1.ao")
+	public String myinfo1(){
+		
+		return "myinfo/myinfo";
+	}
+	
 	@RequestMapping(value = "investRequest.ao")
 	public String investRequest(){
 		return "myinfo/investRequest";
