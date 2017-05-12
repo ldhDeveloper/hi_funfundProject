@@ -12,41 +12,48 @@ background : lightgreen;
 text-align : center;
 color: white;
 }
+.nTitle{
+font-size: 22px;
+}
+.content{
+width:970px;
+margin:auto;
+padding:24px;
+}
+.contentInfo{
+display:inline-block;
+font-size: 13px;
+    line-height: 20px;
+}
+.pimage{
 
+display: inline-block;
+    vertical-align: bottom;
+    margin-right: 5px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: no-repeat center center;
+    background-size: cover;
 
-.contentTitle{
-    background: #f5fafb;
-padding: 16px 10px;
-   
-    font-size: 16px;
-    color: violet;
-    word-break: break-all;
-    border-bottom: 1px solid #d7d7d7;
-    display: block;
-    border-top : 3px solid navy;
 }
+.bottomLine{
 
-.otherInfo{
-padding: 13px 10px;
-    border-bottom: 1px solid #d7d7d7;
+    background: #FAFAFA;
+    margin: 0 !important;
+    padding: 0 !important; 
+    width:100% !important;
 }
-.content{ 
-background : #cccccc;
-height : 700px;
+@media screen and (min-width: 260px){
+.bottomContent{
+    width: 960px;
+    margin: 0 auto;
+    padding: 40px 0;
 }
-.buttonList{
-float:right;}
-.nDetail{
-margin: auto;
-    width: 700px;
-  
-   
 }
-@media screen and (max-width: 700px) {
-    .nDetail {
-        width: 400px;
-        padding: 0;
-    }
+.form{
+width:100%;
+}
 </style>
 
 
@@ -60,20 +67,25 @@ margin: auto;
 </div>
 <div class="container">
 <div class="col-lg-12 col-md-12 col-xs-12">
-<div class="nDetail">
-<div class="contentTitle"> 우리들의 든든한 중개자 funfund 입니다. </div>
-<div class="otherInfo"> <span>날짜</span>  <span>작성자</span></div>
+<div class="content">
+<p class="nTitle">제목</p>
 <br>
-<div class="content">내용 </div>
-<hr>
-<div class="buttonList" ><button>목록</button> </div>
-</div>
 <div>
-<p></p>
-<p></p>
+<em class="pimage" style="background-image:uri()">ass</em><span class="contentInfo">작성자 <br> 날짜</span>
+<div class="context">
 </div>
-
-
+</div>
+</div>
+</div>
+</div>
+<div class="container bottomLine">
+<div class="col-lg-12 col-md-12 col-xs-12">
+<div class="bottomContent" align="center">
+<form action="#" method="post" class="form">
+<textarea class="replyContent" name="replyContent" required></textarea>
+<input type="submit" value="등록">
+</form>
+</div>
 </div>
 </div>
 
