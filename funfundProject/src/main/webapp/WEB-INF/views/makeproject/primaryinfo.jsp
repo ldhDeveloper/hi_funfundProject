@@ -24,6 +24,7 @@
 	rel="stylesheet" type="text/css" />
 <link href="/funfund/lib/froala_editor_2.5.1/css/themes/royal.min.css"
 	rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <!-- Include external JS libs. -->
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
@@ -74,21 +75,8 @@ li {
 <body>
 	<jsp:include page="/WEB-INF/views/common/menubar.jsp" />
 
-	<!-- Include Editor JS files. -->
-	<script type="text/javascript"
-		src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1//js/froala_editor.pkgd.min.js"></script>
 	<script>
 	$(function() {
-		$('#froala-editor').froalaEditor({
-			theme: 'royal',
-		      zIndex: 2002,
-		      heightMin: 500,
-		      heightMax: 500,
-			  toolbarBottom: false,
-			  toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', '|', 'color', 'emoticons', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', '-', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable', '|', 'quote', 'insertHR', 'undo', 'redo', 'clearFormatting', 'selectAll', 'html' ]
-		}) 
-		
-		
 		
 		$('li[id^=info]').click(function(){
 			
@@ -160,7 +148,9 @@ li {
 		</ul>
 	</div>
 	<form id="frm" action="update.it" method="post">
-
+		
+		<input type="hidden" value=${ pro_no }>
+	
 		<!-- 기본정보 입력 화면 -->
 		<div id="primary-info1" class="input-form">
 			<table>
@@ -172,7 +162,7 @@ li {
 					<td style="width: 500px;">
 						<div
 							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px;padding:10px;">
-							curryfavour9@gmail.com</div>
+							${ sessionScope.account.id }</div>
 					</td>
 					<td style="width: 200px;"></td>
 				</tr>
@@ -277,126 +267,7 @@ li {
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
 				</tr>
-				<tr>
-					<td style="width: 200px; font-size: 0.7em">메인해시태그<br>필수
-						해시태그 검색어를 입력해주세요. 펀펀드 내 또는 검색엔진에서 검색이 용이하도록 하나의 단어로 등록 해주세요. 한글 9자
-						또는 영어 18자로 제한되며, 빈칸이 포함되면 안됩니다.
-					</td>
-					<td>
-						<div
-							style="width: 450px; border: 1px solid #ddd; height: 100px; background: #f8f8f8; margin-left: 10px;padding:10px;">
-							#<input type="text" placeholder="메인해시태그"><br>
-							예시:숙면코창슬립닥, 빅이슈홈리스월드컵, 톤도JUMPUP,30km프로젝트, QueenBeeR
-						</div>
-					</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-				</tr>
-				<tr>
-					<td style="width: 200px; font-size: 0.7em" rowspan="3">프로젝트의
-						키워드<br>서포터에게 프로젝트 추천시 기준이 되는 관심사 키워드입니다. 개설하시는 프로젝트에 해당하는
-						키워드를 선택해주세요.( 최소 1개 이상 선택 )
-					</td>
-					<td>
-						<div
-							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px;padding:10px;">
-							<select style="width: 130px;">
-								<option value="">필수입력입니다</option>
-								<option value="I000000001">얼리어답터</option>
-								<option value="I000000002">IT</option>
-								<option value="I000000003">재테크</option>
-								<option value="I000000004">자동차</option>
-								<option value="I000000005">여행/아웃도어</option>
-								<option value="I000000006">건강/헬스케어</option>
-								<option value="I000000007">스포츠</option>
-								<option value="I000000008">게임/엔터테인먼트</option>
-								<option value="I000000009">하이테크</option>
-								<option value="I000000010">창업</option>
-								<option value="I000000011">비상장주식</option>
-								<option value="I000000012">소득공제</option>
-								<option value="I000000013">라이프스타일</option>
-								<option value="I000000014">패션</option>
-								<option value="I000000015">디자인</option>
-								<option value="I000000016">음악</option>
-								<option value="I000000017">공연/전시</option>
-								<option value="I000000018">책</option>
-								<option value="I000000019">사회문제해결</option>
-								<option value="I000000020">기부/나눔</option>
-								<option value="I000000021">친환경</option>
-								<option value="I000000022">공유경제</option>
-								<option value="I000000023">교육/육아</option>
-							</select> <select style="width: 130px;">
-								<option value="">필수입력입니다</option>
-								<option value="I000000001">얼리어답터</option>
-								<option value="I000000002">IT</option>
-								<option value="I000000003">재테크</option>
-								<option value="I000000004">자동차</option>
-								<option value="I000000005">여행/아웃도어</option>
-								<option value="I000000006">건강/헬스케어</option>
-								<option value="I000000007">스포츠</option>
-								<option value="I000000008">게임/엔터테인먼트</option>
-								<option value="I000000009">하이테크</option>
-								<option value="I000000010">창업</option>
-								<option value="I000000011">비상장주식</option>
-								<option value="I000000012">소득공제</option>
-								<option value="I000000013">라이프스타일</option>
-								<option value="I000000014">패션</option>
-								<option value="I000000015">디자인</option>
-								<option value="I000000016">음악</option>
-								<option value="I000000017">공연/전시</option>
-								<option value="I000000018">책</option>
-								<option value="I000000019">사회문제해결</option>
-								<option value="I000000020">기부/나눔</option>
-								<option value="I000000021">친환경</option>
-								<option value="I000000022">공유경제</option>
-								<option value="I000000023">교육/육아</option>
-							</select> <select style="width: 130px;">
-								<option value="">필수입력입니다</option>
-								<option value="I000000001">얼리어답터</option>
-								<option value="I000000002">IT</option>
-								<option value="I000000003">재테크</option>
-								<option value="I000000004">자동차</option>
-								<option value="I000000005">여행/아웃도어</option>
-								<option value="I000000006">건강/헬스케어</option>
-								<option value="I000000007">스포츠</option>
-								<option value="I000000008">게임/엔터테인먼트</option>
-								<option value="I000000009">하이테크</option>
-								<option value="I000000010">창업</option>
-								<option value="I000000011">비상장주식</option>
-								<option value="I000000012">소득공제</option>
-								<option value="I000000013">라이프스타일</option>
-								<option value="I000000014">패션</option>
-								<option value="I000000015">디자인</option>
-								<option value="I000000016">음악</option>
-								<option value="I000000017">공연/전시</option>
-								<option value="I000000018">책</option>
-								<option value="I000000019">사회문제해결</option>
-								<option value="I000000020">기부/나눔</option>
-								<option value="I000000021">친환경</option>
-								<option value="I000000022">공유경제</option>
-								<option value="I000000023">교육/육아</option>
-							</select>
-						</div>
-					</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-				</tr>
-				<tr>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-				</tr>
-				<tr>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-				</tr>
+				
 				<tr>
 					<td style="width: 200px; font-size: 0.7em">카테고리<br>카테고리에
 						따른 분류를 선택해주세요.
@@ -418,7 +289,24 @@ li {
 								<option value="296">여행</option>
 								<option value="297">스포츠</option>
 							</select>
-
+						</div>
+					</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td style="width: 200px; font-size: 0.7em">
+						프로젝트 시작일<br>프로젝트
+						시작일을 입력해주세요. 평균 모금기간은 약 45일입니다.<br>오픈 후 수정 불가하니 신중하게 선택해주세요.
+					</td>
+					<td>
+						<div
+							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px;padding:10px;">
+							<input type="date">
 						</div>
 					</td>
 					<td></td>
@@ -435,7 +323,21 @@ li {
 					<td>
 						<div
 							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px;padding:10px;">
-							<input type="date">
+							<input type="text" id="datepicker" style="padding-left: 15px">
+							<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+ 							<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+							<script>
+ 								 $( function() {
+   									 $( "#datepicker" ).datepicker({
+   										showOn: "button",
+   								      	buttonImage: "images/makeproject/calendar.pn",
+   								      	buttonImageOnly: true,
+   								     	buttonText: "Select date"
+
+
+   									 });
+ 								 });
+ 							</script>
 						</div>
 					</td>
 					<td></td>
@@ -589,7 +491,23 @@ li {
 				<tr>
 					<td colspan="3">
 						<div id="froala-editor" style="width: 860px; max-height: 700px;">
+						
 						</div>
+						<!-- Include Editor JS files. -->
+						<script type="text/javascript"
+						src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1//js/froala_editor.pkgd.min.js"></script>
+						<script>
+							$(function() {
+								$('#froala-editor').froalaEditor({
+									theme: 'royal',
+		     						zIndex: 2002,
+		      						heightMin: 500,
+		      						heightMax: 500,
+			  						toolbarBottom: false,
+			  						toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', '|', 'color', 'emoticons', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', '-', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable', '|', 'quote', 'insertHR', 'undo', 'redo', 'clearFormatting', 'selectAll', 'html' ]
+								}) ;
+							});
+						</script>
 					</td>
 				</tr>
 				<tr>
@@ -678,57 +596,6 @@ li {
 						</div>
 
 					</td>
-					<td>&nbsp;</td>
-				</tr>
-				<tr>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-				</tr>
-				<tr>
-					<td style="font-size: 0.7em;">소셜네트워크<br>프로젝트 메이커(개인/법인)의
-						소셜 웹주소(Facebook페이지 등)를 기입해 주세요.모두 채우기 힘들다면 최소한 1개 이상은 적어주세요.
-					</td>
-					<td>
-						<div
-							style="border: 1px solid #ddd; background: #f8f8f8; padding: 10px; margin-left: 10px; width: 440px; height: 110px;">
-							<img src="images/makeproject/facebook.png" width="25px"
-								height="25px">&nbsp;http://www.facebook.com/&nbsp;<input
-								type="text" size="10"><br> <img
-								src="images/makeproject/twitter.png" width="25px" height="25px">&nbsp;http://www.twitter.com/&nbsp;<input
-								type="text" size="10"><br> <img
-								src="images/makeproject/instargram.png" width="25px"
-								height="25px">&nbsp;http://www.instargram.com/&nbsp;<input
-								type="text" size="10"><br>
-						</div>
-					</td>
-					<td>&nbsp;</td>
-				</tr>
-				<tr>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-				</tr>
-				<tr>
-					<td rowspan="3" style="font-size: 0.7em;">웹사이트 주소<br>프로젝트
-						메이커가 운영하는 웹사이트가 있으시다면 http:// 혹은 https://를 붙여 등록 후, 링크확인 버튼을 클릭하여
-						연결을 확인해 주세요.
-					</td>
-					<td>
-						<div
-							style="border: 1px solid #ddd; background: #f8f8f8; padding: 10px; margin-left: 10px; width: 440px; height: 60px;">
-							<input type="text" size="25" value="http://">&nbsp;
-							<button class="btn btn-primary btn-xs">링크 확인</button>
-						</div>
-					</td>
-					<td>&nbsp;</td>
-				</tr>
-				<tr>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-				</tr>
-				<tr>
-					<td>&nbsp;</td>
 					<td>&nbsp;</td>
 				</tr>
 				<tr>
