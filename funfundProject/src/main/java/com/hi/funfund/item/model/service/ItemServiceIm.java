@@ -16,9 +16,8 @@ public class ItemServiceIm implements ItemService{
 	private ItemDao itemDao;
 
 	@Override
-	public List AllList() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Item> AllList() {
+		return itemDao.AllList();
 	}
 
 	@Override

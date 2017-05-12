@@ -115,4 +115,12 @@ public class ItemController {
 		return null;
 	}
 	
+	@RequestMapping("funding.it")
+	public ModelAndView funding(ModelAndView model){
+		List<Item> iList = itemService.AllList();
+		model.addObject("iList", iList);
+		model.setViewName("funding/funding");
+		return model;
+	}
+	
 }

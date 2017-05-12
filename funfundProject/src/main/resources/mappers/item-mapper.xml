@@ -29,4 +29,6 @@
 				SELECT seq_pro_no.currval FROM dual 
 			</selectKey>
 	</insert>
+	
+	
 </mapper>

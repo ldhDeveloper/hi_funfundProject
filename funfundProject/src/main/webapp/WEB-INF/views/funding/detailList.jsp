@@ -92,12 +92,12 @@ button {
 
 #btn-like {
 	display: inline-block;
-	text-align:center;
+	text-align: center;
 }
 
 #btn-share {
 	display: inline-block;
-	text-align:center;
+	text-align: center;
 }
 
 .makerbox {
@@ -109,6 +109,7 @@ button {
 	display: block;
 	text-align: center;
 }
+
 .makerbox2 {
 	padding: 20px 19px 20px;
 	border: 1px solid #eaeaea;
@@ -118,7 +119,6 @@ button {
 	display: block;
 	text-align: center;
 }
-
 
 .goal {
 	color: #e39402;
@@ -167,11 +167,15 @@ button {
 			}
 		});
 
-		$('.btn-fund').hover(function() {
-			$('.btn-fund').css('background-color', '#fedb9a').css('border-color','#c96903');
-		}, function() {
-			$('.btn-fund').css('background-color', '#fec250').css('border-color', 'transparent');
-		});
+		$('.btn-fund').hover(
+				function() {
+					$('.btn-fund').css('background-color', '#fedb9a').css(
+							'border-color', '#c96903');
+				},
+				function() {
+					$('.btn-fund').css('background-color', '#fec250').css(
+							'border-color', 'transparent');
+				});
 
 		$('.makerbox').hover(function() {
 			$(this).css('background-color', '#c6ebd9');
@@ -261,7 +265,7 @@ button {
 			<p class="info">명의 서포터</p>
 			<button class="btn-fund">펀딩하기</button>
 		</div>
-		<div style="text-align:center;">
+		<div style="text-align: center;">
 			<button class="btn btn-default" id="btn-like">
 				<i class="fa fa-heart-o" aria-hidden="true"></i>
 			</button>

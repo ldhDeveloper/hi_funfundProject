@@ -65,17 +65,12 @@ button {
 
 .clickbtn {
 	background: #fec250;
-	color:white !important;
+	color: white !important;
 }
 </style>
 <script>
 	$(function() {
 		$('.btn').click(function() {
-			/* if ($(this).hasClass("clickbtn")) {
-				$(this).removeClass("clickbtn");
-			} else {
-				$(this).addClass("clickbtn");
-			} */
 			$(".btn").removeClass("clickbtn");
 			$(this).addClass("clickbtn");
 		});
@@ -84,10 +79,9 @@ button {
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/menubar.jsp" flush="true" />
-	<div class="titlebar">
-		<!-- 자동슬라이드로 만들어야함 -->
-		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<ul>
+	<div class="titlebar" align="center">
+		<div>
+			<ul class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
 				<li><img src="/funfund/images/funding/1.PNG"
 					class="img-responsive"></li>
 				<li><img src="/funfund/images/funding/2.PNG"
