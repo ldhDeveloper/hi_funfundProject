@@ -187,7 +187,7 @@ li {
 					<td>
 						<div
 							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px;padding:10px;">
-							<input type="text">
+							<input type="text" name="pname">
 						</div>
 					</td>
 					<td></td>
@@ -204,7 +204,7 @@ li {
 					<td>
 						<div
 							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px;padding:10px;">
-							<input type="text">원
+							<input type="text" name="ecost">&nbsp; 원
 						</div>
 					</td>
 					<td></td>
@@ -275,7 +275,7 @@ li {
 					<td>
 						<div
 							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px;padding:10px;">
-							<select>
+							<select name="category">
 								<option value="">선택하세요</option>
 								<option value="287">테크</option>
 								<option value="288">패션/뷰티</option>
@@ -306,7 +306,7 @@ li {
 					<td>
 						<div
 							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px;padding:10px;">
-							<input type="date">
+							<input type="text" id="datepicker1" style="padding-left: 15px" name="psdate">
 						</div>
 					</td>
 					<td></td>
@@ -323,14 +323,20 @@ li {
 					<td>
 						<div
 							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px;padding:10px;">
-							<input type="text" id="datepicker" style="padding-left: 15px">
+							<input type="text" id="datepicker2" style="padding-left: 15px" name="pedate">
 							<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
  							<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 							<script>
  								 $( function() {
-   									 $( "#datepicker" ).datepicker({
+ 									$( "#datepicker1" ).datepicker({
    										showOn: "button",
-   								      	buttonImage: "images/makeproject/calendar.pn",
+   								      	buttonImage: "images/makeproject/calendar2.png",
+   								      	buttonImageOnly: true,
+   								     	buttonText: "Select date"
+ 									});
+   									 $( "#datepicker2" ).datepicker({
+   										showOn: "button",
+   								      	buttonImage: "images/makeproject/calendar2.png",
    								      	buttonImageOnly: true,
    								     	buttonText: "Select date"
 
@@ -362,40 +368,53 @@ li {
 								<tr>
 									<td style="width: 150px;">리워드#1</td>
 									<td style="width: 100px;">금액</td>
-									<td style="width: 150px;"><input type="text" size="15"></td>
+									<td style="width: 150px;"><input type="text" size="15" name="mcost"></td>
 									<td style="width: 50px;">원</td>
 									<td style="width: 20px;">&nbsp;</td>
 									<td style="width: 120px;">정렬순서</td>
-									<td><input type="text" size="5" value="1"></td>
+									<td><input type="text" size="5" value="1" name="mnum"></td>
 								</tr>
 								<tr>
 									<td>&nbsp;</td>
 									<td>리워드명</td>
-									<td colspan="5"><input type="text" size="44"></td>
+									<td colspan="5"><input type="text" size="44" name="mname"></td>
 								</tr>
 								<tr>
 									<td>&nbsp;</td>
 									<td>상세설명</td>
 									<td colspan="5"><textarea cols="44" rows="5"
-											style="overflow: auto; width: 100%; resize: none"></textarea></td>
+											style="overflow: auto; width: 100%; resize: none" name="mcontent"></textarea></td>
 								</tr>
 								<tr>
 									<td>&nbsp;</td>
 									<td>배송조건</td>
-									<td><input type="checkbox"><font size="0.8em">
+									<td><input type="checkbox" name="delyn"><font size="0.8em">
 											배송받을 주소가 필요합니다.</font></td>
 									<td colspan="2">&nbsp;</td>
 									<td>배송료</td>
-									<td><input type="text" size="5"></td>
+									<td><input type="text" size="5" name="dcost"></td>
 								</tr>
 								<tr>
 									<td>&nbsp;</td>
 									<td>제한수량</td>
-									<td><input type="text" size="3"></td>
+									<td><input type="text" size="3" name="mcount"></td>
 									<td colspan="2">&nbsp;</td>
 									<td>배송일</td>
-									<td><input type="text" style="width: 100%;"
-										placeholder="날짜"></td>
+									<td>
+										<input type="text" id="datepicker3" style="padding-left: 15px" name="mdate">
+										<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+ 										<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ 										<script>
+ 											 $( function() {
+ 												$( "#datepicker3" ).datepicker({
+   													showOn: "button",
+   								      				buttonImage: "images/makeproject/calendar2.png",
+   								      				buttonImageOnly: true,
+   								     				buttonText: "Select date"
+ 												});
+ 								 			});
+ 										</script>
+									</td>
 								</tr>
 							</table>
 							<div align="center">
@@ -421,7 +440,7 @@ li {
 					<td style="width: 500px;">
 						<div
 							style="width: 430px; height: 130px; background: #f8f8f8; border: 1px solid #ddd; padding: 10px; margin-left: 10px;">
-							<input type="text" size="30">
+							<input type="text" size="30" name="pvideo">
 							<button class="btn btn-primary btn-xs" style="margin-left: 10px;">영상등록하기</button>
 							<br>
 							<div
@@ -470,7 +489,7 @@ li {
 					<td>
 						<div
 							style="width: 430px; height: 60px; background: #f8f8f8; border: 1px solid #ddd; padding: 10px; margin-left: 10px; font-size: 0.7em;">
-							<input type="text" size="64">
+							<input type="text" size="64" name="pshort">
 						</div>
 					</td>
 					<td style="width: 200px;"></td>
@@ -490,9 +509,9 @@ li {
 				</tr>
 				<tr>
 					<td colspan="3">
-						<div id="froala-editor" style="width: 860px; max-height: 700px;">
+						<textarea id="froala-editor" style="width: 860px; max-height: 700px;" name="pcontent">
 						
-						</div>
+						</textarea>
 						<!-- Include Editor JS files. -->
 						<script type="text/javascript"
 						src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1//js/froala_editor.pkgd.min.js"></script>
@@ -534,7 +553,7 @@ li {
 						<div
 							style="width: 650px; height: 340px; padding: 15px; border: 1px solid #ddd; background: #f8f8f8;">
 							<textarea
-								style="overflow: auto; width: 100%; height: 310px; resize: none; width; font-size: 0.7em;">
+								style="overflow: auto; width: 100%; height: 310px; resize: none; width; font-size: 0.7em;" name="refund">
 §업체명/메이커명§은 펀딩해주신 서포터분들께 감사의 표시인 리워드 제공 일정을 준수하기 위해 최선을 다할 것을 약속합니다.
 단, 펀딩을 받아야만 생산을 시작할 수 있는 크라우드펀딩 특성 및 생산과정에서의 예상치못한 상황으로 인하여 리워드 제공일이 다소 지연될 수 있는 점을 알려 드립니다.
 
@@ -572,7 +591,7 @@ li {
 					<td style="width: 500px;">
 						<div
 							style="border: 1px solid #ddd; background: #f8f8f8; padding: 10px; margin-left: 10px; width: 440px; height: 50px;">
-							<input type="text" size="43">
+							<input type="text" size="43" name="cname">
 						</div>
 					</td>
 					<td style="width: 200px;">&nbsp;</td>
@@ -610,7 +629,7 @@ li {
 					<td>
 						<div
 							style="border: 1px solid #ddd; background: #f8f8f8; padding: 10px; margin-left: 10px; width: 440px; height: 50px;">
-							<input type="text" size="25">
+							<input type="text" size="25" name="cs_email">
 						</div>
 					</td>
 					<td>&nbsp;</td>
@@ -627,7 +646,7 @@ li {
 					<td>
 						<div
 							style="border: 1px solid #ddd; background: #f8f8f8; padding: 10px; margin-left: 10px; width: 440px; height: 50px;">
-							<input type="text" size="25">
+							<input type="text" size="25" name="cs_phone">
 						</div>
 					</td>
 					<td>&nbsp;</td>
@@ -644,7 +663,7 @@ li {
 						<div
 							style="border: 1px solid #ddd; background: #f8f8f8; padding: 10px; margin-left: 10px; width: 440px; height: 50px;">
 							은행명 &nbsp;
-							<select>
+							<select name="bankcode">
 								<option value=''>선택하세요
 								<option value='003'>기업은행
 								<option value='004'>국민은행
@@ -687,7 +706,7 @@ li {
 							</select>
 							 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 							예금주 &nbsp;
-							<input type="text" size="10">
+							<input type="text" size="10" name="accpnm">
 						</div>
 					</td>
 					<td style="width: 200px;">&nbsp;</td>
@@ -704,7 +723,7 @@ li {
 					<td>
 						<div
 							style="border: 1px solid #ddd; background: #f8f8f8; padding: 10px; margin-left: 10px; width: 440px; height: 50px;">
-							계좌번호 &nbsp;<input type="text" size="25" placeholder="'-'를 제외하고 입력하세요."> &nbsp; <button class="btn btn-primary btn-xs">확인하기</button>
+							계좌번호 &nbsp;<input type="text" size="25" placeholder="'-'를 제외하고 입력하세요." name="accnum"> &nbsp; <button class="btn btn-primary btn-xs">확인하기</button>
 						</div>
 					</td>
 					<td>&nbsp;</td>
