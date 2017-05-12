@@ -58,7 +58,7 @@
 
 <script type="text/javascript">
 $(function(){
-	var str = ${sessionScope.party.id_no};
+	var str ='<c:out value="${sessionScope.party.id_no}"/>';
 	var result = str.split('-');
 	$("#fid_no").val(result[0]);
 	$("#eid_no").val(result[1]);

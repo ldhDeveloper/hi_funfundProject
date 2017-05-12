@@ -260,15 +260,15 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 						
 							<div class="minput" align="center">
 								<div class="email-input-wrap">
-									
+									<form action="myinfo1.ao">
 									
 									<h6 align="left">이름</h6>
 									<c:if test="${ empty sessionScope.party.pname}">
-		                 				<input type="text" name="nickName" class="input-text" placeholder="이름" value=""/>
+		                 				<input type="text" name="pname" class="input-text" placeholder="이름" value=""/>
 		                 			</c:if>
 		                 			
 		                 			<c:if test="${ !empty sessionScope.party.pname}">
-		                 				<input type="text" name="nickName" class="input-text" placeholder="이름" value="${ sessionScope.party.pname }"/>
+		                 				<input type="text" name="pname" class="input-text" placeholder="이름" value="${ sessionScope.party.pname }"/>
 		                 			</c:if>
 		                 			
 		                 			<h6 align="left">닉네임</h6>
@@ -278,9 +278,11 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 		                 			
 		                 			<div class="email-input-wrap small">
 										<div class="btn-wrap">
-											<button id="saveBtn" class="btn-block-purple"  onclick="location.href='myinfo.ao?ano=${sessionScope.account.ano}'">설정하기</button>
+											<button id="saveBtn" class="btn-block-purple" type="submit">설정하기</button>
 	                        			</div>
 	                     			</div>
+	                     			
+	                     			</form>
 	                     			
 	                     			<br><br>
 	                       			
@@ -328,20 +330,20 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 	                        		<br>
 	                        		
 	                        		<em class="line"></em>             			                        	                     	
-												
+									
+									<form id="saveForm">		
 									<div id="accountWrap">
             	            			<div id="newContainer">
                 							<div class="account-wrap">
                     							<h3 class="mh32">비밀번호 설정</h3>
-                    							<div class="email-input-wrap">
-                    								<form id="saveForm">
+                    							<div class="email-input-wrap">                    								
                         								<input type="password" id="oldPassword" name="oldPassword" class="input-text" placeholder="현재 비밀번호" />
                         								<!-- <p id="oldPasswordError" class="error-text">현재 비밀번호가 일치 하지 않습니다.</p> -->
                         								<input type="password" id="newPassword" name="newPassword" class="input-text" placeholder="새 비밀번호" />
                         								<!-- <p id="passwordError" class="pwd-text">영문, 숫자, 특수문자 (!@#$%^&*+=-)를 모두 조합한 8자 이상</p> -->
                         								<input type="password" id="newPasswordConfirm" name="newPasswordConfirm" class="input-text" placeholder="새 비밀번호 확인" />
                         								<!-- <p class="error-text">비밀번호가 같지 않습니다.</p> -->                    
-                       								</form>
+                       								
                     							</div>
                 							</div>
             							</div>
@@ -353,7 +355,9 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 										<div class="btn-wrap">
 											<button id="saveBtn" class="btn-block-purple">설정하기</button>
 	                        			</div>
-	                     			</div>												
+	                     			</div>
+	                     			
+	                     			</form>												
 								
 								</div>
 							</div>
