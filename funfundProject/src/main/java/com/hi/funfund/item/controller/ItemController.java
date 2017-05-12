@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -123,9 +124,15 @@ public class ItemController {
 		return model;
 	}
 	
+	
 	@RequestMapping(value="detail.it")
-	public String fundingdetailList(){
-		return "funding/detailList";
+	public ModelAndView fundingdetailList(ModelAndView model, HttpServletRequest request){
+		int pro_no = Integer.parseInt(request.getParameter("pro_no"));
+		Item item= itemService.selectOne(pro_no);
+		model.addObject("item", item);
+		model.setViewName("funding/detailList");
+		return model;
 	}
+	
 	
 }

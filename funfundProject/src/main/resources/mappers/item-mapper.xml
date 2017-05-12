@@ -2,36 +2,50 @@
 <!DOCTYPE mapper PUBLIC
 "-//mybatis.org//DTD mapper 3.0//en"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace = "itemMapper">
+<mapper namespace="itemMapper">
 	<resultMap type="item" id="itemResult">
-			<id property="pro_no" column="pro_no" />
-			<result property="ano" column="ano" />
-			<result property="pname" column="pname" />
-			<result property="pcontent" column="pcontent" />
-			<result property="category" column="category" />
-			<result property="psdate" column="psdate" />
-			<result property="pedate" column="pedate" />
-			<result property="pshort" column="pshort" />
-			<result property="ecost" column="ecost" />
-			<result property="refund" column="refund" />
-			<result property="pvideo" column="pvideo" />
-			<result property="pstatus" column="pstatus" />
-			<result property="likecount" column="likecount" />
-			<result property="sharelink" column="sharelink" />
+		<id property="pro_no" column="pro_no" />
+		<result property="ano" column="ano" />
+		<result property="pname" column="pname" />
+		<result property="pcontent" column="pcontent" />
+		<result property="category" column="category" />
+		<result property="psdate" column="psdate" />
+		<result property="pedate" column="pedate" />
+		<result property="pshort" column="pshort" />
+		<result property="ecost" column="ecost" />
+		<result property="refund" column="refund" />
+		<result property="pvideo" column="pvideo" />
+		<result property="pstatus" column="pstatus" />
+		<result property="likecount" column="likecount" />
+		<result property="sharelink" column="sharelink" />
+		<result property="bankcode" column="bankcode" />
+		<result property="accpnm" column="accpnm" />
+		<result property="accnum" column="accnum" />
+		<result property="cname" column="cname" />
+		<result property="cs_email" column="cs_email" />
+		<result property="cs_phone" column="cs_phone" />
 	</resultMap>
 
 	<insert id="insert" parameterType="Item">
 		<![CDATA[
 			insert into item values(seq_pro_no.nextval, #{ano}, '테스트1', null, null, null, null, null, 0, null, null, null, 0, null)	
 		]]>
-		
-			<selectKey keyProperty="pro_no" resultType="Integer" order="AFTER"> 
-				SELECT seq_pro_no.currval FROM dual 
-			</selectKey>
+
+		<selectKey keyProperty="pro_no" resultType="Integer" order="AFTER">
+			SELECT seq_pro_no.currval FROM dual
+		</selectKey>
 	</insert>
-	
+
 	<select id="selectList" parameterType="Item" resultMap="itemResult">
-			select pro_no, ano, pname, pcontent, category, psdate, pedate, pshort, ecost, refund, pvideo, pstatus, likecount, sharelink  from item order by category
+			<![CDATA[
+			select pro_no, ano, pname, pcontent, category, psdate, pedate, pshort, ecost, refund, pvideo, pstatus, likecount, sharelink, bankcode, accpnm, accnum, cname, cs_email, cs_phone  from item
+	        ]]>
 	</select>
-	
+
+	<select id="selectOne" parameterType="int" resultMap="itemResult">
+	        <![CDATA[
+	        select pro_no, ano, pname, pcontent, category, psdate, pedate, pshort, ecost, refund, pvideo, pstatus, likecount, sharelink, bankcode, accpnm, accnum, cname, cs_email, cs_phone from item where pro_no= #{pro_no}
+	        ]]>
+	</select>
+
 </mapper>

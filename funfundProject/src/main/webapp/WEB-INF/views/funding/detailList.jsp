@@ -191,11 +191,11 @@ button {
 	<div class="row background">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<h4 align="center" class="font">
-				<em></em> <strong>태그</strong> 프로젝트
+				<em><c:out value="${item.category }"/></em> <strong></strong> 프로젝트
 			</h4>
 		</div>
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<h2 align="center" class="font">매클러, 똑똑한 경락 디바이스의 기적같은 효과!</h2>
+			<h2 align="center" class="font"><c:out value="${item.cname}" /></h2>
 		</div>
 	</div>
 
