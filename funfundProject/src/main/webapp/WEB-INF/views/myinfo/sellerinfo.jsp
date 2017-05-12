@@ -41,9 +41,10 @@
 }
 
 .mlabel {
+	height: 80px;
 	color: #fff;
 	font-size: 2vw;
-	padding-top: 2.5%;
+	padding-top: 1.5%;
 }
 
 .btn-darkgray3{display:inline-block;width:48%;height:44px;font-size:13px;line-height:46px;text-align:center;color:#fff;background:#50E3C2;border:none;box-sizing:border-box}
@@ -130,7 +131,7 @@
 	            
 	                     	
 								<h5>주소</h5>
-		       						<p class="sub-text">본인확인이 가능한 주민등록상의 주소를 입력하세요.</p><br>
+		       						<p class="sub-text">본인확인이 가능한 주민등록상의 주소를 입력하세요.</p>
 		       				
 		       						<div class="btn-wrap post-btn">
 		       							<!-- <input type="text" class="input-text1" id="" name="" placeholder="우편번호" />	&nbsp;&nbsp;
@@ -141,7 +142,7 @@
 		       				
 		       					<div class="input-area">
 		       						<!-- <input type="text" id="sample6_postcode" class="input-text" placeholder="우편번호"> -->
-		       						<input type="text" class="input-text1" id="" name="" placeholder="우편번호" />	&nbsp;&nbsp;
+		       						<input type="text" class="input-text1" id="sample6_postcode" name="sample6_postcode" placeholder="우편번호" readonly/>	&nbsp;&nbsp;
 		       						<input type="button" class="btn-darkgray5" onclick="sample6_execDaumPostcode();" value="우편번호 검색">
 			              			<input type="text" id="sample6_address" name="location1" class="input-text" placeholder="도로명주소" readonly/> 
 			              			<input type="text" id="sample6_address2" name="location2" class="input-text" placeholder="상세주소" />
