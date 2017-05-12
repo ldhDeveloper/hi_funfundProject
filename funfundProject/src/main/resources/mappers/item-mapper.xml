@@ -30,5 +30,8 @@
 			</selectKey>
 	</insert>
 	
+	<select id="selectList" parameterType="Item" resultMap="itemResult">
+			select pro_no, ano, pname, pcontent, category, psdate, pedate, pshort, ecost, refund, pvideo, pstatus, likecount, sharelink  from item order by category
+	</select>
 	
 </mapper>

@@ -107,13 +107,12 @@ public class ItemController {
 		Item item = new Item();
 		item.setAno(ano);
 		
-		int pro_no = itemService.insertRewardItem(item);
 		
-		System.out.println("result : " + pro_no);
-		request.setAttribute("pro_no", pro_no);
-		model.setViewName("makeproject/primaryinfo");
+		int result = itemService.insertRewardItem(item);
 		
-		return model;
+		
+		
+		return null;
 	}
 	
 	@RequestMapping("funding.it")
@@ -122,6 +121,11 @@ public class ItemController {
 		model.addObject("iList", iList);
 		model.setViewName("funding/funding");
 		return model;
+	}
+	
+	@RequestMapping(value="detail.it")
+	public String fundingdetailList(){
+		return "funding/detailList";
 	}
 	
 }

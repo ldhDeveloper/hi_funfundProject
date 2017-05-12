@@ -154,217 +154,38 @@ button {
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-					<div class="thumbnail" align="center">
-						<a href="detail.do"> <img
-							src="/funfund/images/funding/face.PNG" alt="사진1"
-							style="width: 100%">
-							<div class="progress">
-								<div class="progress-bar progress-bar-warning"
-									role="progressbar" aria-valuenow="60" aria-valuemin="0"
-									aria-valuemax="100" style="width: 60%;">
-									<span class="sr-only"></span>
+
+				<c:forEach var="item" items="${iList}">
+					<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+						<div class="thumbnail" align="center">
+							<a href="detail.it"> <img
+								src="/funfund/images/funding/face.PNG" alt="사진1"
+								style="width: 100%">
+								<div class="progress">
+									<div class="progress-bar progress-bar-warning"
+										role="progressbar" aria-valuenow="60" aria-valuemin="0"
+										aria-valuemax="<c:out value="${item.ecost}"/>" style="width: 60%;">
+										<span class="sr-only"></span>
+									</div>
 								</div>
-							</div>
-							<p>
-								<span></span> % &nbsp;&nbsp; <span></span>원 달성 &nbsp;&nbsp; <span></span>
-								일 남음
-							</p>
+								<p>
+									<span></span> % &nbsp;&nbsp; <span></span>원 달성 &nbsp;&nbsp; <span></span>
+									일 남음
+								</p>
 
-							<div class="caption">
-								<p>내용을쓰시오</p>
-								<span>카테고리</span>
-							</div>
-						</a>
+								<div class="caption">
+									<p>
+										<c:out value="${item.pcontent }" />
+									</p>
+									<span><c:out value="${item.category}" /></span>
+								</div>
+							</a>
+						</div>
 					</div>
-				</div>
-				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-					<div class="thumbnail" align="center">
-						<a href=""> <img src="images/funding/" alt="사진1"
-							style="width: 100%">
-							<p>
-								<span></span> % &nbsp;&nbsp; <span></span>원 달성 &nbsp;&nbsp; <span></span>
-								일 남음
-							</p>
-							<div class="caption">
-								<p>내용쓰시오</p>
-							</div>
-						</a>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-					<div class="thumbnail" align="center">
-						<a href=""> <img src="images/funding/" alt="사진1"
-							style="width: 100%">
-							<p>
-								<span></span> % &nbsp;&nbsp; <span></span>원 달성 &nbsp;&nbsp; <span></span>
-								일 남음
-							</p>
-							<div class="caption">
-								<p>내용쓰시오</p>
-							</div>
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
+				</c:forEach>
 
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin"
-					align="center">
-					<img src="images/funding/" class="img-responsive"><br>
-					<h2>design</h2>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-					<div class="thumbnail" align="center">
-						<a href=""> <img src="images/funding/" alt="사진1"
-							style="width: 100%">
-							<p>
-								<span></span> % &nbsp;&nbsp; <span></span>원 달성 &nbsp;&nbsp; <span></span>
-								일 남음
-							</p>
-							<div class="caption">
-								<p>내용쓰시오</p>
-							</div>
-						</a>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-					<div class="thumbnail" align="center">
-						<a href=""> <img src="images/funding/" alt="사진1"
-							style="width: 100%">
-							<p>
-								<span></span> % &nbsp;&nbsp; <span></span>원 달성 &nbsp;&nbsp; <span></span>
-								일 남음
-							</p>
-							<div class="caption">
-								<p>내용쓰시오</p>
-							</div>
-						</a>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-					<div class="thumbnail" align="center">
-						<a href=""> <img src="images/funding/" alt="사진1"
-							style="width: 100%">
-							<p>
-								<span></span> % &nbsp;&nbsp; <span></span>원 달성 &nbsp;&nbsp; <span></span>
-								일 남음
-							</p>
-							<div class="caption">
-								<p>내용쓰시오</p>
-							</div>
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="container">
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin"
-				align="center">
-				<img src="images/funding/" class="img-responsive"><br>
-				<h2>fashion/beauty</h2>
-			</div>
-			<div class="row">
-				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-					<div class="thumbnail" align="center">
-						<a href=""> <img src="images/funding/" alt="사진1"
-							style="width: 100%">
-							<p>
-								<span></span> % &nbsp;&nbsp; <span></span>원 달성 &nbsp;&nbsp; <span></span>
-								일 남음
-							</p>
-							<div class="caption">
-								<p>내용쓰시오</p>
-							</div>
-						</a>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-					<div class="thumbnail" align="center">
-						<a href=""> <img src="images/funding/" alt="사진1"
-							style="width: 100%">
-							<p>
-								<span></span> % &nbsp;&nbsp; <span></span>원 달성 &nbsp;&nbsp; <span></span>
-								일 남음
-							</p>
-							<div class="caption">
-								<p>내용쓰시오</p>
-							</div>
-						</a>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-					<div class="thumbnail" align="center">
-						<a href=""> <img src="images/funding/" alt="사진1"
-							style="width: 100%">
-							<p>
-								<span></span> % &nbsp;&nbsp; <span></span>원 달성 &nbsp;&nbsp; <span></span>
-								일 남음
-							</p>
-							<div class="caption">
-								<p>내용쓰시오</p>
-							</div>
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
 
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin"
-					align="center">
-					<img src="images/funding/" class="img-responsive"><br>
-					<h2>tech</h2>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-					<div class="thumbnail" align="center">
-						<a href=""> <img src="images/funding/" alt="사진1"
-							style="width: 100%">
-							<p>
-								<span></span> % &nbsp;&nbsp; <span></span>원 달성 &nbsp;&nbsp; <span></span>
-								일 남음
-							</p>
-							<div class="caption">
-								<p>내용쓰시오</p>
-							</div>
-						</a>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-					<div class="thumbnail" align="center">
-						<a href=""> <img src="images/funding/" alt="사진1"
-							style="width: 100%">
-							<p>
-								<span></span> % &nbsp;&nbsp; <span></span>원 달성 &nbsp;&nbsp; <span></span>
-								일 남음
-							</p>
-							<div class="caption">
-								<p>내용쓰시오</p>
-							</div>
-						</a>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-					<div class="thumbnail" align="center">
-						<a href=""> <img src="images/funding/" alt="사진1"
-							style="width: 100%">
-							<p>
-								<span></span> % &nbsp;&nbsp; <span></span>원 달성 &nbsp;&nbsp; <span></span>
-								일 남음
-							</p>
-							<div class="caption">
-								<p>내용쓰시오</p>
-							</div>
-						</a>
-					</div>
-				</div>
+
 			</div>
 		</div>
 	</div>
