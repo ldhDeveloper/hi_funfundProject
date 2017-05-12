@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -110,13 +110,24 @@
 		                    	<h5>실명</h5>
 		       					
 		       					<div class="input-area">
-		       						<input type="text" class="input-text" id="nickName" value="김진항" disabled />
+		       						<c:if test="${ empty sessionScope.party.pname }">
+		       							<input type="text" class="input-text" id="nickName" value=""  placeholder="이름" disabled />
+		       						</c:if>
+		       						
+		       						<c:if test="${ !empty sessionScope.party.pname }">
+		       							<input type="text" class="input-text" id="nickName" value="${ sessionScope.party.pname }"  placeholder="이름" disabled />
+		       						</c:if>
 		       					</div>
 		       				
-		       					<h5>휴대폰 번호</h5>	                            
-									<div class="input-text" style="background:#e7e7e7">
-	                                    <p id="niceReturnMobile">01093533034</p>
-	                                </div>                                
+		       					<h5>휴대폰 번호</h5>	
+		       						<c:if test="${ empty sessionScope.party.phone }">
+		       							<input type="text" class="input-text" id="" value="${ sessionScope.party.phone }"  placeholder="휴대폰" disabled />                                                            
+	                           		</c:if>
+	                           		
+	                           		<c:if test="${ !empty sessionScope.party.phone }">
+		       							<input type="text" class="input-text" id="" value="${ sessionScope.party.phone }"  placeholder="휴대폰" disabled />                                                            
+	                           		</c:if>
+	                           		
 	                           <h5>주민등록번호</h5>
 	       							<p class="sub-text">개인정보는 암호화하여 안전하게 처리하고 있습니다.</p>
 	       					

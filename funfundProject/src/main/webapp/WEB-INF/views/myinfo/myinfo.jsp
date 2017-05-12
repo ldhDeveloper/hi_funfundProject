@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -261,11 +261,18 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 							<div class="minput" align="center">
 								<div class="email-input-wrap">
 									
+									
 									<h6 align="left">이름</h6>
-		                 			<input type="text" name="nickName" class="input-text" placeholder="이름" value="육성재"/>
+									<c:if test="${ empty sessionScope.party.pname}">
+		                 				<input type="text" name="nickName" class="input-text" placeholder="이름" value=""/>
+		                 			</c:if>
+		                 			
+		                 			<c:if test="${ !empty sessionScope.party.pname}">
+		                 				<input type="text" name="nickName" class="input-text" placeholder="이름" value="${ sessionScope.party.pname }"/>
+		                 			</c:if>
 		                 			
 		                 			<h6 align="left">닉네임</h6>
-		                 			<input type="text" name="nickName" class="input-text" placeholder="닉네임" value="육찡"/>
+		                 			<input type="text" name="nickName" class="input-text" placeholder="닉네임" value="${ sessionScope.account.nickname }"/>
 		                 			
 		                 			<br>
 		                 			
@@ -280,7 +287,7 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 	                       			<div class="input-btn-wrap">
 	                        			<h6 align="left">이메일</h6>
 	                        				<div class="input">
-	                            				<input type="text" id="userName" name="userName" class="disable input-text" placeholder="이메일 계정" value="jinhang89@gmail.com" disabled/>
+	                            				<input type="text" id="userName" name="userName" class="input-text" placeholder="이메일 계정" value="${ sessionScope.account.email }"/>
 	                          				</div>
 	                          	
 	                          				<div id="emailChangeBtn" class="emailAuthBtn mbtn" data-status="change">
