@@ -1,5 +1,7 @@
 package com.hi.funfund.item.model.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,4 +22,9 @@ public class ItemDao {
 		return result;
 	}
 
+	public List AllList() {
+		/*List<Item> iList = sqlSession.selectList(,);*/
+		return null;
+	}
+	
 }
