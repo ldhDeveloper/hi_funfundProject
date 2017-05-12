@@ -28,7 +28,7 @@
 	<insert id="signupAccount" parameterType="account">
 		<![CDATA[
 			INSERT INTO	ACCOUNT (ano, id, pwd, email, idtype, seller, outyn, nickname)
-			VALUES(ano_seq.nextval, #{id}, ENCRYPTION_AES.ENC_AES(#{pwd}), #{id}, '일반회원', 'N', 'N', #{nickname})	
+			VALUES(seq_ano.nextval, #{id}, ENCRYPTION_AES.ENC_AES(#{pwd}), #{id}, '일반회원', 'N', 'N', #{nickname})	
 		]]>
 	</insert>
 </mapper>
