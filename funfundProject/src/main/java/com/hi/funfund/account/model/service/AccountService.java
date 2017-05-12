@@ -26,6 +26,8 @@ public interface AccountService {
 	 int insert(Party seller); //판매자 정보등록!
 	
 	 Party selectParty(int pno); //판매자 정보 보기
+	 
+	 Party loginParty(int ano); //회원 개인정보 보기
 	
 	 Account selectAccount(int ano); // 회원정보보기
 	

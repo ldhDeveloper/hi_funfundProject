@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hi.funfund.account.model.service.AccountService;
 import com.hi.funfund.account.model.vo.Account;
+import com.hi.funfund.account.model.vo.Party;
 
 @Controller
 //@RequestMapping("account")
@@ -19,11 +20,13 @@ public class AccountController {
 	private AccountService accountService;
 	
 	@RequestMapping("/login.ao")
-	public ModelAndView login(Account account, ModelAndView mv, HttpServletRequest request){
+	public ModelAndView login(Party party, Account account, ModelAndView mv, HttpServletRequest request){
 		account = accountService.login(account);
+		Party p = accountService.loginParty(account.getAno());
 		HttpSession session = request.getSession(false);
 		if(account != null){
 			session.setAttribute("account", account);
+			session.setAttribute("party", p);
 		}
 		mv.setViewName("home");
 		return mv;
