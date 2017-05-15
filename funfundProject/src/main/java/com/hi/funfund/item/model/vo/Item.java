@@ -1,7 +1,9 @@
 package com.hi.funfund.item.model.vo;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class Item implements Serializable {
 
@@ -13,10 +15,12 @@ public class Item implements Serializable {
 	private String pname;
 	private String pcontent;
 	private String category;
+	@DateTimeFormat(pattern = "yy/MM/dd")
 	private Date psdate;
+	@DateTimeFormat(pattern = "yy/MM/dd")
 	private Date pedate;
 	private String pshort;
-	private int ecost;
+	private Integer ecost;
 	private String refund;
 	private String pvideo;
 	private String pstatus;
@@ -93,11 +97,11 @@ public class Item implements Serializable {
 		this.pshort = pshort;
 	}
 
-	public int getEcost() {
+	public Integer getEcost() {
 		return ecost;
 	}
 
-	public void setEcost(int ecost) {
+	public void setEcost(Integer ecost) {
 		this.ecost = ecost;
 	}
 
@@ -190,7 +194,7 @@ public class Item implements Serializable {
 	}
 
 	public Item(int pro_no, int ano, String pname, String pcontent, String category, Date psdate, Date pedate,
-			String pshort, int ecost, String refund, String pvideo, String pstatus, int likecount, String sharelink,
+			String pshort, Integer ecost, String refund, String pvideo, String pstatus, int likecount, String sharelink,
 			String bankcode, String accpnm, String accnum, String cname, String cs_email, String cs_phone) {
 		super();
 		this.pro_no = pro_no;

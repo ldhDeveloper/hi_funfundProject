@@ -41,5 +41,12 @@ public class ItemDao {
 		System.out.println("result: "+result);
 		return result;
 	}
+
+	public int updateRewardItem(Item item) {
+		System.out.println("프로젝트번호 : " + item.getPro_no());
+		int result = sqlSession.update(nameSpace + "tempupdate", item);
+		
+		return result;
+	}
 	
 }
