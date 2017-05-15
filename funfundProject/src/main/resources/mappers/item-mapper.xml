@@ -28,7 +28,7 @@
 
 	<insert id="insert" parameterType="Item">
 		<![CDATA[
-			insert into item values(seq_pro_no.nextval, #{ano}, '테스트1', null, null, null, null, null, 0, null, null, null, 0, null)	
+			insert into item values(seq_pro_no.nextval, #{ano}, '테스트1', null, null, null, null, null, 0, null, null, null, 0, null, null, null, null, null, null, null)	
 		]]>
 
 		<selectKey keyProperty="pro_no" resultType="Integer" order="AFTER">

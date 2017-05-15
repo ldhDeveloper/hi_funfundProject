@@ -111,10 +111,11 @@ public class ItemController {
 		
 		
 		int result = itemService.insertRewardItem(item);
+		model.setViewName("makeproject/primaryinfo");
+		request.setAttribute("ano", ano);
 		
 		
-		
-		return null;
+		return model;
 	}
 	@RequestMapping("update.it")
 	public ModelAndView insertRewardItem(Item item, FundMenu fmenu, HttpServletRequest request){
