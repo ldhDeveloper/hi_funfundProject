@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hi.funfund.fundmenu.model.service.FundMenuService;
 import com.hi.funfund.fundmenu.model.vo.FundMenu;
 import com.hi.funfund.item.model.service.ItemService;
 import com.hi.funfund.item.model.service.ItemServiceIm;
@@ -23,6 +25,8 @@ public class ItemController {
 
 	@Autowired
 	private ItemService itemService;
+	@Autowired
+	private FundMenuService fundMenuService;
 
 	
 	public ModelAndView AllList(ModelAndView model){
@@ -111,13 +115,21 @@ public class ItemController {
 		
 		
 		int result = itemService.insertRewardItem(item);
+		model.setViewName("makeproject/primaryinfo");
+		request.setAttribute("ano", ano);
+		request.setAttribute("pro_no", result);
 		
 		
-		
-		return null;
+		return model;
 	}
-	@RequestMapping("update.it")
+	@RequestMapping(value="update.it", method = RequestMethod.POST)
 	public ModelAndView insertRewardItem(Item item, FundMenu fmenu, HttpServletRequest request){
+		System.out.println("오니?");
+		int result1, result2 = 0;
+		
+		result1 = itemService.updateRewardItem(item);
+		//result2 = fundMenuService.updateFundMenu(fmenu);
+		
 		
 		return null;
 	}

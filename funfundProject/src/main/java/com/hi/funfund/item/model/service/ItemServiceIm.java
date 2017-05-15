@@ -103,4 +103,11 @@ public class ItemServiceIm implements ItemService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public int updateRewardItem(Item item){
+		int result = itemDao.updateRewardItem(item);
+		
+		return result;
+	}
 }

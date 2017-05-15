@@ -1,11 +1,15 @@
 package com.hi.funfund.account.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hi.funfund.account.model.service.AccountService;
@@ -91,6 +95,5 @@ public class AccountController {
 		return "myinfo/myfunding";
 	}
 	
-	// myinfo 회원 정보 설정 끝
-	
+	// myinfo 회원 정보 설정 끝	
 }

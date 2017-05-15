@@ -12,4 +12,6 @@ public interface AttachmentService {
 	int delete(int fno);
 
 	List<Attachment> selectList(int ref_no);
+	
+	int insertImgMyProfile(Attachment attachment);
 }

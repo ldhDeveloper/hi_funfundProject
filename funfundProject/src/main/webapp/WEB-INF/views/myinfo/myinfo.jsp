@@ -200,6 +200,12 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 
 .line{display:block;margin:40px 0;width:100%;height:1px;background:#ddd}
 
+.mnameText {
+	border: none;
+	color: #4D525B;
+	width: 40%;
+	background-color: #F8F8F8;
+}
 </style>
 
 <title>Insert title here</title>
@@ -216,8 +222,23 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 				
 				<div class="minfo">
 					<div class="row">
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6"><img class="img-circle img-responsive" src="images/육찡.jpg" style="max-width:170px;max-height:170px; width:170px; heigh:150px;"><!-- 사진 값이 들어갈 곳  --></div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow mname" align="center">회원명 | 육성재<!-- 회원 이름이 들어갈 곳 --></div>
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+							<form action="imgUpload.at" method="post" enctype="multipart/form-data">
+							<input type="file" name="file1" style="display:none;">
+							<img class="img-circle img-responsive" src="images/myinfo/basic.png" style="max-width:170px;max-height:170px; width:170px; heigh:150px; cursor:pointer" onclick="document.all.file1.click();">
+							</form>
+						</div>
+						
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow mname" align="center">
+							회원명 | <c:if test="${ empty sessionScope.party.pname}">
+		                 				<input type="text" name="pname" class="mnameText" placeholder="이름" value="${ sessionScope.account.nickname }" readonly/>
+		                 			</c:if>
+		                 			
+		                 			<c:if test="${ !empty sessionScope.party.pname}">
+		                 				<input type="text" name="pname" class="mnameText" placeholder="이름" value="${ sessionScope.party.pname }" readonly/>
+		                 			</c:if>
+						</div>
+						
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">개인 일반 회원 <!-- 회원 등급이 들어갈 곳  --></label></div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input type="button" class="mbtn1" value="투자 회원 신청" onclick='location.href="investRequest.ao"'></div>
 					</div>
@@ -249,12 +270,6 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 
 						<div class="account-wrap">
 							<h3 class="mh3">기본 정보 설정</h3>
-						
-							<br>
-						
-							<div class="mimg" align="center">
-								<img class="img-circle img-responsive" src="images/myinfo/basic.png" style="max-width:100px;max-height:100px;"><!-- 사진 값이 들어갈 곳  -->
-							</div>
 						
 							<br>
 						

@@ -3,5 +3,10 @@
 "-//mybatis.org//DTD mapper 3.0//en"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace = "attachmentMapper">
-
+	<insert id="myprofileImg" parameterType="attachment">
+		<![CDATA[
+			INSERT INTO ATTACHMENT (fno, orifname, refname, ftype, refno)
+			VALUES(seq_fno.nextval, #{orifname}, #{refname}, '회원정보이미지', #{ano})
+		]]>
+	</insert>
 </mapper>
