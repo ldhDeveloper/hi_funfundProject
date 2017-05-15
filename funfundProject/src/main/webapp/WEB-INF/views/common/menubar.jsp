@@ -659,23 +659,10 @@ label.sign-form_title {
             	<c:if test="${not empty sessionScope.account.id }">
             		<td style="width:80px;"><a class="fun-menu" href="#"><c:out value="${sessionScope.account.nickname}" /></a></td>
             		<td style="width:80px;"><a class="fun-menu" data-toggle="modal" data-target="#myModal4" style="cursor:pointer"><img style="width:34px;" class="img-circle img-responsive" src="images/myinfo/basic.png"/></a></td>
-            		<td style="width:80px;"><a class="fun-menu" href="logout.ao">로그아웃</a></td>
-            		<td style="width:150px;"><a class="fun-menu" href="myinfo.ao">회원정보보기</a></td>
+            		<!-- <td style="width:80px;"><a class="fun-menu" href="logout.ao">로그아웃</a></td>
+            		<td style="width:150px;"><a class="fun-menu" href="myinfo.ao">회원정보보기</a></td> -->
             	</c:if>  	
          	</tr>
-         	<%-- <tr>
-            	<td style="width:150px;"><a class="fun-menu" href="make.do">프로젝트 등록하기</a></td>
-           	 	<td style="width:150px;"><a class="fun-menu" href="funding.it">프로젝트 둘러보기</a></td>
-            	<td style="width:80px;"><a class="fun-menu" href="nList.no">고객센터</a></td>
-            	<c:if test="${empty sessionScope.account.id }">
-            		<td style="width:80px;"><a class="fun-menu" href="#"  data-toggle="modal" data-target="#myModal">로그인</a></td>
-            	</c:if>
-            	<c:if test="${not empty sessionScope.account.id }">
-            		<td style="width:80px;"><a class="fun-menu" href="#"><c:out value="${sessionScope.account.nickname}" /></a></td>
-            		<td style="width:80px;"><a class="fun-menu" href="logout.ao">로그아웃</a></td>
-            		<td style="width:150px;"><a class="fun-menu" href="myinfo.ao">회원정보보기</a></td>
-            	</c:if>  	
-         	</tr> --%>
       </table>
    </div>   
    </div>
@@ -790,32 +777,33 @@ label.sign-form_title {
   </div>
 </div>
 <style>
-.navheader{
+#navlist .navheader{
 	border-radius: 0px !important;
     -webkit-border-radius: 0px !important;
     -ms-border-radius: 0px !important;
     -moz-border-radius: 0px !important;
+	height: 120px !important;
 	position: relative;
     padding: 16px;
     background: #40C9A1;
 }
-.navproimage{
+#navlist .navproimage{
 	width:66px; 
 	height:66px; 
 	margin-right:12px; 
 	display:inline-block;
 }
-.navproimage img{
+#navlist .navproimage img{
 	float:left;
 	border-radius: 50%;
 	width:64px;
 	height:64px;
 }
-.profileinfo {
+#navlist .profileinfo {
 	display: inline-block;
 	width: 144px;
 }
-.profileinfo .nickname {
+#navlist .profileinfo .nickname {
     font-size: 17px;
     font-weight: 500;
     line-height: 23px;
@@ -824,7 +812,7 @@ label.sign-form_title {
     white-space: nowrap;
     text-overflow: ellipsis;
 }
-.profile-info .username {
+#navlist .profileinfo .username {
     font-size: 13px;
     font-weight: 400;
     line-height: 18px;
@@ -833,7 +821,7 @@ label.sign-form_title {
     white-space: nowrap;
     text-overflow: ellipsis;
 }
-.profileinfo .accnttype {
+#navlist .profileinfo .accnttype {
     font-size: 12px;
     font-weight: 400;
     line-height: 16px;
@@ -842,27 +830,50 @@ label.sign-form_title {
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+#navlist .navmenu-list ul {
+    padding: 7px 0 8px;
+    border-bottom: 1px solid #e6eaed;
+}
+#navlist .navmenu-list li {
+	list-style: none;
+}
+#navlist .navmenu-list li a {
+    font-size: 15px;
+    font-weight: 400;
+    display: block;
+    padding: 0 16px;
+    height: 48px;
+    
+}
 </style>
 <div class="modal right fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
 		<div class="modal-dialog" role="document">
-			<div class="modal-content">
+			<div id="navlist" class="modal-content">
 
 				<div class="modal-header navheader">
 					<div class="navproimage"><img s src="images/myinfo/basic.png"></div>
 					<div class="profileinfo">
 						<p class="nickname"><c:out value="${sessionScope.account.nickname}"/></p>
-						<c:if test="${!empty sessionScope.party.pname}">
-						<p class="username"><c:out value="${sessionScope.party.pname}"/></p>
-						</c:if>
+						<p class="username"><c:out value="${sessionScope.account.id}"/></p>
 						<p class="accnttype">개인투자자</p>
 					</div>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel2">Right Sidebar</h4>
 				</div>
-
 				<div class="modal-body">
-					<p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-					</p>
+					<div class="navmenu-list">
+						<ul>
+							<li><a href="make.do">프로젝트 등록하기</a></li>
+							<li><a href="funding.it">프로젝트 둘러보기</a></li>
+						</ul>
+						<ul>
+							<li><a href="nList.no">고객센터</a></li>
+							<li><a href="myinfo.ao">회원정보보기</a>
+						</ul>
+						<ul>
+							<li><a href="logout.ao">로그아웃</a>
+						</ul>
+					</div>
+					<div></div>
 				</div>
 
 			</div><!-- modal-content -->
