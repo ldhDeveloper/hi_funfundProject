@@ -2,6 +2,8 @@ package com.hi.funfund.fundmenu.model.dao;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,7 +18,8 @@ public class FundMenuDao {
 	private SqlSession sqlSession;
 
 	public List<FundMenu> selectList(int pro_no) {
-		List<FundMenu> mList =  sqlSession.selectList("selectList", pro_no);
+		System.out.println("pro: "+pro_no);
+		List<FundMenu> mList =  sqlSession.selectList("selectMlist", pro_no);
 		System.out.println("mlist: "+mList);
 		return mList;
 	}

@@ -16,10 +16,11 @@
 	</resultMap>
 
 	<select id="selectMlist" parameterType="int" resultMap="fundMenuResult">
-		select mno, mname, mcost, i.pro_no, mcontent, mdate, mnum, mcount, delyn 
-		from fundmenu f 
+		select mno, mname, mcost, i.pro_no, mcontent, mdate, mnum, mcount, delyn
+		from fundmenu f
 		inner join item i on f.pro_no = i.pro_no
-		order by mnum;
+		where i.pro_no = #{pro_no}
+		order by mnum
 	</select>
 
 

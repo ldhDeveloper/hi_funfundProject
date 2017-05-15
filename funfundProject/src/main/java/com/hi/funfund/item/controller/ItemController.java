@@ -26,12 +26,11 @@ public class ItemController {
 	@Autowired
 	private ItemService itemService;
 	@Autowired
-	private FundMenuService fundMenuService;
+	private FundMenuService fundMenuService;	
 
 	
 	public ModelAndView AllList(ModelAndView model){
 		List<Item> mList = itemService.AllList();
-		
 		return model;
 	}  
 	
@@ -147,8 +146,10 @@ public class ItemController {
 	@RequestMapping(value="detail.it")
 	public ModelAndView fundingdetailList(ModelAndView model, HttpServletRequest request){
 		int pro_no = Integer.parseInt(request.getParameter("pro_no"));
+		List<FundMenu> mList = fundMenuService.selectList(pro_no);
 		Item item= itemService.selectOne(pro_no);
 		model.addObject("item", item);
+		model.addObject("mList", mList);
 		model.setViewName("funding/detailList");
 		return model;
 	}

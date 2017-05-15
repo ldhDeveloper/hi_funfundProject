@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
@@ -157,8 +157,7 @@ button {
 	border-color: #ee7f69 !important;
 }
 </style>
-
-<script>
+<script  type="text/javascript">
 	$(function() {
 		$('#btn-like').click(function() {
 			if ($(this).hasClass("backpink")) {
@@ -190,6 +189,10 @@ button {
 			$(this).css('background-color', 'white');
 		});
 
+			var co ='<c:out value="${item.pcontent}"/>';
+			console.log(co);
+			$("#content").html(co);
+
 	});
 </script>
 </head>
@@ -202,7 +205,7 @@ button {
 			</h4>
 		</div>
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<h2 align="center" class="font">${item.cname}</h2>
+			<h2 align="center" class="font">${item.pname}</h2>
 		</div>
 	</div>
 
@@ -225,7 +228,7 @@ button {
 
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 box2"
 		style="padding: 10px;">
-		${item.pcontent}
+		<div id="content"></div>
 		<!-- <div class="">
 			<img src="/funfund/images/funding/face.PNG" class="img-responsive">
 			<h3 style="margin: 30px;" class="hidden-sm hidden-xs">집에서도 전문 경락
@@ -311,19 +314,24 @@ button {
 			<div class=""></div>
 			<c:forEach var="reword" items="${mList}">
 				<ul class="makerbox">
-					<li>${reword.mcost}원</li>
-					<li>작성자이름
+					<li style="font-size: 15pt;"><strong>${reword.mcost}원</strong></li>
+					<li class="makerinfo">작성자이름
 						<dl>${item.pname}</dl>
 					</li>
-					<li>품목
-						<dl></dl>
+					<li class="makerinfo">품목
+						<dl>${reword.mname}</dl>
 					</li>
-					<li>배송비</li>
-					<li>리워드제공 예상일
-						<dl></dl>
+					<li class="makerinfo">배송비</li>
+					<dl>원
+					</dl>
+					<li class="makerinfo">리워드 예상일
+						<dl>${reword.mdate}</dl>
 					</li>
-					<li>제한 수량</li>
-					<li>현재 개 남음</li>
+					<li class="makerinfo">제한 수량</li>
+					<dl>${reword.mcount }개
+					</dl>
+					<li class="makerinfo">현재 개 남음</li>
+					<dl></dl>
 				</ul>
 			</c:forEach>
 		</div>
