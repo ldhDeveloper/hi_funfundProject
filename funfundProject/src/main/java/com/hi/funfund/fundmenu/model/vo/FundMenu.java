@@ -18,11 +18,12 @@ public class FundMenu implements Serializable {
 	private Integer mnum;
 	private Integer mcount;
 	private String delyn;
-	
-	public FundMenu(){}
-	
-	public FundMenu(int mno, String mname, Integer mcost, int pro_no, String mcontent, Integer addcost, Date mdate, Integer mnum,
-			Integer mcount, String delyn) {
+
+	public FundMenu() {
+	}
+
+	public FundMenu(int mno, String mname, Integer mcost, int pro_no, String mcontent, Integer addcost, Date mdate,
+			Integer mnum, Integer mcount, String delyn) {
 		super();
 		this.mno = mno;
 		this.mname = mname;
@@ -44,92 +45,61 @@ public class FundMenu implements Serializable {
 		return mcost;
 	}
 
-
 	public int getPro_no() {
 		return pro_no;
 	}
-
 
 	public String getMcontent() {
 		return mcontent;
 	}
 
-
-
+	public String getMname() {
+		return mname;
+	}
 
 	public Integer getAddcost() {
 		return addcost;
 	}
 
-
-
 	public Date getMdate() {
 		return mdate;
 	}
-
 
 	public Integer getMnum() {
 		return mnum;
 	}
 
-
-
-
 	public Integer getMcount() {
 		return mcount;
 	}
-
-
-
 
 	public String getDelyn() {
 		return delyn;
 	}
 
-
-
-
 	public void setMno(int mno) {
 		this.mno = mno;
 	}
-
-
-
 
 	public void setMname(String mname) {
 		this.mname = mname;
 	}
 
-
-
-
 	public void setMcost(Integer mcost) {
 		this.mcost = mcost;
 	}
-
-
-
 
 	public void setPro_no(int pro_no) {
 		this.pro_no = pro_no;
 	}
 
-
-
-
 	public void setMcontent(String mcontent) {
 		this.mcontent = mcontent;
 	}
 
-
-
-
 	public void setAddcost(Integer addcost) {
 		this.addcost = addcost;
 	}
-
-
-
 
 	public void setMdate(Date mdate) {
 		this.mdate = mdate;
@@ -138,27 +108,17 @@ public class FundMenu implements Serializable {
 		this.delyn = delyn;
 	}
 
-
-
-
 	public void setMnum(Integer mnum) {
 		this.mnum = mnum;
 	}
-
-
-
 
 	public void setMcount(Integer mcount) {
 		this.mcount = mcount;
 	}
 
-
-
-
 	public void setDelyn(String delyn) {
 		this.delyn = delyn;
 	}
-
 
 	@Override
 	public String toString() {
