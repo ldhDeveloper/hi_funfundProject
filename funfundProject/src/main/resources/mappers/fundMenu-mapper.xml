@@ -2,6 +2,25 @@
 <!DOCTYPE mapper PUBLIC
 "-//mybatis.org//DTD mapper 3.0//en"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace = "fundMenuMapper">
+<mapper namespace="fundMenuMapper">
+	<resultMap type="fundMenu" id="fundMenuResult">
+		<id property="mno" column="mno" />
+		<result property="mname" column="mname" />
+		<result property="mcost" column="mcost" />
+		<result property="pro_no" column="pro_no" />
+		<result property="mcontent" column="mcontent" />
+		<result property="mdate" column="mdate" />
+		<result property="mnum" column="mnum" />
+		<result property="mcount" column="mcount" />
+		<result property="delyn" column="delyn" />
+	</resultMap>
+
+	<select id="selectMlist" parameterType="int" resultMap="fundMenuResult">
+		select mno, mname, mcost, i.pro_no, mcontent, mdate, mnum, mcount, delyn 
+		from fundmenu f 
+		inner join item i on f.pro_no = i.pro_no
+		order by mnum;
+	</select>
+
 
 </mapper>

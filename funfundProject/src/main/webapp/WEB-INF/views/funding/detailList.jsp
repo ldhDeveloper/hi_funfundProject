@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -120,6 +121,12 @@ button {
 	text-align: center;
 }
 
+.makerinfo {
+	display: inline-block;
+	padding: 10px;
+	text-align: center;
+}
+
 .goal {
 	color: #e39402;
 	background: #fedb9a;
@@ -191,11 +198,11 @@ button {
 	<div class="row background">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<h4 align="center" class="font">
-				<em><c:out value="${item.category }"/></em> <strong></strong> 프로젝트
+				<em>${item.category }</em> <strong>${item.pshort }</strong> 프로젝트
 			</h4>
 		</div>
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-			<h2 align="center" class="font"><c:out value="${item.cname}" /></h2>
+			<h2 align="center" class="font">${item.cname}</h2>
 		</div>
 	</div>
 
@@ -218,7 +225,8 @@ button {
 
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 box2"
 		style="padding: 10px;">
-		<div class="">
+		${item.pcontent}
+		<!-- <div class="">
 			<img src="/funfund/images/funding/face.PNG" class="img-responsive">
 			<h3 style="margin: 30px;" class="hidden-sm hidden-xs">집에서도 전문 경락
 				마사지를 즐길 수 있다면?에스테틱 전문샵 경력 20년의 베테랑의 모든 노하우를 집약한 매클러를 소개합니다.</h3>
@@ -253,14 +261,22 @@ button {
 			</div>
 
 			<div class="content">소개 내용</div>
-		</div>
+		</div> -->
 	</div>
 
 	<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
 		<div class="box2 info">
-			<p class="box2">일 남음</p>
+			<p class="box2">
+				<jsp:useBean id="now" class="java.util.Date" />
+				<fmt:formatDate value="${now}" var="now" pattern="yyyyMMdd" />
+				<fmt:formatDate value="${item.pedate}" var="date" pattern="yyyyMMdd" />
+				${now - date} 일 남음
+			</p>
 			<em class="infoBar"></em>
-			<p class="info">% 달성</p>
+			<p class="info">
+				<fmt:formatNumber value="${item.ecost}" var="cost" type="percent" />
+				% 달성
+			</p>
 			<p class="info">원의 펀딩</p>
 			<p class="info">명의 서포터</p>
 			<button class="btn-fund">펀딩하기</button>
@@ -278,43 +294,38 @@ button {
 			<p
 				style="font-size: 10pt; text-align: left; padding-top: 20px; padding-bottom: 5px; margin-left: 20px;">메이커
 				정보</p>
-			<div class="makerbox2">프로필 사진이랑 자기소개 불러오는 칸</div>
+			<div class="makerbox2">
+				<div class="makerinfo">사진</div>
+				<div class="makerinfo">${item.cname }</div>
+				<div>
+					<p>문의처</p>
+					<div class="makerinfo">${item.cs_email}</div>
+					<div class="makerinfo">${item.cs_phone}</div>
+				</div>
+			</div>
 		</div>
 
 		<div class="">
 			<p
 				style="font-size: 10pt; text-align: left; padding-bottom: 5px; margin-left: 20px;">리워드선택</p>
-			<ul class="makerbox">
-				<li>원</li>
-				<li>작성자이름</li>
-				<li>품목</li>
-				<li>배송비</li>
-				<li>리워드제공 예상일</li>
-				<li>제한 수량</li>
-				<li>현재 개 남음</li>
-			</ul>
-		</div>
-		<div class="">
-			<ul class="makerbox">
-				<li>원</li>
-				<li>작성자이름</li>
-				<li>품목</li>
-				<li>배송비</li>
-				<li>리워드제공 예상일</li>
-				<li>제한 수량</li>
-				<li>현재 개 남음</li>
-			</ul>
-		</div>
-		<div class="">
-			<ul class="makerbox">
-				<li>원</li>
-				<li>작성자이름</li>
-				<li>품목</li>
-				<li>배송비</li>
-				<li>리워드제공 예상일</li>
-				<li>제한 수량</li>
-				<li>현재 개 남음</li>
-			</ul>
+			<div class=""></div>
+			<c:forEach var="reword" items="${mList}">
+				<ul class="makerbox">
+					<li>${reword.mcost}원</li>
+					<li>작성자이름
+						<dl>${item.pname}</dl>
+					</li>
+					<li>품목
+						<dl></dl>
+					</li>
+					<li>배송비</li>
+					<li>리워드제공 예상일
+						<dl></dl>
+					</li>
+					<li>제한 수량</li>
+					<li>현재 개 남음</li>
+				</ul>
+			</c:forEach>
 		</div>
 		<div>
 			<button class="btn-fund">펀딩하기</button>

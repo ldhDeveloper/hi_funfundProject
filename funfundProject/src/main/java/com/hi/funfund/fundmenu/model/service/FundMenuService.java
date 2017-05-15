@@ -1,10 +1,12 @@
 package com.hi.funfund.fundmenu.model.service;
 
+import java.util.List;
+
 import com.hi.funfund.fundmenu.model.vo.FundMenu;
 
 public interface FundMenuService {
 
-	FundMenu selectOne(int pro_no);
+	List<FundMenu> selectList(int pro_no);
 
 	int insert(FundMenu fm);
 
