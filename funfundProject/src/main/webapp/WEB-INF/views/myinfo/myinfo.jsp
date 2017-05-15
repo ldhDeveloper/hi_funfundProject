@@ -203,7 +203,7 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 .mnameText {
 	border: none;
 	color: #4D525B;
-	width: 10%;
+	width: 50%;
 	background-color: #F8F8F8;
 }
 </style>
