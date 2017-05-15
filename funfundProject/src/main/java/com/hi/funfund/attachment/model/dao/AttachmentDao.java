@@ -25,6 +25,11 @@ public class AttachmentDao {
 	public List<Attachment> selectList(int ref_no) {
 		// TODO Auto-generated method stub
 		return null;
+	}	
+	
+	public int insertImgMyProfile(Attachment attachment) {
+		int result = sqlSession.insert("myprofileImg", attachment);
+		return result;
 	}
 
 }
