@@ -214,7 +214,7 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 <jsp:include page="/WEB-INF/views/common/menubar.jsp" flush="true"/>
 
 <script type="text/javascript">
-function fileUpload1(){
+function fileUpload(){
 	document.form1.file.select();
 	alert(document.selection.createRange().text);
 }
@@ -231,9 +231,9 @@ function fileUpload1(){
 					<div class="row">
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
 							<form action="imgUpload.at" method="post" enctype="multipart/form-data">
-							<input type="file" name="form1" style="display:none;">
+							<input type="file" name="uploadFile" style="display:none;">
 							<!-- <img class="img-circle img-responsive" src="images/myinfo/basic.png" style="max-width:170px;max-height:170px; width:170px; heigh:150px; cursor:pointer" onclick="document.all.uploadFile.click();"> -->
-							<img class="img-circle img-responsive" src="images/myinfo/basic.png" style="max-width:170px;max-height:170px; width:170px; heigh:150px; cursor:pointer" onclick="uploadFile1();">
+							<img class="img-circle img-responsive" src="images/myinfo/basic.png" style="max-width:170px;max-height:170px; width:170px; heigh:150px; cursor:pointer" onclick="uploadFile();">
 							</form>
 						</div>
 						
