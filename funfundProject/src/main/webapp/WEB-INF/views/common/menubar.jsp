@@ -568,6 +568,71 @@ label.sign-form_title {
 	line-height: 20px;
 	color: #707070;
 }
+
+/* left right show */
+	.modal.left .modal-dialog,
+	.modal.right .modal-dialog {
+		position: fixed;
+		margin: auto;
+		width: 320px;
+		height: 100%;
+		-webkit-transform: translate3d(0%, 0, 0);
+		    -ms-transform: translate3d(0%, 0, 0);
+		     -o-transform: translate3d(0%, 0, 0);
+		        transform: translate3d(0%, 0, 0);
+	}
+
+	.modal.left .modal-content,
+	.modal.right .modal-content {
+		height: 100%;
+		overflow-y: auto;
+	}
+	
+	.modal.left .modal-body,
+	.modal.right .modal-body {
+		padding: 15px 15px 80px;
+	}
+
+/*Left*/
+	.modal.left.fade .modal-dialog{
+		left: -320px;
+		-webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
+		   -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
+		     -o-transition: opacity 0.3s linear, left 0.3s ease-out;
+		        transition: opacity 0.3s linear, left 0.3s ease-out;
+	}
+	
+	.modal.left.fade.in .modal-dialog{
+		left: 0;
+	}
+        
+/*Right*/
+	.modal.right.fade .modal-dialog {
+		right: -320px;
+		-webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+		   -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+		     -o-transition: opacity 0.3s linear, right 0.3s ease-out;
+		        transition: opacity 0.3s linear, right 0.3s ease-out;
+	}
+	
+	.modal.right.fade.in .modal-dialog {
+		right: 0;
+	}
+
+/* ----- MODAL STYLE ----- */
+	.modal-content {
+		border-radius: 0;
+		border: none;
+	}
+
+	.modal-header {
+		border-bottom-color: #EEEEEE;
+		background-color: #FAFAFA;
+	}
+.profile-image{
+	width:34px;
+	height:34px;
+}
 </style>
 
 <title>Insert title here</title>
@@ -585,6 +650,20 @@ label.sign-form_title {
    <div class="col-lg-5 col-md-7 col-sm-8">
    		<table style="width:610px">
         	<tr>
+            	<c:if test="${empty sessionScope.account.id }">
+            		<td style="width:150px;"><a class="fun-menu" href="make.do">프로젝트 등록하기</a></td>
+           	 		<td style="width:150px;"><a class="fun-menu" href="funding.it">프로젝트 둘러보기</a></td>
+            		<td style="width:80px;"><a class="fun-menu" href="nList.no">고객센터</a></td>
+            		<td style="width:80px;"><a class="fun-menu" href="#"  data-toggle="modal" data-target="#myModal">로그인</a></td>
+            	</c:if>
+            	<c:if test="${not empty sessionScope.account.id }">
+            		<td style="width:80px;"><a class="fun-menu" href="#"><c:out value="${sessionScope.account.nickname}" /></a></td>
+            		<td style="width:80px;"><a class="fun-menu" data-toggle="modal" data-target="#myModal4" style="cursor:pointer"><img style="width:34px;" class="img-circle img-responsive" src="images/myinfo/basic.png"/></a></td>
+            		<td style="width:80px;"><a class="fun-menu" href="logout.ao">로그아웃</a></td>
+            		<td style="width:150px;"><a class="fun-menu" href="myinfo.ao">회원정보보기</a></td>
+            	</c:if>  	
+         	</tr>
+         	<%-- <tr>
             	<td style="width:150px;"><a class="fun-menu" href="make.do">프로젝트 등록하기</a></td>
            	 	<td style="width:150px;"><a class="fun-menu" href="funding.it">프로젝트 둘러보기</a></td>
             	<td style="width:80px;"><a class="fun-menu" href="nList.no">고객센터</a></td>
@@ -596,7 +675,7 @@ label.sign-form_title {
             		<td style="width:80px;"><a class="fun-menu" href="logout.ao">로그아웃</a></td>
             		<td style="width:150px;"><a class="fun-menu" href="myinfo.ao">회원정보보기</a></td>
             	</c:if>  	
-         	</tr>
+         	</tr> --%>
       </table>
    </div>   
    </div>
@@ -710,5 +789,85 @@ label.sign-form_title {
     </div> 
   </div>
 </div>
+<style>
+.navheader{
+	border-radius: 0px !important;
+    -webkit-border-radius: 0px !important;
+    -ms-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+	position: relative;
+    padding: 16px;
+    background: #40C9A1;
+}
+.navproimage{
+	width:66px; 
+	height:66px; 
+	margin-right:12px; 
+	display:inline-block;
+}
+.navproimage img{
+	float:left;
+	border-radius: 50%;
+	width:64px;
+	height:64px;
+}
+.profileinfo {
+	display: inline-block;
+	width: 144px;
+}
+.profileinfo .nickname {
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 23px;
+    color: #fff;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.profile-info .username {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 18px;
+    color: #fff;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.profileinfo .accnttype {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    color: #fff;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+</style>
+<div class="modal right fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+
+				<div class="modal-header navheader">
+					<div class="navproimage"><img s src="images/myinfo/basic.png"></div>
+					<div class="profileinfo">
+						<p class="nickname"><c:out value="${sessionScope.account.nickname}"/></p>
+						<c:if test="${!empty sessionScope.party.pname}">
+						<p class="username"><c:out value="${sessionScope.party.pname}"/></p>
+						</c:if>
+						<p class="accnttype">개인투자자</p>
+					</div>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel2">Right Sidebar</h4>
+				</div>
+
+				<div class="modal-body">
+					<p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+					</p>
+				</div>
+
+			</div><!-- modal-content -->
+		</div><!-- modal-dialog -->
+	</div><!-- modal -->
+
 </body>
 </html>
