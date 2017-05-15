@@ -28,7 +28,7 @@
 
 	<insert id="insert" parameterType="Item">
 		<![CDATA[
-			insert into item values(seq_pro_no.nextval, #{ano}, '테스트1', null, null, null, null, null, 0, null, null, null, 0, null)	
+			insert into item values(seq_pro_no.nextval, #{ano}, '테스트1', null, null, null, null, null, 0, null, null, null, 0, null, null, null, null, null, null, null)	
 		]]>
 
 		<selectKey keyProperty="pro_no" resultType="Integer" order="AFTER">
@@ -47,5 +47,12 @@
 	        select pro_no, ano, pname, pcontent, category, psdate, pedate, pshort, ecost, refund, pvideo, pstatus, likecount, sharelink, bankcode, accpnm, accnum, cname, cs_email, cs_phone from item where pro_no= #{pro_no}
 	        ]]>
 	</select>
+	
+	
+	<update id="tempupdate" parameterType="Item">
+			<![CDATA[
+				update item set pname=#{pname, jdbcType=VARCHAR}, pcontent=#{pcontent, jdbcType=VARCHAR}, category=#{category, jdbcType=VARCHAR}, psdate=#{psdate, jdbcType=DATE}, pedate=#{pedate, jdbcType=DATE}, pshort=#{pshort, jdbcType=VARCHAR}, ecost=#{ecost, jdbcType=INTEGER}, refund=#{refund, jdbcType=VARCHAR}, pvideo=#{pvideo, jdbcType=VARCHAR}, pstatus=#{pstatus, jdbcType=VARCHAR}, bankcode=#{bankcode, jdbcType=VARCHAR}, accpnm=#{accpnm, jdbcType=VARCHAR}, accnum=#{accnum, jdbcType=VARCHAR}, cname=#{cname, jdbcType=VARCHAR}, cs_email=#{cs_email, jdbcType=VARCHAR}, cs_phone=#{cs_phone, jdbcType=VARCHAR} where pro_no =#{pro_no}
+	        ]]>
+	</update>
 
 </mapper>
