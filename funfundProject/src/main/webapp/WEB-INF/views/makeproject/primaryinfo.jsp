@@ -147,10 +147,12 @@ li {
 			<li id="sendadmin" style="margin-left: 20px;"><a href="#">검토 요청하기</a></li>
 		</ul>
 	</div>
-	<form id="frm" action="update.it" method="post">
+	<form id="frm" action="update.it?pro_no=${ pro_no }" method="post">
 		
-		<input type="hidden" value=${ pro_no }>
-	
+		<%-- <input type="hidden" value="${ param.pro_no }"> --%>
+		<script type="text/javascript">
+			console.log(${param.pro_no});
+		</script>
 		<!-- 기본정보 입력 화면 -->
 		<div id="primary-info1" class="input-form">
 			<table>
