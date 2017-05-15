@@ -203,7 +203,7 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 .mnameText {
 	border: none;
 	color: #4D525B;
-	width: 10%;
+	width: 40%;
 	background-color: #F8F8F8;
 }
 </style>
@@ -222,15 +222,16 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 				
 				<div class="minfo">
 					<div class="row">
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6"><img class="img-circle img-responsive" src="images/myinfo/basic.png" style="max-width:170px;max-height:170px; width:170px; heigh:150px;"><!-- 사진 값이 들어갈 곳  --></div>
-						
-						<!-- <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow mname" align="center">
-							회원명 | 육성재회원 이름이 들어갈 곳
-						</div> -->
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+							<form action="imgUpload.at" method="post" enctype="multipart/form-data">
+							<input type="file" name="file1" style="display:none;">
+							<img class="img-circle img-responsive" src="images/myinfo/basic.png" style="max-width:170px;max-height:170px; width:170px; heigh:150px; cursor:pointer" onclick="document.all.file1.click();">
+							</form>
+						</div>
 						
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow mname" align="center">
 							회원명 | <c:if test="${ empty sessionScope.party.pname}">
-		                 				<input type="text" name="pname" class="mnameText" placeholder="이름" value="성함을 등록하세요" readonly/>
+		                 				<input type="text" name="pname" class="mnameText" placeholder="이름" value="${ sessionScope.account.nickname }" readonly/>
 		                 			</c:if>
 		                 			
 		                 			<c:if test="${ !empty sessionScope.party.pname}">
@@ -269,10 +270,6 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 
 						<div class="account-wrap">
 							<h3 class="mh3">기본 정보 설정</h3>
-						
-							<!-- <div class="mimg" align="center">
-								<img class="img-circle img-responsive" src="images/myinfo/basic.png" style="max-width:100px;max-height:100px;">사진 값이 들어갈 곳 
-							</div> -->
 						
 							<br>
 						

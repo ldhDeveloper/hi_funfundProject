@@ -34,6 +34,16 @@ public List<Attachment> selectList(int ref_no) {
 	return attachmentDao.selectList(ref_no);
 }
 
+@Override
+public int insertImgMyProfile(Attachment attachment) {
+	
+	int result = 0;
+
+	result = attachmentDao.insertImgMyProfile(attachment);
+	
+	return result;
+}
+
 
 	
 	
