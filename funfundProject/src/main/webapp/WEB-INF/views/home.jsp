@@ -22,6 +22,7 @@
 <title>home</title>
 </head>
 <body>
+	<div></div>
 	<!-- 메뉴바 -->
 	<jsp:include page="/WEB-INF/views/common/menubar.jsp" flush="true" />
 
