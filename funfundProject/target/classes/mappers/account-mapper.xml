@@ -15,6 +15,18 @@
 			<result property="outyn" column="outyn" />
 			<result property="nickname" column="nickname" />
 		</resultMap>
+		<resultMap type="party" id="partyResult">
+			<id property="pno" column="pno" />
+			<result property="ano" column="ano" />
+			<result property="pname" column="pname" />
+			<result property="phone" column="phone" />
+			<result property="intro" column="intro" />
+			<result property="id_no" column="id_no" />
+			<result property="president" column="president" />
+			<result property="address" column="address" />
+			<result property="pconfirm" column="pconfirm" />
+			<result property="econfirm" column="econfirm" />
+		</resultMap>
 		<select id="login" parameterType="account" resultMap="accountResult">
 		<![CDATA[
 			SELECT
@@ -31,4 +43,14 @@
 			VALUES(seq_ano.nextval, #{id}, ENCRYPTION_AES.ENC_AES(#{pwd}), #{id}, '일반회원', 'N', 'N', #{nickname})	
 		]]>
 	</insert>
+	<select id="loginParty" parameterType="int" resultMap="partyResult">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				PARTY
+			WHERE
+				ANO = #{ano}
+		]]>
+	</select>
 </mapper>

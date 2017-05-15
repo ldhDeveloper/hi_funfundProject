@@ -36,35 +36,18 @@ public class FundMenu implements Serializable {
 		this.delyn = delyn;
 	}
 
-
-
-
 	public int getMno() {
 		return mno;
 	}
-
-
-
-
-	public String getMname() {
-		return mname;
-	}
-
-
-
 
 	public Integer getMcost() {
 		return mcost;
 	}
 
 
-
-
 	public int getPro_no() {
 		return pro_no;
 	}
-
-
 
 
 	public String getMcontent() {
@@ -80,12 +63,9 @@ public class FundMenu implements Serializable {
 
 
 
-
 	public Date getMdate() {
 		return mdate;
 	}
-
-
 
 
 	public Integer getMnum() {
@@ -153,6 +133,9 @@ public class FundMenu implements Serializable {
 
 	public void setMdate(Date mdate) {
 		this.mdate = mdate;
+		this.mnum = mnum;
+		this.mcount = mcount;
+		this.delyn = delyn;
 	}
 
 
@@ -177,8 +160,6 @@ public class FundMenu implements Serializable {
 	}
 
 
-
-
 	@Override
 	public String toString() {
 		return "FundMenu [mno=" + mno + ", mname=" + mname + ", mcost=" + mcost + ", pro_no=" + pro_no + ", mcontent="
@@ -186,11 +167,4 @@ public class FundMenu implements Serializable {
 				+ ", delyn=" + delyn + "]";
 	}
 
-
-
-
-	
-	
-	
-	
 }
