@@ -184,6 +184,7 @@ textarea {
 #upload {
 	text-align: right;
 	width: 80%;
+	margin-bottom: 20px;
 }
 
 #comment-box {
@@ -209,13 +210,13 @@ textarea {
 	height: 30px;
 }
 
-#cmtId p {
+#cmtco {
 	margin-bottom: 10px;
 	font-size: 13px;
 	line-height: 18px;
 }
 
-#cmtId span {
+#cmtda {
 	display: inline-block;
 	font-size: 12px;
 	line-height: 12px;
@@ -277,8 +278,8 @@ textarea {
 		<ul class="w3-border-bottom w3-border-gray">
 			<li class="active"><a href="detail.it?pro_no=${item.pro_no }">스토리</a></li>
 			<li><a>댓글( )</a></li>
-			<li>새소식( )</li>
-			<li>서포터( )</li>
+			<li><a>새소식( )</a></li>
+			<li><a>서포터( )</a></li>
 		</ul>
 	</div>
 
@@ -297,23 +298,26 @@ textarea {
 		<!-- 댓글작성 영역 -->
 		<div class="comment">
 			<p>개의 댓글이 달렸습니다.</p>
-			<form id="comment-area">
-				<textarea style="overflow-y: hidden;" rows="3" cols="50"
-					maxlength="140;" placeholder="댓글을 입력하세요"></textarea>
+			<form id="comment-area" action="comment.ask">
+				<textarea id="acontent" name="acontent" style="overflow-y: hidden;" rows="3"
+					cols="50" maxlength="140;" placeholder="댓글을 입력하세요"></textarea>
+				<div id="upload">
+					<input type="submit" value="등록하기">
+					<input type="hidden" value="${param.pro_no}" name="pro_no">
+				</div>
 			</form>
-			<div id="upload">
-				<button></button>
-			</div>
+
 			<c:if test="${empty aList }">
 				  아직 댓글이 없습니다. 
 				  첫번째 댓글의 주인공이 되어주세요! :)
 				</c:if>
+
 			<c:if test="${!empty aList}">
 				<div id="comment-box">
 					<c:forEach var="ask" items="${aList}">
 						<p id="cmtId">${ask.id }</p>
-						<p>${ask.ask_content }</p>
-						<span>${ask.ask_date }</span>
+						<p id="cmtco">${ask.ask_content }</p>
+						<span id="cmtda">${ask.ask_date }</span>
 					</c:forEach>
 				</div>
 			</c:if>

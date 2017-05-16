@@ -83,7 +83,7 @@ public class ItemServiceIm implements ItemService{
 
 	@Override
 	public Item selectOne(int pro_no) {
-		return itemDao.selectOne(pro_no);
+		return itemDao.selectOne(pro_no);                                                                                                                                            
 	}
 
 	@Override

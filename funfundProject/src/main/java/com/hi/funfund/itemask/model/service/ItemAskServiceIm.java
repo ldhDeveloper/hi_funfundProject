@@ -1,5 +1,6 @@
 package com.hi.funfund.itemask.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -17,9 +18,8 @@ public class ItemAskServiceIm implements ItemAskService {
 	private ItemAskDao itemAskDao;
 
 	@Override
-	public int insert(ItemAsk itemAsk) {
-		
-		return itemAskDao.insert(itemAsk);
+	public int insert(HashMap<String,String> cmap) {
+		return itemAskDao.insert(cmap);
 	}
 
 	@Override
