@@ -151,7 +151,7 @@ li {
 					요청하기</a></li>
 		</ul>
 	</div>
-	<form id="frm" action="update.it?pro_no=${ pro_no }" method="post" enctype='application/json'>
+	<form id="frm" action="update.it?pro_no=${ pro_no }" method="post" enctype="application/json">
 
 		<%-- <input type="hidden" value="${ param.pro_no }"> --%>
 

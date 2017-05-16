@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hi.funfund.fundmenu.model.vo.FundMenu;
+import com.hi.funfund.fundmenu.model.vo.ReciveFundMenu;
 
 @Repository("fundMenuDao")
 public class FundMenuDao {
@@ -37,5 +38,29 @@ public class FundMenuDao {
 	public int delete(int pro_no) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	public int insertOrUpdateFundMenu(FundMenu fmenu) {
+		System.out.println("오니?");
+		int result = 0;
+		int mno = 0;
+		
+		FundMenu fm = (FundMenu) sqlSession.selectOne(nameSpace + "selectMno", fmenu);
+		if(fm != null){
+			mno = fm.getMno();
+		}
+		
+		
+		if(mno == 0){
+			System.out.println("입력되니?");
+			result = sqlSession.insert(nameSpace + "insertFM", fmenu);
+		}else{
+			fmenu.setMno(mno);
+			result = sqlSession.update(nameSpace + "updateFM", fmenu);
+		}
+		
+		
+		
+		return result;
 	}
 }

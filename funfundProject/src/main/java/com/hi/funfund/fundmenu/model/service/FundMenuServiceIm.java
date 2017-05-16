@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.hi.funfund.fundmenu.model.dao.FundMenuDao;
 import com.hi.funfund.fundmenu.model.vo.FundMenu;
+import com.hi.funfund.fundmenu.model.vo.ReciveFundMenu;
 
 @Service("fundMenuService")
 public class FundMenuServiceIm implements FundMenuService {
@@ -35,5 +36,9 @@ public class FundMenuServiceIm implements FundMenuService {
 	public int delete(int pro_no) {
 
 		return fundMenuDao.delete(pro_no);
+	}
+	@Override
+	public int insertOrUpdateFundMenu(FundMenu fmenu){
+		return fundMenuDao.insertOrUpdateFundMenu(fmenu);
 	}
 }

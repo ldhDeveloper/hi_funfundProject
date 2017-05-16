@@ -81,6 +81,22 @@
 		<url-pattern>*.it</url-pattern>
 	</servlet-mapping>
 	
+	<!-- item 요청 서블릿 -->
+	<servlet>
+		<servlet-name>attachment</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/config/attachment-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+		
+	<servlet-mapping>
+		<servlet-name>attachment</servlet-name>
+		<url-pattern>*.at</url-pattern>
+	</servlet-mapping>
+	
 	<!-- Start: 한글문제 처리 -->
 <filter>
     <filter-name>characterEncodingFilter</filter-name>
