@@ -47,7 +47,9 @@
 			}
 		});
 	})
-
+	function home(){
+		location.href="/funfund";
+	}
 </script>
 
 <script type='text/javascript'>
@@ -682,7 +684,7 @@ label.sign-form_title {
    <div class="row middle-menubar hidden-xs">
    
    <div class="col-lg-2 col-md-2 col-sm-2">
-   	<img src="/funfund/images/common/logo.png" style="widht:400px;height:70px;">
+   	<img src="/funfund/images/common/logo.png" style="widht:400px;height:70px;cursor:pointer" onclick="home();">
    </div>
    <div class="col-lg-5 col-md-3 col-sm-2">
    	&nbsp;
