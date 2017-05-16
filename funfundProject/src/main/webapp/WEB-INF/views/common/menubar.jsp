@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <% String cp = request.getContextPath(); %>
-
+<% String path = request.getSession().getServletContext().getRealPath("/");%>
 <!DOCTYPE html >
 <html>
 <head>
@@ -46,8 +46,10 @@
 				return false;
 			}
 		});
-
 	})
+	function home(){
+		location.href="/funfund";
+	}
 </script>
 
 <script type='text/javascript'>
@@ -682,7 +684,7 @@ label.sign-form_title {
    <div class="row middle-menubar hidden-xs">
    
    <div class="col-lg-2 col-md-2 col-sm-2">
-   	<img src="/funfund/images/common/logo.png" style="widht:400px;height:70px;">
+   	<img src="/funfund/images/common/logo.png" style="widht:400px;height:70px;cursor:pointer" onclick="home();">
    </div>
    <div class="col-lg-5 col-md-3 col-sm-2">
    	&nbsp;
@@ -698,7 +700,15 @@ label.sign-form_title {
             	</c:if>
             	<c:if test="${not empty sessionScope.account.id }">
             		<td style="width:80px;"><a class="fun-menu" href="#"><c:out value="${sessionScope.account.nickname}" /></a></td>
-            		<td style="width:80px;"><a class="fun-menu" data-toggle="modal" data-target="#myModal4" style="cursor:pointer"><img style="width:34px;" class="img-circle img-responsive" src="images/myinfo/basic.png"/></a></td>
+            		<td style="width:80px;"><a class="fun-menu" data-toggle="modal" data-target="#myModal4" style="cursor:pointer">
+            		
+            		<img id="smallprofile" style="width:34px;" class="img-circle img-responsive" src="images/myinfo/basic.png"/>
+          
+            		<%-- <c:if test="${!empty sessionScope.account.pimage }">
+            			<img style="width:34px;" class="img-circle img-responsive" src=""/>
+            		</c:if> --%>
+            		</a></td>
+            		
             		<!-- <td style="width:80px;"><a class="fun-menu" href="logout.ao">로그아웃</a></td>
             		<td style="width:150px;"><a class="fun-menu" href="myinfo.ao">회원정보보기</a></td> -->
             	</c:if>  	
@@ -891,7 +901,7 @@ label.sign-form_title {
 			<div id="navlist" class="modal-content">
 
 				<div class="modal-header navheader">
-					<div class="navproimage"><img s src="images/myinfo/basic.png"></div>
+					<div class="navproimage"><img src="images/myinfo/basic.png"></div>
 					<div class="profileinfo">
 						<p class="nickname"><c:out value="${sessionScope.account.nickname}"/></p>
 						<p class="username"><c:out value="${sessionScope.account.id}"/></p>

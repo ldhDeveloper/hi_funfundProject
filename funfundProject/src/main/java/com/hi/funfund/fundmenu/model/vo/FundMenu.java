@@ -12,7 +12,6 @@ public class FundMenu implements Serializable {
 	private Integer mcost;
 	private int pro_no;
 	private String mcontent;
-	private Integer addcost;
 	@DateTimeFormat(pattern = "yy/MM/dd")
 	private Date mdate;
 	private Integer mnum;
@@ -22,7 +21,7 @@ public class FundMenu implements Serializable {
 	public FundMenu() {
 	}
 
-	public FundMenu(int mno, String mname, Integer mcost, int pro_no, String mcontent, Integer addcost, Date mdate,
+	public FundMenu(int mno, String mname, Integer mcost, int pro_no, String mcontent, Date mdate,
 			Integer mnum, Integer mcount, String delyn) {
 		super();
 		this.mno = mno;
@@ -30,7 +29,6 @@ public class FundMenu implements Serializable {
 		this.mcost = mcost;
 		this.pro_no = pro_no;
 		this.mcontent = mcontent;
-		this.addcost = addcost;
 		this.mdate = mdate;
 		this.mnum = mnum;
 		this.mcount = mcount;
@@ -57,9 +55,6 @@ public class FundMenu implements Serializable {
 		return mname;
 	}
 
-	public Integer getAddcost() {
-		return addcost;
-	}
 
 	public Date getMdate() {
 		return mdate;
@@ -97,9 +92,6 @@ public class FundMenu implements Serializable {
 		this.mcontent = mcontent;
 	}
 
-	public void setAddcost(Integer addcost) {
-		this.addcost = addcost;
-	}
 
 	public void setMdate(Date mdate) {
 		this.mdate = mdate;
@@ -123,7 +115,7 @@ public class FundMenu implements Serializable {
 	@Override
 	public String toString() {
 		return "FundMenu [mno=" + mno + ", mname=" + mname + ", mcost=" + mcost + ", pro_no=" + pro_no + ", mcontent="
-				+ mcontent + ", addcost=" + addcost + ", mdate=" + mdate + ", mnum=" + mnum + ", mcount=" + mcount
+				+ mcontent +  ", mdate=" + mdate + ", mnum=" + mnum + ", mcount=" + mcount
 				+ ", delyn=" + delyn + "]";
 	}
 

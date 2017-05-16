@@ -3,6 +3,7 @@ package com.hi.funfund.fundmenu.model.service;
 import java.util.List;
 
 import com.hi.funfund.fundmenu.model.vo.FundMenu;
+import com.hi.funfund.fundmenu.model.vo.ReciveFundMenu;
 
 public interface FundMenuService {
 
@@ -13,5 +14,7 @@ public interface FundMenuService {
 	int update(FundMenu fm);
 
 	int delete(int pro_no);
+
+	int insertOrUpdateFundMenu(FundMenu fmenu);
 
 }

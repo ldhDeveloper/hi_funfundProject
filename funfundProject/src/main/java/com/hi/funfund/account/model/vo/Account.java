@@ -17,7 +17,6 @@ public class Account implements Serializable {
 	
 	
 	
-	
 	public String getOutyn() {
 		return outyn;
 	}
@@ -82,7 +81,7 @@ public class Account implements Serializable {
 		super();
 	}
 	public Account(int ano, String id, String pwd, String email, String pimage, String idtype, String idtoken,
-			String seller, String outyn, String nickname) {
+			String seller, String outyn, String nickname, String refname) {
 		super();
 		this.ano = ano;
 		this.id = id;

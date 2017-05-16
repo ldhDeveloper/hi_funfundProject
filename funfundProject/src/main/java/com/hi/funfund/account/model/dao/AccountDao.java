@@ -1,5 +1,7 @@
 package com.hi.funfund.account.model.dao;
 
+import java.util.*;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -32,12 +34,20 @@ public class AccountDao {
 	}
 
 	public Account selectOldPwd(int ano, String oldPwd) {
-		Account account = (Account) sqlSession.selectOne("selectOldPwd", ano);
+		HashMap<String, String> hmap = new HashMap<String, String>();
+		hmap.put("ano", Integer.toString(ano));
+		hmap.put("oldPwd", oldPwd);
+		Account account = (Account) sqlSession.selectOne("selectOldPwd", hmap);
+		System.out.println("Dao ano : " + ano + " oldPwd : " + oldPwd + " account : " + account);
 		return account;
 	}
 
 	public int updatePwd(int ano, String newPwd) {
-		int result = sqlSession.insert("updatePwd", ano);
+		HashMap<String, String> hmap = new HashMap<String, String>();
+		hmap.put("ano",  Integer.toString(ano));
+		hmap.put("newPwd", newPwd);
+		int result = sqlSession.update("updatePwd", hmap);
+		System.out.println("Dao ano : " + ano + " newPwd : " + newPwd + " result : " + result);
 		return result;
 	}
 }
