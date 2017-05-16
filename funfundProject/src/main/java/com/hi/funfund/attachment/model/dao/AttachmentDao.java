@@ -27,8 +27,16 @@ public class AttachmentDao {
 		return null;
 	}	
 	
-	public int insertImgMyProfile(Attachment attachment) {
+	/*public int insertImgMyProfile(Attachment attachment) {
 		int result = sqlSession.insert("myprofileImg", attachment);
+		return result;
+	}*/
+	public int insertProfileImage(Attachment vo) {
+		int result = sqlSession.insert("insertprofileImage", vo);
+		return result;
+	}
+	public int updateProfileImage(Attachment vo) {
+		int result = sqlSession.update("updateprofileImage", vo);
 		return result;
 	}
 
