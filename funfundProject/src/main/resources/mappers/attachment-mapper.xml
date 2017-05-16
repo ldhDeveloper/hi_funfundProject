@@ -9,13 +9,13 @@
 			VALUES(seq_fno.nextval, #{orifname}, #{refname}, '회원정보이미지', #{ano})
 		]]>
 	</insert> -->
-	<insert id="" parameterType="attachment">
+	<insert id="insertprofileImage" parameterType="attachment">
 		<![CDATA[
 			INSERT INTO ATTACHMENT (fno, orifname, refname, ftype, refno)
 			VALUES(seq_fno.nextval, #{orifname}, #{refname}, #{ftype}, #{ano})
 		]]>
 	</insert>
-	<update id="" parameterType="attachment">
+	<update id="updateprofileImage" parameterType="attachment">
 		<![CDATA[
 			UPDATE ATTACHMENT SET orifname=#{orifname}, refname=#{refname} 
 			WHERE ftype=#{ftype} AND refno=#{ano}
