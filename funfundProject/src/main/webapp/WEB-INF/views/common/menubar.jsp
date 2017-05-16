@@ -9,6 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="google-signin-client_id" content="659736995246-ddl5nvftj5f76j3gk122g03t00n18pl7.apps.googleusercontent.com">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -20,10 +21,11 @@
 	href="/funfund/lib/font-awesome/font-awesome/css/font-awesome.css">
 <script type="text/javascript" src="/funfund/lib/js/jquery-3.2.1.min.js"></script>
 <script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
-<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script> <!-- 카카오  -->
+<script src="https://apis.google.com/js/platform.js" async defer></script> <!-- 구글 -->
 <script type="text/javascript">
 	$(function(){
 		$("#login_form").submit(function(){
@@ -51,6 +53,16 @@
 </script>
 
 <script type='text/javascript'>
+//api 사용 회원 로그인 가입에 사용하는 공용 함수
+function loginApi(id){
+	
+	location.href =  "loginApi.ao?id"+id;
+
+}
+function insertApi(id, name, token){
+location.href =  "apiSignup.ao?id" +id + "&idtoken"+ idtoken; 
+	
+}
 //카카오톡 회원 로그인 
 Kakao.init('c04a7d5e62e926cf85109fde19aa531a');
     // 카카오 로그인 버튼을 생성합니다.
@@ -58,26 +70,21 @@ Kakao.init('c04a7d5e62e926cf85109fde19aa531a');
 	  Kakao.Auth.login({
     		success: function(res){
     			alert(JSON.stringify(res));
-    			var access_token = res.access_token;
+    			var idtoken = res.access_token;
     			
     			Kakao.API.request({
     		          url: '/v1/user/me',
     		          success: function(res) {
     		            alert(JSON.stringify(res));
-    		        	 var email =  res.kaccount_email;
+    		        	 var id =  res.kaccount_email;
     		             var nickname = res.properties.nickname;
-    		             console.log(email);
     		             console.log(nickname);
-    		            //회원가입 함수작성
-    		            
-    		             
+    		           apiLogin(id, token);    
     		          },
     		          fail: function(error) {
     		            alert(JSON.stringify(error));
     		          }
-    		        });
-
-    			
+    		        });    			
     		},
     		fail : function(err){
     			alert(JSON.stringify(err));
@@ -85,8 +92,10 @@ Kakao.init('c04a7d5e62e926cf85109fde19aa531a');
     	});
     };
   //]]>
+  
+   
 </script>
-
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 <style>
 .middle-menubar {
 	width: 100%;
@@ -723,6 +732,7 @@ label.sign-form_title {
                 <a href="#" class="signin-social p-login_btn login-social-facebook" data-sns="facebook" alt="페이스북으로 로그인" >페이스북으로 로그인</a>
            		<a href="javascript:loginWithKakao()" id="cSignInBt" class="signin-social p-login_btn login-social-kakao"  data-sns="kakao"  alt="카카오로 로그인" >카카오로 로그인</a>
            		<a href="#" id="gSignInBt" class="signin-social p-login_btn login-social-google"  data-sns="google"  alt="구글로 로그인" >구글로 로그인</a>
+           		<div class="g-signin2" data-onsuccess="onSignIn"></div>
            		<a href="#" id="nSignInBt" class="signin-social p-login_btn login-social-naver"  data-sns="naver"  alt="네이버로 로그인" >네이버 로그인</a>
               </fieldset>
 
@@ -770,7 +780,7 @@ label.sign-form_title {
                 <legend class="login-title-txt">소셜 회원가입</legend>
                 <a href="#" class="signup-social p-login_btn login-social-facebook" data-sns="facebook" alt="페이스북으로 회원가입" >페이스북으로 회원가입</a>
             	<a href="javascript:loginWithKakao()" id="custom-login-btn" class="signup-social p-login_btn login-social-kakao" alt="카카오로 회원가입" >카카오로 회원가입</a>
-            	<a href="#" id="gSignUpBt" class="signup-social p-login_btn login-social-google" data-sns="google" alt="구글로 회원가입" >구글로 회원가입</a>
+            	<a href="javascript:signupwithGoogle()" id="gSignUpBt" class="signup-social p-login_btn login-social-google" data-sns="google" alt="구글로 회원가입" >구글로 회원가입</a>
            		<a href="#" id="nSignUpBt" class="signin-social p-login_btn login-social-naver"  data-sns="naver"  alt="네이버로 로그인" >네이버 회원가입</a>
               </fieldset>
             </form>
