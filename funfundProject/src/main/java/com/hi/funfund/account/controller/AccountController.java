@@ -101,14 +101,24 @@ public class AccountController {
 	// myinfo 비밀번호 변경 시작
 	
 	@RequestMapping(value = "changePwd.ao")
-	public ModelAndView changePwd(ModelAndView model, HttpSession session, HttpServletRequest request) {
-		int ano = Integer.parseInt(request.getParameter("ano"));
+	public ModelAndView insertRewardItem(ModelAndView model, HttpSession session, HttpServletRequest request) {
+		System.out.println("오니?");
+		/*int ano = Integer.parseInt(request.getParameter("ano"));*/
+		session = request.getSession(false);
+		Account account = (Account)session.getAttribute("account");
+		int ano = account.getAno();
 		String oldPwd = request.getParameter("oldPwd");
 		String newPwd = request.getParameter("newPwd");
 		
-		Account account = accountService.selectOldPwd(ano, oldPwd);
+		System.out.println("ano : " + ano + " oldPwd : " + oldPwd + " newPwd : " + newPwd);
+		
+		account = accountService.selectOldPwd(ano, oldPwd);
+		
+		System.out.println("Controller ano : " + ano + " oldPwd : " + oldPwd);
 		
 		int result = accountService.updatePwd(ano, newPwd);
+		
+		System.out.println("Controller ano : " + ano + " newPwd : " + newPwd);
 		
 		model.addObject("account", account);
 		model.setViewName("myinfo/myinfo");		

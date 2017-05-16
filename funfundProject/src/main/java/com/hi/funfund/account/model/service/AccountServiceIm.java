@@ -107,11 +107,13 @@ public class AccountServiceIm implements AccountService {
 
 	@Override
 	public Account selectOldPwd(int ano, String oldPwd) {
+		System.out.println("Service ano : " + ano + " oldPwd : " + oldPwd);
 		return accountDao.selectOldPwd(ano, oldPwd);
 	}
 
 	@Override
 	public int updatePwd(int ano, String newPwd) {
+		System.out.println("Service ano : " + ano + " newPwd : " + newPwd);
 		return accountDao.updatePwd(ano, newPwd);
 	}
 
