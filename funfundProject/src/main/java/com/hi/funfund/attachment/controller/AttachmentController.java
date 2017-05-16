@@ -26,6 +26,44 @@ public class AttachmentController {
 	@Autowired
 	private AttachmentService attachmentService;
 
+	@RequestMapping("/imgUpload.at")
+	public String imgUpload(Attachment vo, HttpServletRequest request) throws IllegalStateException, IOException{
+		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest)request;
+		MultipartFile uploadFile = multipartRequest.getFile("uploadFile");
+		HttpSession session = request.getSession(false);
+		String page="";
+		String photoflag = request.getParameter("photoflag");
+		String root = request.getSession().getServletContext().getRealPath("/");
+		String savePath = root + "uploadFile/image/profileimage";
+		int result=0;
+		if(!uploadFile.isEmpty()){
+			String ofileName = uploadFile.getOriginalFilename();
+			
+			long currentTime = System.currentTimeMillis();  
+		    SimpleDateFormat simDf = new SimpleDateFormat("yyyyMMddHHmmss");
+			String rfileName = simDf.format(new Date(currentTime)) +"."
+					+ ofileName.substring(ofileName.lastIndexOf(".")+1);;
+			uploadFile.transferTo(new File(savePath + rfileName));
+			Account ac = (Account)session.getAttribute("account");
+			vo.setOrifname(ofileName);
+			vo.setRefname(rfileName);
+			vo.setFtype("프로필이미지");
+			vo.setRefno(ac.getAno());
+		}	
+		if(photoflag.equals("insert")){
+			result = attachmentService.insertProfileImage(vo);
+		}
+		if(photoflag.equals("update")){
+			result = attachmentService.updateProfileImage(vo);
+		}
+		if(result > 0){
+			page="home";
+		}
+		return page;
+	}
+	
+	
+	
 	public String insert(Attachment attachment) {
 
 		int result = attachmentService.insert(attachment);
@@ -53,7 +91,7 @@ public class AttachmentController {
 
 	// myinfo 사진업로드 시작
 
-	@RequestMapping(value = "/imgUpload.at")
+	/*@RequestMapping(value = "/imgUpload.at")
 	public String insertImgMyProfile(Attachment attachment, HttpServletRequest request) throws IOException{
 		//파일 업로드 처리
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest)request;
@@ -89,5 +127,5 @@ public class AttachmentController {
 	}
 
 	// myinfo 사진업로드 끝
-
+*/
 }

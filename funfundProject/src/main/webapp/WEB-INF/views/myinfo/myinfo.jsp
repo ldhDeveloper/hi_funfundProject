@@ -230,14 +230,34 @@ function fileUpload(){
 				<div class="minfo">
 					<div class="row">
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-							<form action="imgUpload.at" method="post" enctype="multipart/form-data">
-							<input type="file" name="uploadFile" style="display:none;">
-							<!-- <img class="img-circle img-responsive" src="images/myinfo/basic.png" style="max-width:170px;max-height:170px; width:170px; heigh:150px; cursor:pointer" onclick="document.all.uploadFile.click();"> -->
-							<img class="img-circle img-responsive" src="images/myinfo/basic.png" style="max-width:170px;max-height:170px; width:170px; heigh:150px; cursor:pointer" onclick="uploadFile();">
+							<form id="imageform" action="imgUpload.at" method="post" enctype="multipart/form-data">
+							<c:if test="${ empty sessionScope.party.pname}">
+								<input type="hidden" name="photoflag" value="insert">
+							</c:if>
+							<c:if test="${ !empty sessionScope.party.pname}">
+								<input type="hidden" name="photoflag" value="update">
+							</c:if>
+							<input id="profileimagefile" type="file" name="uploadFile" style="display:none;" onchange="LoadImg(this);">
+							<img id="profileimage" class="img-circle img-responsive" src="images/myinfo/basic.png" style="max-width:170px;max-height:170px; width:170px; heigh:150px; cursor:pointer" onclick="document.all.uploadFile.click();">
+							<!-- <img class="img-circle img-responsive" src="images/myinfo/basic.png" style="max-width:170px;max-height:170px; width:170px; heigh:150px; cursor:pointer" onclick="uploadFile();"> -->
 							</form>
 						</div>
-						
+						<script>
+						function LoadImg(value){
+						 	if(value.files && value.files[0]){
+						 		var reader = new FileReader();
+						 		reader.onload = function (e){
+						 			$("#profileimage").attr("src", e.target.result);
+						 		}
+						 		reader.readAsDataURL(value.files[0]);
+						 	}
+						}
+						function photosubmit(){
+							$("#imageform").submit();
+						}
+						</script>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow mname" align="center">
+							<div>
 							회원명 | <c:if test="${ empty sessionScope.party.pname}">
 		                 				<input type="text" name="pname" class="mnameText" placeholder="이름" value="${ sessionScope.account.nickname }" readonly/>
 		                 			</c:if>
@@ -245,8 +265,17 @@ function fileUpload(){
 		                 			<c:if test="${ !empty sessionScope.party.pname}">
 		                 				<input type="text" name="pname" class="mnameText" placeholder="이름" value="${ sessionScope.party.pname }" readonly/>
 		                 			</c:if>
+		       
+							</div>
+							<div style="margin-top:20px;">
+		                 		<c:if test="${empty sessionScope.attachment }">
+		                 			<button id="insertphoto" class="btn btn-info" onclick="photosubmit();">사진추가하기</button>
+		                 		</c:if>
+		                 		<c:if test="${!empty sessionScope.attachment }">
+		                 			<button id="updatephoto" class="btn btn-info" onclick="photosubmit();">사진변경하기</button>
+		                 		</c:if>
+		                 	</div>
 						</div>
-						
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">개인 일반 회원 <!-- 회원 등급이 들어갈 곳  --></label></div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input type="button" class="mbtn1" value="투자 회원 신청" onclick='location.href="investRequest.ao"'></div>
 					</div>

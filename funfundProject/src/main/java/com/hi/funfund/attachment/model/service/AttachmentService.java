@@ -13,5 +13,9 @@ public interface AttachmentService {
 
 	List<Attachment> selectList(int ref_no);
 	
-	int insertImgMyProfile(Attachment attachment);
+	//int insertImgMyProfile(Attachment attachment);
+
+	int insertProfileImage(Attachment vo);
+
+	int updateProfileImage(Attachment vo);
 }

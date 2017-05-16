@@ -34,7 +34,7 @@ public List<Attachment> selectList(int ref_no) {
 	return attachmentDao.selectList(ref_no);
 }
 
-@Override
+/*@Override
 public int insertImgMyProfile(Attachment attachment) {
 	
 	int result = 0;
@@ -42,6 +42,29 @@ public int insertImgMyProfile(Attachment attachment) {
 	result = attachmentDao.insertImgMyProfile(attachment);
 	
 	return result;
+}
+*/
+@Override
+public int insertProfileImage(Attachment vo) {
+	
+	int result = 0;
+	
+	result = attachmentDao.insertProfileImage(vo);
+	
+	return result;
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public int updateProfileImage(Attachment vo) {
+	
+	int result = 0;
+	
+	result = attachmentDao.updateProfileImage(vo);
+	return result;
+	// TODO Auto-generated method stub
+	
 }
 
 
