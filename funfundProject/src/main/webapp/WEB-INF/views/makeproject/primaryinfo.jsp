@@ -24,7 +24,8 @@
 	rel="stylesheet" type="text/css" />
 <link href="/funfund/lib/froala_editor_2.5.1/css/themes/royal.min.css"
 	rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <!-- Include external JS libs. -->
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
@@ -65,94 +66,95 @@ li {
 	padding: 20px;
 	margin-left: auto;
 }
-#primary-info2,#primary-info3,#primary-info4,#primary-info5,#saveall{
-	display:none;
-}
 
+#primary-info2, #primary-info3, #primary-info4, #primary-info5, #saveall
+	{
+	display: none;
+}
 </style>
+
+
+
 <title>Insert title here</title>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/menubar.jsp" />
 
 	<script>
-	$(function() {
-		
-		$('li[id^=info]').click(function(){
-			
-			$('li[id^=info]').removeClass("active-active")
-			
-			$(this).addClass("active-active");
-			$('div[id^=primary-info]').hide();
-			$('#nextorsave').hide();
-			$('#saveall').hide();
-			
-			var id = $(this).attr('id');
-			var num = id.substr(id.length-1,1);
-			
-			var str = "#primary-info" + num;
-			
-			$('#nextorsave').val(num);
-			
-			$(str).show();
-			
-			if(num == 5){
-				$('#saveall').show();
-			}else{
-				$('#nextorsave').show();
-			}
+		$(function() {
+
+			$('li[id^=info]').click(function() {
+
+				$('li[id^=info]').removeClass("active-active")
+
+				$(this).addClass("active-active");
+				$('div[id^=primary-info]').hide();
+				$('#nextorsave').hide();
+				$('#saveall').hide();
+
+				var id = $(this).attr('id');
+				var num = id.substr(id.length - 1, 1);
+
+				var str = "#primary-info" + num;
+
+				$('#nextorsave').val(num);
+
+				$(str).show();
+
+				if (num == 5) {
+					$('#saveall').show();
+				} else {
+					$('#nextorsave').show();
+				}
+			});
+
+			$('#nextorsave').click(function() {
+
+				var page = Number($(this).val()) + 1;
+				var str = "#primary-info" + page;
+				var str2 = "#info" + page;
+				console.log(page);
+
+				$('#nextorsave').val(page);
+
+				$('li[id^=info]').removeClass("active-active")
+				$(str2).addClass("active-active");
+				$('div[id^=primary-info]').hide();
+
+				$('#nextorsave').hide();
+				$('#saveall').hide();
+
+				$(str).show();
+
+				if (page == 5) {
+					$('#saveall').show();
+				} else {
+					$('#nextorsave').show();
+				}
+			});
+
 		});
-		
-		$('#nextorsave').click(function(){
-			
-			var page = Number($(this).val()) + 1;
-			var str ="#primary-info" + page;
-			var str2 = "#info" + page;
-			console.log(page);
-			
-			$('#nextorsave').val(page);
-			
-			$('li[id^=info]').removeClass("active-active")
-			$(str2).addClass("active-active");
-			$('div[id^=primary-info]').hide();
-			
-			$('#nextorsave').hide();
-			$('#saveall').hide();
-			
-			$(str).show();
-			
-			if(page == 5){
-				$('#saveall').show();
-			}else{
-				$('#nextorsave').show();
-			}
-		});
-		
-	}); 
-	
-		
-	
 	</script>
+	
 
 	<br>
 	<div class="middle-submenu">
 		<ul class="nav nav-pills middle-submenu"
 			style="width: 900px; align: center;">
 			<li id="info1" class="active-active"><a href="#">기본정보</a></li>
-			<li id="info2" ><a href="#">리워드</a></li>
-			<li id="info3" ><a href="#">스토리</a></li>
-			<li id="info4" ><a href="#">메이커정보</a></li>
-			<li id="info5" ><a href="#">정산</a></li>
+			<li id="info2"><a href="#">리워드</a></li>
+			<li id="info3"><a href="#">스토리</a></li>
+			<li id="info4"><a href="#">메이커정보</a></li>
+			<li id="info5"><a href="#">정산</a></li>
 			<li id="showpage" style="margin-left: 20px;"><a href="#">미리보기</a></li>
-			<li id="sendadmin" style="margin-left: 20px;"><a href="#">검토 요청하기</a></li>
+			<li id="sendadmin" style="margin-left: 20px;"><a href="#">검토
+					요청하기</a></li>
 		</ul>
 	</div>
-	<form id="frm" action="update.it?pro_no=${ pro_no }" method="post">
-		
+	<form id="frm" action="update.it?pro_no=${ pro_no }" method="post" enctype='application/json'>
+
 		<%-- <input type="hidden" value="${ param.pro_no }"> --%>
-		<script type="text/javascript">
-			console.log(${param.pro_no});
-		</script>
+
 		<!-- 기본정보 입력 화면 -->
 		<div id="primary-info1" class="input-form">
 			<table>
@@ -163,7 +165,7 @@ li {
 					</td>
 					<td style="width: 500px;">
 						<div
-							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px;padding:10px;">
+							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px; padding: 10px;">
 							${ sessionScope.account.id }</div>
 					</td>
 					<td style="width: 200px;"></td>
@@ -172,7 +174,7 @@ li {
 
 					<td>
 						<div
-							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px;padding:10px;">
+							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px; padding: 10px;">
 							010-7660-7771</div>
 					</td>
 					<td></td>
@@ -188,7 +190,7 @@ li {
 					</td>
 					<td>
 						<div
-							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px;padding:10px;">
+							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px; padding: 10px;">
 							<input type="text" name="pname">
 						</div>
 					</td>
@@ -205,7 +207,7 @@ li {
 					</td>
 					<td>
 						<div
-							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px;padding:10px;">
+							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px; padding: 10px;">
 							<input type="text" name="ecost">&nbsp; 원
 						</div>
 					</td>
@@ -222,7 +224,7 @@ li {
 					</td>
 					<td rowspan="10">
 						<div
-							style="width: 450px; border: 1px solid #ddd; height: 350px; background: #f8f8f8; margin-left: 10px;padding:10px;">
+							style="width: 450px; border: 1px solid #ddd; height: 350px; background: #f8f8f8; margin-left: 10px; padding: 10px;">
 
 						</div>
 					</td>
@@ -269,14 +271,14 @@ li {
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
 				</tr>
-				
+
 				<tr>
 					<td style="width: 200px; font-size: 0.7em">카테고리<br>카테고리에
 						따른 분류를 선택해주세요.
 					</td>
 					<td>
 						<div
-							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px;padding:10px;">
+							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px; padding: 10px;">
 							<select name="category">
 								<option value="">선택하세요</option>
 								<option value="287">테크</option>
@@ -301,14 +303,14 @@ li {
 					<td>&nbsp;</td>
 				</tr>
 				<tr>
-					<td style="width: 200px; font-size: 0.7em">
-						프로젝트 시작일<br>프로젝트
+					<td style="width: 200px; font-size: 0.7em">프로젝트 시작일<br>프로젝트
 						시작일을 입력해주세요. 평균 모금기간은 약 45일입니다.<br>오픈 후 수정 불가하니 신중하게 선택해주세요.
 					</td>
 					<td>
 						<div
-							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px;padding:10px;">
-							<input type="text" id="datepicker1" style="padding-left: 15px" name="psdate">
+							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px; padding: 10px;">
+							<input type="text" id="datepicker1" style="padding-left: 15px"
+								name="psdate">
 						</div>
 					</td>
 					<td></td>
@@ -324,28 +326,32 @@ li {
 					</td>
 					<td>
 						<div
-							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px;padding:10px;">
-							<input type="text" id="datepicker2" style="padding-left: 15px" name="pedate">
+							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px; padding: 10px;">
+							<input type="text" id="datepicker2" style="padding-left: 15px"
+								name="pedate">
 							<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
- 							<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+							<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 							<script>
- 								 $( function() {
- 									$( "#datepicker1" ).datepicker({
-   										showOn: "button",
-   								      	buttonImage: "images/makeproject/calendar2.png",
-   								      	buttonImageOnly: true,
-   								     	buttonText: "Select date"
- 									});
-   									 $( "#datepicker2" ).datepicker({
-   										showOn: "button",
-   								      	buttonImage: "images/makeproject/calendar2.png",
-   								      	buttonImageOnly: true,
-   								     	buttonText: "Select date"
+								$(function() {
+									$("#datepicker1")
+											.datepicker(
+													{
+														showOn : "button",
+														buttonImage : "images/makeproject/calendar2.png",
+														buttonImageOnly : true,
+														buttonText : "Select date"
+													});
+									$("#datepicker2")
+											.datepicker(
+													{
+														showOn : "button",
+														buttonImage : "images/makeproject/calendar2.png",
+														buttonImageOnly : true,
+														buttonText : "Select date"
 
-
-   									 });
- 								 });
- 							</script>
+													});
+								});
+							</script>
 						</div>
 					</td>
 					<td></td>
@@ -358,10 +364,10 @@ li {
 			</table>
 
 		</div>
-		
+
 		<!-- 리워드 입력화면 -->
 		<div id="primary-info2" class="input-form">
-			<table style="width: 900px;">
+			<table id="addTable" style="width: 900px;">
 				<tr>
 					<td style="width: 700px;">
 						<div id="reward"
@@ -370,7 +376,8 @@ li {
 								<tr>
 									<td style="width: 150px;">리워드#1</td>
 									<td style="width: 100px;">금액</td>
-									<td style="width: 150px;"><input type="text" size="15" name="mcost"></td>
+									<td style="width: 150px;"><input type="text" size="15"
+										name="mcost"></td>
 									<td style="width: 50px;">원</td>
 									<td style="width: 20px;">&nbsp;</td>
 									<td style="width: 120px;">정렬순서</td>
@@ -385,13 +392,14 @@ li {
 									<td>&nbsp;</td>
 									<td>상세설명</td>
 									<td colspan="5"><textarea cols="44" rows="5"
-											style="overflow: auto; width: 100%; resize: none" name="mcontent"></textarea></td>
+											style="overflow: auto; width: 100%; resize: none"
+											name="mcontent"></textarea></td>
 								</tr>
 								<tr>
 									<td>&nbsp;</td>
 									<td>배송조건</td>
-									<td><input type="checkbox" name="delyn"><font size="0.8em">
-											배송받을 주소가 필요합니다.</font></td>
+									<td><input type="checkbox" name="delyn"><font
+										size="0.8em"> 배송받을 주소가 필요합니다.</font></td>
 									<td colspan="2">&nbsp;</td>
 									<td>배송료</td>
 									<td><input type="text" size="5" name="dcost"></td>
@@ -400,27 +408,25 @@ li {
 									<td>&nbsp;</td>
 									<td>제한수량</td>
 									<td><input type="text" size="3" name="mcount"></td>
-									<td colspan="2">&nbsp;</td>
-									<td>배송일</td>
-									<td>
-										<input type="text" id="datepicker3" style="padding-left: 15px" name="mdate">
-										<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
- 										<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
- 										<script>
- 											 $( function() {
- 												$( "#datepicker3" ).datepicker({
-   													showOn: "button",
-   								      				buttonImage: "images/makeproject/calendar2.png",
-   								      				buttonImageOnly: true,
-   								     				buttonText: "Select date"
- 												});
- 								 			});
- 										</script>
-									</td>
+									<td colspan="2">배송일</td>
+									<td colspan="2"><input type="text" class="datepicker3"
+										style="padding-left: 15px" name="mdate" size="13"> <script
+											src="https://code.jquery.com/jquery-1.12.4.js"></script> <script
+											src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+										<script>
+											/* $( function() {
+											$( "#datepicker3" ).datepicker({
+													showOn: "button",
+													buttonImage: "images/makeproject/calendar2.png",
+													buttonImageOnly: true,
+													buttonText: "Select date"
+											});
+											}); */
+										</script></td>
 								</tr>
 							</table>
 							<div align="center">
-								<button class="btn btn-warning">추가하기</button>
+								<button class="btn btn-warning">삭제하기</button>
 							</div>
 						</div>
 					</td>
@@ -428,7 +434,29 @@ li {
 				</tr>
 
 			</table>
-
+			<br>
+			<br>
+			<div align="center">
+				<button class="btn btn-warning" id="addReward">추가하기</button>
+			</div>
+			<script>
+				$(function() {
+					$("#addReward").click(
+							function() {
+								$("#primary-info2").html(
+										$("#primary-info2").html() + "<br>"
+												+ $("#addTable").html());
+							});
+				});
+				$(function() {
+					$(".datepicker3").datepicker({
+						showOn : "button",
+						buttonImage : "images/makeproject/calendar2.png",
+						buttonImageOnly : true,
+						buttonText : "Select date"
+					});
+				});
+			</script>
 		</div>
 
 		<!-- 스토리 내용 입력 화면 -->
@@ -510,26 +538,44 @@ li {
 					<td>&nbsp;</td>
 				</tr>
 				<tr>
-					<td colspan="3">
-						<textarea id="froala-editor" style="width: 860px; max-height: 700px;" name="pcontent">
+					<td colspan="3"><textarea id="froala-editor"
+							style="width: 860px; max-height: 700px;" name="pcontent">
 						
-						</textarea>
-						<!-- Include Editor JS files. -->
-						<script type="text/javascript"
-						src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1//js/froala_editor.pkgd.min.js"></script>
+						</textarea> <!-- Include Editor JS files. --> <script type="text/javascript"
+							src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1//js/froala_editor.pkgd.min.js"></script>
 						<script>
 							$(function() {
-								$('#froala-editor').froalaEditor({
-									theme: 'royal',
-		     						zIndex: 2002,
-		      						heightMin: 500,
-		      						heightMax: 500,
-			  						toolbarBottom: false,
-			  						toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', '|', 'color', 'emoticons', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', '-', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable', '|', 'quote', 'insertHR', 'undo', 'redo', 'clearFormatting', 'selectAll', 'html' ]
-								}) ;
+								$('#froala-editor').froalaEditor(
+										{
+											theme : 'royal',
+											zIndex : 2002,
+											heightMin : 500,
+											heightMax : 500,
+											toolbarBottom : false,
+											toolbarButtons : [ 'fullscreen',
+													'bold', 'italic',
+													'underline',
+													'strikeThrough',
+													'subscript', 'superscript',
+													'fontFamily', 'fontSize',
+													'|', 'color', 'emoticons',
+													'inlineStyle',
+													'paragraphStyle', '|',
+													'paragraphFormat', 'align',
+													'formatOL', 'formatUL',
+													'outdent', 'indent', '-',
+													'insertLink',
+													'insertImage',
+													'insertVideo',
+													'insertFile',
+													'insertTable', '|',
+													'quote', 'insertHR',
+													'undo', 'redo',
+													'clearFormatting',
+													'selectAll', 'html' ]
+										});
 							});
-						</script>
-					</td>
+						</script></td>
 				</tr>
 				<tr>
 					<td>&nbsp;</td>
@@ -555,7 +601,8 @@ li {
 						<div
 							style="width: 650px; height: 340px; padding: 15px; border: 1px solid #ddd; background: #f8f8f8;">
 							<textarea
-								style="overflow: auto; width: 100%; height: 310px; resize: none; width; font-size: 0.7em;" name="refund">
+								style="overflow: auto; width: 100%; height: 310px; resize: none; width; font-size: 0.7em;"
+								name="refund">
 §업체명/메이커명§은 펀딩해주신 서포터분들께 감사의 표시인 리워드 제공 일정을 준수하기 위해 최선을 다할 것을 약속합니다.
 단, 펀딩을 받아야만 생산을 시작할 수 있는 크라우드펀딩 특성 및 생산과정에서의 예상치못한 상황으로 인하여 리워드 제공일이 다소 지연될 수 있는 점을 알려 드립니다.
 
@@ -585,8 +632,7 @@ li {
 		<div id="primary-info4" class="input-form">
 			<p style="font-size: 0.7em;">* 아래에 입력한 모든 정보는 프로젝트 페이지에 노출되는
 				정보이니, 서포터와의 소통과 응대가 가능한 정확한 정보를 입력해주세요.</p>
-			<br>
-			<br>
+			<br> <br>
 			<table style="width: 900px;">
 				<tr>
 					<td style="width: 200px; font-size: 0.7em;">프로젝트 메이커 이름(법인명)</td>
@@ -610,8 +656,7 @@ li {
 					<td>
 						<div
 							style="border: 1px solid #ddd; background: #f8f8f8; padding: 10px; margin-left: 10px; width: 440px; height: 100px;">
-							<input type="file" size="43" value="클릭하세요"><br>
-							<br>
+							<input type="file" size="43" value="클릭하세요"><br> <br>
 							<div align="center" style="font-size: 0.7em;">3MB 이하의 사진만
 								사용할 수 있습니다.</div>
 						</div>
@@ -664,8 +709,7 @@ li {
 					<td style="width: 500px;">
 						<div
 							style="border: 1px solid #ddd; background: #f8f8f8; padding: 10px; margin-left: 10px; width: 440px; height: 50px;">
-							은행명 &nbsp;
-							<select name="bankcode">
+							은행명 &nbsp; <select name="bankcode">
 								<option value=''>선택하세요
 								<option value='003'>기업은행
 								<option value='004'>국민은행
@@ -705,10 +749,8 @@ li {
 								<option value='287'>메리츠증권
 								<option value='291'>신영증권
 								<option value='238'>대우증권
-							</select>
-							 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-							예금주 &nbsp;
-							<input type="text" size="10" name="accpnm">
+							</select> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 예금주 &nbsp; <input type="text"
+								size="10" name="accpnm">
 						</div>
 					</td>
 					<td style="width: 200px;">&nbsp;</td>
@@ -719,13 +761,13 @@ li {
 					<td>&nbsp;</td>
 				</tr>
 				<tr>
-					<td style="font-size: 0.7em;">
-						계좌번호
-					</td>
+					<td style="font-size: 0.7em;">계좌번호</td>
 					<td>
 						<div
 							style="border: 1px solid #ddd; background: #f8f8f8; padding: 10px; margin-left: 10px; width: 440px; height: 50px;">
-							계좌번호 &nbsp;<input type="text" size="25" placeholder="'-'를 제외하고 입력하세요." name="accnum"> &nbsp; <button class="btn btn-primary btn-xs">확인하기</button>
+							계좌번호 &nbsp;<input type="text" size="25"
+								placeholder="'-'를 제외하고 입력하세요." name="accnum"> &nbsp;
+							<button class="btn btn-primary btn-xs">확인하기</button>
 						</div>
 					</td>
 					<td>&nbsp;</td>
@@ -742,10 +784,20 @@ li {
 	<br>
 	<br>
 	<div align="center">
-		<button class="btn btn-warning" onclick="document.getElementById('frm').submit();">임시저장하기</button>
+		<button class="btn btn-warning" onclick="tempsave();">임시저장하기</button>
+		<script>
+		
+			function tempsave() {
+				
+				
+				document.getElementById('frm').submit();
+			}
+		
+		</script>
 		&nbsp; &nbsp;
 		<button id="nextorsave" class="btn btn-warning" value="1">다음단계로</button>
-		<button id="saveall" class="btn btn-warning" onclick="document.getElementById('frm').submit();">저장하기</button>
+		<button id="saveall" class="btn btn-warning"
+			onclick="document.getElementById('frm').submit();">저장하기</button>
 	</div>
 
 
