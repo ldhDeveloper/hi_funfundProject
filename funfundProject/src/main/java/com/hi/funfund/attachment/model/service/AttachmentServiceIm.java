@@ -1,5 +1,6 @@
 package com.hi.funfund.attachment.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,14 @@ public int updateProfileImage(Attachment vo) {
 	return result;
 	// TODO Auto-generated method stub
 	
+}
+
+@Override
+public int accountProfileImage(HashMap<String, String> hmap) {
+	int result = 0;
+	
+	result = attachmentDao.accountProfileImage(hmap);
+	return result;
 }
 
 

@@ -35,7 +35,7 @@
 				ACCOUNT
 			WHERE
 				ID = #{id}	 AND PWD = ENCRYPTION_AES.ENC_AES(#{pwd})
-		]]>
+		]]> 
 	</select>
 	<insert id="signupAccount" parameterType="account">
 		<![CDATA[
@@ -62,7 +62,6 @@
 	
 	<update id="updatePwd" parameterType="account">
 		<![CDATA[
-			UPDATE ACCOUNT SET  
 		]]>
 	</update>
 </mapper>

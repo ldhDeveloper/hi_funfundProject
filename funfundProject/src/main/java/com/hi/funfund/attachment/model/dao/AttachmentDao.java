@@ -1,5 +1,6 @@
 package com.hi.funfund.attachment.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -37,6 +38,10 @@ public class AttachmentDao {
 	}
 	public int updateProfileImage(Attachment vo) {
 		int result = sqlSession.update("updateprofileImage", vo);
+		return result;
+	}
+	public int accountProfileImage(HashMap<String, String> hmap) {
+		int result = sqlSession.update("accountProfileImage", hmap);
 		return result;
 	}
 
