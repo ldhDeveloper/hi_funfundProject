@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hi.funfund.HomeController;
 import com.hi.funfund.fundmenu.model.service.FundMenuService;
 import com.hi.funfund.fundmenu.model.vo.FundMenu;
+import com.hi.funfund.fundmenu.model.vo.ReciveFundMenu;
 import com.hi.funfund.item.model.service.ItemService;
 import com.hi.funfund.item.model.service.ItemServiceIm;
 import com.hi.funfund.item.model.vo.Item;
@@ -132,15 +133,33 @@ public class ItemController {
 
 	@RequestMapping(value="update.it", method = RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView insertRewardItem(Item item, @RequestBody ArrayList<Object> str, FundMenu fmenu, HttpServletRequest request ){
+	public ModelAndView insertRewardItem(Item item, @RequestBody String str, ReciveFundMenu rfmenu, HttpServletRequest request ){
 		int result1, result2 = 0;
 		
-		for (int j = 0; j < str.size(); j++) {
-			System.out.println(str.get(j));
-		}
+			System.out.println(rfmenu);
+		
 		
 
 		result1 = itemService.updateRewardItem(item);
+		
+		for(int i = 0; i < rfmenu.getMnum().size(); i ++){
+			FundMenu fmenu = new FundMenu();
+			fmenu.setMnum(rfmenu.getMnum().get(i));
+			fmenu.setPro_no(rfmenu.getPro_no());
+			fmenu.setMcost(rfmenu.getMcost().get(i));
+			fmenu.setMname(rfmenu.getMname().get(i));
+			fmenu.setMcontent(rfmenu.getMcontent().get(i));
+			fmenu.setMcount(rfmenu.getMcount().get(i));
+			fmenu.setMdate(rfmenu.getMdate().get(i));
+			
+			System.out.println("반복");
+			int insertOrUpdate = fundMenuService.insertOrUpdateFundMenu(fmenu);
+			
+			
+		}
+		
+		
+		
 		// result2 = fundMenuService.updateFundMenu(fmenu);
 
 		return null;

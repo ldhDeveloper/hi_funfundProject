@@ -23,5 +23,16 @@
 		order by mnum
 	</select>
 
-
+	<select id="selectMno" parameterType="FundMenu" resultMap="fundMenuResult">
+		select mno from fundmenu where pro_no = #{pro_no} and mnum = #{mnum}
+	</select>
+	
+	<insert id="insertFM" parameterType="FundMenu">
+		insert into fundmenu values (seq_mno.nextval, #{mname, jdbcType=VARCHAR}, #{mcost, jdbcType=INTEGER}, #{pro_no}, #{mcontent, jdbcType=VARCHAR}, #{mdate, jdbcType=DATE}, #{mnum}, #{mcount, jdbcType=INTEGER}, #{delyn, jdbcType=VARCHAR}, 0)
+	</insert>
+	
+	<update id="updateFM" parameterType="FundMenu">
+		update fundmenu set mname = #{mname, jdbcType=VARCHAR}, mcost = #{mcost, jdbcType=INTEGER}, mcontent = #{mcontent, jdbcType=VARCHAR}, mdate = #{mdate, jdbcType=DATE}, mnum = #{mnum}, mcount = #{mcount, jdbcType=INTEGER}, delyn = #{delyn, jdbcType=VARCHAR} where mno=#{mno}
+	</update>
+	
 </mapper>
