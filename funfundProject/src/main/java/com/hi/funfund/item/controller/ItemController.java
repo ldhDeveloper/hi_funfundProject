@@ -1,18 +1,25 @@
 package com.hi.funfund.item.controller;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hi.funfund.HomeController;
 import com.hi.funfund.fundmenu.model.service.FundMenuService;
 import com.hi.funfund.fundmenu.model.vo.FundMenu;
 import com.hi.funfund.item.model.service.ItemService;
@@ -32,7 +39,10 @@ public class ItemController {
 	@Autowired
 	private ItemAskService itemAskService;
 
-	public ModelAndView AllList(ModelAndView model) {
+
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
+	public ModelAndView AllList(ModelAndView model){
 		List<Item> mList = itemService.AllList();
 		return model;
 	}
@@ -120,10 +130,15 @@ public class ItemController {
 		return model;
 	}
 
-	@RequestMapping(value = "update.it", method = RequestMethod.POST)
-	public ModelAndView insertRewardItem(Item item, FundMenu fmenu, HttpServletRequest request) {
-		System.out.println("오니?");
+	@RequestMapping(value="update.it", method = RequestMethod.POST)
+	@ResponseBody
+	public ModelAndView insertRewardItem(Item item, @RequestBody ArrayList<Object> str, FundMenu fmenu, HttpServletRequest request ){
 		int result1, result2 = 0;
+		
+		for (int j = 0; j < str.size(); j++) {
+			System.out.println(str.get(j));
+		}
+		
 
 		result1 = itemService.updateRewardItem(item);
 		// result2 = fundMenuService.updateFundMenu(fmenu);
