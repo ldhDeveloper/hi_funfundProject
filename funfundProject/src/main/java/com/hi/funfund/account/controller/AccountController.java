@@ -95,5 +95,25 @@ public class AccountController {
 		return "myinfo/myfunding";
 	}
 	
-	// myinfo 회원 정보 설정 끝	
+	// myinfo 회원 정보 설정 끝
+	
+	
+	// myinfo 비밀번호 변경 시작
+	
+	@RequestMapping(value = "changePwd.ao")
+	public ModelAndView changePwd(ModelAndView model, HttpSession session, HttpServletRequest request) {
+		int ano = Integer.parseInt(request.getParameter("ano"));
+		String oldPwd = request.getParameter("oldPwd");
+		String newPwd = request.getParameter("newPwd");
+		
+		Account account = accountService.selectOldPwd(ano, oldPwd);
+		
+		int result = accountService.updatePwd(ano, newPwd);
+		
+		model.addObject("account", account);
+		model.setViewName("myinfo/myinfo");		
+		return model;
+	}
+		
+	// myinfo 비밀번호 변경 끝
 }

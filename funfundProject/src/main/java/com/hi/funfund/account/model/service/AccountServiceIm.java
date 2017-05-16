@@ -102,6 +102,18 @@ public class AccountServiceIm implements AccountService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	// selectPwd 현재 비밀번호 조회
+
+	@Override
+	public Account selectOldPwd(int ano, String oldPwd) {
+		return accountDao.selectOldPwd(ano, oldPwd);
+	}
+
+	@Override
+	public int updatePwd(int ano, String newPwd) {
+		return accountDao.updatePwd(ano, newPwd);
+	}
 
 	
 	

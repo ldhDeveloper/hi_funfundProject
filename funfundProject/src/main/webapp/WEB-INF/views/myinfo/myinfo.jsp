@@ -147,7 +147,7 @@
 .input-btn-wrap .btn{width:28%;margin-left:4px;display:block;background:#50E3C2;height:46px;line-heigh:46px;border:none;text-align:center;}
 .input-btn-wrap .mbtn{width:28%;margin-left:4px;display:block;background:#50E3C2;height:46px;line-heigh:46px;border:none;text-align:center;}
 .input-btn-wrap .btn.post{margin-left:0;margin-bottom:7px;}
-.input-btn-wrap .btn button{border:0;background:none;cursor:pointer;width:100%;}
+.input-btn-wrap .btn .pwdBtn button{border:0;background:none;cursor:pointer;width:100%;}
 .input-text.disable{background:#e7e7e7;}
 .input-btn-wrap .input .input-text.error{border-color:#d0021b;}
 .input-btn-wrap .input.with-timer{position:relative;}
@@ -172,7 +172,7 @@
 
 .mbtn span{line-height:46px;font-size:13px;color:#ffffff;}
 
-a.btn-block-purple, button.btn-block-purple{display:block;width:100%;height:42px;line-height:42px;text-align:center;font-size:15px;color:#fff;border:none;background:#50e3c2;cursor:pointer;}
+a.btn-block-purple, .pwdBtn, button.btn-block-purple{display:block;width:100%;height:42px;line-height:42px;text-align:center;font-size:15px;color:#fff;border:none;background:#50e3c2;cursor:pointer;}
 a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 226, 193, 0.5);cursor:default;}
 
 .act {
@@ -206,19 +206,16 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 	width: 40%;
 	background-color: #F8F8F8;
 }
+
+.glyphicon {
+	color: #50E3C2;
+}
 </style>
 
 <title>Insert title here</title>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/menubar.jsp" flush="true"/>
-
-<script type="text/javascript">
-function fileUpload(){
-	document.form1.file.select();
-	alert(document.selection.createRange().text);
-}
-</script>
 
 <br><br>
 <div class="container">
@@ -301,7 +298,7 @@ function fileUpload(){
 		                 			
 		                 			<div class="email-input-wrap small">
 										<div class="btn-wrap">
-											<button id="saveBtn" class="btn-block-purple" type="submit">설정하기</button>
+											<input type="submit" id="saveBtn" class="pwdBtn btn-block-purple" value="설정하기">
 	                        			</div>
 	                     			</div>
 	                     			
@@ -354,33 +351,61 @@ function fileUpload(){
 	                        		
 	                        		<em class="line"></em>             			                        	                     	
 									
-									<form id="saveForm">		
+									<form action="changePwd.ao" method="post">	
 									<div id="accountWrap">
             	            			<div id="newContainer">
                 							<div class="account-wrap">
                     							<h3 class="mh32">비밀번호 설정</h3>
-                    							<div class="email-input-wrap">                    								
-                        								<input type="password" id="oldPassword" name="oldPassword" class="input-text" placeholder="현재 비밀번호" />
+                    							<div class="email-input-wrap">                  								
+                        								<input type="password" id="oldPwd" name="oldPwd" class="input-text" placeholder="현재 비밀번호" />
                         								<!-- <p id="oldPasswordError" class="error-text">현재 비밀번호가 일치 하지 않습니다.</p> -->
-                        								<input type="password" id="newPassword" name="newPassword" class="input-text" placeholder="새 비밀번호" />
+                        								<input type="password" id="newPwd" name="newPwd" class="input-text" placeholder="새 비밀번호" />
                         								<!-- <p id="passwordError" class="pwd-text">영문, 숫자, 특수문자 (!@#$%^&*+=-)를 모두 조합한 8자 이상</p> -->
-                        								<input type="password" id="newPasswordConfirm" name="newPasswordConfirm" class="input-text" placeholder="새 비밀번호 확인" />
-                        								<!-- <p class="error-text">비밀번호가 같지 않습니다.</p> -->                    
-                       								
+                        								
+    													<div class="checkSign form-group has-success has-feedback">     
+        													<input type="password" id="newPwd2" class="input-text" id="inputSuccess" placeholder="새 비밀번호 확인">
+        													<span id="gicon" class="checkSign glyphicon form-control-feedback" style="margin-top:7px"></span>
+    													</div>                       								
                     							</div>
                 							</div>
             							</div>
         							</div>
-        
+        							
         							<br>
 						
 									<div class="email-input-wrap small">
 										<div class="btn-wrap">
-											<button id="saveBtn" class="btn-block-purple">설정하기</button>
+											<input type="submit" id="saveBtn" class="pwdBtn btn-block-purple" value="설정하기">
 	                        			</div>
 	                     			</div>
 	                     			
-	                     			</form>												
+	                     			</form>	
+	                     			
+	                     			<script>
+        								$(function(){
+        									$("#newPwd2").focusout(function(){
+        										if($("#newPwd").val() != "" && $("#newPwd2").val() != "") {
+        											if($("#newPwd").val() == $("#newPwd2").val()){
+            											$("#gicon").removeClass("glyphicon-remove-circle");
+            											$("#gicon").addClass("glyphicon-ok-circle");
+            											$("#gicon").css("color", "green");
+            											
+            										}
+            										
+            										else{
+            											$("#gicon").removeClass("glyphicon-ok-circle");
+            											$("#gicon").addClass("glyphicon-remove-circle");
+            											$("#gicon").css("color", "red");
+            										}
+        										}
+        										
+        										else {
+        											$("#gicon").removeClass("glyphicon-remove-circle");
+        											$("#gicon").removeClass("glyphicon-ok-circle");
+        										}
+        									});
+        								});
+        							</script>											
 								
 								</div>
 							</div>
@@ -396,123 +421,3 @@ function fileUpload(){
 
 </body>
 </html>
-
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
-<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<title>회원정보</title>
-
-<style>
-html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
-</style>
-
-</head>
-<body class="w3-theme-l5">
-
-<!-- Navbar -->
-<div class="w3-top">
- <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
-  <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-  <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i class="fa fa-home w3-margin-right"></i>Logo</a>
-  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="News"><i class="fa fa-globe"></i></a>
-  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Account Settings"><i class="fa fa-user"></i></a>
-  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" title="Messages"><i class="fa fa-envelope"></i></a>
-  <div class="w3-dropdown-hover w3-hide-small">
-    <button class="w3-button w3-padding-large" title="Notifications"><i class="fa fa-bell"></i><span class="w3-badge w3-right w3-small w3-green">3</span></button>     
-    <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
-      <a href="#" class="w3-bar-item w3-button">One new friend request</a>
-      <a href="#" class="w3-bar-item w3-button">John Doe posted on your wall</a>
-      <a href="#" class="w3-bar-item w3-button">Jane likes your post</a>
-    </div>
-  </div>
-  <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="My Account"><img src="/w3images/avatar2.png" class="w3-circle" style="height:25px;width:25px" alt="Avatar"></a>
- </div>
-</div>
-
-<!-- Navbar on small screens -->
-<div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-  <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
-  <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
-  <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
-  <a href="#" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
-</div>
-
-<!-- Page Container -->
-<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
-  <!-- The Grid -->
-  <div class="w3-row">
-    <!-- Left Column -->
-    <div class="w3-col m3">
-      <!-- Profile -->
-      <div class="w3-card-2 w3-round w3-white">
-        <div class="w3-container">
-         <h4 class="w3-center">My Profile</h4>
-         <p class="w3-center"><img src="/w3images/avatar3.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
-         <hr>
-         <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> Designer, UI</p>
-         <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> London, UK</p>
-         <p><i class="fa fa-birthday-cake fa-fw w3-margin-right w3-text-theme"></i> April 1, 1988</p>
-        </div>
-      </div>
-      <br>      
-    <!-- End Left Column -->
-    </div>
-    
-    <!-- Middle Column -->
-    <div class="w3-col m7">
-    
-      <div class="w3-row-padding">
-        <div class="w3-col m12">
-          <div class="w3-card-2 w3-round w3-white">
-            <div class="w3-container w3-padding">
-              <h6 class="w3-opacity">Social Media template by w3.css</h6>
-              <p contenteditable="true" class="w3-border w3-padding">Status: Feeling Blue</p>
-              <button type="button" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Post</button> 
-            </div>
-          </div>
-        </div>
-      </div>      
-    <!-- End Middle Column -->
-    </div>    
-  <!-- End Grid -->
-  </div>
-  
-<!-- End Page Container -->
-</div>
-<br>
- 
-<script>
-// Accordion
-function myFunction(id) {
-    var x = document.getElementById(id);
-    if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-        x.previousElementSibling.className += " w3-theme-d1";
-    } else { 
-        x.className = x.className.replace("w3-show", "");
-        x.previousElementSibling.className = 
-        x.previousElementSibling.className.replace(" w3-theme-d1", "");
-    }
-}
-
-// Used to toggle the menu on smaller screens when clicking on the menu button
-function openNav() {
-    var x = document.getElementById("navDemo");
-    if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-    } else { 
-        x.className = x.className.replace(" w3-show", "");
-    }
-}
-</script>
-
-</body>
-</html> --%>
