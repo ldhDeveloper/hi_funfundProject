@@ -39,6 +39,10 @@ public interface AccountService {
 	
 	 List selectGradeList(); //등급별리스트보기(관리자)
 
+	Account selectOldPwd(int ano, String oldPwd);
+
+	int updatePwd(int ano, String newPwd);
+
 	
 	//미추가된 함수 : 프로젝트별 후원자 리스트
 

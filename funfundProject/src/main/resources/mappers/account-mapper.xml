@@ -53,4 +53,16 @@
 				ANO = #{ano}
 		]]>
 	</select>
+	
+	<select id="selectOldPwd" parameterType="account" resultMap="accountResult">
+		<![CDATA[			
+			SELECT ENCRYPTION_AES.DEC_AES(pwd) FROM ACCOUNT WHERE ANO = #{ano}			
+		]]>
+	</select>
+	
+	<update id="updatePwd" parameterType="account">
+		<![CDATA[
+			UPDATE ACCOUNT SET  
+		]]>
+	</update>
 </mapper>

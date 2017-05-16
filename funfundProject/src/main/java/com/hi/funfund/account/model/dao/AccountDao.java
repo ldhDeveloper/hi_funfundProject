@@ -31,4 +31,13 @@ public class AccountDao {
 		return p;
 	}
 
+	public Account selectOldPwd(int ano, String oldPwd) {
+		Account account = (Account) sqlSession.selectOne("selectOldPwd", ano);
+		return account;
+	}
+
+	public int updatePwd(int ano, String newPwd) {
+		int result = sqlSession.insert("updatePwd", ano);
+		return result;
+	}
 }
