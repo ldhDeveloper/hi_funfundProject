@@ -30,14 +30,14 @@ public class ItemDao {
 	}
 
 	public List AllList() {
-		List<Item> iList = (List<Item>) sqlSession.selectList("selectList");
+		List<Item> iList = (List<Item>) sqlSession.selectList(nameSpace+"selectList");
 		System.out.println("iList:"+iList.get(0));
 		return iList;
 	}
 
 	public Item selectOne(int pro_no) {
 		System.out.println("no: "+pro_no);
-		Item result = (Item) sqlSession.selectOne("itemMapper.selectOne", pro_no); 
+		Item result = (Item) sqlSession.selectOne(nameSpace+"selectOne", pro_no); 
 		System.out.println("result: "+result);
 		return result;
 	}

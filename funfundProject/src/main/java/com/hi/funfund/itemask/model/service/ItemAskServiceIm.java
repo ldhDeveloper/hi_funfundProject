@@ -36,7 +36,6 @@ public class ItemAskServiceIm implements ItemAskService {
 
 	@Override
 	public List<ItemAsk> selectList(int pro_no) {
-		// TODO Auto-generated method stub
 		return itemAskDao.selectList(pro_no);
 	}
 }

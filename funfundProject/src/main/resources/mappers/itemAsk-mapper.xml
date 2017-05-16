@@ -2,6 +2,24 @@
 <!DOCTYPE mapper PUBLIC
 "-//mybatis.org//DTD mapper 3.0//en"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace = "itemAskMapper">
+<mapper namespace="itemAskMapper">
+	<resultMap type="itemAsk" id="itemAskResult">
+		<id property="ask_no" column="ask_no" />
+		<result property="pro_no" column="pro_no" />
+		<result property="ask_type" column="ask_type" />
+		<result property="ask_content" column="ask_content" />
+		<result property="id_no" column="id_no" />
+		<result property="ask_date" column="ask_date" />
+		<result property="id" column="id" />
+	</resultMap>
+
+	<select id="selectList" resultMap="itemAskResult" parameterType="int">
+		select ask_no, it.pro_no, ask_type, ask_content, id_no, ask_date, a.id
+		from itemask ask
+		inner join item it on ask.pro_no=it.pro_no
+		inner join account a on ask.id_no = a.ano
+		where it.pro_no = #{pro_no}
+		order by ask_no
+	</select>
 
 </mapper>

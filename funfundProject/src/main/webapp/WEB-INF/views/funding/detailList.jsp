@@ -53,7 +53,6 @@ li {
 }
 
 .box2 {
-	margin: 10px;
 	padding-top: 10px;
 }
 
@@ -141,8 +140,9 @@ button {
 	padding: 10px;
 }
 
-.content {
-	
+#content {
+	box-sizing: content-box;
+	margin: 10px;
 }
 
 #viewon {
@@ -156,8 +156,73 @@ button {
 	background-color: #FFC4B7 !important;
 	border-color: #ee7f69 !important;
 }
+
+.comment {
+	box-sizing: content-box;
+	margin-top: 20px;
+	margin: 10px;
+}
+
+#comment-area textarea {
+	display: block;
+	margin-bottom: 10px;
+	margin-left: 20px;
+	width: 80%;
+	height: 40%;
+	padding: 10px;
+	font-size: 13px;
+	line-height: 18px;
+	border: 1px solid #e4e4e4;
+	background: #fff;
+	box-sizing: border-box !important;
+}
+
+textarea {
+	resize: none;
+}
+
+#upload {
+	text-align: right;
+	width: 80%;
+}
+
+#comment-box {
+	display: block;
+	margin-top: 20px;
+	margin-left: 20px;
+	width: 80%;
+	height: 40%;
+	padding: 10px;
+	font-size: 13px;
+	line-height: 18px;
+	border: 1px solid #e4e4e4;
+	background: #fff;
+	box-sizing: border-box !important;
+}
+
+#btn-like {
+	background: white;
+}
+
+#cmtId {
+	margin-bottom: 10px;
+	height: 30px;
+}
+
+#cmtId p {
+	margin-bottom: 10px;
+	font-size: 13px;
+	line-height: 18px;
+}
+
+#cmtId span {
+	display: inline-block;
+	font-size: 12px;
+	line-height: 12px;
+	color: #92;
+}
 </style>
-<script  type="text/javascript">
+<script type="text/javascript">
 	$(function() {
 		$('#btn-like').click(function() {
 			if ($(this).hasClass("backpink")) {
@@ -189,9 +254,8 @@ button {
 			$(this).css('background-color', 'white');
 		});
 
-			var co ='<c:out value="${item.pcontent}"/>';
-			console.log(co);
-			$("#content").html(co);
+		var co = '<c:out value="${item.pcontent}"/>';
+		$("#content").html(co);
 
 	});
 </script>
@@ -211,8 +275,8 @@ button {
 
 	<div align="center">
 		<ul class="w3-border-bottom w3-border-gray">
-			<li>스토리</li>
-			<li>댓글( )</li>
+			<li class="active"><a href="detail.it?pro_no=${item.pro_no }">스토리</a></li>
+			<li><a>댓글( )</a></li>
 			<li>새소식( )</li>
 			<li>서포터( )</li>
 		</ul>
@@ -228,43 +292,32 @@ button {
 
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 box2"
 		style="padding: 10px;">
+		<!-- 게시글작성영역 -->
 		<div id="content"></div>
-		<!-- <div class="">
-			<img src="/funfund/images/funding/face.PNG" class="img-responsive">
-			<h3 style="margin: 30px;" class="hidden-sm hidden-xs">집에서도 전문 경락
-				마사지를 즐길 수 있다면?에스테틱 전문샵 경력 20년의 베테랑의 모든 노하우를 집약한 매클러를 소개합니다.</h3>
-			<h5 style="padding: 10px;" class="hidden-lg hidden-md"
-				style="align:center">집에서도 전문 경락 마사지를 즐길 수 있다면?에스테틱 전문샵 경력 20년의
-				베테랑의 모든 노하우를 집약한 매클러를 소개합니다.</h5>
-			<div class="goal">
-				<p>
-					<strong>목표금액</strong>
-				</p>
-				<p>
-					<strong>펀딩기간</strong>
-				</p>
-				<p style="color: #423c3b;">
-					100% 모이지 않아도 리워드가 제공되는 프로젝트 이 프로젝트는 펀딩 마감일까지 목표 금액이 100% 모이지 않아도
-					리워드가 제공되며, 결제가 진행됩니다. 리워드 제공 예상일은 <strong></strong> 입니다.
-				</p>
+		<!-- 댓글작성 영역 -->
+		<div class="comment">
+			<p>개의 댓글이 달렸습니다.</p>
+			<form id="comment-area">
+				<textarea style="overflow-y: hidden;" rows="3" cols="50"
+					maxlength="140;" placeholder="댓글을 입력하세요"></textarea>
+			</form>
+			<div id="upload">
+				<button></button>
 			</div>
-			<div class="guide">
-				<p>
-					<strong>펀딩결제안내</strong>
-				</p>
-				<p>
-					펀딩 결제는 바로 진행되지 않고, 펀딩 마감일 다음 영업일인 <strong></strong> 에 모두 함께 진행됩니다.
-				</p>
-				<p>
-					<strong>펀딩 취소 안내</strong>
-				</p>
-				<p>펀딩 마감일까지는 MY 페이지 [나의 펀딩현황]에서 언제든 펀딩 취소가 가능하지만, 마감일 이 후에는 리워드
-					제작 및 배송이 시작되어 펀딩 취소가 불가합니다. 리워드 관련 환불 및 교환은 메이커가 정한 규정에 따르며, 스토리
-					하단의 프로젝트 위험 요인과 해결 방안을 참고해주세요.</p>
-			</div>
-
-			<div class="content">소개 내용</div>
-		</div> -->
+			<c:if test="${empty aList }">
+				  아직 댓글이 없습니다. 
+				  첫번째 댓글의 주인공이 되어주세요! :)
+				</c:if>
+			<c:if test="${!empty aList}">
+				<div id="comment-box">
+					<c:forEach var="ask" items="${aList}">
+						<p id="cmtId">${ask.id }</p>
+						<p>${ask.ask_content }</p>
+						<span>${ask.ask_date }</span>
+					</c:forEach>
+				</div>
+			</c:if>
+		</div>
 	</div>
 
 	<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">

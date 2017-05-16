@@ -13,21 +13,25 @@ public class ItemAskDao {
 	private static final String nameSpace = "itemAskMapper.";
 	@Autowired
 	private SqlSession sqlSession;
+
 	public int insert(ItemAsk itemAsk) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 	public int update(ItemAsk itemAsk) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 	public int delete(int ask_no) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 	public List<ItemAsk> selectList(int pro_no) {
-		// TODO Auto-generated method stub
-		return null;
+		List<ItemAsk> aList = sqlSession.selectList(nameSpace+"selectList", pro_no);
+		return aList;
 	}
 
 }
