@@ -388,11 +388,11 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
                     							<div class="email-input-wrap">                  								
                         								<input type="password" id="oldPwd" name="oldPwd" class="input-text" placeholder="현재 비밀번호" />
                         								<!-- <p id="oldPasswordError" class="error-text">현재 비밀번호가 일치 하지 않습니다.</p> -->
-                        								<input type="password" id="newPwd" name="newPwd" class="input-text" placeholder="새 비밀번호" />
+                        								<input type="password" id="newPwd" class="input-text" placeholder="새 비밀번호" />
                         								<!-- <p id="passwordError" class="pwd-text">영문, 숫자, 특수문자 (!@#$%^&*+=-)를 모두 조합한 8자 이상</p> -->
                         								
     													<div class="checkSign form-group has-success has-feedback">     
-        													<input type="password" id="newPwd2" class="input-text" id="inputSuccess" placeholder="새 비밀번호 확인">
+        													<input type="password" name="newPwd" id="newPwd2" class="input-text" id="inputSuccess" placeholder="새 비밀번호 확인">
         													<span id="gicon" class="checkSign glyphicon form-control-feedback" style="margin-top:7px"></span>
     													</div>                       								
                     							</div>
