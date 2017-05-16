@@ -17,9 +17,17 @@
 		select ask_no, it.pro_no, ask_type, ask_content, id_no, ask_date, a.id
 		from itemask ask
 		inner join item it on ask.pro_no=it.pro_no
-		inner join account a on ask.id_no = a.ano
+		inner join
+		account a on ask.id_no = a.ano
 		where it.pro_no = #{pro_no}
-		order by ask_no
+		order by
+		ask_no
 	</select>
+	
+	<insert id="insertAsk" parameterType="HashMap">
+		insert into itemask
+		values('seq_ask.nextval,','#{pro_no}','댓글','#{acontent}','#{id_no}','sysdate');
+	</insert>
+
 
 </mapper>

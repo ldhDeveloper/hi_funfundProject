@@ -1,5 +1,6 @@
 package com.hi.funfund.itemask.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -14,9 +15,9 @@ public class ItemAskDao {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public int insert(ItemAsk itemAsk) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insert(HashMap<String, String> cmap) {
+		int result = sqlSession.insert(nameSpace + "insertAsk", cmap);
+		return result;
 	}
 
 	public int update(ItemAsk itemAsk) {
@@ -30,7 +31,7 @@ public class ItemAskDao {
 	}
 
 	public List<ItemAsk> selectList(int pro_no) {
-		List<ItemAsk> aList = sqlSession.selectList(nameSpace+"selectList", pro_no);
+		List<ItemAsk> aList = sqlSession.selectList(nameSpace + "selectList", pro_no);
 		return aList;
 	}
 

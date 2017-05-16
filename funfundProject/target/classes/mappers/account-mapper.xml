@@ -54,6 +54,7 @@
 		]]>
 	</select>
 	
+
 	<select id="selectOldPwd" parameterType="account" resultMap="accountResult" resultType="hashmap">
 		<![CDATA[			
 			SELECT ENCRYPTION_AES.DEC_AES(pwd) FROM ACCOUNT WHERE ANO=#{ano} 
