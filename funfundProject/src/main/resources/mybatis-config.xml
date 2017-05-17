@@ -11,6 +11,7 @@
 		<typeAlias type="com.hi.funfund.fundmenu.model.vo.FundMenu" alias="fundMenu" />
 		<typeAlias type="com.hi.funfund.item.model.vo.Item" alias="item" />
 		<typeAlias type="com.hi.funfund.itemask.model.vo.ItemAsk" alias="itemAsk" />
+		<typeAlias type="com.hi.funfund.itemask.model.vo.ItemAskAccount" alias="itemAskAccount" />
 		<typeAlias type="com.hi.funfund.myitem.model.vo.MyItem" alias="myItem" />
 		<typeAlias type="com.hi.funfund.notice.model.vo.Notice" alias="notice" />
 		<typeAlias type="com.hi.funfund.pupdate.model.vo.Pupdate" alias="pUpdate" />
