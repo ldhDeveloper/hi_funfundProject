@@ -110,13 +110,20 @@ public class AccountServiceIm implements AccountService {
 		System.out.println("Service ano : " + ano + " oldPwd : " + oldPwd);
 		return accountDao.selectOldPwd(ano, oldPwd);
 	}
+	
+	// updatePwd 새 비밀번호로 바꾸기
 
 	@Override
 	public int updatePwd(int ano, String newPwd) {
 		System.out.println("Service ano : " + ano + " newPwd : " + newPwd);
 		return accountDao.updatePwd(ano, newPwd);
 	}
+	
+	// insertName 이름 등록하기
 
-	
-	
+	@Override
+	public int insertName(int ano, String name) {
+		System.out.println("Service ano : " + ano + " name : " + name);
+		return accountDao.insertName(ano, name);
+	}	
 }

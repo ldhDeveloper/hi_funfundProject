@@ -29,4 +29,11 @@
 				ANO = #{ano}	
 		]]>
 	</select>
+	
+	<insert id="insertName" parameterType="hashmap">
+		<![CDATA[
+			INSERT INTO PARTY (pno, ano, pname, phone, intro, id_no, president, address, pconfirm, econfirm)
+			VALUES(pno, seq_ano.nextval, #{pname}, phone, intro, id_no, president, address, pconfirm, econfirm)
+		]]>
+	</insert>
 </mapper>
