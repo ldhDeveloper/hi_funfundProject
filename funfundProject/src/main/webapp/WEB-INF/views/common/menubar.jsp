@@ -71,7 +71,9 @@
     	          alert(JSON.stringify(error, undefined, 2));
     	        });
       auth2.signIn().then(function() {
-    	    console.log(auth2.currentUser.get().getId());
+    	  var profile = auth2.currentUser.get().getBasicProfile();
+    	  console.log(profile.getName());
+    	  console.log(profile.getEmail());
     	  });
     });
   };
