@@ -130,19 +130,26 @@ public class ItemController {
 
 		return model;
 	}
+	
+	@RequestMapping("insertReward.it")
+	public ModelAndView insertRewardItem(ModelAndView model, FundMenu fmenu) {
+		System.out.println(fmenu);
+
+		return null;
+	}
 
 	@RequestMapping(value="update.it", method = RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView insertRewardItem(Item item, @RequestBody String str, ReciveFundMenu rfmenu, HttpServletRequest request ){
+	public ModelAndView insertRewardItem(Item item, @RequestBody String str, /*ReciveFundMenu rfmenu, */HttpServletRequest request ){
 		int result1, result2 = 0;
 		
-			System.out.println(rfmenu);
+			/*System.out.println(rfmenu);*/
 		
 		
 
 		result1 = itemService.updateRewardItem(item);
 		
-		for(int i = 0; i < rfmenu.getMnum().size(); i ++){
+		/*for(int i = 0; i < rfmenu.getMnum().size(); i ++){
 			FundMenu fmenu = new FundMenu();
 			fmenu.setMnum(rfmenu.getMnum().get(i));
 			fmenu.setPro_no(rfmenu.getPro_no());
@@ -156,7 +163,7 @@ public class ItemController {
 			int insertOrUpdate = fundMenuService.insertOrUpdateFundMenu(fmenu);
 			
 			
-		}
+		}*/
 		
 		
 		
