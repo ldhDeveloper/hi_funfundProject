@@ -55,7 +55,7 @@
 .mnameText {
 	border: none;
 	color: #4D525B;
-	width: 10%;
+	width: 4s0%;
 	background-color: #F8F8F8;
 }
 </style>

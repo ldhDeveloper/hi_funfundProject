@@ -30,10 +30,15 @@
 		]]>
 	</select>
 	
-	<insert id="insertName" parameterType="hashmap">
+	<insert id="insertName" parameterType="HashMap">
 		<![CDATA[
-			INSERT INTO PARTY (pno, ano, pname, phone, intro, id_no, president, address, pconfirm, econfirm)
-			VALUES(pno, seq_ano.nextval, #{pname}, phone, intro, id_no, president, address, pconfirm, econfirm)
+			INSERT INTO PARTY(pno, ano, pname) VALUES(seq_pno.nextval, #{ano, jdbcType=INTEGER}, #{name, jdbcType=VARCHAR})
 		]]>
 	</insert>
+	
+	<update id="updateName" parameterType="HashMap">
+		<![CDATA[
+			UPDATE PARTY SET pname=(#{name}) WHERE ano=#{ano}
+		]]>
+	</update>
 </mapper>

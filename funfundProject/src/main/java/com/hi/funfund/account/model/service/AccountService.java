@@ -45,6 +45,10 @@ public interface AccountService {
 
 	int insertName(int ano, String name); // 이름 등록
 
+	int updateName(int ano, String name); // 이름 수정
+
+	int updateNickname(int ano, String nickname); // 닉네임 수정
+
 	
 	//미추가된 함수 : 프로젝트별 후원자 리스트
 
