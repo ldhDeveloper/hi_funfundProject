@@ -135,7 +135,7 @@ li {
 
 		});
 	</script>
-	
+
 
 	<br>
 	<div class="middle-submenu">
@@ -151,7 +151,8 @@ li {
 					요청하기</a></li>
 		</ul>
 	</div>
-	<form id="frm" action="update.it?pro_no=${ pro_no }" method="post" enctype="application/json">
+	<form id="frm" action="update.it?pro_no=${ pro_no }" method="post"
+		enctype="application/json">
 
 		<%-- <input type="hidden" value="${ param.pro_no }"> --%>
 
@@ -369,12 +370,25 @@ li {
 		<div id="primary-info2" class="input-form">
 			<table id="addTable" style="width: 900px;">
 				<tr>
+					<td colspan="3"><h3 align="center">등록된 리워드</h3>
+						<div style="width:860px; height:250px; background:#f8f8f8; border:1px solid #ddd; overflow:scroll;">
+							<table class="table table-hover table-condensed" style="text-align:center;" id="rlist">
+								<tr><th>순서</th><th>리워드명</th><th>금액</th><th>배송조건</th><th>제한수량</th><th>배송일</th><th>수정/삭제</th></tr>
+							</table>
+						</div>
+					</td>
+				</tr>
+				
+				<tr>
+					<td colspan = "3">&nbsp;</td>
+				</tr>
+				<tr>
 					<td style="width: 700px;">
 						<div id="reward"
 							style="width: 640px; background: #f8f8f8; border: 1px solid #ddd; padding: 10px;">
 							<table style="width: 620px;">
 								<tr>
-									<td style="width: 150px;">리워드#1</td>
+									<td style="width: 150px;">리워드등록</td>
 									<td style="width: 100px;">금액</td>
 									<td style="width: 150px;"><input type="text" size="15"
 										name="mcost"></td>
@@ -414,50 +428,55 @@ li {
 											src="https://code.jquery.com/jquery-1.12.4.js"></script> <script
 											src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 										<script>
-											/* $( function() {
-											$( "#datepicker3" ).datepicker({
+											 $( function() {
+												$( ".datepicker3" ).datepicker({
 													showOn: "button",
 													buttonImage: "images/makeproject/calendar2.png",
 													buttonImageOnly: true,
 													buttonText: "Select date"
+												});
 											});
-											}); */
 										</script></td>
 								</tr>
 							</table>
-							<div align="center">
-								<button class="btn btn-warning">삭제하기</button>
-							</div>
+							
 						</div>
 					</td>
 					<td></td>
 				</tr>
 
 			</table>
-			<br>
-			<br>
+			<br> <br>
 			<div align="center">
 				<button class="btn btn-warning" id="addReward">추가하기</button>
 			</div>
 			<script>
-				$(function() {
-					$("#addReward").click(
-							function() {
-								$("#primary-info2").html(
-										$("#primary-info2").html() + "<br>"
-												+ $("#addTable").html());
-							});
-				});
-				$(function() {
-					$(".datepicker3").datepicker({
-						showOn : "button",
-						buttonImage : "images/makeproject/calendar2.png",
-						buttonImageOnly : true,
-						buttonText : "Select date"
+				$(function(){
+					$("#addReward").click(function(){
+						var pro_no = ${pro_no};
+						var mname = $("[name=mname]").val();
+						var mcost = $("[name=mcost]").val();
+						var mnum = $("[name=mnum]").val();
+						var dcost = $("[name=dcost]").val();
+						var mdate = $("[name=mdate]").val();
+						var mcount = $("[name=mcount]").val();
+						var delyn = $("[name=delyn]").val();
+						var mcontent = $("[name=mcontent]").val();
+						
+						
+						$.ajax({
+							url : "insertReward.it",   
+				            type : "POST",  
+				            data : {"pro_no":pro_no, "mname":mname, "mcost":mcost, "mnum":mnum, "dcost":dcost, "mdate":mdate, "mcount":mcount, "delyn":delyn, "mcontent":mcontent},
+				            success : function(data){
+				            	
+				            }
+
+						});
 					});
 				});
 			</script>
-		</div>
+			</div>
 
 		<!-- 스토리 내용 입력 화면 -->
 		<div id="primary-info3" class="input-form">
