@@ -56,30 +56,33 @@
 
 <script>
   var googleUser = {};
-  var startApp = function() {
+   function googleLogin() {
     gapi.load('auth2', function(){
       // Retrieve the singleton for the GoogleAuth library and set up the client.
       auth2 = gapi.auth2.init({
         client_id: '659736995246-ddl5nvftj5f76j3gk122g03t00n18pl7.apps.googleusercontent.com',
         cookiepolicy: 'single_host_origin',
-        // Request scopes in addition to 'profile' and 'email'
-        //scope: 'additional_scope'
+       
+        scope: 'profile'
       });
-      attachSignin(document.getElementById('gSignupBt'));
+      auth2.attachClickHandler(document.getElementById('gSignupBt'), {},
+    	        function(googleUser) {
+    	        }, function(error) {
+    	          alert(JSON.stringify(error, undefined, 2));
+    	        });
+      auth2.signIn().then(function() {
+    	  var profile = auth2.currentUser.get().getBasicProfile();
+    	  console.log(profile.getName());
+    	  console.log(profile.getEmail());
+    	  });
     });
   };
 
   function attachSignin(element) {
-    console.log(element.id);
-    auth2.attachClickHandler(element, {},
-        function(googleUser) {
-        alert(googleUser.getId());
-        }, function(error) {
-          alert(JSON.stringify(error, undefined, 2));
-        });
+   
   }
   </script>
-<script>startApp();</script>
+
 <script type='text/javascript'>
 //common function for sns user
 function loginApi(id){
@@ -96,22 +99,21 @@ Kakao.init('c04a7d5e62e926cf85109fde19aa531a');
     // 카카오 로그인 버튼을 생성합니다.
   function loginWithKakao(){
 	  Kakao.Auth.login({
-    		success: function(res){
-    			alert(JSON.stringify(res));
-    			var idtoken = res.access_token;
+    		success: function(authObj){//로그인시도
+    			alert(JSON.stringify(authObj));
     			Kakao.API.request({
-    		          url: '/v1/user/me',
-    		          success: function(res) {
-    		            alert(JSON.stringify(res));
-    		        	 var id =  res.kaccount_email;
-    		             var nickname = res.properties.nickname;
-    		             console.log(nickname);
-    		           apiLogin(id, token);    
-    		          },
-    		          fail: function(error) {
-    		            alert(JSON.stringify(error));
-    		          }
-    		        });    			
+    			url: '/v1/user/me',
+    			success: function(res){
+    			var nickname = res.properties.nickname;
+    			var email = res.kaccount_email;
+    			alert(nickname + ", " + email);
+    			//location.href = "loginApi.ao?nickname="+nickname+"&email="+email;  			
+    			},
+    			fail: function(error){
+    				alert(JSON.stringify(error));
+    			}
+    				
+    			});
     		},
     		fail : function(err){
     			alert(JSON.stringify(err));
@@ -769,7 +771,7 @@ label.sign-form_title {
                 <legend class="login-title-txt">소셜 로그인</legend>
                 <a href="#" class="signin-social p-login_btn login-social-facebook" data-sns="facebook" alt="페이스북으로 로그인" >페이스북으로 로그인</a>
            		<a href="javascript:loginWithKakao()" id="cSignInBt" class="signin-social p-login_btn login-social-kakao"  data-sns="kakao"  alt="카카오로 로그인" >카카오로 로그인</a>
-           		<a href="#" id="gSignupBt" class="signin-social p-login_btn login-social-google"  data-sns="google"  alt="구글로 로그인" >구글로 로그인</a>
+           		<a href="javascript:googleLogin()" id="gSignupBt" class="signin-social p-login_btn login-social-google"  data-sns="google"  alt="구글로 로그인" >구글로 로그인</a>
            		<div class="g-signin2" data-onsuccess="onSignIn"></div>
            		<a href="#" id="nSignInBt" class="signin-social p-login_btn login-social-naver"  data-sns="naver"  alt="네이버로 로그인" >네이버 로그인</a>
               </fieldset>
@@ -785,7 +787,7 @@ label.sign-form_title {
         </div>
         <div class="modal-footer">
             <button class="btn-login_pop">로그인하기</button>
-            <p class="go_signup">펀펀회원이 아니신가요? <a id="linkSignup" href="javascript:void(0);" onclick="SwitchSignupBox();">회원가입</a></p>
+            <p class="go_signup">펀펀회원이 아니신가요? <a id="linkSignup" href="javascript:void(0);" >회원가입</a></p>
         </div>
         </form>  	
       </div>
@@ -818,7 +820,7 @@ label.sign-form_title {
                 <legend class="login-title-txt">소셜 회원가입</legend>
                 <a href="#" class="signup-social p-login_btn login-social-facebook" data-sns="facebook" alt="페이스북으로 회원가입" >페이스북으로 회원가입</a>
             	<a href="javascript:loginWithKakao()" id="custom-login-btn" class="signup-social p-login_btn login-social-kakao" alt="카카오로 회원가입" >카카오로 회원가입</a>
-            	<a id="gSigninBt" class="signup-social p-login_btn login-social-google" alt="구글로 회원가입" >구글로 회원가입</a>
+            	<a href="javascript:google()" id="gSigninBt" class="signup-social p-login_btn login-social-google" alt="구글로 회원가입" >구글로 회원가입</a>
            		<a href="#" id="nSignUpBt" class="signin-social p-login_btn login-social-naver"  data-sns="naver"  alt="네이버로 로그인" >네이버 회원가입</a>
               </fieldset>
             </form>
@@ -826,7 +828,7 @@ label.sign-form_title {
             <form>
               <fieldset>
                 <legend class="login-title-txt">이메일 회원가입</legend>
-                <a id="emailSignup" href="javascript:void(0);" class="signup-email p-login_btn" alt="" onclick="signupWithEmail();">이메일로 회원가입</a>
+                <a id="emailSignup" href="javascript:void(0);" class="signup-email p-login_btn" alt="" >이메일로 회원가입</a>
               </fieldset>
             </form>
             <p class="go_signup">이미 펀펀의 회원이신가요?</p>
