@@ -1,5 +1,6 @@
 package com.hi.funfund.fundmenu.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,9 +19,9 @@ public class FundMenuDao {
 	@Autowired
 	private SqlSession sqlSession;
 
-	public List<FundMenu> selectList(int pro_no) {
+	public ArrayList<FundMenu> selectList(int pro_no) {
 		System.out.println("pro: "+pro_no);
-		List<FundMenu> mList =  sqlSession.selectList("selectMlist", pro_no);
+		ArrayList<FundMenu> mList =  (ArrayList<FundMenu>) sqlSession.selectList("selectMlist", pro_no);
 		System.out.println("mlist: "+mList);
 		return mList;
 	}
@@ -60,6 +61,13 @@ public class FundMenuDao {
 		}
 		
 		
+		
+		return result;
+	}
+
+	public int insertFundMenu(FundMenu fmenu) {
+		
+		int result = sqlSession.insert(nameSpace + "insertFM", fmenu);
 		
 		return result;
 	}

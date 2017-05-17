@@ -1,5 +1,6 @@
 package com.hi.funfund.fundmenu.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class FundMenuServiceIm implements FundMenuService {
 	private FundMenuDao fundMenuDao;
 
 	@Override
-	public List<FundMenu> selectList(int pro_no) {
+	public ArrayList<FundMenu> selectList(int pro_no) {
 		return fundMenuDao.selectList(pro_no);
 	}
 
@@ -40,5 +41,10 @@ public class FundMenuServiceIm implements FundMenuService {
 	@Override
 	public int insertOrUpdateFundMenu(FundMenu fmenu){
 		return fundMenuDao.insertOrUpdateFundMenu(fmenu);
+	}
+	
+	@Override
+	public int insertFundMenu(FundMenu fmenu){
+		return fundMenuDao.insertFundMenu(fmenu);
 	}
 }

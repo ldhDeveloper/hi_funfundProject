@@ -17,12 +17,18 @@ public class FundMenu implements Serializable {
 	private Integer mnum;
 	private Integer mcount;
 	private String delyn;
+	private String dcost;
 
+	
+	
 	public FundMenu() {
 	}
 
-	public FundMenu(int mno, String mname, Integer mcost, int pro_no, String mcontent, Date mdate,
-			Integer mnum, Integer mcount, String delyn) {
+	
+	
+	
+	public FundMenu(int mno, String mname, Integer mcost, int pro_no, String mcontent, Date mdate, Integer mnum,
+			Integer mcount, String delyn, String dcost) {
 		super();
 		this.mno = mno;
 		this.mname = mname;
@@ -33,26 +39,59 @@ public class FundMenu implements Serializable {
 		this.mnum = mnum;
 		this.mcount = mcount;
 		this.delyn = delyn;
+		this.dcost = dcost;
 	}
+
+
+
 
 	public int getMno() {
 		return mno;
 	}
 
+
+	public void setMno(int mno) {
+		this.mno = mno;
+	}
+
+
+	public String getMname() {
+		return mname;
+	}
+
+
+	public void setMname(String mname) {
+		this.mname = mname;
+	}
+
+
 	public Integer getMcost() {
 		return mcost;
 	}
+
+
+	public void setMcost(Integer mcost) {
+		this.mcost = mcost;
+	}
+
 
 	public int getPro_no() {
 		return pro_no;
 	}
 
+
+	public void setPro_no(int pro_no) {
+		this.pro_no = pro_no;
+	}
+
+
 	public String getMcontent() {
 		return mcontent;
 	}
 
-	public String getMname() {
-		return mname;
+
+	public void setMcontent(String mcontent) {
+		this.mcontent = mcontent;
 	}
 
 
@@ -60,63 +99,62 @@ public class FundMenu implements Serializable {
 		return mdate;
 	}
 
+
+	public void setMdate(Date mdate) {
+		this.mdate = mdate;
+	}
+
+
 	public Integer getMnum() {
 		return mnum;
 	}
 
-	public Integer getMcount() {
-		return mcount;
-	}
-
-	public String getDelyn() {
-		return delyn;
-	}
-
-	public void setMno(int mno) {
-		this.mno = mno;
-	}
-
-	public void setMname(String mname) {
-		this.mname = mname;
-	}
-
-	public void setMcost(Integer mcost) {
-		this.mcost = mcost;
-	}
-
-	public void setPro_no(int pro_no) {
-		this.pro_no = pro_no;
-	}
-
-	public void setMcontent(String mcontent) {
-		this.mcontent = mcontent;
-	}
-
-
-	public void setMdate(Date mdate) {
-		this.mdate = mdate;
-		this.mnum = mnum;
-		this.mcount = mcount;
-		this.delyn = delyn;
-	}
 
 	public void setMnum(Integer mnum) {
 		this.mnum = mnum;
 	}
 
+
+	public Integer getMcount() {
+		return mcount;
+	}
+
+
 	public void setMcount(Integer mcount) {
 		this.mcount = mcount;
 	}
+
+
+	public String getDelyn() {
+		return delyn;
+	}
+
 
 	public void setDelyn(String delyn) {
 		this.delyn = delyn;
 	}
 
+
+	public String getDcost() {
+		return dcost;
+	}
+
+
+	public void setDcost(String dcost) {
+		this.dcost = dcost;
+	}
+
+
+
+
 	@Override
 	public String toString() {
 		return "FundMenu [mno=" + mno + ", mname=" + mname + ", mcost=" + mcost + ", pro_no=" + pro_no + ", mcontent="
-				+ mcontent +  ", mdate=" + mdate + ", mnum=" + mnum + ", mcount=" + mcount
-				+ ", delyn=" + delyn + "]";
+				+ mcontent + ", mdate=" + mdate + ", mnum=" + mnum + ", mcount=" + mcount + ", delyn=" + delyn
+				+ ", dcost=" + dcost + "]";
 	}
+
+
+	
 
 }

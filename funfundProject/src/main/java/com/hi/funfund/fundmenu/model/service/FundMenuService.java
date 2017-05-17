@@ -1,5 +1,6 @@
 package com.hi.funfund.fundmenu.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.hi.funfund.fundmenu.model.vo.FundMenu;
@@ -7,7 +8,7 @@ import com.hi.funfund.fundmenu.model.vo.ReciveFundMenu;
 
 public interface FundMenuService {
 
-	List<FundMenu> selectList(int pro_no);
+	ArrayList<FundMenu> selectList(int pro_no);
 
 	int insert(FundMenu fm);
 
@@ -16,5 +17,7 @@ public interface FundMenuService {
 	int delete(int pro_no);
 
 	int insertOrUpdateFundMenu(FundMenu fmenu);
+
+	int insertFundMenu(FundMenu fmenu);
 
 }
