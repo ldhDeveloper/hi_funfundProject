@@ -6,15 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="/funfund/lib/js/jquery-3.2.1.min.js"></script>
 <title>Insert title here</title>
-<link href="/funfund/lib/css/bootstrap.min.css" rel="stylesheet">
-<link href="/funfund/lib/font-awesome/font-awesome/css/font-awesome.css"
-	rel="stylesheet">
-<link
-	href="/funfund/lib/font-awesome/font-awesome/css/font-awesome.min.css"
-	rel="stylesheet">
-
 <style>
 .background {
 	background-color: black;
@@ -160,6 +152,70 @@ button {
 #btn-like {
 	background: white;
 }
+
+.comment {
+	box-sizing: content-box;
+	margin-top: 20px;
+	margin: 10px;
+}
+
+#comment-area textarea {
+	display: block;
+	margin-bottom: 10px;
+	margin-left: 20px;
+	width: 80%;
+	height: 40%;
+	padding: 10px;
+	font-size: 13px;
+	line-height: 18px;
+	border: 1px solid #e4e4e4;
+	background: #fff;
+	box-sizing: border-box !important;
+}
+
+textarea {
+	resize: none;
+}
+
+#upload {
+	text-align: right;
+	width: 80%;
+	margin-bottom: 20px;
+}
+
+#comment-box {
+	display: block;
+	margin-top: 20px;
+	margin-left: 20px;
+	margin-bottom: 20px;
+	bottom-border: 1px solid #e4e4e4;
+	width: 80%;
+	height: 40%;
+	padding: 10px;
+	font-size: 13px;
+	line-height: 18px;
+	border: 1px solid #e4e4e4;
+	background: #fff;
+	box-sizing: border-box !important;
+}
+
+#cmtId {
+	margin-bottom: 10px;
+	height: 30px;
+}
+
+#cmtco {
+	margin-bottom: 10px;
+	font-size: 13px;
+	line-height: 18px;
+}
+
+#cmtda {
+	display: inline-block;
+	font-size: 12px;
+	line-height: 12px;
+	color: #92;
+}
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -220,8 +276,6 @@ button {
 		</ul>
 	</div>
 
-
-	<!-- 모바일 뷰온버튼 -->
 	<button id="viewon" class="hidden-lg hidden-md visible-sm visible-xs">이
 		프로젝트 펀딩하기</button>
 
@@ -230,8 +284,34 @@ button {
 
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 box2"
 		style="padding: 10px;">
-		<!-- 게시글작성영역 -->
-		<div id="content"></div>
+		<!-- 댓글작성 영역 -->
+		<div class="comment">
+			<p>개의 댓글이 달렸습니다.</p>
+			<form id="comment-area" action="coinsert.ask">
+				<textarea id="acontent" name="acontent" style="overflow-y: hidden;"
+					rows="3" cols="50" maxlength="140;" placeholder="댓글을 입력하세요"></textarea>
+				<div id="upload">
+					<input type="submit" value="등록하기">
+					<input type="hidden" value="${pro_no}" name="pro_no">
+				</div>
+			</form>
+
+			<c:if test="${empty aList }">
+				  아직 댓글이 없습니다. 
+				  첫번째 댓글의 주인공이 되어주세요! :)
+				</c:if>
+
+			<c:if test="${!empty aList}">
+				<div id="comment-box">
+					<c:forEach var="ask" items="${aList}">
+						<p id="cmtId">${ask.nickname }</p>
+						<p id="cmtco">${ask.ask_content }</p>
+						<span id="cmtda">${ask.ask_date }</span>
+						<hr>
+					</c:forEach>
+				</div>
+			</c:if>
+		</div>
 	</div>
 
 	<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
@@ -306,6 +386,9 @@ button {
 			<button class="btn-fund">펀딩하기</button>
 		</div>
 	</div>
+
+
+
 
 
 

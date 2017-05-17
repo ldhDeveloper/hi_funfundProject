@@ -10,23 +10,31 @@
 		<result property="ask_content" column="ask_content" />
 		<result property="id_no" column="id_no" />
 		<result property="ask_date" column="ask_date" />
-		<result property="id" column="id" />
 	</resultMap>
 
-	<select id="selectList" resultMap="itemAskResult" parameterType="int">
-		select ask_no, it.pro_no, ask_type, ask_content, id_no, ask_date, a.id
-		from itemask ask
-		inner join item it on ask.pro_no=it.pro_no
-		inner join
-		account a on ask.id_no = a.ano
+	<resultMap type="itemAskAccount" id="itemAskResult2">
+		<id property="ask_no" column="ask_no" />
+		<result property="pro_no" column="pro_no" />
+		<result property="ask_type" column="ask_type" />
+		<result property="ask_content" column="ask_content" />
+		<result property="id_no" column="id_no" />
+		<result property="ask_date" column="ask_date" />
+		<result property="nickname" column="nickname" />
+	</resultMap>
+
+	<select id="selectList" resultMap="itemAskResult2"
+		parameterType="int">
+		select ask_no, it.pro_no, ask_type, ask_content, id_no,
+		ask_date, a.nickname
+		from itemask ask inner join item it on ask.pro_no=it.pro_no
+		inner join account a on ask.id_no = a.ano
 		where it.pro_no = #{pro_no}
-		order by
-		ask_no
+		order by ask_date
 	</select>
-	
+
 	<insert id="insertAsk" parameterType="HashMap">
 		insert into itemask
-		values('seq_ask.nextval,','#{pro_no}','댓글','#{acontent}','#{id_no}','sysdate');
+		values(seq_ask.nextval,#{pro_no},'댓글',#{acontent},#{id_no},sysdate)
 	</insert>
 
 
