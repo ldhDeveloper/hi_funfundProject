@@ -8,25 +8,29 @@ import org.springframework.stereotype.Repository;
 
 import com.hi.funfund.pupdate.model.vo.Pupdate;
 
-@Repository("pUpdateDao")
+@Repository("PupdateDao")
 public class PupdateDao {
 
-	private static final String nameSpace = "pUpdateMapper.";
+	private static final String nameSpace = "pupdateMapper.";
 	@Autowired
 	private SqlSession sqlSession;
+
 	public List<Pupdate> selectList(int pro_no) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Pupdate> pList = sqlSession.selectList(nameSpace + "selectList", pro_no);
+		return pList;
 	}
-	public int insert(Pupdate pUpdate) {
+
+	public int insert(Pupdate Pupdate) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 	public int delete(int upno) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	public int update(Pupdate pUpdate) {
+
+	public int update(Pupdate Pupdate) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

@@ -97,7 +97,7 @@
 		<url-pattern>*.ask</url-pattern>
 	</servlet-mapping>
 
-	<!-- item 요청 서블릿 -->
+	<!-- attachment 요청 서블릿 -->
 	<servlet>
 		<servlet-name>attachment</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -111,6 +111,22 @@
 	<servlet-mapping>
 		<servlet-name>attachment</servlet-name>
 		<url-pattern>*.at</url-pattern>
+	</servlet-mapping>
+	
+	<!-- pupdate 요청 서블릿 -->
+	<servlet>
+		<servlet-name>pupdate</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/config/pupdate-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+		
+	<servlet-mapping>
+		<servlet-name>pupdate</servlet-name>
+		<url-pattern>*.up</url-pattern>
 	</servlet-mapping>
 	
 	<!-- Start: 한글문제 처리 -->

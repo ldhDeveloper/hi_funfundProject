@@ -35,7 +35,7 @@
 				ACCOUNT
 			WHERE
 				ID = #{id}	 AND PWD = ENCRYPTION_AES.ENC_AES(#{pwd})
-		]]>
+		]]> 
 	</select>
 	<insert id="signupAccount" parameterType="account">
 		<![CDATA[
@@ -54,10 +54,9 @@
 		]]>
 	</select>
 	
-
-	<select id="selectOldPwd" parameterType="account" resultMap="accountResult" resultType="hashmap">
+	<select id="selectOldPwd" parameterType="hashmap" resultMap="accountResult">
 		<![CDATA[			
-			SELECT ENCRYPTION_AES.DEC_AES(pwd) FROM ACCOUNT WHERE ANO=#{ano} 
+			SELECT ano, id, ENCRYPTION_AES.DEC_AES(#{oldPwd}) AS pwd, email, pimage, idtype, idtoken, seller, outyn, nickname FROM ACCOUNT WHERE ano=#{ano} 
 		]]>
 	</select>
 	

@@ -216,7 +216,7 @@ button {
 		<ul class="w3-border-bottom w3-border-gray">
 			<li class="active"><a href="detail.it?pro_no=${item.pro_no }">스토리</a></li>
 			<li><a href="reply.ask?pro_no=${item.pro_no }">댓글( )</a></li>
-			<li><a>새소식( )</a></li>
+			<li><a href="news.up?pro_no=${item.pro_no}">새소식( )</a></li>
 		</ul>
 	</div>
 

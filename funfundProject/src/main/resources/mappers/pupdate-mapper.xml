@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD mapper 3.0//en"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pupdateMapper">
+	<resultMap type="pupdate" id="pupdateResult">
+		<id column="upno" property="upno" />
+		<result column="pro_no" property="pro_no" />
+		<result column="uptitle" property="uptitle" />
+		<result column="upname" property="upname" />
+		<result column="uploaddate" property="uploaddate" />
+	</resultMap>
+
+	<select id="selectList" parameterType="int" resultMap="pupdateResult">
+		select upno, pro_no, uptitle, upname, uploaddate
+		from pupdate
+		where pro_no=#{pro_no}
+	</select>
+
+</mapper>

@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
+<!DOCTYPE html >
 <html>
 <head>
 <meta charset="UTF-8">
@@ -153,109 +153,15 @@ button {
 	background: white;
 }
 
-.comment {
-	box-sizing: content-box;
-	margin-top: 20px;
-	margin: 10px;
-}
-
-#comment-area textarea {
+.block {
+	border-top: 1px solid #e4;
+	border-bottom: 1px solid #e4;
 	display: block;
-	margin-bottom: 10px;
-	margin-left: 20px;
-	width: 80%;
-	height: 40%;
-	padding: 10px;
-	font-size: 13px;
-	line-height: 18px;
-	border: 1px solid #e4e4e4;
-	background: #fff;
-	box-sizing: border-box !important;
-}
-
-textarea {
-	resize: none;
-}
-
-#upload {
-	text-align: right;
-	width: 80%;
-	margin-bottom: 20px;
-}
-
-#comment-box {
-	display: block;
-	margin-top: 20px;
-	margin-left: 20px;
-	margin-bottom: 20px;
-	bottom-border: 1px solid #e4e4e4;
-	width: 80%;
-	height: 40%;
-	padding: 10px;
-	font-size: 13px;
-	line-height: 18px;
-	border: 1px solid #e4e4e4;
-	background: #fff;
-	box-sizing: border-box !important;
-}
-
-#cmtId {
-	margin-bottom: 10px;
-	height: 30px;
-}
-
-#cmtco {
-	margin-bottom: 10px;
-	font-size: 13px;
-	line-height: 18px;
-}
-
-#cmtda {
-	display: inline-block;
-	font-size: 12px;
-	line-height: 12px;
-	color: #92;
 }
 </style>
-<script type="text/javascript">
-	$(function() {
-		$('#btn-like').click(function() {
-			if ($(this).hasClass("backpink")) {
-				$(this).removeClass("backpink");
-			} else {
-				$(this).addClass("backpink");
-			}
-		}).hover(function() {
-			if ($(this).hasClass("backpink")) {
-				$(this).removeClass("backpink");
-			} else {
-				$(this).addClass("backpink");
-			}
-		});
-
-		$('.btn-fund').hover(
-				function() {
-					$('.btn-fund').css('background-color', '#fedb9a').css(
-							'border-color', '#c96903');
-				},
-				function() {
-					$('.btn-fund').css('background-color', '#fec250').css(
-							'border-color', 'transparent');
-				});
-
-		$('.makerbox').hover(function() {
-			$(this).css('background-color', '#c6ebd9');
-		}, function() {
-			$(this).css('background-color', 'white');
-		});
-
-		var co = '<c:out value="${item.pcontent}"/>';
-		$("#content").html(co);
-		
-	});
-</script>
 </head>
 <body>
+
 	<jsp:include page="/WEB-INF/views/common/menubar.jsp" flush="true" />
 	<div class="row background">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -272,7 +178,7 @@ textarea {
 		<ul class="w3-border-bottom w3-border-gray">
 			<li class="active"><a href="detail.it?pro_no=${param.pro_no }">스토리</a></li>
 			<li><a href="reply.ask?pro_no=${param.pro_no }">댓글( )</a></li>
-			<li><a href="news.up?pro_no=${item.pro_no}">새소식( )</a></li>
+			<li><a href="news.up?pro_no=${param.pro_no}">새소식( )</a></li>
 		</ul>
 	</div>
 
@@ -284,34 +190,17 @@ textarea {
 
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 box2"
 		style="padding: 10px;">
-		<!-- 댓글작성 영역 -->
-		<div class="comment">
-			<p>개의 댓글이 달렸습니다.</p>
-			<form id="comment-area" action="coinsert.ask">
-				<textarea id="acontent" name="acontent" style="overflow-y: hidden;"
-					rows="3" cols="50" maxlength="140;" placeholder="댓글을 입력하세요"></textarea>
-				<div id="upload">
-					<input type="submit" value="등록하기">
-					<input type="hidden" value="${param.pro_no}" name="pro_no">
-				</div>
-			</form>
-
-			<c:if test="${empty aList }">
-				  아직 댓글이 없습니다. 
-				  첫번째 댓글의 주인공이 되어주세요! :)
-				</c:if>
-
-			<c:if test="${!empty aList}">
-				<div id="comment-box">
-					<c:forEach var="ask" items="${aList}">
-						<p id="cmtId">${ask.nickname }</p>
-						<p id="cmtco">${ask.ask_content }</p>
-						<span id="cmtda">${ask.ask_date }</span>
-						<hr>
-					</c:forEach>
-				</div>
-			</c:if>
-		</div>
+		<!-- 업데이트 글 작성 영역 -->
+		<c:forEach var="update" items="${pList}">
+			<div class="block">
+				<span>#${update.upno }</span> <span>${update.uptitle}</span> <span>
+					<fmt:formatDate value="${update.uploaddate}" var="date"
+						pattern="yyyyMMdd" /> ${date }
+				</span>
+				<div class="content">${update.upname }</div>
+				<hr>
+			</div>
+		</c:forEach>
 	</div>
 
 	<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
@@ -386,10 +275,6 @@ textarea {
 			<button class="btn-fund">펀딩하기</button>
 		</div>
 	</div>
-
-
-
-
 
 
 </body>
