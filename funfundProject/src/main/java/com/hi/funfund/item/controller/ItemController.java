@@ -134,42 +134,35 @@ public class ItemController {
 	@RequestMapping("insertReward.it")
 	public ModelAndView insertRewardItem(ModelAndView model, FundMenu fmenu) {
 		System.out.println(fmenu);
-
-		return null;
+		ArrayList<FundMenu> fmlist = null;
+		
+		
+		int result = fundMenuService.insertFundMenu(fmenu);
+		
+		if(result > 0){
+			fmlist = fundMenuService.selectList(fmenu.getPro_no());
+			model.setViewName("jsonView");
+			model.addObject("fmlist", fmlist);
+			System.out.println("fmlist : " + fmlist);
+		}
+		
+		return model;
 	}
 
 	@RequestMapping(value="update.it", method = RequestMethod.POST)
-	@ResponseBody
-	public ModelAndView insertRewardItem(Item item, @RequestBody String str, /*ReciveFundMenu rfmenu, */HttpServletRequest request ){
-		int result1, result2 = 0;
+	public ModelAndView insertRewardItem(ModelAndView model, Item item,  HttpServletRequest request ){
+		int result = 0;
 		
 			/*System.out.println(rfmenu);*/
 		
 		
 
-		result1 = itemService.updateRewardItem(item);
+		result = itemService.updateRewardItem(item);
+		model.addObject("pro_no", item.getPro_no());
 		
-		/*for(int i = 0; i < rfmenu.getMnum().size(); i ++){
-			FundMenu fmenu = new FundMenu();
-			fmenu.setMnum(rfmenu.getMnum().get(i));
-			fmenu.setPro_no(rfmenu.getPro_no());
-			fmenu.setMcost(rfmenu.getMcost().get(i));
-			fmenu.setMname(rfmenu.getMname().get(i));
-			fmenu.setMcontent(rfmenu.getMcontent().get(i));
-			fmenu.setMcount(rfmenu.getMcount().get(i));
-			fmenu.setMdate(rfmenu.getMdate().get(i));
-			
-			System.out.println("반복");
-			int insertOrUpdate = fundMenuService.insertOrUpdateFundMenu(fmenu);
-			
-			
-		}*/
-		
-		
-		
-		// result2 = fundMenuService.updateFundMenu(fmenu);
+		model.setViewName("makeproject/primaryinfo");
 
-		return null;
+		return model;
 	}
 
 	@RequestMapping("funding.it")

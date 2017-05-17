@@ -152,7 +152,7 @@ li {
 		</ul>
 	</div>
 	<form id="frm" action="update.it?pro_no=${ pro_no }" method="post"
-		enctype="application/json">
+		enctype="application/json" onsubmit="return false;">
 
 		<%-- <input type="hidden" value="${ param.pro_no }"> --%>
 
@@ -450,6 +450,8 @@ li {
 			<div align="center">
 				<button class="btn btn-warning" id="addReward">추가하기</button>
 			</div>
+			<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+							<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 			<script>
 				$(function(){
 					$("#addReward").click(function(){
@@ -466,9 +468,14 @@ li {
 						
 						$.ajax({
 							url : "insertReward.it",   
-				            type : "POST",  
+				            type : "POST", 
+				            async: true,
 				            data : {"pro_no":pro_no, "mname":mname, "mcost":mcost, "mnum":mnum, "dcost":dcost, "mdate":mdate, "mcount":mcount, "delyn":delyn, "mcontent":mcontent},
 				            success : function(data){
+				            	
+				            	console.log($(data));
+				            	console.log(data[0].length);
+				            
 				            	
 				            }
 
