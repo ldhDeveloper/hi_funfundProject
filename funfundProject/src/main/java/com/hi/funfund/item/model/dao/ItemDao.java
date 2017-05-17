@@ -48,5 +48,11 @@ public class ItemDao {
 		
 		return result;
 	}
+
+	public List<Item> top3List() {
+		List<Item> top3List = (List<Item>) sqlSession.selectList(nameSpace+"top3List");
+		System.out.println("top3List :"+top3List.get(0));
+		return top3List;
+	}
 	
 }

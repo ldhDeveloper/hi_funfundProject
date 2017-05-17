@@ -31,11 +31,20 @@ public class AttachmentController {
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest)request;
 		MultipartFile uploadFile = multipartRequest.getFile("uploadFile");
 		HttpSession session = request.getSession(false);
+		/*File file = new File("..\..\weapp");
+		String root = file.getCanonicalPath().toString();*/
 		String page="";
 		String photoflag = request.getParameter("photoflag");
 		String root = request.getSession().getServletContext().getRealPath("/");
 		System.out.println("root : " + root);
-		String savePath = root + "uploadFile/images/profileimage/";
+		String[] roots = root.split("\\\\");
+		String marger="";
+		for(int i=0 ; i<roots.length-3; i++){
+			marger += roots[i] + "\\";
+		}
+		System.out.println("marger : " + marger);
+		String savePath = marger + "src/main/webapp/images/myinfo/";
+		System.out.println("savepath : " + savePath);
 		int ano=0;
 		int result=0;
 		if(!uploadFile.isEmpty()){

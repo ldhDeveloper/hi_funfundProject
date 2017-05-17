@@ -80,7 +80,36 @@
 			</div>
 		</div>
 	</div>
+	<div class="row">
+			<c:forEach var="item" items="${top3List}">
+					<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+						<div class="thumbnail" align="center">
+							<a href="detail.it?pro_no=<c:out value="${item.pro_no}"/>"> <img
+								src="/funfund/images/funding/face.PNG" alt="사진1"
+								style="width: 100%">
+								<div class="progress">
+									<div class="progress-bar progress-bar-warning"
+										role="progressbar" aria-valuenow="60" aria-valuemin="0"
+										aria-valuemax="<c:out value="${item.ecost}"/>" style="width: 60%;">
+										<span class="sr-only"></span>
+									</div>
+								</div>
+								<p>
+									<span></span> % &nbsp;&nbsp; <span></span>원 달성 &nbsp;&nbsp; <span></span>
+									일 남음
+								</p>
 
+								<div class="caption">
+									<p>
+										<c:out value="${item.pcontent }" />
+									</p>
+									<span><c:out value="${item.category}" /></span>
+								</div>
+							</a>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
 
 </body>
 </html>

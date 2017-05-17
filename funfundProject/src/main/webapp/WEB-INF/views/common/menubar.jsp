@@ -711,12 +711,15 @@ label.sign-form_title {
             		<td style="width:80px;"><a class="fun-menu" href="#"><c:out value="${sessionScope.account.nickname}" /></a></td>
             		<td style="width:80px;"><a class="fun-menu" data-toggle="modal" data-target="#myModal4" style="cursor:pointer">
             		
-            		<img id="smallprofile" style="width:34px;" class="img-circle img-responsive" src="images/myinfo/basic.png"/>
+            		
           
-            		<%-- <c:if test="${!empty sessionScope.account.pimage }">
-            			<img style="width:34px;" class="img-circle img-responsive" src=""/>
-            		</c:if> --%>
-            		</a></td>
+            		<c:if test="${!empty sessionScope.account.pimage }">
+            			<img style="width:34px;" class="img-circle img-responsive" src="images/myinfo/<c:out value='${sessionScope.account.pimage }'/>"/>
+            		</c:if>
+            		<c:if test="${empty sessionScope.account.pimage }">
+            			<img style="width:34px;" class="img-circle img-responsive" src="images/myinfo/basic.png"/>
+            		</c:if>
+            		</td>
             		
             		<!-- <td style="width:80px;"><a class="fun-menu" href="logout.ao">로그아웃</a></td>
             		<td style="width:150px;"><a class="fun-menu" href="myinfo.ao">회원정보보기</a></td> -->
@@ -911,7 +914,14 @@ label.sign-form_title {
 			<div id="navlist" class="modal-content">
 
 				<div class="modal-header navheader">
-					<div class="navproimage"><img src="images/myinfo/basic.png"></div>
+					<div class="navproimage">
+					<c:if test="${empty sessionScope.account.pimage }">
+						<img src="images/myinfo/basic.png">
+					</c:if>
+					<c:if test="${!empty sessionScope.account.pimage }">
+						<img src="images/myinfo/<c:out value='${sessionScope.account.pimage }'/>">
+					</c:if>
+					</div>
 					<div class="profileinfo">
 						<p class="nickname"><c:out value="${sessionScope.account.nickname}"/></p>
 						<p class="username"><c:out value="${sessionScope.account.id}"/></p>

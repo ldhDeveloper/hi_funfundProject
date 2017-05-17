@@ -2,28 +2,41 @@ package com.hi.funfund;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.hi.funfund.item.model.service.ItemService;
+import com.hi.funfund.item.model.vo.Item;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
 public class HomeController {
+	@Autowired
+	private ItemService itemService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "start.do", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public ModelAndView home(ModelAndView model) {
+		List<Item> top3List = itemService.top3List();
+		model.addObject("top3List", top3List);
+		model.setViewName("home");
+		return model;
+	}
+	/*public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
 		Date date = new Date();
@@ -34,7 +47,7 @@ public class HomeController {
 		model.addAttribute("serverTime", formattedDate );
 		
 		return "home";
-	}
+	}*/
 	
 	@RequestMapping(value = "make.do")
 	public String make(){

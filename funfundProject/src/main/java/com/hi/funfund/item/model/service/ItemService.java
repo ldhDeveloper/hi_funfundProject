@@ -38,5 +38,7 @@ public interface ItemService {
 	 int[] getGrowRate(int pro_no); // 성장률 표시
 	
 	 int updateRewardItem(Item item);
+
+	List<Item> top3List();
 	
 }
