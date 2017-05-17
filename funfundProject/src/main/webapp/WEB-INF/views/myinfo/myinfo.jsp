@@ -240,7 +240,12 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 								<input type="hidden" name="photoflag" value="update">
 							</c:if>
 							<input id="profileimagefile" type="file" name="uploadFile" style="display:none;" onchange="LoadImg(this);">
-							<img id="profileimage" class="img-circle img-responsive" src="images/myinfo/basic.png" style="max-width:170px;max-height:170px; width:170px; heigh:150px; cursor:pointer" onclick="document.all.uploadFile.click();">
+							<c:if test="${empty sessionScope.account.pimage }">
+								<img id="profileimage" class="img-circle img-responsive" src="images/myinfo/basic.png" style="max-width:170px;max-height:170px; width:170px; heigh:150px; cursor:pointer" onclick="document.all.uploadFile.click();">
+							</c:if>
+							<c:if test="${!empty sessionScope.account.pimage }">
+								<img id="profileimage" class="img-circle img-responsive" src="images/myinfo/<c:out value='${sessionScope.account.pimage }'/>" style="max-width:170px;max-height:170px; width:170px; heigh:150px; cursor:pointer" onclick="document.all.uploadFile.click();">
+							</c:if>
 							<!-- <img class="img-circle img-responsive" src="images/myinfo/basic.png" style="max-width:170px;max-height:170px; width:170px; heigh:150px; cursor:pointer" onclick="uploadFile();"> -->
 							</form>
 						</div>
@@ -270,10 +275,10 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 		       
 							</div>
 							<div style="margin-top:20px;">
-		                 		<c:if test="${empty sessionScope.attachment }">
+		                 		<c:if test="${empty sessionScope.account.pimage }">
 		                 			<button id="insertphoto" class="btn btn-info" onclick="photosubmit();">사진추가하기</button>
 		                 		</c:if>
-		                 		<c:if test="${!empty sessionScope.attachment }">
+		                 		<c:if test="${!empty sessionScope.account.pimage }">
 		                 			<button id="updatephoto" class="btn btn-info" onclick="photosubmit();">사진변경하기</button>
 		                 		</c:if>
 		                 	</div>

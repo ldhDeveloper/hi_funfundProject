@@ -55,4 +55,12 @@
 	        ]]>
 	</update>
 
+	<select id="top3List" resultMap="itemResult">
+			<![CDATA[
+			select pro_no, ano, pname, pcontent, category, psdate, pedate, pshort, ecost, refund, pvideo, pstatus, likecount, sharelink, bankcode, accpnm, accnum, cname, cs_email, cs_phone 
+			from(SELECT i.*, ROW_NUMBER() OVER (ORDER BY likecount DESC) rnum
+     				FROM item i) it
+			where rnum <= 3
+	        ]]>
+	</select>
 </mapper>

@@ -110,4 +110,10 @@ public class ItemServiceIm implements ItemService{
 		
 		return result;
 	}
+
+	@Override
+	public List<Item> top3List() {
+		// TODO Auto-generated method stub
+		return itemDao.top3List();
+	}
 }
