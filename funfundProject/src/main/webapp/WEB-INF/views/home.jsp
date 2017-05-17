@@ -27,7 +27,7 @@
 
 
 	<!-- 슬라이드 사진 영역 -->
-	<div class="row" style="display:none;">
+	<div class="row">
 		
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="container" style="padding-left: 0px;padding-right: 0px; width:100%;">
