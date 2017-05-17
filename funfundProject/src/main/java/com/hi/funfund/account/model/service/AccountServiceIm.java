@@ -75,8 +75,7 @@ public class AccountServiceIm implements AccountService {
 
 	@Override
 	public Account selectAccount(int ano) {
-		// TODO Auto-generated method stub
-		return null;
+		return accountDao.selectAccount(ano);
 	}
 
 	@Override
@@ -125,5 +124,20 @@ public class AccountServiceIm implements AccountService {
 	public int insertName(int ano, String name) {
 		System.out.println("Service ano : " + ano + " name : " + name);
 		return accountDao.insertName(ano, name);
+	}
+
+	// updateName 이름 수정
+	
+	@Override
+	public int updateName(int ano, String name) {
+		return accountDao.updateName(ano, name);
+	}
+
+	// updateNickname 닉네임 수정
+	
+	@Override
+	public int updateNickname(int ano, String nickname) {
+		System.out.println("Service ano : " + ano + " nickname : " + nickname);
+		return accountDao.updateNickname(ano, nickname);
 	}	
 }

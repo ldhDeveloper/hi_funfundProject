@@ -58,4 +58,27 @@ public class AccountDao {
 		int result = sqlSession.update("insertName", hmap);
 		return result;
 	}
+
+	public int updateName(int ano, String name) {
+		HashMap<String, String> hmap = new HashMap<String, String>();
+		hmap.put("ano",  Integer.toString(ano));
+		hmap.put("name", name);
+		int result = sqlSession.update("updateName", hmap);
+		System.out.println("Dao ano : " + ano + " name : " + name);
+		return result;
+	}
+
+	public int updateNickname(int ano, String nickname) {
+		HashMap<String, String> hmap = new HashMap<String, String>();
+		hmap.put("ano", Integer.toString(ano));
+		hmap.put("nickname", nickname);
+		int result = sqlSession.update("updateNickname", hmap);
+		System.out.println("Dao ano : " + ano + " nickname : " + nickname);
+		return result;
+	}
+
+	public Account selectAccount(int ano) {
+		Account account = (Account) sqlSession.selectOne("selectAccount", ano);
+		return account;
+	}
 }

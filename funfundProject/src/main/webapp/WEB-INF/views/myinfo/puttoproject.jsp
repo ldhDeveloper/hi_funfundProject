@@ -136,7 +136,7 @@
 .mnameText {
 	border: none;
 	color: #4D525B;
-	width: 10%;
+	width: 40%;
 	background-color: #F8F8F8;
 }
 

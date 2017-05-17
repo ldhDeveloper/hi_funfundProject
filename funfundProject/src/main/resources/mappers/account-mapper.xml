@@ -65,4 +65,16 @@
 			UPDATE ACCOUNT SET pwd=ENCRYPTION_AES.ENC_AES(#{newPwd}) WHERE ano=#{ano}
 		]]>
 	</update>
+	
+	<update id="updateNickname">
+		<![CDATA[
+			UPDATE ACCOUNT SET nickname=#{nickname} WHERE ano=#{ano}
+		]]>
+	</update>
+	
+	<select id="selectAccount" parameterType="int" resultMap="accountResult">
+		<![CDATA[
+			SELECT * FROM ACCOUNT WHERE ANO = #{ano}
+		]]>
+	</select>
 </mapper>

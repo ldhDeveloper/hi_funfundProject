@@ -98,9 +98,6 @@ public class AccountController {
 	// myinfo 회원 정보 설정 끝
 	
 	// Myinfo 이름, 닉네임 변경 시각
-	// myinfoModify.ao
-	
-	// Myinfo 이름, 닉네임 변경 끝
 	
 	@RequestMapping(value = "changeMyinfo.ao")
 	public String changeMyinfo(ModelAndView model, HttpSession session, HttpServletRequest request) {
@@ -111,17 +108,45 @@ public class AccountController {
 		
 		int ano = account.getAno();
 		String name = request.getParameter("name");
-		/*String nickname = request.getParameter("nickname");*/
+		String nickname = request.getParameter("nickname");
 		
-		int result = accountService.insertName(ano, name);
-		
-		System.out.println("Controller ano : " + ano + " name : " + name + " account : " + account);
+		//이름
 		
 		Party party = accountService.loginParty(ano);
+				
+		if(party == null){
+			int result = accountService.insertName(ano, name);
+			
+			System.out.println("Controller ano : " + ano + " name : " + name);
+		}
+		
+		else {
+			int result2 = accountService.updateName(ano, name);
+			
+			System.out.println("Controller2 ano : " + ano + " name : " + name);
+		}
+		party = accountService.loginParty(ano);
 		session.setAttribute("party", party);
+		
+		// 닉네임
+		
+		System.out.println("Controller3 account" + account);
+		
+				
+		if(account != null) {
+			int result = accountService.updateNickname(ano, nickname);
+			System.out.println("Controller4 account" + account);
+			System.out.println("Controller5 nickname : " + nickname);
+		}
+		
+		/*account.setNickname(nickname);*/
+		account = accountService.selectAccount(ano);
+		session.setAttribute("account", account);
 		
 		return "myinfo/myinfo";
 	}
+	
+	// Myinfo 이름, 닉네임 변경 끝
 	
 	// myinfo 비밀번호 변경 시작
 	
