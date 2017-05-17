@@ -27,7 +27,8 @@
 
 
 	<!-- 슬라이드 사진 영역 -->
-	<div class="row">
+	<div class="row" style="display:none;">
+		
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="container" style="padding-left: 0px;padding-right: 0px; width:100%;">
 				<div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -79,8 +80,9 @@
 				</div>
 			</div>
 		</div>
+		<div class="col-lg-1"></div>
 	</div>
-	<div class="row">
+	<div class="row" style="margin: 0px 20px 0 20px;">
 			<c:forEach var="item" items="${top3List}">
 					<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 						<div class="thumbnail" align="center">
@@ -109,7 +111,6 @@
 						</div>
 					</div>
 				</c:forEach>
-			</div>
-
+				</div>
 </body>
 </html>

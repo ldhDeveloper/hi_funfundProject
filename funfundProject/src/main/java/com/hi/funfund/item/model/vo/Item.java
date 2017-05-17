@@ -33,6 +33,7 @@ public class Item implements Serializable {
 	private String cs_email;
 	private String cs_phone;
 
+
 	public int getPro_no() {
 		return pro_no;
 	}
@@ -195,7 +196,7 @@ public class Item implements Serializable {
 
 	public Item(int pro_no, int ano, String pname, String pcontent, String category, Date psdate, Date pedate,
 			String pshort, Integer ecost, String refund, String pvideo, String pstatus, int likecount, String sharelink,
-			String bankcode, String accpnm, String accnum, String cname, String cs_email, String cs_phone) {
+			String bankcode, String accpnm, String accnum, String cname, String cs_email, String cs_phone, int totalcost) {
 		super();
 		this.pro_no = pro_no;
 		this.ano = ano;
