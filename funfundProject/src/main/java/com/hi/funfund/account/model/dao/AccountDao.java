@@ -50,4 +50,12 @@ public class AccountDao {
 		System.out.println("Dao ano : " + ano + " newPwd : " + newPwd + " result : " + result);
 		return result;
 	}
+
+	public int insertName(int ano, String name) {
+		HashMap<String, String> hmap = new HashMap<String, String>();
+		hmap.put("ano",  Integer.toString(ano));
+		hmap.put("name", name);
+		int result = sqlSession.update("insertName", hmap);
+		return result;
+	}
 }

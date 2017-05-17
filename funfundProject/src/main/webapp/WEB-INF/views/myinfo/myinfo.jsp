@@ -102,7 +102,7 @@
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 	width: 100%;
-	height : 1180px;
+	height : 1350px;
 	padding-top: 2%;
 }
 
@@ -210,6 +210,11 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 .glyphicon {
 	color: #50E3C2;
 }
+
+/* .testAlert {
+	height: 40px;
+	padding-top: 1%;
+} */
 </style>
 
 <title>Insert title here</title>
@@ -309,27 +314,27 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 						
 							<div class="minput" align="center">
 								<div class="email-input-wrap">
-									<form action="myinfo1.ao">
+									<form action="changeMyinfo.ao" method="post">
 									
-									<h6 align="left">이름</h6>
-									<c:if test="${ empty sessionScope.party.pname}">
-		                 				<input type="text" name="pname" class="input-text" placeholder="이름" value=""/>
-		                 			</c:if>
+										<h6 align="left">이름</h6>
+										<c:if test="${ empty sessionScope.party.pname}">
+		                 					<input type="text" name="name" class="input-text" placeholder="이름" value=""/>
+		                 				</c:if>
 		                 			
-		                 			<c:if test="${ !empty sessionScope.party.pname}">
-		                 				<input type="text" name="pname" class="input-text" placeholder="이름" value="${ sessionScope.party.pname }"/>
-		                 			</c:if>
+		                 				<c:if test="${ !empty sessionScope.party.pname}">
+		                 					<input type="text" name="name" class="input-text" placeholder="이름" value="${ sessionScope.party.pname }"/>
+		                 				</c:if>
 		                 			
-		                 			<h6 align="left">닉네임</h6>
-		                 			<input type="text" name="nickName" class="input-text" placeholder="닉네임" value="${ sessionScope.account.nickname }"/>
+		                 				<h6 align="left">닉네임</h6>
+		                 				<input type="text" name="nickname" class="input-text" placeholder="닉네임" value="${ sessionScope.account.nickname }"/>
 		                 			
-		                 			<br>
+		                 				<br>
 		                 			
-		                 			<div class="email-input-wrap small">
-										<div class="btn-wrap">
-											<input type="submit" id="saveBtn" class="pwdBtn btn-block-purple" value="설정하기">
-	                        			</div>
-	                     			</div>
+		                 				<div class="email-input-wrap small">
+											<div class="btn-wrap">
+												<input type="submit" id="saveBtn" class="pwdBtn btn-block-purple" value="설정하기">
+	                        				</div>
+	                     				</div>
 	                     			
 	                     			</form>
 	                     			
@@ -381,66 +386,105 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 	                        		<em class="line"></em>             			                        	                     	
 									
 									<form action="changePwd.ao" method="post">	
-									<div id="accountWrap">
-            	            			<div id="newContainer">
-                							<div class="account-wrap">
-                    							<h3 class="mh32">비밀번호 설정</h3>
-                    							<div class="email-input-wrap">                  								
+										<div id="accountWrap">
+            	            				<div id="newContainer">
+                								<div class="account-wrap">
+                    								<h3 class="mh32">비밀번호 설정</h3>
+                    								<div class="email-input-wrap">                  								
                         								<input type="password" id="oldPwd" name="oldPwd" class="input-text" placeholder="현재 비밀번호" />
+                        								                        								
+                        								<p class="alert alert-danger" id="oldPwdInput"></p>
                         								<!-- <p id="oldPasswordError" class="error-text">현재 비밀번호가 일치 하지 않습니다.</p> -->
+                        								
                         								<input type="password" id="newPwd" class="input-text" placeholder="새 비밀번호" />
+                        								<p class="alert alert-danger" id="newPwdInput"></p>
                         								<!-- <p id="passwordError" class="pwd-text">영문, 숫자, 특수문자 (!@#$%^&*+=-)를 모두 조합한 8자 이상</p> -->
                         								
     													<div class="checkSign form-group has-success has-feedback">     
         													<input type="password" name="newPwd" id="newPwd2" class="input-text" id="inputSuccess" placeholder="새 비밀번호 확인">
         													<span id="gicon" class="checkSign glyphicon form-control-feedback" style="margin-top:7px"></span>
-    													</div>                       								
-                    							</div>
-                							</div>
-            							</div>
-        							</div>
+    													</div>
+    													<p class="alert alert-danger" id="newPwdInput2"></p>    													
+    													<p class="alert alert-danger" id="newPwdInputSame"></p>                       								
+                    								</div>
+                								</div>
+            								</div>
+        								</div>
         							
-        							<br>
+        								<br>
 						
-									<div class="email-input-wrap small">
-										<div class="btn-wrap">
-											<input type="submit" id="saveBtn" class="pwdBtn btn-block-purple" value="설정하기">
-	                        			</div>
-	                     			</div>
-	                     			
+										<div class="email-input-wrap small">
+											<div class="btn-wrap">
+												<input type="submit" id="saveBtn" class="pwdBtn btn-block-purple" value="설정하기">
+	                        				</div>
+	                     				</div>	                     			
 	                     			</form>	
 	                     			
 	                     			<script>
         								$(function(){
+        									$("#oldPwdInput").removeClass("alert alert-danger");
+        									$("#newPwdInput").removeClass("alert alert-danger");
+        									$("#newPwdInput2").removeClass("alert alert-danger");
+        									$("#newPwdInputSame").removeClass("alert alert-danger");
+        									
         									$("#newPwd2").focusout(function(){
         										if($("#newPwd").val() != "" && $("#newPwd2").val() != "") {
         											if($("#newPwd").val() == $("#newPwd2").val()){
             											$("#gicon").removeClass("glyphicon-remove-circle");
             											$("#gicon").addClass("glyphicon-ok-circle");
-            											$("#gicon").css("color", "green");
-            											
+            											$("#gicon").css("color", "green");            											
             										}
             										
             										else{
             											$("#gicon").removeClass("glyphicon-ok-circle");
             											$("#gicon").addClass("glyphicon-remove-circle");
             											$("#gicon").css("color", "red");
+            											return false;
             										}
         										}
         										
         										else {
         											$("#gicon").removeClass("glyphicon-remove-circle");
         											$("#gicon").removeClass("glyphicon-ok-circle");
+        											return false;
         										}
         									});
-        								});
-        							</script>											
-								
+        									        									
+       									});
+        								
+        								function savePwd (){
+    										if($("#oldPwd").val() == "") {
+    											$("#oldPwdInput").addClass("alert alert-danger");
+    											$("#oldPwdInput").html("현재 비밀번호를 입력해주세요.");
+    											/* alert("현재 비밀번호를 입력해주세요."); */
+    											return false;
+    										}
+    										
+    										else if($("#newPwd").val() == "") {
+    											$("#newPwdInput").addClass("alert alert-danger");
+    											$("#newPwdInput").html("새 비밀번호를 입력해주세요.");
+    											/* alert("새 비밀번호를 입력해주세요."); */
+    											return false;
+    										}
+    										
+    										else if($("#newPwd2").val() == "") {
+    											$("#newPwdInput2").addClass("alert alert-danger");
+    											$("#newPwdInput2").html("새 비밀번호를 입력해주세요.");
+    											/* alert("새 비밀번호를 입력해주세요."); */
+    											return false;
+    										}
+    										
+    										else if($("#newPwd").val() != $("#newPwd2").val()) {
+    											$("#newPwdInputSame").addClass("alert alert-danger");
+    											$("#newPwdInputSame").html("새 비밀번호를 동일하게 입력해주세요");
+    											return false;
+    										}
+    									};
+        							</script>																			
 								</div>
 							</div>
 						</div>				
-					</div>
-				
+					</div>				
 				</div>
 			</div>
 		</div>

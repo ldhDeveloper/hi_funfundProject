@@ -97,31 +97,60 @@ public class AccountController {
 	
 	// myinfo 회원 정보 설정 끝
 	
+	// Myinfo 이름, 닉네임 변경 시각
+	// myinfoModify.ao
+	
+	// Myinfo 이름, 닉네임 변경 끝
+	
+	@RequestMapping(value = "changeMyinfo.ao")
+	public String changeMyinfo(ModelAndView model, HttpSession session, HttpServletRequest request) {
+		System.out.println("오니?");
+		
+		session = request.getSession(false);
+		Account account = (Account)session.getAttribute("account");
+		
+		int ano = account.getAno();
+		String name = request.getParameter("name");
+		/*String nickname = request.getParameter("nickname");*/
+		
+		int result = accountService.insertName(ano, name);
+		
+		System.out.println("Controller ano : " + ano + " name : " + name + " account : " + account);
+		
+		Party party = accountService.loginParty(ano);
+		session.setAttribute("party", party);
+		
+		return "myinfo/myinfo";
+	}
 	
 	// myinfo 비밀번호 변경 시작
 	
 	@RequestMapping(value = "changePwd.ao")
-	public ModelAndView insertRewardItem(ModelAndView model, HttpSession session, HttpServletRequest request) {
+	public ModelAndView changePwd(ModelAndView model, HttpSession session, HttpServletRequest request) {
 		System.out.println("오니?");
-		/*int ano = Integer.parseInt(request.getParameter("ano"));*/
+		
 		session = request.getSession(false);
 		Account account = (Account)session.getAttribute("account");
+		
 		int ano = account.getAno();
 		String oldPwd = request.getParameter("oldPwd");
 		String newPwd = request.getParameter("newPwd");
 		
 		System.out.println("ano : " + ano + " oldPwd : " + oldPwd + " newPwd : " + newPwd);
 		
-		account = accountService.selectOldPwd(ano, oldPwd);
+		Account account2 = accountService.selectOldPwd(ano, oldPwd);
 		
-		System.out.println("Controller ano : " + ano + " oldPwd : " + oldPwd);
+		System.out.println("Controller ano : " + ano + " oldPwd : " + oldPwd + " account2 : " + account2);
 		
-		int result = accountService.updatePwd(ano, newPwd);
+		if(account2 != null) {
+			int result = accountService.updatePwd(ano, newPwd);
+			
+			System.out.println("Controller ano : " + ano + " newPwd : " + newPwd);										
+		}
 		
-		System.out.println("Controller ano : " + ano + " newPwd : " + newPwd);
+		model.addObject("account", account2);
+		model.setViewName("myinfo/myinfo");	
 		
-		model.addObject("account", account);
-		model.setViewName("myinfo/myinfo");		
 		return model;
 	}
 		
