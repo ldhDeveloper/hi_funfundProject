@@ -35,8 +35,28 @@ public class Item implements Serializable {
 	private int fundamount;
 	private int fundcount;
 	private int supportcount;
+	private int upcount;
+	private int repcount;
 	
 	
+	
+	
+
+	public int getUpcount() {
+		return upcount;
+	}
+
+	public void setUpcount(int upcount) {
+		this.upcount = upcount;
+	}
+
+	public int getRepcount() {
+		return repcount;
+	}
+
+	public void setRepcount(int repcount) {
+		this.repcount = repcount;
+	}
 
 	public int getFundamount() {
 		return fundamount;
@@ -225,7 +245,7 @@ public class Item implements Serializable {
 	public Item(int pro_no, int ano, String pname, String pcontent, String category, Date psdate, Date pedate,
 			String pshort, Integer ecost, String refund, String pvideo, String pstatus, int likecount, String sharelink,
 			String bankcode, String accpnm, String accnum, String cname, String cs_email, String cs_phone,
-			int fundamount, int fundcount, int supportcount) {
+			int fundamount, int fundcount, int supportcount, int upcount, int repcount) {
 		super();
 		this.pro_no = pro_no;
 		this.ano = ano;
@@ -250,6 +270,8 @@ public class Item implements Serializable {
 		this.fundamount = fundamount;
 		this.fundcount = fundcount;
 		this.supportcount = supportcount;
+		this.upcount = upcount;
+		this.repcount = repcount;
 	}
 
 	@Override
@@ -259,7 +281,10 @@ public class Item implements Serializable {
 				+ ", refund=" + refund + ", pvideo=" + pvideo + ", pstatus=" + pstatus + ", likecount=" + likecount
 				+ ", sharelink=" + sharelink + ", bankcode=" + bankcode + ", accpnm=" + accpnm + ", accnum=" + accnum
 				+ ", cname=" + cname + ", cs_email=" + cs_email + ", cs_phone=" + cs_phone + ", fundamount="
-				+ fundamount + ", fundcount=" + fundcount + ", supportcount=" + supportcount + "]";
+				+ fundamount + ", fundcount=" + fundcount + ", supportcount=" + supportcount + ", upcount=" + upcount
+				+ ", repcount=" + repcount + "]";
 	}
+
+	
 
 }
