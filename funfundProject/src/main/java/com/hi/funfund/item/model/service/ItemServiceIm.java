@@ -121,4 +121,5 @@ public class ItemServiceIm implements ItemService{
 	public List bestList(int pro_no) {
 		return itemDao.bestList(pro_no);
 	}
+
 }

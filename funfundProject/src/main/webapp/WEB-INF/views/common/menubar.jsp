@@ -52,45 +52,55 @@
 	function home(){
 		location.href="/funfund";
 	}
-	var alertt = '${alert}';
-	if(alertt !== "")
-	alert("경고" + alertt);
+	var loginFail = '${loginFail}';//구글등으로 로그인시 회원가입실패한 경우 날라오는 경고문
+	if(loginFail !== "")
+	alert("경고" + loginFail);
 </script>
-
-<script>
+<script>//구글
   var googleUser = {};
+  var profile;
+  var nickname;
+  var emaill
+  var idtoken;
+  var access_token;
    function googleLogin() {
     gapi.load('auth2', function(){
       // Retrieve the singleton for the GoogleAuth library and set up the client.
       auth2 = gapi.auth2.init({
         client_id: '659736995246-ddl5nvftj5f76j3gk122g03t00n18pl7.apps.googleusercontent.com',
         cookiepolicy: 'single_host_origin',
-        scope: 'profile'
+        scope: 'https://www.googleapis.com/auth/admin.directory.user'
       });
       auth2.attachClickHandler(document.getElementById('gSignupBt'), {},
     	        function(googleUser) {
+    	  
     	        }, function(error) {
     	          alert(JSON.stringify(error, undefined, 2));
     	        });
       auth2.signIn().then(function() {
-    	  var profile = auth2.currentUser.get().getBasicProfile();
-    		
-    	  console.log(profile.getName());
-    	  console.log(profile.getEmail());
+    	   profile = auth2.currentUser.get().getBasicProfile();
+    	   nickname = profile.getName();
+    	   email = profile.getEmail();
+    	   idtoken = "구글";
+    	   access_token = "임시 토큰";
+    	   loginWithThirdParty(email, name, idtoken, access_token);
     	  });
+    
+    
     });
   };
-
-  function attachSignin(element) {
-   
-  }
+  function googleSignOut() {
+	    var auth2 = gapi.auth2.getAuthInstance();
+	    auth2.signOut().then(function () {
+	      console.log('User signed out.');
+	    });}
   </script>
 
 <script type='text/javascript'>
 //common function for sns user
 
-function loginWiththirdParty(email, name, token){
-location.href="loginWithApi.ao?email="+email +"&nickname="+ name + "&idtoken="+ idtoken;
+function loginWithThirdParty(email, name, idtoken, access_token ){
+location.href="loginWithApi.ao?email="+email +"&nickname="+ name + "&idtoken="+ idtoken +"&access_token="+access_token;
 
 	
 } 
@@ -98,6 +108,8 @@ location.href="loginWithApi.ao?email="+email +"&nickname="+ name + "&idtoken="+ 
  var nickname;
  var email;
  var idtoken;
+ var access_token;
+ 
 //카카오톡 회원 로그인 
 Kakao.init('c04a7d5e62e926cf85109fde19aa531a');
     // 카카오 로그인 버튼을 생성합니다.
@@ -105,22 +117,22 @@ Kakao.init('c04a7d5e62e926cf85109fde19aa531a');
 	  Kakao.Auth.login({
     		success: function(authObj){//로그인시도
     			//alert(JSON.stringify(authObj));
-    			idtoken = authObj.access_token;
+    			access_token = authObj.access_token;
     			Kakao.API.request({
     			url: '/v1/user/me',
     			success: function(res){
     			nickname = res.properties.nickname;
     			email = res.kaccount_email;
+    			idtoken = "카카오";
     			//alert(JSON.stringify(res));
     			//alert(nickname + ", " + email);
     			alert(email +", " +nickname +", " + idtoken)
-    			loginWiththirdParty(email, nickname, idtoken); 
+    			loginWithThirdParty(email, nickname, idtoken, access_token); 
     			  
     			},
     			fail: function(error){
     				alert(JSON.stringify(error));
     			}
-    				
     			});
     		},
     		fail : function(err){
@@ -128,8 +140,6 @@ Kakao.init('c04a7d5e62e926cf85109fde19aa531a');
     		},
     		persistAccessToken : true
     	});
-	
-	  
 	  };
   //]]>
   
@@ -978,7 +988,7 @@ label.sign-form_title {
 							<li><a href="myinfo.ao">회원정보보기</a>
 						</ul>
 						<ul>
-							<li><a href="logout.ao">로그아웃</a>
+							<li><a href="logout.ao" onclick="googleSignOut();">로그아웃</a>
 						</ul>
 					</div>
 					<div></div>

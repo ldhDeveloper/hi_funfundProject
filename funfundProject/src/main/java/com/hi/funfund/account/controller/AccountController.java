@@ -48,21 +48,20 @@ public class AccountController {
 	
 	@RequestMapping(value = "/loginWithApi.ao")
 	public ModelAndView loginWithThirdParty(Account account, ModelAndView mv, HttpServletRequest request ){
-		System.out.println();
-		String email = request.getParameter("email");
-		String idtoken  = request.getParameter("idtoken");
+		String access_token = request.getParameter("access_token");
 		Account thirdPartyUser = accountService.selectThirdPartyUser(account);
 		Party p = accountService.loginParty(account.getAno());
 			HttpSession session = request.getSession(false);
 			if(thirdPartyUser != null){
+				thirdPartyUser.setIdtoken(access_token);
 				session.setAttribute("account", thirdPartyUser);
 				session.setAttribute("party", p);
 				mv.setViewName("redirect:/");
 			
 			}else{
-				String alert= "redirect:/?alert=\"이미 가입되어 있는 회원입니다.\" ";
-				System.out.println(alert);
-				mv.setViewName(alert);
+				
+				mv.addObject("loginFail", "이미 가입된아이디가 존재합니다.");
+				mv.setViewName("redirect:/");
 			}
 					
 		return mv;
@@ -81,7 +80,7 @@ public class AccountController {
 	@RequestMapping("/logout.ao")
 	public String logout(HttpSession session){
 		session.invalidate();
-		return "home";
+		return "redirect:/";
 	}
 	
 	// myinfo 회원정보 설정 시작
@@ -127,7 +126,6 @@ public class AccountController {
 		return "myinfo/myfunding";
 	}
 	
-	// myinfo 회원 정보 설정 끝
 	
 	// Myinfo 이름, 닉네임 변경 시각
 	
@@ -178,8 +176,6 @@ public class AccountController {
 		return "myinfo/myinfo";
 	}
 	
-	// Myinfo 이름, 닉네임 변경 끝
-	
 	// myinfo 비밀번호 변경 시작
 	
 	@RequestMapping(value = "changePwd.ao")
@@ -215,6 +211,50 @@ public class AccountController {
 	
 	// myinfo 이메일 인증 시작
 	
+	/*@RequestMapping(value = "certifyEmail.ao")
+	public String certifyEmail(ModelAndView model, HttpSession session, HttpServletRequest request) {
+	   
+	         
+	        // 메일 관련 정보
+	        String host = "smtp.naver.com";
+	        final String username = "XXXXXXX";       //네이버 이메일 주소중 @ naver.com앞주소만 기재합니다.
+	        final String password = "1234";   //네이버 이메일 비밀번호를 기재합니다.
+	        int port=465;
+	         
+	        // 메일 내용
+	        String recipient = "XXXXXXX@nate.com";    //메일을 발송할 이메일 주소를 기재해 줍니다.
+	        String subject = "네이버를 사용한 발송 테스트입니다.";
+	        String body = "내용 무";
+	         
+	        Properties props = System.getProperties();
+	          
+	          
+	        props.put("mail.smtp.host", host);
+	        props.put("mail.smtp.port", port);
+	        props.put("mail.smtp.auth", "true");
+	        props.put("mail.smtp.ssl.enable", "true");
+	        props.put("mail.smtp.ssl.trust", host);
+	           
+	        Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+	            String un=username;
+	            String pw=password;
+	            protected PasswordAuthentication getPasswordAuthentication() {
+	                return new PasswordAuthentication(un, pw);
+	            }
+	        });
+	        session.setDebug(true); //for debug
+	           
+	        Message mimeMessage = new MimeMessage(session);
+	        mimeMessage.setFrom(new InternetAddress("mong400@naver.com"));
+	        mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
+	        mimeMessage.setSubject(subject);
+	        mimeMessage.setText(body);
+	        Transport.send(mimeMessage);	 
+	    }
+	
+		return "logout.ao";
+	}*/
+	
 	/*@Component
 	public class HelpMailSender implements HelpMailSendable{
 	 
@@ -234,7 +274,6 @@ public class AccountController {
 				message.addRecipient(RecipientType.TO, new InternetAddress(email));
 				mailSender.send(message);
 			} catch (MessagingException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	 

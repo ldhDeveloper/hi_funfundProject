@@ -148,6 +148,20 @@ public class ItemController {
 		
 		return model;
 	}
+	
+	@RequestMapping(value ="selectAll.it", method = RequestMethod.POST)
+	public ModelAndView selectAllItem(ModelAndView model) {
+		List<Item> iList = itemService.AllList();
+		System.out.println("오니?");
+		if(iList != null){
+			//model.setViewName("jsonView");
+			model.addObject("iList", iList);
+			System.out.println("iList : " + iList);
+		}
+		
+		return model;
+	}
+	
 
 	@RequestMapping(value="update.it", method = RequestMethod.POST)
 	public ModelAndView insertRewardItem(ModelAndView model, Item item,  HttpServletRequest request ){

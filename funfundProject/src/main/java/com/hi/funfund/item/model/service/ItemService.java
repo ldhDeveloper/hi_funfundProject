@@ -1,6 +1,7 @@
 package com.hi.funfund.item.model.service;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.hi.funfund.item.model.vo.Item;
@@ -42,5 +43,5 @@ public interface ItemService {
 	List<Item> top3List();
 
 	List bestList(int pro_no);
-	
+
 }

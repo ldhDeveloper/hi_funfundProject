@@ -344,9 +344,8 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 	                     			
 	                     			</form>
 	                     			
-	                     			<br><br>
-	                       			
-	                       			
+	                     			<br><br>	                     			                       			
+	                 
 	                       				<div class="input-btn-wrap">
 	                        				<h6 align="left">이메일</h6>
 	                        				<div class="input">
@@ -355,8 +354,10 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 	                          				
 	                          				<span id="mEmailChange">
 	                          					<input type="submit" id="emailChangeBtn" class="emailChange emailAuthBtn mbtn" value="변경" style="color:#fff;">
-	                          				</span>	                          				                          				
-	                          					                          				
+	                          				</span>	
+	                          				
+	                          				<!-- <form action="certifyEmail.ao" method="post">  -->                        				                          				
+	                          				                        				
 	                          				<span id="mEmailCheck" style="display:none;">
 	                          					<input type="submit" id="emailCheckBtn" class="emailCheck emailAuthBtn mbtn" value="인증하기" style="color:#fff;">
 	                          				</span>
@@ -365,11 +366,18 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 	                          					
 	                          				<span id="mEmailRetry" style="display:none;">
 	                          					<input type="submit" id="emailRetryBtn" class="emailRetry emailAuthBtn mbtn" value="재전송" style="color:#fff;">
-	                          				</span>		                          					                          			
+	                          				</span>
+	                          				
+	                          				<div class="input" id="certifyNumber" style="display:none">
+	                            				<input type="text" name="certifyNumber" class="input-text" placeholder="인증번호" value="">
+	                          				</div>
+	                          				
+	                          				<input type="submit" id="certifyNumBtn" class="certifyNumBtn mbtn" value="인증완료" style="color:#fff; display:none; margin-top:7px;">	                          				                          					
+	                          				<!-- </form>   -->                       					                          			
 	                        			</div>
 	                        			
-	                        			<form action="certifyEmail.ao" method="post" onsubmit="return certifyEmail();">
-	                        				<div id="emailConfirmArea" class="input-btn-wrap" style="display:none">	                          			
+		
+	                        				<!-- <div id="emailConfirmArea" class="input-btn-wrap" style="display:none">	                          			
 	                            				<div class="input">
 	                                				<input type="text" id="emailAuthCode" class="input-text" placeholder="인증번호">
 	                                				<input type="hidden" id="emailConfirmId" value="">
@@ -379,8 +387,9 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 	                            				</div>
 	                            				                            			
 	                            				<input type="submit" id="emailConfirmBtn" class="emailAuthBtn mbtn" value="인증완료" style="color:#fff;">		                            			                            			 	                            
-	                        				</div>
-	                        			</form>
+	                        				</div> -->
+	                        			
+	                        			
 	                        			
 	                        			<!-- <p id="emailCheckNumberError" class="error-text emailMsg">인증번호를 잘못 입력하셨습니다. 다시 입력해주세요.</p>
 	                        			<p id="emailTimeOutTokenError" class="error-text emailMsg">기간이 만료된 인증번호입니다. 다시 입력해주세요.</p>
@@ -473,7 +482,8 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
     												$("#mEmailChange").hide();
             										$("#mEmailCheck").hide();    											    											    											
         											$("#mEmailRetry").show();
-        											$("#emailConfirmArea").show();
+        											$("#certifyNumber").show();
+        											$("#certifyNumBtn").show();
     												$("#userEmail").val();
     												$("#mEmailCheckInput").hide();
     												
@@ -525,6 +535,20 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
     											$("#emailCheckBtn").addClass("emailCheck emailAuthBtn mbtn");
     										}); */
     									};
+    									
+    									var ch = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','0','1','2','3','4','5','6','7','8','9'};
+    									
+    									
+    									
+    									var aNum = "";
+    									
+    									/* char[] charaters = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','0','1','2','3','4','5','6','7','8','9'};
+    						            StringBuffer sb = new StringBuffer();
+    						            Random rn = new Random();
+    						            for( int i = 0 ; i < 10 ; i++ ){
+    						                sb.append( charaters[ rn.nextInt( charaters.length ) ] );
+    						            }
+    						            String pw =  sb.toString(); */
         							</script>																			
 								</div>
 							</div>
