@@ -151,6 +151,13 @@ li {
 					요청하기</a></li>
 		</ul>
 	</div>
+	<form name="authCodeFrm" id="authCodeFrm" method="GET" action="https://testapi.open-platform.or.kr/oauth/2.0/authorize" enctype="application/json"> 
+				<input type="hidden" id="response_type" 	name="response_type" value="code" />
+				<input type="hidden" id="scope" 	name="scope" value="login inquiry" />
+				<input type="hidden" id="redirect_uri" 	name="redirect_uri" value="http://127.0.0.1:9998/funfund/insert.it?ano=20" />
+				<input type="hidden" id="client_id" name="client_id" style="width:200px" value="l7xx6712d9c9cd524d3b9c3f0f60b2dea3ee">
+				
+				</form>
 	<form id="frm" action="update.it?pro_no=${ pro_no }" method="post"
 		enctype="application/json" onsubmit="return false;">
 
@@ -773,7 +780,7 @@ li {
 					<td style="width: 500px;">
 						<div
 							style="border: 1px solid #ddd; background: #f8f8f8; padding: 10px; margin-left: 10px; width: 440px; height: 50px;">
-							은행명 &nbsp; <select name="bankcode">
+							은행명 &nbsp; <select name="bankcode" id="bank_code_std">
 								<option value=''>선택하세요
 								<option value='003'>기업은행
 								<option value='004'>국민은행
@@ -814,28 +821,133 @@ li {
 								<option value='291'>신영증권
 								<option value='238'>대우증권
 							</select> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 예금주 &nbsp; <input type="text"
-								size="10" name="accpnm">
+								size="10" name="accpnm" id="accpname">
 						</div>
 					</td>
 					<td style="width: 200px;">&nbsp;</td>
 				</tr>
 				<tr>
 					<td>&nbsp;</td>
-					<td>&nbsp;</td>
+					<td>&nbsp;<input type="hidden" value="8500206"  id="account_holder_info"></td>
 					<td>&nbsp;</td>
 				</tr>
 				<tr>
-					<td style="font-size: 0.7em;">계좌번호</td>
+					<td style="font-size: 0.7em;">계좌번호<input type="hidden" id="tran_dtime"></td>
 					<td>
 						<div
 							style="border: 1px solid #ddd; background: #f8f8f8; padding: 10px; margin-left: 10px; width: 440px; height: 50px;">
 							계좌번호 &nbsp;<input type="text" size="25"
-								placeholder="'-'를 제외하고 입력하세요." name="accnum"> &nbsp;
-							<button class="btn btn-primary btn-xs">확인하기</button>
+								placeholder="'-'를 제외하고 입력하세요." name="accnum" id="account_num"> &nbsp;
+							<button class="btn btn-primary btn-xs" id="searchRealname">확인하기</button>
 						</div>
 					</td>
 					<td>&nbsp;</td>
 				</tr>
+				
+				<script text="text/javascript">
+						$(function(){
+							var client_id = "l7xx6712d9c9cd524d3b9c3f0f60b2dea3ee";
+							var client_secret = "10e3bd27aa5e4287ae709bca09c34ea7";
+							var  grant_type = "client_credentials";
+							document.getElementById('authCodeFrm').submit();
+							
+							var access_token = "";
+							var user_seq_no = 0;
+							var time = new Date();
+							
+							
+					        var year = time.getFullYear();
+					        
+					        var month = 0;
+					        if(time.getMonth() + 1 >= 10){
+					        	month = time.getMonth();
+					        }else{
+					        	month = '0' + time.getMonth();
+					        }
+					        
+					        var day = 0;
+					        if(time.getDate() >= 10){
+					        	month = time.getDate();
+					        }else{
+					        	month = '0' + time.getDate();
+					        }
+					        
+					        var hour = 0;
+					        if(time.getHours() >= 10){
+					        	month = time.getHours();
+					        }else{
+					        	month = '0' + time.getHours();
+					        }
+					        
+					        var minutes = 0;
+					        if(time.getMinutes() >= 10){
+					        	month = time.getMinutes();
+					        }else{
+					        	month = '0' + time.getMinutes();
+					        }
+					        
+					        var seconds = 0;
+					        if(time.getSeconds() >= 10){
+					        	month = time.getSeconds();
+					        }else{
+					        	month = '0' + time.getSeconds();
+					        }
+					        
+					        var currentTime = year + '' + month + '' + day + '' + hour + '' + minutes + '' + seconds;
+					          
+							
+							$("#tran_dtime").val(currentTime);
+							console.log("오니1?")
+							var scope = "oob";
+							 $.ajax({		
+									url: "https://testapi.open-platform.or.kr/oauth/2.0/token",		
+									type: "POST",
+									contenType: "application/json",		
+									data: {"client_id":client_id,"client_secret":client_secret,"grant_type":grant_type,"scope":scope},
+									dataType: "json",			
+									success : function (data, data2, data3) {
+										var list = JSON.parse(data3.responseText);					
+										access_token = list.access_token;
+										user_seq_no = list.user_seq_no;		
+										console.log("오니2?");
+										console.log(access_token);
+										}
+									
+								}); 
+							 
+							 $("#searchRealname").click(function(){
+								 var bank_code_std = $("#bank_code_std").val();
+								 var account_holder_info = $("#account_holder_info").val();
+								 var tran_dtime = $("#tran_dtime").val();
+								 var access_token = "Bearer "+ access_token;
+								 var resData = {"bank_code_std":bank_code_std,"account_num":account_num,"account_holder_info":account_holder_info,"tran_dtime":tran_dtime};
+								 var rearName = "";	
+								 
+								 console.log("오니3?")
+								 
+									 $.ajax({
+										url: "https://testapi.open-platform.or.kr/v1.0/inquiry/real_name",
+										beforeSend : function(request){
+											request.setRequestHeader("Authorization", access_token);
+										},
+										type: "POST",
+										data: JSON.stringify(resData),
+										dataType: "json",
+										success : function (data, data2, data3) {
+											
+											console.log("data==" + data);
+											console.log("data2==" + data2);
+											console.log("data3==" + data3);
+											console.log("data3.res==" + data3.responseText);
+											rearName = data3.responseText.replace(/,/gi, ",\n");
+											consolo.log("realName = " + realName);
+											},
+									});
+							 });
+							 
+						});
+				</script>
+				
 				<tr>
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
