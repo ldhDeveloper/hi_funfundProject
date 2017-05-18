@@ -13,6 +13,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hi.funfund.account.model.vo.Account;
+import com.hi.funfund.fundmenu.model.service.FundMenuService;
+import com.hi.funfund.fundmenu.model.vo.FundMenu;
+import com.hi.funfund.item.model.service.ItemService;
+import com.hi.funfund.item.model.vo.Item;
 import com.hi.funfund.itemask.model.service.ItemAskService;
 import com.hi.funfund.itemask.model.vo.ItemAsk;
 
@@ -22,6 +26,10 @@ public class ItemAskController {
 
 	@Autowired
 	private ItemAskService itemAskService;
+	@Autowired
+	private FundMenuService fundMenuService;
+	@Autowired
+	private ItemService itemService;
 
 	@RequestMapping("coinsert.ask")
 	public String insert(HttpSession session, HttpServletRequest request, ModelAndView model,
@@ -57,6 +65,10 @@ public class ItemAskController {
 	public ModelAndView selectList(ModelAndView model, HttpServletRequest request) {
 		int pro_no = Integer.parseInt(request.getParameter("pro_no"));
 		List<ItemAsk> aList = itemAskService.selectList(pro_no);
+		Item item = itemService.selectOne(pro_no);
+		List<FundMenu> mList = fundMenuService.selectList(pro_no);
+		model.addObject("item", item);
+		model.addObject("mList", mList);
 		model.addObject("aList", aList);
 		model.setViewName("funding/reply");
 		return model;
