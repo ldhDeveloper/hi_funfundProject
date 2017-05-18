@@ -345,52 +345,47 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 	                     			
 	                     			<br><br>
 	                       			
-	                       			<div class="input-btn-wrap">
-	                        			<h6 align="left">이메일</h6>
+	                       			<form action="" method="post" onsubmit="return certifyEmail();">
+	                       				<div class="input-btn-wrap">
+	                        				<h6 align="left">이메일</h6>
 	                        				<div class="input">
 	                            				<input type="text" id="userName" name="userName" class="input-text" placeholder="이메일 계정" value="${ sessionScope.account.email }"/>
 	                          				</div>
-	                          	
-	                          				<div id="emailChangeBtn" class="emailAuthBtn mbtn" data-status="change">
-	                            				<a href="#" class="mbtnButton" onclick="return false;">
-	                                				<span>변경</span>
-	                              				</a>
-	                          				</div>
-	                          	
-	                          			<div id="emailCheckBtn" class="emailAuthBtn mbtn" style="display:none;" data-status="check">
-	                            			<a href="#" onclick="return false;">
-	                                			<span>인증하기</span>
-	                              			</a>
-	                              		</div>	                          	
-	                          	
-	                          			<div id="emailRetryBtn" class="emailAuthBtn mbtn" style="display:none;" data-status="retry">
-	                              			<a href="#" onclick="return false;">
-	                                  			<span>재전송</span>
-	                              			</a>
-	                          			</div>
-	                        		</div>
-	                        
-	                        		<div id="emailConfirmArea" class="input-btn-wrap" style="display:none;">
-	                            		<div class="input">
-	                                		<input type="text" id="emailAuthCode" class="input-text" placeholder="인증번호" />
-	                                		<input type="hidden" id="emailConfirmId" value="">
-	                                		<time class="limit_time" style="position:relative;top:-39px;left:85%;text-align:right;">
-	                                			<span id="emailMs_timer" style="color:#50e3c2;font-size:13px;"></span>
-	                                		</time>
-	                            		</div>
-	                            
-	                            		<div id="emailConfirmBtn" class="emailAuthBtn mbtn" data-status="confirm">
-	                                		<a href="#" onclick="return false;">
-	                                    		<span>인증완료</span>
-	                                		</a>
-	                            		</div>
-	                        		</div>
+	                          			
+	                          			
+	                          				<input type="submit" id="emailChangeBtn" class="emailAuthBtn mbtn" value="변경" style="color:#fff;">
+	                          				<input type="submit" id="emailCheckBtn" class="emailAuthBtn mbtn" value="인증하기" style="color:#fff; display:none;">
+	                          				<input type="submit" id="emailRetryBtn" class="emailAuthBtn mbtn" value="재전송" style="color:#fff; display:none;">	                          			
+	                        			</div>
+	                        		
+	                        			<div id="emailConfirmArea" class="input-btn-wrap">	                          			
+	                            			<div class="input">
+	                                			<input type="text" id="emailAuthCode" class="input-text" placeholder="인증번호" />
+	                                			<input type="hidden" id="emailConfirmId" value="">
+	                                			<time class="limit_time" style="position:relative;top:-39px;left:85%;text-align:right;">
+	                                				<span id="emailMs_timer" style="color:#50e3c2;font-size:13px;"></span>
+	                                			</time>
+	                            			</div>
+	                            		
+	                            			<input type="submit" id="emailConfirmBtn" class="emailAuthBtn mbtn" value="인증완료" style="color:#fff;"> 	                            
+	                        			</div>
+	                        			
+	                        			<!-- <p id="emailCheckNumberError" class="error-text emailMsg">인증번호를 잘못 입력하셨습니다. 다시 입력해주세요.</p>
+	                        			<p id="emailTimeOutTokenError" class="error-text emailMsg">기간이 만료된 인증번호입니다. 다시 입력해주세요.</p>
+	                        			<p id="emailTimeOutError" class="error-text emailMsg">시간이 종료되었습니다. 다시 인증해주세요.</p>
+	                        			<p id="emailSuccessNumberCheckMsg" class="error-text emailMsg" style="color:#50e3c2;">인증이 완료되었습니다.</p>
+	                        			<p id="emailError" class="error-text emailMsg">이메일 형식이 올바르지 않습니다.</p>
+										<p id="emailJoinedError" class="error-text emailMsg">이미 회원가입된 계정입니다. 다른 이메일을 입력해주세요.</p>
+										<p id="checkEmailInfo" class="info-text emailMsg">이메일 인증이 필요합니다.</p>
+										<p id="changeEmailInfo" class="info-text emailMsg">로그인 아이디와 안내 메일 발송 주소가 변경됩니다.</p>
+										<p id="sendEmailInfo" class="info-text emailMsg">인증메일이 발송되었습니다.</p> 	 -->                        		
+	                        		</form>
 	                        		
 	                        		<br>
 	                        		
 	                        		<em class="line"></em>             			                        	                     	
 									
-									<form action="changePwd.ao" method="post">	
+									<form action="changePwd.ao" method="post" onsubmit="return savePwd();">	
 										<div id="accountWrap">
             	            				<div id="newContainer">
                 								<div class="account-wrap">
@@ -453,8 +448,7 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
         											$("#gicon").removeClass("glyphicon-ok-circle");
         											return false;
         										}
-        									});
-        									        									
+        									});        									        									
        									});
         								
         								function savePwd (){
@@ -484,6 +478,10 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
     											$("#newPwdInputSame").html("새 비밀번호를 동일하게 입력해주세요");
     											return false;
     										}
+    									};
+    									
+    									function certifyEmail() {
+    										
     									};
         							</script>																			
 								</div>
