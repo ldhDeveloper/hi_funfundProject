@@ -20,7 +20,7 @@
 		select mno, mname, mcost, pro_no, mcontent, mdate, mnum, mcount, delyn, dcost
 		from fundmenu 
 		where pro_no = #{pro_no}
-		order by mnum
+		order by mno, mnum
 	</select>
 
 	<select id="selectMno" parameterType="FundMenu" resultMap="fundMenuResult">
