@@ -85,29 +85,33 @@
 
 <script type='text/javascript'>
 //common function for sns user
-function loginApi(id){
-	
-	location.href =  "loginApi.ao?id"+id;
 
-}
-function insertApi(id, name, token){
-location.href =  "apiSignup.ao?id" +id + "&idtoken"+ idtoken; 
+function loginWiththirdParty(email, name, token){
+location.href="loginWithApi.ao?email="+email +"&name="+ name + "&token="+ token;
+
 	
-}
+} 
+
+ var name;
+ var email;
+ var token;
 //카카오톡 회원 로그인 
 Kakao.init('c04a7d5e62e926cf85109fde19aa531a');
     // 카카오 로그인 버튼을 생성합니다.
   function loginWithKakao(){
 	  Kakao.Auth.login({
     		success: function(authObj){//로그인시도
-    			alert(JSON.stringify(authObj));
+    			//alert(JSON.stringify(authObj));
+    			token = authObj.access_token;
     			Kakao.API.request({
     			url: '/v1/user/me',
     			success: function(res){
-    			var nickname = res.properties.nickname;
-    			var email = res.kaccount_email;
-    			alert(nickname + ", " + email);
-    			//location.href = "loginApi.ao?nickname="+nickname+"&email="+email;  			
+    			name = res.properties.nickname;
+    			email = res.kaccount_email;
+    			//alert(JSON.stringify(res));
+    			//alert(nickname + ", " + email);
+    			  alert(email +", " +name +", " + token)
+    			  loginWiththirdParty(email, name, token); 
     			},
     			fail: function(error){
     				alert(JSON.stringify(error));
@@ -117,9 +121,12 @@ Kakao.init('c04a7d5e62e926cf85109fde19aa531a');
     		},
     		fail : function(err){
     			alert(JSON.stringify(err));
-    		}
+    		},
+    		persistAccessToken : true
     	});
-    };
+	
+	  
+	  };
   //]]>
   
    
@@ -770,7 +777,7 @@ label.sign-form_title {
               <fieldset style="border:0; margin:0; padding:0;">
                 <legend class="login-title-txt">소셜 로그인</legend>
                 <a href="#" class="signin-social p-login_btn login-social-facebook" data-sns="facebook" alt="페이스북으로 로그인" >페이스북으로 로그인</a>
-           		<a href="javascript:loginWithKakao()" id="cSignInBt" class="signin-social p-login_btn login-social-kakao"  data-sns="kakao"  alt="카카오로 로그인" >카카오로 로그인</a>
+           		<a href="#" onclick="loginWithKakao()" id="cSignInBt" class="signin-social p-login_btn login-social-kakao"  data-sns="kakao"  alt="카카오로 로그인" >카카오로 로그인</a>
            		<a href="javascript:googleLogin()" id="gSignupBt" class="signin-social p-login_btn login-social-google"  data-sns="google"  alt="구글로 로그인" >구글로 로그인</a>
            		<div class="g-signin2" data-onsuccess="onSignIn"></div>
            		<a href="#" id="nSignInBt" class="signin-social p-login_btn login-social-naver"  data-sns="naver"  alt="네이버로 로그인" >네이버 로그인</a>
@@ -819,8 +826,8 @@ label.sign-form_title {
               <fieldset>
                 <legend class="login-title-txt">소셜 회원가입</legend>
                 <a href="#" class="signup-social p-login_btn login-social-facebook" data-sns="facebook" alt="페이스북으로 회원가입" >페이스북으로 회원가입</a>
-            	<a href="javascript:loginWithKakao()" id="custom-login-btn" class="signup-social p-login_btn login-social-kakao" alt="카카오로 회원가입" >카카오로 회원가입</a>
-            	<a href="javascript:google()" id="gSigninBt" class="signup-social p-login_btn login-social-google" alt="구글로 회원가입" >구글로 회원가입</a>
+            	<a href="javascript:loginWithKakao();" id="custom-login-btn" class="signup-social p-login_btn login-social-kakao" alt="카카오로 회원가입" >카카오로 회원가입</a>
+            	<a href="#" onclick="google();" id="gSigninBt" class="signup-social p-login_btn login-social-google" alt="구글로 회원가입" >구글로 회원가입</a>
            		<a href="#" id="nSignUpBt" class="signin-social p-login_btn login-social-naver"  data-sns="naver"  alt="네이버로 로그인" >네이버 회원가입</a>
               </fieldset>
             </form>
