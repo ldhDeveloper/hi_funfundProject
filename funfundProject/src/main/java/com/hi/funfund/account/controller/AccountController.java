@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hi.funfund.account.model.service.AccountService;
 import com.hi.funfund.account.model.vo.Account;
 import com.hi.funfund.account.model.vo.Party;
+
+
 
 @Controller
 //@RequestMapping("account")
@@ -35,6 +38,19 @@ public class AccountController {
 		mv.setViewName("home");
 		return mv;
 	}
+	
+	/*@RequestMapping(value = "/loginWithApi.ao")
+	public ModelAndView loginWithThirdParty(ModelAndView mv, HttpServletRequest request ){
+		System.out.println();
+		String email = request.getParameter("email");
+		String id = request.getParameter("name");
+		String idtoken  = request.getParameter("token");
+		System.out.println(email+"," + id);
+		System.out.println(mv.getStatus());
+		mv.setViewName("redirect:/");
+		
+		return mv;
+	}*/
 	
 	@RequestMapping(value = "/signup.ao", produces = "text/plain;charset=UTF-8")
 	public String signup(Account account){
