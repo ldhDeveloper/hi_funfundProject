@@ -54,5 +54,10 @@ public class ItemDao {
 		System.out.println("top3List :"+top3List.get(0));
 		return top3List;
 	}
+
+	public int selectAllItem() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 }
