@@ -49,6 +49,8 @@ public interface AccountService {
 
 	int updateNickname(int ano, String nickname); // 닉네임 수정
 
+	Account selectThirdPartyUser(Account account);
+
 	
 	//미추가된 함수 : 프로젝트별 후원자 리스트
 

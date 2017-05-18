@@ -81,4 +81,20 @@ public class AccountDao {
 		Account account = (Account) sqlSession.selectOne("selectAccount", ano);
 		return account;
 	}
+
+	public Account selectThirdPartyUser(Account account) {
+		int result = 0; //데이터베이스에 회원이 있는지를 가리기위한 변수
+		System.out.println("reached at accountDao ....");
+		Account user = (Account) sqlSession.selectOne("accountMapper.thirdPartyUser", account);
+		if(user == null){
+		System.out.println("before insert..." + account);
+			account.setId(account.getEmail());
+			 result = sqlSession.insert("accountMapper.insertThirdParty", account);
+			 if(result >0){
+				 user = account;
+			 }
+		}
+		return user;
+	}
+
 }
