@@ -11,11 +11,14 @@
 .container{
 	position:absolute;
 	top:-70px;
-	z-index:1;
 }
 .fun-menu{
 	color:white !important;
 
+}
+
+.item{
+   
 }
 </style>
 
@@ -30,7 +33,7 @@
 	<div class="row">
 		
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="container" style="padding-left: 0px;padding-right: 0px; width:100%;">
+			<div class="container" style="padding-left:0px; padding-right: 0px; width:100%;">
 				<div id="myCarousel" class="carousel slide" data-ride="carousel">
 					<!-- Indicators -->
 					<ol class="carousel-indicators">

@@ -247,8 +247,8 @@ button {
 				<fmt:formatNumber value="${item.ecost}" var="cost" type="percent" />
 				% 달성
 			</p>
-			<p class="info">원의 펀딩</p>
-			<p class="info">명의 서포터</p>
+			<p class="info">${item.fundcount }원의 펀딩</p>
+			<p class="info">${item.supportcount }명의 서포터</p>
 			<button class="btn-fund">펀딩하기</button>
 		</div>
 		<div style="text-align: center;">
