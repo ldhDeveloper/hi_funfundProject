@@ -55,6 +55,10 @@ public class ItemDao {
 		return top3List;
 	}
 
+	public List<Item> bestList(int pro_no) {
+		List bestList = sqlSession.selectList(nameSpace+"bestList", pro_no);
+		return null;
+
 	public int selectAllItem() {
 		// TODO Auto-generated method stub
 		return 0;

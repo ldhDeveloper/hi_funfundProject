@@ -42,4 +42,6 @@ public interface ItemService {
 
 	List<Item> top3List();
 
+	List bestList(int pro_no);
+
 }
