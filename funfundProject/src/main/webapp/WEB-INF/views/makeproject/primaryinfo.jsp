@@ -454,6 +454,10 @@ li {
 							<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 			<script>
 				$(function(){
+					
+					
+					
+					
 					$("#addReward").click(function(){
 						var pro_no = ${pro_no};
 						var mname = $("[name=mname]").val();
@@ -472,10 +476,44 @@ li {
 				            async: true,
 				            data : {"pro_no":pro_no, "mname":mname, "mcost":mcost, "mnum":mnum, "dcost":dcost, "mdate":mdate, "mcount":mcount, "delyn":delyn, "mcontent":mcontent},
 				            success : function(data){
-				            	
+				            	var i = Number(data.fmlist.length) - 1;
 				            	console.log($(data));
-				            	console.log(data[0].length);
+				            	console.log(data.fmlist[i].mname);
+				            	
+				            	
+				            	$("#rlist").html($("#rlist").html() + "<tr><td>" + data.fmlist[i].mnum + "</td><td>" + data.fmlist[i].mname + "</td><td>" + data.fmlist[i].mcost + "</td><td>" + data.fmlist[i].delyn + "</td><td>" + data.fmlist[i].mcount + "</td><td>" + data.fmlist[i].mdata + "</td><td><button value='수정'/>&nbsp; <button value='삭제'/></td></tr>")
+					            	
+				            	
+				            	
 				            
+				            	/* {"modelAndView":
+				            					{
+				            						"empty":false,
+				            						"model":
+				            								{"fmlist":
+				            											[
+				            											    {"dcost":"","delyn":"on","mcontent":"","mcost":65747,"mcount":0,"mdate":null,"mname":"","mno":26,"mnum":1,"pro_no":26},
+				            									 			{"dcost":"","delyn":"on","mcontent":"","mcost":142213,"mcount":0,"mdate":null,"mname":"","mno":25,"mnum":1,"pro_no":26}
+				            											]
+				            								}
+				            						,"modelMap":
+				            									{"fmlist":
+				            											[
+				            										 		{"dcost":"","delyn":"on","mcontent":"","mcost":65747,"mcount":0,"mdate":null,"mname":"","mno":26,"mnum":1,"pro_no":26},
+				            	                       						{"dcost":"","delyn":"on","mcontent":"","mcost":142213,"mcount":0,"mdate":null,"mname":"","mno":25,"mnum":1,"pro_no":26}
+				            										 	]
+				            	
+				            									},
+				            						"reference":true,"status":null,"view":null,"viewName":"jsonView"
+				            						},
+				            	"fundMenu":{"dcost":"","delyn":"on","mcontent":"","mcost":65747,"mcount":0,"mdate":null,"mname":"","mno":0,"mnum":1,"pro_no":26},
+				            	"fmlist":[{"dcost":"","delyn":"on","mcontent":"","mcost":65747,"mcount":0,"mdate":null,"mname":"","mno":26,"mnum":1,"pro_no":26},
+				            	          {"dcost":"","delyn":"on","mcontent":"","mcost":142213,"mcount":0,"mdate":null,"mname":"","mno":25,"mnum":1,"pro_no":26}]
+				            	} */
+				            	
+				            	
+				            	
+				            	
 				            	
 				            }
 
