@@ -30,6 +30,7 @@
 		<result property="upcount" column="upcount"/>
 		<result property="repcount" column="repcount"/>
 	</resultMap>
+	
 
 	<insert id="insert" parameterType="Item">
 		<![CDATA[

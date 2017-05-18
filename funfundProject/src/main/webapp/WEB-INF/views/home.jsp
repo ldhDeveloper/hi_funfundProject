@@ -8,17 +8,21 @@
 <head>
 <meta charset="UTF-8">
 <style>
-.container{
-	position:absolute;
-	top:-70px;
-}
-.fun-menu{
-	color:white !important;
-
+.contain {
+	position:relative;;
+	top: -70px;
 }
 
-.item{
-   
+.fun-menu {
+	color: white !important;
+}
+
+.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive,
+	.thumbnail a>img, .thumbnail>img {
+	display: block;
+	max-width: 100%;
+	max-height: 540px !important;
+	margin: auto;
 }
 </style>
 
@@ -31,9 +35,9 @@
 
 	<!-- 슬라이드 사진 영역 -->
 	<div class="row">
-		
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="container" style="padding-left:0px; padding-right: 0px; width:100%;">
+			<div class="contain"
+				style="padding-left: 0px; padding-right: 0px; width: 100%; clear: both;">
 				<div id="myCarousel" class="carousel slide" data-ride="carousel">
 					<!-- Indicators -->
 					<ol class="carousel-indicators">
@@ -83,73 +87,103 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-1"></div>
 	</div>
-	<div class="row" style="margin: 0px 20px 0 20px;">
+
+
+	<div class="container" style="clear: both">
+		<div class="row" style="margin: 0px 20px 0 20px;">
 			<c:forEach var="item" items="${top3List}" varStatus="status">
-					<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-						<div class="thumbnail" align="center">
-							<a href="detail.it?pro_no=<c:out value="${item.pro_no}"/>"> <img
-								src="/funfund/images/funding/face.PNG" alt="사진1"
-								style="width: 100%">
-								<script>
-										$(function(){
-											var ecost = "<c:out value='${item.ecost}'/>";
-											var fundamount = "<c:out value='${item.fundamount}'/>"
-											var persent = Math.round(fundamount * 100 / ecost);
-											var bar=0;
-											if(persent > 100){
-												bar=100;
-											} else {
-												bar=persent;
-											}
-											var edate = new Date("<c:out value='${item.pedate}'/>");
-											var todate = new Date();
-											var btMs = edate.getTime() - todate.getTime() ;
-										    var btDay = Math.round(btMs / (1000*60*60*24)) ;
+				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+					<div class="thumbnail" align="center">
+						<a href="detail.it?pro_no=<c:out value="${item.pro_no}"/>"> <img
+							src="/funfund/images/funding/face.PNG" alt="사진1"
+							style="width: 100%"> <script>
+								$(function() {
+									var ecost = "<c:out value='${item.ecost}'/>";
+									var fundamount = "<c:out value='${item.fundamount}'/>"
+									var persent = Math.round(fundamount * 100
+											/ ecost);
+									var bar = 0;
+									if (persent > 100) {
+										bar = 100;
+									} else {
+										bar = persent;
+									}
+									var edate = new Date(
+											"<c:out value='${item.pedate}'/>");
+									var todate = new Date();
+									var btMs = edate.getTime()
+											- todate.getTime();
+									var btDay = Math.round(btMs
+											/ (1000 * 60 * 60 * 24));
 
-											console.log(persent);
-											$("#persent<c:out value='${status.index}'/>").text(persent);
-											$("#progressbar<c:out value='${status.index}'/>").attr("aria-valuenow", persent);
-											$("#progressbar<c:out value='${status.index}'/>").css("width", bar + "%");
-											$("#edate<c:out value='${status.index}'/>").text(btDay);
-											
-											if(btDay < 0){
-												$("#edate<c:out value='${status.index}'/>").hide();
-												$("#yet<c:out value='${status.index}'/>").hide();
-												$("#complete<c:out value='${status.index}'/>").show();
-											} else {
-												$("#complete<c:out value='${status.index}'/>").hide();
-												$("#edate<c:out value='${status.index}'/>").show();
-												$("#yet<c:out value='${status.index}'/>").show();
-											}
-										})
-									</script>
-								<div id="progress<c:out value='${status.index}'/>" class="progress">
-									<div class="progress-bar progress-bar-warning"
-										id="progressbar<c:out value='${status.index}'/>"
-										role="progressbar" aria-valuenow="60" aria-valuemin="0"
-										aria-valuemax="<c:out value="${item.ecost}"/>" style="width: 60%;">
-										<span class="sr-only"></span>
-									</div>
+									console.log(persent);
+									$(
+											"#persent<c:out value='${status.index}'/>")
+											.text(persent);
+									$(
+											"#progressbar<c:out value='${status.index}'/>")
+											.attr("aria-valuenow", persent);
+									$(
+											"#progressbar<c:out value='${status.index}'/>")
+											.css("width", bar + "%");
+									$("#edate<c:out value='${status.index}'/>")
+											.text(btDay);
+
+									if (btDay < 0) {
+										$(
+												"#edate<c:out value='${status.index}'/>")
+												.hide();
+										$(
+												"#yet<c:out value='${status.index}'/>")
+												.hide();
+										$(
+												"#complete<c:out value='${status.index}'/>")
+												.show();
+									} else {
+										$(
+												"#complete<c:out value='${status.index}'/>")
+												.hide();
+										$(
+												"#edate<c:out value='${status.index}'/>")
+												.show();
+										$(
+												"#yet<c:out value='${status.index}'/>")
+												.show();
+									}
+								})
+							</script>
+							<div id="progress<c:out value='${status.index}'/>"
+								class="progress">
+								<div class="progress-bar progress-bar-warning"
+									id="progressbar<c:out value='${status.index}'/>"
+									role="progressbar" aria-valuenow="60" aria-valuemin="0"
+									aria-valuemax="<c:out value="${item.ecost}"/>"
+									style="width: 60%;">
+									<span class="sr-only"></span>
 								</div>
+							</div>
+							<p>
+								<span id="persent<c:out value='${status.index}'/>"></span> %
+								&nbsp;&nbsp; <span><c:out value="${item.fundamount }" /></span>원
+								달성 &nbsp;&nbsp; <span id="edate<c:out value='${status.index}'/>"></span>
+								<span id="yet<c:out value='${status.index}'/>">일 남음</span>
+								<spen id="complete<c:out value='${status.index}'/>">펀딩종료</spen>
+							</p>
+
+							<div class="caption">
 								<p>
-									<span id="persent<c:out value='${status.index}'/>"></span> % &nbsp;&nbsp; <span><c:out value="${item.fundamount }"/></span>원 달성 &nbsp;&nbsp; 
-									<span id="edate<c:out value='${status.index}'/>"></span>
-									<span id="yet<c:out value='${status.index}'/>">일 남음</span>
-									<spen id="complete<c:out value='${status.index}'/>">펀딩종료</spen>
+									<c:out value="${item.pcontent }" />
 								</p>
-
-								<div class="caption">
-									<p>
-										<c:out value="${item.pcontent }" />
-									</p>
-									<span><c:out value="${item.category}" /></span>
-								</div>
-							</a>
-						</div>
+								<span><c:out value="${item.category}" /></span>
+							</div>
+						</a>
 					</div>
-				</c:forEach>
 				</div>
+			</c:forEach>
+		</div>
+	</div>
+	
+	
 </body>
 </html>

@@ -177,6 +177,7 @@ public class ItemController {
 	public ModelAndView fundingdetailList(ModelAndView model, HttpServletRequest request) {
 		int pro_no = Integer.parseInt(request.getParameter("pro_no"));
 		Item item = itemService.selectOne(pro_no);
+		List bestList=itemService.bestList(pro_no);
 		List<FundMenu> mList = fundMenuService.selectList(pro_no);
 		List<ItemAsk> aList = itemAskService.selectList(pro_no);
 		model.addObject("item", item);

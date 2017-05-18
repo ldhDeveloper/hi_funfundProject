@@ -160,6 +160,10 @@ button {
 #btn-like {
 	background: white;
 }
+
+.supportinfo {
+	display: inline-block;
+}
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -215,8 +219,10 @@ button {
 	<div align="center">
 		<ul class="w3-border-bottom w3-border-gray">
 			<li class="active"><a href="detail.it?pro_no=${item.pro_no }">스토리</a></li>
-			<li><a href="reply.ask?pro_no=${item.pro_no }">댓글( )</a></li>
-			<li><a href="news.up?pro_no=${item.pro_no}">새소식( )</a></li>
+			<li><a href="reply.ask?pro_no=${item.pro_no }">댓글(${item.repcount }
+					)</a></li>
+			<li><a href="news.up?pro_no=${item.pro_no}">새소식(
+					${item.upcount })</a></li>
 		</ul>
 	</div>
 
@@ -244,11 +250,13 @@ button {
 			</p>
 			<em class="infoBar"></em>
 			<p class="info">
-				<fmt:formatNumber value="${item.ecost}" var="cost" type="percent" />
+				<c:set var="ecost" value="${item.ecost }" />
+				<c:set var="fundamount" value="${item.fundamount}" />
+				<c:out value="${ fundamount * 100 / ecost}" />
 				% 달성
 			</p>
-			<p class="info">${item.fundcount }원의 펀딩</p>
-			<p class="info">${item.supportcount }명의 서포터</p>
+			<p class="info">${item.fundamount }원의펀딩</p>
+			<p class="info">${item.supportcount }명의서포터</p>
 			<button class="btn-fund">펀딩하기</button>
 		</div>
 		<div style="text-align: center;">
@@ -280,12 +288,9 @@ button {
 				style="font-size: 10pt; text-align: left; padding-top: 20px; padding-bottom: 5px; margin-left: 20px;">베스트
 				서포터</p>
 			<div class="makerbox2">
-				<div class="makerinfo">사진</div>
-				<div class="makerinfo"></div>
-				<div>
-					<p>문의처</p>
-					<div class="makerinfo">${item.cs_email}</div>
-					<div class="makerinfo">${item.cs_phone}</div>
+				<div class="supportinfo">
+					<c:forEach var="" items="">사진 아이디
+				</c:forEach>
 				</div>
 			</div>
 		</div>
@@ -296,7 +301,8 @@ button {
 			<div class=""></div>
 			<c:forEach var="reword" items="${mList}">
 				<ul class="makerbox">
-					<li style="font-size: 15pt;"><strong>${reword.mcost}원</strong></li>
+					<li style="font-size: 15pt;"><strong><fmt:formatNumber
+								var="mcost" value="${reword.mcost}" /> ${mcost }원</strong></li>
 					<li class="makerinfo">작성자이름
 						<dl>${item.pname}</dl>
 					</li>
@@ -304,7 +310,10 @@ button {
 						<dl>${reword.mname}</dl>
 					</li>
 					<li class="makerinfo">배송비</li>
-					<dl>원
+					<dl>
+						<c:if test="${null eq reword.dcost }">${reword.dcost }</c:if>
+						<c:if test="${reword.dcost != '' || null ne reword.dcost}">0</c:if>
+						원
 					</dl>
 					<li class="makerinfo">리워드 예상일
 						<dl>${reword.mdate}</dl>
@@ -312,8 +321,13 @@ button {
 					<li class="makerinfo">제한 수량</li>
 					<dl>${reword.mcount }개
 					</dl>
-					<li class="makerinfo">현재 개 남음</li>
-					<dl></dl>
+					<li class="makerinfo">현재 <c:set var="result"
+							value="${reword.mcount - item.fundcount }" /> <c:if
+							test="${result > 0}">
+					${reword.mcount - item.fundcount  }</c:if> <c:if test="${result <= 0 }">
+					0
+					</c:if>개 남음
+					</li>
 				</ul>
 			</c:forEach>
 		</div>

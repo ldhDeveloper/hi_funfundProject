@@ -232,8 +232,8 @@ button {
 	<div align="center">
 		<ul class="w3-border-bottom w3-border-gray">
 			<li class="active"><a href="detail.it?pro_no=${param.pro_no }">스토리</a></li>
-			<li><a href="reply.ask?pro_no=${param.pro_no }">댓글( )</a></li>
-			<li><a href="news.up?pro_no=${param.pro_no}">새소식( )</a></li>
+			<li><a href="reply.ask?pro_no=${param.pro_no }">댓글(${item.repcount } )</a></li>
+			<li><a href="news.up?pro_no=${item.pro_no}">새소식( ${item.upcount })</a></li>
 		</ul>
 	</div>
 
@@ -269,11 +269,12 @@ button {
 			</p>
 			<em class="infoBar"></em>
 			<p class="info">
-				<fmt:formatNumber value="${item.ecost}" var="cost" type="percent" />
-				% 달성
+				<c:set var="ecost"  value="${item.ecost }"/>
+				<c:set var="fundamount" value="${item.fundamount}"/>
+				<c:out value="${ fundamount * 100 / ecost}"/>  % 달성
 			</p>
-			<p class="info">원의 펀딩</p>
-			<p class="info">명의 서포터</p>
+			<p class="info">${item.fundamount }원의 펀딩</p>
+			<p class="info">${item.supportcount }명의 서포터</p>
 			<button class="btn-fund">펀딩하기</button>
 		</div>
 		<div style="text-align: center;">
@@ -329,7 +330,8 @@ button {
 						<dl>${reword.mname}</dl>
 					</li>
 					<li class="makerinfo">배송비</li>
-					<dl>원
+					<dl><c:if test="${null eq reword.dcost }">${reword.dcost }</c:if>
+						<c:if test="${reword.dcost != '' || null ne reword.dcost}">0</c:if>원
 					</dl>
 					<li class="makerinfo">리워드 예상일
 						<dl>${reword.mdate}</dl>
@@ -337,8 +339,13 @@ button {
 					<li class="makerinfo">제한 수량</li>
 					<dl>${reword.mcount }개
 					</dl>
-					<li class="makerinfo">현재 개 남음</li>
-					<dl></dl>
+					<li class="makerinfo">현재 
+					<c:set var="result" value="${reword.mcount - item.fundcount }"/>
+					<c:if test="${result > 0}">
+					${reword.mcount - item.fundcount  }</c:if>
+					<c:if test="${result <= 0 }">
+					0
+					</c:if>개 남음</li>
 				</ul>
 			</c:forEach>
 		</div>

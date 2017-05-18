@@ -40,5 +40,7 @@ public interface ItemService {
 	 int updateRewardItem(Item item);
 
 	List<Item> top3List();
+
+	List bestList(int pro_no);
 	
 }

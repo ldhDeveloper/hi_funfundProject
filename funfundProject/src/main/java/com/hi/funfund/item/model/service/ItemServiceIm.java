@@ -116,4 +116,9 @@ public class ItemServiceIm implements ItemService{
 		// TODO Auto-generated method stub
 		return itemDao.top3List();
 	}
+
+	@Override
+	public List bestList(int pro_no) {
+		return itemDao.bestList(pro_no);
+	}
 }

@@ -54,5 +54,10 @@ public class ItemDao {
 		System.out.println("top3List :"+top3List.get(0));
 		return top3List;
 	}
+
+	public List<Item> bestList(int pro_no) {
+		List bestList = sqlSession.selectList(nameSpace+"bestList", pro_no);
+		return null;
+	}
 	
 }
