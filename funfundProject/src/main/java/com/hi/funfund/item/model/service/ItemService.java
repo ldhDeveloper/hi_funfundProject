@@ -1,6 +1,7 @@
 package com.hi.funfund.item.model.service;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.hi.funfund.item.model.vo.Item;
@@ -40,5 +41,5 @@ public interface ItemService {
 	 int updateRewardItem(Item item);
 
 	List<Item> top3List();
-	
+
 }
