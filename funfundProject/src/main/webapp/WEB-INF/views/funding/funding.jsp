@@ -134,11 +134,16 @@ button {
 		<div class="container">
 			<div id="blist" class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
 				style="display: block; text-align: center;">
-				<button class="btn ">전체</button>
-				<button class="btn ">아이디어</button>
-				<button class="btn ">디자인</button>
-				<button class="btn ">패션/뷰티</button>
-				<button class="btn ">테크</button>
+				<button id="selectAll" class="btn " value="all">전체</button>
+				<button id="selectTech" class="btn " value="tech">테크</button>
+				<button id="selectBeauty" class="btn " value="beauty">패션/뷰티</button>
+				<button id="selectFood" class="btn " value="food">푸드</button>
+				<button id="selectDesign" class="btn " value="design">디자인</button>
+				<button id="selectArt" class="btn " value="art">예술</button>
+				<button id="selectGame" class="btn " value="game">게임</button>
+				<button id="selectTrip" class="btn " value="trip">여행</button>
+				<button id="selectSport" class="btn " value="sport">스포츠</button>
+				<button id="selectPinterest" class="btn " value="pinterest">공익</button>
 			</div>
 		</div>
 	</div>
