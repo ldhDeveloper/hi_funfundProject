@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -217,6 +218,7 @@ textarea {
 	color: #92;
 }
 </style>
+<script src="/funfund/lib/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$('#btn-like').click(function() {
@@ -251,7 +253,7 @@ textarea {
 
 		var co = '<c:out value="${item.pcontent}"/>';
 		$("#content").html(co);
-		
+
 	});
 </script>
 </head>
@@ -272,7 +274,7 @@ textarea {
 		<ul class="w3-border-bottom w3-border-gray">
 			<li class="active"><a href="detail.it?pro_no=${param.pro_no }">스토리</a></li>
 			<li><a href="reply.ask?pro_no=${param.pro_no }">댓글( )</a></li>
-			<li><a href="news.up?pro_no=${item.pro_no}">새소식( )</a></li>
+			<li><a href="news.up?pro_no=${param.pro_no}">새소식( )</a></li>
 		</ul>
 	</div>
 
@@ -286,13 +288,13 @@ textarea {
 		style="padding: 10px;">
 		<!-- 댓글작성 영역 -->
 		<div class="comment">
-			<p>개의 댓글이 달렸습니다.</p>
+			<p>${fn:length(aList) }개의 댓글이 달렸습니다.</p>
 			<form id="comment-area" action="coinsert.ask">
 				<textarea id="acontent" name="acontent" style="overflow-y: hidden;"
 					rows="3" cols="50" maxlength="140;" placeholder="댓글을 입력하세요"></textarea>
 				<div id="upload">
-					<input type="submit" value="등록하기">
-					<input type="hidden" value="${param.pro_no}" name="pro_no">
+					<input type="submit" value="등록하기"> <input type="hidden"
+						value="${param.pro_no}" name="pro_no">
 				</div>
 			</form>
 
@@ -355,6 +357,20 @@ textarea {
 			</div>
 		</div>
 
+		<div class="">
+			<p
+				style="font-size: 10pt; text-align: left; padding-top: 20px; padding-bottom: 5px; margin-left: 20px;">베스트
+				서포터</p>
+			<div class="makerbox2">
+				<%-- <div class="makerinfo">사진</div>
+				<div class="makerinfo">${item.cname }</div>
+				<div>
+					<p>문의처</p>
+					<div class="makerinfo">${item.cs_email}</div>
+					<div class="makerinfo">${item.cs_phone}</div>
+				</div> --%>
+			</div>
+		</div>
 		<div class="">
 			<p
 				style="font-size: 10pt; text-align: left; padding-bottom: 5px; margin-left: 20px;">리워드선택</p>

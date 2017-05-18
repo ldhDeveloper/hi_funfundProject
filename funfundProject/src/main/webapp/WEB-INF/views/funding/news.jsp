@@ -157,8 +157,63 @@ button {
 	border-top: 1px solid #e4;
 	border-bottom: 1px solid #e4;
 	display: block;
+	margin-bottom: 20px;
+}
+
+.datanum {
+	display: block;
+	margin-bottom: 10px;
+	font-size: 20px;
+}
+
+.datatitle {
+	display: inline-block;
+	font-size: 20px;
+}
+
+.ddate {
+	display: inlne-block;
+	font-size: 12px;
 }
 </style>
+<script src="/funfund/lib/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$('#btn-like').click(function() {
+			if ($(this).hasClass("backpink")) {
+				$(this).removeClass("backpink");
+			} else {
+				$(this).addClass("backpink");
+			}
+		}).hover(function() {
+			if ($(this).hasClass("backpink")) {
+				$(this).removeClass("backpink");
+			} else {
+				$(this).addClass("backpink");
+			}
+		});
+
+		$('.btn-fund').hover(
+				function() {
+					$('.btn-fund').css('background-color', '#fedb9a').css(
+							'border-color', '#c96903');
+				},
+				function() {
+					$('.btn-fund').css('background-color', '#fec250').css(
+							'border-color', 'transparent');
+				});
+
+		$('.makerbox').hover(function() {
+			$(this).css('background-color', '#c6ebd9');
+		}, function() {
+			$(this).css('background-color', 'white');
+		});
+
+		var co = '<c:out value="${item.pcontent}"/>';
+		$("#content").html(co);
+
+	});
+</script>
 </head>
 <body>
 
@@ -193,7 +248,8 @@ button {
 		<!-- 업데이트 글 작성 영역 -->
 		<c:forEach var="update" items="${pList}">
 			<div class="block">
-				<span>#${update.upno }</span> <span>${update.uptitle}</span> <span>
+				<span class="datanum">#${update.upno }</span> <span
+					class="datatitle">${update.uptitle}</span> <span class="ddate">
 					<fmt:formatDate value="${update.uploaddate}" var="date"
 						pattern="yyyyMMdd" /> ${date }
 				</span>
@@ -241,6 +297,21 @@ button {
 					<div class="makerinfo">${item.cs_email}</div>
 					<div class="makerinfo">${item.cs_phone}</div>
 				</div>
+			</div>
+		</div>
+
+		<div class="">
+			<p
+				style="font-size: 10pt; text-align: left; padding-top: 20px; padding-bottom: 5px; margin-left: 20px;">베스트
+				서포터</p>
+			<div class="makerbox2">
+				<%-- <div class="makerinfo">사진</div>
+				<div class="makerinfo">${item.cname }</div>
+				<div>
+					<p>문의처</p>
+					<div class="makerinfo">${item.cs_email}</div>
+					<div class="makerinfo">${item.cs_phone}</div>
+				</div> --%>
 			</div>
 		</div>
 

@@ -277,6 +277,21 @@ button {
 
 		<div class="">
 			<p
+				style="font-size: 10pt; text-align: left; padding-top: 20px; padding-bottom: 5px; margin-left: 20px;">베스트
+				서포터</p>
+			<div class="makerbox2">
+				<div class="makerinfo">사진</div>
+				<div class="makerinfo"></div>
+				<div>
+					<p>문의처</p>
+					<div class="makerinfo">${item.cs_email}</div>
+					<div class="makerinfo">${item.cs_phone}</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="">
+			<p
 				style="font-size: 10pt; text-align: left; padding-bottom: 5px; margin-left: 20px;">리워드선택</p>
 			<div class=""></div>
 			<c:forEach var="reword" items="${mList}">
