@@ -48,21 +48,20 @@ public class AccountController {
 	
 	@RequestMapping(value = "/loginWithApi.ao")
 	public ModelAndView loginWithThirdParty(Account account, ModelAndView mv, HttpServletRequest request ){
-		System.out.println();
-		String email = request.getParameter("email");
-		String idtoken  = request.getParameter("idtoken");
+		String access_token = request.getParameter("access_token");
 		Account thirdPartyUser = accountService.selectThirdPartyUser(account);
 		Party p = accountService.loginParty(account.getAno());
 			HttpSession session = request.getSession(false);
 			if(thirdPartyUser != null){
+				thirdPartyUser.setIdtoken(access_token);
 				session.setAttribute("account", thirdPartyUser);
 				session.setAttribute("party", p);
 				mv.setViewName("redirect:/");
 			
 			}else{
-				String alert= "redirect:/?alert=\"이미 가입되어 있는 회원입니다.\" ";
-				System.out.println(alert);
-				mv.setViewName(alert);
+				
+				mv.addObject("loginFail", "이미 가입된아이디가 존재합니다.");
+				mv.setViewName("redirect:/");
 			}
 					
 		return mv;
@@ -81,7 +80,7 @@ public class AccountController {
 	@RequestMapping("/logout.ao")
 	public String logout(HttpSession session){
 		session.invalidate();
-		return "home";
+		return "redirect:/";
 	}
 	
 	// myinfo 회원정보 설정 시작
