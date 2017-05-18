@@ -32,7 +32,35 @@ public class Item implements Serializable {
 	private String cname;
 	private String cs_email;
 	private String cs_phone;
+	private int fundamount;
+	private int fundcount;
+	private int supportcount;
+	
+	
 
+	public int getFundamount() {
+		return fundamount;
+	}
+
+	public void setFundamount(int fundamount) {
+		this.fundamount = fundamount;
+	}
+
+	public int getFundcount() {
+		return fundcount;
+	}
+
+	public void setFundcount(int fundcount) {
+		this.fundcount = fundcount;
+	}
+
+	public int getSupportcount() {
+		return supportcount;
+	}
+
+	public void setSupportcount(int supportcount) {
+		this.supportcount = supportcount;
+	}
 
 	public int getPro_no() {
 		return pro_no;
@@ -196,7 +224,8 @@ public class Item implements Serializable {
 
 	public Item(int pro_no, int ano, String pname, String pcontent, String category, Date psdate, Date pedate,
 			String pshort, Integer ecost, String refund, String pvideo, String pstatus, int likecount, String sharelink,
-			String bankcode, String accpnm, String accnum, String cname, String cs_email, String cs_phone, int totalcost) {
+			String bankcode, String accpnm, String accnum, String cname, String cs_email, String cs_phone,
+			int fundamount, int fundcount, int supportcount) {
 		super();
 		this.pro_no = pro_no;
 		this.ano = ano;
@@ -218,6 +247,9 @@ public class Item implements Serializable {
 		this.cname = cname;
 		this.cs_email = cs_email;
 		this.cs_phone = cs_phone;
+		this.fundamount = fundamount;
+		this.fundcount = fundcount;
+		this.supportcount = supportcount;
 	}
 
 	@Override
@@ -226,8 +258,8 @@ public class Item implements Serializable {
 				+ category + ", psdate=" + psdate + ", pedate=" + pedate + ", pshort=" + pshort + ", ecost=" + ecost
 				+ ", refund=" + refund + ", pvideo=" + pvideo + ", pstatus=" + pstatus + ", likecount=" + likecount
 				+ ", sharelink=" + sharelink + ", bankcode=" + bankcode + ", accpnm=" + accpnm + ", accnum=" + accnum
-				+ ", cname=" + cname + ", cs_email=" + cs_email + ", cs_phone=" + cs_phone + "]";
+				+ ", cname=" + cname + ", cs_email=" + cs_email + ", cs_phone=" + cs_phone + ", fundamount="
+				+ fundamount + ", fundcount=" + fundcount + ", supportcount=" + supportcount + "]";
 	}
 
-	
 }

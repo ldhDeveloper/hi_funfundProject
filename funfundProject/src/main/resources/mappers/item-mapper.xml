@@ -24,6 +24,9 @@
 		<result property="cname" column="cname" />
 		<result property="cs_email" column="cs_email" />
 		<result property="cs_phone" column="cs_phone" />
+		<result property="fundamount" column="fundamount" />
+		<result property="fundcount" column="fundcount" />
+		<result property="supportcount" column="supportcount" />
 	</resultMap>
 
 	<insert id="insert" parameterType="Item">
@@ -37,14 +40,42 @@
 	</insert>
 
 	<select id="selectList" parameterType="Item" resultMap="itemResult">
-			<![CDATA[
+			<!-- <![CDATA[
 			select pro_no, ano, pname, pcontent, category, psdate, pedate, pshort, ecost, refund, pvideo, pstatus, likecount, sharelink, bankcode, accpnm, accnum, cname, cs_email, cs_phone  from item
-	        ]]>
+	        ]]> -->
+	        <![CDATA[
+	        select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount
+			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost), 0) as fundamount 
+			from item i2 join fundmenu fm2 on (i2.pro_no = fm2.pro_no)
+			             join fundlist fl2 on (fm2.mno = fl2.mno)
+			group by i2.pro_no) i2 on(i1.pro_no = i2.pro_no)
+			left join (select i3.pro_no, count(fl3.ano) as fundcount
+			           from item i3 join fundmenu fm3 on (i3.pro_no = fm3.pro_no)
+			                        join fundlist fl3 on (fm3.mno = fl3.mno)
+			           group by i3.pro_no) i3 on(i1.pro_no = i3.pro_no)
+			left join (select i3.pro_no, count(distinct fl3.ano) as supportcount
+			from item i3 join fundmenu fm3 on (i3.pro_no = fm3.pro_no)
+			             join fundlist fl3 on (fm3.mno = fl3.mno)
+			group by i3.pro_no) i4 on(i1.pro_no = i4.pro_no)
+			]]>
 	</select>
 
 	<select id="selectOne" parameterType="int" resultMap="itemResult">
 	        <![CDATA[
-	        select pro_no, ano, pname, pcontent, category, psdate, pedate, pshort, ecost, refund, pvideo, pstatus, likecount, sharelink, bankcode, accpnm, accnum, cname, cs_email, cs_phone from item where pro_no= #{pro_no}
+	        select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount
+			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost), 0) as fundamount 
+			from item i2 join fundmenu fm2 on (i2.pro_no = fm2.pro_no)
+			             join fundlist fl2 on (fm2.mno = fl2.mno)
+			group by i2.pro_no) i2 on(i1.pro_no = i2.pro_no)
+			left join (select i3.pro_no, count(fl3.ano) as fundcount
+			           from item i3 join fundmenu fm3 on (i3.pro_no = fm3.pro_no)
+			                        join fundlist fl3 on (fm3.mno = fl3.mno)
+			           group by i3.pro_no) i3 on(i1.pro_no = i3.pro_no)
+			left join (select i3.pro_no, count(distinct fl3.ano) as supportcount
+			from item i3 join fundmenu fm3 on (i3.pro_no = fm3.pro_no)
+			             join fundlist fl3 on (fm3.mno = fl3.mno)
+			group by i3.pro_no) i4 on(i1.pro_no = i4.pro_no)
+	        where i1.pro_no= #{pro_no}
 	        ]]>
 	</select>
 	
@@ -57,9 +88,25 @@
 
 	<select id="top3List" resultMap="itemResult">
 			<![CDATA[
-			select pro_no, ano, pname, pcontent, category, psdate, pedate, pshort, ecost, refund, pvideo, pstatus, likecount, sharelink, bankcode, accpnm, accnum, cname, cs_email, cs_phone 
-			from(SELECT i.*, ROW_NUMBER() OVER (ORDER BY likecount DESC) rnum
-     				FROM item i) it
+			select it.pro_no as pro_no, it.ano as ano, it.pname as pname, it.pcontent as pcontent, it.category as category,
+			it.psdate as psdate, it.pedate as pedate, it.pshort as pshort, it.ecost as ecost, it.refund as refund, it.pvideo as pvideo,
+			it.pstatus as pstatus, it.likecount as likecount, it.sharelink as sharelink, it.bankcode as bankcode, it.accpnm as accpnm,
+			it.accnum as accnum, it.cname as cname, it.cs_email as cs_email, it.cs_phone as cs_phone, it.fundamount as fundamount, 
+			it.fundcount as fundcount, it.supportcount as supportcount
+						from(SELECT item.*, ROW_NUMBER() OVER (ORDER BY fundcount DESC) rnum
+			     				FROM (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount
+			                  from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost), 0) as fundamount 
+			                  from item i2 join fundmenu fm2 on (i2.pro_no = fm2.pro_no)
+			                               join fundlist fl2 on (fm2.mno = fl2.mno)
+			                  group by i2.pro_no) i2 on(i1.pro_no = i2.pro_no)
+			                  left join (select i3.pro_no, count(fl3.ano) as fundcount
+			                             from item i3 join fundmenu fm3 on (i3.pro_no = fm3.pro_no)
+			                                          join fundlist fl3 on (fm3.mno = fl3.mno)
+			                             group by i3.pro_no) i3 on(i1.pro_no = i3.pro_no)
+			                  left join (select i3.pro_no, count(distinct fl3.ano) as supportcount
+			                  from item i3 join fundmenu fm3 on (i3.pro_no = fm3.pro_no)
+			                               join fundlist fl3 on (fm3.mno = fl3.mno)
+			                  group by i3.pro_no) i4 on(i1.pro_no = i4.pro_no)) item) it
 			where rnum <= 3
 	        ]]>
 	</select>
