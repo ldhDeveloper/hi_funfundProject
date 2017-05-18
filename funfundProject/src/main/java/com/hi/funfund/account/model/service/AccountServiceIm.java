@@ -139,5 +139,13 @@ public class AccountServiceIm implements AccountService {
 	public int updateNickname(int ano, String nickname) {
 		System.out.println("Service ano : " + ano + " nickname : " + nickname);
 		return accountDao.updateNickname(ano, nickname);
+	}
+
+	@Override
+	public Account selectThirdPartyUser(Account account) {
+		Account thirdPartyUser = accountDao.selectThirdPartyUser(account);
+		
+		
+		return thirdPartyUser;
 	}	
 }

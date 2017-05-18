@@ -46,18 +46,27 @@ public class AccountController {
 		return mv;
 	}
 	
-	/*@RequestMapping(value = "/loginWithApi.ao")
-	public ModelAndView loginWithThirdParty(ModelAndView mv, HttpServletRequest request ){
+	@RequestMapping(value = "/loginWithApi.ao")
+	public ModelAndView loginWithThirdParty(Account account, ModelAndView mv, HttpServletRequest request ){
 		System.out.println();
 		String email = request.getParameter("email");
-		String id = request.getParameter("name");
-		String idtoken  = request.getParameter("token");
-		System.out.println(email+"," + id);
-		System.out.println(mv.getStatus());
-		mv.setViewName("redirect:/");
-		
+		String idtoken  = request.getParameter("idtoken");
+		Account thirdPartyUser = accountService.selectThirdPartyUser(account);
+		Party p = accountService.loginParty(account.getAno());
+			HttpSession session = request.getSession(false);
+			if(thirdPartyUser != null){
+				session.setAttribute("account", thirdPartyUser);
+				session.setAttribute("party", p);
+				mv.setViewName("redirect:/");
+			
+			}else{
+				String alert= "redirect:/?alert=\"이미 가입되어 있는 회원입니다.\" ";
+				System.out.println(alert);
+				mv.setViewName(alert);
+			}
+					
 		return mv;
-	}*/
+	}
 	
 	@RequestMapping(value = "/signup.ao", produces = "text/plain;charset=UTF-8")
 	public String signup(Account account){

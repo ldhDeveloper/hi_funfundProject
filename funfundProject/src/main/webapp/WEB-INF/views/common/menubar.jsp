@@ -52,6 +52,9 @@
 	function home(){
 		location.href="/funfund";
 	}
+	var alertt = '${alert}';
+	if(alertt !== "")
+	alert("경고" + alertt);
 </script>
 
 <script>
@@ -62,7 +65,6 @@
       auth2 = gapi.auth2.init({
         client_id: '659736995246-ddl5nvftj5f76j3gk122g03t00n18pl7.apps.googleusercontent.com',
         cookiepolicy: 'single_host_origin',
-       
         scope: 'profile'
       });
       auth2.attachClickHandler(document.getElementById('gSignupBt'), {},
@@ -72,6 +74,7 @@
     	        });
       auth2.signIn().then(function() {
     	  var profile = auth2.currentUser.get().getBasicProfile();
+    		
     	  console.log(profile.getName());
     	  console.log(profile.getEmail());
     	  });
@@ -87,14 +90,14 @@
 //common function for sns user
 
 function loginWiththirdParty(email, name, token){
-location.href="loginWithApi.ao?email="+email +"&name="+ name + "&token="+ token;
+location.href="loginWithApi.ao?email="+email +"&nickname="+ name + "&idtoken="+ idtoken;
 
 	
 } 
 
- var name;
+ var nickname;
  var email;
- var token;
+ var idtoken;
 //카카오톡 회원 로그인 
 Kakao.init('c04a7d5e62e926cf85109fde19aa531a');
     // 카카오 로그인 버튼을 생성합니다.
@@ -102,16 +105,17 @@ Kakao.init('c04a7d5e62e926cf85109fde19aa531a');
 	  Kakao.Auth.login({
     		success: function(authObj){//로그인시도
     			//alert(JSON.stringify(authObj));
-    			token = authObj.access_token;
+    			idtoken = authObj.access_token;
     			Kakao.API.request({
     			url: '/v1/user/me',
     			success: function(res){
-    			name = res.properties.nickname;
+    			nickname = res.properties.nickname;
     			email = res.kaccount_email;
     			//alert(JSON.stringify(res));
     			//alert(nickname + ", " + email);
-    			  alert(email +", " +name +", " + token)
-    			  loginWiththirdParty(email, name, token); 
+    			alert(email +", " +nickname +", " + idtoken)
+    			loginWiththirdParty(email, nickname, idtoken); 
+    			  
     			},
     			fail: function(error){
     				alert(JSON.stringify(error));
