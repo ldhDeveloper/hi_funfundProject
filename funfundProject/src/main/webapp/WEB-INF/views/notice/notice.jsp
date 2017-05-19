@@ -77,6 +77,75 @@ margin: auto;
 .paging li {
 float : left;
 }
+button {
+background-repeat-y:
+;
+background-size:
+auto
+;
+border-bottom-color:
+rgb(0, 204, 163)
+;
+border-bottom-style:
+solid
+;
+border-bottom-width:
+1.11111px
+;
+border-image-outset:
+0px
+;
+border-image-repeat:
+stretch
+;
+border-image-slice:
+100%
+;
+border-image-source:
+none
+;
+border-image-width:
+1
+;
+border-left-color:
+rgb(0, 204, 163)
+;
+border-left-style:
+solid
+;
+border-left-width:
+1.11111px
+;
+border-right-color:
+rgb(0, 204, 163)
+;
+border-right-style:
+solid
+;
+border-right-width:
+1.11111px
+;
+border-top-color:
+rgb(0, 204, 163)
+;
+border-top-style:
+solid
+;
+border-top-width:
+1.11111px
+;
+
+background-color:
+rgb(0, 204, 163)
+;
+;
+font-family:
+Roboto, "Noto Sans KR", sans-serif
+;
+font-size:
+15px
+;
+}
 </style>
 
 </head>

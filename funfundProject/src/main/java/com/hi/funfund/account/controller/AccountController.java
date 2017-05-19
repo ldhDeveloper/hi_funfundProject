@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -50,21 +51,28 @@ public class AccountController {
 	public ModelAndView loginWithThirdParty(Account account, ModelAndView mv, HttpServletRequest request ){
 		String access_token = request.getParameter("access_token");
 		Account thirdPartyUser = accountService.selectThirdPartyUser(account);
-		Party p = accountService.loginParty(account.getAno());
+		Party p = null;
 			HttpSession session = request.getSession(false);
 			if(thirdPartyUser != null){
 				thirdPartyUser.setIdtoken(access_token);
+				p = accountService.loginParty(thirdPartyUser.getAno());
 				session.setAttribute("account", thirdPartyUser);
 				session.setAttribute("party", p);
 				mv.setViewName("redirect:/");
-			
-			}else{
 				
-				mv.addObject("loginFail", "이미 가입된아이디가 존재합니다.");
+			}else{
+			
+				
 				mv.setViewName("redirect:/");
 			}
 					
 		return mv;
+	}
+	@RequestMapping(method = RequestMethod.POST)
+	private void loginFail(ModelAndView model, HttpServletRequest request){
+		System.out.println( request.getMethod());
+	
+		
 	}
 	
 	@RequestMapping(value = "/signup.ao", produces = "text/plain;charset=UTF-8")
