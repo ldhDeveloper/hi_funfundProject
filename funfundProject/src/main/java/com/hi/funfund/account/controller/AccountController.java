@@ -49,7 +49,7 @@ public class AccountController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/loginWithApi.ao")
+	@RequestMapping(value = "/loginWithApi.ao") // 타 사이트 정보로 회원가입
 	public ModelAndView loginWithThirdParty(Account account, ModelAndView mv, HttpServletRequest request ){
 		String access_token = request.getParameter("access_token");
 		System.out.println(account);
@@ -60,22 +60,14 @@ public class AccountController {
 				thirdPartyUser.setIdtoken(access_token);
 				p = accountService.loginParty(thirdPartyUser.getAno());
 				session.setAttribute("account", thirdPartyUser);
-				session.setAttribute("party", p);
-				mv.setViewName("redirect:/");
-				
+				session.setAttribute("party", p);			
 			}else{
-				mv.setViewName("redirect:/loginFail.ao");
+				mv.addObject("loginFail", "로그인에 실패 했습니다.");
 			}				
+			mv.setViewName("redirect:/");
 		return mv;
 	}
-	@RequestMapping(value = "loginFail.ao", method= RequestMethod.POST)
-	@ResponseStatus(value=HttpStatus.OK)
-	private ModelAndView loginFail(ModelAndView model){
-		model.addObject("loginFail", "로그인에 실패 했습니다.");
-		model.setViewName("redirect:/");
-		return  model;
-		
-	}
+	
 	
 	
 	@RequestMapping(value = "/signup.ao", produces = "text/plain;charset=UTF-8")

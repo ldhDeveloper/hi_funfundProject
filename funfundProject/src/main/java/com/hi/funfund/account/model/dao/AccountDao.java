@@ -81,8 +81,8 @@ public class AccountDao {
 		Account account = (Account) sqlSession.selectOne("selectAccount", ano);
 		return account;
 	}
-
-	public Account selectThirdPartyUser(Account account){
+	//타사이트로 가입한 유저 찾기/로그인/중복가입방지
+	public Account selectThirdPartyUser(Account account){ 
 		int result = 0; //데이터베이스에 회원이 있는지를 가리기위한 변수
 		Account user = (Account) sqlSession.selectOne("accountMapper.thirdPartyUser", account);
 		if(user == null){

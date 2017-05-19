@@ -54,9 +54,12 @@
 	function home(){
 		location.href="/funfund";
 	}
+	function loginFail(){
 	var loginFail = '${loginFail}';//구글등으로 로그인시 회원가입실패한 경우 날라오는 경고문
 	if(loginFail !== "")
 	alert("경고" + loginFail);
+	home();
+	}
 </script>
 <script>//구글
   var googleUser = {};
