@@ -89,11 +89,11 @@
     
     });
   };
-  function googleSignOut() {
+  /* function googleSignOut() {
 	    var auth2 = gapi.auth2.getAuthInstance();
 	    auth2.signOut().then(function () {
 	      console.log('User signed out.');
-	    });}
+	    });} */
   </script>
 
 <script type='text/javascript'>
@@ -101,10 +101,7 @@
 
 function loginWithThirdParty(email, name, idtoken, access_token ){
 location.href="loginWithApi.ao?email="+email +"&nickname="+ name + "&idtoken="+ idtoken +"&access_token="+access_token;
-
-	
 } 
-
  var nickname;
  var email;
  var idtoken;
@@ -124,11 +121,7 @@ Kakao.init('c04a7d5e62e926cf85109fde19aa531a');
     			nickname = res.properties.nickname;
     			email = res.kaccount_email;
     			idtoken = "카카오";
-    			//alert(JSON.stringify(res));
-    			//alert(nickname + ", " + email);
-    			alert(email +", " +nickname +", " + idtoken)
-    			loginWithThirdParty(email, nickname, idtoken, access_token); 
-    			  
+    			loginWithThirdParty(email, nickname, idtoken, access_token);  
     			},
     			fail: function(error){
     				alert(JSON.stringify(error));
@@ -142,7 +135,9 @@ Kakao.init('c04a7d5e62e926cf85109fde19aa531a');
     	});
 	  };
   //]]>
-  
+/*   function KakaoLogout(){
+	  Kakao.Auth.logout();
+  } */
    
 </script>
 
@@ -988,7 +983,7 @@ label.sign-form_title {
 							<li><a href="myinfo.ao">회원정보보기</a>
 						</ul>
 						<ul>
-							<li><a href="logout.ao" onclick="googleSignOut();">로그아웃</a>
+							<li><a href="logout.ao" onclick="googleSignOut();KakaoLogout();">로그아웃</a>
 						</ul>
 					</div>
 					<div></div>
