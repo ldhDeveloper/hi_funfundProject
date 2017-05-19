@@ -1,7 +1,11 @@
 package com.hi.funfund.item.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,11 +21,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hi.funfund.HomeController;
+import com.hi.funfund.account.model.vo.Account;
+import com.hi.funfund.attachment.model.service.AttachmentService;
+import com.hi.funfund.attachment.model.vo.Attachment;
 import com.hi.funfund.fundmenu.model.service.FundMenuService;
 import com.hi.funfund.fundmenu.model.vo.FundMenu;
 import com.hi.funfund.fundmenu.model.vo.ReciveFundMenu;
@@ -42,6 +51,9 @@ public class ItemController {
 	private FundMenuService fundMenuService;
 	@Autowired
 	private ItemAskService itemAskService;
+	@Autowired
+	private AttachmentService attachmentService;
+
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
@@ -150,18 +162,25 @@ public class ItemController {
 		return model;
 	}
 
-	@RequestMapping(value = "selectAll.it", method = RequestMethod.POST)
+	
+	@RequestMapping(value ="selectAll.it", method = RequestMethod.GET)
 	public @ResponseBody List<Item> selectAllItem() {
-		// ObjectMapper mapper = new ObjectMapper();
 		List<Item> iList = itemService.AllList();
 		System.out.println("오니?");
-		if (iList != null) {
-			// model.setViewName("jsonView");
-			// String jsonInString = mapper.writeValueAsString(iList);
-			// model.addObject("iList", iList);
+		if(iList != null){
 			System.out.println("iList : " + iList);
-		}
-
+		}	
+		return iList;
+	}
+	
+	@RequestMapping(value ="selectCategory.it", method = RequestMethod.GET)
+	public @ResponseBody List<Item> selectCategoryItem(@RequestParam("category") String category) {
+		System.out.println("category : " + category);
+		List<Item> iList = itemService.categoryList(category);
+		System.out.println("오니?");
+		if(iList != null){
+			System.out.println("iList : " + iList);
+		}	
 		return iList;
 	}
 
@@ -169,9 +188,55 @@ public class ItemController {
 	public ModelAndView insertRewardItem(ModelAndView model, Item item, HttpServletRequest request) {
 		int result = 0;
 
-		/* System.out.println(rfmenu); */
 
 		result = itemService.updateRewardItem(item);
+		
+
+		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+		if (!multipartRequest.getFile("uploadFile").isEmpty()) {
+
+			MultipartFile uploadFile = multipartRequest.getFile("uploadFile");
+			HttpSession session = request.getSession(false);
+
+			String page = "";
+			String root = request.getSession().getServletContext().getRealPath("/");
+			System.out.println("root : " + root);
+			String[] roots = root.split("\\\\");
+			String marger = "";
+			for (int i = 0; i < roots.length - 3; i++) {
+				marger += roots[i] + "\\";
+			}
+
+			System.out.println("marger : " + marger);
+			String savePath = marger + "src/main/webapp/images/makeproject/titleimg";
+			System.out.println("savepath : " + savePath);
+
+			int pro_no = 0;
+			int result2 = 0;
+			String ofileName = uploadFile.getOriginalFilename();
+
+			long currentTime = System.currentTimeMillis();
+			SimpleDateFormat simDf = new SimpleDateFormat("yyyyMMddHHmmss");
+			String rfileName = simDf.format(new Date(currentTime)) + "(1)."
+					+ ofileName.substring(ofileName.lastIndexOf(".") + 1);
+			;
+			try {
+				uploadFile.transferTo(new File(savePath + rfileName));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			Attachment att = new Attachment();
+			
+			att.setOrifname(ofileName);
+			att.setRefname(rfileName);
+			att.setFtype("titleimg");
+			att.setRefno(item.getPro_no());
+			
+			result2 = attachmentService.updateProfileImage(att);
+			
+		}
+		
 		model.addObject("pro_no", item.getPro_no());
 
 		model.setViewName("makeproject/primaryinfo");
