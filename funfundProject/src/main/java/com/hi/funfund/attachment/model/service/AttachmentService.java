@@ -21,4 +21,11 @@ public interface AttachmentService {
 	int updateProfileImage(Attachment vo);
 
 	int accountProfileImage(HashMap<String, String> hmap);
+
+	int insertItemImages(int pro_no);
+
+	int updateTitleImage(Attachment att);
+
+	int updateMakerImage(Attachment att);
+	
 }
