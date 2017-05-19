@@ -106,7 +106,6 @@ public class AccountServiceIm implements AccountService {
 
 	@Override
 	public Account selectOldPwd(int ano, String oldPwd) {
-		System.out.println("Service ano : " + ano + " oldPwd : " + oldPwd);
 		return accountDao.selectOldPwd(ano, oldPwd);
 	}
 	
@@ -114,7 +113,6 @@ public class AccountServiceIm implements AccountService {
 
 	@Override
 	public int updatePwd(int ano, String newPwd) {
-		System.out.println("Service ano : " + ano + " newPwd : " + newPwd);
 		return accountDao.updatePwd(ano, newPwd);
 	}
 	
@@ -122,7 +120,6 @@ public class AccountServiceIm implements AccountService {
 
 	@Override
 	public int insertName(int ano, String name) {
-		System.out.println("Service ano : " + ano + " name : " + name);
 		return accountDao.insertName(ano, name);
 	}
 
@@ -137,7 +134,6 @@ public class AccountServiceIm implements AccountService {
 	
 	@Override
 	public int updateNickname(int ano, String nickname) {
-		System.out.println("Service ano : " + ano + " nickname : " + nickname);
 		return accountDao.updateNickname(ano, nickname);
 	}
 	
@@ -147,12 +143,24 @@ public class AccountServiceIm implements AccountService {
 	public int updateEmail(String ano, String email) {
 		return accountDao.updateEmail(ano, email);
 	}
+	
+	// insertAddress 주소 추가
+	
+	@Override
+	public int insertAddress(int ano, String address) {
+		return accountDao.insertAddress(ano, address);
+	}
+	
+	// updateAddress 주소 수정
+	
+	@Override
+	public int updateAddress(int ano, String address) {
+		return accountDao.updateAddress(ano, address);
+	}
 
 	@Override
 	public Account selectThirdPartyUser(Account account) { //타사이트로 가입한 유저 로그인/가입/제어
 		Account thirdPartyUser = accountDao.selectThirdPartyUser(account);
 		return thirdPartyUser;
-	}
-
-		
+	}		
 }
