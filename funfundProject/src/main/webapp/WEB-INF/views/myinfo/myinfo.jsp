@@ -234,22 +234,16 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 					<div class="row">
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
 							<form id="imageform" action="imgUpload.at" method="post" enctype="multipart/form-data">
-							<c:if test="${ empty sessionScope.party.pname}">
-								<input type="hidden" name="photoflag" value="insert">
-							</c:if>
-							<c:if test="${ !empty sessionScope.party.pname}">
-								<input type="hidden" name="photoflag" value="update">
-							</c:if>
-							<input id="profileimagefile" type="file" name="uploadFile" style="display:none;" onchange="LoadImg(this);">
-							<c:if test="${empty sessionScope.account.pimage }">
-								<img id="profileimage" class="img-circle img-responsive" src="images/myinfo/basic.png" style="max-width:170px;max-height:170px; width:170px; heigh:150px; cursor:pointer" onclick="document.all.uploadFile.click();">
-							</c:if>
-							<c:if test="${!empty sessionScope.account.pimage }">
-								<img id="profileimage" class="img-circle img-responsive" src="images/myinfo/<c:out value='${sessionScope.account.pimage }'/>" style="max-width:170px;max-height:170px; width:170px; heigh:150px; cursor:pointer" onclick="document.all.uploadFile.click();">
-							</c:if>
-							<!-- <img class="img-circle img-responsive" src="images/myinfo/basic.png" style="max-width:170px;max-height:170px; width:170px; heigh:150px; cursor:pointer" onclick="uploadFile();"> -->
+								<input id="profileimagefile" type="file" name="uploadFile" style="display:none;" onchange="LoadImg(this);">
+								<c:if test="${empty sessionScope.account.pimage }">
+									<img id="profileimage" class="img-circle img-responsive" src="images/myinfo/basic.png" style="max-width:170px;min-width:170px;min-height:170px;max-height:170px; width:170px; heigh:150px; cursor:pointer" onclick="document.all.uploadFile.click();">
+								</c:if>
+								<c:if test="${!empty sessionScope.account.pimage }">
+									<img id="profileimage" class="img-circle img-responsive" src="images/myinfo/<c:out value='${sessionScope.account.pimage }'/>" style="min-width:170px;min-height:170px;max-width:170px;max-height:170px; width:170px; heigh:150px; cursor:pointer" onclick="document.all.uploadFile.click();">
+								</c:if>
 							</form>
 						</div>
+						
 						<script>
 						function LoadImg(value){
 						 	if(value.files && value.files[0]){
@@ -264,6 +258,7 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 							$("#imageform").submit();
 						}
 						</script>
+						
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow mname" align="center">
 							<div>
 							회원명 | <c:if test="${ empty sessionScope.party.pname}">
@@ -442,6 +437,8 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 	                     			
 	                     			<script>
         								$(function(){
+        									var num;
+        									
         									$("#oldPwdInput").removeClass("alert alert-danger");
         									$("#newPwdInput").removeClass("alert alert-danger");
         									$("#newPwdInput2").removeClass("alert alert-danger");
@@ -498,6 +495,37 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
         									$("#mEmailRetry").click(function(){
         										
     										});
+        									
+        									$("#emailCheckBtn").click(function() {
+        										if($("#userEmail").val() == "") {
+        											alert("이메일을 입력해주세요.");
+        											return;
+        										}
+        										
+        										/* $("#emailFrame").fadeIn(350); */
+        										$("#emailCheckBtn").attr("disabled",true);
+        										
+        										// alert("receive :: " + $("#receive").val());
+        										
+        										http = jQuery.ajax({
+        									   		url		: "/mailCodeSend.do",
+        									   		type	: "POST",
+        											data 	: 'receive='+$("#receive").val(),
+        											dataType: 'html',
+        									   		async	: true,
+        											success : function(msg) {
+
+       													// alert(msg);
+        												alert("인증번호가 메일로 발송되었습니다.");
+        												
+        												if(msg == '') {
+        													alert("이메일주소를 입력해주세요.");
+        													return;
+        												} 
+        												num = msg;        												
+        											}
+        									  	});
+        									});
        									});
         								
         								function savePwd (){
@@ -535,20 +563,8 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
     											$("#emailCheckBtn").addClass("emailCheck emailAuthBtn mbtn");
     										}); */
     									};
-    									
-    									var ch = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','0','1','2','3','4','5','6','7','8','9'};
-    									
-    									
-    									
-    									var aNum = "";
-    									
-    									/* char[] charaters = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','0','1','2','3','4','5','6','7','8','9'};
-    						            StringBuffer sb = new StringBuffer();
-    						            Random rn = new Random();
-    						            for( int i = 0 ; i < 10 ; i++ ){
-    						                sb.append( charaters[ rn.nextInt( charaters.length ) ] );
-    						            }
-    						            String pw =  sb.toString(); */
+    									   
+    									/* emailCheckBtn */
         							</script>																			
 								</div>
 							</div>

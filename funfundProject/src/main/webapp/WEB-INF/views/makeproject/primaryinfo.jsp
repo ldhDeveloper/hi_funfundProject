@@ -849,13 +849,12 @@ li {
 							var client_id = "l7xx6712d9c9cd524d3b9c3f0f60b2dea3ee";
 							var client_secret = "10e3bd27aa5e4287ae709bca09c34ea7";
 							var  grant_type = "client_credentials";
-							document.getElementById('authCodeFrm').submit();
+							//document.getElementById('authCodeFrm').submit();
 							
 							var access_token = "";
 							var user_seq_no = 0;
 							var time = new Date();
-							
-							
+														
 					        var year = time.getFullYear();
 					        
 					        var month = 0;

@@ -37,11 +37,11 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/menubar.jsp" flush="true"/>
-<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script> -->
-<!-- <script src="https://service.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script> -->
-<!-- <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.4.js"></script> -->
-<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script> -->
-<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.4.js"></script>
+<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script src="https://service.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.4.js"></script> -->
+
+
 
 <br>
 <div class="all">
@@ -52,7 +52,7 @@
 				<h3>투자 서비스 신청</h3>
 				<h5>투자 서비스를 신청하시면, 비상장 기업이 자금모집을 위해 진행하는 크라우드펀딩 증권형 프로젝트에 청약신청이 가능합니다. 청약신청부터 증권배정까지 와디즈 투자 서비스를 이용해보세요.</h5>
 				<h6>투자서비스 이용을 위한 본인여부 확인이 필요합니다.</h6><br><br>
-				<input type="button" value="휴대폰 본인인증" class="confirmBtn" id="check"><br><br><br>
+				<input type="button" value="휴대폰 본인인증" class="confirmBtn" id="injung"><br><br><br>
 				<h6>Funfund에서 본인인증을 진행함으로써 인증된 성명, 생년월일, 휴대폰번호 정보가 와디즈로 전달되어 회원정보로 저장됨을 동의합니다.</h6>
 			</div>
 			<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"></div>
@@ -63,13 +63,15 @@
 
 <br><br>
 
+<script src="https://service.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
+
 <script type="text/javascript">
 	/* var jQuery = $.noConflict(true); */
 	
 	$(function(){		
 		console.log("오니?");
 		
-		$("#check").click(function(){
+		$("#injung").click(function() {
 			IMP.init('imp55262355');			
 			console.log("여긴 오니?");
 			
