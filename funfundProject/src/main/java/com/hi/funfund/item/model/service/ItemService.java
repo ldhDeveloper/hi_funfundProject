@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.hi.funfund.item.model.vo.Item;
+import com.hi.funfund.item.model.vo.Itemfund;
 
 public interface ItemService {
 
@@ -42,6 +43,6 @@ public interface ItemService {
 
 	List<Item> top3List();
 
-	List bestList(int pro_no);
+	List<Itemfund> bestList(int pro_no);
 
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hi.funfund.item.model.vo.Item;
+import com.hi.funfund.item.model.vo.Itemfund;
 
 @Repository("itemDao")
 public class ItemDao {
@@ -55,9 +56,10 @@ public class ItemDao {
 		return top3List;
 	}
 
-	public List<Item> bestList(int pro_no) {
+	public List<Itemfund> bestList(int pro_no) {
 		List bestList = sqlSession.selectList(nameSpace+"bestList", pro_no);
-		return null;
+		return bestList;
+	}
 
 	public int selectAllItem() {
 		// TODO Auto-generated method stub

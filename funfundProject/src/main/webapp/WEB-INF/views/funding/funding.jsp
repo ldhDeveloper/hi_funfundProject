@@ -138,7 +138,7 @@ button {
 		          		html += '<span id="persent' + i +'"></span> % &nbsp;&nbsp; <span>' + data.iList[i].fundamount + '</span>원 달성 &nbsp;&nbsp;';
 		          		html += '<span id="edate' + i +'"></span>';
 		          		html += '<span id="yet' + i +'">일 남음</span>';
-		          		html += '<spen id="complete' + i + '">펀딩종료</spen>';
+		          		html += '<span id="complete' + i + '">펀딩종료</span>';
 		          		html += '</p><div class="caption"><p>' + data.iList[i].pcontent + '</p>';
 						html += '<span>' + data.iList[i].category + '</span></div></a></div></div>';
 		          	}
@@ -265,7 +265,7 @@ button {
 									<span id="persent<c:out value='${status.index}'/>"></span> % &nbsp;&nbsp; <span><c:out value="${item.fundamount }"/></span>원 달성 &nbsp;&nbsp; 
 									<span id="edate<c:out value='${status.index}'/>"></span>
 									<span id="yet<c:out value='${status.index}'/>">일 남음</span>
-									<spen id="complete<c:out value='${status.index}'/>">펀딩종료</spen>
+									<span id="complete<c:out value='${status.index}'/>">펀딩종료</span>
 								</p>
 
 								<div class="caption">
