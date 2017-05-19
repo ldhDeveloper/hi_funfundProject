@@ -123,5 +123,11 @@ public class ItemServiceIm implements ItemService{
 		return itemDao.bestList(pro_no);
 	}
 
+	@Override
+	public int plusItemLike(int pro_no) {
+		// TODO Auto-generated method stub
+		return itemDao.plusItemLike(pro_no);
+	}
+
 	
 }

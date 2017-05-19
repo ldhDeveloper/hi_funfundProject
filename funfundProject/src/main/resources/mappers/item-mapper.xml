@@ -189,5 +189,10 @@
 			where i1.category = #{category}
 			]]>
 	</select>
-
+	<update id="plusItemLike" parameterType="int">
+		update item set likecount = (select likecount
+												  from item
+												  where pro_no = #{pro_no}) + 1
+		where pro_no = #{pro_no}										  
+	</update>
 </mapper>

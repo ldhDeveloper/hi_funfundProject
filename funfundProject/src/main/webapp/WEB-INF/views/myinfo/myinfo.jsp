@@ -235,6 +235,12 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
 							<form id="imageform" action="imgUpload.at" method="post" enctype="multipart/form-data">
 								<input id="profileimagefile" type="file" name="uploadFile" style="display:none;" onchange="LoadImg(this);">
+								<c:if test="${ empty sessionScope.account.pimage}">
+									<input type="hidden" name="photoflag" value="insert">
+								</c:if>
+								<c:if test="${ !empty sessionScope.account.pimage}">
+									<input type="hidden" name="photoflag" value="update">
+								</c:if>
 								<c:if test="${empty sessionScope.account.pimage }">
 									<img id="profileimage" class="img-circle img-responsive" src="images/myinfo/basic.png" style="max-width:170px;min-width:170px;min-height:170px;max-height:170px; width:170px; heigh:150px; cursor:pointer" onclick="document.all.uploadFile.click();">
 								</c:if>
