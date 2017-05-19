@@ -21,6 +21,14 @@
 			WHERE ftype=#{ftype} AND fsubtype=#{fsubtype} AND refno=#{refno}
 		]]>
 	</update>
+	
+	<insert id="insertSlideImages" parameterType="attachment">
+		<![CDATA[
+			INSERT INTO ATTACHMENT (fno, orifname, refname, ftype, fsubtype, refno)
+			VALUES(seq_fno.nextval, #{orifname}, #{refname}, #{ftype}, #{fsubtype}, #{refno})
+		]]>
+	</insert>
+	
 	<update id="accountProfileImage" parameterType="HashMap">
 		<![CDATA[
 			UPDATE ACCOUNT SET PIMAGE=#{pimage}

@@ -1,6 +1,7 @@
 package com.hi.funfund.attachment.controller;
 
 import java.io.*;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -80,6 +82,73 @@ public class AttachmentController {
 		return page;
 	}
 	
+	@RequestMapping("/insertSlide.at")
+	public ModelAndView insertSlideImages(/*@RequestParam("pro_no")int pro_no,*/ ModelAndView model, HttpServletRequest request) throws  IOException{
+		
+		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+		HttpSession session = request.getSession(false);
+		
+		String page = "";
+		ArrayList<Integer> farr = new ArrayList<Integer>();
+		String root = request.getSession().getServletContext().getRealPath("/");
+		System.out.println("root : " + root);
+		String[] roots = root.split("\\\\");
+		String marger = "";
+		for (int i = 0; i < roots.length - 3; i++) {
+			marger += roots[i] + "\\";
+		}
+
+		System.out.println("marger : " + marger);
+		String savePath = marger + "src/main/webapp/images/makeproject/slideimg/";
+		System.out.println("savepath : " + savePath);
+
+		
+		
+		Iterator<String> files = multipartRequest.getFileNames();
+		
+		while(files.hasNext()) {
+			System.out.println("오니?");
+			int i = 0;
+			String uploadFile = files.next();
+			MultipartFile mFile = multipartRequest.getFile(uploadFile);
+			
+			
+			int result2 = 0;
+			String ofileName = mFile.getOriginalFilename();
+
+			long currentTime = System.currentTimeMillis();
+			SimpleDateFormat simDf = new SimpleDateFormat("yyyyMMddHHmmss");
+			String rfileName = simDf.format(new Date(currentTime)) + "("+ i +")."
+					+ ofileName.substring(ofileName.lastIndexOf(".") + 1);
+			;
+			try {
+				mFile.transferTo(new File(savePath + rfileName));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			Attachment att = new Attachment();
+			
+			att.setOrifname(ofileName);
+			att.setRefname(rfileName);
+			att.setFtype("item");
+			att.setFsubtype("slideimg");
+			//att.setRefno(pro_no);
+			
+			result2 = attachmentService.insertSlideImages(att);
+			
+			farr.add(result2);
+			
+			i++;
+		}
+		
+		
+		model.addObject("farr", farr);
+
+		model.setViewName("jsonView");
+
+		return model;
+	}
 	
 	
 	public String insert(Attachment attachment) {

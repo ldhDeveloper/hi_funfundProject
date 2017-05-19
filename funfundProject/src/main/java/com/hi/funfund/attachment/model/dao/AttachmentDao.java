@@ -64,6 +64,10 @@ public class AttachmentDao {
 	public int updateMakerImage(Attachment att) {
 		return sqlSession.update("updateItemImages", att);
 	}
+	public int insertSlideImages(Attachment att) {
+		
+		return sqlSession.insert("insertSlideImages", att);
+	}
 	
 
 }

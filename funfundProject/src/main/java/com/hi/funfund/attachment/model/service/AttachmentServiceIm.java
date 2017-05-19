@@ -88,4 +88,9 @@ public class AttachmentServiceIm implements AttachmentService {
 	public int updateMakerImage(Attachment att){
 		return attachmentDao.updateMakerImage(att);
 	}
+	
+	@Override
+	public int insertSlideImages(Attachment att){
+		return attachmentDao.insertSlideImages(att);
+	}
 }
