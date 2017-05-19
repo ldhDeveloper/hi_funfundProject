@@ -27,5 +27,7 @@ public interface AttachmentService {
 	int updateTitleImage(Attachment att);
 
 	int updateMakerImage(Attachment att);
+
+	int insertSlideImages(Attachment att);
 	
 }

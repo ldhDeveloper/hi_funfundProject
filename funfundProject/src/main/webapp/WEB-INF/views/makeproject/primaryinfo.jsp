@@ -5,6 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
 <!-- 편집기사용 -->
 
 <!-- Include external CSS. -->
@@ -70,6 +73,23 @@ li {
 #primary-info2, #primary-info3, #primary-info4, #primary-info5, #saveall
 	{
 	display: none;
+}
+
+#sortable {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 450px;
+}
+
+#sortable li {
+	margin: 3px 3px 3px 0;
+	padding: 10px;
+	float: left;
+	width: 130px;
+	height: 130px;
+	font-size: 4em;
+	text-align: center;
 }
 </style>
 
@@ -151,13 +171,18 @@ li {
 					요청하기</a></li>
 		</ul>
 	</div>
-	<form name="authCodeFrm" id="authCodeFrm" method="GET" action="https://testapi.open-platform.or.kr/oauth/2.0/authorize" enctype="application/json"  > 
-				<input type="hidden" id="response_type" 	name="response_type" value="code" />
-				<input type="hidden" id="scope" 	name="scope" value="login inquiry" />
-				<input type="hidden" id="redirect_uri" 	name="redirect_uri" value="http://127.0.0.1:9998/funfund/insert.it?ano=20" />
-				<input type="hidden" id="client_id" name="client_id" style="width:200px" value="l7xx6712d9c9cd524d3b9c3f0f60b2dea3ee">
-				
-				</form>
+	<form name="authCodeFrm" id="authCodeFrm" method="GET"
+		action="https://testapi.open-platform.or.kr/oauth/2.0/authorize"
+		enctype="application/json">
+		<input type="hidden" id="response_type" name="response_type"
+			value="code" /> <input type="hidden" id="scope" name="scope"
+			value="login inquiry" /> <input type="hidden" id="redirect_uri"
+			name="redirect_uri"
+			value="http://127.0.0.1:9998/funfund/insert.it?ano=20" /> <input
+			type="hidden" id="client_id" name="client_id" style="width: 200px"
+			value="l7xx6712d9c9cd524d3b9c3f0f60b2dea3ee">
+
+	</form>
 	<form id="frm" action="update.it?pro_no=${ pro_no }" method="post"
 		onsubmit="return false;" enctype="multipart/form-data">
 
@@ -231,10 +256,14 @@ li {
 						카드와 공유 이미지로 사용됩니다. 이미지 등록 가이드를 반드시 확인하고 이미지를 등록해주시기 바랍니다.
 					</td>
 					<td rowspan="10">
-						<div style="width: 450px; border: 1px solid #ddd; height: 350px; background: #f8f8f8; margin-left: 10px; padding-left:75px;padding-top:30px;cursor:pointer;" onclick="document.all.uploadFile.click();">
-							<input id="titleimagefile" type="file" name="uploadFile" style="display:none;" onchange="LoadImg(this);">
-							<img id="titleimage"  src="images/makeproject/camera.PNG" style="max-width:300px;max-height:200px; width:300px; heigh:200px; " >
-							<br><br>
+						<div
+							style="width: 450px; border: 1px solid #ddd; height: 350px; background: #f8f8f8; margin-left: 10px; padding-left: 75px; padding-top: 30px; cursor: pointer;"
+							onclick="document.all.uploadFile.click();">
+							<input id="titleimagefile" type="file" name="uploadFile"
+								style="display: none;" onchange="LoadImg(this);"> <img
+								id="titleimage" src="images/makeproject/camera.PNG"
+								style="max-width: 300px; max-height: 200px; width: 300px; heigh: 200px;">
+							<br> <br>
 							<ul>
 								<li>사이즈 : 가로 800px, 세로 600px</li>
 								<li>용량 : 1 MB 미만</li>
@@ -245,18 +274,17 @@ li {
 					<td></td>
 				</tr>
 				<script>
-						function LoadImg(value){
-						 	if(value.files && value.files[0]){
-						 		var reader = new FileReader();
-						 		reader.onload = function (e){
-						 			$("#titleimage").attr("src", e.target.result);
-						 		}
-						 		reader.readAsDataURL(value.files[0]);
-						 	}
+					function LoadImg(value) {
+						if (value.files && value.files[0]) {
+							var reader = new FileReader();
+							reader.onload = function(e) {
+								$("#titleimage").attr("src", e.target.result);
+							}
+							reader.readAsDataURL(value.files[0]);
 						}
-						
+					}
 				</script>
-				
+
 				<tr>
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
@@ -397,16 +425,25 @@ li {
 			<table id="addTable" style="width: 900px;">
 				<tr>
 					<td colspan="3"><h3 align="center">등록된 리워드</h3>
-						<div style="width:860px; height:250px; background:#f8f8f8; border:1px solid #ddd; overflow:scroll;">
-							<table class="table table-hover table-condensed" style="text-align:center;" id="rlist">
-								<tr><th>순서</th><th>리워드명</th><th>금액</th><th>배송조건</th><th>제한수량</th><th>배송일</th><th>수정/삭제</th></tr>
+						<div
+							style="width: 860px; height: 250px; background: #f8f8f8; border: 1px solid #ddd; overflow: scroll;">
+							<table class="table table-hover table-condensed"
+								style="text-align: center;" id="rlist">
+								<tr>
+									<th>순서</th>
+									<th>리워드명</th>
+									<th>금액</th>
+									<th>배송조건</th>
+									<th>제한수량</th>
+									<th>배송일</th>
+									<th>수정/삭제</th>
+								</tr>
 							</table>
-						</div>
-					</td>
+						</div></td>
 				</tr>
-				
+
 				<tr>
-					<td colspan = "3">&nbsp;</td>
+					<td colspan="3">&nbsp;</td>
 				</tr>
 				<tr>
 					<td style="width: 700px;">
@@ -454,18 +491,20 @@ li {
 											src="https://code.jquery.com/jquery-1.12.4.js"></script> <script
 											src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 										<script>
-											 $( function() {
-												$( ".datepicker3" ).datepicker({
-													showOn: "button",
-													buttonImage: "images/makeproject/calendar2.png",
-													buttonImageOnly: true,
-													buttonText: "Select date"
-												});
+											$(function() {
+												$(".datepicker3")
+														.datepicker(
+																{
+																	showOn : "button",
+																	buttonImage : "images/makeproject/calendar2.png",
+																	buttonImageOnly : true,
+																	buttonText : "Select date"
+																});
 											});
 										</script></td>
 								</tr>
 							</table>
-							
+
 						</div>
 					</td>
 					<td></td>
@@ -477,77 +516,101 @@ li {
 				<button class="btn btn-warning" id="addReward">추가하기</button>
 			</div>
 			<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-							<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+			<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 			<script>
-				$(function(){
-					
-					
-					
-					
-					$("#addReward").click(function(){
-						var pro_no = ${pro_no};
-						var mname = $("[name=mname]").val();
-						var mcost = $("[name=mcost]").val();
-						var mnum = $("[name=mnum]").val();
-						var dcost = $("[name=dcost]").val();
-						var mdate = $("[name=mdate]").val();
-						var mcount = $("[name=mcount]").val();
-						var delyn = $("[name=delyn]").val();
-						var mcontent = $("[name=mcontent]").val();
-						
-						
-						$.ajax({
-							url : "insertReward.it",   
-				            type : "POST", 
-				            async: true,
-				            data : {"pro_no":pro_no, "mname":mname, "mcost":mcost, "mnum":mnum, "dcost":dcost, "mdate":mdate, "mcount":mcount, "delyn":delyn, "mcontent":mcontent},
-				            success : function(data){
-				            	var i = Number(data.fmlist.length) - 1;
-				            	console.log($(data));
-				            	console.log(data.fmlist[i].mname);
-				            	
-				            	
-				            	$("#rlist").html($("#rlist").html() + "<tr><td>" + data.fmlist[i].mnum + "</td><td>" + data.fmlist[i].mname + "</td><td>" + data.fmlist[i].mcost + "</td><td>" + data.fmlist[i].delyn + "</td><td>" + data.fmlist[i].mcount + "</td><td>" + data.fmlist[i].mdata + "</td><td><button value='수정'/>&nbsp; <button value='삭제'/></td></tr>")
-					            	
-				            	
-				            	
-				            
-				            	/* {"modelAndView":
-				            					{
-				            						"empty":false,
-				            						"model":
-				            								{"fmlist":
-				            											[
-				            											    {"dcost":"","delyn":"on","mcontent":"","mcost":65747,"mcount":0,"mdate":null,"mname":"","mno":26,"mnum":1,"pro_no":26},
-				            									 			{"dcost":"","delyn":"on","mcontent":"","mcost":142213,"mcount":0,"mdate":null,"mname":"","mno":25,"mnum":1,"pro_no":26}
-				            											]
-				            								}
-				            						,"modelMap":
-				            									{"fmlist":
-				            											[
-				            										 		{"dcost":"","delyn":"on","mcontent":"","mcost":65747,"mcount":0,"mdate":null,"mname":"","mno":26,"mnum":1,"pro_no":26},
-				            	                       						{"dcost":"","delyn":"on","mcontent":"","mcost":142213,"mcount":0,"mdate":null,"mname":"","mno":25,"mnum":1,"pro_no":26}
-				            										 	]
-				            	
-				            									},
-				            						"reference":true,"status":null,"view":null,"viewName":"jsonView"
-				            						},
-				            	"fundMenu":{"dcost":"","delyn":"on","mcontent":"","mcost":65747,"mcount":0,"mdate":null,"mname":"","mno":0,"mnum":1,"pro_no":26},
-				            	"fmlist":[{"dcost":"","delyn":"on","mcontent":"","mcost":65747,"mcount":0,"mdate":null,"mname":"","mno":26,"mnum":1,"pro_no":26},
-				            	          {"dcost":"","delyn":"on","mcontent":"","mcost":142213,"mcount":0,"mdate":null,"mname":"","mno":25,"mnum":1,"pro_no":26}]
-				            	} */
-				            	
-				            	
-				            	
-				            	
-				            	
-				            }
+				$(function() {
 
-						});
-					});
+					$("#addReward")
+							.click(
+									function() {
+										var pro_no = $
+										{
+											pro_no
+										}
+										;
+										var mname = $("[name=mname]").val();
+										var mcost = $("[name=mcost]").val();
+										var mnum = $("[name=mnum]").val();
+										var dcost = $("[name=dcost]").val();
+										var mdate = $("[name=mdate]").val();
+										var mcount = $("[name=mcount]").val();
+										var delyn = $("[name=delyn]").val();
+										var mcontent = $("[name=mcontent]")
+												.val();
+
+										$
+												.ajax({
+													url : "insertReward.it",
+													type : "POST",
+													async : true,
+													data : {
+														"pro_no" : pro_no,
+														"mname" : mname,
+														"mcost" : mcost,
+														"mnum" : mnum,
+														"dcost" : dcost,
+														"mdate" : mdate,
+														"mcount" : mcount,
+														"delyn" : delyn,
+														"mcontent" : mcontent
+													},
+													success : function(data) {
+														var i = Number(data.fmlist.length) - 1;
+														console.log($(data));
+														console
+																.log(data.fmlist[i].mname);
+
+														$("#rlist")
+																.html(
+																		$(
+																				"#rlist")
+																				.html()
+																				+ "<tr><td>"
+																				+ data.fmlist[i].mnum
+																				+ "</td><td>"
+																				+ data.fmlist[i].mname
+																				+ "</td><td>"
+																				+ data.fmlist[i].mcost
+																				+ "</td><td>"
+																				+ data.fmlist[i].delyn
+																				+ "</td><td>"
+																				+ data.fmlist[i].mcount
+																				+ "</td><td>"
+																				+ data.fmlist[i].mdata
+																				+ "</td><td><button value='수정'/>&nbsp; <button value='삭제'/></td></tr>")
+
+														/* {"modelAndView":
+																		{
+																			"empty":false,
+																			"model":
+																					{"fmlist":
+																								[
+																								    {"dcost":"","delyn":"on","mcontent":"","mcost":65747,"mcount":0,"mdate":null,"mname":"","mno":26,"mnum":1,"pro_no":26},
+																						 			{"dcost":"","delyn":"on","mcontent":"","mcost":142213,"mcount":0,"mdate":null,"mname":"","mno":25,"mnum":1,"pro_no":26}
+																								]
+																					}
+																			,"modelMap":
+																						{"fmlist":
+																								[
+																							 		{"dcost":"","delyn":"on","mcontent":"","mcost":65747,"mcount":0,"mdate":null,"mname":"","mno":26,"mnum":1,"pro_no":26},
+														                       						{"dcost":"","delyn":"on","mcontent":"","mcost":142213,"mcount":0,"mdate":null,"mname":"","mno":25,"mnum":1,"pro_no":26}
+																							 	]
+														
+																						},
+																			"reference":true,"status":null,"view":null,"viewName":"jsonView"
+																			},
+														"fundMenu":{"dcost":"","delyn":"on","mcontent":"","mcost":65747,"mcount":0,"mdate":null,"mname":"","mno":0,"mnum":1,"pro_no":26},
+														"fmlist":[{"dcost":"","delyn":"on","mcontent":"","mcost":65747,"mcount":0,"mdate":null,"mname":"","mno":26,"mnum":1,"pro_no":26},
+														          {"dcost":"","delyn":"on","mcontent":"","mcost":142213,"mcount":0,"mdate":null,"mname":"","mno":25,"mnum":1,"pro_no":26}]
+														} */
+
+													}
+
+												});
+									});
 				});
 			</script>
-			</div>
+		</div>
 
 		<!-- 스토리 내용 입력 화면 -->
 		<div id="primary-info3" class="input-form">
@@ -580,14 +643,23 @@ li {
 					</td>
 					<td>
 						<div
-							style="width: 430px; height: 130px; background: #f8f8f8; border: 1px solid #ddd; padding: 10px; margin-left: 10px; font-size: 0.7em;">
-							<div style="width: 400px; border: 1px solid #ddd">
-								<input type="file" size="20" multiple="multiple" name="slidefile[]">
+							style="width: 430px; min-height: 350px; background: #f8f8f8; border: 1px solid #ddd; padding: 10px; margin-left: 10px; font-size: 0.7em;">
+							
+							<div id=""
+								style="width: 400px; min-height: 200px; border: 1px solid #ddd; background: #f8f8f8; cursor: pointer">
+								<ul id="sortable">
+									
+								</ul >
+								
 							</div>
-							<br>
+							<br style="clear:both">
 							<div align="center">
 								<button class="btn btn-primary btn-xs"
-									style="margin-left: 10px;">사진업로드</button>
+									style="margin-left: 10px;"
+									onclick="document.all.slidefile.click();">사진찾기</button>
+								&nbsp;
+								<button class="btn btn-primary btn-xs"
+									style="margin-left: 10px;" id="saveslideimgs">사진저장</button>
 							</div>
 							<br> 정렬이 바뀔 경우 하단 [저장> 버튼을 클릭하셔야만 변경된 순서가 반영됩니다.<br>(사이즈
 							: 630x400 pixel, 용량 : 2MB, 형식 : jpg, jpeg, gif, png)
@@ -595,6 +667,64 @@ li {
 					</td>
 					<td style="width: 200px;"></td>
 				</tr>
+				<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+				<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+				<script>
+					$(function() {
+						$("#sortable").sortable({
+							
+						});
+						$("#sortable").disableSelection();
+
+						$("#saveslideimgs").click(function(){
+							var formData = new FormData($("#fileForm")[0]);
+							
+							
+							$.ajax({
+								type : 'post',
+					            url : 'insertSlide.at',
+					            data : formData,
+					            processData : false,
+					            contentType : false,
+					            success : function(html) {
+					                alert("파일 업로드하였습니다.");
+					            },
+					            error : function(error) {
+					                alert("파일 업로드에 실패하였습니다.");
+					                console.log(error);
+					                console.log(error.status);
+					            }
+
+
+					
+							});
+						});
+						
+					});
+
+					function LoadSlideImg(value) {
+						for (var i = 0; i < value.files.length; i++) {
+
+							if (value.files && value.files[i]) {
+								var reader = new FileReader();
+								reader.onload = function(e) {
+
+									$("#sortable")
+											.html(
+													$("#sortable").html()
+														+"<li class='ui-state-default'>"
+														+ "<img class='ui-state-default' style='max-width:110px;max-height:110px;min-width:110px;min-height:110px;' src='"
+							 							+ e.target.result + "'></li>");
+									$()
+
+								}
+								reader.readAsDataURL(value.files[i]);
+							}
+
+						}
+
+					}
+				</script>
 				<tr>
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
@@ -744,11 +874,14 @@ li {
 					</td>
 					<td>
 						<div
-							style="border: 1px solid #ddd; background: #f8f8f8; padding: 10px; margin-left: 10px; width: 440px; height: 180px; padding-left:160px;">
-							<input id="makerprofileimagefile" type="file" name="uploadFile2" style="display:none;" onchange="LoadImg2(this);">
-							<img id="makerprofileimage" class="img-circle"  src="images/myinfo/basic.png" style="min-width:120px; min-height:120px; width:120px; heigh:120px; cursor:pointer" onclick="document.all.uploadFile2.click();">
-							<br><br>
-							<ul style="font-size:0.7em;margin-left:-70px;">
+							style="border: 1px solid #ddd; background: #f8f8f8; padding: 10px; margin-left: 10px; width: 440px; height: 180px; padding-left: 160px;">
+							<input id="makerprofileimagefile" type="file" name="uploadFile2"
+								style="display: none;" onchange="LoadImg2(this);"> <img
+								id="makerprofileimage" class="img-circle"
+								src="images/myinfo/basic.png"
+								style="min-width: 120px; min-height: 120px; width: 120px; heigh: 120px; cursor: pointer"
+								onclick="document.all.uploadFile2.click();"> <br> <br>
+							<ul style="font-size: 0.7em; margin-left: -70px;">
 								<li>3 MB 이하의 사진만 사용할 수 있습니다.</li>
 							</ul>
 						</div>
@@ -757,16 +890,16 @@ li {
 					<td>&nbsp;</td>
 				</tr>
 				<script>
-						function LoadImg2(value){
-						 	if(value.files && value.files[0]){
-						 		var reader = new FileReader();
-						 		reader.onload = function (e){
-						 			$("#makerprofileimage").attr("src", e.target.result);
-						 		}
-						 		reader.readAsDataURL(value.files[0]);
-						 	}
+					function LoadImg2(value) {
+						if (value.files && value.files[0]) {
+							var reader = new FileReader();
+							reader.onload = function(e) {
+								$("#makerprofileimage").attr("src",
+										e.target.result);
+							}
+							reader.readAsDataURL(value.files[0]);
 						}
-						
+					}
 				</script>
 				<tr>
 					<td>&nbsp;</td>
@@ -861,125 +994,168 @@ li {
 				</tr>
 				<tr>
 					<td>&nbsp;</td>
-					<td>&nbsp;<input type="hidden" value="8500206"  id="account_holder_info"></td>
+					<td>&nbsp;<input type="hidden" value="8500206"
+						id="account_holder_info"></td>
 					<td>&nbsp;</td>
 				</tr>
 				<tr>
-					<td style="font-size: 0.7em;">계좌번호<input type="hidden" id="tran_dtime"></td>
+					<td style="font-size: 0.7em;">계좌번호<input type="hidden"
+						id="tran_dtime"></td>
 					<td>
 						<div
 							style="border: 1px solid #ddd; background: #f8f8f8; padding: 10px; margin-left: 10px; width: 440px; height: 50px;">
 							계좌번호 &nbsp;<input type="text" size="25"
-								placeholder="'-'를 제외하고 입력하세요." name="accnum" id="account_num"> &nbsp;
+								placeholder="'-'를 제외하고 입력하세요." name="accnum" id="account_num">
+							&nbsp;
 							<button class="btn btn-primary btn-xs" id="searchRealname">확인하기</button>
 						</div>
 					</td>
 					<td>&nbsp;</td>
 				</tr>
-				
+
 				<script text="text/javascript">
-						$(function(){
-							var client_id = "l7xx6712d9c9cd524d3b9c3f0f60b2dea3ee";
-							var client_secret = "10e3bd27aa5e4287ae709bca09c34ea7";
-							var  grant_type = "client_credentials";
-							//document.getElementById('authCodeFrm').submit();
-							
-							var access_token = "";
-							var user_seq_no = 0;
-							var time = new Date();
-														
-					        var year = time.getFullYear();
-					        
-					        var month = 0;
-					        if(time.getMonth() + 1 >= 10){
-					        	month = time.getMonth();
-					        }else{
-					        	month = '0' + time.getMonth();
-					        }
-					        
-					        var day = 0;
-					        if(time.getDate() >= 10){
-					        	month = time.getDate();
-					        }else{
-					        	month = '0' + time.getDate();
-					        }
-					        
-					        var hour = 0;
-					        if(time.getHours() >= 10){
-					        	month = time.getHours();
-					        }else{
-					        	month = '0' + time.getHours();
-					        }
-					        
-					        var minutes = 0;
-					        if(time.getMinutes() >= 10){
-					        	month = time.getMinutes();
-					        }else{
-					        	month = '0' + time.getMinutes();
-					        }
-					        
-					        var seconds = 0;
-					        if(time.getSeconds() >= 10){
-					        	month = time.getSeconds();
-					        }else{
-					        	month = '0' + time.getSeconds();
-					        }
-					        
-					        var currentTime = year + '' + month + '' + day + '' + hour + '' + minutes + '' + seconds;
-					          
-							
-							$("#tran_dtime").val(currentTime);
-							console.log("오니1?")
-							var scope = "oob";
-							 $.ajax({		
-									url: "https://testapi.open-platform.or.kr/oauth/2.0/token",		
-									type: "POST",
-									contenType: "application/json",		
-									data: {"client_id":client_id,"client_secret":client_secret,"grant_type":grant_type,"scope":scope},
-									dataType: "json",			
-									success : function (data, data2, data3) {
-										var list = JSON.parse(data3.responseText);					
+					$(function() {
+						var client_id = "l7xx6712d9c9cd524d3b9c3f0f60b2dea3ee";
+						var client_secret = "10e3bd27aa5e4287ae709bca09c34ea7";
+						var grant_type = "client_credentials";
+						//document.getElementById('authCodeFrm').submit();
+
+						var access_token = "";
+						var user_seq_no = 0;
+						var time = new Date();
+
+						var year = time.getFullYear();
+
+						var month = 0;
+						if (time.getMonth() + 1 >= 10) {
+							month = time.getMonth();
+						} else {
+							month = '0' + time.getMonth();
+						}
+
+						var day = 0;
+						if (time.getDate() >= 10) {
+							month = time.getDate();
+						} else {
+							month = '0' + time.getDate();
+						}
+
+						var hour = 0;
+						if (time.getHours() >= 10) {
+							month = time.getHours();
+						} else {
+							month = '0' + time.getHours();
+						}
+
+						var minutes = 0;
+						if (time.getMinutes() >= 10) {
+							month = time.getMinutes();
+						} else {
+							month = '0' + time.getMinutes();
+						}
+
+						var seconds = 0;
+						if (time.getSeconds() >= 10) {
+							month = time.getSeconds();
+						} else {
+							month = '0' + time.getSeconds();
+						}
+
+						var currentTime = year + '' + month + '' + day + ''
+								+ hour + '' + minutes + '' + seconds;
+
+						$("#tran_dtime").val(currentTime);
+						console.log("오니1?")
+						var scope = "oob";
+						$
+								.ajax({
+									url : "https://testapi.open-platform.or.kr/oauth/2.0/token",
+									type : "POST",
+									contenType : "application/json",
+									data : {
+										"client_id" : client_id,
+										"client_secret" : client_secret,
+										"grant_type" : grant_type,
+										"scope" : scope
+									},
+									dataType : "json",
+									success : function(data, data2, data3) {
+										var list = JSON
+												.parse(data3.responseText);
 										access_token = list.access_token;
-										user_seq_no = list.user_seq_no;		
+										user_seq_no = list.user_seq_no;
 										console.log("오니2?");
 										console.log(access_token);
-										}
-									
-								}); 
-							 
-							 $("#searchRealname").click(function(){
-								 var bank_code_std = $("#bank_code_std").val();
-								 var account_holder_info = $("#account_holder_info").val();
-								 var tran_dtime = $("#tran_dtime").val();
-								 var access_token = "Bearer "+ access_token;
-								 var resData = {"bank_code_std":bank_code_std,"account_num":account_num,"account_holder_info":account_holder_info,"tran_dtime":tran_dtime};
-								 var rearName = "";	
-								 
-								 console.log("오니3?")
-								 
-									 $.ajax({
-										url: "https://testapi.open-platform.or.kr/v1.0/inquiry/real_name",
-										beforeSend : function(request){
-											request.setRequestHeader("Authorization", access_token);
-										},
-										type: "POST",
-										data: JSON.stringify(resData),
-										dataType: "json",
-										success : function (data, data2, data3) {
-											
-											console.log("data==" + data);
-											console.log("data2==" + data2);
-											console.log("data3==" + data3);
-											console.log("data3.res==" + data3.responseText);
-											rearName = data3.responseText.replace(/,/gi, ",\n");
-											consolo.log("realName = " + realName);
-											},
-									});
-							 });
-							 
-						});
+									}
+
+								});
+
+						$("#searchRealname")
+								.click(
+										function() {
+											var bank_code_std = $(
+													"#bank_code_std").val();
+											var account_holder_info = $(
+													"#account_holder_info")
+													.val();
+											var tran_dtime = $("#tran_dtime")
+													.val();
+											var access_token = "Bearer "
+													+ access_token;
+											var resData = {
+												"bank_code_std" : bank_code_std,
+												"account_num" : account_num,
+												"account_holder_info" : account_holder_info,
+												"tran_dtime" : tran_dtime
+											};
+											var rearName = "";
+
+											console.log("오니3?")
+
+											$
+													.ajax({
+														url : "https://testapi.open-platform.or.kr/v1.0/inquiry/real_name",
+														beforeSend : function(
+																request) {
+															request
+																	.setRequestHeader(
+																			"Authorization",
+																			access_token);
+														},
+														type : "POST",
+														data : JSON
+																.stringify(resData),
+														dataType : "json",
+														success : function(
+																data, data2,
+																data3) {
+
+															console
+																	.log("data=="
+																			+ data);
+															console
+																	.log("data2=="
+																			+ data2);
+															console
+																	.log("data3=="
+																			+ data3);
+															console
+																	.log("data3.res=="
+																			+ data3.responseText);
+															rearName = data3.responseText
+																	.replace(
+																			/,/gi,
+																			",\n");
+															consolo
+																	.log("realName = "
+																			+ realName);
+														},
+													});
+										});
+
+					});
 				</script>
-				
+
 				<tr>
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
@@ -994,20 +1170,21 @@ li {
 	<div align="center">
 		<button class="btn btn-warning" onclick="tempsave();">임시저장하기</button>
 		<script>
-		
 			function tempsave() {
-				
-				
+
 				document.getElementById('frm').submit();
 			}
-		
 		</script>
 		&nbsp; &nbsp;
 		<button id="nextorsave" class="btn btn-warning" value="1">다음단계로</button>
 		<button id="saveall" class="btn btn-warning"
 			onclick="document.getElementById('frm').submit();">저장하기</button>
 	</div>
-
+	<form id="fileForm" method="post" enctype="multipart/form-data" onsubmit="return false;">
+		<input type="file" size="20" multiple="multiple" name="slidefile"
+								style="display: none;" onchange="LoadSlideImg(this);">
+		<input type="hidden" name="pro_no" value="${ pro_no }">
+	</form>
 
 </body>
 </html>
