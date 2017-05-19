@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hi.funfund.HomeController;
 import com.hi.funfund.fundmenu.model.service.FundMenuService;
 import com.hi.funfund.fundmenu.model.vo.FundMenu;
@@ -150,16 +152,18 @@ public class ItemController {
 	}
 	
 	@RequestMapping(value ="selectAll.it", method = RequestMethod.POST)
-	public ModelAndView selectAllItem(ModelAndView model) {
+	public @ResponseBody List<Item> selectAllItem() {
+		//ObjectMapper mapper = new ObjectMapper();
 		List<Item> iList = itemService.AllList();
 		System.out.println("오니?");
 		if(iList != null){
 			//model.setViewName("jsonView");
-			model.addObject("iList", iList);
+			//String jsonInString = mapper.writeValueAsString(iList);
+			//model.addObject("iList", iList);
 			System.out.println("iList : " + iList);
 		}
 		
-		return model;
+		return iList;
 	}
 	
 
