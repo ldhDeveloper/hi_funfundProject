@@ -27,4 +27,26 @@
 			WHERE ANO=#{ano}
 		]]>
 	</update>
+	
+	<insert id="insertTitleImage" parameterType="Integer">
+		<![CDATA[
+			INSERT INTO ATTACHMENT (fno, orifname, refname, ftype, fsubtype, refno)
+			VALUES(seq_fno.nextval, null, null, 'item', 'titleimg', #{pro_no})
+		]]>
+	</insert>
+	<insert id="insertMakerImage" parameterType="Integer">
+		<![CDATA[
+			INSERT INTO ATTACHMENT (fno, orifname, refname, ftype, fsubtype, refno)
+			VALUES(seq_fno.nextval, null, null, 'item', 'makerimg', #{pro_no})
+		]]>
+	</insert>
+	<update id="updateItemImages" parameterType="attachment">
+		<![CDATA[
+			UPDATE ATTACHMENT SET orifname=#{orifname}, refname=#{refname} 
+			WHERE ftype=#{ftype} AND fsubtype=#{fsubtype} AND refno=#{refno}
+		]]>
+	</update>
+
+	
+	
 </mapper>

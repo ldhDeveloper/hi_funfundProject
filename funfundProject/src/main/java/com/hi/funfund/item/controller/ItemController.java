@@ -1,7 +1,11 @@
 package com.hi.funfund.item.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,11 +21,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hi.funfund.HomeController;
+import com.hi.funfund.account.model.vo.Account;
+import com.hi.funfund.attachment.model.service.AttachmentService;
+import com.hi.funfund.attachment.model.vo.Attachment;
 import com.hi.funfund.fundmenu.model.service.FundMenuService;
 import com.hi.funfund.fundmenu.model.vo.FundMenu;
 import com.hi.funfund.fundmenu.model.vo.ReciveFundMenu;
@@ -42,11 +52,13 @@ public class ItemController {
 	private FundMenuService fundMenuService;
 	@Autowired
 	private ItemAskService itemAskService;
+	@Autowired
+	private AttachmentService attachmentService;
 
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
-	public ModelAndView AllList(ModelAndView model){
+
+	public ModelAndView AllList(ModelAndView model) {
 		List<Item> mList = itemService.AllList();
 		return model;
 	}
@@ -120,65 +132,164 @@ public class ItemController {
 	}
 
 	@RequestMapping("insert.it")
-	public ModelAndView insertRewardItem(ModelAndView model, HttpSession session, HttpServletRequest request) {
-		int ano = Integer.parseInt(request.getParameter("ano"));
+	public ModelAndView insertRewardItem(ModelAndView model, HttpSession session, HttpServletRequest request, @RequestParam("ano") int ano) {
+		//int ano = Integer.parseInt(request.getParameter("ano"));
 		System.out.println("ano : " + ano);
 		Item item = new Item();
 		item.setAno(ano);
 
-		int result = itemService.insertRewardItem(item);
-		model.setViewName("makeproject/primaryinfo");
+		int pro_no = itemService.insertRewardItem(item);
+		
+		int ii = attachmentService.insertItemImages(pro_no);
+		
 		request.setAttribute("ano", ano);
-		request.setAttribute("pro_no", result);
+		request.setAttribute("pro_no", pro_no);
+		
 
+		model.setViewName("makeproject/primaryinfo");
+		
 		return model;
 	}
-	
+
 	@RequestMapping("insertReward.it")
 	public ModelAndView insertRewardItem(ModelAndView model, FundMenu fmenu) {
 		System.out.println(fmenu);
 		ArrayList<FundMenu> fmlist = null;
-		
-		
+
 		int result = fundMenuService.insertFundMenu(fmenu);
-		
-		if(result > 0){
+
+		if (result > 0) {
 			fmlist = fundMenuService.selectList(fmenu.getPro_no());
 			model.setViewName("jsonView");
 			model.addObject("fmlist", fmlist);
 			System.out.println("fmlist : " + fmlist);
 		}
-		
+
 		return model;
 	}
+
 	
-	@RequestMapping(value ="selectAll.it", method = RequestMethod.POST)
+	@RequestMapping(value ="selectAll.it", method = RequestMethod.GET)
 	public @ResponseBody List<Item> selectAllItem() {
-		//ObjectMapper mapper = new ObjectMapper();
 		List<Item> iList = itemService.AllList();
 		System.out.println("오니?");
 		if(iList != null){
-			//model.setViewName("jsonView");
-			//String jsonInString = mapper.writeValueAsString(iList);
-			//model.addObject("iList", iList);
 			System.out.println("iList : " + iList);
-		}
-		
+		}	
 		return iList;
 	}
 	
+	@RequestMapping(value ="selectCategory.it", method = RequestMethod.GET)
+	public @ResponseBody List<Item> selectCategoryItem(@RequestParam("category") String category) {
+		System.out.println("category : " + category);
+		List<Item> iList = itemService.categoryList(category);
+		System.out.println("오니?");
+		if(iList != null){
+			System.out.println("iList : " + iList);
+		}	
+		return iList;
+	}
 
-	@RequestMapping(value="update.it", method = RequestMethod.POST)
-	public ModelAndView insertRewardItem(ModelAndView model, Item item,  HttpServletRequest request ){
+	@RequestMapping(value = "update.it", method = RequestMethod.POST)
+	public ModelAndView insertRewardItem(ModelAndView model, Item item, HttpServletRequest request) {
 		int result = 0;
-		
-			/*System.out.println(rfmenu);*/
-		
-		
+
 
 		result = itemService.updateRewardItem(item);
-		model.addObject("pro_no", item.getPro_no());
 		
+
+		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+		MultipartFile uploadFile = multipartRequest.getFile("uploadFile");
+		MultipartFile uploadFile2 = multipartRequest.getFile("uploadFile2");
+		
+		if (!uploadFile.isEmpty()) {
+
+			HttpSession session = request.getSession(false);
+
+			String page = "";
+			String root = request.getSession().getServletContext().getRealPath("/");
+			System.out.println("root : " + root);
+			String[] roots = root.split("\\\\");
+			String marger = "";
+			for (int i = 0; i < roots.length - 3; i++) {
+				marger += roots[i] + "\\";
+			}
+
+			System.out.println("marger : " + marger);
+			String savePath = marger + "src/main/webapp/images/makeproject/titleimg/";
+			System.out.println("savepath : " + savePath);
+
+			int result2 = 0;
+			String ofileName = uploadFile.getOriginalFilename();
+
+			long currentTime = System.currentTimeMillis();
+			SimpleDateFormat simDf = new SimpleDateFormat("yyyyMMddHHmmss");
+			String rfileName = simDf.format(new Date(currentTime)) + "(1)."
+					+ ofileName.substring(ofileName.lastIndexOf(".") + 1);
+			;
+			try {
+				uploadFile.transferTo(new File(savePath + rfileName));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			Attachment att = new Attachment();
+			
+			att.setOrifname(ofileName);
+			att.setRefname(rfileName);
+			att.setFtype("item");
+			att.setFsubtype("titleimg");
+			att.setRefno(item.getPro_no());
+			
+			result2 = attachmentService.updateTitleImage(att);
+			
+		}
+		
+		if (!uploadFile2.isEmpty()) {
+
+			HttpSession session = request.getSession(false);
+
+			String page = "";
+			String root = request.getSession().getServletContext().getRealPath("/");
+			System.out.println("root : " + root);
+			String[] roots = root.split("\\\\");
+			String marger = "";
+			for (int i = 0; i < roots.length - 3; i++) {
+				marger += roots[i] + "\\";
+			}
+
+			System.out.println("marger : " + marger);
+			String savePath = marger + "src/main/webapp/images/makeproject/makerimg/";
+			System.out.println("savepath : " + savePath);
+
+			int result2 = 0;
+			String ofileName = uploadFile2.getOriginalFilename();
+
+			long currentTime = System.currentTimeMillis();
+			SimpleDateFormat simDf = new SimpleDateFormat("yyyyMMddHHmmss");
+			String rfileName = simDf.format(new Date(currentTime)) + "(2)."
+					+ ofileName.substring(ofileName.lastIndexOf(".") + 1);
+			;
+			try {
+				uploadFile2.transferTo(new File(savePath + rfileName));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			Attachment att = new Attachment();
+			
+			att.setOrifname(ofileName);
+			att.setRefname(rfileName);
+			att.setFtype("item");
+			att.setFsubtype("makerimg");
+			att.setRefno(item.getPro_no());
+			
+			result2 = attachmentService.updateMakerImage(att);
+			
+		}
+		
+		model.addObject("pro_no", item.getPro_no());
+
 		model.setViewName("makeproject/primaryinfo");
 
 		return model;
@@ -196,9 +307,15 @@ public class ItemController {
 	public ModelAndView fundingdetailList(ModelAndView model, HttpServletRequest request) {
 		int pro_no = Integer.parseInt(request.getParameter("pro_no"));
 		Item item = itemService.selectOne(pro_no);
-		List<Itemfund> bestList=itemService.bestList(pro_no);
+		List<Itemfund> bestList = itemService.bestList(pro_no);
 		List<FundMenu> mList = fundMenuService.selectList(pro_no);
 		List<ItemAsk> aList = itemAskService.selectList(pro_no);
+		//youtube 주소
+		String vaddress = item.getPvideo();
+		String[] pvideoAddress = vaddress.split("/");
+		vaddress = pvideoAddress[pvideoAddress.length - 1];
+		
+		item.setPvideo(vaddress);
 		model.addObject("item", item);
 		model.addObject("mList", mList);
 		model.addObject("aList", aList);

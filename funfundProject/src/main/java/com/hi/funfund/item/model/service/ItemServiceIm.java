@@ -15,6 +15,7 @@ public class ItemServiceIm implements ItemService{
 
 	@Autowired
 	private ItemDao itemDao;
+	
 
 	@Override
 	public List<Item> AllList() {
@@ -59,8 +60,7 @@ public class ItemServiceIm implements ItemService{
 
 	@Override
 	public List categoryList(String category) {
-		// TODO Auto-generated method stub
-		return null;
+		return itemDao.categoryList(category);
 	}
 
 	@Override
@@ -123,4 +123,5 @@ public class ItemServiceIm implements ItemService{
 		return itemDao.bestList(pro_no);
 	}
 
+	
 }

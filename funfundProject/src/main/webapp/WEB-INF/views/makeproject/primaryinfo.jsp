@@ -151,7 +151,7 @@ li {
 					요청하기</a></li>
 		</ul>
 	</div>
-	<form name="authCodeFrm" id="authCodeFrm" method="GET" action="https://testapi.open-platform.or.kr/oauth/2.0/authorize" enctype="application/json"> 
+	<form name="authCodeFrm" id="authCodeFrm" method="GET" action="https://testapi.open-platform.or.kr/oauth/2.0/authorize" enctype="application/json"  > 
 				<input type="hidden" id="response_type" 	name="response_type" value="code" />
 				<input type="hidden" id="scope" 	name="scope" value="login inquiry" />
 				<input type="hidden" id="redirect_uri" 	name="redirect_uri" value="http://127.0.0.1:9998/funfund/insert.it?ano=20" />
@@ -159,7 +159,7 @@ li {
 				
 				</form>
 	<form id="frm" action="update.it?pro_no=${ pro_no }" method="post"
-		enctype="application/json" onsubmit="return false;">
+		onsubmit="return false;" enctype="multipart/form-data">
 
 		<%-- <input type="hidden" value="${ param.pro_no }"> --%>
 
@@ -582,14 +582,13 @@ li {
 						<div
 							style="width: 430px; height: 130px; background: #f8f8f8; border: 1px solid #ddd; padding: 10px; margin-left: 10px; font-size: 0.7em;">
 							<div style="width: 400px; border: 1px solid #ddd">
-								<input type="file" size="20">
+								<input type="file" size="20" multiple="multiple" name="slidefile[]">
 							</div>
 							<br>
 							<div align="center">
 								<button class="btn btn-primary btn-xs"
 									style="margin-left: 10px;">사진업로드</button>
 							</div>
-
 							<br> 정렬이 바뀔 경우 하단 [저장> 버튼을 클릭하셔야만 변경된 순서가 반영됩니다.<br>(사이즈
 							: 630x400 pixel, 용량 : 2MB, 형식 : jpg, jpeg, gif, png)
 						</div>

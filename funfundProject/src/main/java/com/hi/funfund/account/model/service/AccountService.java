@@ -49,7 +49,7 @@ public interface AccountService {
 
 	int updateNickname(int ano, String nickname); // 닉네임 수정
 
-	Account selectThirdPartyUser(Account account);
+	Account selectThirdPartyUser(Account account); // 타사이트로 가입한 유저 찾기/등록/가입제어
 
 	int updateEmail(String ano, String email);
 

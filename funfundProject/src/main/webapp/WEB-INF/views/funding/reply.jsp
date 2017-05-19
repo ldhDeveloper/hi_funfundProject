@@ -222,6 +222,10 @@ textarea {
 	display: inline-block;
 	padding: 15px;
 }
+
+#box2 {
+	padding-top: 10px;
+}
 </style>
 <script src="/funfund/lib/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
@@ -325,11 +329,20 @@ textarea {
 
 	<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
 		<div class="box2 info">
-			<p class="box2">
-				<jsp:useBean id="now" class="java.util.Date" />
-				<fmt:formatDate value="${now}" var="now" pattern="yyyyMMdd" />
-				<fmt:formatDate value="${item.pedate}" var="date" pattern="yyyyMMdd" />
-				${now - date} 일 남음
+			<p id="box2">
+				<script>
+					$(function() {
+						var date = "<c:out value='${item.pedate}'/>";
+						console.log("date : " + date);
+						var edate = new Date(date.toString());
+						var todate = new Date();
+						var btMs = edate.getTime() - todate.getTime();
+						console.log("btMs : " + btMs);
+						var btDay = Math.round(btMs / (1000 * 60 * 60 * 24));
+						console.log("btDay : " + btDay);
+						$("#box2").html(btDay + "일 남음");
+					});
+				</script>
 			</p>
 			<em class="infoBar"></em>
 			<p class="info">
@@ -371,13 +384,18 @@ textarea {
 				style="font-size: 10pt; text-align: left; padding-top: 20px; padding-bottom: 5px; margin-left: 20px;">베스트
 				서포터</p>
 			<div class="makerbox2">
-				<c:forEach var="bestList" items="${bestList }">
-					<div class="supportinfo">
-						사진
-						<p>${bestList.nickname }</p>
-						<p>${bestList.mcost } 원 펀딩</p>
-					</div>
-				</c:forEach>
+				<c:if test="${!empty bestList}">
+					<c:forEach var="bestList" items="${bestList }">
+						<div class="supportinfo">
+							<p>${bestList.pimage }</p>
+							<p>${bestList.nickname }</p>
+							<p>${bestList.mcost }원펀딩</p>
+						</div>
+					</c:forEach>
+				</c:if>
+				<c:if test="${empty bestList}">
+				  아직 서포터가 존재하지 않습니다.
+				</c:if>
 			</div>
 		</div>
 
