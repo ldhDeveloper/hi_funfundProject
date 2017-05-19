@@ -71,5 +71,10 @@ public class ItemDao {
 		//System.out.println("iList:"+iList.get(0));
 		return iList;
 	}
+
+	public int plusItemLike(int pro_no) {
+		int result = sqlSession.update(nameSpace + "plusItemLike", pro_no);
+		return result;
+	}
 	
 }

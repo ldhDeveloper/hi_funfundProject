@@ -45,5 +45,8 @@ public interface ItemService {
 
 	List<Itemfund> bestList(int pro_no);
 
+	int plusItemLike(int pro_no);
+
+
 
 }

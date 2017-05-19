@@ -205,7 +205,16 @@ button {
 
 		var co = '<c:out value="${item.pcontent}"/>';
 		$("#content").html(co);
-
+		$("#btn-like").click(function(){
+				$.ajax({
+					url:"insertMyitem.mi",
+					data: {"pro_no" : "${param.pro_no}", "ano" : "${sessionScope.account.ano}"},
+					success : function(data){
+						$("#btn-like").hide();
+						alert(data);
+					}
+				})
+		})
 	});
 </script>
 </head>
@@ -256,7 +265,9 @@ button {
 		<div class="box2 info">
 			<p id="box2">
 				<script>
+				
 					$(function() {
+						console.log(${sessionScope.myitem });
 						var date = "<c:out value='${item.pedate}'/>";
 						console.log("date : " + date);
 						var edate = new Date(date.toString());
@@ -268,6 +279,7 @@ button {
 						$("#box2").html(btDay + "일 남음");
 					});
 				</script>
+				
 			</p>
 			<em class="infoBar"></em>
 			<p class="info">
@@ -282,6 +294,9 @@ button {
 		</div>
 		<div style="text-align: center;">
 			<button class="btn btn-default" id="btn-like">
+				<i class="fa fa-heart-o" aria-hidden="true"></i>
+			</button>
+			<button class="btn btn-default backpink" id="btn-nonlike" style="display:none;">
 				<i class="fa fa-heart-o" aria-hidden="true"></i>
 			</button>
 			<button class="btn btn-default" id="btn-share">
