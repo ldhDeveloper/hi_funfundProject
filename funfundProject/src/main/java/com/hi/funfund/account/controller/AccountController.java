@@ -3,11 +3,9 @@ package com.hi.funfund.account.controller;
 import java.io.IOException;
 import java.util.Properties;
 
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -18,11 +16,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hi.funfund.AuthMail.AuthMail;
 import com.hi.funfund.account.model.service.AccountService;
 import com.hi.funfund.account.model.vo.Account;
 import com.hi.funfund.account.model.vo.Party;
@@ -214,155 +214,24 @@ public class AccountController {
 	
 	// myinfo 이메일 인증 시작
 	
-	/*@RequestMapping(value = "certifyEmail.ao")
-	public String certifyEmail(ModelAndView model, HttpSession session, HttpServletRequest request) {
-	   
-	         
-	        // 메일 관련 정보
-	        String host = "smtp.naver.com";
-	        final String username = "XXXXXXX";       //네이버 이메일 주소중 @ naver.com앞주소만 기재합니다.
-	        final String password = "1234";   //네이버 이메일 비밀번호를 기재합니다.
-	        int port=465;
-	         
-	        // 메일 내용
-	        String recipient = "XXXXXXX@nate.com";    //메일을 발송할 이메일 주소를 기재해 줍니다.
-	        String subject = "네이버를 사용한 발송 테스트입니다.";
-	        String body = "내용 무";
-	         
-	        Properties props = System.getProperties();
-	          
-	          
-	        props.put("mail.smtp.host", host);
-	        props.put("mail.smtp.port", port);
-	        props.put("mail.smtp.auth", "true");
-	        props.put("mail.smtp.ssl.enable", "true");
-	        props.put("mail.smtp.ssl.trust", host);
-	           
-	        Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
-	            String un=username;
-	            String pw=password;
-	            protected PasswordAuthentication getPasswordAuthentication() {
-	                return new PasswordAuthentication(un, pw);
-	            }
-	        });
-	        session.setDebug(true); //for debug
-	           
-	        Message mimeMessage = new MimeMessage(session);
-	        mimeMessage.setFrom(new InternetAddress("mong400@naver.com"));
-	        mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
-	        mimeMessage.setSubject(subject);
-	        mimeMessage.setText(body);
-	        Transport.send(mimeMessage);	 
-	    }
-	
-		return "logout.ao";
-	}*/
-	
-	/*@Component
-	public class HelpMailSender implements HelpMailSendable{
-	 
-		@Resource(name = "mailSender")
-		JavaMailSender mailSender;
-	 
-		public void sendEmail(String email, String pw) {
-	 
-			MimeMessage message = mailSender.createMimeMessage();
-			try {
-				message.setSubject("[안내] 임시 비밀번호 발신 <관리자가 보낸메일>", "euc-kr");
-				String htmlContent = "당신의 임시 비밀번호는 <Strong>" + pw
-						+ "</Strong> 입니다. 사이트에 접속해서 로그인 후 비밀번호를 변경하세요.<br>";
-				htmlContent += "<a href='http://localhost:9999/index.choon' target='_blank'>홈으로 이동</a>";
-				message.setText(htmlContent, "euc-kr", "html");
-				message.setFrom(new InternetAddress(""));
-				message.addRecipient(RecipientType.TO, new InternetAddress(email));
-				mailSender.send(message);
-			} catch (MessagingException e) {
-				e.printStackTrace();
-			}
-	 
-		}
-	 
-	}*/
-	
-	/*@RequestMapping(value = "certifyEmail.ao")
-	public String certifyEmail(ModelAndView model, HttpSession session, HttpServletRequest request) {
-		System.out.println("오니?");
+	@RequestMapping(value = "authEmail.ao", method=RequestMethod.GET)
+	public @ResponseBody void authEmail(@RequestParam("email") String email, @RequestParam("authNumber") String authNumber) {
+		ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Mail.xml");
 		
-		String email = request.getParameter("email");
+	    AuthMail mm = (AuthMail) context.getBean("mailMail");
+	    mm.sendMail("from@no-spam.com", email, "Funfund에서 이메일 인증번호를 발송합니다.", "인증번호는 <strong>" + authNumber + "</strong>입니다.");
+	    
+	    return;
+	}
+	
+	@RequestMapping(value = "authNumerCheck.ao", method=RequestMethod.GET)
+	public @ResponseBody void authNumerCheck(@RequestParam("email") String email, @RequestParam("ano") String ano) {
+		int aNo = Integer.parseInt(ano);
 		
-		Properties p = System.getProperties();
-        p.put("mail.smtp.starttls.enable", "true");     // gmail은 무조건 true 고정
-        p.put("mail.smtp.host", "smtp.gmail.com");      // smtp 서버 주소
-        p.put("mail.smtp.auth","true");                 // gmail은 무조건 true 고정
-        p.put("mail.smtp.port", "587");                 // gmail 포트
-           
-        Authenticator auth = new MyAuthentication();
-         
-        //session 생성 및  MimeMessage생성
-        session = session.getDefaultInstance(p, auth);
-        MimeMessage msg = new MimeMessage(session);
-         
-        try{
-            //편지보낸시간
-            msg.setSentDate(new Date());
-             
-            InternetAddress from = new InternetAddress() ;
-             
-             
-            from = new InternetAddress("ldh8206<ldh8206@gmail.com>");
-             
-            // 이메일 발신자
-            msg.setFrom(from);
-             
-             
-            // 이메일 수신자
-            InternetAddress to = new InternetAddress(email);
-            msg.setRecipient(Message.RecipientType.TO, to);
-             
-            // 이메일 제목
-            msg.setSubject("[안내] 임시 비밀번호 발신 <관리자가 보낸메일>", "UTF-8");
-             
-            
-            char[] charaters = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','0','1','2','3','4','5','6','7','8','9'};
-            StringBuffer sb = new StringBuffer();
-            Random rn = new Random();
-            for( int i = 0 ; i < 10 ; i++ ){
-                sb.append( charaters[ rn.nextInt( charaters.length ) ] );
-            }
-            String pw =  sb.toString();
-       
-            
-            String htmlContent = "당신의 임시 비밀번호는 <Strong>" + pw + "</Strong> 입니다. 사이트에 접속해서 로그인 후 비밀번호를 변경하세요.<br>"; 
-            htmlContent += "<a href='http://localhost:7660/jsmi/views/main1/member/resetpwdform.jsp?userid=" + userid + "&target='_blank'>홈으로 이동</a>"; 
-            msg.setText(htmlContent, "UTF-8", "html"); 
-
-            
-            // 이메일 내용
- 
-             
-            // 이메일 헤더
-            msg.setHeader("content-Type", "text/html");
-            
-            int result = new PartyService().updatePwd(userid, pw);
-    		
-    		RequestDispatcher view = null;
-    		if(result > 0){
-    			javax.mail.Transport.send(msg);
-    			view = request.getRequestDispatcher("views/main1/member/successsendmail.html");
-    			request.setAttribute("message", "이메일로 임시비밀번호가 발송되었습니다.");
-    			view.forward(request, response);
-    		}else{
-    			view = request.getRequestDispatcher("views/main1/member/memberError.jsp");
-    			request.setAttribute("message", "임시비밀번호 발송에 실패하였습니다.");
-    			view.forward(request, response);
-    		}
-            //메일보내기
-            
-             
-        }
-		
-		return "myinfo/myinfo";
-	}*/
+		int result = accountService.updateEmail(ano, email);
+	    
+	    return;
+	}
 	
 	// myinfo 이메일 인증 끝
 }
