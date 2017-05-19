@@ -54,6 +54,7 @@ public class ItemController {
 	@Autowired
 	private AttachmentService attachmentService;
 
+
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	public ModelAndView AllList(ModelAndView model) {
@@ -187,6 +188,7 @@ public class ItemController {
 	public ModelAndView insertRewardItem(ModelAndView model, Item item, HttpServletRequest request) {
 		int result = 0;
 
+
 		result = itemService.updateRewardItem(item);
 		
 
@@ -254,9 +256,15 @@ public class ItemController {
 	public ModelAndView fundingdetailList(ModelAndView model, HttpServletRequest request) {
 		int pro_no = Integer.parseInt(request.getParameter("pro_no"));
 		Item item = itemService.selectOne(pro_no);
-		List<Itemfund> bestList=itemService.bestList(pro_no);
+		List<Itemfund> bestList = itemService.bestList(pro_no);
 		List<FundMenu> mList = fundMenuService.selectList(pro_no);
 		List<ItemAsk> aList = itemAskService.selectList(pro_no);
+		//youtube 주소
+		String vaddress = item.getPvideo();
+		String[] pvideoAddress = vaddress.split("/");
+		vaddress = pvideoAddress[pvideoAddress.length - 1];
+		
+		item.setPvideo(vaddress);
 		model.addObject("item", item);
 		model.addObject("mList", mList);
 		model.addObject("aList", aList);
