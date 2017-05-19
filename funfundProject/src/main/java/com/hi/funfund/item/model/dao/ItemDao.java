@@ -59,7 +59,7 @@ public class ItemDao {
 		List bestList = sqlSession.selectList(nameSpace+"bestList", pro_no);
 		return null;
 	}
-		
+
 	public int selectAllItem() {
 		// TODO Auto-generated method stub
 		return 0;
