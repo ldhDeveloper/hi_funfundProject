@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -131,17 +132,22 @@ public class ItemController {
 	}
 
 	@RequestMapping("insert.it")
-	public ModelAndView insertRewardItem(ModelAndView model, HttpSession session, HttpServletRequest request) {
-		int ano = Integer.parseInt(request.getParameter("ano"));
+	public ModelAndView insertRewardItem(ModelAndView model, HttpSession session, HttpServletRequest request, @RequestParam("ano") int ano) {
+		//int ano = Integer.parseInt(request.getParameter("ano"));
 		System.out.println("ano : " + ano);
 		Item item = new Item();
 		item.setAno(ano);
 
-		int result = itemService.insertRewardItem(item);
-		model.setViewName("makeproject/primaryinfo");
+		int pro_no = itemService.insertRewardItem(item);
+		
+		int ii = attachmentService.insertItemImages(pro_no);
+		
 		request.setAttribute("ano", ano);
-		request.setAttribute("pro_no", result);
+		request.setAttribute("pro_no", pro_no);
+		
 
+		model.setViewName("makeproject/primaryinfo");
+		
 		return model;
 	}
 
@@ -193,9 +199,11 @@ public class ItemController {
 		
 
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-		if (!multipartRequest.getFile("uploadFile").isEmpty()) {
+		MultipartFile uploadFile = multipartRequest.getFile("uploadFile");
+		MultipartFile uploadFile2 = multipartRequest.getFile("uploadFile2");
+		
+		if (!uploadFile.isEmpty()) {
 
-			MultipartFile uploadFile = multipartRequest.getFile("uploadFile");
 			HttpSession session = request.getSession(false);
 
 			String page = "";
@@ -208,10 +216,9 @@ public class ItemController {
 			}
 
 			System.out.println("marger : " + marger);
-			String savePath = marger + "src/main/webapp/images/makeproject/titleimg";
+			String savePath = marger + "src/main/webapp/images/makeproject/titleimg/";
 			System.out.println("savepath : " + savePath);
 
-			int pro_no = 0;
 			int result2 = 0;
 			String ofileName = uploadFile.getOriginalFilename();
 
@@ -230,10 +237,54 @@ public class ItemController {
 			
 			att.setOrifname(ofileName);
 			att.setRefname(rfileName);
-			att.setFtype("titleimg");
+			att.setFtype("item");
+			att.setFsubtype("titleimg");
 			att.setRefno(item.getPro_no());
 			
-			result2 = attachmentService.updateProfileImage(att);
+			result2 = attachmentService.updateTitleImage(att);
+			
+		}
+		
+		if (!uploadFile2.isEmpty()) {
+
+			HttpSession session = request.getSession(false);
+
+			String page = "";
+			String root = request.getSession().getServletContext().getRealPath("/");
+			System.out.println("root : " + root);
+			String[] roots = root.split("\\\\");
+			String marger = "";
+			for (int i = 0; i < roots.length - 3; i++) {
+				marger += roots[i] + "\\";
+			}
+
+			System.out.println("marger : " + marger);
+			String savePath = marger + "src/main/webapp/images/makeproject/makerimg/";
+			System.out.println("savepath : " + savePath);
+
+			int result2 = 0;
+			String ofileName = uploadFile2.getOriginalFilename();
+
+			long currentTime = System.currentTimeMillis();
+			SimpleDateFormat simDf = new SimpleDateFormat("yyyyMMddHHmmss");
+			String rfileName = simDf.format(new Date(currentTime)) + "(2)."
+					+ ofileName.substring(ofileName.lastIndexOf(".") + 1);
+			;
+			try {
+				uploadFile2.transferTo(new File(savePath + rfileName));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			Attachment att = new Attachment();
+			
+			att.setOrifname(ofileName);
+			att.setRefname(rfileName);
+			att.setFtype("item");
+			att.setFsubtype("makerimg");
+			att.setRefno(item.getPro_no());
+			
+			result2 = attachmentService.updateMakerImage(att);
 			
 		}
 		

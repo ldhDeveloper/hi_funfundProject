@@ -13,71 +13,79 @@ import com.hi.funfund.attachment.model.vo.Attachment;
 
 public class AttachmentServiceIm implements AttachmentService {
 
-	
-@Autowired
-AttachmentDao attachmentDao;
+	@Autowired
+	AttachmentDao attachmentDao;
 
-@Override
-public int insert(Attachment attachment) {
-	
-	return attachmentDao.insert(attachment);
-}
+	@Override
+	public int insert(Attachment attachment) {
 
-@Override
-public int delete(int fno) {
-	
-	return attachmentDao.delete(fno);
-}
+		return attachmentDao.insert(attachment);
+	}
 
-@Override
-public List<Attachment> selectList(int ref_no) {
+	@Override
+	public int delete(int fno) {
 
-	return attachmentDao.selectList(ref_no);
-}
+		return attachmentDao.delete(fno);
+	}
 
-/*@Override
-public int insertImgMyProfile(Attachment attachment) {
-	
-	int result = 0;
+	@Override
+	public List<Attachment> selectList(int ref_no) {
 
-	result = attachmentDao.insertImgMyProfile(attachment);
-	
-	return result;
-}
-*/
-@Override
-public int insertProfileImage(Attachment vo) {
-	
-	int result = 0;
-	
-	result = attachmentDao.insertProfileImage(vo);
-	
-	return result;
-	// TODO Auto-generated method stub
-	
-}
+		return attachmentDao.selectList(ref_no);
+	}
 
-@Override
-public int updateProfileImage(Attachment vo) {
-	
-	int result = 0;
-	
-	result = attachmentDao.updateProfileImage(vo);
-	return result;
-	// TODO Auto-generated method stub
-	
-}
+	/*
+	 * @Override public int insertImgMyProfile(Attachment attachment) {
+	 * 
+	 * int result = 0;
+	 * 
+	 * result = attachmentDao.insertImgMyProfile(attachment);
+	 * 
+	 * return result; }
+	 */
+	@Override
+	public int insertProfileImage(Attachment vo) {
 
-@Override
-public int accountProfileImage(HashMap<String, String> hmap) {
-	int result = 0;
-	
-	result = attachmentDao.accountProfileImage(hmap);
-	return result;
-}
+		int result = 0;
 
+		result = attachmentDao.insertProfileImage(vo);
 
+		return result;
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public int updateProfileImage(Attachment vo) {
+
+		int result = 0;
+
+		result = attachmentDao.updateProfileImage(vo);
+		return result;
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public int accountProfileImage(HashMap<String, String> hmap) {
+		int result = 0;
+
+		result = attachmentDao.accountProfileImage(hmap);
+		return result;
+	}
+
+	@Override
+	public int insertItemImages(int pro_no){
+		return attachmentDao.insertItemImages(pro_no);
+	}
 	
+	@Override
+	public int updateTitleImage(Attachment att){
+		return attachmentDao.updateTitleImage(att);
+	}
 	
-	
+	@Override
+	public int updateMakerImage(Attachment att){
+		return attachmentDao.updateMakerImage(att);
+	}
 }

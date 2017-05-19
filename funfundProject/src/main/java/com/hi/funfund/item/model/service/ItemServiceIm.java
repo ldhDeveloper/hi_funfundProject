@@ -15,6 +15,7 @@ public class ItemServiceIm implements ItemService{
 
 	@Autowired
 	private ItemDao itemDao;
+	
 
 	@Override
 	public List<Item> AllList() {
@@ -122,4 +123,5 @@ public class ItemServiceIm implements ItemService{
 		return itemDao.bestList(pro_no);
 	}
 
+	
 }

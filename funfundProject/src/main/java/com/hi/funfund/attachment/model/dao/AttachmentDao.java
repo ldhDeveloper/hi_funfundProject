@@ -44,5 +44,26 @@ public class AttachmentDao {
 		int result = sqlSession.update("accountProfileImage", hmap);
 		return result;
 	}
+	public int insertItemImages(int pro_no) {
+		int result = 0, result1= 0 , result2 = 0;
+		
+		result1 = sqlSession.insert("insertTitleImage", pro_no);
+		if(result1 > 0){
+			result2 = sqlSession.insert("insertMakerImage", pro_no);
+			if(result2 > 0){
+				result = result1 + result2;
+			}
+		}
+		
+		
+		return result;
+	}
+	public int updateTitleImage(Attachment att) {
+		return sqlSession.update("updateItemImages", att);
+	}
+	public int updateMakerImage(Attachment att) {
+		return sqlSession.update("updateItemImages", att);
+	}
+	
 
 }
