@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.hi.funfund.item.model.dao.ItemDao;
 import com.hi.funfund.item.model.vo.Item;
+import com.hi.funfund.item.model.vo.Itemfund;
 
 @Service("itemService")
 public class ItemServiceIm implements ItemService{
@@ -118,7 +119,7 @@ public class ItemServiceIm implements ItemService{
 	}
 
 	@Override
-	public List bestList(int pro_no) {
+	public List<Itemfund> bestList(int pro_no) {
 		return itemDao.bestList(pro_no);
 	}
 

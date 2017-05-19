@@ -59,7 +59,8 @@ public class AttachmentController {
 			ano = ac.getAno();
 			vo.setOrifname(ofileName);
 			vo.setRefname(rfileName);
-			vo.setFtype("프로필이미지");
+			vo.setFtype("account");
+			vo.setFsubtype("profileimage");
 			vo.setRefno(ano);
 			if(photoflag.equals("insert")){
 				result = attachmentService.insertProfileImage(vo);

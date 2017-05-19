@@ -82,17 +82,17 @@ public class AccountDao {
 		return account;
 	}
 
-	public Account selectThirdPartyUser(Account account) {
+	public Account selectThirdPartyUser(Account account){
 		int result = 0; //데이터베이스에 회원이 있는지를 가리기위한 변수
 		Account user = (Account) sqlSession.selectOne("accountMapper.thirdPartyUser", account);
 		if(user == null){
 			account.setId(account.getEmail());
 			 result = sqlSession.insert("accountMapper.insertThirdParty", account);
-			 if(result >0){
+			 if(result > 0){
 				 user = account;
 			 }
 		}else{
-			if(user.getIdtoken() != account.getIdtoken()){
+			if(!user.getIdtoken().equals(account.getIdtoken())){
 				user = null;
 			}
 		}

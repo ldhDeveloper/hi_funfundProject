@@ -25,6 +25,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hi.funfund.HomeController;
 import com.hi.funfund.account.model.vo.Account;
 import com.hi.funfund.attachment.model.service.AttachmentService;
@@ -35,6 +37,7 @@ import com.hi.funfund.fundmenu.model.vo.ReciveFundMenu;
 import com.hi.funfund.item.model.service.ItemService;
 import com.hi.funfund.item.model.service.ItemServiceIm;
 import com.hi.funfund.item.model.vo.Item;
+import com.hi.funfund.item.model.vo.Itemfund;
 import com.hi.funfund.itemask.model.service.ItemAskService;
 import com.hi.funfund.itemask.model.vo.ItemAsk;
 
@@ -158,17 +161,20 @@ public class ItemController {
 		return model;
 	}
 
-	@RequestMapping(value = "selectAll.it", method = RequestMethod.POST)
-	public ModelAndView selectAllItem(ModelAndView model) {
+	
+	@RequestMapping(value ="selectAll.it", method = RequestMethod.POST)
+	public @ResponseBody List<Item> selectAllItem() {
+		//ObjectMapper mapper = new ObjectMapper();
 		List<Item> iList = itemService.AllList();
 		System.out.println("오니?");
-		if (iList != null) {
-			// model.setViewName("jsonView");
-			model.addObject("iList", iList);
+		if(iList != null){
+			//model.setViewName("jsonView");
+			//String jsonInString = mapper.writeValueAsString(iList);
+			//model.addObject("iList", iList);
 			System.out.println("iList : " + iList);
 		}
-
-		return model;
+		
+		return iList;
 	}
 
 	@RequestMapping(value = "update.it", method = RequestMethod.POST)
@@ -242,12 +248,13 @@ public class ItemController {
 	public ModelAndView fundingdetailList(ModelAndView model, HttpServletRequest request) {
 		int pro_no = Integer.parseInt(request.getParameter("pro_no"));
 		Item item = itemService.selectOne(pro_no);
-		List bestList = itemService.bestList(pro_no);
+		List<Itemfund> bestList=itemService.bestList(pro_no);
 		List<FundMenu> mList = fundMenuService.selectList(pro_no);
 		List<ItemAsk> aList = itemAskService.selectList(pro_no);
 		model.addObject("item", item);
 		model.addObject("mList", mList);
 		model.addObject("aList", aList);
+		model.addObject("bestList", bestList);
 		model.setViewName("funding/detailList");
 		return model;
 	}

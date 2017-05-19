@@ -888,8 +888,7 @@ li {
 							var access_token = "";
 							var user_seq_no = 0;
 							var time = new Date();
-							
-							
+														
 					        var year = time.getFullYear();
 					        
 					        var month = 0;
