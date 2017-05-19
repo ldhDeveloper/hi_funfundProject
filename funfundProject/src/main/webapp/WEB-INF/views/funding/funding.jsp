@@ -98,7 +98,71 @@ button {
 		$("#selectAll").click(function(){
 			$.ajax({
 		        url : "selectAll.it",
-		        type: "post",
+		        type: "get",
+		        async: true,
+		        success : function(data){
+		    		console.log(data);
+		        	var html="";
+		          	for(var i = 0; i<data.length; i++){
+		          		var pro_no = data[i].pro_no;
+		          		var ecost = data[i].ecost;
+		          		var fundamount = data[i].fundamount;
+		          		var pedate = data[i].pedate;
+		          		var persent = Math.round(fundamount * 100 / ecost);
+		          		var bar = 0;
+		          		var category = data[i].category;
+		          		var pcontent = data[i].pcontent;
+		          		if(persent > 100){
+		          			bar = 100;
+		          		} else {
+		          			bar = persent;
+		          		}
+		          		var edate = new Date(pedate);
+		          		var todate = new Date();
+		          		var btMs = edate.getTime() - todate.getTime();
+		          		console.log("btMs : " + btMs);
+		          		var btDay = Math.round(btMs / (1000*60*60*24));
+		          		console.log("btDay : " + btDay);
+		          		var funding="";
+		          		var ending="";
+		          		if(btDay < 0) {
+		          			funding = "none";
+		          			ending = "";
+		          		} else {
+		          			funding = "";
+		          			ending = "none";
+		          		}
+		          		html += '<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">';
+		          		html += '<div class="thumbnail" align="center">';
+		          		html += '<a href="detail.it?pro_no=' + pro_no +'> ';
+		          		html += '<img src="/funfund/images/funding/face.PNG" alt="사진1" style="width: 100%">';
+		          		html += '<div id="progress' + i + '" class="progress">';
+		          		html += '<div class="progress-bar progress-bar-warning"';
+		          		html += 'id="progressbar' + i + '"';
+		          		html += 'role="progressbar" aria-valuenow="60" aria-valuemin="0"';
+		          		html += 'aria-valuemax="' + ecost + '" style="width: ' + bar + '%;">';
+		          		html += '<span class="sr-only"></span>';
+		          		html += '</div></div><p>';
+		          		html += '<span id="persent' + i +'">' + persent + '</span> % &nbsp;&nbsp; <span>' + fundamount + '</span>원 달성 &nbsp;&nbsp;';
+		          		html += '<span id="edate' + i +'" style="display:' + funding + '">' + btDay + '</span>';
+		          		html += '<span id="yet' + i +'" style="display:' + funding + '">일 남음</span>';
+		          		html += '<spen id="complete' + i + '" style="display:' + ending + '">펀딩종료</spen>';
+		          		html += '</p><div class="caption"><p>' + pcontent + '</p>';
+						html += '<span>' + category + '</span></div></a></div></div>';
+		          	}
+		          	$("#fundItemList").html(html);
+		        },
+		        error:function(request,status,error){
+		            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		        }
+		    });
+		});
+		
+		$(".selcategory").click(function(){
+			$.ajax({
+		        url : "selectCategory.it",
+		        type: "get",
+		        data: {"category" : $(this).val()},
 		        async: true,
 		        success : function(data){
 		    		console.log(data);
@@ -197,15 +261,15 @@ button {
 			<div id="blist" class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
 				style="display: block; text-align: center;">
 				<button id="selectAll" class="btn " value="all">전체</button>
-				<button id="selectTech" class="btn " value="tech">테크</button>
-				<button id="selectBeauty" class="btn " value="beauty">패션/뷰티</button>
-				<button id="selectFood" class="btn " value="food">푸드</button>
-				<button id="selectDesign" class="btn " value="design">디자인</button>
-				<button id="selectArt" class="btn " value="art">예술</button>
-				<button id="selectGame" class="btn " value="game">게임</button>
-				<button id="selectTrip" class="btn " value="trip">여행</button>
-				<button id="selectSport" class="btn " value="sport">스포츠</button>
-				<button id="selectPinterest" class="btn " value="pinterest">공익</button>
+				<button id="selectTech" class="btn selcategory" value="tech">테크</button>
+				<button id="selectBeauty" class="btn selcategory" value="beauty">패션/뷰티</button>
+				<button id="selectFood" class="btn selcategory" value="food">푸드</button>
+				<button id="selectDesign" class="btn selcategory" value="design">디자인</button>
+				<button id="selectArt" class="btn selcategory" value="art">예술</button>
+				<button id="selectGame" class="btn selcategory" value="game">게임</button>
+				<button id="selectTrip" class="btn selcategory" value="trip">여행</button>
+				<button id="selectSport" class="btn selcategory" value="sport">스포츠</button>
+				<button id="selectPinterest" class="btn selcategory" value="pinterest">공익</button>
 			</div>
 		</div>
 	</div>
