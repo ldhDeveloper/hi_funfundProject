@@ -51,6 +51,8 @@ public interface AccountService {
 
 	Account selectThirdPartyUser(Account account);
 
+	int updateEmail(String ano, String email);
+
 	
 	//미추가된 함수 : 프로젝트별 후원자 리스트
 

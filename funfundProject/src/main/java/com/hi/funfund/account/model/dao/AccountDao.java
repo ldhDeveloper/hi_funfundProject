@@ -99,4 +99,12 @@ public class AccountDao {
 		return user;
 	}
 
+	public int updateEmail(String ano, String email) {
+		HashMap<String, String> hmap = new HashMap<String, String>();
+		hmap.put("ano", ano);
+		hmap.put("email", email);
+		int result = sqlSession.update("updateEmail", hmap);
+		return result;
+	}
+
 }

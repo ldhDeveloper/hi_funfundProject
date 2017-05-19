@@ -351,7 +351,7 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 	                          					<input type="submit" id="emailChangeBtn" class="emailChange emailAuthBtn mbtn" value="변경" style="color:#fff;">
 	                          				</span>	
 	                          				
-	                          				<!-- <form action="certifyEmail.ao" method="post">  -->                        				                          				
+	                          				<!-- <form action="authEmail.ao" method="post">  -->                        				                          				
 	                          				                        				
 	                          				<span id="mEmailCheck" style="display:none;">
 	                          					<input type="submit" id="emailCheckBtn" class="emailCheck emailAuthBtn mbtn" value="인증하기" style="color:#fff;">
@@ -364,10 +364,13 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 	                          				</span>
 	                          				
 	                          				<div class="input" id="certifyNumber" style="display:none">
-	                            				<input type="text" name="certifyNumber" class="input-text" placeholder="인증번호" value="">
+	                            				<input type="text" id="authenticNum" name="certifyNumber" class="input-text" placeholder="인증번호" value="">
 	                          				</div>
 	                          				
-	                          				<input type="submit" id="certifyNumBtn" class="certifyNumBtn mbtn" value="인증완료" style="color:#fff; display:none; margin-top:7px;">	                          				                          					
+	                          				<input type="submit" id="certifyNumBtn" class="certifyNumBtn mbtn" value="인증완료" style="color:#fff; display:none; margin-top:7px;">	
+	                          				
+                          				    <p class="alert alert-danger" id="authComplete" style="margin-top:7px;"></p>
+                          				    <p class="alert alert-danger" id="authIncorrect" style="margin-top:7px;"></p>                      					
 	                          				<!-- </form>   -->                       					                          			
 	                        			</div>
 	                        			
@@ -436,8 +439,13 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 	                     			</form>	
 	                     			
 	                     			<script>
-        								$(function(){
-        									var num;
+	                     			// 인증번호
+	                     			var codeList = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','0','1','2','3','4','5','6','7','8','9'];
+ 								   
+									var authNumber="";
+	                     			
+        								$(function(){ 
+        									// 비밀번호
         									
         									$("#oldPwdInput").removeClass("alert alert-danger");
         									$("#newPwdInput").removeClass("alert alert-danger");
@@ -467,11 +475,17 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
         										}
         									});
         									
+        									// 이메일
+        									$("#authComplete").removeClass("alert alert-danger");
+        									$("#authIncorrect").removeClass("alert alert-danger");
+        									
         									$("#mEmailChange").click(function(){
         										$("#mEmailChange").hide();
     											$("#mEmailCheck").show();    											
     											$("#mEmailRetry").hide();
     											$("#userEmail").val("");
+    											$("#authComplete").removeClass("alert alert-danger");
+    											$("#authIncorrect").removeClass("alert alert-danger");
     										});
         									
         									$("#emailCheckBtn").click(function(){    											
@@ -483,7 +497,8 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
         											$("#certifyNumBtn").show();
     												$("#userEmail").val();
     												$("#mEmailCheckInput").hide();
-    												
+    												$("#authComplete").removeClass("alert alert-danger");
+    												$("#authIncorrect").removeClass("alert alert-danger");
     											}
     											
     											else {
@@ -493,40 +508,66 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
     										});
         									
         									$("#mEmailRetry").click(function(){
-        										
+        										sendAuthMail();
     										});
         									
         									$("#emailCheckBtn").click(function() {
-        										if($("#userEmail").val() == "") {
-        											alert("이메일을 입력해주세요.");
-        											return;
+        										sendAuthMail();        										
+        									});
+        									
+        									$("#certifyNumBtn").click(function() {
+        										if($("#authenticNum").val() == "") {        											
+        											$("#authComplete").addClass("alert alert-danger");
+        											$("#authComplete").html("인증번호를 입력해주세요");
+        											$("#authIncorrect").removeClass("alert alert-danger");
+        											return false;
         										}
-        										
-        										/* $("#emailFrame").fadeIn(350); */
-        										$("#emailCheckBtn").attr("disabled",true);
-        										
-        										// alert("receive :: " + $("#receive").val());
-        										
-        										http = jQuery.ajax({
-        									   		url		: "/mailCodeSend.do",
-        									   		type	: "POST",
-        											data 	: 'receive='+$("#receive").val(),
-        											dataType: 'html',
-        									   		async	: true,
-        											success : function(msg) {
-
-       													// alert(msg);
-        												alert("인증번호가 메일로 발송되었습니다.");
+        										 
+        										else {
+        											if($("#authenticNum").val() == authNumber) {
+        												$("#authComplete").removeClass("alert alert-danger");
         												
-        												if(msg == '') {
-        													alert("이메일주소를 입력해주세요.");
-        													return;
-        												} 
-        												num = msg;        												
-        											}
-        									  	});
+        												$ajax({
+        													url: "authNumerCheck.ao",
+        													type: "get",
+        													data: {"email" : $("#userEmail").val(), "ano" : "${ sessionScope.account.ano }"},
+        													success: function(data) {
+        														alert("아이디와 이메일이 변경되었습니다. 다시 로그인 해주세요.");
+        														location.href("logout.ao");
+        													}
+        												});
+            										}
+            										
+        											else {
+            											$("#authComplete").removeClass("alert alert-danger");
+            											$("#authIncorrect").addClass("alert alert-danger");
+            											$("#authIncorrect").html("인증번호가 일치하지 않습니다.");
+            										}
+        										}        																						
         									});
        									});
+        								
+        								function sendAuthMail() {
+        									/* if($("#userEmail").val() == "") {
+    											alert("이메일을 입력해주세요.");
+    											return;
+    										} */
+    										        								    
+        									for(var i=0; i<8; i++){
+        								    	var num = Math.floor(Math.random() * 33);
+        								    	authNumber += codeList[num];
+        								    }
+        								    console.log("authNumber : " + authNumber);
+    										
+    										$.ajax({
+    											url: "authEmail.ao",
+    											type: "get",
+    											data: {"email" : $("#userEmail").val(), "authNumber" : authNumber},
+    											success: function(data){
+    												alert("인증메일을 발송하였습니다.");
+    											}
+    										});    										
+        								}        								
         								
         								function savePwd (){
     										if($("#oldPwd").val() == "") {
@@ -556,15 +597,6 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
     											return false;
     										}
     									};
-    									
-    									function certifyEmail() {
-    										/* $("#emailChangeBtn").click(function(){
-    											$("#emailChangeBtn").removeClass("emailChange emailAuthBtn mbtn");
-    											$("#emailCheckBtn").addClass("emailCheck emailAuthBtn mbtn");
-    										}); */
-    									};
-    									   
-    									/* emailCheckBtn */
         							</script>																			
 								</div>
 							</div>

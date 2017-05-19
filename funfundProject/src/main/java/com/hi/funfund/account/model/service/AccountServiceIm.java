@@ -140,12 +140,19 @@ public class AccountServiceIm implements AccountService {
 		System.out.println("Service ano : " + ano + " nickname : " + nickname);
 		return accountDao.updateNickname(ano, nickname);
 	}
+	
+	// updateEmail 이메일 수정
+	
+	@Override
+	public int updateEmail(String ano, String email) {
+		return accountDao.updateEmail(ano, email);
+	}
 
 	@Override
 	public Account selectThirdPartyUser(Account account) {
-		Account thirdPartyUser = accountDao.selectThirdPartyUser(account);
-		
-		
+		Account thirdPartyUser = accountDao.selectThirdPartyUser(account);		
 		return thirdPartyUser;
-	}	
+	}
+
+		
 }
