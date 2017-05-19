@@ -231,13 +231,32 @@ li {
 						카드와 공유 이미지로 사용됩니다. 이미지 등록 가이드를 반드시 확인하고 이미지를 등록해주시기 바랍니다.
 					</td>
 					<td rowspan="10">
-						<div
-							style="width: 450px; border: 1px solid #ddd; height: 350px; background: #f8f8f8; margin-left: 10px; padding: 10px;">
-
+						<div style="width: 450px; border: 1px solid #ddd; height: 350px; background: #f8f8f8; margin-left: 10px; padding-left:75px;padding-top:30px;cursor:pointer;" onclick="document.all.uploadFile.click();">
+							<input id="titleimagefile" type="file" name="uploadFile" style="display:none;" onchange="LoadImg(this);">
+							<img id="titleimage"  src="images/makeproject/camera.PNG" style="max-width:300px;max-height:200px; width:300px; heigh:200px; " >
+							<br><br>
+							<ul>
+								<li>사이즈 : 가로 800px, 세로 600px</li>
+								<li>용량 : 1 MB 미만</li>
+								<li>텍스트 및 로고 삽입 금지</li>
+							</ul>
 						</div>
 					</td>
 					<td></td>
 				</tr>
+				<script>
+						function LoadImg(value){
+						 	if(value.files && value.files[0]){
+						 		var reader = new FileReader();
+						 		reader.onload = function (e){
+						 			$("#titleimage").attr("src", e.target.result);
+						 		}
+						 		reader.readAsDataURL(value.files[0]);
+						 	}
+						}
+						
+				</script>
+				
 				<tr>
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
@@ -726,15 +745,30 @@ li {
 					</td>
 					<td>
 						<div
-							style="border: 1px solid #ddd; background: #f8f8f8; padding: 10px; margin-left: 10px; width: 440px; height: 100px;">
-							<input type="file" size="43" value="클릭하세요"><br> <br>
-							<div align="center" style="font-size: 0.7em;">3MB 이하의 사진만
-								사용할 수 있습니다.</div>
+							style="border: 1px solid #ddd; background: #f8f8f8; padding: 10px; margin-left: 10px; width: 440px; height: 180px; padding-left:160px;">
+							<input id="makerprofileimagefile" type="file" name="uploadFile2" style="display:none;" onchange="LoadImg2(this);">
+							<img id="makerprofileimage" class="img-circle"  src="images/myinfo/basic.png" style="min-width:120px; min-height:120px; width:120px; heigh:120px; cursor:pointer" onclick="document.all.uploadFile2.click();">
+							<br><br>
+							<ul style="font-size:0.7em;margin-left:-70px;">
+								<li>3 MB 이하의 사진만 사용할 수 있습니다.</li>
+							</ul>
 						</div>
 
 					</td>
 					<td>&nbsp;</td>
 				</tr>
+				<script>
+						function LoadImg2(value){
+						 	if(value.files && value.files[0]){
+						 		var reader = new FileReader();
+						 		reader.onload = function (e){
+						 			$("#makerprofileimage").attr("src", e.target.result);
+						 		}
+						 		reader.readAsDataURL(value.files[0]);
+						 	}
+						}
+						
+				</script>
 				<tr>
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
@@ -849,7 +883,7 @@ li {
 							var client_id = "l7xx6712d9c9cd524d3b9c3f0f60b2dea3ee";
 							var client_secret = "10e3bd27aa5e4287ae709bca09c34ea7";
 							var  grant_type = "client_credentials";
-							document.getElementById('authCodeFrm').submit();
+							//document.getElementById('authCodeFrm').submit();
 							
 							var access_token = "";
 							var user_seq_no = 0;
