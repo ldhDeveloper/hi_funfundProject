@@ -11,14 +11,14 @@
 	</insert> -->
 	<insert id="insertprofileImage" parameterType="attachment">
 		<![CDATA[
-			INSERT INTO ATTACHMENT (fno, orifname, refname, ftype, refno)
-			VALUES(seq_fno.nextval, #{orifname}, #{refname}, #{ftype}, #{refno})
+			INSERT INTO ATTACHMENT (fno, orifname, refname, ftype, fsubtype, refno)
+			VALUES(seq_fno.nextval, #{orifname}, #{refname}, #{ftype}, #{fsubtype}, #{refno})
 		]]>
 	</insert>
 	<update id="updateprofileImage" parameterType="attachment">
 		<![CDATA[
 			UPDATE ATTACHMENT SET orifname=#{orifname}, refname=#{refname} 
-			WHERE ftype=#{ftype} AND refno=#{refno}
+			WHERE ftype=#{ftype} AND fsubtype=#{fsubtype} AND refno=#{refno}
 		]]>
 	</update>
 	<update id="accountProfileImage" parameterType="HashMap">
