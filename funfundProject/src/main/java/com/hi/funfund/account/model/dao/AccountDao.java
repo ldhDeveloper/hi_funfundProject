@@ -38,7 +38,7 @@ public class AccountDao {
 		hmap.put("ano", Integer.toString(ano));
 		hmap.put("oldPwd", oldPwd);
 		Account account = (Account) sqlSession.selectOne("selectOldPwd", hmap);
-		System.out.println("Dao ano : " + ano + " oldPwd : " + oldPwd + " account : " + account);
+		
 		return account;
 	}
 
@@ -47,7 +47,7 @@ public class AccountDao {
 		hmap.put("ano",  Integer.toString(ano));
 		hmap.put("newPwd", newPwd);
 		int result = sqlSession.update("updatePwd", hmap);
-		System.out.println("Dao ano : " + ano + " newPwd : " + newPwd + " result : " + result);
+		
 		return result;
 	}
 
@@ -64,7 +64,7 @@ public class AccountDao {
 		hmap.put("ano",  Integer.toString(ano));
 		hmap.put("name", name);
 		int result = sqlSession.update("updateName", hmap);
-		System.out.println("Dao ano : " + ano + " name : " + name);
+
 		return result;
 	}
 
@@ -73,7 +73,7 @@ public class AccountDao {
 		hmap.put("ano", Integer.toString(ano));
 		hmap.put("nickname", nickname);
 		int result = sqlSession.update("updateNickname", hmap);
-		System.out.println("Dao ano : " + ano + " nickname : " + nickname);
+
 		return result;
 	}
 
@@ -106,6 +106,23 @@ public class AccountDao {
 		hmap.put("ano", ano);
 		hmap.put("email", email);
 		int result = sqlSession.update("updateEmail", hmap);
+
+		return result;
+	}
+
+	public int insertAddress(int ano, String address) {
+		HashMap<String, String> hmap = new HashMap<String, String>();
+		hmap.put("ano", Integer.toString(ano));
+		hmap.put("address", address);
+		int result = sqlSession.insert("insertAddress", hmap);
+		return result;
+	}
+
+	public int updateAddress(int ano, String address) {
+		HashMap<String, String> hmap = new HashMap<String, String>();
+		hmap.put("ano", Integer.toString(ano));
+		hmap.put("address", address);
+		int result = sqlSession.insert("updateAddress", hmap);
 		return result;
 	}
 

@@ -18,9 +18,6 @@
 .mlabel {
 	border: 1px solid #ddd;
 	background-color: #24B3A8;
-	/* background: -webkit-linear-gradient(left top, #24B3A8, #58CEB0, #2AC594);
-	background: -o-linear-gradient(bottom right, #24B3A8, #58CEB0, #2AC594);
-	background: -moz-linear-gradient(bottom right, #24B3A8, #58CEB0, #2AC594); */
 	background: linear-gradient(to right, #24B3A8, #58CEB0, #2AC594);
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
@@ -355,9 +352,7 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 	                          				
 	                          				<span id="mEmailChange">
 	                          					<input type="submit" id="emailChangeBtn" class="emailChange emailAuthBtn mbtn" value="변경" style="color:#fff;">
-	                          				</span>	
-	                          				
-	                          				<!-- <form action="authEmail.ao" method="post">  -->                        				                          				
+	                          				</span>		                                               				                          				
 	                          				                        				
 	                          				<span id="mEmailCheck" style="display:none;">
 	                          					<input type="submit" id="emailCheckBtn" class="emailCheck emailAuthBtn mbtn" value="인증하기" style="color:#fff;">
@@ -376,34 +371,8 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 	                          				<input type="submit" id="certifyNumBtn" class="certifyNumBtn mbtn" value="인증완료" style="color:#fff; display:none; margin-top:7px;">	
 	                          				
                           				    <p class="alert alert-danger" id="authComplete" style="margin-top:7px;"></p>
-                          				    <p class="alert alert-danger" id="authIncorrect" style="margin-top:7px;"></p>                      					
-	                          				<!-- </form>   -->                       					                          			
+                          				    <p class="alert alert-danger" id="authIncorrect" style="margin-top:7px;"></p>                      					                      					                          			
 	                        			</div>
-	                        			
-		
-	                        				<!-- <div id="emailConfirmArea" class="input-btn-wrap" style="display:none">	                          			
-	                            				<div class="input">
-	                                				<input type="text" id="emailAuthCode" class="input-text" placeholder="인증번호">
-	                                				<input type="hidden" id="emailConfirmId" value="">
-	                                				<time class="limit_time" style="position:relative;top:-39px;left:85%;text-align:right;">
-	                                					<span id="emailMs_timer" style="color:#50e3c2;font-size:13px;"></span>
-	                                				</time>
-	                            				</div>
-	                            				                            			
-	                            				<input type="submit" id="emailConfirmBtn" class="emailAuthBtn mbtn" value="인증완료" style="color:#fff;">		                            			                            			 	                            
-	                        				</div> -->
-	                        			
-	                        			
-	                        			
-	                        			<!-- <p id="emailCheckNumberError" class="error-text emailMsg">인증번호를 잘못 입력하셨습니다. 다시 입력해주세요.</p>
-	                        			<p id="emailTimeOutTokenError" class="error-text emailMsg">기간이 만료된 인증번호입니다. 다시 입력해주세요.</p>
-	                        			<p id="emailTimeOutError" class="error-text emailMsg">시간이 종료되었습니다. 다시 인증해주세요.</p>
-	                        			<p id="emailSuccessNumberCheckMsg" class="error-text emailMsg" style="color:#50e3c2;">인증이 완료되었습니다.</p>
-	                        			<p id="emailError" class="error-text emailMsg">이메일 형식이 올바르지 않습니다.</p>
-										<p id="emailJoinedError" class="error-text emailMsg">이미 회원가입된 계정입니다. 다른 이메일을 입력해주세요.</p>
-										<p id="checkEmailInfo" class="info-text emailMsg">이메일 인증이 필요합니다.</p>
-										<p id="changeEmailInfo" class="info-text emailMsg">로그인 아이디와 안내 메일 발송 주소가 변경됩니다.</p>
-										<p id="sendEmailInfo" class="info-text emailMsg">인증메일이 발송되었습니다.</p> 	 -->                        		
 
 	                        		<br>
 	                        		
@@ -418,11 +387,9 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
                         								<input type="password" id="oldPwd" name="oldPwd" class="input-text" placeholder="현재 비밀번호" />
                         								                        								
                         								<p class="alert alert-danger" id="oldPwdInput"></p>
-                        								<!-- <p id="oldPasswordError" class="error-text">현재 비밀번호가 일치 하지 않습니다.</p> -->
                         								
                         								<input type="password" id="newPwd" class="input-text" placeholder="새 비밀번호" />
                         								<p class="alert alert-danger" id="newPwdInput"></p>
-                        								<!-- <p id="passwordError" class="pwd-text">영문, 숫자, 특수문자 (!@#$%^&*+=-)를 모두 조합한 8자 이상</p> -->
                         								
     													<div class="checkSign form-group has-success has-feedback">     
         													<input type="password" name="newPwd" id="newPwd2" class="input-text" id="inputSuccess" placeholder="새 비밀번호 확인">
@@ -533,13 +500,13 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
         											if($("#authenticNum").val() == authNumber) {
         												$("#authComplete").removeClass("alert alert-danger");
         												
-        												$ajax({
+        												$.ajax({
         													url: "authNumerCheck.ao",
         													type: "get",
         													data: {"email" : $("#userEmail").val(), "ano" : "${ sessionScope.account.ano }"},
         													success: function(data) {
         														alert("아이디와 이메일이 변경되었습니다. 다시 로그인 해주세요.");
-        														location.href("logout.ao");
+        														location.href = "logout.ao";
         													}
         												});
             										}

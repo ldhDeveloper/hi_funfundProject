@@ -137,9 +137,7 @@ public class AccountController {
 	// Myinfo 이름, 닉네임 변경 시각
 	
 	@RequestMapping(value = "changeMyinfo.ao")
-	public String changeMyinfo(ModelAndView model, HttpSession session, HttpServletRequest request) {
-		System.out.println("오니?");
-		
+	public String changeMyinfo(ModelAndView model, HttpSession session, HttpServletRequest request) {		
 		session = request.getSession(false);
 		Account account = (Account)session.getAttribute("account");
 		
@@ -153,30 +151,19 @@ public class AccountController {
 				
 		if(party == null){
 			int result = accountService.insertName(ano, name);
-			
-			System.out.println("Controller ano : " + ano + " name : " + name);
 		}
 		
 		else {
 			int result2 = accountService.updateName(ano, name);
-			
-			System.out.println("Controller2 ano : " + ano + " name : " + name);
 		}
 		party = accountService.loginParty(ano);
 		session.setAttribute("party", party);
 		
-		// 닉네임
-		
-		System.out.println("Controller3 account" + account);
-		
-				
+		// 닉네임		
 		if(account != null) {
 			int result = accountService.updateNickname(ano, nickname);
-			System.out.println("Controller4 account" + account);
-			System.out.println("Controller5 nickname : " + nickname);
 		}
 		
-		/*account.setNickname(nickname);*/
 		account = accountService.selectAccount(ano);
 		session.setAttribute("account", account);
 		
@@ -186,26 +173,18 @@ public class AccountController {
 	// myinfo 비밀번호 변경 시작
 	
 	@RequestMapping(value = "changePwd.ao")
-	public ModelAndView changePwd(ModelAndView model, HttpSession session, HttpServletRequest request) {
-		System.out.println("오니?");
-		
+	public ModelAndView changePwd(ModelAndView model, HttpSession session, HttpServletRequest request) {		
 		session = request.getSession(false);
 		Account account = (Account)session.getAttribute("account");
 		
 		int ano = account.getAno();
 		String oldPwd = request.getParameter("oldPwd");
-		String newPwd = request.getParameter("newPwd");
-		
-		System.out.println("ano : " + ano + " oldPwd : " + oldPwd + " newPwd : " + newPwd);
+		String newPwd = request.getParameter("newPwd");		
 		
 		Account account2 = accountService.selectOldPwd(ano, oldPwd);
 		
-		System.out.println("Controller ano : " + ano + " oldPwd : " + oldPwd + " account2 : " + account2);
-		
 		if(account2 != null) {
-			int result = accountService.updatePwd(ano, newPwd);
-			
-			System.out.println("Controller ano : " + ano + " newPwd : " + newPwd);										
+			int result = accountService.updatePwd(ano, newPwd);									
 		}
 		
 		model.addObject("account", account2);
@@ -230,12 +209,39 @@ public class AccountController {
 	
 	@RequestMapping(value = "authNumerCheck.ao", method=RequestMethod.GET)
 	public @ResponseBody void authNumerCheck(@RequestParam("email") String email, @RequestParam("ano") String ano) {
-		int aNo = Integer.parseInt(ano);
-		
 		int result = accountService.updateEmail(ano, email);
-	    
+		
 	    return;
 	}
 	
-	// myinfo 이메일 인증 끝
+	// seller 정보 변경 시작
+	
+	@RequestMapping(value = "changSeller.ao")
+	public String changSeller(ModelAndView model, HttpSession session, HttpServletRequest request) {
+		System.out.println("오니?");
+		session = request.getSession(false);
+		Account account = (Account)session.getAttribute("account");
+		int ano = account.getAno();
+		Party party = accountService.loginParty(ano);
+		
+		String address1 = request.getParameter("address1");
+		String address2 = request.getParameter("address2");
+		String address3 = request.getParameter("address3");
+		
+		String address = address1 + "-" + address2 + "-" + address3;
+		
+		if(party == null){
+			int result = accountService.insertAddress(ano, address);
+		}
+		
+		else {
+			int result = accountService.updateAddress(ano, address);
+		}
+		
+		party = accountService.loginParty(ano);
+		
+		session.setAttribute("party", party);
+		
+		return "myinfo/sellerinfo";
+	}	
 }

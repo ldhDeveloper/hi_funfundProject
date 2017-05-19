@@ -41,4 +41,16 @@
 			UPDATE PARTY SET pname=(#{name}) WHERE ano=#{ano}
 		]]>
 	</update>
+	
+	<insert id="insertAddress" parameterType="HashMap">
+		<![CDATA[
+			INSERT INTO PARTY(pno, ano, address) VALUES(seq_pno.nextval, #{ano, jdbcType=INTEGER}, #{address, jdbcType=VARCHAR})
+		]]>
+	</insert>
+	
+	<update id="updateAddress" parameterType="HashMap">
+		<![CDATA[
+			UPDATE PARTY SET address=(#{address}) WHERE ano=#{ano}
+		]]>
+	</update>
 </mapper>

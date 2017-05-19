@@ -48,11 +48,14 @@ public interface AccountService {
 	int updateName(int ano, String name); // 이름 수정
 
 	int updateNickname(int ano, String nickname); // 닉네임 수정
+	
+	int updateEmail(String ano, String email); // 이메일 수정
 
 	Account selectThirdPartyUser(Account account); // 타사이트로 가입한 유저 찾기/등록/가입제어
 
-	int updateEmail(String ano, String email);
+	int insertAddress(int ano, String address);
 
+	int updateAddress(int ano, String address);
 	
 	//미추가된 함수 : 프로젝트별 후원자 리스트
 
