@@ -50,15 +50,17 @@
 				return false;
 			}
 		});
+	loginFail();
 	})
 	function home(){
 		location.href="/funfund";
 	}
 	function loginFail(){
 	var loginFail = '${loginFail}';//구글등으로 로그인시 회원가입실패한 경우 날라오는 경고문
-	if(loginFail !== "")
-	alert("경고" + loginFail);
+	if(loginFail !== ""){
+	alert(loginFail);
 	home();
+	}
 	}
 </script>
 <script>//구글
@@ -74,21 +76,22 @@
       auth2 = gapi.auth2.init({
         client_id: '659736995246-ddl5nvftj5f76j3gk122g03t00n18pl7.apps.googleusercontent.com',
         cookiepolicy: 'single_host_origin',
-        scope: 'https://www.googleapis.com/auth/admin.directory.user'
+        scope: 'profile'
       });
       auth2.attachClickHandler(document.getElementById('gSignupBt'), {},
     	        function(googleUser) {
-    	  
     	        }, function(error) {
     	          alert(JSON.stringify(error, undefined, 2));
     	        });
       auth2.signIn().then(function() {
     	   profile = auth2.currentUser.get().getBasicProfile();
+    	   
     	   nickname = profile.getName();
     	   email = profile.getEmail();
-    	   alert(nickname + ", " + email)
-    	   idtoken = "구글";
-    	   access_token = "임시 토큰";
+    	   /* alert(auth2.currentUser.getAuthResponse().id_token); */
+    	   idtoken = auth2.currentUser.get().getId();
+    	   access_token =  "없음";
+ 			
     	   loginWithThirdParty(email, nickname, idtoken, access_token);
     	  });
     
@@ -106,17 +109,7 @@
 //common function for sns user
 
 function loginWithThirdParty(email, name, idtoken, access_token ){
-	/* $.ajax({
-		url :"loginWithApi.ao",
-		data : {"nickname":name,"email":email, "idtoken":idtoken, "access_token":access_token},
-		success : function(data){
-			if(data ==null){
-			alert(data);	
-			}
-		}
-		
-	});
-	 */
+	
 location.href="loginWithApi.ao?email="+email +"&nickname="+ name + "&idtoken="+ idtoken +"&access_token="+access_token;
 } 
  var nickname;
@@ -137,7 +130,8 @@ location.href="loginWithApi.ao?email="+email +"&nickname="+ name + "&idtoken="+ 
     			success: function(res){
     			nickname = res.properties.nickname;
     			email = res.kaccount_email;
-    			idtoken = "카카오";
+    			
+    			idtoken = res.id;
     			loginWithThirdParty(email, nickname, idtoken, access_token);  
     			},
     			fail: function(error){
@@ -811,8 +805,8 @@ label.sign-form_title {
 
             <p class="lineor_bg"><span class="lineor">또는</span></p>
             <div class="login-email">
-	            <input type="email" name="id" placeholder="이메일주소" autofocus="autofocus" /> <!-- 20160727 autofocus 추가 -->
-	            <input type="password" name="pwd" placeholder="영문+숫자포함 6~20자" />
+	            <input type="email" name="id" placeholder="이메일주소" autofocus="autofocus" required /> <!-- 20160727 autofocus 추가 -->
+	            <input type="password" name="pwd" placeholder="영문+숫자포함 6~20자" required/>
 	            <a href="javascript:void(0);" class="forget_pw" onclick="switchToForgotBox();">비밀번호를 잊으셨나요?</a>
             </div>
             <label for="rememberemail" class="remeber_email">
