@@ -8,7 +8,23 @@ public class Attachment implements Serializable {
 	private String orifname;
 	private String refname;
 	private String ftype;
+	private String fsubtype;
+	private int fnum;
 	private int refno;
+	
+	
+	public int getFnum() {
+		return fnum;
+	}
+	public void setFnum(int fnum) {
+		this.fnum = fnum;
+	}
+	public String getFsubtype() {
+		return fsubtype;
+	}
+	public void setFsubtype(String fsubtype) {
+		this.fsubtype = fsubtype;
+	}
 	public int getFno() {
 		return fno;
 	}
@@ -44,18 +60,19 @@ public class Attachment implements Serializable {
 	public Attachment() {
 		super();
 	}
-	public Attachment(int fno, String orifname, String refname, String ftype, int refno) {
+	public Attachment(int fno, String orifname, String refname, String ftype, String fsubtype, int fnum, int refno) {
 		super();
 		this.fno = fno;
 		this.orifname = orifname;
 		this.refname = refname;
 		this.ftype = ftype;
+		this.fsubtype = fsubtype;
+		this.fnum = fnum;
 		this.refno = refno;
 	}
 	@Override
 	public String toString() {
-		return fno + ", " + orifname + ", " + refname + ", " + ftype + ", " + refno;
+		return "Attachment [fno=" + fno + ", orifname=" + orifname + ", refname=" + refname + ", ftype=" + ftype
+				+ ", fsubtype=" + fsubtype + ", fnum=" + fnum + ", refno=" + refno + "]";
 	}
-	
-	
 }
