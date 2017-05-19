@@ -51,11 +51,11 @@
 .btn-darkgray4{display:inline-block;width:48%;height:44px;font-size:13px;line-height:46px;text-align:center;color:#fff;background:#FBAF2C;border:none;box-sizing:border-box}
 .btn-darkgray5{display:inline-block;width:48%;height:44px;font-size:13px;line-height:46px;text-align:center;color:#fff;background:#50E3C2;border:none;box-sizing:border-box;}
 .input-text1{box-sizing:border-box;display:inline-block;width:48%;margin-bottom:7px;height:45px;line-height:48px;font-size:13px;color:#4a4a4a;background:#fff;border:1px solid #e4e4e4;outline:none;padding-top:1%;padding-left:4.5%}
-
+.input-text2{box-sizing:border-box;display:inline-block;width:100%;margin-bottom:7px;height:27px;line-height:30px;font-size:13px;color:#4a4a4a;background:#fff;border:1px solid #e4e4e4;outline:none;padding-top:1%;padding-left:4.5%}
 .mnameText {
 	border: none;
 	color: #4D525B;
-	width: 4s0%;
+	width: 40%;
 	background-color: #F8F8F8;
 }
 </style>
@@ -193,6 +193,8 @@ $(function(){
 				       				
 				       				<div class="info-box" id="idCardInfoBox" style="display:none;"></div>
 				       				<div class="file-list" id="idCardFileArea" style="display:none;"></div>
+				       				
+				       				<input type="text" id="imgRoute" name="imgRoute" class="input-text2" readonly/>
 				       				
 				       				<div class="btn-wrap" id="idCardFileUploadBtn">
 				       					<input type="button" class="btn-darkgray" id="btnUploadIdCardImg" value="이미지 파일 등록">
