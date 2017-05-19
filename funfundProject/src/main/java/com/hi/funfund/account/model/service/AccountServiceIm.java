@@ -142,7 +142,7 @@ public class AccountServiceIm implements AccountService {
 	}
 
 	@Override
-	public Account selectThirdPartyUser(Account account) {
+	public Account selectThirdPartyUser(Account account) { //타사이트로 가입한 유저 로그인/가입/제어
 		Account thirdPartyUser = accountDao.selectThirdPartyUser(account);
 		
 		
