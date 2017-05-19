@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="java.util.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -53,6 +54,10 @@ li {
 }
 
 .box2 {
+	padding-top: 10px;
+}
+
+#box2 {
 	padding-top: 10px;
 }
 
@@ -163,7 +168,7 @@ button {
 
 .supportinfo {
 	display: inline-block;
-	padding:15px;
+	padding: 15px;
 }
 </style>
 <script type="text/javascript">
@@ -236,18 +241,33 @@ button {
 	<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12"></div>
 
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 box2"
-		style="padding: 10px;">
+		style="padding: 10px;" align="center">
+		<!-- video작성영역 -->
+		<c:if test="${!empty item.pvideo}">
+			<iframe width="560" height="315"
+				src="https://www.youtube.com/embed/${item.pvideo }" frameborder="0"
+				allowfullscreen></iframe>
+		</c:if>
 		<!-- 게시글작성영역 -->
 		<div id="content"></div>
 	</div>
 
 	<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
 		<div class="box2 info">
-			<p class="box2">
-				<jsp:useBean id="now" class="java.util.Date" />
-				<fmt:formatDate value="${now}" var="now" pattern="yyyyMMdd" />
-				<fmt:formatDate value="${item.pedate}" var="date" pattern="yyyyMMdd" />
-				${now - date} 일 남음
+			<p id="box2">
+				<script>
+					$(function() {
+						var date = "<c:out value='${item.pedate}'/>";
+						console.log("date : " + date);
+						var edate = new Date(date.toString());
+						var todate = new Date();
+						var btMs = edate.getTime() - todate.getTime();
+						console.log("btMs : " + btMs);
+						var btDay = Math.round(btMs / (1000 * 60 * 60 * 24));
+						console.log("btDay : " + btDay);
+						$("#box2").html(btDay + "일 남음");
+					});
+				</script>
 			</p>
 			<em class="infoBar"></em>
 			<p class="info">
@@ -289,13 +309,18 @@ button {
 				style="font-size: 10pt; text-align: left; padding-top: 20px; padding-bottom: 5px; margin-left: 20px;">베스트
 				서포터</p>
 			<div class="makerbox2">
-				<c:forEach var="bestList" items="${bestList }">
-					<div class="supportinfo">
-						사진
-						<p>${bestList.nickname }</p>
-						<p>${bestList.mcost } 원 펀딩</p>
-					</div>
-				</c:forEach>
+				<c:if test="${!empty bestList}">
+					<c:forEach var="bestList" items="${bestList }">
+						<div class="supportinfo">
+							<p>${bestList.pimage }</p>
+							<p>${bestList.nickname }</p>
+							<p>${bestList.mcost }원펀딩</p>
+						</div>
+					</c:forEach>
+				</c:if>
+				<c:if test="${empty bestList}">
+				  아직 서포터가 존재하지 않습니다.
+				</c:if>
 			</div>
 		</div>
 

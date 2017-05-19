@@ -43,10 +43,9 @@ public class ItemController {
 	@Autowired
 	private ItemAskService itemAskService;
 
-
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
-	public ModelAndView AllList(ModelAndView model){
+
+	public ModelAndView AllList(ModelAndView model) {
 		List<Item> mList = itemService.AllList();
 		return model;
 	}
@@ -133,52 +132,48 @@ public class ItemController {
 
 		return model;
 	}
-	
+
 	@RequestMapping("insertReward.it")
 	public ModelAndView insertRewardItem(ModelAndView model, FundMenu fmenu) {
 		System.out.println(fmenu);
 		ArrayList<FundMenu> fmlist = null;
-		
-		
+
 		int result = fundMenuService.insertFundMenu(fmenu);
-		
-		if(result > 0){
+
+		if (result > 0) {
 			fmlist = fundMenuService.selectList(fmenu.getPro_no());
 			model.setViewName("jsonView");
 			model.addObject("fmlist", fmlist);
 			System.out.println("fmlist : " + fmlist);
 		}
-		
+
 		return model;
 	}
-	
-	@RequestMapping(value ="selectAll.it", method = RequestMethod.POST)
+
+	@RequestMapping(value = "selectAll.it", method = RequestMethod.POST)
 	public @ResponseBody List<Item> selectAllItem() {
-		//ObjectMapper mapper = new ObjectMapper();
+		// ObjectMapper mapper = new ObjectMapper();
 		List<Item> iList = itemService.AllList();
 		System.out.println("오니?");
-		if(iList != null){
-			//model.setViewName("jsonView");
-			//String jsonInString = mapper.writeValueAsString(iList);
-			//model.addObject("iList", iList);
+		if (iList != null) {
+			// model.setViewName("jsonView");
+			// String jsonInString = mapper.writeValueAsString(iList);
+			// model.addObject("iList", iList);
 			System.out.println("iList : " + iList);
 		}
-		
+
 		return iList;
 	}
-	
 
-	@RequestMapping(value="update.it", method = RequestMethod.POST)
-	public ModelAndView insertRewardItem(ModelAndView model, Item item,  HttpServletRequest request ){
+	@RequestMapping(value = "update.it", method = RequestMethod.POST)
+	public ModelAndView insertRewardItem(ModelAndView model, Item item, HttpServletRequest request) {
 		int result = 0;
-		
-			/*System.out.println(rfmenu);*/
-		
-		
+
+		/* System.out.println(rfmenu); */
 
 		result = itemService.updateRewardItem(item);
 		model.addObject("pro_no", item.getPro_no());
-		
+
 		model.setViewName("makeproject/primaryinfo");
 
 		return model;
@@ -196,9 +191,15 @@ public class ItemController {
 	public ModelAndView fundingdetailList(ModelAndView model, HttpServletRequest request) {
 		int pro_no = Integer.parseInt(request.getParameter("pro_no"));
 		Item item = itemService.selectOne(pro_no);
-		List<Itemfund> bestList=itemService.bestList(pro_no);
+		List<Itemfund> bestList = itemService.bestList(pro_no);
 		List<FundMenu> mList = fundMenuService.selectList(pro_no);
 		List<ItemAsk> aList = itemAskService.selectList(pro_no);
+		//youtube 주소
+		String vaddress = item.getPvideo();
+		String[] pvideoAddress = vaddress.split("/");
+		vaddress = pvideoAddress[pvideoAddress.length - 1];
+		
+		item.setPvideo(vaddress);
 		model.addObject("item", item);
 		model.addObject("mList", mList);
 		model.addObject("aList", aList);

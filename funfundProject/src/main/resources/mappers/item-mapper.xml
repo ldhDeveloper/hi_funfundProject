@@ -35,6 +35,7 @@
 		<id property="pro_no" column="pro_no" />
 		<result property="nickname" column="nickname" />
 		<result property="mcost" column="mcost" />
+		<result property="pimage" column="pimage" />
 	</resultMap>
 
 
@@ -146,7 +147,7 @@
 	</select>
 
 	<select id="bestList" resultMap="itemResult2" parameterType="int">
-		<![CDATA[select a.nickname, a2.mcost
+		<![CDATA[select a.nickname, a2.mcost, a.pimage
 		from account a join
 		(select fl.ano, sum(fm.mcost) as mcost, rank() over (order by sum(fm.mcost)
 		desc) as rank
