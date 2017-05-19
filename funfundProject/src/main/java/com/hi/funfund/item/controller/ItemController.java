@@ -162,18 +162,24 @@ public class ItemController {
 	}
 
 	
-	@RequestMapping(value ="selectAll.it", method = RequestMethod.POST)
+	@RequestMapping(value ="selectAll.it", method = RequestMethod.GET)
 	public @ResponseBody List<Item> selectAllItem() {
-		//ObjectMapper mapper = new ObjectMapper();
 		List<Item> iList = itemService.AllList();
 		System.out.println("오니?");
 		if(iList != null){
-			//model.setViewName("jsonView");
-			//String jsonInString = mapper.writeValueAsString(iList);
-			//model.addObject("iList", iList);
 			System.out.println("iList : " + iList);
-		}
-		
+		}	
+		return iList;
+	}
+	
+	@RequestMapping(value ="selectCategory.it", method = RequestMethod.GET)
+	public @ResponseBody List<Item> selectCategoryItem(@RequestParam("category") String category) {
+		System.out.println("category : " + category);
+		List<Item> iList = itemService.categoryList(category);
+		System.out.println("오니?");
+		if(iList != null){
+			System.out.println("iList : " + iList);
+		}	
 		return iList;
 	}
 

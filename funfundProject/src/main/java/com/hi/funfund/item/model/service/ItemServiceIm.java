@@ -59,8 +59,7 @@ public class ItemServiceIm implements ItemService{
 
 	@Override
 	public List categoryList(String category) {
-		// TODO Auto-generated method stub
-		return null;
+		return itemDao.categoryList(category);
 	}
 
 	@Override

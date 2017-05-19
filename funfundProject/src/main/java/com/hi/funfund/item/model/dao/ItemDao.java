@@ -65,5 +65,11 @@ public class ItemDao {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	public List categoryList(String category) {
+		List<Item> iList = (List<Item>) sqlSession.selectList(nameSpace+"selectCategory", category);
+		//System.out.println("iList:"+iList.get(0));
+		return iList;
+	}
 	
 }
