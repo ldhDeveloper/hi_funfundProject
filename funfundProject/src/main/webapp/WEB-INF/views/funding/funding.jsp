@@ -273,7 +273,7 @@ button {
 									<span id="persent<c:out value='${status.index}'/>"></span> % &nbsp;&nbsp; <span><c:out value="${item.fundamount }"/></span>원 달성 &nbsp;&nbsp; 
 									<span id="edate<c:out value='${status.index}'/>"></span>
 									<span id="yet<c:out value='${status.index}'/>">일 남음</span>
-									<spen id="complete<c:out value='${status.index}'/>">펀딩종료</spen>
+									<span id="complete<c:out value='${status.index}'/>">펀딩종료</span>
 								</p>
 
 								<div class="caption">

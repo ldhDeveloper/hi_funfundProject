@@ -163,6 +163,7 @@ button {
 
 .supportinfo {
 	display: inline-block;
+	padding:15px;
 }
 </style>
 <script type="text/javascript">
@@ -288,10 +289,13 @@ button {
 				style="font-size: 10pt; text-align: left; padding-top: 20px; padding-bottom: 5px; margin-left: 20px;">베스트
 				서포터</p>
 			<div class="makerbox2">
-				<div class="supportinfo">
-					<c:forEach var="" items="">사진 아이디
+				<c:forEach var="bestList" items="${bestList }">
+					<div class="supportinfo">
+						사진
+						<p>${bestList.nickname }</p>
+						<p>${bestList.mcost } 원 펀딩</p>
+					</div>
 				</c:forEach>
-				</div>
 			</div>
 		</div>
 
