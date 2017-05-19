@@ -57,14 +57,18 @@ public class AccountController {
 		Party p = null;
 			HttpSession session = request.getSession(false);
 			if(thirdPartyUser != null){
-				thirdPartyUser.setIdtoken(access_token);
+				
 				p = accountService.loginParty(thirdPartyUser.getAno());
 				session.setAttribute("account", thirdPartyUser);
-				session.setAttribute("party", p);			
+				session.setAttribute("party", p);	
+				mv.setViewName("redirect:/");
+				session.setAttribute("access_token", access_token);
 			}else{
 				mv.addObject("loginFail", "로그인에 실패 했습니다.");
-			}				
-			mv.setViewName("redirect:/");
+				mv.setViewName("home");
+			}				System.out.println(mv);
+			
+		
 		return mv;
 	}
 	

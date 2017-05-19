@@ -7,87 +7,138 @@ pageEncoding="utf-8"/>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-.noticeTitle{
-background : lightgreen;
-text-align : center;
-color: white;
+body {
+line-height : 1px;
+}
+#nDetailContainer{
+
+    text-align: center;
+    
+    padding: 20px;
+    width: 100%;
+    height: 450px;
+    float: left;
+}
+.category{
+    padding: 15px 10px 10px 10px;
+    height: 70px;
+    border-bottom: 1px solid #e4e4e4;
+}
+.categoryName{
+float: left;
+}
+.categoryName a{
+display: inline-block;
+    height: 40px;
+   
+    font-size: 16px;
+    font-weight: 400px;
+}
+.replyTable{
+ 
+    
+    padding: 20px;
+    width: 100%;
+    height: 450px;
+    float: left;
+  display: block;
+   background-color: #F9F7F5;
+}
+#content{
+width : 100%;
+border : 1px solid #e4e4e4;
+}
+.replyButton{
+float:right;
+display: inline-block;
+    padding: 0 18px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    background: #50e3c2;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    -webkit-appearance: none;}
+.replyContent{
+background : white;
+border : 1px solid #e4e4e4;
+border-
+}
+em{
+    display: inline-block;
+    margin-right: 4px;
+    line-height: 24px;
+    font-size: 17px;
+    font-weight: 400;
+    color: orange;
 }
 .nTitle{
-font-size: 22px;
+    font-weight: 500;
+    color: #0D0F12;
 }
-.content{
-width:970px;
-margin:auto;
-padding:24px;
-}
-.contentInfo{
-display:inline-block;
+.nWriter, .nDate{
+padding-right: 8px;
 font-size: 13px;
-    line-height: 20px;
-}
-.pimage{
-
-display: inline-block;
-    vertical-align: bottom;
-    margin-right: 5px;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background: no-repeat center center;
-    background-size: cover;
-
-}
-.bottomLine{
-
-    background: #FAFAFA;
-    margin: 0 !important;
-    padding: 0 !important; 
-    width:100% !important;
-}
-@media screen and (min-width: 260px){
-.bottomContent{
-    width: 960px;
-    margin: 0 auto;
-    padding: 40px 0;
-}
-}
-.form{
-width:100%;
+    line-height: 16px;
+    color: #7C8288;
 }
 </style>
-
-
 </head>
 <body>
 
 <jsp:include page="/WEB-INF/views/common/menubar.jsp" flush="true" />
-<div class="noticeTitle" >
-<h2>공지사항</h2> <p/>
-<p>펀펀드의 소식이 담겨있습니다.</p> 
-</div>
-<div class="container">
-<div class="col-lg-12 col-md-12 col-xs-12">
-<div class="content">
-<p class="nTitle">제목</p>
-<br>
-<div>
-<em class="pimage" style="background-image:uri()">ass</em><span class="contentInfo">작성자 <br> 날짜</span>
-<div class="context">
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="container bottomLine">
-<div class="col-lg-12 col-md-12 col-xs-12">
-<div class="bottomContent" align="center">
-<form action="#" method="post" class="form">
-<textarea class="replyContent" name="replyContent" required></textarea>
-<input type="submit" value="등록">
-</form>
-</div>
-</div>
-</div>
+<hr>
+
+	<div id="nDetailContainer">
+		<div class="col-lg-3 col-md-0 col-sm-0 col-xs-0"></div>
+		<div class=" col-lg-6 col-md-12 col-sm-12 col-xs-12">
+		<div class="category">
+			<p class="categoryName"><a>&lt; 공지사항</a></p>
+		</div>
+		</div>
+		<div class="col-lg-3 col-md-0 col-sm-0 col-xs-0"></div>
+	</div>
+	<div class="row"></div>
+	<div class="replyTable">
+	<div class="col-lg-3 col-md-0 col-sm-0 col-xs-0"></div>
+		<div class=" col-lg-6 col-md-12 col-sm-12 col-xs-12">
+		<div class="category">
+			<p class="categoryName">0개의 댓글이 달려있습니다.</p>
+			<form>
+			<textarea id="content" name="content"></textarea>
+			<input type="hidden" value="작성자">
+			<input type="hidden" value="프로젝트번호">
+			<input type="hidden" value="작성자번호">
+			<input type="checkbox" value="문의유형">문의유형
+			<br>
+			<input class="replyButton" type="submit" value="작성하기">
+			</form>
+			<br><br>
+			<div class="replyContent">
+			<img><p>이름</p>
+			<p>내용</p>
+			<p>작성일시</p>
+			<br>
+			</div>
+		</div>
+		</div>
+		<div class="col-lg-3 col-md-0 col-sm-0 col-xs-0"></div>
+	</div>
+	<div class="replyTable">
+		<div class="col-lg-3 col-md-0 col-sm-0 col-xs-0"></div>
+		<div class=" col-lg-6 col-md-12 col-sm-12 col-xs-12" style="margin-left:15px;" >
+			<p> 다른 게시물</p>
+			<hr>				
+				<p> <em>공지사항</em>  <span class="nTitle"> 제목</span> </p>
+				<p> <span class="nWriter"> 작성자</span> <span class="nDate">작성일</span> </p>
+			<hr>
+			<div>
+			
+			</div>
+		</div>
+		<div class="col-lg-3 col-md-0 col-sm-0 col-xs-0"></div>
+	</div>
 
 </body>
 </html>

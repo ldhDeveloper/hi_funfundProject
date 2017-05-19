@@ -98,7 +98,8 @@
 						<a href="detail.it?pro_no=<c:out value="${item.pro_no}"/>"> <img
 							src="/funfund/images/funding/face.PNG" alt="사진1"
 							style="width: 100%"> <script>
-								$(function() {
+								$(function(){
+									
 									var ecost = "<c:out value='${item.ecost}'/>";
 									var fundamount = "<c:out value='${item.fundamount}'/>"
 									var persent = Math.round(fundamount * 100

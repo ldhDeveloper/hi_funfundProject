@@ -21,20 +21,34 @@ padding:24px;
 
 }
 .nList:hover {
-background : #aaa;
+background : RGB(245,247,250);
 taxt-decoration : none;
 }
 
 .titleContainer{
-background : #666;
+height:150px;
+line-height:22.5px;
+text-size-adjust:100%;
+background : RGB(96,101,106);
 height : 150px;
+
 }
 
+.titleContainer h2 {
+font-size:36px;
+font-style:normal;
+font-weight:500;
+letter-spacing:-0.72px;
+line-height:44px;
+margin-bottom:8px;
+
+
+}
 .noticeTitle{
 
 text-align : center;
 color: white;
-    padding: 32px 16px;
+    padding: 15px 16px;
 }
 
 em{
@@ -59,7 +73,7 @@ font-size: 13px;
 .noticeTitle {
     width: 960px;
     margin: 0 auto;
-    padding: 48px 24px 40px;
+    padding: 15px 24px 40px;
 }
 }
 .downbar{
@@ -78,73 +92,27 @@ margin: auto;
 float : left;
 }
 button {
-background-repeat-y:
-;
-background-size:
-auto
-;
-border-bottom-color:
-rgb(0, 204, 163)
-;
-border-bottom-style:
-solid
-;
-border-bottom-width:
-1.11111px
-;
-border-image-outset:
-0px
-;
-border-image-repeat:
-stretch
-;
-border-image-slice:
-100%
-;
-border-image-source:
-none
-;
-border-image-width:
-1
-;
-border-left-color:
-rgb(0, 204, 163)
-;
-border-left-style:
-solid
-;
-border-left-width:
-1.11111px
-;
-border-right-color:
-rgb(0, 204, 163)
-;
-border-right-style:
-solid
-;
-border-right-width:
-1.11111px
-;
-border-top-color:
-rgb(0, 204, 163)
-;
-border-top-style:
-solid
-;
-border-top-width:
-1.11111px
-;
-
-background-color:
-rgb(0, 204, 163)
-;
-;
-font-family:
-Roboto, "Noto Sans KR", sans-serif
-;
-font-size:
-15px
-;
+background-repeat-y: ;
+background-size: auto;
+border-bottom-color:rgb(0, 204, 163);
+border-bottom-style:solid;
+border-bottom-width:1.11111px;
+border-image-outset:0px;
+border-image-repeat:stretch;
+border-image-slice:100%;
+border-image-source:none;
+border-image-width:1;
+border-left-color:rgb(0, 204, 163);
+border-left-style:solid;
+border-left-width:1.11111px;
+border-right-color:rgb(0, 204, 163);
+border-right-style:solid;
+border-right-width:1.11111px;
+border-top-color:rgb(0, 204, 163);
+border-top-style:solid;
+border-top-width:1.11111px;
+background-color:rgb(0, 204, 163);
+font-size:15px;
 }
 </style>
 
