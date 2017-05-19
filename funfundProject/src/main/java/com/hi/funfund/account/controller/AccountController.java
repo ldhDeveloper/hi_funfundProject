@@ -12,11 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -50,6 +52,7 @@ public class AccountController {
 	@RequestMapping(value = "/loginWithApi.ao")
 	public ModelAndView loginWithThirdParty(Account account, ModelAndView mv, HttpServletRequest request ){
 		String access_token = request.getParameter("access_token");
+		System.out.println(account);
 		Account thirdPartyUser = accountService.selectThirdPartyUser(account);
 		Party p = null;
 			HttpSession session = request.getSession(false);
@@ -61,19 +64,19 @@ public class AccountController {
 				mv.setViewName("redirect:/");
 				
 			}else{
-			
-				
-				mv.setViewName("redirect:/");
-			}
-					
+				mv.setViewName("redirect:/loginFail.ao");
+			}				
 		return mv;
 	}
-	@RequestMapping(method = RequestMethod.POST)
-	private void loginFail(ModelAndView model, HttpServletRequest request){
-		System.out.println( request.getMethod());
-	
+	@RequestMapping(value = "loginFail.ao", method= RequestMethod.POST)
+	@ResponseStatus(value=HttpStatus.OK)
+	private ModelAndView loginFail(ModelAndView model){
+		model.addObject("loginFail", "로그인에 실패 했습니다.");
+		model.setViewName("redirect:/");
+		return  model;
 		
 	}
+	
 	
 	@RequestMapping(value = "/signup.ao", produces = "text/plain;charset=UTF-8")
 	public String signup(Account account){

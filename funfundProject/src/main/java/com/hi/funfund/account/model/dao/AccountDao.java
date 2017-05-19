@@ -92,8 +92,10 @@ public class AccountDao {
 				 user = account;
 			 }
 		}else{
-			if(!user.getIdtoken().equals(account.getIdtoken())){
+			if(user.getIdtoken() == null ){
 				user = null;
+			}else{
+				user = user.getIdtoken().equals(account.getIdtoken())? user : null;
 			}
 		}
 		return user;

@@ -28,6 +28,8 @@
 
 <script type="text/javascript">
 	$(function(){
+		Kakao.init('c04a7d5e62e926cf85109fde19aa531a');
+		
 		$("#login_form").submit(function(){
 			var email=$("#login_form input[name=email]").val();
 			var pwd=$("#login_form input[name=pwd]").val();
@@ -81,9 +83,10 @@
     	   profile = auth2.currentUser.get().getBasicProfile();
     	   nickname = profile.getName();
     	   email = profile.getEmail();
+    	   alert(nickname + ", " + email)
     	   idtoken = "구글";
     	   access_token = "임시 토큰";
-    	   loginWithThirdParty(email, name, idtoken, access_token);
+    	   loginWithThirdParty(email, nickname, idtoken, access_token);
     	  });
     
     
@@ -100,6 +103,17 @@
 //common function for sns user
 
 function loginWithThirdParty(email, name, idtoken, access_token ){
+	/* $.ajax({
+		url :"loginWithApi.ao",
+		data : {"nickname":name,"email":email, "idtoken":idtoken, "access_token":access_token},
+		success : function(data){
+			if(data ==null){
+			alert(data);	
+			}
+		}
+		
+	});
+	 */
 location.href="loginWithApi.ao?email="+email +"&nickname="+ name + "&idtoken="+ idtoken +"&access_token="+access_token;
 } 
  var nickname;
@@ -108,7 +122,7 @@ location.href="loginWithApi.ao?email="+email +"&nickname="+ name + "&idtoken="+ 
  var access_token;
  
 //카카오톡 회원 로그인 
-Kakao.init('c04a7d5e62e926cf85109fde19aa531a');
+
     // 카카오 로그인 버튼을 생성합니다.
   function loginWithKakao(){
 	  Kakao.Auth.login({
@@ -834,10 +848,10 @@ label.sign-form_title {
       	<form>
               <fieldset>
                 <legend class="login-title-txt">소셜 회원가입</legend>
-                <a href="#" class="signup-social p-login_btn login-social-facebook" data-sns="facebook" alt="페이스북으로 회원가입" >페이스북으로 회원가입</a>
+                <!-- <a href="#" class="signup-social p-login_btn login-social-facebook" data-sns="facebook" alt="페이스북으로 회원가입" >페이스북으로 회원가입</a>
             	<a href="javascript:loginWithKakao();" id="custom-login-btn" class="signup-social p-login_btn login-social-kakao" alt="카카오로 회원가입" >카카오로 회원가입</a>
             	<a href="#" onclick="google();" id="gSigninBt" class="signup-social p-login_btn login-social-google" alt="구글로 회원가입" >구글로 회원가입</a>
-           		<a href="#" id="nSignUpBt" class="signin-social p-login_btn login-social-naver"  data-sns="naver"  alt="네이버로 로그인" >네이버 회원가입</a>
+           		<a href="#" id="nSignUpBt" class="signin-social p-login_btn login-social-naver"  data-sns="naver"  alt="네이버로 로그인" >네이버 회원가입</a> -->
               </fieldset>
             </form>
             <p class="lineor_bg"><span class="lineor">또는</span></p>
