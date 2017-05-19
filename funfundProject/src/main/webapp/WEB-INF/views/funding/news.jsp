@@ -175,6 +175,11 @@ button {
 	display: inlne-block;
 	font-size: 12px;
 }
+
+.supportinfo {
+	display: inline-block;
+	padding: 15px;
+}
 </style>
 <script src="/funfund/lib/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
@@ -232,8 +237,10 @@ button {
 	<div align="center">
 		<ul class="w3-border-bottom w3-border-gray">
 			<li class="active"><a href="detail.it?pro_no=${param.pro_no }">스토리</a></li>
-			<li><a href="reply.ask?pro_no=${param.pro_no }">댓글(${item.repcount } )</a></li>
-			<li><a href="news.up?pro_no=${item.pro_no}">새소식( ${item.upcount })</a></li>
+			<li><a href="reply.ask?pro_no=${param.pro_no }">댓글(${item.repcount }
+					)</a></li>
+			<li><a href="news.up?pro_no=${item.pro_no}">새소식(
+					${item.upcount })</a></li>
 		</ul>
 	</div>
 
@@ -269,12 +276,13 @@ button {
 			</p>
 			<em class="infoBar"></em>
 			<p class="info">
-				<c:set var="ecost"  value="${item.ecost }"/>
-				<c:set var="fundamount" value="${item.fundamount}"/>
-				<c:out value="${ fundamount * 100 / ecost}"/>  % 달성
+				<c:set var="ecost" value="${item.ecost }" />
+				<c:set var="fundamount" value="${item.fundamount}" />
+				<c:out value="${ fundamount * 100 / ecost}" />
+				% 달성
 			</p>
-			<p class="info">${item.fundamount }원의 펀딩</p>
-			<p class="info">${item.supportcount }명의 서포터</p>
+			<p class="info">${item.fundamount }원의펀딩</p>
+			<p class="info">${item.supportcount }명의서포터</p>
 			<button class="btn-fund">펀딩하기</button>
 		</div>
 		<div style="text-align: center;">
@@ -306,13 +314,13 @@ button {
 				style="font-size: 10pt; text-align: left; padding-top: 20px; padding-bottom: 5px; margin-left: 20px;">베스트
 				서포터</p>
 			<div class="makerbox2">
-				<%-- <div class="makerinfo">사진</div>
-				<div class="makerinfo">${item.cname }</div>
-				<div>
-					<p>문의처</p>
-					<div class="makerinfo">${item.cs_email}</div>
-					<div class="makerinfo">${item.cs_phone}</div>
-				</div> --%>
+				<c:forEach var="bestList" items="${bestList }">
+					<div class="supportinfo">
+						사진
+						<p>${bestList.nickname }</p>
+						<p>${bestList.mcost } 원 펀딩</p>
+					</div>
+				</c:forEach>
 			</div>
 		</div>
 
@@ -330,8 +338,10 @@ button {
 						<dl>${reword.mname}</dl>
 					</li>
 					<li class="makerinfo">배송비</li>
-					<dl><c:if test="${null eq reword.dcost }">${reword.dcost }</c:if>
-						<c:if test="${reword.dcost != '' || null ne reword.dcost}">0</c:if>원
+					<dl>
+						<c:if test="${null eq reword.dcost }">${reword.dcost }</c:if>
+						<c:if test="${reword.dcost != '' || null ne reword.dcost}">0</c:if>
+						원
 					</dl>
 					<li class="makerinfo">리워드 예상일
 						<dl>${reword.mdate}</dl>
@@ -339,13 +349,13 @@ button {
 					<li class="makerinfo">제한 수량</li>
 					<dl>${reword.mcount }개
 					</dl>
-					<li class="makerinfo">현재 
-					<c:set var="result" value="${reword.mcount - item.fundcount }"/>
-					<c:if test="${result > 0}">
-					${reword.mcount - item.fundcount  }</c:if>
-					<c:if test="${result <= 0 }">
+					<li class="makerinfo">현재 <c:set var="result"
+							value="${reword.mcount - item.fundcount }" /> <c:if
+							test="${result > 0}">
+					${reword.mcount - item.fundcount  }</c:if> <c:if test="${result <= 0 }">
 					0
-					</c:if>개 남음</li>
+					</c:if>개 남음
+					</li>
 				</ul>
 			</c:forEach>
 		</div>

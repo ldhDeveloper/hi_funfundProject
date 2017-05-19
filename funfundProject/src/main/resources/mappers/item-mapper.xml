@@ -27,10 +27,17 @@
 		<result property="fundamount" column="fundamount" />
 		<result property="fundcount" column="fundcount" />
 		<result property="supportcount" column="supportcount" />
-		<result property="upcount" column="upcount"/>
-		<result property="repcount" column="repcount"/>
+		<result property="upcount" column="upcount" />
+		<result property="repcount" column="repcount" />
 	</resultMap>
-	
+
+	<resultMap type="itemfund" id="itemResult2">
+		<id property="pro_no" column="pro_no" />
+		<result property="nickname" column="nickname" />
+		<result property="mcost" column="mcost" />
+	</resultMap>
+
+
 
 	<insert id="insert" parameterType="Item">
 		<![CDATA[
@@ -43,9 +50,9 @@
 	</insert>
 
 	<select id="selectList" parameterType="Item" resultMap="itemResult">
-			<!-- <![CDATA[
-			select pro_no, ano, pname, pcontent, category, psdate, pedate, pshort, ecost, refund, pvideo, pstatus, likecount, sharelink, bankcode, accpnm, accnum, cname, cs_email, cs_phone  from item
-	        ]]> -->
+		<!-- <![CDATA[ select pro_no, ano, pname, pcontent, category, psdate, pedate, 
+			pshort, ecost, refund, pvideo, pstatus, likecount, sharelink, bankcode, accpnm, 
+			accnum, cname, cs_email, cs_phone from item ]]> -->
 	        <![CDATA[
 	        select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount
 			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost), 0) as fundamount 
@@ -97,8 +104,8 @@
 	        where i1.pro_no= #{pro_no}
 	        ]]>
 	</select>
-	
-	
+
+
 	<update id="tempupdate" parameterType="Item">
 			<![CDATA[
 				update item set pname=#{pname, jdbcType=VARCHAR}, pcontent=#{pcontent, jdbcType=VARCHAR}, category=#{category, jdbcType=VARCHAR}, psdate=#{psdate, jdbcType=DATE}, pedate=#{pedate, jdbcType=DATE}, pshort=#{pshort, jdbcType=VARCHAR}, ecost=#{ecost, jdbcType=INTEGER}, refund=#{refund, jdbcType=VARCHAR}, pvideo=#{pvideo, jdbcType=VARCHAR}, pstatus=#{pstatus, jdbcType=VARCHAR}, bankcode=#{bankcode, jdbcType=VARCHAR}, accpnm=#{accpnm, jdbcType=VARCHAR}, accnum=#{accnum, jdbcType=VARCHAR}, cname=#{cname, jdbcType=VARCHAR}, cs_email=#{cs_email, jdbcType=VARCHAR}, cs_phone=#{cs_phone, jdbcType=VARCHAR} where pro_no =#{pro_no}
@@ -137,4 +144,20 @@
 			where rnum <= 3
 	        ]]>
 	</select>
+
+	<select id="bestList" resultMap="itemResult2" parameterType="int">
+		<![CDATA[select a.nickname, a2.mcost
+		from account a join
+		(select fl.ano, sum(fm.mcost) as mcost, rank() over (order by sum(fm.mcost)
+		desc) as rank
+		from item i join fundmenu fm on (i.pro_no=fm.pro_no)
+		join fundlist fl on (fm.mno=fl.mno)
+		where i.pro_no = 1
+		group by fl.ano) a2
+		on (a.ano = a2.ano)
+		where rank <=3
+		order by mcost desc ]]>
+	</select>
+
+
 </mapper>

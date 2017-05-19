@@ -103,44 +103,52 @@ button {
 		        success : function(data){
 		    		console.log(data);
 		        	var html="";
-		          	for(var i = 0; i<data.iList.length; i++){
+		          	for(var i = 0; i<data.length; i++){
+		          		var pro_no = data[i].pro_no;
+		          		var ecost = data[i].ecost;
+		          		var fundamount = data[i].fundamount;
+		          		var pedate = data[i].pedate;
+		          		var persent = Math.round(fundamount * 100 / ecost);
+		          		var bar = 0;
+		          		var category = data[i].category;
+		          		var pcontent = data[i].pcontent;
+		          		if(persent > 100){
+		          			bar = 100;
+		          		} else {
+		          			bar = persent;
+		          		}
+		          		var edate = new Date(pedate);
+		          		var todate = new Date();
+		          		var btMs = edate.getTime() - todate.getTime();
+		          		console.log("btMs : " + btMs);
+		          		var btDay = Math.round(btMs / (1000*60*60*24));
+		          		console.log("btDay : " + btDay);
+		          		var funding="";
+		          		var ending="";
+		          		if(btDay < 0) {
+		          			funding = "none";
+		          			ending = "";
+		          		} else {
+		          			funding = "";
+		          			ending = "none";
+		          		}
 		          		html += '<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">';
 		          		html += '<div class="thumbnail" align="center">';
-		          		html += '<a href="detail.it?pro_no=' + data.iList[i].pro_no +'> ';
+		          		html += '<a href="detail.it?pro_no=' + pro_no +'> ';
 		          		html += '<img src="/funfund/images/funding/face.PNG" alt="사진1" style="width: 100%">';
-		          		html += '<script>';
-		          		html += 'var ecost = ' + data.iList[i].ecost + ';';
-		          		html += 'var fundamount = ' + data.iList[i].fundamount + ';';
-		          		html += 'var persent = Math.round(' + data.iList[i].fundamount + ' * 100 / ' + data.iList[i].ecost + ');';
-		          		html += 'var bar=0;';
-		          		html += 'if(persent > 100){bar=100;} else {bar=persent;}';
-		          		html += 'var edate = new Date(' + data.iList[i].pedate + ');';
-		          		html += 'var todate = new Date();';
-		          		html += 'var btMs = edate.getTime() - todate.getTime();';
-		          		html += 'var btDay = Math.round(btMs / (1000*60*60*24));';
-		          		html += '$("#persent' + i +'").text(persent);';
-		          		html += '$("#progressbar' + i + '").attr("aria-valuenow", persent);';
-		          		html += '$("#progressbar' + i +'").css("width", bar + "%");';
-		          		html += '$("#edate' + i + '").text(btDay);';	
-		          		html += 'if(btDay < 0){';
-		          		html += '$("#edate' + i + '").hide();';
-		          		html += '$("#yet' + i +'").hide();';
-		          		html += '$("#complete' + i +'").show();';
-		          		html += '}';
-		          		html += '<//script>';
 		          		html += '<div id="progress' + i + '" class="progress">';
 		          		html += '<div class="progress-bar progress-bar-warning"';
 		          		html += 'id="progressbar' + i + '"';
 		          		html += 'role="progressbar" aria-valuenow="60" aria-valuemin="0"';
-		          		html += 'aria-valuemax="' + data.iList[i].ecost + '" style="width: 60%;">';
+		          		html += 'aria-valuemax="' + ecost + '" style="width: ' + bar + '%;">';
 		          		html += '<span class="sr-only"></span>';
 		          		html += '</div></div><p>';
-		          		html += '<span id="persent' + i +'"></span> % &nbsp;&nbsp; <span>' + data.iList[i].fundamount + '</span>원 달성 &nbsp;&nbsp;';
-		          		html += '<span id="edate' + i +'"></span>';
-		          		html += '<span id="yet' + i +'">일 남음</span>';
-		          		html += '<spen id="complete' + i + '">펀딩종료</spen>';
-		          		html += '</p><div class="caption"><p>' + data.iList[i].pcontent + '</p>';
-						html += '<span>' + data.iList[i].category + '</span></div></a></div></div>';
+		          		html += '<span id="persent' + i +'">' + persent + '</span> % &nbsp;&nbsp; <span>' + fundamount + '</span>원 달성 &nbsp;&nbsp;';
+		          		html += '<span id="edate' + i +'" style="display:' + funding + '">' + btDay + '</span>';
+		          		html += '<span id="yet' + i +'" style="display:' + funding + '">일 남음</span>';
+		          		html += '<spen id="complete' + i + '" style="display:' + ending + '">펀딩종료</spen>';
+		          		html += '</p><div class="caption"><p>' + pcontent + '</p>';
+						html += '<span>' + category + '</span></div></a></div></div>';
 		          	}
 		          	$("#fundItemList").html(html);
 		        },
@@ -265,7 +273,7 @@ button {
 									<span id="persent<c:out value='${status.index}'/>"></span> % &nbsp;&nbsp; <span><c:out value="${item.fundamount }"/></span>원 달성 &nbsp;&nbsp; 
 									<span id="edate<c:out value='${status.index}'/>"></span>
 									<span id="yet<c:out value='${status.index}'/>">일 남음</span>
-									<spen id="complete<c:out value='${status.index}'/>">펀딩종료</spen>
+									<span id="complete<c:out value='${status.index}'/>">펀딩종료</span>
 								</p>
 
 								<div class="caption">

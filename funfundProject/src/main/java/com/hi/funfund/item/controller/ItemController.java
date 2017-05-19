@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hi.funfund.HomeController;
 import com.hi.funfund.fundmenu.model.service.FundMenuService;
 import com.hi.funfund.fundmenu.model.vo.FundMenu;
@@ -26,6 +28,7 @@ import com.hi.funfund.fundmenu.model.vo.ReciveFundMenu;
 import com.hi.funfund.item.model.service.ItemService;
 import com.hi.funfund.item.model.service.ItemServiceIm;
 import com.hi.funfund.item.model.vo.Item;
+import com.hi.funfund.item.model.vo.Itemfund;
 import com.hi.funfund.itemask.model.service.ItemAskService;
 import com.hi.funfund.itemask.model.vo.ItemAsk;
 
@@ -150,16 +153,18 @@ public class ItemController {
 	}
 	
 	@RequestMapping(value ="selectAll.it", method = RequestMethod.POST)
-	public ModelAndView selectAllItem(ModelAndView model) {
+	public @ResponseBody List<Item> selectAllItem() {
+		//ObjectMapper mapper = new ObjectMapper();
 		List<Item> iList = itemService.AllList();
 		System.out.println("오니?");
 		if(iList != null){
 			//model.setViewName("jsonView");
-			model.addObject("iList", iList);
+			//String jsonInString = mapper.writeValueAsString(iList);
+			//model.addObject("iList", iList);
 			System.out.println("iList : " + iList);
 		}
 		
-		return model;
+		return iList;
 	}
 	
 
@@ -191,12 +196,13 @@ public class ItemController {
 	public ModelAndView fundingdetailList(ModelAndView model, HttpServletRequest request) {
 		int pro_no = Integer.parseInt(request.getParameter("pro_no"));
 		Item item = itemService.selectOne(pro_no);
-		List bestList=itemService.bestList(pro_no);
+		List<Itemfund> bestList=itemService.bestList(pro_no);
 		List<FundMenu> mList = fundMenuService.selectList(pro_no);
 		List<ItemAsk> aList = itemAskService.selectList(pro_no);
 		model.addObject("item", item);
 		model.addObject("mList", mList);
 		model.addObject("aList", aList);
+		model.addObject("bestList", bestList);
 		model.setViewName("funding/detailList");
 		return model;
 	}
