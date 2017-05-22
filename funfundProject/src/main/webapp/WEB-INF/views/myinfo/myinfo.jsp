@@ -378,7 +378,7 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 	                        		
 	                        		<em class="line"></em>             			                        	                     	
 									
-									<form action="" method="post" onsubmit="return savePwd();">	
+									<form action="changePwd.ao" method="post" onsubmit="return savePwd();">	
 										<div id="accountWrap">
             	            				<div id="newContainer">
                 								<div class="account-wrap">

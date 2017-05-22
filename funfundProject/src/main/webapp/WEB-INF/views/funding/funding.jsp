@@ -112,6 +112,7 @@ button {
 		          		var bar = 0;
 		          		var category = data[i].category;
 		          		var pcontent = data[i].pcontent;
+		          		var thumbnail = data[i].thumbnail;
 		          		if(persent > 100){
 		          			bar = 100;
 		          		} else {
@@ -134,8 +135,8 @@ button {
 		          		}
 		          		html += '<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">';
 		          		html += '<div class="thumbnail" align="center">';
-		          		html += '<a href="detail.it?pro_no=' + pro_no +'> ';
-		          		html += '<img src="/funfund/images/funding/face.PNG" alt="사진1" style="width: 100%">';
+		          		html += '<a href="detail.it?pro_no=' + pro_no + '">';
+		          		html += '<img src="/funfund/images/funding/thumbnail/' + thumbnail + '" alt="사진1" style="width: 100%">';
 		          		html += '<div id="progress' + i + '" class="progress">';
 		          		html += '<div class="progress-bar progress-bar-warning"';
 		          		html += 'id="progressbar' + i + '"';
@@ -176,6 +177,7 @@ button {
 		          		var bar = 0;
 		          		var category = data[i].category;
 		          		var pcontent = data[i].pcontent;
+		          		var thumbnail = data[i].thumbnail;
 		          		if(persent > 100){
 		          			bar = 100;
 		          		} else {
@@ -198,8 +200,8 @@ button {
 		          		}
 		          		html += '<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">';
 		          		html += '<div class="thumbnail" align="center">';
-		          		html += '<a href="detail.it?pro_no=' + pro_no +'> ';
-		          		html += '<img src="/funfund/images/funding/face.PNG" alt="사진1" style="width: 100%">';
+		          		html += '<a href="detail.it?pro_no=' + pro_no +'"> ';
+		          		html += '<img src="/funfund/images/funding/thumbnail/' + thumbnail + '" alt="사진1" style="width: 100%">';
 		          		html += '<div id="progress' + i + '" class="progress">';
 		          		html += '<div class="progress-bar progress-bar-warning"';
 		          		html += 'id="progressbar' + i + '"';
@@ -290,7 +292,7 @@ button {
 					<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 						<div class="thumbnail" align="center">
 							<a href="detail.it?pro_no=<c:out value="${item.pro_no}"/>"> <img
-								src="/funfund/images/funding/face.PNG" alt="사진1"
+								src="/funfund/images/funding/thumbnail/<c:out value="${item.thumbnail }"/>" alt="사진1"
 								style="width: 100%">
 								<script>
 										$(function(){

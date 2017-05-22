@@ -37,10 +37,19 @@ public class Item implements Serializable {
 	private int supportcount;
 	private int upcount;
 	private int repcount;
+	private String thumbnail;
 	
 	
 	
 	
+
+	public String getThumbnail() {
+		return thumbnail;
+	}
+
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
 
 	public int getUpcount() {
 		return upcount;
@@ -245,7 +254,7 @@ public class Item implements Serializable {
 	public Item(int pro_no, int ano, String pname, String pcontent, String category, Date psdate, Date pedate,
 			String pshort, Integer ecost, String refund, String pvideo, String pstatus, int likecount, String sharelink,
 			String bankcode, String accpnm, String accnum, String cname, String cs_email, String cs_phone,
-			int fundamount, int fundcount, int supportcount, int upcount, int repcount) {
+			int fundamount, int fundcount, int supportcount, int upcount, int repcount, String thumbnail) {
 		super();
 		this.pro_no = pro_no;
 		this.ano = ano;
@@ -272,6 +281,7 @@ public class Item implements Serializable {
 		this.supportcount = supportcount;
 		this.upcount = upcount;
 		this.repcount = repcount;
+		this.thumbnail = thumbnail;
 	}
 
 	@Override
@@ -282,8 +292,10 @@ public class Item implements Serializable {
 				+ ", sharelink=" + sharelink + ", bankcode=" + bankcode + ", accpnm=" + accpnm + ", accnum=" + accnum
 				+ ", cname=" + cname + ", cs_email=" + cs_email + ", cs_phone=" + cs_phone + ", fundamount="
 				+ fundamount + ", fundcount=" + fundcount + ", supportcount=" + supportcount + ", upcount=" + upcount
-				+ ", repcount=" + repcount + "]";
+				+ ", repcount=" + repcount + ", thumbnail=" + thumbnail + "]";
 	}
+
+	
 
 	
 

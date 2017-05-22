@@ -144,34 +144,47 @@ $(function(){
 	                			<em class="line"></em>   
 							<div>
 						
-							<form id="sellerChange" action="changSeller.ao" method="post" enctype="multipart/form-data">
+							<form id="sellerChange" action="changSeller.ao" method="post" enctype="multipart/form-data" onsubmit="return saveSeller();">
 		                    	<h5>실명</h5>
 		       					
 		       					<div class="input-area">
 		       						<c:if test="${ empty sessionScope.party.pname }">
-		       							<input type="text" class="input-text" id="nickName" value=""  placeholder="이름" disabled />
+		       							<input type="text" class="input-text" id="name" value=""  placeholder="이름" disabled />
 		       						</c:if>
 		       						
 		       						<c:if test="${ !empty sessionScope.party.pname }">
-		       							<input type="text" class="input-text" id="nickName" value="${ sessionScope.party.pname }"  placeholder="이름" disabled />
+		       							<input type="text" class="input-text" id="name" value="${ sessionScope.party.pname }"  placeholder="이름" disabled />
 		       						</c:if>
 		       					</div>
-		       				
+		       							       					
 		       					<h5>휴대폰 번호</h5>	
 		       						<c:if test="${ empty sessionScope.party.phone }">
-		       							<input type="text" class="input-text" id="" value="${ sessionScope.party.phone }"  placeholder="휴대폰" disabled />                                                            
+		       							<input type="text" class="input-text" id="phone" name="phone" value=""  placeholder="휴대폰" />                                                            
 	                           		</c:if>
 	                           		
 	                           		<c:if test="${ !empty sessionScope.party.phone }">
-		       							<input type="text" class="input-text" id="" value="${ sessionScope.party.phone }"  placeholder="휴대폰" disabled />                                                            
+		       							<input type="text" class="input-text" id="phone" name="phone" value="${ sessionScope.party.phone }"  placeholder="휴대폰"  disabled/>                                                            
 	                           		</c:if>
 	                           		
 	                           <h5>주민등록번호</h5>
 	       							<p class="sub-text">개인정보는 암호화하여 안전하게 처리하고 있습니다.</p>
 	       					
 	       							<ul class="input-div2">
-		       							<li><input id="fid_no" type="tel" class="input-text" value="" disabled /></li>
-		       							<li><input id="eid_no" autocomplete="new-password" type="password" class="input-text" id="ssn2" name="ssn2" placeholder="주민등록번호 뒷자리" maxlength="7" /></li>
+	       								<c:if test="${ empty sessionScope.party.id_no }">
+		       								<li><input id="fid_no" type="tel" class="input-text" value="" name="id_no1" maxlength="7" placeholder="주민등록번호 앞자리"/></li>
+		       							</c:if>
+		       							
+		       							<c:if test="${ ! empty sessionScope.party.id_no }"> 
+		       								<li><input id="fid_no" type="tel" class="input-text" value="" name="id_no1" maxlength="7" placeholder="주민등록번호 앞자리" disabled/></li>
+		       							</c:if>
+		       							
+		       							<c:if test="${ empty sessionScope.party.id_no }">
+		       								<li><input id="eid_no" autocomplete="new-password" type="password" class="input-text" name="id_no2" placeholder="주민등록번호 뒷자리" maxlength="7" /></li>
+		       							</c:if>
+		       							
+		       							<c:if test="${ ! empty sessionScope.party.id_no }">
+		       								<li><input id="eid_no" autocomplete="new-password" type="password" class="input-text" name="id_no2" placeholder="주민등록번호 뒷자리" maxlength="7" disabled/></li>
+		       							</c:if>
 		       						</ul>
 	                 		
 	                 				<p id="ssnError" class="error-text">이미 가입한 주민번호입니다.</p>
@@ -187,21 +200,19 @@ $(function(){
 		       						<input type="button" class="btn-darkgray5" onclick="sample6_execDaumPostcode();" value="우편번호 검색">
 			              			<input type="text" id="sample6_address" name="address2" class="input-text" placeholder="도로명주소" readonly/> 
 			              			<input type="text" id="sample6_address2" name="address3" class="input-text" placeholder="상세주소" />
-		       						<p id="locationError" class="pwd-text small">본인확인이 가능한 주민등록상의 주소로 입력하세요.</p>
                                 	<p id="addrError" class="error-text">주소를 검색하세요.</p>
                                 	<br>
 		       					</div>	                        
 	                        
 								<h5>실명확인증표 등록</h5>
-				       				<p class="sub-text">실명과 주민등록번호 확인을 위해, 현재 유효한 주민등록증 또는 면허증의 앞면을 촬영한 사진을 등록하세요.</p>
+				       				<p class="sub-text">실명과   주민등록번호 확인을 위해, 현재 유효한 주민등록증 또는 면허증의 앞면을 촬영한 사진을 등록하세요.</p>
+				       								       				
+				       				<input type="text" id="imgRoute" class="input-text" placeholder="선택된 파일 없음" readonly/>
 				       				
-				       				<div class="info-box" id="idCardInfoBox" style="display:none;"></div>
-				       				<div class="file-list" id="idCardFileArea" style="display:none;"></div>
-				       				
-				       				<input type="text" id="imgRoute" name="imgRoute" class="input-text" readonly/>
+				       				<input id="uploadIdCardImg" class="input-text" type="file" name="idimage" style="display:none;" onchange="document.getElementById('imgRoute').value=this.value;">
 				       				
 				       				<div class="btn-wrap" id="idCardFileUploadBtn">
-				       					<input type="button" class="btn-darkgray" id="btnUploadIdCardImg" value="이미지 파일 등록">
+				       					<input type="button" class="btn-darkgray" id="btnUploadIdCardImg" value="이미지 파일 등록" onclick="document.all.idimage.click();"/>
 				       				</div>
 				       		
 				       				<p id="idCardImgError" class="error-text" style="margin-bottom:6px;">실명확인증표를 등록하세요.</p>
@@ -226,7 +237,7 @@ $(function(){
 		        	    		
 		        	    		<br><br>
 		        	    		
-		        	    		<input type="submit" class="btn-darkgray3" id="" value="수정"> &nbsp;&nbsp; <input type="button" class="btn-darkgray4" id="" value="취소">
+		        	    		<input type="submit" class="btn-darkgray3" id="modifyBtn" value="수정"> &nbsp;&nbsp; <input type="button" class="btn-darkgray4" id="" value="취소">
 							</form>
 							</div>
 					
@@ -287,6 +298,18 @@ $(function(){
             }
         }).open();
     }
+    
+    // 수정 버튼 클릭시
+    function saveSeller() {
+    	if($("#name").val() == "") {
+    		alert("회원정보 설정에서 이름을 반드시 입력하세요!");
+    		return false;
+    	}
+    };
+    
+    function photosubmit(){
+		$("#imageform").submit();
+	}
 </script>
 
 </body>

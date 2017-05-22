@@ -677,8 +677,18 @@ li {
 						$("#sortable").disableSelection();
 
 						$("#saveslideimgs").click(function(){
-							var formData = new FormData($("#fileForm")[0]);
+							//var formData = new FormData($("#fileForm")[0]);
 							
+							console.log($("#slidefile")[0].files.length);
+							
+							var formData = new FormData();
+							
+							for(var i = 0; i < $("#slidefile")[0].files.length; i++){
+								formData.append("slidefile["+i+"]",$("#slidefile")[0].files[i]);
+								console.log($("#slidefile")[0].files[i]);
+							}
+							
+							console.log($(formData));
 							
 							$.ajax({
 								type : 'post',
@@ -715,7 +725,7 @@ li {
 														+"<li class='ui-state-default'>"
 														+ "<img class='ui-state-default' style='max-width:110px;max-height:110px;min-width:110px;min-height:110px;' src='"
 							 							+ e.target.result + "'></li>");
-									$()
+									//$('#fileForm').html($("#fileForm").html() + "<input type='file' size='20' multiple='multiple' name='slidefile' style='display: none;' onchange='LoadSlideImg(this);''>");
 
 								}
 								reader.readAsDataURL(value.files[i]);
@@ -1181,7 +1191,7 @@ li {
 			onclick="document.getElementById('frm').submit();">저장하기</button>
 	</div>
 	<form id="fileForm" method="post" enctype="multipart/form-data" onsubmit="return false;">
-		<input type="file" size="20" multiple="multiple" name="slidefile"
+		<input type="file" size="20" multiple="multiple" name="slidefile[]" id="slidefile"
 								style="display: none;" onchange="LoadSlideImg(this);">
 		<input type="hidden" name="pro_no" value="${ pro_no }">
 	</form>

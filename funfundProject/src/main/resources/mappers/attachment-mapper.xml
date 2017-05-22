@@ -24,8 +24,8 @@
 	
 	<insert id="insertSlideImages" parameterType="attachment">
 		<![CDATA[
-			INSERT INTO ATTACHMENT (fno, orifname, refname, ftype, fsubtype, refno)
-			VALUES(seq_fno.nextval, #{orifname}, #{refname}, #{ftype}, #{fsubtype}, #{refno})
+			INSERT INTO ATTACHMENT (fno, orifname, refname, ftype, fsubtype, refno, fnum)
+			VALUES(seq_fno.nextval, #{orifname}, #{refname}, #{ftype}, #{fsubtype}, #{refno}, #{fnum})
 		]]>
 	</insert>
 	

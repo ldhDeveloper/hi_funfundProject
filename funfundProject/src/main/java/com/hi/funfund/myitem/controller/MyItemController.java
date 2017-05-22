@@ -1,5 +1,6 @@
 package com.hi.funfund.myitem.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.hi.funfund.item.model.service.ItemService;
 import com.hi.funfund.myitem.model.service.MyItemService;
@@ -28,33 +30,56 @@ public class MyItemController {
 	private ItemService itemService;  
 
 	@RequestMapping(value = "insertMyitem.mi", method = RequestMethod.GET)
-	public @ResponseBody String insert(HttpSession session, HttpServletRequest request, @RequestParam("pro_no") String pro_no, @RequestParam("ano") String ano){
+	public @ResponseBody ArrayList<Integer> insertMyLikeitem(HttpSession session, HttpServletRequest request, @RequestParam("pro_no") String pro_no, @RequestParam("ano") String ano){
 		HashMap<String, String> hmap = new HashMap<String, String>();
 		session = request.getSession(false);
-		int[] proList = null;
 		hmap.put("pro_no", pro_no);
 		hmap.put("ano", ano);
 		String end = "fail";
-		int result = myItemService.insert(hmap);
+		int result = myItemService.insertLike(hmap);
 		int likeResult = 0;
+		ArrayList<Integer> likeArr = new ArrayList<Integer>();
 		if(result > 0){
 			likeResult = itemService.plusItemLike(Integer.parseInt(pro_no));
 			if(likeResult > 0){
-				List<MyItem> myitem = myItemService.select(Integer.parseInt(ano));
+				List<MyItem> myitem = myItemService.selectLike(Integer.parseInt(ano));
+				System.out.println("myitem : " + myitem);
 				if(myitem != null){
 					session.setAttribute("myitem", myitem);
 					for(int i=0; i<myitem.size(); i++){
-						proList = new int[myitem.size()];
-						proList[i] = myitem.get(i).getPro_no();
+						likeArr.add(myitem.get(i).getPro_no());
 					}
-					session.setAttribute("proList", proList);
 				}
 				end="success";
 			}
 		}
-		return end;
+		return likeArr;
 	}
 	
+	@RequestMapping(value = "deleteMyitem.mi", method = RequestMethod.GET)
+	public @ResponseBody ArrayList<Integer> deleteMyLikeItem(HttpSession session, HttpServletRequest request, @RequestParam("pro_no") String pro_no, @RequestParam("ano") String ano){
+		HashMap<String, String> hmap = new HashMap<String, String>();
+		session = request.getSession(false);
+		hmap.put("pro_no", pro_no);
+		hmap.put("ano", ano);
+		int result = myItemService.deleteLike(hmap);
+		int likeResult = 0;
+		ArrayList<Integer> likeArr = new ArrayList<Integer>();
+		if(result > 0){
+			likeResult = itemService.minusItemLike(Integer.parseInt(pro_no));
+			if(likeResult > 0){
+				List<MyItem> myitem = myItemService.selectLike(Integer.parseInt(ano));
+				System.out.println("myitem : " + myitem);
+				if(myitem != null){
+					session.setAttribute("myitem", myitem);
+					for(int i=0; i<myitem.size(); i++){
+						likeArr.add(myitem.get(i).getPro_no());
+					}
+				}
+			}
+		}
+		return likeArr;
+	}
 	
 	public String delete(int mpro_no){
 		

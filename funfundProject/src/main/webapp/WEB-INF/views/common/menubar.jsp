@@ -25,7 +25,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script> <!-- 카카오  -->
   <script src="https://apis.google.com/js/api:client.js"></script>
-
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.4.js"></script> <!-- 아임포트 본인 인증 -->
 <script type="text/javascript">
 	$(function(){
 		Kakao.init('c04a7d5e62e926cf85109fde19aa531a');
@@ -655,15 +655,15 @@ input.input_tel {
 }
 
 .text-center {
-	text-align: center !important;
+	text-align: center !ortant;
 }
 
 .text-left {
-	text-align: left !important;
+	text-align: left !ortant;
 }
 
 .text-right {
-	text-align: right !important;
+	text-align: right !ortant;
 }
 
 label.sign-form_title {
@@ -832,6 +832,39 @@ label.sign-form_title {
 			$("#myModal3").modal("show");
 		});
 	})
+	function trytopay(){
+		
+/* 		IMP.init("imp79484327");
+	//권한 불승인 !!!
+		 $.ajax({
+		url :"https://api.iamport.kr/users/getToken",
+		
+		crossDomain : true,
+		data : {"imp_key" : "0181304251894926", "imp_secret" : "tCrG13c6c1hA3LPBWFBnAOZhKq8cNlUhYlYZoa6Bbnbf91R5Gstghsy2THeG29Y0uW0T76vjuGyEIpKp"},
+		contentType: 'application/json; charset=utf-8',
+		dataType : "JSON",
+		success : function(data){
+			console.log(data);
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+		    var err;
+		    if (textStatus !== "abort" && errorThrown !== "abort") {
+		        try {
+		            err = $.parseJSON(jqXHR.responseText);
+		            alert(err.Message);
+		        } catch(e) {
+		            alert("ERROR:\n" + jqXHR.responseText);
+		        }
+		    }
+		}
+	});	   */
+	/*    var xhttp = new XMLHttpRequest();
+	 xhttp.open("POST", "https://api.iamport.kr/users/getToken?_token=1a2662c58b3a491bf3bb1bd0a87c0f82b31c8be3", false);
+	 xhttp.setRequestHeader("Content-type", "application/json");
+	 xhttp.send();
+	 console.log(xhttp.status);
+		  */
+	}
 </script>
 <div id="myModal2" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -845,6 +878,7 @@ label.sign-form_title {
       	<form>
               <fieldset>
                 <legend class="login-title-txt">소셜 회원가입</legend>
+                <button onclick="trytopay();">결제</button>
                 <!-- <a href="#" class="signup-social p-login_btn login-social-facebook" data-sns="facebook" alt="페이스북으로 회원가입" >페이스북으로 회원가입</a>
             	<a href="javascript:loginWithKakao();" id="custom-login-btn" class="signup-social p-login_btn login-social-kakao" alt="카카오로 회원가입" >카카오로 회원가입</a>
             	<a href="#" onclick="google();" id="gSigninBt" class="signup-social p-login_btn login-social-google" alt="구글로 회원가입" >구글로 회원가입</a>
@@ -855,7 +889,7 @@ label.sign-form_title {
             <form>
               <fieldset>
                 <legend class="login-title-txt">이메일 회원가입</legend>
-                <a id="emailSignup" href="javascript:void(0);" class="signup-email p-login_btn" alt="" >이메일로 회원가입</a>
+                <a id="emailSignup" href="javascript:void(0);" class="signup-email p-login_btn" >이메일로 회원가입</a>
               </fieldset>
             </form>
             <p class="go_signup">이미 펀펀의 회원이신가요?</p>

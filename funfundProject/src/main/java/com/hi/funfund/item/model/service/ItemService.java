@@ -47,6 +47,8 @@ public interface ItemService {
 
 	int plusItemLike(int pro_no);
 
+	int minusItemLike(int pro_no);
+
 
 
 }

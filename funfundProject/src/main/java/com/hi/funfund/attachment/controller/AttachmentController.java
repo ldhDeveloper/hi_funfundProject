@@ -40,6 +40,7 @@ public class AttachmentController {
 		/*File file = new File("..\..\weapp");
 		String root = file.getCanonicalPath().toString();*/
 		String page="";
+		
 		String photoflag = request.getParameter("photoflag");
 		System.out.println("photoflag = " + photoflag);
 		String root = request.getSession().getServletContext().getRealPath("/");
@@ -101,6 +102,7 @@ public class AttachmentController {
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		HttpSession session = request.getSession(false);
 		
+		
 		String page = "";
 		ArrayList<Integer> farr = new ArrayList<Integer>();
 		String root = request.getSession().getServletContext().getRealPath("/");
@@ -116,13 +118,15 @@ public class AttachmentController {
 		System.out.println("savepath : " + savePath);
 
 		
-		
 		Iterator<String> files = multipartRequest.getFileNames();
+		System.out.println(files);
+		int i = 0;
 		
 		while(files.hasNext()) {
 			System.out.println("오니?");
-			int i = 0;
+			
 			String uploadFile = files.next();
+			System.out.println(uploadFile);
 			MultipartFile mFile = multipartRequest.getFile(uploadFile);
 			
 			
@@ -131,14 +135,8 @@ public class AttachmentController {
 
 			long currentTime = System.currentTimeMillis();
 			SimpleDateFormat simDf = new SimpleDateFormat("yyyyMMddHHmmss");
-			String rfileName = simDf.format(new Date(currentTime)) + "("+ i +")."
+			String rfileName = simDf.format(new Date(currentTime)) + "(" + i + ")."
 					+ ofileName.substring(ofileName.lastIndexOf(".") + 1);
-			;
-			try {
-				mFile.transferTo(new File(savePath + rfileName));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 			
 			Attachment att = new Attachment();
 			
@@ -146,13 +144,25 @@ public class AttachmentController {
 			att.setRefname(rfileName);
 			att.setFtype("item");
 			att.setFsubtype("slideimg");
+			att.setFnum(i+1);
 			//att.setRefno(pro_no);
+			
+			System.out.println(i);
 			
 			result2 = attachmentService.insertSlideImages(att);
 			
 			farr.add(result2);
 			
 			i++;
+			try {
+				mFile.transferTo(new File(savePath + rfileName));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			
+			
+			
 		}
 		
 		

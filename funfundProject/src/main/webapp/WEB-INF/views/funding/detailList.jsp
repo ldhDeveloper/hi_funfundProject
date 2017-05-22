@@ -176,7 +176,7 @@ button {
 </style>
 <script type="text/javascript">
 	$(function() {
-		$('#btn-like').click(function() {
+		/* $('#btn-like').click(function() {
 			if ($(this).hasClass("backpink")) {
 				$(this).removeClass("backpink");
 			} else {
@@ -188,8 +188,20 @@ button {
 			} else {
 				$(this).addClass("backpink");
 			}
-		});
-
+		}); */
+		var likeList = localStorage.getItem("likeList");
+		console.log("likeList : " + likeList);
+		var pro_no = "<c:out value='${param.pro_no}'/>";
+		console.log("pro_no : " + pro_no);
+		if(likeList != null && likeList.includes("${param.pro_no}")){
+			$("#btn-like").hide();
+			$("#btn-nonlike").show();
+		} else {
+			$("#btn-like").show();
+			$("#btn-nonlike").hide();
+		}
+		
+		
 		$('.btn-fund').hover(
 				function() {
 					$('.btn-fund').css('background-color', '#fedb9a').css(
@@ -208,18 +220,29 @@ button {
 
 		var co = '<c:out value="${item.pcontent}"/>';
 		$("#content").html(co);
-		$("#btn-like").click(function() {
-			$.ajax({
-				url : "insertMyitem.mi",
-				data : {
-					"pro_no" : "${param.pro_no}",
-					"ano" : "${sessionScope.account.ano}"
-				},
-				success : function(data) {
-					$("#btn-like").hide();
-					alert(data);
-				}
-			})
+		$("#btn-like").click(function(){
+				$.ajax({
+					url:"insertMyitem.mi",
+					data: {"pro_no" : "${param.pro_no}", "ano" : "${sessionScope.account.ano}"},
+					success : function(data){
+						console.log("ajax like : " + data);
+						localStorage.setItem("likeList", data);
+						$("#btn-like").hide();
+						$("#btn-nonlike").show();
+					}
+				})
+		})
+		$("#btn-nonlike").click(function(){
+				$.ajax({
+					url:"deleteMyitem.mi",
+					data: {"pro_no" : "${param.pro_no}", "ano" : "${sessionScope.account.ano}"},
+					success : function(data){
+						console.log("ajax like : " + data);
+						localStorage.setItem("likeList", data);
+						$("#btn-like").show();
+						$("#btn-nonlike").hide();
+					}
+				})
 		})
 
 		$(window).scroll(function() {
@@ -300,6 +323,7 @@ button {
 						console.log("btDay : " + btDay);
 						$("#box2").html(btDay + "일 남음");
 					});
+
 				</script>
 
 			</p>

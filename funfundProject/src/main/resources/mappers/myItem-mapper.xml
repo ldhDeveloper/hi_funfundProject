@@ -12,8 +12,11 @@
 	<insert id="insertMyitem" parameterType="HashMap">
 		insert into myitem values(seq_mpro_no.nextval, #{pro_no}, 'pick', #{ano})
 	</insert>
-	<select id="select" parameterType="int" resultMap="myitemResult">
+	<delete id="deleteMyitem" parameterType="HashMap">
+		delete from myitem where pro_no = #{pro_no} and mptype = 'pick' and ano = #{ano}
+	</delete>
+	<select id="selectLike" parameterType="int" resultMap="myitemResult">
 		select * from myitem
-		where pro_no = #{pro_no}
+		where ano = #{ano} and mptype='pick'
 	</select>
 </mapper>

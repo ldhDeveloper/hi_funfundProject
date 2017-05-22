@@ -76,5 +76,10 @@ public class ItemDao {
 		int result = sqlSession.update(nameSpace + "plusItemLike", pro_no);
 		return result;
 	}
+
+	public int minusItemLike(int pro_no) {
+		int result = sqlSession.update(nameSpace + "minusItemLike", pro_no);
+		return result;
+	}
 	
 }

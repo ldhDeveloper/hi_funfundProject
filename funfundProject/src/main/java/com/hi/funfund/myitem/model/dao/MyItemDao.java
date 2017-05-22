@@ -19,7 +19,7 @@ public class MyItemDao {
 		return 0;
 	}
 	
-	public int insert(HashMap<String, String> hmap) {
+	public int insertLike(HashMap<String, String> hmap) {
 		int result = sqlSession.insert(nameSpace + "insertMyitem", hmap);
 		return result;
 	}
@@ -29,9 +29,14 @@ public class MyItemDao {
 		return likeList;
 	}*/
 
-	public List select(int ano) {
-		List likeList = sqlSession.selectList(nameSpace + "select", ano);
-		return null;
+	public List selectLike(int ano) {
+		List likeList = sqlSession.selectList(nameSpace + "selectLike", ano);
+		return likeList;
+	}
+
+	public int deleteLike(HashMap<String, String> hmap) {
+		int result = sqlSession.delete(nameSpace + "deleteMyitem", hmap);
+		return result;
 	}
 
 }
