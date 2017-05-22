@@ -97,11 +97,15 @@ public class AttachmentController {
 	}
 	
 	@RequestMapping("/insertSlide.at")
-	public ModelAndView insertSlideImages(/*@RequestParam("pro_no")int pro_no,*/ ModelAndView model, HttpServletRequest request) throws  IOException{
+	public ModelAndView insertSlideImages( ModelAndView model, HttpServletRequest request ,@RequestParam("pro_no")int pro_no) throws  IOException{
 		
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		HttpSession session = request.getSession(false);
+		String positions = request.getParameter("positions");
 		
+		System.out.println(pro_no);
+		
+		String[] fnum = positions.split(";");
 		
 		String page = "";
 		ArrayList<Integer> farr = new ArrayList<Integer>();
@@ -119,6 +123,7 @@ public class AttachmentController {
 
 		
 		Iterator<String> files = multipartRequest.getFileNames();
+		
 		System.out.println(files);
 		int i = 0;
 		
@@ -144,8 +149,8 @@ public class AttachmentController {
 			att.setRefname(rfileName);
 			att.setFtype("item");
 			att.setFsubtype("slideimg");
-			att.setFnum(i+1);
-			//att.setRefno(pro_no);
+			att.setFnum(Integer.parseInt(fnum[i]));
+			att.setRefno(pro_no);
 			
 			System.out.println(i);
 			
