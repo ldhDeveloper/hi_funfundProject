@@ -118,7 +118,7 @@
 									var btDay = Math.round(btMs
 											/ (1000 * 60 * 60 * 24));
 
-									console.log(persent);
+									//console.log(persent);
 									$(
 											"#persent<c:out value='${status.index}'/>")
 											.text(persent);

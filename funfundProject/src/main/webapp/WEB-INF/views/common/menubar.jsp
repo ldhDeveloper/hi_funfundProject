@@ -25,11 +25,12 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script> <!-- 카카오  -->
   <script src="https://apis.google.com/js/api:client.js"></script>
-<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.4.js"></script> <!-- 아임포트 본인 인증 -->
+
+
 <script type="text/javascript">
 	$(function(){
+
 		Kakao.init('c04a7d5e62e926cf85109fde19aa531a');
-		
 		$("#login_form").submit(function(){
 			var email=$("#login_form input[name=email]").val();
 			var pwd=$("#login_form input[name=pwd]").val();
@@ -63,6 +64,9 @@
 	}
 	}
 </script>
+<!-- 결제 함수 -->
+
+
 <script>//구글
   var googleUser = {};
   var profile;
@@ -878,7 +882,7 @@ label.sign-form_title {
       	<form>
               <fieldset>
                 <legend class="login-title-txt">소셜 회원가입</legend>
-                <button onclick="trytopay();">결제</button>
+               
                 <!-- <a href="#" class="signup-social p-login_btn login-social-facebook" data-sns="facebook" alt="페이스북으로 회원가입" >페이스북으로 회원가입</a>
             	<a href="javascript:loginWithKakao();" id="custom-login-btn" class="signup-social p-login_btn login-social-kakao" alt="카카오로 회원가입" >카카오로 회원가입</a>
             	<a href="#" onclick="google();" id="gSigninBt" class="signup-social p-login_btn login-social-google" alt="구글로 회원가입" >구글로 회원가입</a>
