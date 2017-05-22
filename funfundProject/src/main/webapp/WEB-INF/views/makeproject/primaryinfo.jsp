@@ -91,6 +91,30 @@ li {
 	font-size: 4em;
 	text-align: center;
 }
+.wrap {
+    width: 500px;
+    height: auto;
+    position: relative;
+    display: inline-block;
+}
+.wrap textarea {
+    resize: none;
+    height:60px;
+    max-height:60px;
+    min-height:60px;
+}
+.wrap span {
+    position: absolute;
+    bottom: 5px;
+    right: 15px;
+    
+}
+#counter {
+  background:rgba(255,0,0,0.5);
+  border-radius: 0.5em;
+  padding: 0 .5em 0 .5em;
+  font-size: 0.75em;
+}
 </style>
 
 
@@ -579,30 +603,6 @@ li {
 																				+ data.fmlist[i].mdata
 																				+ "</td><td><button value='수정'/>&nbsp; <button value='삭제'/></td></tr>")
 
-														/* {"modelAndView":
-																		{
-																			"empty":false,
-																			"model":
-																					{"fmlist":
-																								[
-																								    {"dcost":"","delyn":"on","mcontent":"","mcost":65747,"mcount":0,"mdate":null,"mname":"","mno":26,"mnum":1,"pro_no":26},
-																						 			{"dcost":"","delyn":"on","mcontent":"","mcost":142213,"mcount":0,"mdate":null,"mname":"","mno":25,"mnum":1,"pro_no":26}
-																								]
-																					}
-																			,"modelMap":
-																						{"fmlist":
-																								[
-																							 		{"dcost":"","delyn":"on","mcontent":"","mcost":65747,"mcount":0,"mdate":null,"mname":"","mno":26,"mnum":1,"pro_no":26},
-														                       						{"dcost":"","delyn":"on","mcontent":"","mcost":142213,"mcount":0,"mdate":null,"mname":"","mno":25,"mnum":1,"pro_no":26}
-																							 	]
-														
-																						},
-																			"reference":true,"status":null,"view":null,"viewName":"jsonView"
-																			},
-														"fundMenu":{"dcost":"","delyn":"on","mcontent":"","mcost":65747,"mcount":0,"mdate":null,"mname":"","mno":0,"mnum":1,"pro_no":26},
-														"fmlist":[{"dcost":"","delyn":"on","mcontent":"","mcost":65747,"mcount":0,"mdate":null,"mname":"","mno":26,"mnum":1,"pro_no":26},
-														          {"dcost":"","delyn":"on","mcontent":"","mcost":142213,"mcount":0,"mdate":null,"mname":"","mno":25,"mnum":1,"pro_no":26}]
-														} */
 
 													}
 
@@ -671,29 +671,33 @@ li {
 				<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 				<script>
 					$(function() {
+						var positions = "";
+						
+						
 						$("#sortable").sortable({
-							
+							 update: function(event, ui) {    
+								 var order = $(this).sortable('toArray');
+								  positions = order.join(';');
+					               console.log(positions);
+					            }
 						});
 						$("#sortable").disableSelection();
 
 						$("#saveslideimgs").click(function(){
-							//var formData = new FormData($("#fileForm")[0]);
-							
-							console.log($("#slidefile")[0].files.length);
-							
 							var formData = new FormData();
+							var pro_no = ${pro_no};
+							console.log("pro_no" + pro_no);
 							
 							for(var i = 0; i < $("#slidefile")[0].files.length; i++){
 								formData.append("slidefile["+i+"]",$("#slidefile")[0].files[i]);
 								console.log($("#slidefile")[0].files[i]);
 							}
-							
-							console.log($(formData));
-							
+							console.log("전송"+positions);
+							var url = "insertSlide.at?positions=" + positions +"&pro_no=" + pro_no;
 							$.ajax({
 								type : 'post',
-					            url : 'insertSlide.at',
-					            data : formData,
+					            url : url,
+					            data :  formData,
 					            processData : false,
 					            contentType : false,
 					            success : function(html) {
@@ -704,15 +708,16 @@ li {
 					                console.log(error);
 					                console.log(error.status);
 					            }
-
-
-					
 							});
 						});
-						
 					});
-
+					var j = 0;
 					function LoadSlideImg(value) {
+						
+						/* if(value.files.length != 0){
+							j = value.files.length + 1;
+						} */
+						
 						for (var i = 0; i < value.files.length; i++) {
 
 							if (value.files && value.files[i]) {
@@ -722,11 +727,11 @@ li {
 									$("#sortable")
 											.html(
 													$("#sortable").html()
-														+"<li class='ui-state-default'>"
+														+"<li class='ui-state-default' id='" + j + "'>"
 														+ "<img class='ui-state-default' style='max-width:110px;max-height:110px;min-width:110px;min-height:110px;' src='"
 							 							+ e.target.result + "'></li>");
-									//$('#fileForm').html($("#fileForm").html() + "<input type='file' size='20' multiple='multiple' name='slidefile' style='display: none;' onchange='LoadSlideImg(this);''>");
-
+									console.log('index : ' + j);
+									j++;
 								}
 								reader.readAsDataURL(value.files[i]);
 							}
@@ -746,9 +751,21 @@ li {
 						수 있도록 작성해주세요. 3줄 이하로 작성되면 좋겠습니다. 너무 길지 않게 적어주세요.
 					</td>
 					<td>
-						<div
-							style="width: 430px; height: 60px; background: #f8f8f8; border: 1px solid #ddd; padding: 10px; margin-left: 10px; font-size: 0.7em;">
-							<input type="text" size="64" name="pshort">
+						<div class="wrap"
+							style="width: 430px; height: 100px; background: #f8f8f8; border: 1px solid #ddd; padding: 10px; margin-left: 10px; font-size: 0.7em;">
+							<textarea rows='3' style="width:405px;resize:none" name="pshort" id="pshort" maxlength="200"></textarea>
+							<span id="counter">###</span>
+							<script>
+							$(function() {
+							      $('#pshort').keypress(function (e){
+							          var content = $(this).val();
+							          $(this).height(((content.split('\n').length + 1) * 1.5) + 'em');
+							          $('#counter').html(content.length + '/200');
+							      });
+							      $('#pshort').keypress();
+							      
+							});
+							</script>
 						</div>
 					</td>
 					<td style="width: 200px;"></td>
@@ -780,6 +797,7 @@ li {
 											zIndex : 2002,
 											heightMin : 500,
 											heightMax : 500,
+											width:855,
 											toolbarBottom : false,
 											toolbarButtons : [ 'fullscreen',
 													'bold', 'italic',

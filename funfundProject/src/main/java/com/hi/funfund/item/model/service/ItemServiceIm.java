@@ -135,5 +135,10 @@ public class ItemServiceIm implements ItemService{
 		return itemDao.minusItemLike(pro_no);
 	}
 
+	@Override
+	public List<Item> selectMyItems(int ano) {
+		return itemDao.selectMyItems(ano);
+	}
+
 	
 }

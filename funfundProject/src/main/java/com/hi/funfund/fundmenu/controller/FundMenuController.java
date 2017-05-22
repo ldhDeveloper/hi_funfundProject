@@ -1,5 +1,6 @@
 package com.hi.funfund.fundmenu.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,14 +23,30 @@ public class FundMenuController {
 	private FundMenuService fundMenuService;
 	@Autowired
 	private ItemService itemService;
-     
+
+	//오류남
 	@RequestMapping("reward.fm")
 	public ModelAndView selectList(int pro_no, ModelAndView model) {
 		List<FundMenu> mList = fundMenuService.selectList(pro_no);
 		Item item = itemService.selectOne(pro_no);
 		model.addObject("mList", mList);
 		model.addObject("item", item);
+
 		model.setViewName("payment/rewardList");
+		return model;
+
+	}
+
+	//오류남
+	@RequestMapping("selectList.fm")
+	public ModelAndView selectfList(int pro_no, ModelAndView model) {
+
+		ArrayList<FundMenu> mList = null;
+
+		mList = fundMenuService.selectList(pro_no);
+		model.addObject("mList", mList);
+		model.setViewName("jsonView");
+
 		return model;
 	}
 
@@ -54,5 +71,4 @@ public class FundMenuController {
 		return null;
 	}
 
-	
 }

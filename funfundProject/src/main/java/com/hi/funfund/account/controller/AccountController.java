@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Properties;
 
 import org.springframework.context.ApplicationContext;
@@ -32,6 +33,8 @@ import com.hi.funfund.account.model.vo.Account;
 import com.hi.funfund.account.model.vo.Party;
 import com.hi.funfund.attachment.model.service.AttachmentService;
 import com.hi.funfund.attachment.model.vo.Attachment;
+import com.hi.funfund.item.model.service.ItemService;
+import com.hi.funfund.item.model.vo.Item;
 
 
 
@@ -44,6 +47,9 @@ public class AccountController {
 	
 	@Autowired
 	private AttachmentService attachmentService;
+
+  @Autowired
+	private ItemService itemService;
 	
 	@RequestMapping("/login.ao")
 	public ModelAndView login(Party party, Account account, ModelAndView mv, HttpServletRequest request){
@@ -128,8 +134,15 @@ public class AccountController {
 	}
 	
 	@RequestMapping(value = "puttoproject.ao")
-	public String puttoproject(){
-		return "myinfo/puttoproject";
+	public ModelAndView puttoproject(ModelAndView model, HttpSession session, HttpServletRequest request){
+		session = request.getSession(false);
+		Account account = (Account)session.getAttribute("account");
+		int ano = account.getAno();
+		List<Item> iList = itemService.selectMyItems(ano);
+		model.addObject("iList", iList);
+		model.setViewName("myinfo/puttoproject");
+		System.out.println("마이프로젝트 리스트 : " + iList);
+		return model;
 	}
 	
 	@RequestMapping(value = "newproject.ao")
