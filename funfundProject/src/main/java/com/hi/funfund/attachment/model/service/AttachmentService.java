@@ -29,5 +29,10 @@ public interface AttachmentService {
 	int updateMakerImage(Attachment att);
 
 	int insertSlideImages(Attachment att);
-	
+
+	int insertIdImage(Attachment vo);
+
+	int updateIdImage(Attachment vo);
+
+	int partyIdImage(HashMap<String, String> hmap);
 }

@@ -115,13 +115,12 @@ public class AccountDao {
 	
 	// 판매자 정보 입력
 
-	public int insertSeller(int ano, String phone, String id_no, String address, String idimage) {
+	public int insertSeller(int ano, String phone, String id_no, String address) {
 		HashMap<String, String> hmap = new HashMap<String, String>();
 		hmap.put("ano", Integer.toString(ano));
-		hmap.put("address", phone);
-		hmap.put("address", id_no);
+		hmap.put("phone", phone);
+		hmap.put("id_no", id_no);
 		hmap.put("address", address);
-		hmap.put("address", idimage);
 		int result = sqlSession.insert("insertSeller", hmap);
 		return result;
 	}
@@ -138,5 +137,4 @@ public class AccountDao {
 		int result = sqlSession.insert("updateSeller", hmap);
 		return result;
 	}
-
 }

@@ -53,7 +53,7 @@ public interface AccountService {
 
 	Account selectThirdPartyUser(Account account); // 타사이트로 가입한 유저 찾기/등록/가입제어
 
-	int insertSeller(int ano, String phone, String id_no, String address, String idimage); // seller 정보 입력 (휴대폰, 주민등록번호, 주소, 실명확인증표)
+	int insertSeller(int ano, String phone, String id_no, String address); // seller 정보 입력 (휴대폰, 주민등록번호, 주소, 실명확인증표)
 
 	int updateSeller(int ano, String phone, String id_no, String address, String idimage); // seller 정보 수정 (휴대폰, 주민등록번호, 주소, 실명확인증표)
 	

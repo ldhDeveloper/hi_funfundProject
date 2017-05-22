@@ -1,6 +1,10 @@
 package com.hi.funfund.account.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 
@@ -27,6 +31,7 @@ import com.hi.funfund.AuthMail.AuthMail;
 import com.hi.funfund.account.model.service.AccountService;
 import com.hi.funfund.account.model.vo.Account;
 import com.hi.funfund.account.model.vo.Party;
+import com.hi.funfund.attachment.model.service.AttachmentService;
 import com.hi.funfund.attachment.model.vo.Attachment;
 import com.hi.funfund.item.model.service.ItemService;
 import com.hi.funfund.item.model.vo.Item;
@@ -41,6 +46,9 @@ public class AccountController {
 	private AccountService accountService;
 	
 	@Autowired
+	private AttachmentService attachmentService;
+
+  @Autowired
 	private ItemService itemService;
 	
 	@RequestMapping("/login.ao")
@@ -238,22 +246,35 @@ public class AccountController {
 	@RequestMapping(value = "changSeller.ao")
 	public String changSeller(Attachment vo, HttpServletRequest request) throws  IOException{
 		System.out.println("오니?");
+		
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		MultipartFile idimage = multipartRequest.getFile("idimage");
 		HttpSession session = request.getSession(false);
 		String page="";
 		
+		String photoflag = request.getParameter("photoflag");
+		System.out.println("photoflag = " + photoflag);
 		
+		String root = request.getSession().getServletContext().getRealPath("/");
+		System.out.println("root : " + root);
+		String[] roots = root.split("\\\\");
+		String merger="";
+		for(int i=0 ; i<roots.length-3; i++){
+			merger += roots[i] + "\\";
+		}
+		System.out.println("merger : " + merger);
+		String savePath = merger + "src/main/webapp/images/myinfo/";
+		System.out.println("savepath : " + savePath);
 		
-		session = request.getSession(false);
-		Account account = (Account)session.getAttribute("account");
-		int ano = account.getAno();
+		int ano=0;
+		int result=0;
+		
 		Party party = accountService.loginParty(ano);
 		
 		String phone = request.getParameter("phone");
 		
 		String id_no1 = request.getParameter("id_no1");
-		String id_no2 = request.getParameter("id_no");
+		String id_no2 = request.getParameter("id_no2");
 		
 		String id_no = id_no1 + "-" + id_no2;
 				
@@ -263,13 +284,58 @@ public class AccountController {
 		
 		String address = address1 + "-" + address2 + "-" + address3;
 		
-		/*if(party == null){
-			int result = accountService.insertSeller(ano, phone, id_no, address, idimage);
+		if(party == null){
+			result = accountService.insertSeller(ano, phone, id_no, address);
+		}
+		
+		if(!idimage.isEmpty()){
+			//오리지널 파일 이름 생성
+			String ofileName = idimage.getOriginalFilename();
+			//시간데이터 생성하여 오리지널 파일의 확장자 명을 더해서 새파일명 생성
+			long currentTime = System.currentTimeMillis();  
+		    SimpleDateFormat simDf = new SimpleDateFormat("yyyyMMddHHmmss");
+			String rfileName = simDf.format(new Date(currentTime)) +"."
+					+ ofileName.substring(ofileName.lastIndexOf(".")+1);;
+					idimage.transferTo(new File(savePath + rfileName));
+			//account의 ano 추출
+			party = (Party)session.getAttribute("party");
+			int pno = party.getPno();
+			//attachment 테이블에 insert/update 할 vo객체 생성
+			vo.setOrifname(ofileName);
+			vo.setRefname(rfileName);
+			vo.setFtype("party");
+			vo.setFsubtype("idimage");
+			vo.setRefno(pno);
+			//전달받은 photoflag 값이 insert 일경우 attachment 테이블에 사진파일 insert 실행
+			if(photoflag.equals("insert")){
+				result = attachmentService.insertIdImage(vo);
+				System.out.println("insert 발생");
+			}
+			//전달받은 photoflag 값이 update 일경우 attachment 테이블에 사진파일 update 실행
+			if(photoflag.equals("update")){
+				result = attachmentService.updateIdImage(vo);
+				System.out.println("insert 발생");
+			}
+			//insert or update 가 성공할 경우 해당 사진의 계정 테이블(account)에 pimage 컬럼 update
+			if(result > 0){
+				HashMap<String, String> hmap = new HashMap<String, String>();
+				hmap.put("ano", Integer.toString(ano));
+				hmap.put("idimage", rfileName);
+				result = attachmentService.partyIdImage(hmap);
+				//페이지에 나타나는 사진이미지를 갱신해주기위해 account 객체를 조회하여 세션의 account에 덮어씀
+				if(result > 0){
+					Party p = accountService.loginParty(ano);
+					session = request.getSession(false);
+					session.setAttribute("party", p);	
+				} else {
+					System.out.println("업로드 실패");
+				}				
+			}
 		}
 		
 		else {
-			int result = accountService.updateSeller(ano, phone, id_no, address, idimage);
-		}*/
+			result = accountService.updateSeller(ano, phone, id_no, address, idimage);
+		}
 		
 		party = accountService.loginParty(ano);
 		
