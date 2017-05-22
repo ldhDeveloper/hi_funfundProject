@@ -49,6 +49,8 @@ public interface ItemService {
 
 	int minusItemLike(int pro_no);
 
+	List<Item> selectMyItems(int ano);
+
 
 
 }

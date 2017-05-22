@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.hi.funfund.item.model.vo.Item;
 import com.hi.funfund.myitem.model.vo.MyItem;
 
 @Repository("myItemDao")
@@ -37,6 +38,11 @@ public class MyItemDao {
 	public int deleteLike(HashMap<String, String> hmap) {
 		int result = sqlSession.delete(nameSpace + "deleteMyitem", hmap);
 		return result;
+	}
+
+	public List<Item> selectMyItems(int ano) {
+		List<Item> iList = sqlSession.selectList(nameSpace + "selectMyItems", ano);
+		return iList;
 	}
 
 }

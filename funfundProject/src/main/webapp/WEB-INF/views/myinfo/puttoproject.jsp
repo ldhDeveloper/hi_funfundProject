@@ -141,6 +141,9 @@
 }
 
 </style>
+<script>
+
+</script>
 
 <title>Insert title here</title>
 </head>
@@ -206,7 +209,21 @@
 						<div class="well">
 	  						<div class="panel panel-success">
       							<div class="panel-heading">찜한 리워드형 프로젝트</div>
+      							<c:if test="${empty iList}">
       							<div class="panel-body">아직 찜한 프로젝트가 없습니다.</div>
+      							</c:if>
+      							<c:if test="${!empty iList }">
+      								<c:forEach var="item" items="${iList }">
+      										<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+      											<div class="panel panel-default">
+													  <div class="panel-heading">Panel heading without title</div>
+													  <div class="panel-body">
+													    Panel content
+													  </div>
+												</div>
+      										</div>
+      								</c:forEach>
+      							</c:if>
     						</div>
     					</div>
     		    					
