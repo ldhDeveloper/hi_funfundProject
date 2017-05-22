@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>reply</title>
 <style>
 .background {
 	background-color: black;
@@ -403,31 +403,31 @@ textarea {
 			<p
 				style="font-size: 10pt; text-align: left; padding-bottom: 5px; margin-left: 20px;">리워드선택</p>
 			<div class=""></div>
-			<c:forEach var="reword" items="${mList}">
+			<c:forEach var="reward" items="${mList}">
 				<ul class="makerbox">
-					<li style="font-size: 15pt;"><strong>${reword.mcost}원</strong></li>
+					<li style="font-size: 15pt;"><strong>${reward.mcost}원</strong></li>
 					<li class="makerinfo">작성자이름
 						<dl>${item.pname}</dl>
 					</li>
 					<li class="makerinfo">품목
-						<dl>${reword.mname}</dl>
+						<dl>${reward.mname}</dl>
 					</li>
 					<li class="makerinfo">배송비</li>
 					<dl>
-						<c:if test="${null eq reword.dcost }">${reword.dcost }</c:if>
-						<c:if test="${reword.dcost != '' || null ne reword.dcost}">0</c:if>
+						<c:if test="${null eq reward.dcost }">${reward.dcost }</c:if>
+						<c:if test="${reward.dcost != '' || null ne reward.dcost}">0</c:if>
 						원
 					</dl>
 					<li class="makerinfo">리워드 예상일
-						<dl>${reword.mdate}</dl>
+						<dl>${reward.mdate}</dl>
 					</li>
 					<li class="makerinfo">제한 수량</li>
-					<dl>${reword.mcount }개
+					<dl>${reward.mcount }개
 					</dl>
 					<li class="makerinfo">현재 <c:set var="result"
-							value="${reword.mcount - item.fundcount }" /> <c:if
+							value="${reward.mcount - item.fundcount }" /> <c:if
 							test="${result > 0}">
-					${reword.mcount - item.fundcount  }</c:if> <c:if test="${result <= 0 }">
+					${reward.mcount - item.fundcount  }</c:if> <c:if test="${result <= 0 }">
 					0
 					</c:if>개 남음
 					</li>

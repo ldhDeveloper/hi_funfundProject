@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="java.util.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
@@ -8,14 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <script src="/funfund/lib/js/jquery-3.2.1.min.js"></script>
-<title>Insert title here</title>
+<title>detailList</title>
 <link href="/funfund/lib/css/bootstrap.min.css" rel="stylesheet">
 <link href="/funfund/lib/font-awesome/font-awesome/css/font-awesome.css"
 	rel="stylesheet">
-<link
-	href="/funfund/lib/font-awesome/font-awesome/css/font-awesome.min.css"
-	rel="stylesheet">
-
 <style>
 .background {
 	background-color: black;
@@ -170,6 +165,14 @@ button {
 	display: inline-block;
 	padding: 15px;
 }
+
+#scrollbutton {
+	position: fixed;
+	right: 20px;
+	width: 3%;
+	text-align: center;
+	display: none;
+}
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -205,16 +208,38 @@ button {
 
 		var co = '<c:out value="${item.pcontent}"/>';
 		$("#content").html(co);
-		$("#btn-like").click(function(){
-				$.ajax({
-					url:"insertMyitem.mi",
-					data: {"pro_no" : "${param.pro_no}", "ano" : "${sessionScope.account.ano}"},
-					success : function(data){
-						$("#btn-like").hide();
-						alert(data);
-					}
-				})
+		$("#btn-like").click(function() {
+			$.ajax({
+				url : "insertMyitem.mi",
+				data : {
+					"pro_no" : "${param.pro_no}",
+					"ano" : "${sessionScope.account.ano}"
+				},
+				success : function(data) {
+					$("#btn-like").hide();
+					alert(data);
+				}
+			})
 		})
+
+		$(window).scroll(function() {
+			if ($(this).scrollTop() > 400) {
+				$('#scrollbutton').fadeIn("slow");
+			} else {
+				$("#scrollbutton").fadeOut("slow");
+			}
+		});
+
+		$("#scrollbutton").click(function() {
+			$("body").animate({
+				scrollTop : 0
+			}, 400);
+			return false;
+		});
+
+		$(".pay").click(function(){
+			location.href="reward.fm?pro_no=${item.pro_no}";
+		});
 	});
 </script>
 </head>
@@ -234,10 +259,9 @@ button {
 	<div align="center">
 		<ul class="w3-border-bottom w3-border-gray">
 			<li class="active"><a href="detail.it?pro_no=${item.pro_no }">스토리</a></li>
-			<li><a href="reply.ask?pro_no=${item.pro_no }">댓글(${item.repcount }
-					)</a></li>
+			<li><a href="reply.ask?pro_no=${item.pro_no }">댓글(${item.repcount})</a></li>
 			<li><a href="news.up?pro_no=${item.pro_no}">새소식(
-					${item.upcount })</a></li>
+					${item.upcount})</a></li>
 		</ul>
 	</div>
 
@@ -265,9 +289,7 @@ button {
 		<div class="box2 info">
 			<p id="box2">
 				<script>
-				
 					$(function() {
-						console.log(${sessionScope.myitem });
 						var date = "<c:out value='${item.pedate}'/>";
 						console.log("date : " + date);
 						var edate = new Date(date.toString());
@@ -279,7 +301,7 @@ button {
 						$("#box2").html(btDay + "일 남음");
 					});
 				</script>
-				
+
 			</p>
 			<em class="infoBar"></em>
 			<p class="info">
@@ -290,13 +312,14 @@ button {
 			</p>
 			<p class="info">${item.fundamount }원의펀딩</p>
 			<p class="info">${item.supportcount }명의서포터</p>
-			<button class="btn-fund">펀딩하기</button>
+			<button class="btn-fund pay">펀딩하기</button>
 		</div>
 		<div style="text-align: center;">
 			<button class="btn btn-default" id="btn-like">
-				<i class="fa fa-heart-o" aria-hidden="true"></i>
+				<i class="fa fa-heart-o" aria-hidden="true"></i><i>(${item.likecount})</i>
 			</button>
-			<button class="btn btn-default backpink" id="btn-nonlike" style="display:none;">
+			<button class="btn btn-default backpink" id="btn-nonlike"
+				style="display: none;">
 				<i class="fa fa-heart-o" aria-hidden="true"></i>
 			</button>
 			<button class="btn btn-default" id="btn-share">
@@ -339,36 +362,41 @@ button {
 			</div>
 		</div>
 
+		<!-- 뷰온버튼 -->
+		<button id="scrollbutton" style="bottom: 50px;">
+			<i class="fa fa-angle-up fa-2x" aria-hidden="true"
+				style="display: block;"></i>TOP
+		</button>
+
 		<div class="">
 			<p
 				style="font-size: 10pt; text-align: left; padding-bottom: 5px; margin-left: 20px;">리워드선택</p>
-			<div class=""></div>
-			<c:forEach var="reword" items="${mList}">
-				<ul class="makerbox">
+			<c:forEach var="reward" items="${mList}">
+				<ul class="makerbox pay">
 					<li style="font-size: 15pt;"><strong><fmt:formatNumber
-								var="mcost" value="${reword.mcost}" /> ${mcost }원</strong></li>
+								var="mcost" value="${reward.mcost}" /> ${mcost }원</strong></li>
 					<li class="makerinfo">작성자이름
 						<dl>${item.pname}</dl>
 					</li>
 					<li class="makerinfo">품목
-						<dl>${reword.mname}</dl>
+						<dl>${reward.mname}</dl>
 					</li>
 					<li class="makerinfo">배송비</li>
 					<dl>
-						<c:if test="${null eq reword.dcost }">${reword.dcost }</c:if>
-						<c:if test="${reword.dcost != '' || null ne reword.dcost}">0</c:if>
+						<c:if test="${null eq reward.dcost }">${reward.dcost }</c:if>
+						<c:if test="${reward.dcost != '' || null ne reward.dcost}">0</c:if>
 						원
 					</dl>
 					<li class="makerinfo">리워드 예상일
-						<dl>${reword.mdate}</dl>
+						<dl>${reward.mdate}</dl>
 					</li>
 					<li class="makerinfo">제한 수량</li>
-					<dl>${reword.mcount }개
+					<dl>${reward.mcount }개
 					</dl>
 					<li class="makerinfo">현재 <c:set var="result"
-							value="${reword.mcount - item.fundcount }" /> <c:if
+							value="${reward.mcount - item.fundcount }" /> <c:if
 							test="${result > 0}">
-					${reword.mcount - item.fundcount  }</c:if> <c:if test="${result <= 0 }">
+					${reward.mcount - item.fundcount  }</c:if> <c:if test="${result <= 0 }">
 					0
 					</c:if>개 남음
 					</li>
@@ -376,7 +404,7 @@ button {
 			</c:forEach>
 		</div>
 		<div>
-			<button class="btn-fund">펀딩하기</button>
+			<button class="btn-fund pay">펀딩하기</button>
 		</div>
 	</div>
 

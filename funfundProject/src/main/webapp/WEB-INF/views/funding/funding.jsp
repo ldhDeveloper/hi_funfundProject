@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>funding</title>
 <script src="/funfund/lib/js/jquery-3.2.1.min.js"></script>
 <link href="/funfund/lib/css/bootstrap.min.css" rel="stylesheet">
 <style>
