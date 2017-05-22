@@ -14,88 +14,12 @@ public class Party implements java.io.Serializable {
 	private String address;
 	private String pconfirm;
 	private String econfirm;
-	public int getPno() {
-		return pno;
-	}
-	public void setPno(int pno) {
-		this.pno = pno;
-	}
-	public int getAno() {
-		return ano;
-	}
-	public void setAno(int ano) {
-		this.ano = ano;
-	}
-	public String getPname() {
-		return pname;
-	}
-	public void setPname(String pname) {
-		this.pname = pname;
-	}
-	public String getPhone() {
-		return phone;
-	}
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-	public String getIntro() {
-		return intro;
-	}
-	public void setIntro(String intro) {
-		this.intro = intro;
-	}
-	public String getAccount() {
-		return account;
-	}
-	public void setAccount(String account) {
-		this.account = account;
-	}
-	public String getCname() {
-		return cname;
-	}
-	public void setCname(String cname) {
-		this.cname = cname;
-	}
-	public String getId_no() {
-		return id_no;
-	}
-	public void setId_no(String id_no) {
-		this.id_no = id_no;
-	}
-	public String getCom_no() {
-		return com_no;
-	}
-	public void setCom_no(String com_no) {
-		this.com_no = com_no;
-	}
-	public String getPresident() {
-		return president;
-	}
-	public void setPresident(String president) {
-		this.president = president;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	public String isPconfirm() {
-		return pconfirm;
-	}
-	public void setPconfirm(String pconfirm) {
-		this.pconfirm = pconfirm;
-	}
-	public String isEconfirm() {
-		return econfirm;
-	}
-	public void setEconfirm(String econfirm) {
-		this.econfirm = econfirm;
-	}
+	private String idimage;
 	
 	public Party(){}
+	
 	public Party(int pno, int ano, String pname, String phone, String intro, String account, String cname, String id_no,
-			String com_no, String president, String address, String pconfirm, String econfirm) {
+			String com_no, String president, String address, String pconfirm, String econfirm, String idimage) {
 		super();
 		this.pno = pno;
 		this.ano = ano;
@@ -110,15 +34,126 @@ public class Party implements java.io.Serializable {
 		this.address = address;
 		this.pconfirm = pconfirm;
 		this.econfirm = econfirm;
+		this.idimage = idimage;
 	}
+
+	public int getPno() {
+		return pno;
+	}
+
+	public void setPno(int pno) {
+		this.pno = pno;
+	}
+
+	public int getAno() {
+		return ano;
+	}
+
+	public void setAno(int ano) {
+		this.ano = ano;
+	}
+
+	public String getPname() {
+		return pname;
+	}
+
+	public void setPname(String pname) {
+		this.pname = pname;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getIntro() {
+		return intro;
+	}
+
+	public void setIntro(String intro) {
+		this.intro = intro;
+	}
+
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
+	}
+
+	public String getCname() {
+		return cname;
+	}
+
+	public void setCname(String cname) {
+		this.cname = cname;
+	}
+
+	public String getId_no() {
+		return id_no;
+	}
+
+	public void setId_no(String id_no) {
+		this.id_no = id_no;
+	}
+
+	public String getCom_no() {
+		return com_no;
+	}
+
+	public void setCom_no(String com_no) {
+		this.com_no = com_no;
+	}
+
+	public String getPresident() {
+		return president;
+	}
+
+	public void setPresident(String president) {
+		this.president = president;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPconfirm() {
+		return pconfirm;
+	}
+
+	public void setPconfirm(String pconfirm) {
+		this.pconfirm = pconfirm;
+	}
+
+	public String getEconfirm() {
+		return econfirm;
+	}
+
+	public void setEconfirm(String econfirm) {
+		this.econfirm = econfirm;
+	}
+
+	public String getIdimage() {
+		return idimage;
+	}
+
+	public void setIdimage(String idimage) {
+		this.idimage = idimage;
+	}
+
 	@Override
 	public String toString() {
 		return "Party [pno=" + pno + ", ano=" + ano + ", pname=" + pname + ", phone=" + phone + ", intro=" + intro
 				+ ", account=" + account + ", cname=" + cname + ", id_no=" + id_no + ", com_no=" + com_no
 				+ ", president=" + president + ", address=" + address + ", pconfirm=" + pconfirm + ", econfirm="
-				+ econfirm + "]";
+				+ econfirm + ", idimage=" + idimage + "]";
 	}
-	
-	
-	
 }

@@ -26,6 +26,7 @@ import com.hi.funfund.AuthMail.AuthMail;
 import com.hi.funfund.account.model.service.AccountService;
 import com.hi.funfund.account.model.vo.Account;
 import com.hi.funfund.account.model.vo.Party;
+import com.hi.funfund.attachment.model.vo.Attachment;
 
 
 
@@ -173,7 +174,8 @@ public class AccountController {
 	// myinfo 비밀번호 변경 시작
 	
 	@RequestMapping(value = "changePwd.ao")
-	public ModelAndView changePwd(ModelAndView model, HttpSession session, HttpServletRequest request) {		
+	public ModelAndView changePwd(ModelAndView model, HttpSession session, HttpServletRequest request) {
+		System.out.println("오니?");
 		session = request.getSession(false);
 		Account account = (Account)session.getAttribute("account");
 		
@@ -183,8 +185,12 @@ public class AccountController {
 		
 		Account account2 = accountService.selectOldPwd(ano, oldPwd);
 		
+		System.out.println("PWD Controller ano : " + ano + " oldPwd : " + oldPwd);
+		
 		if(account2 != null) {
-			int result = accountService.updatePwd(ano, newPwd);									
+			int result = accountService.updatePwd(ano, newPwd);
+			
+			System.out.println("PWD Controller2 ano : " + ano + " newPwd : " + newPwd);
 		}
 		
 		model.addObject("account", account2);
@@ -217,26 +223,40 @@ public class AccountController {
 	// seller 정보 변경 시작
 	
 	@RequestMapping(value = "changSeller.ao")
-	public String changSeller(ModelAndView model, HttpSession session, HttpServletRequest request) {
+	public String changSeller(Attachment vo, HttpServletRequest request) throws  IOException{
 		System.out.println("오니?");
+		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+		MultipartFile idimage = multipartRequest.getFile("idimage");
+		HttpSession session = request.getSession(false);
+		String page="";
+		
+		
+		
 		session = request.getSession(false);
 		Account account = (Account)session.getAttribute("account");
 		int ano = account.getAno();
 		Party party = accountService.loginParty(ano);
 		
+		String phone = request.getParameter("phone");
+		
+		String id_no1 = request.getParameter("id_no1");
+		String id_no2 = request.getParameter("id_no");
+		
+		String id_no = id_no1 + "-" + id_no2;
+				
 		String address1 = request.getParameter("address1");
 		String address2 = request.getParameter("address2");
 		String address3 = request.getParameter("address3");
 		
 		String address = address1 + "-" + address2 + "-" + address3;
 		
-		if(party == null){
-			int result = accountService.insertAddress(ano, address);
+		/*if(party == null){
+			int result = accountService.insertSeller(ano, phone, id_no, address, idimage);
 		}
 		
 		else {
-			int result = accountService.updateAddress(ano, address);
-		}
+			int result = accountService.updateSeller(ano, phone, id_no, address, idimage);
+		}*/
 		
 		party = accountService.loginParty(ano);
 		

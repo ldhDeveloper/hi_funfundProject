@@ -113,6 +113,7 @@ public class AccountServiceIm implements AccountService {
 
 	@Override
 	public int updatePwd(int ano, String newPwd) {
+		System.out.println("PWD Service ano : " + ano + " newPwd : " + newPwd);
 		return accountDao.updatePwd(ano, newPwd);
 	}
 	
@@ -144,23 +145,24 @@ public class AccountServiceIm implements AccountService {
 		return accountDao.updateEmail(ano, email);
 	}
 	
-	// insertAddress 주소 추가
+	// insertSeller 판매자 정보 추가
 	
 	@Override
-	public int insertAddress(int ano, String address) {
-		return accountDao.insertAddress(ano, address);
+	public int insertSeller(int ano, String phone, String id_no, String address, String idimage) {
+		return accountDao.insertSeller(ano, phone, id_no, address, idimage);
 	}
-	
+		
 	// updateAddress 주소 수정
-	
 	@Override
-	public int updateAddress(int ano, String address) {
-		return accountDao.updateAddress(ano, address);
-	}
+	public int updateSeller(int ano, String phone, String id_no, String address, String idimage) {
+		// TODO Auto-generated method stub
+		return accountDao.updateSeller(ano, phone, id_no, address, idimage);
+	}	
 
 	@Override
 	public Account selectThirdPartyUser(Account account) { //타사이트로 가입한 유저 로그인/가입/제어
 		Account thirdPartyUser = accountDao.selectThirdPartyUser(account);
 		return thirdPartyUser;
-	}		
+	}
+		
 }
