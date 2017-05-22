@@ -23,10 +23,38 @@ ol li {
 	padding: 20px;
 }
 
-.rewardList {
+#rewardList {
 	
 }
 </style>
+<script src="/funfund/lib/js/jquery-3.2.1.min.js"></script>
+<script>
+	$(function() {
+		var pro_no = ${item.pro_no};
+		$.ajax({
+					url : "selectList.fm",
+					type : "post",
+					data : {
+						"pro_no" : pro_no 
+					},
+					success : function(data) {
+						var i = Number(data.mList.length);
+						console.log(data.mList[i].mname);
+						$("#rewardList")
+								.html(
+										/* $("#rewardList").html()
+												+ "<input type='checkbox' id="+data.mList[i].mno+" value="+data.mList[i].mname+">"
+												+ "<label for="+data.mList[i].mno+">"
+												+ data.mList[i].mcost
+												+ "원 펀딩합니다.<br>"
+												+ data.mList[i].mcount
+												+ "</label>" */
+												data.mList[i].mcount
+												)
+					}
+				});
+	}); 
+</script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/menubar.jsp" flush="true" />
@@ -49,12 +77,9 @@ ol li {
 		<div id="guide">리워드 선택 결제 예약</div>
 
 		<form method="post" id="" name="">
-			<div class="rewardList">
+			<div id="rewardList">
 				<input type="checkbox" name="menu" value=""> <label
-					for="checkbox">원 펀딩합니다.</label> <input type="checkbox" name="menu"
-					value=""> <label for="checkbox">원 펀딩합니다.</label> <input
-					type="checkbox" name="menu" value=""> <label for="checkbox">원
-					펀딩합니다.</label>
+					for="checkbox">원 펀딩합니다.</label>
 			</div>
 		</form>
 
