@@ -22,14 +22,20 @@ public class MyItemServiceIm implements MyItemService{
 	}
 
 	@Override
-	public int insert(HashMap<String, String> hmap) {
+	public int insertLike(HashMap<String, String> hmap) {
 		// TODO Auto-generated method stub
-		return myItemDao.insert(hmap);
+		return myItemDao.insertLike(hmap);
 	}
 
 	@Override
-	public List<MyItem> select(int ano) {
-		return myItemDao.select(ano);
+	public List<MyItem> selectLike(int ano) {
+		return myItemDao.selectLike(ano);
+	}
+
+	@Override
+	public int deleteLike(HashMap<String, String> hmap) {
+		// TODO Auto-generated method stub
+		return myItemDao.deleteLike(hmap);
 	}
 
 	/*@Override

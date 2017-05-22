@@ -29,6 +29,7 @@
 		<result property="supportcount" column="supportcount" />
 		<result property="upcount" column="upcount" />
 		<result property="repcount" column="repcount" />
+		<result property="thumbnail" column="thumbnail" />
 	</resultMap>
 
 	<resultMap type="itemfund" id="itemResult2">
@@ -55,7 +56,7 @@
 			pshort, ecost, refund, pvideo, pstatus, likecount, sharelink, bankcode, accpnm, 
 			accnum, cname, cs_email, cs_phone from item ]]> -->
 	        <![CDATA[
-	        select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount
+	        select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount, i7.thumbnail as thumbnail
 			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost), 0) as fundamount 
 			from item i2 join fundmenu fm2 on (i2.pro_no = fm2.pro_no)
 			             join fundlist fl2 on (fm2.mno = fl2.mno)
@@ -76,12 +77,15 @@
 			                                                    from itemask
 			                                                    where ask_type='댓글') ia on(i.pro_no = ia.pro_no)
 			                             group by i.pro_no) i6 on (i1.pro_no = i6.pro_no)
+			                  left join (select refno, refname as thumbnail 
+			                             from attachment
+			                             where ftype='item') i7 on(i1.pro_no = i7.refno)
 			]]>
 	</select>
 
 	<select id="selectOne" parameterType="int" resultMap="itemResult">
 	        <![CDATA[
-	        select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount
+	        select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount, i7.thumbnail as thumbnail
 			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost), 0) as fundamount 
 			from item i2 join fundmenu fm2 on (i2.pro_no = fm2.pro_no)
 			             join fundlist fl2 on (fm2.mno = fl2.mno)
@@ -102,6 +106,9 @@
 			                                                    from itemask
 			                                                    where ask_type='댓글') ia on(i.pro_no = ia.pro_no)
 			                             group by i.pro_no) i6 on (i1.pro_no = i6.pro_no)
+			                  left join (select refno, refname as thumbnail 
+			                             from attachment
+			                             where ftype='item') i7 on(i1.pro_no = i7.refno)
 	        where i1.pro_no= #{pro_no}
 	        ]]>
 	</select>
@@ -119,9 +126,9 @@
 			it.psdate as psdate, it.pedate as pedate, it.pshort as pshort, it.ecost as ecost, it.refund as refund, it.pvideo as pvideo,
 			it.pstatus as pstatus, it.likecount as likecount, it.sharelink as sharelink, it.bankcode as bankcode, it.accpnm as accpnm,
 			it.accnum as accnum, it.cname as cname, it.cs_email as cs_email, it.cs_phone as cs_phone, it.fundamount as fundamount, 
-			it.fundcount as fundcount, it.supportcount as supportcount, it.upcount as upcount, it.repcount as repcount
+			it.fundcount as fundcount, it.supportcount as supportcount, it.upcount as upcount, it.repcount as repcount, it.thumbnail as thumbnail
 						from(SELECT item.*, ROW_NUMBER() OVER (ORDER BY fundcount DESC) rnum
-			     				FROM (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount
+			     				FROM (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount, i7.thumbnail as thumbnail
 			                  from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost), 0) as fundamount 
 			                  from item i2 join fundmenu fm2 on (i2.pro_no = fm2.pro_no)
 			                               join fundlist fl2 on (fm2.mno = fl2.mno)
@@ -141,7 +148,10 @@
 			                             from item i left join (select ask_no, pro_no
 			                                                    from itemask
 			                                                    where ask_type='댓글') ia on(i.pro_no = ia.pro_no)
-			                             group by i.pro_no) i6 on (i1.pro_no = i6.pro_no)) item) it
+			                             group by i.pro_no) i6 on (i1.pro_no = i6.pro_no)
+			                  left join (select refno, refname as thumbnail 
+			                             from attachment
+			                             where ftype='item') i7 on(i1.pro_no = i7.refno)) item) it
 			where rnum <= 3
 	        ]]>
 	</select>
@@ -165,7 +175,7 @@
 			pshort, ecost, refund, pvideo, pstatus, likecount, sharelink, bankcode, accpnm, 
 			accnum, cname, cs_email, cs_phone from item ]]> -->
 	        <![CDATA[
-	        select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount
+	        select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount, i7.thumbnail as thumbnail
 			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost), 0) as fundamount 
 			from item i2 join fundmenu fm2 on (i2.pro_no = fm2.pro_no)
 			             join fundlist fl2 on (fm2.mno = fl2.mno)
@@ -186,6 +196,9 @@
 			                                                    from itemask
 			                                                    where ask_type='댓글') ia on(i.pro_no = ia.pro_no)
 			                             group by i.pro_no) i6 on (i1.pro_no = i6.pro_no)
+			                  left join (select refno, refname as thumbnail 
+			                             from attachment
+			                             where ftype='item') i7 on(i1.pro_no = i7.refno)
 			where i1.category = #{category}
 			]]>
 	</select>
@@ -193,6 +206,12 @@
 		update item set likecount = (select likecount
 												  from item
 												  where pro_no = #{pro_no}) + 1
+		where pro_no = #{pro_no}										  
+	</update>
+	<update id="minusItemLike" parameterType="int">
+		update item set likecount = (select likecount
+												  from item
+												  where pro_no = #{pro_no}) - 1
 		where pro_no = #{pro_no}										  
 	</update>
 </mapper>
