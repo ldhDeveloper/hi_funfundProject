@@ -146,16 +146,14 @@ public class AccountServiceIm implements AccountService {
 	}
 	
 	// insertSeller 판매자 정보 추가
-	
 	@Override
-	public int insertSeller(int ano, String phone, String id_no, String address, String idimage) {
-		return accountDao.insertSeller(ano, phone, id_no, address, idimage);
+	public int insertSeller(int ano, String phone, String id_no, String address) {
+		return accountDao.insertSeller(ano, phone, id_no, address);
 	}
 		
 	// updateAddress 주소 수정
 	@Override
 	public int updateSeller(int ano, String phone, String id_no, String address, String idimage) {
-		// TODO Auto-generated method stub
 		return accountDao.updateSeller(ano, phone, id_no, address, idimage);
 	}	
 
@@ -163,6 +161,5 @@ public class AccountServiceIm implements AccountService {
 	public Account selectThirdPartyUser(Account account) { //타사이트로 가입한 유저 로그인/가입/제어
 		Account thirdPartyUser = accountDao.selectThirdPartyUser(account);
 		return thirdPartyUser;
-	}
-		
+	}		
 }

@@ -214,6 +214,13 @@ $(function(){
 				       				<div class="btn-wrap" id="idCardFileUploadBtn">
 				       					<input type="button" class="btn-darkgray" id="btnUploadIdCardImg" value="이미지 파일 등록" onclick="document.all.idimage.click();"/>
 				       				</div>
+				       				
+				       				<c:if test="${ empty sessionScope.party.idimage}">
+										<input type="hidden" name="photoflag" value="insert">
+									</c:if>
+									<c:if test="${ !empty sessionScope.party.idimage}">
+										<input type="hidden" name="photoflag" value="update">
+									</c:if>
 				       		
 				       				<p id="idCardImgError" class="error-text" style="margin-bottom:6px;">실명확인증표를 등록하세요.</p>
 				       				<p class="comment">funfund에서 청약을 하기 위해서는 금융실명법에 따라 실명확인이 필요합니다. funfund는 금융위원회에 정식 등록된 온라인소액투자중개업자로 실명확인을 진행하오니 안심하고 등록해주세요.</p>

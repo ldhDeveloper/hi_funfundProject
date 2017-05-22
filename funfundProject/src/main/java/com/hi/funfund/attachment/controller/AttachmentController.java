@@ -43,6 +43,7 @@ public class AttachmentController {
 		
 		String photoflag = request.getParameter("photoflag");
 		System.out.println("photoflag = " + photoflag);
+		
 		String root = request.getSession().getServletContext().getRealPath("/");
 		System.out.println("root : " + root);
 		String[] roots = root.split("\\\\");

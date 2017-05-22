@@ -55,7 +55,6 @@ public class AttachmentDao {
 			}
 		}
 		
-		
 		return result;
 	}
 	public int updateTitleImage(Attachment att) {
@@ -67,6 +66,21 @@ public class AttachmentDao {
 	public int insertSlideImages(Attachment att) {
 		
 		return sqlSession.insert("insertSlideImages", att);
+	}
+	
+	// insertIdImage seller 실명확인 증표 등록
+	public int insertIdImage(Attachment vo) {
+		return sqlSession.insert("insertIdImage");
+	}
+	
+	// updateIdImage seller 실명확인 증표 수정
+	public int updateIdImage(Attachment vo) {
+		return sqlSession.update("updateImage");
+	}
+	public int partyIdImage(HashMap<String, String> hmap) {		
+		int result = sqlSession.update("partyIdImage", hmap);
+		return result;
+		
 	}
 	
 

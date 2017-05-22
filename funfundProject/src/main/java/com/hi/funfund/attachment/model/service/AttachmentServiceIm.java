@@ -93,4 +93,22 @@ public class AttachmentServiceIm implements AttachmentService {
 	public int insertSlideImages(Attachment att){
 		return attachmentDao.insertSlideImages(att);
 	}
+
+	// insertIdImage seller 실명확인 증표 등록
+	@Override
+	public int insertIdImage(Attachment vo) {
+		return attachmentDao.insertIdImage(vo);
+	}
+
+	// updateIdImage seller 실명확인 증표 수정
+	@Override
+	public int updateIdImage(Attachment vo) {
+		return attachmentDao.updateIdImage(vo);
+	}
+
+	@Override
+	public int partyIdImage(HashMap<String, String> hmap) {
+		int result = attachmentDao.partyIdImage(hmap);
+		return result;
+	}
 }
