@@ -18,6 +18,7 @@
 		<result property="address" column="address" />
 		<result property="pconfirm" column="pconfirm" />
 		<result property="econfirm" column="econfirm" />
+		<result property="idimage" column="idimage" />
 	</resultMap>
 	<select id="selectParty" parameterType="party" resultMap="partyResult">
 		<![CDATA[
@@ -42,15 +43,15 @@
 		]]>
 	</update>
 	
-	<insert id="insertAddress" parameterType="HashMap">
+	<insert id="insertSeller" parameterType="HashMap">
 		<![CDATA[
-			INSERT INTO PARTY(pno, ano, address) VALUES(seq_pno.nextval, #{ano, jdbcType=INTEGER}, #{address, jdbcType=VARCHAR})
+			INSERT INTO PARTY(pno, ano, id_no, address, idimage) VALUES(seq_pno.nextval, #{ano, jdbcType=INTEGER}, #{phone, jdbcType=VARCHAR}, #{id_no, jdbcType=VARCHAR}, #{address, jdbcType=VARCHAR}, #{idimage, jdbcType=VARCHAR})
 		]]>
 	</insert>
 	
-	<update id="updateAddress" parameterType="HashMap">
+	<update id="updateSeller" parameterType="HashMap">
 		<![CDATA[
-			UPDATE PARTY SET address=(#{address}) WHERE ano=#{ano}
+			UPDATE PARTY SET address=(#{phone}, #{id_no}, #{address}, #{idimage}) WHERE ano=#{ano}
 		]]>
 	</update>
 </mapper>

@@ -40,6 +40,7 @@ public class AttachmentController {
 		/*File file = new File("..\..\weapp");
 		String root = file.getCanonicalPath().toString();*/
 		String page="";
+		
 		String photoflag = request.getParameter("photoflag");
 		System.out.println("photoflag = " + photoflag);
 		String root = request.getSession().getServletContext().getRealPath("/");

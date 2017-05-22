@@ -47,6 +47,7 @@ public class AccountDao {
 		hmap.put("ano",  Integer.toString(ano));
 		hmap.put("newPwd", newPwd);
 		int result = sqlSession.update("updatePwd", hmap);
+		System.out.println("PWD Dao ano : " + ano + " newPwd : " + newPwd);
 		
 		return result;
 	}
@@ -101,6 +102,8 @@ public class AccountDao {
 		return user;
 	}
 
+	// 이메일 정보 수정
+	
 	public int updateEmail(String ano, String email) {
 		HashMap<String, String> hmap = new HashMap<String, String>();
 		hmap.put("ano", ano);
@@ -109,20 +112,30 @@ public class AccountDao {
 
 		return result;
 	}
+	
+	// 판매자 정보 입력
 
-	public int insertAddress(int ano, String address) {
+	public int insertSeller(int ano, String phone, String id_no, String address, String idimage) {
 		HashMap<String, String> hmap = new HashMap<String, String>();
 		hmap.put("ano", Integer.toString(ano));
+		hmap.put("address", phone);
+		hmap.put("address", id_no);
 		hmap.put("address", address);
-		int result = sqlSession.insert("insertAddress", hmap);
+		hmap.put("address", idimage);
+		int result = sqlSession.insert("insertSeller", hmap);
 		return result;
 	}
+	
+	// 판매자 정보 수정
 
-	public int updateAddress(int ano, String address) {
+	public int updateSeller(int ano, String phone, String id_no, String address, String idimage) {
 		HashMap<String, String> hmap = new HashMap<String, String>();
 		hmap.put("ano", Integer.toString(ano));
+		hmap.put("address", phone);
+		hmap.put("address", id_no);
 		hmap.put("address", address);
-		int result = sqlSession.insert("updateAddress", hmap);
+		hmap.put("address", idimage);
+		int result = sqlSession.insert("updateSeller", hmap);
 		return result;
 	}
 
