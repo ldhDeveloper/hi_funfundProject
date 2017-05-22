@@ -5,13 +5,15 @@
 
 
 	<welcome-file-list>
-	<welcome-file>index.jsp</welcome-file></welcome-file-list>
-	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	<!-- The definition of the Root Spring Container shared by all Servlets 
+		and Filters -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:root-context.xml</param-value>
 	</context-param>
-	
+
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -27,13 +29,13 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-	
+
 	<servlet-mapping>
 		<servlet-name>action</servlet-name>
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
-	 
-	<!-- notice servlet --> 
+
+	<!-- notice servlet -->
 	<servlet>
 		<servlet-name>notice</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -43,12 +45,12 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-		
+
 	<servlet-mapping>
 		<servlet-name>notice</servlet-name>
 		<url-pattern>*.no</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- account 요청 서블릿 -->
 	<servlet>
 		<servlet-name>account</servlet-name>
@@ -59,12 +61,12 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-		
+
 	<servlet-mapping>
 		<servlet-name>account</servlet-name>
 		<url-pattern>*.ao</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- item 요청 서블릿 -->
 	<servlet>
 		<servlet-name>item</servlet-name>
@@ -75,12 +77,12 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-		
+
 	<servlet-mapping>
 		<servlet-name>item</servlet-name>
 		<url-pattern>*.it</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- itemask 요청 서블릿 -->
 	<servlet>
 		<servlet-name>ItemAsk</servlet-name>
@@ -88,15 +90,31 @@
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/config/itemAsk-servlet.xml</param-value>
-     </init-param>
+		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-		
+
 	<servlet-mapping>
 		<servlet-name>ItemAsk</servlet-name>
 		<url-pattern>*.ask</url-pattern>
 	</servlet-mapping>
 
+	<!-- FundMenu 요청 서블릿 -->
+	<servlet>
+		<servlet-name>fundMenu</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/config/fundMenu-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>fundMenu</servlet-name>
+		<url-pattern>*.fm</url-pattern>
+	</servlet-mapping>
+	
 	<!-- attachment 요청 서블릿 -->
 	<servlet>
 		<servlet-name>attachment</servlet-name>
@@ -107,12 +125,12 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-		
+
 	<servlet-mapping>
 		<servlet-name>attachment</servlet-name>
 		<url-pattern>*.at</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- pupdate 요청 서블릿 -->
 	<servlet>
 		<servlet-name>pupdate</servlet-name>
@@ -123,12 +141,12 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-		
+
 	<servlet-mapping>
 		<servlet-name>pupdate</servlet-name>
 		<url-pattern>*.up</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- myitem 요청 서블릿 -->
 	<servlet>
 		<servlet-name>myitem</servlet-name>
@@ -139,40 +157,40 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-		
+
 	<servlet-mapping>
 		<servlet-name>myitem</servlet-name>
 		<url-pattern>*.mi</url-pattern>
 	</servlet-mapping>
-	
-	<!-- Start: 한글문제 처리 -->
-<filter>
-    <filter-name>characterEncodingFilter</filter-name>
-    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-    <init-param>
-        <param-name>encoding</param-name>
-        <param-value>utf-8</param-value>
-    </init-param>
-    <init-param>
-        <param-name>forceEncoding</param-name>
-        <param-value>true</param-value>
-    </init-param>
-</filter>
-<filter-mapping>
-    <filter-name>characterEncodingFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-</filter-mapping>
-<!-- Finish: 한글문제 처리 -->
 
-<!-- ajax로 외부 url 호출을 위한 샌드박스 해제용 필터  -->
-<filter>
-    <filter-name>cors</filter-name>
-    <filter-class>com.hi.funfund.common.SimpleCORSFitter</filter-class>
-</filter>
-<filter-mapping>
-    <filter-name>cors</filter-name>
-    <url-pattern>/*</url-pattern>
-</filter-mapping>
+	<!-- Start: 한글문제 처리 -->
+	<filter>
+		<filter-name>characterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>utf-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>characterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!-- Finish: 한글문제 처리 -->
+
+	<!-- ajax로 외부 url 호출을 위한 샌드박스 해제용 필터 -->
+	<filter>
+		<filter-name>cors</filter-name>
+		<filter-class>com.hi.funfund.common.SimpleCORSFitter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>cors</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
 
 
