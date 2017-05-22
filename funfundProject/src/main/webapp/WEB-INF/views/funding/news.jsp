@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>news</title>
 <style>
 .background {
 	background-color: black;
@@ -257,35 +257,39 @@ button {
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 box2"
 		style="padding: 10px;">
 		<!-- 업데이트 글 작성 영역 -->
-		<c:forEach var="update" items="${pList}">
-			<div class="block">
-				<span class="datanum">#${update.upno }</span> <span
-					class="datatitle">${update.uptitle}</span> <span class="ddate">
-					<fmt:formatDate value="${update.uploaddate}" var="date"
-						pattern="yyyyMMdd" /> ${date }
-				</span>
-				<div class="content">${update.upname }</div>
-				<hr>
-			</div>
-		</c:forEach>
+		<c:if test="${empty pList }">
+		   새소식이 없습니다.
+		</c:if>
+		<c:if test="${!empty pList }">
+			<c:forEach var="update" items="${pList}">
+				<div class="block">
+					<span class="datanum">#${update.upno }</span> <span
+						class="datatitle">${update.uptitle}</span> <span class="ddate">
+						<fmt:formatDate value="${update.uploaddate}" var="date"
+							pattern="yyyyMMdd" /> ${date }
+					</span>
+					<div class="content">${update.upname }</div>
+					<hr>
+				</div>
+			</c:forEach>
+		</c:if>
 	</div>
 
 	<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
 		<div class="box2 info">
 			<p id="box2">
-			<script>
-				   $(function(){
-					   var date="<c:out value='${item.pedate}'/>";
-					   console.log("date : " + date);
-					    var edate = new Date(date.toString());
-		          		var todate = new Date();
-		          		var btMs = edate.getTime() - todate.getTime();
-		          		console.log("btMs : " + btMs);
-		          		var btDay = Math.round(btMs / (1000*60*60*24));
-		          		console.log("btDay : " + btDay);
-		          		 $("#box2").html(btDay+"일 남음");
-				   });
-				 
+				<script>
+					$(function() {
+						var date = "<c:out value='${item.pedate}'/>";
+						console.log("date : " + date);
+						var edate = new Date(date.toString());
+						var todate = new Date();
+						var btMs = edate.getTime() - todate.getTime();
+						console.log("btMs : " + btMs);
+						var btDay = Math.round(btMs / (1000 * 60 * 60 * 24));
+						console.log("btDay : " + btDay);
+						$("#box2").html(btDay + "일 남음");
+					});
 				</script>
 			</p>
 			<em class="infoBar"></em>
@@ -347,31 +351,31 @@ button {
 			<p
 				style="font-size: 10pt; text-align: left; padding-bottom: 5px; margin-left: 20px;">리워드선택</p>
 			<div class=""></div>
-			<c:forEach var="reword" items="${mList}">
+			<c:forEach var="reward" items="${mList}">
 				<ul class="makerbox">
-					<li style="font-size: 15pt;"><strong>${reword.mcost}원</strong></li>
+					<li style="font-size: 15pt;"><strong>${reward.mcost}원</strong></li>
 					<li class="makerinfo">작성자이름
 						<dl>${item.pname}</dl>
 					</li>
 					<li class="makerinfo">품목
-						<dl>${reword.mname}</dl>
+						<dl>${reward.mname}</dl>
 					</li>
 					<li class="makerinfo">배송비</li>
 					<dl>
-						<c:if test="${null eq reword.dcost }">${reword.dcost }</c:if>
-						<c:if test="${reword.dcost != '' || null ne reword.dcost}">0</c:if>
+						<c:if test="${null eq reward.dcost }">${reward.dcost }</c:if>
+						<c:if test="${reward.dcost != '' || null ne reward.dcost}">0</c:if>
 						원
 					</dl>
 					<li class="makerinfo">리워드 예상일
-						<dl>${reword.mdate}</dl>
+						<dl>${reward.mdate}</dl>
 					</li>
 					<li class="makerinfo">제한 수량</li>
-					<dl>${reword.mcount }개
+					<dl>${reward.mcount }개
 					</dl>
 					<li class="makerinfo">현재 <c:set var="result"
-							value="${reword.mcount - item.fundcount }" /> <c:if
+							value="${reward.mcount - item.fundcount }" /> <c:if
 							test="${result > 0}">
-					${reword.mcount - item.fundcount  }</c:if> <c:if test="${result <= 0 }">
+					${reward.mcount - item.fundcount  }</c:if> <c:if test="${result <= 0 }">
 					0
 					</c:if>개 남음
 					</li>
