@@ -81,5 +81,10 @@ public class ItemDao {
 		int result = sqlSession.update(nameSpace + "minusItemLike", pro_no);
 		return result;
 	}
+
+	public List<Item> selectMyItems(int ano) {
+		List<Item> iList = (List<Item>) sqlSession.selectList(nameSpace + "selectMyItems", ano);
+		return null;
+	}
 	
 }

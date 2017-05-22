@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hi.funfund.item.model.vo.Item;
 import com.hi.funfund.myitem.model.dao.MyItemDao;
 import com.hi.funfund.myitem.model.vo.MyItem;
 
