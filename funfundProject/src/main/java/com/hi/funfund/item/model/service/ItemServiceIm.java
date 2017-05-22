@@ -129,5 +129,11 @@ public class ItemServiceIm implements ItemService{
 		return itemDao.plusItemLike(pro_no);
 	}
 
+	@Override
+	public int minusItemLike(int pro_no) {
+		// TODO Auto-generated method stub
+		return itemDao.minusItemLike(pro_no);
+	}
+
 	
 }

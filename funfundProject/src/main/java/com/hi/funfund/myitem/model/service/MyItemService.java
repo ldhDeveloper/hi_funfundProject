@@ -7,10 +7,12 @@ import com.hi.funfund.myitem.model.vo.MyItem;
 
 public interface MyItemService {
 	
-	int insert(HashMap<String, String> hmap);
+	int insertLike(HashMap<String, String> hmap);
 
 	int delete(int mpro_no);
 
-	List<MyItem> select(int ano);
+	List<MyItem> selectLike(int ano);
+
+	int deleteLike(HashMap<String, String> hmap);
 
 }
