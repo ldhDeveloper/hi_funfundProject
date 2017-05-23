@@ -9,14 +9,15 @@ public class ItemAskAccount {
 	private String ask_content;
 	private int id_no;
 	private Date ask_date;
+	private int upask_no;
 	private String nickname;
 
 	public ItemAskAccount() {
 		super();
 	}
-
-	public ItemAskAccount(int ask_no, int pro_no, String ask_type, String ask_content, int id_no, Date ask_date,
-			String nickname) {
+	
+	public ItemAskAccount(int ask_no, int pro_no, String ask_type, String ask_content, int id_no,
+			Date ask_date, int upask_no, String nickname) {
 		super();
 		this.ask_no = ask_no;
 		this.pro_no = pro_no;
@@ -24,10 +25,9 @@ public class ItemAskAccount {
 		this.ask_content = ask_content;
 		this.id_no = id_no;
 		this.ask_date = ask_date;
+		this.upask_no = upask_no;
 		this.nickname = nickname;
 	}
-
-	
 	
 	public int getAsk_no() {
 		return ask_no;
@@ -85,10 +85,20 @@ public class ItemAskAccount {
 		this.nickname = nickname;
 	}
 
+	
+	public int getUpask_no() {
+		return upask_no;
+	}
+
+	public void setUpask_no(int upask_no) {
+		this.upask_no = upask_no;
+	}
+
 	@Override
 	public String toString() {
-		return "ItemAskAccount [ask_no=" + ask_no + ", pro_no=" + pro_no + ", ask_type=" + ask_type + ", ask_content="
-				+ ask_content + ", id_no=" + id_no + ", ask_date=" + ask_date + ", nickname=" + nickname + "]";
+		return "ItemAskAccount [ask_no=" + ask_no + ", pro_no=" + pro_no + ", ask_type=" + ask_type
+				+ ", ask_content=" + ask_content + ", id_no=" + id_no + ", ask_date=" + ask_date
+				+ ", upask_no=" + upask_no + ", nickname=" + nickname + "]";
 	}
 
 }

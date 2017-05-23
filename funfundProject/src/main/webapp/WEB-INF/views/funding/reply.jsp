@@ -197,11 +197,6 @@ textarea {
 	width: 80%;
 	margin-bottom: 20px;
 }
-#upload2 {
-	text-align: right;
-	width: 80%;
-	margin-bottom: 20px;
-}
 
 #comment-box {
 	display: block;
@@ -219,18 +214,34 @@ textarea {
 	box-sizing: border-box !important;
 }
 
-#cmtId {
+#comment-box2 {
+	display: block;
+	margin-top: 20px;
+	margin-left: 20px;
+	margin-bottom: 20px;
+	bottom-border: 1px solid #e4e4e4;
+	width: 80%;
+	height: 40%;
+	padding: 10px;
+	font-size: 13px;
+	line-height: 18px;
+	border: 1px solid #e4e4e4;
+	background: #fff;
+	box-sizing: border-box !important;
+}
+
+.cmtId {
 	margin-bottom: 10px;
 	height: 30px;
 }
 
-#cmtco {
+.cmtco {
 	margin-bottom: 10px;
 	font-size: 13px;
 	line-height: 18px;
 }
 
-#cmtda {
+.cmtda {
 	display: inline-block;
 	font-size: 12px;
 	line-height: 12px;
@@ -292,11 +303,11 @@ textarea {
 		$("#content").html(co);
 
 	});
-	
-	$(function(){
-		$('#comment-area2').hide(); 
+
+	$(function() {
+		$('#comment-area2').hide();
 		$('#recmtbutton').click(function() {
-            $('#comment-area2').toggle();
+			$('#comment-area2').toggle();
 		});
 	});
 </script>
@@ -334,7 +345,7 @@ textarea {
 		style="padding: 10px;">
 		<!-- 댓글작성 영역 -->
 		<div class="comment">
-			<p>${fn:length(aList) }개의 댓글이 달렸습니다.</p>
+			<p>${fn:length(aList) }개의댓글이달렸습니다.</p>
 			<form id="comment-area" action="coinsert.ask">
 				<textarea id="acontent" name="acontent" style="overflow-y: hidden;"
 					rows="3" cols="50" maxlength="140;" placeholder="댓글을 입력하세요"></textarea>
@@ -344,30 +355,33 @@ textarea {
 				</div>
 			</form>
 
-			<c:if test="${empty aList }">
-				  아직 댓글이 없습니다. 
-				  첫번째 댓글의 주인공이 되어주세요! :)
-				</c:if>
-
 			<c:if test="${!empty aList}">
 				<div id="comment-box">
 					<c:forEach var="ask" items="${aList}">
-						<p id="cmtId">${ask.nickname }</p>
-						<p id="cmtco">${ask.ask_content }</p>
-						<a id="recmtbutton">답글달기</a>
-						<span id="cmtda">${ask.ask_date }</span>
-						<form action="" id="comment-area2">
-							<textarea id="acontent2" name="acontent2"
-								style="overflow-y: hidden;" rows="3" cols="50" maxlength="140;"
-								placeholder="답글을 입력하세요"></textarea>
-							<div id="upload2">
-								<input type="submit" value="답글달기"> <input type="hidden"
-									value="${param.pro_no}" name="pro_no">
-									<input type="hidden" value="${ask.id_no}" name="id_no">
-									console.log("${ask.id_no }");
+						<c:if test="${ask.ask_type eq '댓글' }">
+							<p class="cmtId">${ask.nickname }</p>
+							<p class="cmtco">${ask.ask_content }</p>
+							<span class="cmtda">${ask.ask_date }</span>
+							<a id="recmtbutton">답글달기</a>
+							<form action="" id="comment-area2">
+								<textarea id="acontent2" name="acontent"
+									style="overflow-y: hidden;" rows="3" cols="50" maxlength="140;"
+									placeholder="답글을 입력하세요"></textarea>
+								<div id="upload">
+									<input type="submit" value="답글달기"> <input type="hidden"
+										value="${param.pro_no}" name="pro_no"> <input
+										type="hidden" value="${ask.ask_no}" name="ask_no">
+								</div>
+							</form>
+							<hr>
+						</c:if>
+						<c:if test="${ask.ask_type eq '답글' }">
+							<div id="comment-box2">
+								<p class="cmtId">${ask.nickname }</p>
+								<p class="cmtco">${ask.ask_content }</p>
+								<span class="cmtda">${ask.ask_date }</span>
 							</div>
-						</form>
-						<hr>
+						</c:if>
 					</c:forEach>
 				</div>
 			</c:if>

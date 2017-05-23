@@ -20,8 +20,8 @@ public class ItemAskDao {
 		return result;
 	}
 
-	public int update(ItemAsk itemAsk) {
-		// TODO Auto-generated method stub
+	public int update(int pro_no) {
+		int result=sqlSession.update(nameSpace+"updateAsk", pro_no);
 		return 0;
 	}
 
