@@ -257,20 +257,24 @@ public class AccountController {
 		System.out.println("photoflag = " + photoflag);
 		
 		String root = request.getSession().getServletContext().getRealPath("/");
-		System.out.println("root : " + root);
+		/*System.out.println("root : " + root);*/
 		String[] roots = root.split("\\\\");
 		String merger="";
 		for(int i=0 ; i<roots.length-3; i++){
 			merger += roots[i] + "\\";
 		}
-		System.out.println("merger : " + merger);
-		String savePath = merger + "src/main/webapp/images/myinfo/";
-		System.out.println("savepath : " + savePath);
+		/*System.out.println("merger : " + merger);*/
+		String savePath = merger + "src/main/webapp/images/myinfo/sellerinfo/";
+		/*System.out.println("savepath : " + savePath);*/
 		
-		int ano=0;
-		int result=0;
+		Account account = (Account)session.getAttribute("account");
+		
+		int ano = account.getAno();
+		int result = 0;
 		
 		Party party = accountService.loginParty(ano);
+		
+		System.out.println("seller Controller ano : " + ano);
 		
 		String phone = request.getParameter("phone");
 		
@@ -283,46 +287,59 @@ public class AccountController {
 		String address2 = request.getParameter("address2");
 		String address3 = request.getParameter("address3");
 		
-		String address = address1 + "-" + address2 + "-" + address3;
+		String address = address1 + "@" + address2 + "@" + address3;
 		
-		if(party == null){
-			result = accountService.insertSeller(ano, phone, id_no, address);
-		}
+		String rfileName = null;
 		
-		if(!idimage.isEmpty()){
+		System.out.println("seller Controller ano : " + ano + " phone : " + phone + " id_no : " + id_no + " address : " + address);
+		
+		result = accountService.updateSeller(ano, phone, id_no, address);
+		
+		System.out.println("seller Controller ano : " + ano + " phone : " + phone + " id_no : " + id_no + " address : " + address);
+
+		if(result > 0){			
 			//오리지널 파일 이름 생성
 			String ofileName = idimage.getOriginalFilename();
 			//시간데이터 생성하여 오리지널 파일의 확장자 명을 더해서 새파일명 생성
 			long currentTime = System.currentTimeMillis();  
 		    SimpleDateFormat simDf = new SimpleDateFormat("yyyyMMddHHmmss");
-			String rfileName = simDf.format(new Date(currentTime)) +"."
+			rfileName = simDf.format(new Date(currentTime)) +"."
 					+ ofileName.substring(ofileName.lastIndexOf(".")+1);;
 					idimage.transferTo(new File(savePath + rfileName));
 			//account의 ano 추출
 			party = (Party)session.getAttribute("party");
 			int pno = party.getPno();
 			//attachment 테이블에 insert/update 할 vo객체 생성
+			
 			vo.setOrifname(ofileName);
 			vo.setRefname(rfileName);
 			vo.setFtype("party");
 			vo.setFsubtype("idimage");
 			vo.setRefno(pno);
+			
 			//전달받은 photoflag 값이 insert 일경우 attachment 테이블에 사진파일 insert 실행
 			if(photoflag.equals("insert")){
 				result = attachmentService.insertIdImage(vo);
+				System.out.println("Controller insertIdImage : " + vo);
 				System.out.println("insert 발생");
 			}
+			
 			//전달받은 photoflag 값이 update 일경우 attachment 테이블에 사진파일 update 실행
 			if(photoflag.equals("update")){
 				result = attachmentService.updateIdImage(vo);
-				System.out.println("insert 발생");
+				System.out.println("Controller updateIdImage : " + vo);
+				System.out.println("update 발생");
 			}
+			
 			//insert or update 가 성공할 경우 해당 사진의 계정 테이블(account)에 pimage 컬럼 update
 			if(result > 0){
 				HashMap<String, String> hmap = new HashMap<String, String>();
 				hmap.put("ano", Integer.toString(ano));
 				hmap.put("idimage", rfileName);
 				result = attachmentService.partyIdImage(hmap);
+				
+				System.out.println("seller idimage Controller ano : " + ano + " rfileName : " + rfileName);
+				
 				//페이지에 나타나는 사진이미지를 갱신해주기위해 account 객체를 조회하여 세션의 account에 덮어씀
 				if(result > 0){
 					Party p = accountService.loginParty(ano);
@@ -334,11 +351,10 @@ public class AccountController {
 			}
 		}
 		
-		else {
-			//result = accountService.updateSeller(ano, phone, id_no, address, idimage);
-		}
+		party = accountService.selectResult(ano);
+
 		
-		party = accountService.loginParty(ano);
+		System.out.println("seller Controller3 ano : " + ano + " party : " + party);
 		
 		session.setAttribute("party", party);
 		

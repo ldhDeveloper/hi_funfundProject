@@ -39,31 +39,13 @@
 	
 	<update id="updateName" parameterType="HashMap">
 		<![CDATA[
-			UPDATE PARTY SET pname=(#{name}) WHERE ano=#{ano}
+			UPDATE PARTY SET pname=#{name} WHERE ano=#{ano}
 		]]>
 	</update>
-	
-	<insert id="insertSeller" parameterType="HashMap">
-		<![CDATA[
-			INSERT INTO PARTY(pno, ano, id_no, address) VALUES(seq_pno.nextval, #{ano, jdbcType=INTEGER}, #{phone, jdbcType=VARCHAR}, ENCRYPTION_AES.ENC_AES(#{id_no, jdbcType=VARCHAR}), #{address, jdbcType=VARCHAR})
-		]]>
-	</insert>
 	
 	<update id="updateSeller" parameterType="HashMap">
 		<![CDATA[
-			UPDATE PARTY SET phone=(#{phone}), id_no=(ENCRYPTION_AES.ENC_AES(#{id_no})), address=#{address}, idimage=#{idimage}) WHERE ano=#{ano}
+			UPDATE PARTY SET phone=#{phone}, id_no=ENCRYPTION_AES.ENC_AES(#{id_no}), address=#{address} WHERE ano=#{ano}
 		]]>
-	</update>
-	
-	<insert id="insertIdImage">
-		<![CDATA[
-		
-		]]>
-	</insert>
-	
-	<update id="updateImage">
-		<![CDATA[
-		
-		]]>	
 	</update>
 </mapper>

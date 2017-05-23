@@ -71,10 +71,23 @@ $(function(){
 	$("#eid_no").val(result[1]);
 
 	var add ='<c:out value="${sessionScope.party.address}"/>';
-	var aResult = add.split('-');
+	var aResult = add.split('@');
 	$("#sample6_postcode").val(aResult[0]);
 	$("#sample6_address").val(aResult[1]);
 	$("#sample6_address2").val(aResult[2]);
+	
+	var img = '<c:out value="${sessionScope.party.idimage}"/>';
+	if(img == "") {
+		$("#btnUpdateIdCardImg").hide();
+		$("#btnUploadIdCardImg").show();
+		
+		
+	}
+	
+	else {
+		$("#btnUpdateIdCardImg").show();
+		$("#btnUploadIdCardImg").hide();
+	}
 });
 
 </script>
@@ -163,7 +176,7 @@ $(function(){
 	                           		</c:if>
 	                           		
 	                           		<c:if test="${ !empty sessionScope.party.phone }">
-		       							<input type="text" class="input-text" id="phone" name="phone" value="${ sessionScope.party.phone }"  placeholder="휴대폰"  disabled/>                                                            
+		       							<input type="text" class="input-text" id="phone" name="phone" value="${ sessionScope.party.phone }"  placeholder="휴대폰"/>                                                            
 	                           		</c:if>
 	                           		
 	                           <h5>주민등록번호</h5>
@@ -175,7 +188,7 @@ $(function(){
 		       							</c:if>
 		       							
 		       							<c:if test="${ ! empty sessionScope.party.id_no }"> 
-		       								<li><input id="fid_no" type="tel" class="input-text" value="" name="id_no1" maxlength="7" placeholder="주민등록번호 앞자리" disabled/></li>
+		       								<li><input id="fid_no" type="tel" class="input-text" value="" name="id_no1" maxlength="7" placeholder="주민등록번호 앞자리" /></li>
 		       							</c:if>
 		       							
 		       							<c:if test="${ empty sessionScope.party.id_no }">
@@ -183,7 +196,7 @@ $(function(){
 		       							</c:if>
 		       							
 		       							<c:if test="${ ! empty sessionScope.party.id_no }">
-		       								<li><input id="eid_no" autocomplete="new-password" type="password" class="input-text" name="id_no2" placeholder="주민등록번호 뒷자리" maxlength="7" disabled/></li>
+		       								<li><input id="eid_no" autocomplete="new-password" type="password" class="input-text" name="id_no2" placeholder="주민등록번호 뒷자리" maxlength="7"/></li>
 		       							</c:if>
 		       						</ul>
 	                 		
@@ -206,8 +219,14 @@ $(function(){
 	                        
 								<h5>실명확인증표 등록</h5>
 				       				<p class="sub-text">실명과   주민등록번호 확인을 위해, 현재 유효한 주민등록증 또는 면허증의 앞면을 촬영한 사진을 등록하세요.</p>
-				       								       				
+				       				       				
 				       				<input type="text" id="imgRoute" class="input-text" placeholder="선택된 파일 없음" readonly/>
+				       				
+				       				<input type="text" id="savefile" class="input-text" value="파일이 저장되었습니다." readonly disabled/>
+				       				
+				       				<c:if test="${ ! empty sessionScope.party.idimage }">				       				
+				       					<input type="button" class="btn-darkgray" id="btnUpdateIdCardImg" value="이미지 파일 수정" onclick="document.all.idimage.click();"/>
+				       				</c:if>
 				       				
 				       				<input id="uploadIdCardImg" class="input-text" type="file" name="idimage" style="display:none;" onchange="document.getElementById('imgRoute').value=this.value;">
 				       				
@@ -305,14 +324,6 @@ $(function(){
             }
         }).open();
     }
-    
-    // 수정 버튼 클릭시
-    function saveSeller() {
-    	if($("#name").val() == "") {
-    		alert("회원정보 설정에서 이름을 반드시 입력하세요!");
-    		return false;
-    	}
-    };
     
     function photosubmit(){
 		$("#imageform").submit();

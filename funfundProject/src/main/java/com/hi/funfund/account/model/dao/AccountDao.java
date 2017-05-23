@@ -5,6 +5,7 @@ import java.util.*;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.hi.funfund.account.model.vo.Account;
 import com.hi.funfund.account.model.vo.Party;
@@ -113,28 +114,21 @@ public class AccountDao {
 		return result;
 	}
 	
-	// 판매자 정보 입력
+	// 판매자 정보 수정
 
-	public int insertSeller(int ano, String phone, String id_no, String address) {
+	public int updateSeller(int ano, String phone, String id_no, String address) {
 		HashMap<String, String> hmap = new HashMap<String, String>();
 		hmap.put("ano", Integer.toString(ano));
 		hmap.put("phone", phone);
 		hmap.put("id_no", id_no);
 		hmap.put("address", address);
-		int result = sqlSession.insert("insertSeller", hmap);
+		int result = sqlSession.update("updateSeller", hmap);
+		System.out.println("seller Dao ano : " + ano + " phone : " + phone + " id_no : " + id_no + " address : " + address);
 		return result;
 	}
-	
-	// 판매자 정보 수정
 
-	public int updateSeller(int ano, String phone, String id_no, String address, String idimage) {
-		HashMap<String, String> hmap = new HashMap<String, String>();
-		hmap.put("ano", Integer.toString(ano));
-		hmap.put("address", phone);
-		hmap.put("address", id_no);
-		hmap.put("address", address);
-		hmap.put("address", idimage);
-		int result = sqlSession.insert("updateSeller", hmap);
-		return result;
+	public Party selectResult(int ano) {
+		Party p  = (Party)sqlSession.selectOne("selectResult", ano);
+		return p;
 	}
 }
