@@ -334,7 +334,7 @@ public class AccountController {
 		}
 		
 		else {
-			result = accountService.updateSeller(ano, phone, id_no, address, idimage);
+			//result = accountService.updateSeller(ano, phone, id_no, address, idimage);
 		}
 		
 		party = accountService.loginParty(ano);
