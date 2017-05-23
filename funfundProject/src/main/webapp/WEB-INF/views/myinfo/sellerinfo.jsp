@@ -80,13 +80,15 @@ $(function(){
 	if(img == "") {
 		$("#btnUpdateIdCardImg").hide();
 		$("#btnUploadIdCardImg").show();
-		
+		$("#updateCardImg").removeClass("alert alert-danger");
 		
 	}
 	
 	else {
 		$("#btnUpdateIdCardImg").show();
 		$("#btnUploadIdCardImg").hide();
+		$("#updateCardImg").addClass("alert alert-success");
+		$("#updateCardImg").html("사진이 저장되었습니다.");
 	}
 });
 
@@ -139,7 +141,6 @@ $(function(){
       							<ul class="nav navbar-nav">      	
         							<li><a href="myinfo.ao" class="otherActive">회원 정보 설정</a></li>
         							<li class="act"><a class="active" href="myinfo.do">판매자 정보 변경<span class="sr-only">(current)</span></a></li>
-        							<li><a href="joinproject.ao" class="otherActive">참여한 프로젝트</a></li>
         							<li><a href="puttoproject.ao" class="otherActive">찜한 프로젝트</a></li>
         							<li><a href="newproject.ao" class="otherActive">개설한 프로젝트</a></li>
         							<li><a href="myfunding.ao" class="otherActive">나의 펀딩 현황</a></li>
@@ -222,12 +223,9 @@ $(function(){
 				       				       				
 				       				<input type="text" id="imgRoute" class="input-text" placeholder="선택된 파일 없음" readonly/>
 				       				
-				       				<input type="text" id="savefile" class="input-text" value="파일이 저장되었습니다." readonly disabled/>
-				       				
-				       				<c:if test="${ ! empty sessionScope.party.idimage }">				       				
-				       					<input type="button" class="btn-darkgray" id="btnUpdateIdCardImg" value="이미지 파일 수정" onclick="document.all.idimage.click();"/>
-				       				</c:if>
-				       				
+				       				<p class="alert alert-success" id="updateCardImg"></p>		       				
+				       				<input type="button" class="btn-darkgray" id="btnUpdateIdCardImg" value="이미지 파일 수정" onclick="document.all.idimage.click();"/>
+				       								       				
 				       				<input id="uploadIdCardImg" class="input-text" type="file" name="idimage" style="display:none;" onchange="document.getElementById('imgRoute').value=this.value;">
 				       				
 				       				<div class="btn-wrap" id="idCardFileUploadBtn">
