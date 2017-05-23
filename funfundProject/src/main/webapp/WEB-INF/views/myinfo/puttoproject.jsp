@@ -205,7 +205,6 @@
       							<ul class="nav navbar-nav">
       								<li><a href="myinfo.ao" class="otherActive">회원 정보 설정</a></li>
         							<li><a href="sellerinfo.ao" class="otherActive">판매자 정보 변경</a></li>
-        							<li><a href="joinproject.ao" class="otherActive">참여한 프로젝트</a></li>
         							<li class="act"><a class="active" href="puttoproject.ao">찜한 프로젝트<span class="sr-only">(current)</span></a></li>      							        							        							
         							<li><a href="newproject.ao" class="otherActive">개설한 프로젝트</a></li>
         							<li><a href="myfunding.ao" class="otherActive">나의 펀딩 현황</a></li>

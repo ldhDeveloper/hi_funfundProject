@@ -6,8 +6,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
-
 <style type="text/css">
 .container{
 	width: 100%;
@@ -141,6 +139,33 @@
 	width: 40%;
 	background-color: #F8F8F8;
 }
+
+.mfth {
+	text-align: center;
+}
+
+.mftd {
+	text-align: center;
+	cursor:pointer;
+}
+
+.mftdrL {
+	border-bottom : 1px solid #ddd;
+}
+
+.tableStart {
+	width: 98%;
+	padding-left: 2%;
+}
+
+.state {
+	border: none;
+	border-radius: 9px;
+	background-color: #E25253;
+	width: 30%;
+	height: 25px;
+	color: white;
+}
 </style>
 
 <title>Insert title here</title>
@@ -195,7 +220,6 @@
       							<ul class="nav navbar-nav">
       								<li><a href="myinfo.ao" class="otherActive">회원 정보 설정</a></li>
         							<li><a href="sellerinfo.ao" class="otherActive">판매자 정보 변경</a></li>
-        							<li><a href="joinproject.ao" class="otherActive">참여한 프로젝트</a></li>
         							<li><a href="puttoproject.ao" class="otherActive">찜한 프로젝트</a></li>
         							<li><a href="newproject.ao" class="otherActive">개설한 프로젝트</a></li>
         							<li class="act"><a class="active" href="myfunding.ao">나의 펀딩 현황<span class="sr-only">(current)</span></a></li>      							        							        							        							       							
@@ -212,7 +236,92 @@
 												
     						<div class="panel panel-success">
       							<div class="panel-heading">리워드형 프로젝트</div>
-      							<div class="panel-body">아직 참여한 프로젝트가 없습니다.</div>
+      							<!-- <div class="panel-body">아직 참여한 프로젝트가 없습니다.</div> -->
+      							
+      							<br>
+									<div class="tableStart">
+										<table class="table table-hover">
+    										<thead>
+      											<tr class="mfthr">
+        											<th class="mfth">참여 프로젝트</th>
+        											<th class="mfth">마감날짜</th>
+        											<th class="mfth">금액</th>
+        											<th class="mfth">결제상태</th>
+        											<th class="mfth">변경/취소</th>
+      											</tr>
+    										</thead>
+    
+    										<tbody>
+      											<tr class="mftdr">
+        											<td class="mftd"><b class="state">진행중</b> 들고다니면서 마시는 미니 고급 콜드...</td>
+        											<td class="mftd">2017.06.16</td>
+        											<td class="mftd">17,500원</td>
+        											<td class="mftd">결제예정</td>
+        											<td class="mftd">정보변경/취소</td>
+      											</tr>
+      									
+      											<tr class="mftdr">
+        											<td class="mftd"><b class="state">진행중</b> 들고다니면서 마시는 미니 고급 콜드...</td>
+        											<td class="mftd">2017.06.16</td>
+        											<td class="mftd">17,500원</td>
+        											<td class="mftd">결제예정</td>
+        											<td class="mftd">정보변경/취소</td>
+      											</tr>
+      									
+      											<tr class="mftdrL">
+        											<td class="mftd"><b class="state">진행중</b> 들고다니면서 마시는 미니 고급 콜드...</td>
+        											<td class="mftd">2017.06.16</td>
+        											<td class="mftd">17,500원</td>
+        											<td class="mftd">결제예정</td>
+        											<td class="mftd">정보변경/취소</td>
+      											</tr>
+      									
+      											<!-- <tr class="mftdrL">
+        											<td class="mftd"><b class="state">진행중</b> 제목 넣기</td>
+        											<td class="mftd">마감 날짜 값 넣기 </td>
+        											<td class="mftd">금액 값 넣기</td>
+        											<td class="mftd">결제 상태값 넣기</td>
+        											<td class="mftd">변경/취소 값 넣기</td>
+      											</tr> -->
+    										</tbody>
+  										</table>
+  									</div>
+  									
+  									<div class="tableStart">
+  									
+  									<h3>결제 정보 변경 및 취소</h3>
+										<table class="table">
+    										<thead>
+    											<h5>참여한 프로젝트 정보</h5>
+      											<tr class="mfthr">
+        											<th class="mfth">주문번호</th>
+        											<th class="mfth">리워드 프로젝트</th>
+        											<th class="mfth">마감날짜</th>
+        											<th class="mfth">참여금액</th>
+        											<th class="mfth">결제상태</th>
+      											</tr>
+    										</thead>
+    
+    										<tbody>
+      											<tr class="mftdr">
+        											<td class="mftd">-4854-20170522180209-323532</td>
+        											<td class="mftd"><b class="state">진행중</b> 들고다니면서 마시는 미니 고급 콜드...</td>
+        											<td class="mftd">2017.06.16</td>
+        											<td class="mftd">17,500원</td>
+        											<td class="mftd">결제예정</td>
+      											</tr>
+      											
+      											<!-- <tr class="mftdr">
+        											<td class="mftd">-4854-20170522180209-323532</td>
+        											<td class="mftd"><b class="state">진행중</b> 들고다니면서 마시는 미니 고급 콜드...</td>
+        											<td class="mftd">2017.06.16</td>
+        											<td class="mftd">17,500원</td>
+        											<td class="mftd">결제예정</td>
+      											</tr> -->      											
+    										</tbody>
+  										</table>
+  									</div>  								
+  								<br>
     						</div>
     					</div>
     					
