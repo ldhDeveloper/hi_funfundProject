@@ -9,7 +9,7 @@ public interface ItemAskService {
 
 	int insert(HashMap<String, String> cmap);
 
-	int update(ItemAsk itemAsk);
+	int update(int pro_no);
 
 	int delete(int ask_no);
 

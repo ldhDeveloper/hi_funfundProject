@@ -20,28 +20,32 @@
 		<result property="ask_content" column="ask_content" />
 		<result property="id_no" column="id_no" />
 		<result property="ask_date" column="ask_date" />
+		<result property="upask_no" column="upask_no" />
 		<result property="nickname" column="nickname" />
 	</resultMap>
 
 	<select id="selectList" resultMap="itemAskResult2"
 		parameterType="int">
 		select ask_no, it.pro_no, ask_type, ask_content, id_no,
-		ask_date, upask_no, a.nickname
+		ask_date, upask_no, a.nickname , a.pimage
 		from itemask ask inner join item it on ask.pro_no=it.pro_no
 		inner join account a on ask.id_no = a.ano
 		where it.pro_no = #{pro_no}
-		order by ask_date
+		order by upask_no desc, ask_no asc
 	</select>
 
 	<insert id="insertAsk" parameterType="HashMap">
-		insert into itemask
-		values(seq_ask.nextval,#{pro_no},'댓글',#{acontent},#{id_no}, sysdate, null)
+		insert into itemask (ask_no, pro_no, ask_type, ask_content, id_no, ask_date)
+		values(seq_ask.nextval,#{pro_no},'댓글',#{acontent},#{id_no}, sysdate)
 	</insert>
 	
-	<!-- <insert id="insertAsk2" parameterType="HashMap">
-		insert into itemask
-		values(seq_ask.nextval,#{pro_no},'답글',#{acontent},#{id_no}, sysdate, #{upask_no})
-	</insert> -->
+	<update id="updateAsk" parameterType="HashMap">
+	     update from itemask  
+	     set upask_no = #{upask_no}
+	     where pro_no = #{pro_no}
+	</update>
+	
+	
 
 
 </mapper>

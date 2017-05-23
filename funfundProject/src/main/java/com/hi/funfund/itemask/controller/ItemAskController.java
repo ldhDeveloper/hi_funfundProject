@@ -37,43 +37,33 @@ public class ItemAskController {
 			RedirectAttributes redirect) {
 		String pro_no = request.getParameter("pro_no");
 		String acontent = request.getParameter("acontent");
+		String ask_no = request.getParameter("ask_no");
 		Account account = (Account) session.getAttribute("account");
 		System.out.println(account);
 		System.out.println(acontent);
 		System.out.println(pro_no);
+		System.out.println(ask_no);
 		HashMap<String, String> cmap = new HashMap<String, String>();
 		cmap.put("pro_no", pro_no);
 		cmap.put("acontent", acontent);
 		cmap.put("id_no", Integer.toString(account.getAno()));
+		cmap.put("ask_no", ask_no);
 		int result = itemAskService.insert(cmap);
 		model.setViewName("funding/reply");
 		redirect.addAttribute("pro_no", pro_no);
 		return "redirect:/reply.ask";
 	}
-	
-	/*@RequestMapping("reinsert.ask")
-	public String reinsert(HttpSession session, HttpServletRequest request, ModelAndView model,
-			RedirectAttributes redirect) {
+
+	/*@RequestMapping("update.ask")
+	public String update(HttpServletRequest request, RedirectAttributes redirect) {
 		String pro_no = request.getParameter("pro_no");
 		String acontent = request.getParameter("acontent");
-		Account account = (Account) session.getAttribute("account");
-		System.out.println(account);
-		System.out.println(acontent);
-		System.out.println(pro_no);
-		HashMap<String, String> cmap = new HashMap<String, String>();
-		cmap.put("pro_no", pro_no);
-		cmap.put("acontent", acontent);
-		cmap.put("id_no", Integer.toString(account.getAno()));
-		int result = itemAskService.insert(cmap);
-		model.setViewName("funding/reply");
+		HashMap<String, String> umap = new HashMap<String, String>();
+		umap.put("pro_no", pro_no);
+		int result = itemAskService.update(pro_no);
 		redirect.addAttribute("pro_no", pro_no);
 		return "redirect:/reply.ask";
 	}*/
-
-	public String update(ItemAsk itemAsk) {
-		int result = itemAskService.update(itemAsk);
-		return null;
-	}
 
 	public String delete(int ask_no) {
 		int result = itemAskService.delete(ask_no);
@@ -87,14 +77,14 @@ public class ItemAskController {
 		List<ItemAsk> aList = itemAskService.selectList(pro_no);
 		Item item = itemService.selectOne(pro_no);
 		List<FundMenu> mList = fundMenuService.selectList(pro_no);
-		List<Itemfund> bestList=itemService.bestList(pro_no);
+		List<Itemfund> bestList = itemService.bestList(pro_no);
 		model.addObject("item", item);
 		model.addObject("mList", mList);
 		model.addObject("aList", aList);
+		System.out.println("a" + aList);
 		model.addObject("bestList", bestList);
 		model.setViewName("funding/reply");
 		return model;
 	}
-	
 
 }

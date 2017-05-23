@@ -23,9 +23,8 @@ public class ItemAskServiceIm implements ItemAskService {
 	}
 
 	@Override
-	public int update(ItemAsk itemAsk) {
-		// TODO Auto-generated method stub
-		return itemAskDao.update(itemAsk);
+	public int update(int pro_no) {
+		return itemAskDao.update(pro_no);
 	}
 
 	@Override
