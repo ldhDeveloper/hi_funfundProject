@@ -84,7 +84,7 @@ public class ItemDao {
 
 	public List<Item> selectMyItems(int ano) {
 		List<Item> iList = (List<Item>) sqlSession.selectList(nameSpace + "selectMyItems", ano);
-		return null;
+		return iList;
 	}
 	
 }

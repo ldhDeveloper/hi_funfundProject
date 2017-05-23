@@ -140,6 +140,15 @@
 	background-color: #F8F8F8;
 }
 
+.myItemList{
+	margin : 0px !important;
+	padding : 0px !important;
+}
+
+.myListMargin{
+	margin-top : 15px !important;
+	margin-bottom : 15px !important;
+}
 </style>
 <script>
 
@@ -209,21 +218,91 @@
 						<div class="well">
 	  						<div class="panel panel-success">
       							<div class="panel-heading">찜한 리워드형 프로젝트</div>
+      							<div class="row myItemList">
       							<c:if test="${empty iList}">
       							<div class="panel-body">아직 찜한 프로젝트가 없습니다.</div>
       							</c:if>
       							<c:if test="${!empty iList }">
-      								<c:forEach var="item" items="${iList }">
-      										<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-      											<div class="panel panel-default">
-													  <div class="panel-heading">Panel heading without title</div>
+      								<c:forEach var="item" items="${iList }" varStatus="status">
+      										<script>
+										$(function(){
+											var ecost = "<c:out value='${item.ecost}'/>";
+											var fundamount = "<c:out value='${item.fundamount}'/>"
+											var persent = Math.round(fundamount * 100 / ecost);
+											var bar=0;
+											if(persent > 100){
+												bar=100;
+											} else {
+												bar=persent;
+											}
+											var edate = new Date("<c:out value='${item.pedate}'/>");
+											var todate = new Date();
+											var btMs = edate.getTime() - todate.getTime() ;
+										    var btDay = Math.round(btMs / (1000*60*60*24)) ;
+
+											console.log(persent);
+											$("#persent<c:out value='${status.index}'/>").text(persent);
+											$("#progressbar<c:out value='${status.index}'/>").attr("aria-valuenow", persent);
+											$("#progressbar<c:out value='${status.index}'/>").css("width", bar + "%");
+											$("#edate<c:out value='${status.index}'/>").text(btDay);
+											
+											if(btDay < 0){
+												$("#edate<c:out value='${status.index}'/>").hide();
+												$("#yet<c:out value='${status.index}'/>").hide();
+												$("#complete<c:out value='${status.index}'/>").show();
+												$("#conitemper<c:out value='${status.index}'/>").hide();
+												$("#enditemper<c:out value='${status.index}'/>").show();
+											} else {
+												$("#complete<c:out value='${status.index}'/>").hide();
+												$("#edate<c:out value='${status.index}'/>").show();
+												$("#yet<c:out value='${status.index}'/>").show();
+												$("#conitemper<c:out value='${status.index}'/>").show();
+												$("#enditemper<c:out value='${status.index}'/>").hide();
+												$("#itempanel<c:out value='${status.index}'/>").removeClass("panel-default");
+												$("#itempanel<c:out value='${status.index}'/>").addClass("panel-primary");
+											}
+										})
+									</script>
+      										<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 myListMargin">
+      											<div id="itempanel<c:out value='${status.index}'/>" class="panel panel-default">
+      													
+													  <div id="conitemper<c:out value='${status.index}'/>" class="panel-heading panel-primary">진행중</div>
+													  <div id="enditemper<c:out value='${status.index}'/>" class="panel-heading">펀딩 종료</div>
 													  <div class="panel-body">
-													    Panel content
+													    <div class="thumbnail" align="center">
+							<a href="detail.it?pro_no=<c:out value="${item.pro_no}"/>"> <img
+								src="/funfund/images/funding/thumbnail/<c:out value="${item.thumbnail }"/>" alt="사진1"
+								style="width: 100%">
+																<div id="progress<c:out value='${status.index}'/>" class="progress">
+									<div class="progress-bar progress-bar-warning"
+										id="progressbar<c:out value='${status.index}'/>"
+										role="progressbar" aria-valuenow="60" aria-valuemin="0"
+										aria-valuemax="<c:out value="${item.ecost}"/>" style="width: 60%;">
+										<span class="sr-only"></span>
+									</div>
+								</div>
+								<p>
+									<span id="persent<c:out value='${status.index}'/>"></span> % &nbsp;&nbsp; <span><c:out value="${item.fundamount }"/></span>원 달성 &nbsp;&nbsp; 
+									<span id="edate<c:out value='${status.index}'/>"></span>
+									<span id="yet<c:out value='${status.index}'/>">일 남음</span>
+									<span id="complete<c:out value='${status.index}'/>">펀딩종료</span>
+								</p>
+
+								<div class="caption">
+									<p>
+										<c:out value="${item.pcontent }" />
+									</p>
+									<span><c:out value="${item.category}" /></span>
+								</div>
+							</a>
+						</div>
 													  </div>
 												</div>
       										</div>
+      									
       								</c:forEach>
-      							</c:if>
+      								</c:if>
+      							</div>
     						</div>
     					</div>
     		    					
