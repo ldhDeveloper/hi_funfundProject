@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hi.funfund.fundmenu.model.service.FundMenuService;
@@ -24,30 +26,27 @@ public class FundMenuController {
 	@Autowired
 	private ItemService itemService;
 
-	//오류남
 	@RequestMapping("reward.fm")
 	public ModelAndView selectList(int pro_no, ModelAndView model) {
 		List<FundMenu> mList = fundMenuService.selectList(pro_no);
 		Item item = itemService.selectOne(pro_no);
 		model.addObject("mList", mList);
 		model.addObject("item", item);
-
 		model.setViewName("payment/rewardList");
 		return model;
 
 	}
-
-	//오류남
-	@RequestMapping("selectList.fm")
-	public ModelAndView selectfList(int pro_no, ModelAndView model) {
-
-		ArrayList<FundMenu> mList = null;
-
-		mList = fundMenuService.selectList(pro_no);
-		model.addObject("mList", mList);
-		model.setViewName("jsonView");
-
-		return model;
+	
+	
+	@RequestMapping(value = "selectList.fm", method = RequestMethod.GET)
+	public @ResponseBody List<FundMenu> selectfList(int pro_no) {
+		System.out.println("ppppp:"+pro_no);
+		ArrayList<FundMenu> mList = fundMenuService.selectList(pro_no);
+		System.out.println("오니?");
+		if (mList != null) {
+			System.out.println("ajaxmList: " + mList);
+		}
+		return mList;
 	}
 
 	public String insert(FundMenu fm) {

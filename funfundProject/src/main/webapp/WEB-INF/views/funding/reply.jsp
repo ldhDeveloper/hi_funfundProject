@@ -173,12 +173,31 @@ button {
 	background: #fff;
 	box-sizing: border-box !important;
 }
+#comment-area2 textarea {
+	display: block;
+	margin-bottom: 10px;
+	margin-left: 20px;
+	margin-top:10px;
+	width: 80%;
+	height: 40%;
+	padding: 10px;
+	font-size: 13px;
+	line-height: 18px;
+	border: 1px solid #e4e4e4;
+	background: #fff;
+	box-sizing: border-box !important;
+}
 
 textarea {
 	resize: none;
 }
 
 #upload {
+	text-align: right;
+	width: 80%;
+	margin-bottom: 20px;
+}
+#upload2 {
 	text-align: right;
 	width: 80%;
 	margin-bottom: 20px;
@@ -216,11 +235,20 @@ textarea {
 	font-size: 12px;
 	line-height: 12px;
 	color: #92;
+	margin-top: 10px;
+}
+
+#recmtbutton {
+	display: inline-block;
+	font-size: 12px;
+	margin-top: 10px;
+	color: #92;
 }
 
 .supportinfo {
 	display: inline-block;
 	padding: 15px;
+	margin-bottom: 10px;
 }
 
 #box2 {
@@ -264,6 +292,13 @@ textarea {
 		$("#content").html(co);
 
 	});
+	
+	$(function(){
+		$('#comment-area2').hide(); 
+		$('#recmtbutton').click(function() {
+            $('#comment-area2').toggle();
+		});
+	});
 </script>
 </head>
 <body>
@@ -299,12 +334,12 @@ textarea {
 		style="padding: 10px;">
 		<!-- 댓글작성 영역 -->
 		<div class="comment">
-			<p>${fn:length(aList) }개의댓글이달렸습니다.</p>
+			<p>${fn:length(aList) }개의 댓글이 달렸습니다.</p>
 			<form id="comment-area" action="coinsert.ask">
 				<textarea id="acontent" name="acontent" style="overflow-y: hidden;"
 					rows="3" cols="50" maxlength="140;" placeholder="댓글을 입력하세요"></textarea>
 				<div id="upload">
-					<input type="submit" value="등록하기"> <input type="hidden"
+					<input type="submit" value="댓글달기"> <input type="hidden"
 						value="${param.pro_no}" name="pro_no">
 				</div>
 			</form>
@@ -319,7 +354,19 @@ textarea {
 					<c:forEach var="ask" items="${aList}">
 						<p id="cmtId">${ask.nickname }</p>
 						<p id="cmtco">${ask.ask_content }</p>
+						<a id="recmtbutton">답글달기</a>
 						<span id="cmtda">${ask.ask_date }</span>
+						<form action="" id="comment-area2">
+							<textarea id="acontent2" name="acontent2"
+								style="overflow-y: hidden;" rows="3" cols="50" maxlength="140;"
+								placeholder="답글을 입력하세요"></textarea>
+							<div id="upload2">
+								<input type="submit" value="답글달기"> <input type="hidden"
+									value="${param.pro_no}" name="pro_no">
+									<input type="hidden" value="${ask.id_no}" name="id_no">
+									console.log("${ask.id_no }");
+							</div>
+						</form>
 						<hr>
 					</c:forEach>
 				</div>

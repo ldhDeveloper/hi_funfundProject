@@ -10,6 +10,8 @@ public class ItemAsk {
 	private String ask_content;
 	private int id_no;
 	private Date ask_date;
+	private int upask_no;
+	
 	public int getAsk_no() {
 		return ask_no;
 	}
@@ -46,10 +48,17 @@ public class ItemAsk {
 	public void setAsk_date(Date ask_date) {
 		this.ask_date = ask_date;
 	}
+	public int getUpask_no() {
+		return upask_no;
+	}
+	public void setUpask_no(int upask_no) {
+		this.upask_no = upask_no;
+	}
 	public ItemAsk() {
 		super();
 	}
-	public ItemAsk(int ask_no, int pro_no, String ask_type, String ask_content, int id_no, Date ask_date) {
+	public ItemAsk(int ask_no, int pro_no, String ask_type, String ask_content, int id_no, Date ask_date,
+			int upask_no) {
 		super();
 		this.ask_no = ask_no;
 		this.pro_no = pro_no;
@@ -57,11 +66,14 @@ public class ItemAsk {
 		this.ask_content = ask_content;
 		this.id_no = id_no;
 		this.ask_date = ask_date;
+		this.upask_no = upask_no;
 	}
 	@Override
 	public String toString() {
-		return ask_no + ", " + pro_no + ", " + ask_type + ", " + ask_content + ", " + id_no + ", " + ask_date;
+		return "ItemAsk [ask_no=" + ask_no + ", pro_no=" + pro_no + ", ask_type=" + ask_type + ", ask_content="
+				+ ask_content + ", id_no=" + id_no + ", ask_date=" + ask_date + ", upask_no=" + upask_no + "]";
 	}
+	
 	
 	
 	
