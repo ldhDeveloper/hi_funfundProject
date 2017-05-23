@@ -70,18 +70,17 @@ public class AttachmentDao {
 	
 	// insertIdImage seller 실명확인 증표 등록
 	public int insertIdImage(Attachment vo) {
-		return sqlSession.insert("insertIdImage");
+		System.out.println("DAO insertIdImage : " + vo);
+		return sqlSession.insert("insertIdImage", vo);
 	}
 	
 	// updateIdImage seller 실명확인 증표 수정
 	public int updateIdImage(Attachment vo) {
-		return sqlSession.update("updateImage");
+		System.out.println("updateIdImage : " + vo);
+		return sqlSession.update("updateImage", vo);
 	}
 	public int partyIdImage(HashMap<String, String> hmap) {		
 		int result = sqlSession.update("partyIdImage", hmap);
-		return result;
-		
+		return result;		
 	}
-	
-
 }

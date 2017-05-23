@@ -2,6 +2,8 @@ package com.hi.funfund.account.model.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.hi.funfund.account.model.vo.Account;
 import com.hi.funfund.account.model.vo.Party;
 
@@ -53,9 +55,9 @@ public interface AccountService {
 
 	Account selectThirdPartyUser(Account account); // 타사이트로 가입한 유저 찾기/등록/가입제어
 
-	int insertSeller(int ano, String phone, String id_no, String address); // seller 정보 입력 (휴대폰, 주민등록번호, 주소, 실명확인증표)
+	int updateSeller(int ano, String phone, String id_no, String address); // seller 정보 수정 (휴대폰, 주민등록번호, 주소, 실명확인증표)
 
-	int updateSeller(int ano, String phone, String id_no, String address, String idimage); // seller 정보 수정 (휴대폰, 주민등록번호, 주소, 실명확인증표)
+	Party selectResult(int ano);
 	
 	//미추가된 함수 : 프로젝트별 후원자 리스트
 

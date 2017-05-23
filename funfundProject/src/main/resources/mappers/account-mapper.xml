@@ -46,7 +46,7 @@
 	<select id="loginParty" parameterType="int" resultMap="partyResult">
 		<![CDATA[
 			SELECT
-				*
+				* 
 			FROM
 				PARTY
 			WHERE
@@ -56,7 +56,7 @@
 
 	<select id="selectOldPwd" parameterType="hashmap" resultMap="accountResult">
 		<![CDATA[			
-			SELECT ano, id, ENCRYPTION_AES.DEC_AES(#{oldPwd}) AS pwd, email, pimage, idtype, idtoken, seller, outyn, nickname FROM ACCOUNT WHERE ano=#{ano} 
+			SELECT ano, id, ENCRYPTION_AES.DEC_AES(pwd) AS pwd, email, pimage, idtype, idtoken, seller, outyn, nickname FROM ACCOUNT WHERE ano=#{ano} 
 		]]>
 	</select>
 
@@ -100,5 +100,9 @@
 		</selectKey>
 	</insert>
 
-
+	<select id="selectResult" parameterType="int" resultMap="partyResult">
+		<![CDATA[
+			SELECT pno, ano, pname, phone, intro, ENCRYPTION_AES.DEC_AES(id_no) AS id_no, president, address, pconfirm, econfirm, idimage FROM PARTY WHERE ano=#{ano}
+		]]>
+	</select>
 </mapper>

@@ -55,21 +55,22 @@
 		]]>
 	</update>
 	
-	<insert id="insertIdImage">
+	<insert id="insertIdImage" parameterType="attachment">
 		<![CDATA[
-			INSERT INTO (fno, orifname, refname, ftype, refno, fsubtype) VALUES(seq_fno.nextval(), #{orifname}, #{refname}, #{ftype}, #{refno}, #{fsubtype})
+			INSERT INTO ATTACHMENT (fno, orifname, refname, ftype, fsubtype, refno)
+			VALUES(seq_fno.nextval, #{orifname, JDBCType=VARCHAR}, #{refname, JDBCType=VARCHAR}, #{ftype, JDBCType=VARCHAR}, #{fsubtype, JDBCType=VARCHAR}, #{refno, JDBCType=INTEGER})
 		]]>
 	</insert>
 
-	<update id="updateImage">		
+	<update id="updateImage" parameterType="attachment">		
 		<![CDATA[
 			UPDATE ATTACHMENT SET orifname=#{orifname}, refname=#{refname} WHERE ftype=#{ftype} AND fsubtype=#{fsubtype} AND refno=#{refno}
 		]]>
 	</update>
 
-	<update id="partyIdImage">
+	<update id="partyIdImage" parameterType="hashmap">
 		<![CDATA[
-		
+			UPDATE PARTY SET idimage=#{idimage} WHERE ano=#{ano}
 		]]>
 	</update>
 	

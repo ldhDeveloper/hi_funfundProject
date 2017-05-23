@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.hi.funfund.account.model.dao.AccountDao;
 import com.hi.funfund.account.model.vo.Account;
@@ -145,21 +146,22 @@ public class AccountServiceIm implements AccountService {
 		return accountDao.updateEmail(ano, email);
 	}
 	
-	// insertSeller 판매자 정보 추가
+	// updateAddress 주소 수정
+
 	@Override
-	public int insertSeller(int ano, String phone, String id_no, String address) {
-		return accountDao.insertSeller(ano, phone, id_no, address);
+	public int updateSeller(int ano, String phone, String id_no, String address) {
+		System.out.println("seller Service ano : " + ano + " phone : " + phone + " id_no : " + id_no + " address : " + address);
+		return accountDao.updateSeller(ano, phone, id_no, address);
 	}
 		
-	// updateAddress 주소 수정
-	@Override
-	public int updateSeller(int ano, String phone, String id_no, String address, String idimage) {
-		return accountDao.updateSeller(ano, phone, id_no, address, idimage);
-	}	
-
 	@Override
 	public Account selectThirdPartyUser(Account account) { //타사이트로 가입한 유저 로그인/가입/제어
 		Account thirdPartyUser = accountDao.selectThirdPartyUser(account);
 		return thirdPartyUser;
-	}		
+	}
+
+	@Override
+	public Party selectResult(int ano) {
+		return accountDao.selectResult(ano);
+	}
 }

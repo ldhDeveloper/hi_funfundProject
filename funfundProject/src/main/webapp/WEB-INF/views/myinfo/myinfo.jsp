@@ -301,7 +301,20 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 								<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 									<ul class="nav navbar-nav">
 										<li class="act"><a class="active" href="myinfo.ao">회원 정보 설정<span class="sr-only">(current)</span></a></li>
-										<li><a href="sellerinfo.ao" class="otherActive">판매자 정보 변경</a></li>
+										
+										
+										<li><a class="otherActive" id="goSellerinfo">판매자 정보 변경</a></li>
+										
+										<!-- <li><a href="sellerinfo.ao" class="otherActive" id="goSellerinfo">판매자 정보 변경</a></li> -->
+										
+										<%-- <c:if test="${ empty sessionScope.party.pname }">
+											<li><a href="sellerinfo.ao" class="otherActive">판매자 정보 변경</a></li>
+										</c:if>
+										
+										<c:if test="${ ! empty sessionScope.party.pname }">
+											<li><a href="sellerinfo.ao" class="otherActive">판매자 정보 변경</a></li>
+										</c:if> --%>
+										
 										<li><a href="joinproject.ao" class="otherActive">참여한 프로젝트</a></li>
 										<li><a href="puttoproject.ao" class="otherActive">찜한 프로젝트</a></li>
 										<li><a href="newproject.ao" class="otherActive">개설한 프로젝트</a></li>
@@ -412,10 +425,10 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 	                     			</form>	
 	                     			
 	                     			<script>
-	                     			// 인증번호
-	                     			var codeList = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','0','1','2','3','4','5','6','7','8','9'];
+	                     				// 인증번호
+	                     				var codeList = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','0','1','2','3','4','5','6','7','8','9'];
  								   
-									var authNumber="";
+										var authNumber="";
 	                     			
         								$(function(){ 
         									// 비밀번호
@@ -486,6 +499,19 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
         									
         									$("#emailCheckBtn").click(function() {
         										sendAuthMail();        										
+        									});
+        									
+        									var name ='<c:out value="${sessionScope.party.pname}"/>';
+        									
+        									$("#goSellerinfo").click(function() {
+        										if(name == "") {
+        											alert("회원정보 설정에서 이름을 반드시 입력하세요!");
+        											return result;
+        										}
+        										
+        										else {
+        											location.href = "sellerinfo.ao";
+        										}
         									});
         									
         									$("#certifyNumBtn").click(function() {
@@ -569,7 +595,7 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
     											$("#newPwdInputSame").html("새 비밀번호를 동일하게 입력해주세요");
     											return false;
     										}
-    									};
+    									};    									
         							</script>																			
 								</div>
 							</div>
