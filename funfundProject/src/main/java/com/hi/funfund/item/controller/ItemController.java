@@ -150,24 +150,16 @@ public class ItemController {
 		System.out.println("ano : " + ano);
 		Item item = new Item();
 		item.setAno(ano);
-		int pro_no=0;
-
-		if("TRUE".equals(request.getAttribute("TOKEN_SAVE_CHECK"))) {
-			 pro_no = itemService.insertRewardItem(item);
-			 int ii = attachmentService.insertItemImages(pro_no);
-		} else {
-			  // 중복 요청이므로 그에 따른 로직 작성
-		}
-
 		
+		int pro_no = itemService.insertRewardItem(item);
 		
-		
+		int ii = attachmentService.insertItemImages(pro_no);
 		
 		request.setAttribute("ano", ano);
 		request.setAttribute("pro_no", pro_no);
 		
 
-		model.setViewName("makeproject/primaryinfo");
+		model.setViewName("redirect:/update.it?pro_no=" + pro_no + "&flag=true");
 		
 		return model;
 	}
@@ -211,112 +203,127 @@ public class ItemController {
 		return iList;
 	}
 
-	@RequestMapping(value = "update.it", method = RequestMethod.POST)
+	@RequestMapping(value = "update.it", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView insertRewardItem(ModelAndView model, Item item, HttpServletRequest request) {
 		int result = 0;
-		
-		String[] psdates = item.getS_psdate().split("-");
-		String s_psdate = psdates[0] + psdates[1] + psdates[2];
-		item.setS_psdate(s_psdate);
-		String[] pedates = item.getS_pedate().split("-");
-		String s_pedate = pedates[0] + pedates[1] + pedates[2];
-		item.setS_pedate(s_pedate);
-		
-		System.out.println(s_psdate);
-		System.out.println(s_pedate);
-		
-		result = itemService.updateRewardItem(item);
-		
-
-		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-		MultipartFile uploadFile = multipartRequest.getFile("uploadFile");
-		MultipartFile uploadFile2 = multipartRequest.getFile("uploadFile2");
-		
-		if (!uploadFile.isEmpty()) {
-
-			HttpSession session = request.getSession(false);
-
-			String page = "";
-			String root = request.getSession().getServletContext().getRealPath("/");
-			System.out.println("root : " + root);
-			String[] roots = root.split("\\\\");
-			String marger = "";
-			for (int i = 0; i < roots.length - 3; i++) {
-				marger += roots[i] + "\\";
-			}
-
-			System.out.println("marger : " + marger);
-			String savePath = marger + "src/main/webapp/images/makeproject/titleimg/";
-			System.out.println("savepath : " + savePath);
-
-			int result2 = 0;
-			String ofileName = uploadFile.getOriginalFilename();
-
-			long currentTime = System.currentTimeMillis();
-			SimpleDateFormat simDf = new SimpleDateFormat("yyyyMMddHHmmss");
-			String rfileName = simDf.format(new Date(currentTime)) + "(1)."
-					+ ofileName.substring(ofileName.lastIndexOf(".") + 1);
-			;
-			try {
-				uploadFile.transferTo(new File(savePath + rfileName));
-			} catch (Exception e) {
-				e.printStackTrace();
+		String flag = request.getParameter("flag");
+		System.out.println(flag);
+		System.out.println(item);
+		if(flag.equals("false")){
+			System.out.println("오니?");
+			result = itemService.updateRewardItem(item);
+			System.out.println("날짜"+item.getS_psdate()+"일");
+			if(!item.getS_psdate().equals("")){
+				String[] psdates = item.getS_psdate().split("-");
+				String s_psdate = psdates[0] + psdates[1] + psdates[2];
+				item.setS_psdate(s_psdate);
 			}
 			
-			Attachment att = new Attachment();
 			
-			att.setOrifname(ofileName);
-			att.setRefname(rfileName);
-			att.setFtype("item");
-			att.setFsubtype("titleimg");
-			att.setRefno(item.getPro_no());
+			if(!item.getS_pedate().equals("")){
+				String[] pedates = item.getS_pedate().split("-");
+				String s_pedate = pedates[0] + pedates[1] + pedates[2];
+				item.setS_pedate(s_pedate);
+			}
 			
-			result2 = attachmentService.updateTitleImage(att);
+
+		
+			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+			MultipartFile uploadFile = multipartRequest.getFile("uploadFile");
+			MultipartFile uploadFile2 = multipartRequest.getFile("uploadFile2");
 			
+			if (!uploadFile.isEmpty()) {
+
+				HttpSession session = request.getSession(false);
+
+				String page = "";
+				String root = request.getSession().getServletContext().getRealPath("/");
+				System.out.println("root : " + root);
+				String[] roots = root.split("\\\\");
+				String marger = "";
+				for (int i = 0; i < roots.length - 3; i++) {
+					marger += roots[i] + "\\";
+				}
+
+				System.out.println("marger : " + marger);
+				String savePath = marger + "src/main/webapp/images/makeproject/titleimg/";
+				System.out.println("savepath : " + savePath);
+
+				int result2 = 0;
+				String ofileName = uploadFile.getOriginalFilename();
+
+				long currentTime = System.currentTimeMillis();
+				SimpleDateFormat simDf = new SimpleDateFormat("yyyyMMddHHmmss");
+				String rfileName = simDf.format(new Date(currentTime)) + "(1)."
+						+ ofileName.substring(ofileName.lastIndexOf(".") + 1);
+				;
+				try {
+					uploadFile.transferTo(new File(savePath + rfileName));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				Attachment att = new Attachment();
+				
+				att.setOrifname(ofileName);
+				att.setRefname(rfileName);
+				att.setFtype("item");
+				att.setFsubtype("titleimg");
+				att.setRefno(item.getPro_no());
+				
+				result2 = attachmentService.updateTitleImage(att);
+				
+			}
+			
+			if (!uploadFile2.isEmpty()) {
+
+				HttpSession session = request.getSession(false);
+
+				String page = "";
+				String root = request.getSession().getServletContext().getRealPath("/");
+				System.out.println("root : " + root);
+				String[] roots = root.split("\\\\");
+				String marger = "";
+				for (int i = 0; i < roots.length - 3; i++) {
+					marger += roots[i] + "\\";
+				}
+
+				System.out.println("marger : " + marger);
+				String savePath = marger + "src/main/webapp/images/makeproject/makerimg/";
+				System.out.println("savepath : " + savePath);
+
+				int result2 = 0;
+				String ofileName = uploadFile2.getOriginalFilename();
+
+				long currentTime = System.currentTimeMillis();
+				SimpleDateFormat simDf = new SimpleDateFormat("yyyyMMddHHmmss");
+				String rfileName = simDf.format(new Date(currentTime)) + "(2)."
+						+ ofileName.substring(ofileName.lastIndexOf(".") + 1);
+				;
+				try {
+					uploadFile2.transferTo(new File(savePath + rfileName));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				Attachment att = new Attachment();
+				
+				att.setOrifname(ofileName);
+				att.setRefname(rfileName);
+				att.setFtype("item");
+				att.setFsubtype("makerimg");
+				att.setRefno(item.getPro_no());
+				
+				result2 = attachmentService.updateMakerImage(att);
+				
+			}
 		}
 		
-		if (!uploadFile2.isEmpty()) {
+		
+		
+		
 
-			HttpSession session = request.getSession(false);
-
-			String page = "";
-			String root = request.getSession().getServletContext().getRealPath("/");
-			System.out.println("root : " + root);
-			String[] roots = root.split("\\\\");
-			String marger = "";
-			for (int i = 0; i < roots.length - 3; i++) {
-				marger += roots[i] + "\\";
-			}
-
-			System.out.println("marger : " + marger);
-			String savePath = marger + "src/main/webapp/images/makeproject/makerimg/";
-			System.out.println("savepath : " + savePath);
-
-			int result2 = 0;
-			String ofileName = uploadFile2.getOriginalFilename();
-
-			long currentTime = System.currentTimeMillis();
-			SimpleDateFormat simDf = new SimpleDateFormat("yyyyMMddHHmmss");
-			String rfileName = simDf.format(new Date(currentTime)) + "(2)."
-					+ ofileName.substring(ofileName.lastIndexOf(".") + 1);
-			;
-			try {
-				uploadFile2.transferTo(new File(savePath + rfileName));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-			Attachment att = new Attachment();
-			
-			att.setOrifname(ofileName);
-			att.setRefname(rfileName);
-			att.setFtype("item");
-			att.setFsubtype("makerimg");
-			att.setRefno(item.getPro_no());
-			
-			result2 = attachmentService.updateMakerImage(att);
-			
-		}
+		
 		
 		model.addObject("pro_no", item.getPro_no());
 

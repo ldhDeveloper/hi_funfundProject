@@ -94,7 +94,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "makeproject.do")
 	public String makeProject(){
-		return "makeproject/primaryinfo";
+		return "makeproject/forwardtoupdate";
 	}
 	
 	
