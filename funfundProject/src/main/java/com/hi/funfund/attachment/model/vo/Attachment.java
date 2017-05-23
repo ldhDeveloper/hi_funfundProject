@@ -15,7 +15,7 @@ public class Attachment implements Serializable {
 
 	public Attachment() {
 		super();
-
+	}
 	public Attachment(Integer fno, String orifname, String refname, String ftype, String fsubtype, Integer fnum,
 			Integer refno) {
 		super();

@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
+<!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
 <!-- 편집기사용 -->
 
 <!-- Include external CSS. -->
@@ -28,8 +28,8 @@
 	rel="stylesheet" type="text/css" />
 <link href="/funfund/lib/froala_editor_2.5.1/css/themes/royal.min.css"
 	rel="stylesheet" type="text/css" />
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!-- <link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
 <!-- Include external JS libs. -->
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
@@ -123,10 +123,6 @@ li {
 <title>Insert title here</title>
 </head>
 <body oncontextmenu="return false">
-<%
-        if(request.getAttribute("TOKEN_KEY")==null) Token.set(request);
-       %>
-       <input type="hidden" name="TOKEN_KEY" value="<%=request.getAttribute("TOKEN_KEY")%>"/>
 
 	<jsp:include page="/WEB-INF/views/common/menubar.jsp" />
 
@@ -201,23 +197,12 @@ li {
 					요청하기</a></li>
 		</ul>
 	</div>
-	<form name="authCodeFrm" id="authCodeFrm" method="GET"
-		action="https://testapi.open-platform.or.kr/oauth/2.0/authorize"
-		enctype="application/json">
-		<input type="hidden" id="response_type" name="response_type"
-			value="code" /> <input type="hidden" id="scope" name="scope"
-			value="login inquiry" /> <input type="hidden" id="redirect_uri"
-			name="redirect_uri"
-			value="http://127.0.0.1:9998/funfund/insert.it?ano=20" /> <input
-			type="hidden" id="client_id" name="client_id" style="width: 200px"
-			value="l7xx6712d9c9cd524d3b9c3f0f60b2dea3ee">
 
-	</form>
 	<form id="frm" action="update.it?pro_no=${ pro_no }" method="post"
 		onsubmit="return false;" enctype="multipart/form-data">
 
-		<%-- <input type="hidden" value="${ param.pro_no }"> --%>
-
+		<input type="hidden" name="flag" value="false">
+		<%-- <input type="hidden" name="pro_no" value="${pro_no }"> --%>
 		<!-- 기본정보 입력 화면 -->
 		<div id="primary-info1" class="input-form">
 			<table>
@@ -520,9 +505,9 @@ li {
 									<td><input type="text" size="3" name="mcount"></td>
 									<td colspan="2">배송일</td>
 									<td colspan="2"><input type="text" class="datepicker3"
-										style="padding-left: 15px" name="mdate" size="13"> <script
+										style="padding-left: 15px" name="mdate" size="13"> <!-- <script
 											src="https://code.jquery.com/jquery-1.12.4.js"></script> <script
-											src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+											src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 										<script>
 											$(function() {
 												$(".datepicker3")
@@ -1072,7 +1057,7 @@ li {
 	</form>
 	
 	<!-- 계좌본인인증 API -->
-	<script type="text/javascript" src='/funfund/lib/js/jquery-2.2.2.min.js'></script>
+ 	<!-- <script type="text/javascript" src='/funfund/lib/js/jquery-2.2.2.min.js'></script> -->
 	<script type="text/javascript" src='/funfund/lib/js/system.js'></script>
 	<script type="text/javascript" src='/funfund/lib/js/util.js'></script>
 	
