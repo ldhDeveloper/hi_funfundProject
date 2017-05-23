@@ -12,7 +12,6 @@ public class Attachment implements Serializable {
 	private int fnum;
 	private int refno;
 	
-	
 	public int getFnum() {
 		return fnum;
 	}
@@ -70,6 +69,7 @@ public class Attachment implements Serializable {
 		this.fnum = fnum;
 		this.refno = refno;
 	}
+	
 	@Override
 	public String toString() {
 		return "Attachment [fno=" + fno + ", orifname=" + orifname + ", refname=" + refname + ", ftype=" + ftype

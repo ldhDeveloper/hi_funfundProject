@@ -240,6 +240,6 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
                                             left join (select refno, refname as thumbnail 
                                                        from attachment
                                                        where ftype='item') i7 on(i1.pro_no = i7.refno)) ia on (mi1.pro_no = ia.pro_no)
-							where mi1.ano = #{ano}
+							where mi1.ano = #{ano} and ia.category != 'pinterest'
 	</select>
 </mapper>

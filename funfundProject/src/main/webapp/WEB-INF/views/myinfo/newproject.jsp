@@ -210,6 +210,10 @@
 					
 					<div class="row">
 						<div class="newproject">아직 개설한 프로젝트가 없습니다.</div>
+						<form action="myproject.mi" method="get">
+							<input type="hidden" name="pro_no" value=1>
+							<button type="submit">테스트버튼</button>
+						</form>
 					</div>										
 				</div>				
 			</div>

@@ -138,6 +138,7 @@ public class AccountController {
 		session = request.getSession(false);
 		Account account = (Account)session.getAttribute("account");
 		int ano = account.getAno();
+		System.out.println("마이 리스트 ano : " + ano);
 		List<Item> iList = itemService.selectMyItems(ano);
 		model.addObject("iList", iList);
 		model.setViewName("myinfo/puttoproject");
@@ -334,7 +335,7 @@ public class AccountController {
 		}
 		
 		else {
-			result = accountService.updateSeller(ano, phone, id_no, address, idimage);
+			//result = accountService.updateSeller(ano, phone, id_no, address, idimage);
 		}
 		
 		party = accountService.loginParty(ano);
