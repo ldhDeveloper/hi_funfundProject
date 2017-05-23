@@ -30,30 +30,40 @@ ol li {
 <script src="/funfund/lib/js/jquery-3.2.1.min.js"></script>
 <script>
 	$(function() {
-		var pro_no = ${item.pro_no};
+		var pro_no = '${item.pro_no}';
 		$.ajax({
 					url : "selectList.fm",
-					type : "post",
+					type : "get",
+					async : true,
 					data : {
-						"pro_no" : pro_no 
+						"pro_no" : pro_no
 					},
 					success : function(data) {
-						var i = Number(data.mList.length);
-						console.log(data.mList[i].mname);
-						$("#rewardList")
-								.html(
-										/* $("#rewardList").html()
-												+ "<input type='checkbox' id="+data.mList[i].mno+" value="+data.mList[i].mname+">"
-												+ "<label for="+data.mList[i].mno+">"
-												+ data.mList[i].mcost
-												+ "원 펀딩합니다.<br>"
-												+ data.mList[i].mcount
-												+ "</label>" */
-												data.mList[i].mcount
-												)
-					}
+						console.log(data);
+						/* var html = "";
+						for (var i=0; i<data.length; i++) {
+							var pro_no = data[i].pro_no;
+							var mno = data[i].mno;
+							var mname = data[i].mname;
+							var cost = data[i].mcost;
+							var mcontent = data[i].mcontent;
+							var mdate = data[i].mdate;
+							var mnum = data[i].mnum;
+							var mcount = data[i].mcount;
+							var delyn = data[i].delyn;
+							var dcost = data[i].dcost;
+							var mdate2 = new date(mdate);
+							 html += '<input type="checkbox" id="'+mno+'" value="'+mname+'">';
+							html += '<label for="'+data.mList[i].mno+'">';
+							html += '<span>' + data.mList[i].mcost
+									+ '원 펀딩합니다.<br></span></label>';
+						}
+						$('#rewardList').html(html); */
+					}, error:function(request,status,error){
+				        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				       }
 				});
-	}); 
+	});
 </script>
 </head>
 <body>

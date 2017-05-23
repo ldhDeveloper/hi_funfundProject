@@ -50,6 +50,25 @@ public class ItemAskController {
 		redirect.addAttribute("pro_no", pro_no);
 		return "redirect:/reply.ask";
 	}
+	
+	/*@RequestMapping("reinsert.ask")
+	public String reinsert(HttpSession session, HttpServletRequest request, ModelAndView model,
+			RedirectAttributes redirect) {
+		String pro_no = request.getParameter("pro_no");
+		String acontent = request.getParameter("acontent");
+		Account account = (Account) session.getAttribute("account");
+		System.out.println(account);
+		System.out.println(acontent);
+		System.out.println(pro_no);
+		HashMap<String, String> cmap = new HashMap<String, String>();
+		cmap.put("pro_no", pro_no);
+		cmap.put("acontent", acontent);
+		cmap.put("id_no", Integer.toString(account.getAno()));
+		int result = itemAskService.insert(cmap);
+		model.setViewName("funding/reply");
+		redirect.addAttribute("pro_no", pro_no);
+		return "redirect:/reply.ask";
+	}*/
 
 	public String update(ItemAsk itemAsk) {
 		int result = itemAskService.update(itemAsk);
@@ -76,5 +95,6 @@ public class ItemAskController {
 		model.setViewName("funding/reply");
 		return model;
 	}
+	
 
 }
