@@ -3,6 +3,7 @@ package com.hi.funfund.item.controller;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,8 +15,11 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -56,7 +60,16 @@ public class ItemController {
 	private AttachmentService attachmentService;
 
 
+	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
+	
+	@InitBinder
+	public void binder(WebDataBinder binder) {
+	    DateFormat dateOnlyFormat = new SimpleDateFormat("dd/MM/yyyy");
+	    dateOnlyFormat.setLenient(true);
+	    binder.registerCustomEditor(Date.class, "dataInicio", new CustomDateEditor(dateOnlyFormat, true));
+	}
 
 	public ModelAndView AllList(ModelAndView model) {
 		List<Item> mList = itemService.AllList();
@@ -137,10 +150,18 @@ public class ItemController {
 		System.out.println("ano : " + ano);
 		Item item = new Item();
 		item.setAno(ano);
+		int pro_no=0;
 
-		int pro_no = itemService.insertRewardItem(item);
+		if("TRUE".equals(request.getAttribute("TOKEN_SAVE_CHECK"))) {
+			 pro_no = itemService.insertRewardItem(item);
+			 int ii = attachmentService.insertItemImages(pro_no);
+		} else {
+			  // 중복 요청이므로 그에 따른 로직 작성
+		}
+
 		
-		int ii = attachmentService.insertItemImages(pro_no);
+		
+		
 		
 		request.setAttribute("ano", ano);
 		request.setAttribute("pro_no", pro_no);
@@ -193,8 +214,17 @@ public class ItemController {
 	@RequestMapping(value = "update.it", method = RequestMethod.POST)
 	public ModelAndView insertRewardItem(ModelAndView model, Item item, HttpServletRequest request) {
 		int result = 0;
-
-
+		
+		String[] psdates = item.getS_psdate().split("-");
+		String s_psdate = psdates[0] + psdates[1] + psdates[2];
+		item.setS_psdate(s_psdate);
+		String[] pedates = item.getS_pedate().split("-");
+		String s_pedate = pedates[0] + pedates[1] + pedates[2];
+		item.setS_pedate(s_pedate);
+		
+		System.out.println(s_psdate);
+		System.out.println(s_pedate);
+		
 		result = itemService.updateRewardItem(item);
 		
 

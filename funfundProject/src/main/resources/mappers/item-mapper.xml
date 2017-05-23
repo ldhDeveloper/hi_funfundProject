@@ -11,6 +11,8 @@
 		<result property="category" column="category" />
 		<result property="psdate" column="psdate" />
 		<result property="pedate" column="pedate" />
+		<result property="s_psdate" column="s_psdate" />
+		<result property="s_pedate" column="s_pedate" />
 		<result property="pshort" column="pshort" />
 		<result property="ecost" column="ecost" />
 		<result property="refund" column="refund" />
@@ -116,7 +118,7 @@
 
 	<update id="tempupdate" parameterType="Item">
 			<![CDATA[
-				update item set pname=#{pname, jdbcType=VARCHAR}, pcontent=#{pcontent, jdbcType=VARCHAR}, category=#{category, jdbcType=VARCHAR}, psdate=#{psdate, jdbcType=DATE}, pedate=#{pedate, jdbcType=DATE}, pshort=#{pshort, jdbcType=VARCHAR}, ecost=#{ecost, jdbcType=INTEGER}, refund=#{refund, jdbcType=VARCHAR}, pvideo=#{pvideo, jdbcType=VARCHAR}, pstatus=#{pstatus, jdbcType=VARCHAR}, bankcode=#{bankcode, jdbcType=VARCHAR}, accpnm=#{accpnm, jdbcType=VARCHAR}, accnum=#{accnum, jdbcType=VARCHAR}, cname=#{cname, jdbcType=VARCHAR}, cs_email=#{cs_email, jdbcType=VARCHAR}, cs_phone=#{cs_phone, jdbcType=VARCHAR} where pro_no =#{pro_no}
+				update item set pname=#{pname, jdbcType=VARCHAR}, pcontent=#{pcontent, jdbcType=VARCHAR}, category=#{category, jdbcType=VARCHAR}, psdate=to_date(#{s_psdate, jdbcType=VARCHAR},'yyyy-mm-dd'), pedate=to_date(#{s_pedate, jdbcType=VARCHAR}, 'yyyy-mm-dd'), pshort=#{pshort, jdbcType=VARCHAR}, ecost=#{ecost, jdbcType=INTEGER}, refund=#{refund, jdbcType=VARCHAR}, pvideo=#{pvideo, jdbcType=VARCHAR}, pstatus=#{pstatus, jdbcType=VARCHAR}, bankcode=#{bankcode, jdbcType=VARCHAR}, accpnm=#{accpnm, jdbcType=VARCHAR}, accnum=#{accnum, jdbcType=VARCHAR}, cname=#{cname, jdbcType=VARCHAR}, cs_email=#{cs_email, jdbcType=VARCHAR}, cs_phone=#{cs_phone, jdbcType=VARCHAR} where pro_no =#{pro_no}
 	        ]]>
 	</update>
 
