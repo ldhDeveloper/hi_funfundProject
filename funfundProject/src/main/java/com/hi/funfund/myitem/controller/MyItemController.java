@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hi.funfund.item.model.service.ItemService;
+import com.hi.funfund.item.model.vo.Item;
 import com.hi.funfund.myitem.model.service.MyItemService;
 import com.hi.funfund.myitem.model.vo.MyItem;
 
@@ -28,6 +29,16 @@ public class MyItemController {
 	
 	@Autowired
 	private ItemService itemService;  
+	
+	@RequestMapping(value = "myproject.mi", method = RequestMethod.GET)
+	public ModelAndView selectMyProject(ModelAndView model, HttpSession session, HttpServletRequest request){
+		String pro_no = request.getParameter("pro_no");
+		Item proItem = itemService.selectOne(Integer.parseInt(pro_no));
+		model.addObject("proItem", proItem);
+		model.setViewName("myproject/myprojectDetail");
+		return model;
+	}
+	
 
 	@RequestMapping(value = "insertMyitem.mi", method = RequestMethod.GET)
 	public @ResponseBody ArrayList<Integer> insertMyLikeitem(HttpSession session, HttpServletRequest request, @RequestParam("pro_no") String pro_no, @RequestParam("ano") String ano){

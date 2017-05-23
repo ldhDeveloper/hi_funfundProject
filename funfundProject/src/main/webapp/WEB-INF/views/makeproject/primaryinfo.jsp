@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="com.hi.funfund.common.*"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -121,7 +122,12 @@ li {
 
 <title>Insert title here</title>
 </head>
-<body>
+<body oncontextmenu="return false">
+<%
+        if(request.getAttribute("TOKEN_KEY")==null) Token.set(request);
+       %>
+       <input type="hidden" name="TOKEN_KEY" value="<%=request.getAttribute("TOKEN_KEY")%>"/>
+
 	<jsp:include page="/WEB-INF/views/common/menubar.jsp" />
 
 	<script>
@@ -389,7 +395,7 @@ li {
 						<div
 							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px; padding: 10px;">
 							<input type="text" id="datepicker1" style="padding-left: 15px"
-								name="psdate">
+								name="s_psdate">
 						</div>
 					</td>
 					<td></td>
@@ -407,7 +413,7 @@ li {
 						<div
 							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px; padding: 10px;">
 							<input type="text" id="datepicker2" style="padding-left: 15px"
-								name="pedate">
+								name="s_pedate">
 							<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 							<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 							<script>
@@ -418,7 +424,9 @@ li {
 														showOn : "button",
 														buttonImage : "images/makeproject/calendar2.png",
 														buttonImageOnly : true,
-														buttonText : "Select date"
+														buttonText : "Select date",
+														altField: "#datepicker1",
+														altFormat: "yy-mm-dd"
 													});
 									$("#datepicker2")
 											.datepicker(
@@ -426,8 +434,9 @@ li {
 														showOn : "button",
 														buttonImage : "images/makeproject/calendar2.png",
 														buttonImageOnly : true,
-														buttonText : "Select date"
-
+														buttonText : "Select date",
+														altField: "#datepicker2",
+														altFormat: "yy-mm-dd"
 													});
 								});
 							</script>
@@ -547,11 +556,10 @@ li {
 					$("#addReward")
 							.click(
 									function() {
-										var pro_no = $
-										{
-											pro_no
-										}
-										;
+										var pro_no = ${pro_no};
+										
+										console.log("pro_no : " + pro_no);
+										
 										var mname = $("[name=mname]").val();
 										var mcost = $("[name=mcost]").val();
 										var mnum = $("[name=mnum]").val();
@@ -562,8 +570,7 @@ li {
 										var mcontent = $("[name=mcontent]")
 												.val();
 
-										$
-												.ajax({
+										$.ajax({
 													url : "insertReward.it",
 													type : "POST",
 													async : true,
@@ -622,12 +629,8 @@ li {
 					</td>
 					<td style="width: 500px;">
 						<div
-							style="width: 430px; height: 130px; background: #f8f8f8; border: 1px solid #ddd; padding: 10px; margin-left: 10px;">
+							style="width: 430px; height: 50px; background: #f8f8f8; border: 1px solid #ddd; padding: 10px; margin-left: 10px;">
 							<input type="text" size="30" name="pvideo">
-							<button class="btn btn-primary btn-xs" style="margin-left: 10px;">영상등록하기</button>
-							<br>
-							<div
-								style="width: 100px; height: 60px; border: 1px dashed #bbb; background: #f0f0f0; margin-top: 15px; margin-left: 30px; padding-top: 15px; padding-left: 25px;">VIDEO</div>
 						</div>
 					</td>
 					<td style="width: 200px;"></td>
@@ -757,12 +760,12 @@ li {
 							<span id="counter">###</span>
 							<script>
 							$(function() {
-							      $('#pshort').keypress(function (e){
+							      $('#pshort').keyup(function (e){
 							          var content = $(this).val();
 							          $(this).height(((content.split('\n').length + 1) * 1.5) + 'em');
 							          $('#counter').html(content.length + '/200');
 							      });
-							      $('#pshort').keypress();
+							      $('#pshort').keyup();
 							      
 							});
 							</script>
@@ -974,7 +977,7 @@ li {
 					<td style="width: 500px;">
 						<div
 							style="border: 1px solid #ddd; background: #f8f8f8; padding: 10px; margin-left: 10px; width: 440px; height: 50px;">
-							은행명 &nbsp; <select name="bankcode" id="bank_code_std">
+							은행명 &nbsp; <select name="bankcode" id="bankcode">
 								<option value=''>선택하세요
 								<option value='003'>기업은행
 								<option value='004'>국민은행
@@ -1015,175 +1018,29 @@ li {
 								<option value='291'>신영증권
 								<option value='238'>대우증권
 							</select> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 예금주 &nbsp; <input type="text"
-								size="10" name="accpnm" id="accpname">
+								size="10" name="accpnm" id="accpnm">
 						</div>
 					</td>
 					<td style="width: 200px;">&nbsp;</td>
 				</tr>
 				<tr>
 					<td>&nbsp;</td>
-					<td>&nbsp;<input type="hidden" value="8500206"
-						id="account_holder_info"></td>
+					<td>&nbsp;</td>
 					<td>&nbsp;</td>
 				</tr>
 				<tr>
-					<td style="font-size: 0.7em;">계좌번호<input type="hidden"
-						id="tran_dtime"></td>
+					<td style="font-size: 0.7em;">계좌번호<input type="hidden"></td>
 					<td>
 						<div
 							style="border: 1px solid #ddd; background: #f8f8f8; padding: 10px; margin-left: 10px; width: 440px; height: 50px;">
 							계좌번호 &nbsp;<input type="text" size="25"
-								placeholder="'-'를 제외하고 입력하세요." name="accnum" id="account_num">
+								placeholder="'-'를 제외하고 입력하세요." name="accnum" id="accnum">
 							&nbsp;
-							<button class="btn btn-primary btn-xs" id="searchRealname">확인하기</button>
+							<button class="btn btn-primary btn-xs" onclick="fnSearchAccessToken()">확인하기</button>
 						</div>
 					</td>
 					<td>&nbsp;</td>
 				</tr>
-
-				<script text="text/javascript">
-					$(function() {
-						var client_id = "l7xx6712d9c9cd524d3b9c3f0f60b2dea3ee";
-						var client_secret = "10e3bd27aa5e4287ae709bca09c34ea7";
-						var grant_type = "client_credentials";
-						//document.getElementById('authCodeFrm').submit();
-
-						var access_token = "";
-						var user_seq_no = 0;
-						var time = new Date();
-
-						var year = time.getFullYear();
-
-						var month = 0;
-						if (time.getMonth() + 1 >= 10) {
-							month = time.getMonth();
-						} else {
-							month = '0' + time.getMonth();
-						}
-
-						var day = 0;
-						if (time.getDate() >= 10) {
-							month = time.getDate();
-						} else {
-							month = '0' + time.getDate();
-						}
-
-						var hour = 0;
-						if (time.getHours() >= 10) {
-							month = time.getHours();
-						} else {
-							month = '0' + time.getHours();
-						}
-
-						var minutes = 0;
-						if (time.getMinutes() >= 10) {
-							month = time.getMinutes();
-						} else {
-							month = '0' + time.getMinutes();
-						}
-
-						var seconds = 0;
-						if (time.getSeconds() >= 10) {
-							month = time.getSeconds();
-						} else {
-							month = '0' + time.getSeconds();
-						}
-
-						var currentTime = year + '' + month + '' + day + ''
-								+ hour + '' + minutes + '' + seconds;
-
-						$("#tran_dtime").val(currentTime);
-						console.log("오니1?")
-						var scope = "oob";
-						$
-								.ajax({
-									url : "https://testapi.open-platform.or.kr/oauth/2.0/token",
-									type : "POST",
-									contenType : "application/json",
-									data : {
-										"client_id" : client_id,
-										"client_secret" : client_secret,
-										"grant_type" : grant_type,
-										"scope" : scope
-									},
-									dataType : "json",
-									success : function(data, data2, data3) {
-										var list = JSON
-												.parse(data3.responseText);
-										access_token = list.access_token;
-										user_seq_no = list.user_seq_no;
-										console.log("오니2?");
-										console.log(access_token);
-									}
-
-								});
-
-						$("#searchRealname")
-								.click(
-										function() {
-											var bank_code_std = $(
-													"#bank_code_std").val();
-											var account_holder_info = $(
-													"#account_holder_info")
-													.val();
-											var tran_dtime = $("#tran_dtime")
-													.val();
-											var access_token = "Bearer "
-													+ access_token;
-											var resData = {
-												"bank_code_std" : bank_code_std,
-												"account_num" : account_num,
-												"account_holder_info" : account_holder_info,
-												"tran_dtime" : tran_dtime
-											};
-											var rearName = "";
-
-											console.log("오니3?")
-
-											$
-													.ajax({
-														url : "https://testapi.open-platform.or.kr/v1.0/inquiry/real_name",
-														beforeSend : function(
-																request) {
-															request
-																	.setRequestHeader(
-																			"Authorization",
-																			access_token);
-														},
-														type : "POST",
-														data : JSON
-																.stringify(resData),
-														dataType : "json",
-														success : function(
-																data, data2,
-																data3) {
-
-															console
-																	.log("data=="
-																			+ data);
-															console
-																	.log("data2=="
-																			+ data2);
-															console
-																	.log("data3=="
-																			+ data3);
-															console
-																	.log("data3.res=="
-																			+ data3.responseText);
-															rearName = data3.responseText
-																	.replace(
-																			/,/gi,
-																			",\n");
-															consolo
-																	.log("realName = "
-																			+ realName);
-														},
-													});
-										});
-
-					});
-				</script>
-
 				<tr>
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
@@ -1213,6 +1070,146 @@ li {
 								style="display: none;" onchange="LoadSlideImg(this);">
 		<input type="hidden" name="pro_no" value="${ pro_no }">
 	</form>
+	
+	<!-- 계좌본인인증 API -->
+	<script type="text/javascript" src='/funfund/lib/js/jquery-2.2.2.min.js'></script>
+	<script type="text/javascript" src='/funfund/lib/js/system.js'></script>
+	<script type="text/javascript" src='/funfund/lib/js/util.js'></script>
+	
+	<div>
+		<table>
+			
+			<colgroup>
+				<col style="width:180px" />
+				<col style="width:*" />
+			</colgroup>
+			<tbody>
+				<form name="authCodeFrm" id="authCodeFrm" method="GET" action="https://testapi.open-platform.or.kr/oauth/2.0/authorize"> 
+					<input type="hidden" id="response_type" 	name="response_type" value="code" />
+					<input type="hidden" id="scope" 	name="scope" value="inquiry" />
+					<input type="hidden" id="redirect_uri" 	name="redirect_uri" value="http://localhost:8090/openapi/test/callback.html" />
+				<tr>
+					<th><!-- <span class="ess">Client ID</span> --></th>
+					<td><span ><input type="hidden" id="client_id" name="client_id" style="width:200px" value="l7xx6712d9c9cd524d3b9c3f0f60b2dea3ee"></span>
+				</tr>
+				</form>				
+				<tr>
+					<th><!-- <span>Client Secret</span> --></th>
+					<td><span><input type="hidden" id="client_secret" name="client_secret" style="width:200px" value="10e3bd27aa5e4287ae709bca09c34ea7"></span></td>
+				</tr>					
+				<tr>
+					<th><!-- <span>Access Token</span> --></th>
+					<td><span><input type="hidden"  id="access_token" name="access_token" style="background:#e0e0e0" ></span>
+					<!-- <button type="button" onclick="fnSearchAccessToken()">토큰발급</button> --></td>
+				</tr>	
+				<tr>
+					<th><!-- <span>은행코드</span> --></th>
+					<td><span><input type="hidden" class="txt"  id="bank_code_std" name="bank_code_std" ></span></td>
+				</tr>
+				<tr>
+					<th><!-- <span>계좌번호</span> --></th>
+					<td><span><input type="hidden" class="txt"  id="account_num" name="account_num" ></span>
+					</td>
+				</tr>
+				<tr>
+					<th><!-- <span>예금주 생년월일</span> --></th>
+					<td><span><input type="hidden" class="txt" id="account_holder_info" name="account_holder_info" value="850206" /></span>
+				</tr>
+				<tr>
+					<th><!-- <span>요청일시</span> --></th>
+					<td><span style="width:200px"><input type="hidden" class="txt" id="tran_dtime" title="요청일시 입력" name="tran_dtime"  /></span>
+					<!-- <button type="button" onclick="fnSearchRealName()">계좌실명조회</button> --></td>
+				</tr>				
+				<!-- <tr> 		
+					<th><span>계좌실명조회결과</span></th>
+					<td> 				
+						<textarea style="height:220px;width:250px" id="real_name" name="real_name"></textarea>
+					</td>
+				</tr> -->
+			</tbody>
+		</table>
+		
+	</div>
+	<script type="text/javascript">
 
+	$.support.cors = true;
+	var currentTime = new Date().format("yyyyMMddHHmmss");
+	$("#tran_dtime").val(currentTime);
+
+
+	/* 사용자인증 Access Token 획득 */
+	function fnSearchAccessToken()
+	{
+		$("#bank_code_std").val($("#bankcode").val());
+		$("#account_num").val($("#accnum").val());
+		var client_id = $("#client_id").val();
+		var client_secret = $("#client_secret").val();		
+		var  grant_type = "client_credentials";
+		var scope = "oob";		
+		 $.ajax({		
+			//url: "/tpt/test/getOauthToken",
+			url: "https://testapi.open-platform.or.kr/oauth/2.0/token",		
+			type: "POST",
+			//cache: false,
+			contenType: "application/json",		
+			data: {"client_id":client_id,"client_secret":client_secret,"grant_type":grant_type,"scope":scope},
+			dataType: "json",			
+			success : function (data, data2, data3) {
+				var list = JSON.parse(data3.responseText);					
+				$("#access_token").val(list.access_token);
+				$("#user_seq_no").val(list.user_seq_no);
+				fnSearchRealName();
+				},
+			error : function (data,data2, data3) {
+				alert('error!!!');
+			}
+		}); 
+		
+	}
+	
+	/* 계좌실명조회API */
+	function fnSearchRealName()
+	{
+		var bank_code_std = $("#bank_code_std").val();
+		var account_num = $("#account_num").val();
+		var account_holder_info = $("#account_holder_info").val();
+		var tran_dtime = $("#tran_dtime").val();
+
+		var  access_token = "Bearer "+$("#access_token").val();
+
+		var resData = {"bank_code_std":bank_code_std,"account_num":account_num,"account_holder_info":account_holder_info,"tran_dtime":tran_dtime};
+		
+		 $.ajax({
+			url: "https://testapi.open-platform.or.kr/v1.0/inquiry/real_name",
+			beforeSend : function(request){
+				request.setRequestHeader("Authorization", access_token);
+				//request.setRequestHeader("Content-Type", "application/json");
+			},
+			type: "POST",
+			//data: {"bank_code_std":bank_code_std,"account_num":account_num,"account_holder_info":account_holder_info,"tran_dtime":tran_dtime},
+			data: JSON.stringify(resData),
+			dataType: "json",
+			success : function (data, data2, data3) {
+				
+				console.log("data==" + data);
+				console.log("data2==" + data2);
+				console.log("data3==" + data3);
+				console.log($(data));
+				console.log("data3.res==" + data3.responseText);
+				console.log("data3.name==" + data.account_holder_name);
+				//var list = JSON.parse(data);	 
+				//$("#real_name").text(data3.responseText.replace(/,/gi, ",\n"));
+					if(data.account_holder_name == $("#accpnm").val()){
+						alert('인증 성공!!!');
+					}else{
+						alert('인증 실패');
+					}
+				},
+			error : function (data,data2, data3) {
+				alert('error!!!');
+			}
+		});
+	}
+</script>
 </body>
 </html>

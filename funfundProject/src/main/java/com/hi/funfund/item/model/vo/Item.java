@@ -15,10 +15,12 @@ public class Item implements Serializable {
 	private String pname;
 	private String pcontent;
 	private String category;
-	@DateTimeFormat(pattern = "yy/MM/dd")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date psdate;
-	@DateTimeFormat(pattern = "yy/MM/dd")
+	private String s_psdate;
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date pedate;
+	private String s_pedate;
 	private String pshort;
 	private Integer ecost;
 	private String refund;
@@ -42,6 +44,58 @@ public class Item implements Serializable {
 	
 	
 	
+
+	public Item(int pro_no, int ano, String pname, String pcontent, String category, Date psdate, String s_psdate,
+			Date pedate, String s_pedate, String pshort, Integer ecost, String refund, String pvideo, String pstatus,
+			int likecount, String sharelink, String bankcode, String accpnm, String accnum, String cname,
+			String cs_email, String cs_phone, int fundamount, int fundcount, int supportcount, int upcount,
+			int repcount, String thumbnail) {
+		super();
+		this.pro_no = pro_no;
+		this.ano = ano;
+		this.pname = pname;
+		this.pcontent = pcontent;
+		this.category = category;
+		this.psdate = psdate;
+		this.s_psdate = s_psdate;
+		this.pedate = pedate;
+		this.s_pedate = s_pedate;
+		this.pshort = pshort;
+		this.ecost = ecost;
+		this.refund = refund;
+		this.pvideo = pvideo;
+		this.pstatus = pstatus;
+		this.likecount = likecount;
+		this.sharelink = sharelink;
+		this.bankcode = bankcode;
+		this.accpnm = accpnm;
+		this.accnum = accnum;
+		this.cname = cname;
+		this.cs_email = cs_email;
+		this.cs_phone = cs_phone;
+		this.fundamount = fundamount;
+		this.fundcount = fundcount;
+		this.supportcount = supportcount;
+		this.upcount = upcount;
+		this.repcount = repcount;
+		this.thumbnail = thumbnail;
+	}
+
+	public String getS_psdate() {
+		return s_psdate;
+	}
+
+	public String getS_pedate() {
+		return s_pedate;
+	}
+
+	public void setS_psdate(String s_psdate) {
+		this.s_psdate = s_psdate;
+	}
+
+	public void setS_pedate(String s_pedate) {
+		this.s_pedate = s_pedate;
+	}
 
 	public String getThumbnail() {
 		return thumbnail;
@@ -251,49 +305,20 @@ public class Item implements Serializable {
 		this.cs_phone = cs_phone;
 	}
 
-	public Item(int pro_no, int ano, String pname, String pcontent, String category, Date psdate, Date pedate,
-			String pshort, Integer ecost, String refund, String pvideo, String pstatus, int likecount, String sharelink,
-			String bankcode, String accpnm, String accnum, String cname, String cs_email, String cs_phone,
-			int fundamount, int fundcount, int supportcount, int upcount, int repcount, String thumbnail) {
-		super();
-		this.pro_no = pro_no;
-		this.ano = ano;
-		this.pname = pname;
-		this.pcontent = pcontent;
-		this.category = category;
-		this.psdate = psdate;
-		this.pedate = pedate;
-		this.pshort = pshort;
-		this.ecost = ecost;
-		this.refund = refund;
-		this.pvideo = pvideo;
-		this.pstatus = pstatus;
-		this.likecount = likecount;
-		this.sharelink = sharelink;
-		this.bankcode = bankcode;
-		this.accpnm = accpnm;
-		this.accnum = accnum;
-		this.cname = cname;
-		this.cs_email = cs_email;
-		this.cs_phone = cs_phone;
-		this.fundamount = fundamount;
-		this.fundcount = fundcount;
-		this.supportcount = supportcount;
-		this.upcount = upcount;
-		this.repcount = repcount;
-		this.thumbnail = thumbnail;
-	}
-
 	@Override
 	public String toString() {
 		return "Item [pro_no=" + pro_no + ", ano=" + ano + ", pname=" + pname + ", pcontent=" + pcontent + ", category="
-				+ category + ", psdate=" + psdate + ", pedate=" + pedate + ", pshort=" + pshort + ", ecost=" + ecost
-				+ ", refund=" + refund + ", pvideo=" + pvideo + ", pstatus=" + pstatus + ", likecount=" + likecount
-				+ ", sharelink=" + sharelink + ", bankcode=" + bankcode + ", accpnm=" + accpnm + ", accnum=" + accnum
-				+ ", cname=" + cname + ", cs_email=" + cs_email + ", cs_phone=" + cs_phone + ", fundamount="
-				+ fundamount + ", fundcount=" + fundcount + ", supportcount=" + supportcount + ", upcount=" + upcount
-				+ ", repcount=" + repcount + ", thumbnail=" + thumbnail + "]";
+				+ category + ", psdate=" + psdate + ", s_psdate=" + s_psdate + ", pedate=" + pedate + ", s_pedate="
+				+ s_pedate + ", pshort=" + pshort + ", ecost=" + ecost + ", refund=" + refund + ", pvideo=" + pvideo
+				+ ", pstatus=" + pstatus + ", likecount=" + likecount + ", sharelink=" + sharelink + ", bankcode="
+				+ bankcode + ", accpnm=" + accpnm + ", accnum=" + accnum + ", cname=" + cname + ", cs_email=" + cs_email
+				+ ", cs_phone=" + cs_phone + ", fundamount=" + fundamount + ", fundcount=" + fundcount
+				+ ", supportcount=" + supportcount + ", upcount=" + upcount + ", repcount=" + repcount + ", thumbnail="
+				+ thumbnail + "]";
 	}
+
+
+
 
 	
 

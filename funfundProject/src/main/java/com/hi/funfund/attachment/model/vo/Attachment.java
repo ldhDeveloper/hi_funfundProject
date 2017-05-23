@@ -12,9 +12,9 @@ public class Attachment implements Serializable {
 	private Integer fnum;
 	private Integer refno;
 	
+
 	public Attachment() {
 		super();
-	}
 
 	public Attachment(Integer fno, String orifname, String refname, String ftype, String fsubtype, Integer fnum,
 			Integer refno) {

@@ -138,6 +138,7 @@ public class AccountController {
 		session = request.getSession(false);
 		Account account = (Account)session.getAttribute("account");
 		int ano = account.getAno();
+		System.out.println("마이 리스트 ano : " + ano);
 		List<Item> iList = itemService.selectMyItems(ano);
 		model.addObject("iList", iList);
 		model.setViewName("myinfo/puttoproject");
@@ -351,6 +352,7 @@ public class AccountController {
 		}
 		
 		party = accountService.selectResult(ano);
+
 		
 		System.out.println("seller Controller3 ano : " + ano + " party : " + party);
 		

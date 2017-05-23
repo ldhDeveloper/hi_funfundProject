@@ -346,11 +346,42 @@ button {
 				style="display: none;">
 				<i class="fa fa-heart-o" aria-hidden="true"></i>
 			</button>
-			<button class="btn btn-default" id="btn-share">
+			<button class="btn btn-default" id="btn-share" onclick="link();">
 				<i class="fa fa-share" aria-hidden="true"></i>
 			</button>
 		</div>
+		
+		
+<script>/* 
 
+function linkWithKakaoTalk(){
+	 Kakao.Auth.login({
+	      //// Additional scope is needed to send memeo chat.
+	      scope: "PROFILE,TALK_MESSAGE",
+	      success: function(res) {
+	        Kakao.API.request({
+	          url: '/v2/api/talk/memo/send',
+	          data: {
+	            template_id: '4046',
+	            args: '{"${USER_NAME}": "developer","${AGE}": 20}'
+	          },
+	          success: function(res) {
+	            alert('success!');
+	            console.log(res);
+	          },
+	          fail: function(error) {
+	            alert('error! \n' + JSON.stringify(error));
+	            console.log(error);
+	          }
+	        })
+	      },
+	      fail: function(error) {
+	        console.log(error);
+	      }
+	    });
+	
+} */
+</script>
 		<div class="">
 			<p
 				style="font-size: 10pt; text-align: left; padding-top: 20px; padding-bottom: 5px; margin-left: 20px;">메이커
