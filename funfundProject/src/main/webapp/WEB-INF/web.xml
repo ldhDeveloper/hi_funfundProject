@@ -163,6 +163,22 @@
 		<url-pattern>*.mi</url-pattern>
 	</servlet-mapping>
 
+<!-- mail 요청 서블릿 -->
+	<servlet>
+		<servlet-name>mailSender</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/config/mailSender-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>mailSender</servlet-name>
+		<url-pattern>*.ms</url-pattern>
+	</servlet-mapping>
+
 	<!-- Start: 한글문제 처리 -->
 	<filter>
 		<filter-name>characterEncodingFilter</filter-name>

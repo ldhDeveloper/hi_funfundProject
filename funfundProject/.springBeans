@@ -16,6 +16,7 @@
 		<config>src/main/webapp/WEB-INF/config/account-servlet.xml</config>
 		<config>src/main/webapp/WEB-INF/config/attachment-servlet.xml</config>
 		<config>src/main/webapp/WEB-INF/config/item-servlet.xml</config>
+		<config>src/main/webapp/WEB-INF/config/mailSender-servlet.xml</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>

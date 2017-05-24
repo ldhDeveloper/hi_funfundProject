@@ -104,6 +104,19 @@ public class AccountController {
 		session.invalidate();
 		return "redirect:/";
 	}
+	//비밀 번호 찾기 및 변경
+	
+	@RequestMapping(value="changePw.ao")
+	public ModelAndView changePw(Account account, ModelAndView model ){	
+		Account ac = accountService.changePwd(account);
+		System.out.println(ac);
+		model.addObject("tempEmail", account.getEmail());
+		sendTempPwd(ac);
+		model.setViewName("home");
+		
+		return model;
+	}
+	
 	
 	// myinfo 회원정보 설정 시작
 	
@@ -224,6 +237,12 @@ public class AccountController {
 	
 	
 	// myinfo 이메일 인증 시작
+	
+	private void sendTempPwd(Account account){
+	ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Mail.xml");	
+	AuthMail mm = (AuthMail)context.getBean("mailMail");
+	mm.sendMail("mfrom@spam.com", account.getEmail(), "FunFund에서 임시비밀번호를 발송 합니다.", "귀하의 계정 임시 비밀번호는" +  account.getPwd()+ "입니다.");
+	}
 	
 	@RequestMapping(value = "authEmail.ao", method=RequestMethod.GET)
 	public @ResponseBody void authEmail(@RequestParam("email") String email, @RequestParam("authNumber") String authNumber) {
