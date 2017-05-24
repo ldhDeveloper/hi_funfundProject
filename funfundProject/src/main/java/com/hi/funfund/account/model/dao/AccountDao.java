@@ -86,7 +86,7 @@ public class AccountDao {
 	//타사이트로 가입한 유저 찾기/로그인/중복가입방지
 	public Account selectThirdPartyUser(Account account){ 
 		int result = 0; //데이터베이스에 회원이 있는지를 가리기위한 변수
-		Account user = (Account) sqlSession.selectOne("accountMapper.thirdPartyUser", account);
+		Account user = (Account) sqlSession.selectOne("selectWithEmail", account);
 		if(user == null){
 			account.setId(account.getEmail());
 			 result = sqlSession.insert("accountMapper.insertThirdParty", account);
@@ -130,5 +130,26 @@ public class AccountDao {
 	public Party selectResult(int ano) {
 		Party p  = (Party)sqlSession.selectOne("selectResult", ano);
 		return p;
+	}
+
+	public Account changePwd(Account account) {
+		
+		Account ac = (Account)sqlSession.selectOne("selectWithEmail", account);
+		
+		if(ac != null && ac.getPwd() != null){
+			char[] charaters = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','0','1','2','3','4','5','6','7','8','9'};
+            StringBuffer sb = new StringBuffer();
+            Random rn = new Random();
+            for( int i = 0 ; i < 10 ; i++ ){
+                sb.append( charaters[ rn.nextInt( charaters.length ) ] );
+            }
+            String pw =  sb.toString();
+            account.setPwd(pw);
+			int result = sqlSession.update("changePwd", pw);
+			if(result > 0){
+				ac = account;
+			}
+		}
+		return ac;
 	}
 }

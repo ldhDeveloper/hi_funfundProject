@@ -15,8 +15,6 @@ public interface AccountService {
 	
 	 String findId(Account account); //아이디찾기
 	
-	 int findPwd(Account account); //비번찾기
-	
 	 Account checkId(String Id); // 중복확인
 	
 	 int update(Account account); //회원정보변경 
@@ -58,6 +56,8 @@ public interface AccountService {
 	int updateSeller(int ano, String phone, String id_no, String address); // seller 정보 수정 (휴대폰, 주민등록번호, 주소, 실명확인증표)
 
 	Party selectResult(int ano);
+
+	Account changePwd(Account account);
 	
 	//미추가된 함수 : 프로젝트별 후원자 리스트
 

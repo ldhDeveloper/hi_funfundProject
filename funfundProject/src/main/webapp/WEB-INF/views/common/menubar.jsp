@@ -28,7 +28,9 @@
 
 
 <script type="text/javascript">
-	$(function(){		
+	$(function(){
+
+		Kakao.init('c04a7d5e62e926cf85109fde19aa531a');
 		$("#login_form").submit(function(){
 			var email=$("#login_form input[name=email]").val();
 			var pwd=$("#login_form input[name=pwd]").val();
@@ -50,7 +52,10 @@
 			}
 		});
 	loginFail();
-	});
+	changeTempPwd();
+	})
+	
+	
 	function home(){
 		location.href="/funfund";
 	}
@@ -60,6 +65,12 @@
 	alert(loginFail);
 	home();
 	}
+	}
+	function changeTempPwd(){
+		var tempE = "${tempEmail}";
+		if(tempE !== ""){
+			$("#myModal9").modal("show");
+		}
 	}
 </script>
 <!-- 결제 함수 -->
@@ -123,7 +134,6 @@ location.href="loginWithApi.ao?email="+email +"&nickname="+ name + "&idtoken="+ 
 
     // 카카오 로그인 버튼을 생성합니다.
   function loginWithKakao(){
-	  Kakao.init('c04a7d5e62e926cf85109fde19aa531a');
 	  Kakao.Auth.login({
     		success: function(authObj){//로그인시도
     			//alert(JSON.stringify(authObj));
@@ -133,7 +143,7 @@ location.href="loginWithApi.ao?email="+email +"&nickname="+ name + "&idtoken="+ 
     			success: function(res){
     			nickname = res.properties.nickname;
     			email = res.kaccount_email;
-    			alert(email);
+    			
     			idtoken = res.id;
     			loginWithThirdParty(email, nickname, idtoken, access_token);  
     			},
@@ -153,38 +163,6 @@ location.href="loginWithApi.ao?email="+email +"&nickname="+ name + "&idtoken="+ 
 	  Kakao.Auth.logout();
   } */
    
-  function link(){
-	  Kakao.init('c04a7d5e62e926cf85109fde19aa531a');
-Kakao.Link.createTalkLinkButton({
-
-	container : "#btn-share",
-	label: '즐거움이 가득한 곳 펀펀드!',
-	image : {
-		 src: 'http://dn.api1.kage.kakao.co.kr/14/dn/btqaWmFftyx/tBbQPH764Maw2R6IBhXd6K/o.jpg',
-	      width: '300',
-	      height: '200'
-	},
-	webButton: {
-		text : '펀펀드',
-		url : "http://localhost:9998/funfund"
-	}
-});
-	  
-	  /*   Kakao.API.request({
-	  url : "/v2/api/talk/memo/default/send",
-	  type : "POST",
-	  data : {"object_type" : "feed",
-		  "content" : {"title" : "펀펀드", "description" : "즐거움이 가득한곳 펀펀드!", 
-			  "image_url" : "http://alpha-api1-kage.kakao.com/dn/cerDB5/ZSb2iRugKx/M4nuZxX823tnK1Mk5yVcv0/kakaolink40_original.png",
-			 "link" : {"web_url:" : "http://localhost:9998/funfund", 
-			 "mobile_web_url" : "http://localhost:9998/funfund"
-			 }
-		  }
-	  }
-  }); */
-  }
-
-  
 </script>
 
 <style>
@@ -832,7 +810,7 @@ label.sign-form_title {
               <fieldset style="border:0; margin:0; padding:0;">
                 <legend class="login-title-txt">소셜 로그인</legend>
                 <a href="#" class="signin-social p-login_btn login-social-facebook" data-sns="facebook" alt="페이스북으로 로그인" >페이스북으로 로그인</a>
-           		<a href="javascript:loginWithKakao()" id="custom-login-btn" class="signin-social p-login_btn login-social-kakao"  alt="카카오로 로그인" >카카오로 로그인</a>
+           		<a href="#" onclick="loginWithKakao()" id="cSignInBt" class="signin-social p-login_btn login-social-kakao"  data-sns="kakao"  alt="카카오로 로그인" >카카오로 로그인</a>
            		<a href="javascript:googleLogin()" id="gSignupBt" class="signin-social p-login_btn login-social-google"  data-sns="google"  alt="구글로 로그인" >구글로 로그인</a>
            		<div class="g-signin2" data-onsuccess="onSignIn"></div>
            		<a href="#" id="nSignInBt" class="signin-social p-login_btn login-social-naver"  data-sns="naver"  alt="네이버로 로그인" >네이버 로그인</a>
@@ -842,7 +820,7 @@ label.sign-form_title {
             <div class="login-email">
 	            <input type="email" name="id" placeholder="이메일주소" autofocus="autofocus" required /> <!-- 20160727 autofocus 추가 -->
 	            <input type="password" name="pwd" placeholder="영문+숫자포함 6~20자" required/>
-	            <a href="javascript:void(0);" class="forget_pw" onclick="switchToForgotBox();">비밀번호를 잊으셨나요?</a>
+	            <a href="javascript:void(0);" class="find_pwd" onclick="findPwd();">비밀번호를 잊으셨나요?</a>
             </div>
             <label for="rememberemail" class="remeber_email">
             <input type="checkbox" id="rememberemail" name="remember_email" class="remeber_check"/>이메일기억하기</label>
@@ -857,18 +835,21 @@ label.sign-form_title {
   </div>
 </div>
 <script type="text/javascript">
-
 	$(function(){
 		$("#linkSignup").click(function(){
 			$("#myModal").modal("hide");
-			/* $("#myModal2").modal("show"); */
+			$("#myModal2").modal("show");
+		});
+		$("#emailSignup").click(function(){
+			$("#myModal2").modal("hide");
 			$("#myModal3").modal("show");
 		});
-		/* $("#emailSignup").click(function(){
-			$("#myModal2").modal("hide"); */
-		/* 	$("#myModal3").modal("show"); */
-		/* }); */
 	});
+	function findPwd(){
+		$("#myModal").modal("hide");
+		$("#myModal5").modal("show");
+	}
+	
 	function trytopay(){
 		
 /* 		IMP.init("imp79484327");
@@ -903,7 +884,6 @@ label.sign-form_title {
 		  */
 	}
 </script>
-<!-- 외부 아이디로 가입하기기능이 통합되었으므로 mYmodal2 삭제 요망 -->
 <div id="myModal2" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
@@ -959,6 +939,61 @@ label.sign-form_title {
             <div class="modal-footer">
             	<button class="btn-login_pop">회원가입하기</button>
             	<p class="go_signup">위의 버튼을 눌러 약관에 동의하고 회원가입합니다.</p>
+            </div>
+		  </form>          
+      </div>
+    </div> 
+  </div>
+</div>
+<div id="myModal5" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+           <span class="modal-close"  data-dismiss="modal" onclick="closeEmailSignupBox();">&nbsp;</span>
+          <h2 class="p-t-signup">비밀번호 찾기</h2>
+       </div>
+      <div class="modal-body" style="padding:30px;">
+      	<form id="join_form" action="changePw.ao" method="post">
+          	<input type="hidden" name="secuToken" value="7QD6StfHBmmEFvusyATSQA"/>
+          	<input type="hidden" name="nmLast" value=""/>
+          	<input type="hidden" name="mobile" value=""/>
+            <fieldset  style="border:0; margin:0; padding:0;">
+              <legend class="signup-title-txt">이메일</legend>
+                  <input type="email" id="signup-form_id" name="email" placeholder="아이디(이메일)" class="sign-form_input">
+            </fieldset>
+            <div class="modal-footer">
+            	<button class="btn-login_pop">임시비밀번호 전송</button>
+            	<p class="go_signup">입력된 이메일로 임시비밀번호를 전송합니다.</p>
+            </div>
+		  </form>          
+      </div>
+    </div> 
+  </div>
+</div>
+<div id="myModal9" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+           <span class="modal-close"  data-dismiss="modal" onclick="closeEmailSignupBox();">&nbsp;</span>
+          <h2 class="p-t-signup">비밀번호 찾기</h2>
+       </div>
+      <div class="modal-body" style="padding:30px;">
+      	<form id="join_form" action="setPwd.ao" method="post">
+          	<input type="hidden" name="secuToken" value="7QD6StfHBmmEFvusyATSQA"/>
+          	<input type="hidden" name="nmLast" value=""/>
+          	<input type="hidden" name="mobile" value=""/>
+            <fieldset  style="border:0; margin:0; padding:0;">
+              <legend class="signup-title-txt">이메일</legend>
+                  <input type="hidden" name = "email" value= "${tempEmail}">
+                   <input type="text" id="signup-form_id" name="tempPwd" placeholder="임시비밀번호" class="sign-form_input">
+                    <input type="text" id="signup-form_id" name="pwd" placeholder="번경할 비밀번호" class="sign-form_input">
+                     <input type="text" id="signup-form_id" name="confirmPwd" placeholder="비밀번호 재입력" class="sign-form_input">
+            </fieldset>
+            <div class="modal-footer">
+            	<button class="btn-login_pop">비밀번호 변경</button>
+            	<p class="go_signup">비밀 번호를 변경합니다.</p>
             </div>
 		  </form>          
       </div>

@@ -28,9 +28,9 @@ public class AccountServiceIm implements AccountService {
 	}
 
 	@Override
-	public int findPwd(Account account) {
-		// TODO Auto-generated method stub
-		return 0;
+	public Account changePwd(Account account) {
+		
+		return accountDao.changePwd(account);
 	}
 
 	@Override
