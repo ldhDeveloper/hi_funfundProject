@@ -38,30 +38,60 @@ public class ItemAskController {
 		String pro_no = request.getParameter("pro_no");
 		String acontent = request.getParameter("acontent");
 		String ask_no = request.getParameter("ask_no");
+		String upask_no = request.getParameter("upask_no");
 		Account account = (Account) session.getAttribute("account");
-		System.out.println(account);
-		System.out.println(acontent);
+		System.out.println("account"+account);
+		System.out.println("acontent"+acontent);
 		System.out.println(pro_no);
-		System.out.println(ask_no);
+		System.out.println("ask_no"+ask_no);
 		HashMap<String, String> cmap = new HashMap<String, String>();
 		cmap.put("pro_no", pro_no);
 		cmap.put("acontent", acontent);
 		cmap.put("id_no", Integer.toString(account.getAno()));
 		cmap.put("ask_no", ask_no);
+		cmap.put("upask_no", upask_no);
 		int result = itemAskService.insert(cmap);
 		model.setViewName("funding/reply");
 		redirect.addAttribute("pro_no", pro_no);
+		redirect.addAttribute("upask_no", upask_no);
 		return "redirect:/reply.ask";
 	}
 
+	@RequestMapping("reinsert.ask")
+	public String reinsert(HttpSession session, HttpServletRequest request, ModelAndView model,
+			RedirectAttributes redirect) {
+		String pro_no = request.getParameter("pro_no");
+		String acontent = request.getParameter("acontent2");
+		String upask_no = request.getParameter("upask_no");
+		Account account = (Account) session.getAttribute("account");
+		System.out.println("account"+account);
+		System.out.println("acontent"+acontent);
+		System.out.println(pro_no);
+		System.out.println(upask_no);
+		HashMap<String, String> cmap = new HashMap<String, String>();
+		cmap.put("pro_no", pro_no);
+		cmap.put("acontent", acontent);
+		cmap.put("upask_no", upask_no);
+		cmap.put("id_no", Integer.toString(account.getAno()));
+		int result = itemAskService.reinsert(cmap);
+		model.setViewName("funding/reply");
+		redirect.addAttribute("pro_no", pro_no);
+		redirect.addAttribute("upask_no", upask_no);
+		return "redirect:/reply.ask";
+	}
+	
 	/*@RequestMapping("update.ask")
 	public String update(HttpServletRequest request, RedirectAttributes redirect) {
+		System.out.println("오니???");
 		String pro_no = request.getParameter("pro_no");
-		String acontent = request.getParameter("acontent");
+		String upask_no = request.getParameter("upask_no");
 		HashMap<String, String> umap = new HashMap<String, String>();
 		umap.put("pro_no", pro_no);
-		int result = itemAskService.update(pro_no);
+		umap.put("upask_no", upask_no);
+	    System.out.println("upask_no:"+upask_no);
+		int result = itemAskService.update(umap);
 		redirect.addAttribute("pro_no", pro_no);
+		redirect.addAttribute("upask_no", upask_no);
 		return "redirect:/reply.ask";
 	}*/
 

@@ -11,13 +11,16 @@ public class ItemAskAccount {
 	private Date ask_date;
 	private int upask_no;
 	private String nickname;
+	private String idtype;
+	private String pimage;
+	/* private String orifname; */
 
 	public ItemAskAccount() {
 		super();
 	}
-	
-	public ItemAskAccount(int ask_no, int pro_no, String ask_type, String ask_content, int id_no,
-			Date ask_date, int upask_no, String nickname) {
+
+	public ItemAskAccount(int ask_no, int pro_no, String ask_type, String ask_content, int id_no, Date ask_date,
+			int upask_no, String nickname, String idtype, String pimage) {
 		super();
 		this.ask_no = ask_no;
 		this.pro_no = pro_no;
@@ -27,8 +30,20 @@ public class ItemAskAccount {
 		this.ask_date = ask_date;
 		this.upask_no = upask_no;
 		this.nickname = nickname;
+		this.idtype = idtype;
+		this.pimage = pimage;
 	}
-	
+
+	/*
+	 * public ItemAskAccount(int ask_no, int pro_no, String ask_type, String
+	 * ask_content, int id_no, Date ask_date, int upask_no, String nickname,
+	 * String idtype, String orifname) { super(); this.ask_no = ask_no;
+	 * this.pro_no = pro_no; this.ask_type = ask_type; this.ask_content =
+	 * ask_content; this.id_no = id_no; this.ask_date = ask_date; this.upask_no
+	 * = upask_no; this.nickname = nickname; this.idtype = idtype; this.orifname
+	 * = orifname; }
+	 */
+
 	public int getAsk_no() {
 		return ask_no;
 	}
@@ -85,7 +100,6 @@ public class ItemAskAccount {
 		this.nickname = nickname;
 	}
 
-	
 	public int getUpask_no() {
 		return upask_no;
 	}
@@ -94,11 +108,41 @@ public class ItemAskAccount {
 		this.upask_no = upask_no;
 	}
 
+	public String getIdtype() {
+		return idtype;
+	}
+
+	public void setIdtype(String idtype) {
+		this.idtype = idtype;
+	}
+
+	public String getPimage() {
+		return pimage;
+	}
+
+	public void setPimage(String pimage) {
+		this.pimage = pimage;
+	}
+
+	/*
+	 * public String getOrifname() { return orifname; }
+	 * 
+	 * public void setOrifname(String orifname) { this.orifname = orifname; }
+	 */
+
+	/*
+	 * @Override public String toString() { return "ItemAskAccount [ask_no=" +
+	 * ask_no + ", pro_no=" + pro_no + ", ask_type=" + ask_type +
+	 * ", ask_content=" + ask_content + ", id_no=" + id_no + ", ask_date=" +
+	 * ask_date + ", upask_no=" + upask_no + ", nickname=" + nickname +
+	 * ", idtype=" + idtype + ", orifname=" + orifname + "]"; }
+	 */
+
 	@Override
 	public String toString() {
-		return "ItemAskAccount [ask_no=" + ask_no + ", pro_no=" + pro_no + ", ask_type=" + ask_type
-				+ ", ask_content=" + ask_content + ", id_no=" + id_no + ", ask_date=" + ask_date
-				+ ", upask_no=" + upask_no + ", nickname=" + nickname + "]";
+		return "ItemAskAccount [ask_no=" + ask_no + ", pro_no=" + pro_no + ", ask_type=" + ask_type + ", ask_content="
+				+ ask_content + ", id_no=" + id_no + ", ask_date=" + ask_date + ", upask_no=" + upask_no + ", nickname="
+				+ nickname + ", idtype=" + idtype + ", pimage=" + pimage + "]";
 	}
 
 }
