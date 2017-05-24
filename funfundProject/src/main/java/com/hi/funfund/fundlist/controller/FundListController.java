@@ -21,12 +21,11 @@ import com.hi.funfund.item.model.vo.Item;
 //@RequestMapping("fundList")
 public class FundListController {
 
-	
-@Autowired
-private FundListService fundListService;
+	@Autowired
+	private FundListService fundListService;
 
-@Autowired
-private ItemService itemService;  
+  @Autowired
+  private ItemService itemService;  
 
 @RequestMapping(value = "myproject.fl", method = RequestMethod.GET)
 public ModelAndView selectMyProject(ModelAndView model, HttpSession session, HttpServletRequest request){
@@ -46,17 +45,33 @@ public ModelAndView selectList(ModelAndView model){
 	return model;
 	
 }
+ 
+	public ModelAndView selectList(ModelAndView model) {
+		List<FundList> fList = fundListService.selectList();
 
-public String insert(FundList fList){
-	
-	int result= fundListService.insert(fList);
-	
-	return null;
-}
+		return model;
 
-public String update(FundList fList){
+	}
+
+	public String insert(FundList fList) {
+
+		int result = fundListService.insert(fList);
+
+		return null;
+	}
+
+	public String update(FundList fList) {
+
+		int result = fundListService.update(fList);
+		return null;
+	}
 	
-	int result = fundListService.update(fList);	
-	return null;
-}
+	@RequestMapping(value = "myfundingDetail.fl")
+	public String myfundingDetail(){
+		System.out.println("오니?");
+		
+		
+		
+		return "myinfo/myfundingDetail";
+	}
 }
