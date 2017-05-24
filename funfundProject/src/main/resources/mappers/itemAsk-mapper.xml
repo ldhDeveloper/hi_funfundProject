@@ -22,30 +22,34 @@
 		<result property="ask_date" column="ask_date" />
 		<result property="upask_no" column="upask_no" />
 		<result property="nickname" column="nickname" />
+		<result property="pimage" column="pimage" />
+		<!-- <result property="orifname" column="orifname" /> -->
+		<result property="idtype" column="idtype" />
 	</resultMap>
 
 	<select id="selectList" resultMap="itemAskResult2"
 		parameterType="int">
-		select ask_no, it.pro_no, ask_type, ask_content, id_no,
-		ask_date, upask_no, a.nickname , a.pimage
-		from itemask ask inner join item it on ask.pro_no=it.pro_no
-		inner join account a on ask.id_no = a.ano
+	    select ask_no, it.pro_no, ask_type, ask_content, id_no,
+		ask_date, upask_no, a.nickname , a.pimage, a.idtype
+		from itemask ask
+		left outer join item it on ask.pro_no=it.pro_no
+		left outer join account a on ask.id_no = a.ano
 		where it.pro_no = #{pro_no}
 		order by upask_no desc, ask_no asc
 	</select>
 
 	<insert id="insertAsk" parameterType="HashMap">
-		insert into itemask (ask_no, pro_no, ask_type, ask_content, id_no, ask_date)
-		values(seq_ask.nextval,#{pro_no},'댓글',#{acontent},#{id_no}, sysdate)
+		insert into itemask
+		(ask_no, pro_no, ask_type, ask_content, id_no, ask_date, upask_no)
+		values(seq_ask.nextval,#{pro_no},'댓글',#{acontent},#{id_no}, sysdate, seq_ask.currval)
 	</insert>
 	
-	<update id="updateAsk" parameterType="HashMap">
-	     update from itemask  
-	     set upask_no = #{upask_no}
-	     where pro_no = #{pro_no}
-	</update>
-	
-	
+	<insert id="reinsertAsk" parameterType="HashMap">
+		insert into itemask
+		(ask_no, pro_no, ask_type, ask_content, id_no, ask_date, upask_no)
+		values(seq_ask.nextval,#{pro_no},'답글',#{acontent},#{id_no}, sysdate, #{upask_no})
+	</insert>
+
 
 
 </mapper>

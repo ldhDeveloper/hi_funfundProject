@@ -173,11 +173,12 @@ button {
 	background: #fff;
 	box-sizing: border-box !important;
 }
+
 #comment-area2 textarea {
 	display: block;
 	margin-bottom: 10px;
 	margin-left: 20px;
-	margin-top:10px;
+	margin-top: 10px;
 	width: 80%;
 	height: 40%;
 	padding: 10px;
@@ -230,15 +231,17 @@ textarea {
 	box-sizing: border-box !important;
 }
 
-.cmtId {
-	margin-bottom: 10px;
+.cmtId { 
+	margin-top:10px;
+	font-size: 15px;
 	height: 30px;
 }
 
 .cmtco {
 	margin-bottom: 10px;
-	font-size: 13px;
+	margin-top: 10px; font-size : 13px;
 	line-height: 18px;
+	font-size: 13px;
 }
 
 .cmtda {
@@ -264,6 +267,25 @@ textarea {
 
 #box2 {
 	padding-top: 10px;
+}
+
+.cmtst {
+	display: inline-block;
+	font-size: 15px;
+	line-height: 15px;
+	color: #92;
+	margin-top: 10px;
+	background: orange;
+}
+
+img {
+	vertical-align: middle;
+	width:40px;
+	height:40px;
+}
+
+.img{
+ display:inline-block;
 }
 </style>
 <script src="/funfund/lib/js/jquery-3.2.1.min.js"></script>
@@ -305,9 +327,9 @@ textarea {
 	});
 
 	$(function() {
-		$('#comment-area2').hide();
+		$('.comment-area2').hide();
 		$('#recmtbutton').click(function() {
-			$('#comment-area2').toggle();
+			$('.comment-area2').toggle();
 		});
 	});
 </script>
@@ -351,7 +373,8 @@ textarea {
 					rows="3" cols="50" maxlength="140;" placeholder="댓글을 입력하세요"></textarea>
 				<div id="upload">
 					<input type="submit" value="댓글달기"> <input type="hidden"
-						value="${param.pro_no}" name="pro_no">
+						value="${param.pro_no}" name="pro_no"><input type="hidden"
+						value="${ask.ask_no}" name="upask_no">
 				</div>
 			</form>
 
@@ -359,25 +382,34 @@ textarea {
 				<div id="comment-box">
 					<c:forEach var="ask" items="${aList}">
 						<c:if test="${ask.ask_type eq '댓글' }">
-							<p class="cmtId">${ask.nickname }</p>
+							<div class="img"><img src="/funfund/images/myinfo/${ask.pimage }"></div>
+							<span class="cmtId">${ask.nickname }</span>
+							<c:if test="${ask.idtype eq '메이커' }">
+								<span class="cmtst">메이커</span>
+							</c:if>
 							<p class="cmtco">${ask.ask_content }</p>
 							<span class="cmtda">${ask.ask_date }</span>
 							<a id="recmtbutton">답글달기</a>
-							<form action="" id="comment-area2">
-								<textarea id="acontent2" name="acontent"
+							<form action="reinsert.ask" id="comment-area2"
+								class="comment-area2">
+								<textarea id="acontent2" name="acontent2"
 									style="overflow-y: hidden;" rows="3" cols="50" maxlength="140;"
 									placeholder="답글을 입력하세요"></textarea>
 								<div id="upload">
 									<input type="submit" value="답글달기"> <input type="hidden"
 										value="${param.pro_no}" name="pro_no"> <input
-										type="hidden" value="${ask.ask_no}" name="ask_no">
+										type="hidden" value="${ask.ask_no}" name="upask_no">
 								</div>
 							</form>
 							<hr>
 						</c:if>
 						<c:if test="${ask.ask_type eq '답글' }">
 							<div id="comment-box2">
-								<p class="cmtId">${ask.nickname }</p>
+								<div class="img"><img src="/funfund/images/myinfo/${ask.pimage }"></div>
+								<span class="cmtId">${ask.nickname }</span>
+								<c:if test="${ask.idtype eq '메이커' }">
+									<span class="cmtst">메이커</span>
+								</c:if>
 								<p class="cmtco">${ask.ask_content }</p>
 								<span class="cmtda">${ask.ask_date }</span>
 							</div>
