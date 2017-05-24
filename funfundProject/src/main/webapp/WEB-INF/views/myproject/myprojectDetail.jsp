@@ -51,9 +51,16 @@
     border: 1px solid rgba(0,0,0,.1);
 }
 .funderTable{
+	text-align : center;
 	background-color:#fff;
 	border-radius: .28571429rem;
     border: 1px solid rgba(0,0,0,.1);
+}
+.thcenter{
+	text-align:center;
+}
+.tmargin{
+	margin-bottom:10px;
 }
 </style>
 <body>
@@ -66,8 +73,11 @@
 		console.log("persent : " + persent);
 		$("#itemPersent").html(persent + " %");
 		
-		$("#firstList").click(function(){
-			$("#detailList").toggle();
+		$("tr[id ^= firstList]").click(function(){
+			var name = $(this).attr("id");
+			var num = name.substr(name.length - 1, 1);
+			console.log("num : " + num);
+			$("#detailList" + num).toggle("fast");
 		})
 	});
 </script>
@@ -108,49 +118,57 @@
 			<table class="table table-hover funderTable">
 			    <thead>
 			      <tr>
-			        <th>후원번호</th>
-			        <th>닉네임</th>
-			        <th>후원명</th>
-			        <th>후원금액</th>
-			        <th>결제상태</th>
-			        <th>배송상태</th>
+			        <th class="thcenter">후원번호</th>
+			        <th class="thcenter">닉네임</th>
+			        <th class="thcenter">후원명</th>
+			        <th class="thcenter">후원금액</th>
+			        <th class="thcenter">결제상태</th>
+			        <th class="thcenter">배송상태</th>
 			      </tr>
 			    </thead>
 			    <tbody>
-			      <tr id="firstList">
-			        <td>a</td>
-			        <td>b</td>
-			        <td>c</td>
-			        <td>d</td>
-			        <td>e</td>
-			        <td>f</td>
+			      <c:forEach var="item" items="${mlist}" varStatus="status">
+			      <tr id="firstList<c:out value='${status.index }'/>">
+			        <td><a name="fund_no<c:out value='${status.index }'/>"><c:out value="${item.fund_no }"/></a></td>    
+			        <td><a name="nickname<c:out value='${status.index }'/>"><c:out value="${item.nickname }"/></a></td>
+			        <td><a name="mname<c:out value='${status.index }'/>"><c:out value="${item.mname }"/></a></td>
+			        <td><a name="tcost<c:out value='${status.index }'/>"><c:out value="${item.tcost }"/></a></td>
+			        <td><a name="funstatus<c:out value='${status.index }'/>"><c:out value="${item.funstatus }"/></a></td>
+			        <td><a name="delstatus<c:out value='${status.index }'/>"><c:out value="${item.delstatus }"/></a></td>
 			      </tr>
-			      <tr id="detailList" style="display:none;">
+			      <tr id="detailList<c:out value='${status.index }'/>" style="display:none;">
 			        <td colspan="6">
-			            <div class="row">
+			            <div class="row tmargin">
 							<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><h6>결재방법</h6></div>
-							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><input type="text" class="form-control"></div>
+							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><input type="text" name="payment<c:out value='${status.index }'/>" class="form-control" value="${item.payment }" readonly></div>
 							<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><h6>결재근거</h6></div>
-							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><input type="text" class="form-control"></div>
+							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><input type="text" name="fund_no<c:out value='${status.index }'/>" class="form-control" value="${item.evidence }" readonly></div>
 						</div>
-						<div class="row">
+						<div class="row tmargin">
 							<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><h6>수량</h6></div>
-							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><input type="text" class="form-control"></div>
+							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><input type="text" name="fundcount<c:out value='${status.index }'/>" class="form-control" value="${item.fundcount }" readonly></div>
 							<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><h6>수신자</h6></div>
-							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><input type="text" class="form-control"></div>
+							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><input type="text" name="recname<c:out value='${status.index }'/>" class="form-control" value="${item.recname }" readonly></div>
 						</div>
-						<div class="row">	
+						<div class="row tmargin">	
 							<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><h6>연락처</h6></div>
-							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><input type="text" class="form-control"></div>
+							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><input type="text" name="rephone<c:out value='${status.index }'/>" class="form-control" value="${item.rephone }" readonly></div>
 							<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><h6>이메일</h6></div>
-							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><input type="text" class="form-control"></div>
-						</div>	
-						<div class="row">	
+							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><input type="text" name="email<c:out value='${status.index }'/>" class="form-control" value="${item.email }" readonly></div>
+						</div>
+						<div class="row tmargin">	
+							<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><h6>추가금액</h6></div>
+							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><input type="text" name="addcost<c:out value='${status.index }'/>" class="form-control" value="${item.addcost }" readonly></div>
+							<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><h6>운송장번호</h6></div>
+							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><input type="text" name="del_no<c:out value='${status.index }'/>" class="form-control" value="${item.del_no }"></div>
+						</div>		
+						<div class="row tmargin">	
 							<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><h6>주소</h6></div>
-							<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10"><input type="text" class="form-control"></div>
+							<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10"><input type="text" name="deladdress<c:out value='${status.index }'/>" class="form-control" value="${item.deladdress }" readonly></div>
 						</div>
 					</td>
 			      </tr>
+			      </c:forEach>
 			    </tbody>
 			  </table>
 		</div>

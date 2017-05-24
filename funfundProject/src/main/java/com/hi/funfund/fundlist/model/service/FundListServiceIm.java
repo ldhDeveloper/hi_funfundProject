@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.hi.funfund.fundlist.model.dao.FundListDao;
 import com.hi.funfund.fundlist.model.vo.FundList;
+import com.hi.funfund.fundlist.model.vo.Mysponsor;
 
 
 @Service("fundListService")
@@ -37,5 +38,10 @@ public class FundListServiceIm implements FundListService {
 		
 		
 		return fundListDao.update(fList);
+	}
+
+	@Override
+	public List<Mysponsor> selectSponsorList(int pro_no) {
+		return fundListDao.selectSponsorList(pro_no);
 	}
 }

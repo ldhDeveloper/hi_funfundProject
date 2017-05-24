@@ -113,13 +113,13 @@ public class AttachmentController {
 		String root = request.getSession().getServletContext().getRealPath("/");
 		System.out.println("root : " + root);
 		String[] roots = root.split("\\\\");
-		String marger = "";
+		String merger = "";
 		for (int i = 0; i < roots.length - 3; i++) {
-			marger += roots[i] + "\\";
+			merger += roots[i] + "\\";
 		}
 
-		System.out.println("marger : " + marger);
-		String savePath = marger + "src/main/webapp/images/makeproject/slideimg/";
+		System.out.println("merger : " + merger);
+		String savePath = merger + "src/main/webapp/images/makeproject/slideimg/";
 		System.out.println("savepath : " + savePath);
 
 		

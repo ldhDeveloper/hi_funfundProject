@@ -30,14 +30,14 @@ public class MyItemController {
 	@Autowired
 	private ItemService itemService;  
 	
-	@RequestMapping(value = "myproject.mi", method = RequestMethod.GET)
+/*	@RequestMapping(value = "myproject.mi", method = RequestMethod.GET)
 	public ModelAndView selectMyProject(ModelAndView model, HttpSession session, HttpServletRequest request){
 		String pro_no = request.getParameter("pro_no");
 		Item proItem = itemService.selectOne(Integer.parseInt(pro_no));
 		model.addObject("proItem", proItem);
 		model.setViewName("myproject/myprojectDetail");
 		return model;
-	}
+	}*/
 	
 
 	@RequestMapping(value = "insertMyitem.mi", method = RequestMethod.GET)

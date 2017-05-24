@@ -115,6 +115,22 @@
 		<url-pattern>*.fm</url-pattern>
 	</servlet-mapping>
 	
+	<!-- FundList 요청 서블릿 -->
+	<servlet>
+		<servlet-name>fundList</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/config/fundList-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>fundList</servlet-name>
+		<url-pattern>*.fl</url-pattern>
+	</servlet-mapping>
+	
 	<!-- attachment 요청 서블릿 -->
 	<servlet>
 		<servlet-name>attachment</servlet-name>

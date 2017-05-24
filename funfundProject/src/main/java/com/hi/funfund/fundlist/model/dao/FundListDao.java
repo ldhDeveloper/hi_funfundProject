@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hi.funfund.fundlist.model.vo.FundList;
+import com.hi.funfund.fundlist.model.vo.Mysponsor;
 
 
 @Repository("fundListDao")
@@ -26,6 +27,11 @@ public class FundListDao {
 	public int update(FundList fList) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	public List<Mysponsor> selectSponsorList(int pro_no) {
+		System.out.println("나와랏! : " + pro_no);
+		List<Mysponsor> mList = sqlSession.selectList(nameSpace+"sponsorList", pro_no);
+		return mList;
 	}
 
 }
