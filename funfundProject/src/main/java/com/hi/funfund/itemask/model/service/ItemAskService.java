@@ -9,10 +9,12 @@ public interface ItemAskService {
 
 	int insert(HashMap<String, String> cmap);
 
-	int update(int pro_no);
-
 	int delete(int ask_no);
 
 	List<ItemAsk> selectList(int pro_no);
+
+	int reinsert(HashMap<String, String> cmap);
+
+	int update(HashMap<String, String> umap);
 
 }

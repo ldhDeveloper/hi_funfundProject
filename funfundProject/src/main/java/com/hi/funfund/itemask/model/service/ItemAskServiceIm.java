@@ -21,10 +21,10 @@ public class ItemAskServiceIm implements ItemAskService {
 	public int insert(HashMap<String,String> cmap) {
 		return itemAskDao.insert(cmap);
 	}
-
+	
 	@Override
-	public int update(int pro_no) {
-		return itemAskDao.update(pro_no);
+	public int update(HashMap<String,String> umap) {
+		return itemAskDao.update(umap);
 	}
 
 	@Override
@@ -37,4 +37,11 @@ public class ItemAskServiceIm implements ItemAskService {
 	public List<ItemAsk> selectList(int pro_no) {
 		return itemAskDao.selectList(pro_no);
 	}
+
+	@Override
+	public int reinsert(HashMap<String, String> cmap) {
+		return itemAskDao.reinsert(cmap);
+	}
+
+	
 }

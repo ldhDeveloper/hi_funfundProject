@@ -20,8 +20,8 @@ public class ItemAskDao {
 		return result;
 	}
 
-	public int update(int pro_no) {
-		int result=sqlSession.update(nameSpace+"updateAsk", pro_no);
+	public int update(HashMap<String, String> umap) {
+		int result=sqlSession.update(nameSpace+"updateAsk", umap);
 		return 0;
 	}
 
@@ -33,6 +33,11 @@ public class ItemAskDao {
 	public List<ItemAsk> selectList(int pro_no) {
 		List<ItemAsk> aList = sqlSession.selectList(nameSpace + "selectList", pro_no);
 		return aList;
+	}
+
+	public int reinsert(HashMap<String, String> cmap) {
+		int result = sqlSession.insert(nameSpace + "reinsertAsk", cmap);
+		return result;
 	}
 
 }

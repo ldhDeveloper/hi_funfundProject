@@ -17,6 +17,7 @@
 		<typeAlias type="com.hi.funfund.notice.model.vo.Notice" alias="notice" />
 		<typeAlias type="com.hi.funfund.pupdate.model.vo.Pupdate" alias="pupdate" />
 		<typeAlias type="com.hi.funfund.fundlist.model.vo.Myfunding" alias="myfunding" />
+		<typeAlias type="com.hi.funfund.fundlist.model.vo.Mysponsor" alias="mysponsor" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/account-mapper.xml" />
@@ -29,8 +30,6 @@
 		<mapper resource="mappers/myItem-mapper.xml" />
 		<mapper resource="mappers/notice-mapper.xml" />
 		<mapper resource="mappers/pupdate-mapper.xml" />
-		
-		
 	</mappers>
 	
 

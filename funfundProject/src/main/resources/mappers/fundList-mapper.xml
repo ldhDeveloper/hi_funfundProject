@@ -18,6 +18,26 @@
 		<result property="evidence" column="evidence"/>
 		<result property="sumcost" column="sumcost"/>
 	</resultMap>
+  <resultMap type="mysponsor" id="mysponsorResult">
+		<id property="fund_no" column="fund_no" />
+		<result property="ano" column="ano" />
+		<result property="mno" column="mno" />
+		<result property="deladdress" column="deladdress" />
+		<result property="rephone" column="rephone" />
+		<result property="delstatus" column="delstatus" />
+		<result property="del_no" column="del_no" />
+		<result property="recname" column="recname" />
+		<result property="funddate" column="funddate" />
+		<result property="funstatus" column="funstatus" />
+		<result property="addcost" column="addcost" />
+		<result property="fundcount" column="fundcount" />
+		<result property="payment" column="payment" />
+		<result property="evidence" column="evidence" />
+		<result property="mname" column="mname" />
+		<result property="mcost" column="mcost" />
+		<result property="nickname" column="nickname" />
+		<result property="email" column="email" />
+	</resultMap>
 	
 	<select id="selectMyfunding" parameterType="int" resultMap="myfundingResult">
 		<![CDATA[
@@ -27,5 +47,14 @@
 			JOIN FUNDLIST FL ON (FM.MNO = FL.MNO)
 			WHERE FL.ANO=#{ano}
 		]]>
+	<select id="sponsorList" parameterType="int" resultMap="mysponsorResult">
+		select fl.*, fm.mname, fm.mcost, a.nickname, fm.mcost * fl.fundcount as tcost, a.email
+		from fundlist fl left join (select mno, mname, mcost, Pro_no
+		                            from fundmenu) fm
+		                      on (fl.mno = fm.mno)
+		                 left join (select ano, nickname, email
+		                            from account) a
+		                      on (fl.ano = a.ano)
+		where  fm.pro_no = #{pro_no}
 	</select>
 </mapper>
