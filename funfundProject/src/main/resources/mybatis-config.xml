@@ -16,6 +16,7 @@
 		<typeAlias type="com.hi.funfund.myitem.model.vo.MyItem" alias="myItem" />
 		<typeAlias type="com.hi.funfund.notice.model.vo.Notice" alias="notice" />
 		<typeAlias type="com.hi.funfund.pupdate.model.vo.Pupdate" alias="pupdate" />
+		<typeAlias type="com.hi.funfund.fundlist.model.vo.Myfunding" alias="myfunding" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/account-mapper.xml" />

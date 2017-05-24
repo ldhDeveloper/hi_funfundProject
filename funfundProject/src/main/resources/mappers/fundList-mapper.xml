@@ -3,5 +3,29 @@
 "-//mybatis.org//DTD mapper 3.0//en"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace = "fundListMapper">
-
+	<resultMap type="myfunding" id="myfundingResult">
+		<id property="fund_no" column="fund_no"/>
+		<result property="pname" column="pname"/>
+		<result property="mname" column="mname"/>
+		<result property="mcost" column="mcost"/>
+		<result property="redate" column="redate"/>
+		<result property="deladdress" column="deladdress"/>
+		<result property="fundcount" column="fundcount"/>
+		<result property="rephone" column="rephone"/>
+		<result property="recname" column="recname"/>
+		<result property="funstatus" column="funstatus"/>
+		<result property="payment" column="payment"/>
+		<result property="evidence" column="evidence"/>
+		<result property="sumcost" column="sumcost"/>
+	</resultMap>
+	
+	<select id="selectMyfunding" parameterType="int" resultMap="myfundingResult">
+		<![CDATA[
+			SELECT FL.FUND_NO, I.PNAME, FM.MNAME, FM.MCOST, I.PEDATE, FL.DELADDRESS, FL.FUNDCOUNT, FL.REPHONE, FL.RECNAME, FL.FUNSTATUS, FL.PAYMENT, FL.EVIDENCE, (FM.MCOST*FL.FUNDCOUNT) AS SUMCOST
+			FROM FUNDMENU FM
+			JOIN ITEM I ON (FM.PRO_NO = I.PRO_NO)
+			JOIN FUNDLIST FL ON (FM.MNO = FL.MNO)
+			WHERE FL.ANO=#{ano}
+		]]>
+	</select>
 </mapper>

@@ -178,21 +178,10 @@
 }
 </style>
 
-
-
 <title>Insert title here</title>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/menubar.jsp" flush="true"/>
-
-<script type="text/javascript">
-$(function(){
-	$(".mftdr").click(function(){
-		location.href = "myfundingDetail.fl";
-		console.log("나오니?");
-	});
-});
-</script>
 
 <br><br>
 <div class="container">
@@ -260,59 +249,8 @@ $(function(){
       							<!-- <div class="panel-body">아직 참여한 프로젝트가 없습니다.</div> -->
       							
       							<br>
-									<div class="tableStart">
-										<table class="table table-hover">
-    										<thead>
-      											<tr class="mfthr">
-        											<th class="mfth">참여 프로젝트</th>
-        											<th class="mfth">마감날짜</th>
-        											<th class="mfth">금액</th>
-        											<th class="mfth">결제상태</th>
-        											<th class="mfth">변경/취소</th>
-      											</tr>
-    										</thead>
-    
-    										<tbody>
-      											<tr class="mftdr">
-        											<td class="mftd"><b class="state">진행중</b> 들고다니면서 마시는 미니 고급 콜드...</td>
-        											<td class="mftd">2017.06.16</td>
-        											<td class="mftd">17,500원</td>
-        											<td class="mftd">결제예정</td>
-        											<td class="mftd">정보변경/취소</td>
-      											</tr>
-      									
-      											<tr class="mftdr">
-        											<td class="mftd"><b class="state">진행중</b> 들고다니면서 마시는 미니 고급 콜드...</td>
-        											<td class="mftd">2017.06.16</td>
-        											<td class="mftd">17,500원</td>
-        											<td class="mftd">결제예정</td>
-        											<td class="mftd">정보변경/취소</td>
-      											</tr>
-      									
-      											<tr class="mftdrL">
-        											<td class="mftd"><b class="state">진행중</b> 들고다니면서 마시는 미니 고급 콜드...</td>
-        											<td class="mftd">2017.06.16</td>
-        											<td class="mftd">17,500원</td>
-        											<td class="mftd">결제예정</td>
-        											<td class="mftd">정보변경/취소</td>
-      											</tr>
-      									
-      											<!-- <tr class="mftdrL">
-        											<td class="mftd"><b class="state">진행중</b> 제목 넣기</td>
-        											<td class="mftd">마감 날짜 값 넣기 </td>
-        											<td class="mftd">금액 값 넣기</td>
-        											<td class="mftd">결제 상태값 넣기</td>
-        											<td class="mftd">변경/취소 값 넣기</td>
-      											</tr> -->
-    										</tbody>
-  										</table>
-  									</div>
   									
-  	<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-  									
-  									<br><br><br><br><br><br>
-  									
-  									<!-- <div class="tableStart">
+  									<div class="tableStart">
   									
   									<h3>결제 정보 변경 및 취소</h3>
   									<br>
@@ -339,16 +277,16 @@ $(function(){
         											<td class="mftd">결제예정</td>
       											</tr>
       											
-      											<tr class="mftdr">
+      											<!-- <tr class="mftdr">
         											<td class="mftd">-4854-20170522180209-323532</td>
         											<td class="mftd"><b class="state">진행중</b> 들고다니면서 마시는 미니 고급 콜드...</td>
         											<td class="mftd">2017.06.16</td>
         											<td class="mftd">17,500원</td>
         											<td class="mftd">결제예정</td>
-      											</tr>      											
+      											</tr> -->      											
     										</tbody>
   										</table>
-  									</div>  --> 								
+  									</div>  								
   								<br>
     						</div>
     					</div>
