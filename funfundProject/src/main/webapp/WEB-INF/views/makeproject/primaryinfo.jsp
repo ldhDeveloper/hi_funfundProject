@@ -92,29 +92,32 @@ li {
 	font-size: 4em;
 	text-align: center;
 }
+
 .wrap {
-    width: 500px;
-    height: auto;
-    position: relative;
-    display: inline-block;
+	width: 500px;
+	height: auto;
+	position: relative;
+	display: inline-block;
 }
+
 .wrap textarea {
-    resize: none;
-    height:60px;
-    max-height:60px;
-    min-height:60px;
+	resize: none;
+	height: 60px;
+	max-height: 60px;
+	min-height: 60px;
 }
+
 .wrap span {
-    position: absolute;
-    bottom: 5px;
-    right: 15px;
-    
+	position: absolute;
+	bottom: 5px;
+	right: 15px;
 }
+
 #counter {
-  background:rgba(255,0,0,0.5);
-  border-radius: 0.5em;
-  padding: 0 .5em 0 .5em;
-  font-size: 0.75em;
+	background: rgba(255, 0, 0, 0.5);
+	border-radius: 0.5em;
+	padding: 0 .5em 0 .5em;
+	font-size: 0.75em;
 }
 </style>
 
@@ -178,7 +181,6 @@ li {
 					$('#nextorsave').show();
 				}
 			});
-
 		});
 	</script>
 
@@ -192,11 +194,13 @@ li {
 			<li id="info3"><a href="#">스토리</a></li>
 			<li id="info4"><a href="#">메이커정보</a></li>
 			<li id="info5"><a href="#">정산</a></li>
-			<li id="showpage" style="margin-left: 20px;"><a href="#">미리보기</a></li>
+			<li id="showpage" style="margin-left: 20px;"><a
+				href="detail.it?pro_no=${pro_no }">미리보기</a></li>
 			<li id="sendadmin" style="margin-left: 20px;"><a href="#">검토
 					요청하기</a></li>
 		</ul>
 	</div>
+
 
 	<form id="frm" action="update.it?pro_no=${ pro_no }" method="post"
 		onsubmit="return false;" enctype="multipart/form-data">
@@ -351,17 +355,15 @@ li {
 							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px; padding: 10px;">
 							<select name="category">
 								<option value="">선택하세요</option>
-								<option value="287">테크</option>
-								<option value="288">패션/뷰티</option>
-								<option value="289">푸드</option>
-								<option value="290">디자인제품</option>
-								<option value="291">웹툰</option>
-								<option value="292">게임</option>
-								<option value="293">출판</option>
-								<option value="294">대중예술</option>
-								<option value="295">공공프로젝트</option>
-								<option value="296">여행</option>
-								<option value="297">스포츠</option>
+								<option value="테크">테크</option>
+								<option value="패션/뷰티">패션/뷰티</option>
+								<option value="푸드">푸드</option>
+								<option value="디자인">디자인제품</option>
+								<option value="예술">예술</option>
+								<option value="게임">게임</option>
+								<option value="여행">여행</option>
+								<option value="스포츠">스포츠</option>
+								<option value="공익">공익</option>
 							</select>
 						</div>
 					</td>
@@ -410,8 +412,8 @@ li {
 														buttonImage : "images/makeproject/calendar2.png",
 														buttonImageOnly : true,
 														buttonText : "Select date",
-														altField: "#datepicker1",
-														altFormat: "yy-mm-dd"
+														altField : "#datepicker1",
+														altFormat : "yy-mm-dd"
 													});
 									$("#datepicker2")
 											.datepicker(
@@ -420,8 +422,8 @@ li {
 														buttonImage : "images/makeproject/calendar2.png",
 														buttonImageOnly : true,
 														buttonText : "Select date",
-														altField: "#datepicker2",
-														altFormat: "yy-mm-dd"
+														altField : "#datepicker2",
+														altFormat : "yy-mm-dd"
 													});
 								});
 							</script>
@@ -541,10 +543,14 @@ li {
 					$("#addReward")
 							.click(
 									function() {
-										var pro_no = ${pro_no};
-										
+										var pro_no = $
+										{
+											pro_no
+										}
+										;
+
 										console.log("pro_no : " + pro_no);
-										
+
 										var mname = $("[name=mname]").val();
 										var mcost = $("[name=mcost]").val();
 										var mnum = $("[name=mnum]").val();
@@ -555,7 +561,8 @@ li {
 										var mcontent = $("[name=mcontent]")
 												.val();
 
-										$.ajax({
+										$
+												.ajax({
 													url : "insertReward.it",
 													type : "POST",
 													async : true,
@@ -595,7 +602,6 @@ li {
 																				+ data.fmlist[i].mdata
 																				+ "</td><td><button value='수정'/>&nbsp; <button value='삭제'/></td></tr>")
 
-
 													}
 
 												});
@@ -632,15 +638,15 @@ li {
 					<td>
 						<div
 							style="width: 430px; min-height: 350px; background: #f8f8f8; border: 1px solid #ddd; padding: 10px; margin-left: 10px; font-size: 0.7em;">
-							
+
 							<div id=""
 								style="width: 400px; min-height: 200px; border: 1px solid #ddd; background: #f8f8f8; cursor: pointer">
 								<ul id="sortable">
-									
-								</ul >
-								
+
+								</ul>
+
 							</div>
-							<br style="clear:both">
+							<br style="clear: both">
 							<div align="center">
 								<button class="btn btn-primary btn-xs"
 									style="margin-left: 10px;"
@@ -660,52 +666,66 @@ li {
 				<script>
 					$(function() {
 						var positions = "";
-						
-						
+
 						$("#sortable").sortable({
-							 update: function(event, ui) {    
-								 var order = $(this).sortable('toArray');
-								  positions = order.join(';');
-					               console.log(positions);
-					            }
+							update : function(event, ui) {
+								var order = $(this).sortable('toArray');
+								positions = order.join(';');
+								console.log(positions);
+							}
 						});
 						$("#sortable").disableSelection();
 
-						$("#saveslideimgs").click(function(){
-							var formData = new FormData();
-							var pro_no = ${pro_no};
-							console.log("pro_no" + pro_no);
-							
-							for(var i = 0; i < $("#slidefile")[0].files.length; i++){
-								formData.append("slidefile["+i+"]",$("#slidefile")[0].files[i]);
-								console.log($("#slidefile")[0].files[i]);
-							}
-							console.log("전송"+positions);
-							var url = "insertSlide.at?positions=" + positions +"&pro_no=" + pro_no;
-							$.ajax({
-								type : 'post',
-					            url : url,
-					            data :  formData,
-					            processData : false,
-					            contentType : false,
-					            success : function(html) {
-					                alert("파일 업로드하였습니다.");
-					            },
-					            error : function(error) {
-					                alert("파일 업로드에 실패하였습니다.");
-					                console.log(error);
-					                console.log(error.status);
-					            }
-							});
-						});
+						$("#saveslideimgs")
+								.click(
+										function() {
+											var formData = new FormData();
+											var pro_no = $
+											{
+												pro_no
+											}
+											;
+											console.log("pro_no" + pro_no);
+
+											for (var i = 0; i < $("#slidefile")[0].files.length; i++) {
+												formData
+														.append(
+																"slidefile["
+																		+ i
+																		+ "]",
+																$("#slidefile")[0].files[i]);
+												console
+														.log($("#slidefile")[0].files[i]);
+											}
+											console.log("전송" + positions);
+											var url = "insertSlide.at?positions="
+													+ positions
+													+ "&pro_no="
+													+ pro_no;
+											$.ajax({
+												type : 'post',
+												url : url,
+												data : formData,
+												processData : false,
+												contentType : false,
+												success : function(html) {
+													alert("파일 업로드하였습니다.");
+												},
+												error : function(error) {
+													alert("파일 업로드에 실패하였습니다.");
+													console.log(error);
+													console.log(error.status);
+												}
+											});
+										});
 					});
 					var j = 0;
 					function LoadSlideImg(value) {
-						
+
 						/* if(value.files.length != 0){
 							j = value.files.length + 1;
 						} */
-						
+
 						for (var i = 0; i < value.files.length; i++) {
 
 							if (value.files && value.files[i]) {
@@ -715,8 +735,8 @@ li {
 									$("#sortable")
 											.html(
 													$("#sortable").html()
-														+"<li class='ui-state-default' id='" + j + "'>"
-														+ "<img class='ui-state-default' style='max-width:110px;max-height:110px;min-width:110px;min-height:110px;' src='"
+															+ "<li class='ui-state-default' id='" + j + "'>"
+															+ "<img class='ui-state-default' style='max-width:110px;max-height:110px;min-width:110px;min-height:110px;' src='"
 							 							+ e.target.result + "'></li>");
 									console.log('index : ' + j);
 									j++;
@@ -741,18 +761,29 @@ li {
 					<td>
 						<div class="wrap"
 							style="width: 430px; height: 100px; background: #f8f8f8; border: 1px solid #ddd; padding: 10px; margin-left: 10px; font-size: 0.7em;">
-							<textarea rows='3' style="width:405px;resize:none" name="pshort" id="pshort" maxlength="200"></textarea>
+							<textarea rows='3' style="width: 405px; resize: none"
+								name="pshort" id="pshort" maxlength="200"></textarea>
 							<span id="counter">###</span>
 							<script>
-							$(function() {
-							      $('#pshort').keyup(function (e){
-							          var content = $(this).val();
-							          $(this).height(((content.split('\n').length + 1) * 1.5) + 'em');
-							          $('#counter').html(content.length + '/200');
-							      });
-							      $('#pshort').keyup();
-							      
-							});
+								$(function() {
+									$('#pshort')
+											.keyup(
+													function(e) {
+														var content = $(this)
+																.val();
+														$(this)
+																.height(
+																		((content
+																				.split('\n').length + 1) * 1.5)
+																				+ 'em');
+														$('#counter')
+																.html(
+																		content.length
+																				+ '/200');
+													});
+									$('#pshort').keyup();
+
+								});
 							</script>
 						</div>
 					</td>
@@ -785,7 +816,7 @@ li {
 											zIndex : 2002,
 											heightMin : 500,
 											heightMax : 500,
-											width:855,
+											width : 855,
 											toolbarBottom : false,
 											toolbarButtons : [ 'fullscreen',
 													'bold', 'italic',
@@ -1021,7 +1052,8 @@ li {
 							계좌번호 &nbsp;<input type="text" size="25"
 								placeholder="'-'를 제외하고 입력하세요." name="accnum" id="accnum">
 							&nbsp;
-							<button class="btn btn-primary btn-xs" onclick="fnSearchAccessToken()">확인하기</button>
+							<button class="btn btn-primary btn-xs"
+								onclick="fnSearchAccessToken()">확인하기</button>
 						</div>
 					</td>
 					<td>&nbsp;</td>
@@ -1050,61 +1082,87 @@ li {
 		<button id="saveall" class="btn btn-warning"
 			onclick="document.getElementById('frm').submit();">저장하기</button>
 	</div>
-	<form id="fileForm" method="post" enctype="multipart/form-data" onsubmit="return false;">
-		<input type="file" size="20" multiple="multiple" name="slidefile[]" id="slidefile"
-								style="display: none;" onchange="LoadSlideImg(this);">
+	<form id="fileForm" method="post" enctype="multipart/form-data"
+		onsubmit="return false;">
+		<input type="file" size="20" multiple="multiple" name="slidefile[]"
+			id="slidefile" style="display: none;" onchange="LoadSlideImg(this);">
 		<input type="hidden" name="pro_no" value="${ pro_no }">
 	</form>
-	
+
 	<!-- 계좌본인인증 API -->
- 	<!-- <script type="text/javascript" src='/funfund/lib/js/jquery-2.2.2.min.js'></script> -->
+	<!-- <script type="text/javascript" src='/funfund/lib/js/jquery-2.2.2.min.js'></script> -->
 	<script type="text/javascript" src='/funfund/lib/js/system.js'></script>
 	<script type="text/javascript" src='/funfund/lib/js/util.js'></script>
-	
+
 	<div>
 		<table>
-			
+
 			<colgroup>
-				<col style="width:180px" />
-				<col style="width:*" />
+				<col style="width: 180px" />
+				<col style="width: *" />
 			</colgroup>
 			<tbody>
-				<form name="authCodeFrm" id="authCodeFrm" method="GET" action="https://testapi.open-platform.or.kr/oauth/2.0/authorize"> 
-					<input type="hidden" id="response_type" 	name="response_type" value="code" />
-					<input type="hidden" id="scope" 	name="scope" value="inquiry" />
-					<input type="hidden" id="redirect_uri" 	name="redirect_uri" value="http://localhost:8090/openapi/test/callback.html" />
+				<form name="authCodeFrm" id="authCodeFrm" method="GET"
+					action="https://testapi.open-platform.or.kr/oauth/2.0/authorize">
+					<input type="hidden" id="response_type" name="response_type"
+						value="code" /> <input type="hidden" id="scope" name="scope"
+						value="inquiry" /> <input type="hidden" id="redirect_uri"
+						name="redirect_uri"
+						value="http://localhost:8090/openapi/test/callback.html" />
+					<tr>
+						<th>
+							<!-- <span class="ess">Client ID</span> -->
+						</th>
+						<td><span><input type="hidden" id="client_id"
+								name="client_id" style="width: 200px"
+								value="l7xx6712d9c9cd524d3b9c3f0f60b2dea3ee"></span>
+					</tr>
+				</form>
 				<tr>
-					<th><!-- <span class="ess">Client ID</span> --></th>
-					<td><span ><input type="hidden" id="client_id" name="client_id" style="width:200px" value="l7xx6712d9c9cd524d3b9c3f0f60b2dea3ee"></span>
-				</tr>
-				</form>				
-				<tr>
-					<th><!-- <span>Client Secret</span> --></th>
-					<td><span><input type="hidden" id="client_secret" name="client_secret" style="width:200px" value="10e3bd27aa5e4287ae709bca09c34ea7"></span></td>
-				</tr>					
-				<tr>
-					<th><!-- <span>Access Token</span> --></th>
-					<td><span><input type="hidden"  id="access_token" name="access_token" style="background:#e0e0e0" ></span>
-					<!-- <button type="button" onclick="fnSearchAccessToken()">토큰발급</button> --></td>
-				</tr>	
-				<tr>
-					<th><!-- <span>은행코드</span> --></th>
-					<td><span><input type="hidden" class="txt"  id="bank_code_std" name="bank_code_std" ></span></td>
-				</tr>
-				<tr>
-					<th><!-- <span>계좌번호</span> --></th>
-					<td><span><input type="hidden" class="txt"  id="account_num" name="account_num" ></span>
-					</td>
+					<th>
+						<!-- <span>Client Secret</span> -->
+					</th>
+					<td><span><input type="hidden" id="client_secret"
+							name="client_secret" style="width: 200px"
+							value="10e3bd27aa5e4287ae709bca09c34ea7"></span></td>
 				</tr>
 				<tr>
-					<th><!-- <span>예금주 생년월일</span> --></th>
-					<td><span><input type="hidden" class="txt" id="account_holder_info" name="account_holder_info" value="850206" /></span>
+					<th>
+						<!-- <span>Access Token</span> -->
+					</th>
+					<td><span><input type="hidden" id="access_token"
+							name="access_token" style="background: #e0e0e0"></span> <!-- <button type="button" onclick="fnSearchAccessToken()">토큰발급</button> --></td>
 				</tr>
 				<tr>
-					<th><!-- <span>요청일시</span> --></th>
-					<td><span style="width:200px"><input type="hidden" class="txt" id="tran_dtime" title="요청일시 입력" name="tran_dtime"  /></span>
-					<!-- <button type="button" onclick="fnSearchRealName()">계좌실명조회</button> --></td>
-				</tr>				
+					<th>
+						<!-- <span>은행코드</span> -->
+					</th>
+					<td><span><input type="hidden" class="txt"
+							id="bank_code_std" name="bank_code_std"></span></td>
+				</tr>
+				<tr>
+					<th>
+						<!-- <span>계좌번호</span> -->
+					</th>
+					<td><span><input type="hidden" class="txt"
+							id="account_num" name="account_num"></span></td>
+				</tr>
+				<tr>
+					<th>
+						<!-- <span>예금주 생년월일</span> -->
+					</th>
+					<td><span><input type="hidden" class="txt"
+							id="account_holder_info" name="account_holder_info"
+							value="850206" /></span>
+				</tr>
+				<tr>
+					<th>
+						<!-- <span>요청일시</span> -->
+					</th>
+					<td><span style="width: 200px"><input type="hidden"
+							class="txt" id="tran_dtime" title="요청일시 입력" name="tran_dtime" /></span>
+						<!-- <button type="button" onclick="fnSearchRealName()">계좌실명조회</button> --></td>
+				</tr>
 				<!-- <tr> 		
 					<th><span>계좌실명조회결과</span></th>
 					<td> 				
@@ -1113,88 +1171,98 @@ li {
 				</tr> -->
 			</tbody>
 		</table>
-		
+
 	</div>
 	<script type="text/javascript">
+		$.support.cors = true;
+		var currentTime = new Date().format("yyyyMMddHHmmss");
+		$("#tran_dtime").val(currentTime);
 
-	$.support.cors = true;
-	var currentTime = new Date().format("yyyyMMddHHmmss");
-	$("#tran_dtime").val(currentTime);
-
-
-	/* 사용자인증 Access Token 획득 */
-	function fnSearchAccessToken()
-	{
-		$("#bank_code_std").val($("#bankcode").val());
-		$("#account_num").val($("#accnum").val());
-		var client_id = $("#client_id").val();
-		var client_secret = $("#client_secret").val();		
-		var  grant_type = "client_credentials";
-		var scope = "oob";		
-		 $.ajax({		
-			//url: "/tpt/test/getOauthToken",
-			url: "https://testapi.open-platform.or.kr/oauth/2.0/token",		
-			type: "POST",
-			//cache: false,
-			contenType: "application/json",		
-			data: {"client_id":client_id,"client_secret":client_secret,"grant_type":grant_type,"scope":scope},
-			dataType: "json",			
-			success : function (data, data2, data3) {
-				var list = JSON.parse(data3.responseText);					
-				$("#access_token").val(list.access_token);
-				$("#user_seq_no").val(list.user_seq_no);
-				fnSearchRealName();
+		/* 사용자인증 Access Token 획득 */
+		function fnSearchAccessToken() {
+			$("#bank_code_std").val($("#bankcode").val());
+			$("#account_num").val($("#accnum").val());
+			var client_id = $("#client_id").val();
+			var client_secret = $("#client_secret").val();
+			var grant_type = "client_credentials";
+			var scope = "oob";
+			$.ajax({
+				//url: "/tpt/test/getOauthToken",
+				url : "https://testapi.open-platform.or.kr/oauth/2.0/token",
+				type : "POST",
+				//cache: false,
+				contenType : "application/json",
+				data : {
+					"client_id" : client_id,
+					"client_secret" : client_secret,
+					"grant_type" : grant_type,
+					"scope" : scope
 				},
-			error : function (data,data2, data3) {
-				alert('error!!!');
-			}
-		}); 
-		
-	}
+				dataType : "json",
+				success : function(data, data2, data3) {
+					var list = JSON.parse(data3.responseText);
+					$("#access_token").val(list.access_token);
+					$("#user_seq_no").val(list.user_seq_no);
+					fnSearchRealName();
+				},
+				error : function(data, data2, data3) {
+					alert('error!!!');
+				}
+			});
+
+		}
+
+		/* 계좌실명조회API */
+		function fnSearchRealName() {
+			var bank_code_std = $("#bank_code_std").val();
+			var account_num = $("#account_num").val();
+			var account_holder_info = $("#account_holder_info").val();
+			var tran_dtime = $("#tran_dtime").val();
+
+			var access_token = "Bearer " + $("#access_token").val();
+
+			var resData = {
+				"bank_code_std" : bank_code_std,
+				"account_num" : account_num,
+				"account_holder_info" : account_holder_info,
+				"tran_dtime" : tran_dtime
+			};
+
+			$
+					.ajax({
+						url : "https://testapi.open-platform.or.kr/v1.0/inquiry/real_name",
+						beforeSend : function(request) {
+							request.setRequestHeader("Authorization",
+									access_token);
+							//request.setRequestHeader("Content-Type", "application/json");
+						},
+						type : "POST",
+						//data: {"bank_code_std":bank_code_std,"account_num":account_num,"account_holder_info":account_holder_info,"tran_dtime":tran_dtime},
+						data : JSON.stringify(resData),
+						dataType : "json",
+						success : function(data, data2, data3) {
+
+							console.log("data==" + data);
+							console.log("data2==" + data2);
+							console.log("data3==" + data3);
+							console.log($(data));
+							console.log("data3.res==" + data3.responseText);
+							console.log("data3.name=="
+									+ data.account_holder_name);
+							//var list = JSON.parse(data);	 
+							//$("#real_name").text(data3.responseText.replace(/,/gi, ",\n"));
+							if (data.account_holder_name == $("#accpnm").val()) {
+								alert('인증 성공!!!');
+							} else {
+								alert('인증 실패');
+							}
+						},
+						error : function(data, data2, data3) {
+							alert('error!!!');
+						}
+					});
+		}
+	</script>
 	
-	/* 계좌실명조회API */
-	function fnSearchRealName()
-	{
-		var bank_code_std = $("#bank_code_std").val();
-		var account_num = $("#account_num").val();
-		var account_holder_info = $("#account_holder_info").val();
-		var tran_dtime = $("#tran_dtime").val();
-
-		var  access_token = "Bearer "+$("#access_token").val();
-
-		var resData = {"bank_code_std":bank_code_std,"account_num":account_num,"account_holder_info":account_holder_info,"tran_dtime":tran_dtime};
-		
-		 $.ajax({
-			url: "https://testapi.open-platform.or.kr/v1.0/inquiry/real_name",
-			beforeSend : function(request){
-				request.setRequestHeader("Authorization", access_token);
-				//request.setRequestHeader("Content-Type", "application/json");
-			},
-			type: "POST",
-			//data: {"bank_code_std":bank_code_std,"account_num":account_num,"account_holder_info":account_holder_info,"tran_dtime":tran_dtime},
-			data: JSON.stringify(resData),
-			dataType: "json",
-			success : function (data, data2, data3) {
-				
-				console.log("data==" + data);
-				console.log("data2==" + data2);
-				console.log("data3==" + data3);
-				console.log($(data));
-				console.log("data3.res==" + data3.responseText);
-				console.log("data3.name==" + data.account_holder_name);
-				//var list = JSON.parse(data);	 
-				//$("#real_name").text(data3.responseText.replace(/,/gi, ",\n"));
-					if(data.account_holder_name == $("#accpnm").val()){
-						alert('인증 성공!!!');
-					}else{
-						alert('인증 실패');
-					}
-				},
-			error : function (data,data2, data3) {
-				alert('error!!!');
-			}
-		});
-	}
-</script>
 </body>
 </html>

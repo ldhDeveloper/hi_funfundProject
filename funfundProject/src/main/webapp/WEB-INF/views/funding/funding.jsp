@@ -87,6 +87,7 @@ button {
 }
 .titlebar li{
 	padding : 0 !important;
+	float:left;
 }
 </style>
 <script>
@@ -344,7 +345,7 @@ button {
 
 								<div class="caption">
 									<p>
-										<c:out value="${item.pcontent }" />
+										${item.pshort }
 									</p>
 									<span><c:out value="${item.category}" /></span>
 								</div>

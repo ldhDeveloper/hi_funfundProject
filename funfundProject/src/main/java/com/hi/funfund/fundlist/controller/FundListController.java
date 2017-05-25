@@ -162,6 +162,7 @@ public ModelAndView selectList(ModelAndView model){
 
 	}*/
 
+
 	public String insert(FundList fList) {
 
 		int result = fundListService.insert(fList);

@@ -145,13 +145,6 @@ button {
 	margin: 10px;
 }
 
-#viewon {
-	position: fixed;
-	right: 5px;
-	z-index: 100;
-	top: 600px;
-}
-
 .backpink {
 	background-color: #FFC4B7 !important;
 	border-color: #ee7f69 !important;
@@ -193,15 +186,14 @@ button {
 		console.log("likeList : " + likeList);
 		var pro_no = "<c:out value='${param.pro_no}'/>";
 		console.log("pro_no : " + pro_no);
-		if(likeList != null && likeList.includes("${param.pro_no}")){
+		if (likeList != null && likeList.includes("${param.pro_no}")) {
 			$("#btn-like").hide();
 			$("#btn-nonlike").show();
 		} else {
 			$("#btn-like").show();
 			$("#btn-nonlike").hide();
 		}
-		
-		
+
 		$('.btn-fund').hover(
 				function() {
 					$('.btn-fund').css('background-color', '#fedb9a').css(
@@ -218,31 +210,37 @@ button {
 			$(this).css('background-color', 'white');
 		});
 
-		var co = '<c:out value="${item.pcontent}"/>';
-		$("#content").html(co);
-		$("#btn-like").click(function(){
-				$.ajax({
-					url:"insertMyitem.mi",
-					data: {"pro_no" : "${param.pro_no}", "ano" : "${sessionScope.account.ano}"},
-					success : function(data){
-						console.log("ajax like : " + data);
-						localStorage.setItem("likeList", data);
-						$("#btn-like").hide();
-						$("#btn-nonlike").show();
-					}
-				})
+		console.log('${item.pcontent}');
+		$("#content").html('${item.pcontent}');
+		$("#btn-like").click(function() {
+			$.ajax({
+				url : "insertMyitem.mi",
+				data : {
+					"pro_no" : "${param.pro_no}",
+					"ano" : "${sessionScope.account.ano}"
+				},
+				success : function(data) {
+					console.log("ajax like : " + data);
+					localStorage.setItem("likeList", data);
+					$("#btn-like").hide();
+					$("#btn-nonlike").show();
+				}
+			})
 		})
-		$("#btn-nonlike").click(function(){
-				$.ajax({
-					url:"deleteMyitem.mi",
-					data: {"pro_no" : "${param.pro_no}", "ano" : "${sessionScope.account.ano}"},
-					success : function(data){
-						console.log("ajax like : " + data);
-						localStorage.setItem("likeList", data);
-						$("#btn-like").show();
-						$("#btn-nonlike").hide();
-					}
-				})
+		$("#btn-nonlike").click(function() {
+			$.ajax({
+				url : "deleteMyitem.mi",
+				data : {
+					"pro_no" : "${param.pro_no}",
+					"ano" : "${sessionScope.account.ano}"
+				},
+				success : function(data) {
+					console.log("ajax like : " + data);
+					localStorage.setItem("likeList", data);
+					$("#btn-like").show();
+					$("#btn-nonlike").hide();
+				}
+			})
 		})
 
 		$(window).scroll(function() {
@@ -260,8 +258,8 @@ button {
 			return false;
 		});
 
-		$(".pay").click(function(){
-			location.href="reward.fm?pro_no=${item.pro_no}";
+		$(".pay").click(function() {
+			location.href = "reward.fm?pro_no=${item.pro_no}";
 		});
 	});
 </script>
@@ -287,11 +285,6 @@ button {
 					${item.upcount})</a></li>
 		</ul>
 	</div>
-
-
-	<!-- 모바일 뷰온버튼 -->
-	<button id="viewon" class="hidden-lg hidden-md visible-sm visible-xs">이
-		프로젝트 펀딩하기</button>
 
 
 	<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12"></div>
@@ -323,7 +316,6 @@ button {
 						console.log("btDay : " + btDay);
 						$("#box2").html(btDay + "일 남음");
 					});
-
 				</script>
 
 			</p>
@@ -350,38 +342,39 @@ button {
 				<i class="fa fa-share" aria-hidden="true"></i>
 			</button>
 		</div>
-		
-		
-<script>/* 
 
-function linkWithKakaoTalk(){
-	 Kakao.Auth.login({
-	      //// Additional scope is needed to send memeo chat.
-	      scope: "PROFILE,TALK_MESSAGE",
-	      success: function(res) {
-	        Kakao.API.request({
-	          url: '/v2/api/talk/memo/send',
-	          data: {
-	            template_id: '4046',
-	            args: '{"${USER_NAME}": "developer","${AGE}": 20}'
-	          },
-	          success: function(res) {
-	            alert('success!');
-	            console.log(res);
-	          },
-	          fail: function(error) {
-	            alert('error! \n' + JSON.stringify(error));
-	            console.log(error);
-	          }
-	        })
-	      },
-	      fail: function(error) {
-	        console.log(error);
-	      }
-	    });
-	
-} */
-</script>
+
+		<script>
+			/* 
+
+			function linkWithKakaoTalk(){
+			Kakao.Auth.login({
+			//// Additional scope is needed to send memeo chat.
+			scope: "PROFILE,TALK_MESSAGE",
+			success: function(res) {
+			Kakao.API.request({
+			url: '/v2/api/talk/memo/send',
+			data: {
+			template_id: '4046',
+			args: '{"${USER_NAME}": "developer","${AGE}": 20}'
+			},
+			success: function(res) {
+			alert('success!');
+			console.log(res);
+			},
+			fail: function(error) {
+			alert('error! \n' + JSON.stringify(error));
+			console.log(error);
+			}
+			})
+			},
+			fail: function(error) {
+			console.log(error);
+			}
+			});
+			
+			} */
+		</script>
 		<div class="">
 			<p
 				style="font-size: 10pt; text-align: left; padding-top: 20px; padding-bottom: 5px; margin-left: 20px;">메이커
@@ -451,7 +444,8 @@ function linkWithKakaoTalk(){
 					<li class="makerinfo">현재 <c:set var="result"
 							value="${reward.mcount - item.fundcount }" /> <c:if
 							test="${result > 0}">
-					${reward.mcount - item.fundcount  }</c:if> <c:if test="${result <= 0 }">
+					${reward.mcount - item.fundcount  }</c:if> 
+					<c:if test="${result <= 0 }">
 					0
 					</c:if>개 남음
 					</li>
