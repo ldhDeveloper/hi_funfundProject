@@ -176,6 +176,43 @@
 	padding-top: 3%;
 	padding-bottom: 3%;
 }
+
+.choiceReward {
+	border: none;
+	background-color: #DFF0D8;
+	padding-top: 3%;
+	padding-bottom: 3%;
+}
+
+#delivery{
+	float: left;
+}
+
+#deliveryBtn{
+	float: right;
+}
+
+.mdtrs {
+	border-top: 3px solid #DFF0D8;
+	border-bottom: 1px solid #DFF0D8;	
+}
+
+.mdtr {
+	border-bottom: 1px solid #DFF0D8;	
+}
+
+.mdtd {
+	background-color: #F3F3F3;
+	padding-left: 5%;
+	padding-top: 3%;
+	padding-bottom: 3%;
+}
+
+.mdtdv {
+	padding-left: 5%;
+	padding-top: 3%;
+	padding-bottom: 3%;
+}
 </style>
 
 <title>Insert title here</title>
@@ -252,7 +289,7 @@
   									
   									<div class="tableStart">
   									
-  									<h3>결제 정보 변경 및 취소</h3>
+  									<h3 align="center">결제 정보 변경 및 취소</h3>
   									<br>
   									<label>참여한 프로젝트 정보</label><input type="button" value="참여취소">
   									<br>
@@ -270,20 +307,114 @@
     
     										<tbody>
       											<tr class="mftdr">
-        											<td class="mftd">-4854-20170522180209-323532</td>
-        											<td class="mftd"><b class="state">진행중</b> 들고다니면서 마시는 미니 고급 콜드...</td>
-        											<td class="mftd">2017.06.16</td>
-        											<td class="mftd">17,500원</td>
-        											<td class="mftd">결제예정</td>
+        											<td class="mftd">${ myfunding.fund_no }</td>
+        											<td class="mftd"><b class="state">진행중</b>&nbsp;&nbsp;&nbsp;${ myfunding.pname }</td>
+        											<td class="mftd">${ myfunding.pedate }</td>
+        											<td class="mftd">${ myfunding.sumcost }</td>
+        											<td class="mftd">${ myfunding.funstatus }</td>
+      											</tr>    										      											      											
+    										</tbody>
+  										</table>
+  										
+  										<br><br><br><br>
+  										
+  										<div class="choiceReward">
+  											<h3 align="center">선택한 리워드</h3>
+  											
+  											<p>${ myfunding.pname }</p>
+  											<p>${ myfunding.fundcount }개 / ${ myfunding.mcost }원</p>
+  											<p>옵션 : <input type="button" value="옵션 변경"/></p>
+  										</div>
+  										
+  										<br><br><br><br>
+  										
+  										
+  									<br>
+  									<label>결제정보</label><input type="button" value="결제정보변경">
+  									<br>
+										<table class="table">    								   
+    										<tbody>
+      											<tr class="mftdr">
+        											<td class="mftd">${ myfunding.payment }</td>
+        											<td class="mftd">${ myfunding.evidence }</td>
+        											<td class="mftd">${ myfunding.funstatus }</td>
+      											</tr>    										      											      											
+    										</tbody>
+  										</table>
+  										
+  										
+  										<br>
+  									<label>배송지정보</label><input type="button" value="배송지정보변경">
+  									<br>
+										<table class="table">    								   
+    										<tbody>
+      											<tr class="mftdr">
+        											<td class="mftd">받으시는 분</td>
+        											<td class="mftd">${ myfunding.recname }</td>
+      											</tr>
+      											<tr class="mftdr">
+        											<td class="mftd">연락처</td>
+        											<td class="mftd">${ myfunding.rephone }</td>
+      											</tr>
+      											<tr class="mftdr">
+        											<td class="mftd">이메일</td>
+        											<td class="mftd">${ sessionScope.account.email }</td>
+      											</tr> 
+      											<tr class="mftdr">
+        											<td class="mftd">주소</td>
+        											<td class="mftd">${ myfunding.deladdress }</td>
+      											</tr>    										      											      											
+    										</tbody>
+  										</table>
+  										
+  										
+  										<label id="delivery">배송지정보</label><input id="deliveryBtn" type="button" value="배송지정보변경">
+  										<table class="tableStart">
+  											<tbody>
+      											<tr class="mdtrs">
+        											<td class="mdtd">받으시는 분</td>
+        											<td class="mdtdv">${ myfunding.recname }</td>
+        											<td class="mdtd">연락처</td>
+        											<td class="mdtdv">${ myfunding.rephone }</td>
       											</tr>
       											
-      											<!-- <tr class="mftdr">
-        											<td class="mftd">-4854-20170522180209-323532</td>
-        											<td class="mftd"><b class="state">진행중</b> 들고다니면서 마시는 미니 고급 콜드...</td>
-        											<td class="mftd">2017.06.16</td>
-        											<td class="mftd">17,500원</td>
-        											<td class="mftd">결제예정</td>
-      											</tr> -->      											
+      											<tr class="mdtr">
+        											<td class="mdtd" colspan="2">이메일</td>
+        											<td class="mdtdv" colspan="2">${ sessionScope.account.email }</td>
+      											</tr> 
+      											
+      											<tr class="mdtr">
+        											<td class="mdtd" colspan="2">주소</td>
+        											<td class="mdtdv" colspan="2">${ myfunding.deladdress }</td>
+      											</tr>    										      											      											
+    										</tbody>
+  										</table>
+  										
+  										<br><br>
+  										
+  										<!-- &nbsp;&nbsp;&nbsp; --><label id="delivery">배송지정보</label><input id="deliveryBtn" type="button" value="배송지정보변경">
+  										<br><br>
+  										<table class="tableStart">
+  											<tbody>
+      											<tr class="mdtrs">
+        											<td class="mdtd">받으시는 분</td>
+        											<td class="mdtdv">${ myfunding.recname }</td>
+      											</tr>
+      											
+      											<tr class="mdtr">
+        											<td class="mdtd">연락처</td>
+        											<td class="mdtdv">${ myfunding.rephone }</td>
+      											</tr>
+      											
+      											<tr class="mdtr">
+        											<td class="mdtd">이메일</td>
+        											<td class="mdtdv">${ sessionScope.account.email }</td>
+      											</tr> 
+      											
+      											<tr class="mdtr">
+        											<td class="mdtd">주소</td>
+        											<td class="mdtdv">${ myfunding.deladdress }</td>
+      											</tr>    										      											      											
     										</tbody>
   										</table>
   									</div>  								

@@ -7,7 +7,7 @@ public class Myfunding implements java.io.Serializable {
 	private String pname;
 	private String mname;
 	private int mcost;
-	private Date redate;
+	private Date pedate;
 	private String deladdress;
 	private int fundcount;
 	private String rephone;
@@ -19,14 +19,14 @@ public class Myfunding implements java.io.Serializable {
 	
 	public Myfunding(){}
 
-	public Myfunding(int fund_no, String pname, String mname, int mcost, Date redate, String deladdress, int fundcount,
+	public Myfunding(int fund_no, String pname, String mname, int mcost, Date pedate, String deladdress, int fundcount,
 			String rephone, String recname, String funstatus, String payment, String evidence, int sumcost) {
 		super();
 		this.fund_no = fund_no;
 		this.pname = pname;
 		this.mname = mname;
 		this.mcost = mcost;
-		this.redate = redate;
+		this.pedate = pedate;
 		this.deladdress = deladdress;
 		this.fundcount = fundcount;
 		this.rephone = rephone;
@@ -69,12 +69,12 @@ public class Myfunding implements java.io.Serializable {
 		this.mcost = mcost;
 	}
 
-	public Date getRedate() {
-		return redate;
+	public Date getPedate() {
+		return pedate;
 	}
 
-	public void setRedate(Date redate) {
-		this.redate = redate;
+	public void setPedate(Date pedate) {
+		this.pedate = pedate;
 	}
 
 	public String getDeladdress() {
@@ -144,7 +144,7 @@ public class Myfunding implements java.io.Serializable {
 	@Override
 	public String toString() {
 		return "Myfunding [fund_no=" + fund_no + ", pname=" + pname + ", mname=" + mname + ", mcost=" + mcost
-				+ ", redate=" + redate + ", deladdress=" + deladdress + ", fundcount=" + fundcount + ", rephone="
+				+ ", pedate=" + pedate + ", deladdress=" + deladdress + ", fundcount=" + fundcount + ", rephone="
 				+ rephone + ", recname=" + recname + ", funstatus=" + funstatus + ", payment=" + payment + ", evidence="
 				+ evidence + ", sumcost=" + sumcost + "]";
 	}	

@@ -8,7 +8,7 @@
 		<result property="pname" column="pname"/>
 		<result property="mname" column="mname"/>
 		<result property="mcost" column="mcost"/>
-		<result property="redate" column="redate"/>
+		<result property="pedate" column="pedate"/>
 		<result property="deladdress" column="deladdress"/>
 		<result property="fundcount" column="fundcount"/>
 		<result property="rephone" column="rephone"/>
@@ -57,5 +57,15 @@
 		                            from account) a
 		                      on (fl.ano = a.ano)
 		where  fm.pro_no = #{pro_no}
+	</select>
+	
+	<select id="selectMyfundingDetail" parameterType="int" resultMap="myfundingResult">
+		<![CDATA[
+			SELECT FL.FUND_NO, I.PNAME, FM.MNAME, FM.MCOST, I.PEDATE, FL.DELADDRESS, FL.FUNDCOUNT, FL.REPHONE, FL.RECNAME, FL.FUNSTATUS, FL.PAYMENT, FL.EVIDENCE, (FM.MCOST*FL.FUNDCOUNT) AS SUMCOST
+			FROM FUNDMENU FM
+			JOIN ITEM I ON (FM.PRO_NO = I.PRO_NO)
+			JOIN FUNDLIST FL ON (FM.MNO = FL.MNO)
+			WHERE FL.FUND_NO=#{fund_no}
+		]]>
 	</select>
 </mapper>
