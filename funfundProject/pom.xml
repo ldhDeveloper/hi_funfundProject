@@ -20,6 +20,12 @@
 			<name>ORACLE JDBC Repository</name>
 			<url>http://mesir.googlecode.com/svn/trunk/mavenrepo</url>
 		</repository>
+		
+		<!-- 아임포트설정 -->
+		<repository>
+	    	<id>jitpack.io</id>
+	    	<url>https://jitpack.io</url>
+		</repository>
 
 		<!-- ojdbc6 설정시 -->
 		<repository>
@@ -38,11 +44,6 @@
 
 	<!-- jackson -->
 	<dependencies>
-		<dependency>
-    		<groupId>com.google.code.gson</groupId>
-    		<artifactId>gson</artifactId>
-    		<version>2.2.4</version>
-		</dependency>
 		
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -195,12 +196,20 @@
 		</dependency>
 
 		<!-- Test -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.7</version>
 			<scope>test</scope>
+		</dependency> -->
+
+		<!-- 아임포트결제모듈 -->
+		<dependency>
+	    	<groupId>com.github.iamport</groupId>
+	    	<artifactId>iamport-rest-client-java</artifactId>
+	    	<version>0.1.0</version>
 		</dependency>
+	
 
 		<!-- FileUpload -->
 		<dependency>

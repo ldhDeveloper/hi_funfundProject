@@ -1,14 +1,19 @@
 package com.hi.funfund.fundlist.controller;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.math.BigDecimal;
 import java.sql.Date;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +23,6 @@ import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,13 +31,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.hi.funfund.account.model.vo.Account;
 import com.hi.funfund.fundlist.model.service.FundListService;
 import com.hi.funfund.fundlist.model.vo.FundList;
 import com.hi.funfund.fundlist.model.vo.Myfunding;
 import com.hi.funfund.fundlist.model.vo.Mysponsor;
 import com.hi.funfund.item.model.service.ItemService;
 import com.hi.funfund.item.model.vo.Item;
+import com.siot.IamportRestClient.IamportClient;
+import com.siot.IamportRestClient.request.ScheduleData;
+import com.siot.IamportRestClient.request.ScheduleEntry;
+import com.siot.IamportRestClient.request.UnscheduleData;
+import com.siot.IamportRestClient.response.AccessToken;
+import com.siot.IamportRestClient.response.IamportResponse;
+import com.siot.IamportRestClient.response.Schedule;
 
 @Controller
 // @RequestMapping("fundList")
@@ -190,5 +200,106 @@ public ModelAndView selectList(ModelAndView model){
 		model.setViewName("myinfo/myfundingDetail");
 		
 		return model;
+	}
+	@RequestMapping("gopayment.fl")
+	public ModelAndView sendPayInfo(ModelAndView model){
+		
+		model.setViewName("payment/paymentform");
+		
+		return model;
+	}
+	
+	@RequestMapping("payment.fl")
+	public ModelAndView payment(ModelAndView model){
+		
+		//인증요청
+		String test_api_key = "9856064046040656";
+		String test_api_secret = "GMMpCiJ9gK1p7TzdFSJ1ZnQmktP7ZjrG6d6IwPSMzTcHNLUsEEuE1k1lNQtNaUuh8AZEqSr0LDHzpC14";
+		IamportClient client = new IamportClient(test_api_key, test_api_secret);
+		
+		//토큰발급
+		IamportResponse<AccessToken> auth_response = client.getAuth();
+		assertNotNull(auth_response.getResponse());
+		assertNotNull(auth_response.getResponse().getToken());
+		
+		//예약결제
+		String test_customer_uid = "customer_123456";
+		ScheduleData schedule_data = new ScheduleData(test_customer_uid);
+		
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.YEAR, 2018);
+		cal.set(Calendar.MONTH, Calendar.OCTOBER);
+		cal.set(Calendar.DAY_OF_MONTH, 25);
+		java.util.Date d1 = cal.getTime();
+		
+		cal.set(Calendar.YEAR, 2018);
+		cal.set(Calendar.MONTH, Calendar.NOVEMBER);
+		cal.set(Calendar.DAY_OF_MONTH, 25);
+		java.util.Date d2 = cal.getTime();
+		
+		cal.set(Calendar.YEAR, 2018);
+		cal.set(Calendar.MONTH, Calendar.DECEMBER);
+		cal.set(Calendar.DAY_OF_MONTH, 25);
+		java.util.Date d3 = cal.getTime();
+	
+		schedule_data.addSchedule(new ScheduleEntry(getRandomMerchantUid(), d1, BigDecimal.valueOf(1004)));
+		schedule_data.addSchedule(new ScheduleEntry(getRandomMerchantUid(), d2, BigDecimal.valueOf(1005)));
+		schedule_data.addSchedule(new ScheduleEntry(getRandomMerchantUid(), d3, BigDecimal.valueOf(1006)));
+		
+		System.out.println("예약 요청");
+		IamportResponse<List<Schedule>> schedule_response = client.subscribeSchedule(schedule_data);
+		
+		List<Schedule> schedules = schedule_response.getResponse();
+		List<ScheduleEntry> req_schedules = schedule_data.getSchedules();
+		
+		/*for (int i = 0; i < 3; i++) {
+			System.out.println("오니?");
+			assertEquals(schedules.get(i).getCustomerUid(), test_customer_uid);
+			assertEquals(schedules.get(i).getMerchantUid(), req_schedules.get(i).getMerchantUid());
+			assertDateEquals(schedules.get(i).getScheduleAt(), req_schedules.get(i).getScheduleAt());
+			assertEquals(schedules.get(i).getAmount(), req_schedules.get(i).getAmount());
+		}*/
+		
+		try {
+			//1초 후 등록된 예약 unschedule by multiple merchant_uid
+			Thread.sleep(1000);
+			System.out.println("복수 merchant_uid 예약 취소 요청");
+			UnscheduleData unschedule_data = new UnscheduleData(test_customer_uid);
+			unschedule_data.addMerchantUid( req_schedules.get(0).getMerchantUid() );
+			unschedule_data.addMerchantUid( req_schedules.get(2).getMerchantUid() );
+			
+			IamportResponse<List<Schedule>> unschedule_response = client.unsubscribeSchedule(unschedule_data);
+			List<Schedule> cancelled_schedule = unschedule_response.getResponse();
+			
+			assertNotNull(cancelled_schedule);
+			assertEquals(cancelled_schedule.get(0).getMerchantUid(), req_schedules.get(0).getMerchantUid());
+			assertEquals(cancelled_schedule.get(1).getMerchantUid(), req_schedules.get(2).getMerchantUid());
+			
+			//1초 후 등록된 예약 unschedule by single multiple_uid
+			Thread.sleep(1000);
+			System.out.println("단일 merchant_uid 예약 취소 요청");
+			unschedule_data = new UnscheduleData(test_customer_uid);
+			unschedule_data.addMerchantUid( req_schedules.get(1).getMerchantUid());
+			
+			unschedule_response = client.unsubscribeSchedule(unschedule_data);
+			cancelled_schedule = unschedule_response.getResponse();
+			
+			assertNotNull(cancelled_schedule);
+			assertEquals(cancelled_schedule.get(0).getMerchantUid(), req_schedules.get(1).getMerchantUid());
+			
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return model;
+	}
+	
+
+	private String getRandomMerchantUid() {
+		DateFormat df = new SimpleDateFormat("$$hhmmssSS");
+		int n = (int) (Math.random() * 100) + 1;
+		
+		return df.format(new Date(new GregorianCalendar().getTimeInMillis())) + "_" + n;
 	}
 }
