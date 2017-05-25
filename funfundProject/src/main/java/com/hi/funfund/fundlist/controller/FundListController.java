@@ -27,32 +27,34 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hi.funfund.account.model.vo.Account;
 import com.hi.funfund.fundlist.model.service.FundListService;
 import com.hi.funfund.fundlist.model.vo.FundList;
+import com.hi.funfund.fundlist.model.vo.Myfunding;
 import com.hi.funfund.fundlist.model.vo.Mysponsor;
 import com.hi.funfund.item.model.service.ItemService;
 import com.hi.funfund.item.model.vo.Item;
 
 @Controller
-//@RequestMapping("fundList")
+// @RequestMapping("fundList")
 public class FundListController {
 
 	@Autowired
 	private FundListService fundListService;
 
-  @Autowired
-  private ItemService itemService;  
+	@Autowired
+	private ItemService itemService;
 
-@RequestMapping(value = "myproject.fl", method = RequestMethod.GET)
-public ModelAndView selectMyProject(ModelAndView model, HttpSession session, HttpServletRequest request){
-	String pro_no = request.getParameter("pro_no");
-	Item proItem = itemService.selectOne(Integer.parseInt(pro_no));
-	List<Mysponsor> mlist = fundListService.selectSponsorList(Integer.parseInt(pro_no));
-	model.addObject("proItem", proItem);
-	model.addObject("mlist", mlist);
-	model.setViewName("myproject/myprojectDetail");
-	return model;
-}
+	@RequestMapping(value = "myproject.fl", method = RequestMethod.GET)
+	public ModelAndView selectMyProject(ModelAndView model, HttpSession session, HttpServletRequest request) {
+		String pro_no = request.getParameter("pro_no");
+		Item proItem = itemService.selectOne(Integer.parseInt(pro_no));
+		List<Mysponsor> mlist = fundListService.selectSponsorList(Integer.parseInt(pro_no));
+		model.addObject("proItem", proItem);
+		model.addObject("mlist", mlist);
+		model.setViewName("myproject/myprojectDetail");
+		return model;
+	}
 
 
 @RequestMapping(value = "exportExcel.fl", method = RequestMethod.POST)
@@ -175,13 +177,18 @@ public ModelAndView selectList(ModelAndView model){
 		int result = fundListService.update(fList);
 		return null;
 	}
-	
+
 	@RequestMapping(value = "myfundingDetail.fl")
-	public String myfundingDetail(){
+	public ModelAndView myfundingDetail(ModelAndView model, HttpSession session, HttpServletRequest request) {
 		System.out.println("오니?");
 		
+		int fund_no = Integer.parseInt(request.getParameter("fund_no"));
 		
+		Myfunding myfunding = fundListService.selectMyfundingDetail(fund_no);
 		
-		return "myinfo/myfundingDetail";
+		model.addObject("myfunding", myfunding);
+		model.setViewName("myinfo/myfundingDetail");
+		
+		return model;
 	}
 }

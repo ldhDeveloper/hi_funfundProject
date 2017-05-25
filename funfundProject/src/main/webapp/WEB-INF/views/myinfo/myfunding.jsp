@@ -186,9 +186,9 @@
 <jsp:include page="/WEB-INF/views/common/menubar.jsp" flush="true"/>
 
 <script type="text/javascript">
-$(function(){
-	$(".mftdr").click(function(){
-		location.href = "myfundingDetail.fl";
+$(function(){	
+	$(".mftdrL").click(function(){
+		location.href = "myfundingDetail.fl?fund_no=" + $(this).find(".fundNo").val();
 		console.log("나오니?");
 	});
 });
@@ -273,37 +273,24 @@ $(function(){
     										</thead>
     
     										<tbody>
-      											<tr class="mftdr">
+      											<!-- <tr class="mftdr">
         											<td class="mftd"><b class="state">진행중</b> 들고다니면서 마시는 미니 고급 콜드...</td>
         											<td class="mftd">2017.06.16</td>
         											<td class="mftd">17,500원</td>
         											<td class="mftd">결제예정</td>
         											<td class="mftd">정보변경/취소</td>
-      											</tr>
-      									
-      											<tr class="mftdr">
-        											<td class="mftd"><b class="state">진행중</b> 들고다니면서 마시는 미니 고급 콜드...</td>
-        											<td class="mftd">2017.06.16</td>
-        											<td class="mftd">17,500원</td>
-        											<td class="mftd">결제예정</td>
-        											<td class="mftd">정보변경/취소</td>
-      											</tr>
-      									
-      											<tr class="mftdrL">
-        											<td class="mftd"><b class="state">진행중</b> 들고다니면서 마시는 미니 고급 콜드...</td>
-        											<td class="mftd">2017.06.16</td>
-        											<td class="mftd">17,500원</td>
-        											<td class="mftd">결제예정</td>
-        											<td class="mftd">정보변경/취소</td>
-      											</tr>
-      									
-      											<!-- <tr class="mftdrL">
-        											<td class="mftd"><b class="state">진행중</b> 제목 넣기</td>
-        											<td class="mftd">마감 날짜 값 넣기 </td>
-        											<td class="mftd">금액 값 넣기</td>
-        											<td class="mftd">결제 상태값 넣기</td>
-        											<td class="mftd">변경/취소 값 넣기</td>
       											</tr> -->
+      											
+      											<c:forEach var="fundList" items="${ mfList }">
+      											<tr class="mftdrL">
+      												<td class="mftd" style="display:none;"><input class="fundNo" type="hidden" value="<c:out value='${ fundList.fund_no }'/>"/></td>
+        											<td class="mftd"><b class="state">진행중</b>&nbsp;&nbsp;&nbsp;${ fundList.pname }</td>
+        											<td class="mftd">${ fundList.pedate } </td>
+        											<td class="mftd">${ fundList.sumcost }</td>
+        											<td class="mftd">${ fundList.funstatus }</td>
+        											<td class="mftd">변경/취소 값 넣기</td>
+      											</tr>
+      											</c:forEach>
     										</tbody>
   										</table>
   									</div>

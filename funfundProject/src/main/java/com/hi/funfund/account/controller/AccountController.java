@@ -33,6 +33,8 @@ import com.hi.funfund.account.model.vo.Account;
 import com.hi.funfund.account.model.vo.Party;
 import com.hi.funfund.attachment.model.service.AttachmentService;
 import com.hi.funfund.attachment.model.vo.Attachment;
+import com.hi.funfund.fundlist.model.service.FundListService;
+import com.hi.funfund.fundlist.model.vo.Myfunding;
 import com.hi.funfund.item.model.service.ItemService;
 import com.hi.funfund.item.model.vo.Item;
 
@@ -48,8 +50,11 @@ public class AccountController {
 	@Autowired
 	private AttachmentService attachmentService;
 
-  @Autowired
+	@Autowired
 	private ItemService itemService;
+  
+	@Autowired
+	private FundListService fundListService;
 	
 	@RequestMapping("/login.ao")
 	public ModelAndView login(Party party, Account account, ModelAndView mv, HttpServletRequest request){
@@ -186,9 +191,18 @@ public class AccountController {
 		return "myinfo/newproject";
 	}
 	
-	@RequestMapping(value = "myfunding.ao")
-	public String myfunding(){
-		return "myinfo/myfunding";
+	@RequestMapping(value = "myfunding.ao")	
+	public ModelAndView myfunding(ModelAndView model, HttpSession session, HttpServletRequest request) {
+		session = request.getSession(false);
+		Account account = (Account)session.getAttribute("account");
+		int ano = account.getAno();
+		
+		List <Myfunding> mfList = fundListService.selectMyfunding(ano);
+		
+		model.addObject("mfList", mfList);
+		model.setViewName("myinfo/myfunding");
+		
+		return model;
 	}
 	
 	
@@ -401,5 +415,5 @@ public class AccountController {
 		session.setAttribute("party", party);
 		
 		return "myinfo/sellerinfo";
-	}	
+	}
 }

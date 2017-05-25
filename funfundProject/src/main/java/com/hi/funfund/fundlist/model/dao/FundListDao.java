@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hi.funfund.fundlist.model.vo.FundList;
+import com.hi.funfund.fundlist.model.vo.Myfunding;
 import com.hi.funfund.fundlist.model.vo.Mysponsor;
 
 
@@ -32,6 +33,14 @@ public class FundListDao {
 		System.out.println("나와랏! : " + pro_no);
 		List<Mysponsor> mList = sqlSession.selectList(nameSpace+"sponsorList", pro_no);
 		return mList;
+	}
+	public List<Myfunding> selectMyfunding(int ano) {
+		List<Myfunding> list = sqlSession.selectList(nameSpace+"selectMyfunding", ano);
+		return list;
+	}
+	public Myfunding selectMyfundingDetail(int fund_no) {
+		Myfunding myfunding = (Myfunding)sqlSession.selectOne("selectMyfundingDetail", fund_no);
+		return myfunding;
 	}
 
 }
