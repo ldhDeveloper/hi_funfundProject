@@ -14,6 +14,7 @@ public interface NoticeService {
 	int update(Notice notice);
 	int delete(int nno);
 	int insert(Notice notice);
+	int getListCount(int bno);
 
 	
 	

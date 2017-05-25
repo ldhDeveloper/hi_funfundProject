@@ -793,7 +793,7 @@ label.sign-form_title {
             	<c:if test="${empty sessionScope.account.id }">
             		<td style="width:150px;"><a class="fun-menu" href="make.do">프로젝트 등록하기</a></td>
            	 		<td style="width:150px;"><a class="fun-menu" href="funding.it">프로젝트 둘러보기</a></td>
-            		<td style="width:80px;"><a class="fun-menu" href="nList.no">고객센터</a></td>
+            		<td style="width:80px;"><a class="fun-menu" href="nList.no?sbno=1&spage=1">고객센터</a></td>
             		<td style="width:80px;"><a class="fun-menu" href="#"  data-toggle="modal" data-target="#myModal">로그인</a></td>
             	</c:if>
             	<c:if test="${not empty sessionScope.account.id }">
