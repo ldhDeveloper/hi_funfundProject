@@ -59,16 +59,13 @@ public class ItemController {
 	@Autowired
 	private AttachmentService attachmentService;
 
-
-	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
-	
+
 	@InitBinder
 	public void binder(WebDataBinder binder) {
-	    DateFormat dateOnlyFormat = new SimpleDateFormat("dd/MM/yyyy");
-	    dateOnlyFormat.setLenient(true);
-	    binder.registerCustomEditor(Date.class, "dataInicio", new CustomDateEditor(dateOnlyFormat, true));
+		DateFormat dateOnlyFormat = new SimpleDateFormat("dd/MM/yyyy");
+		dateOnlyFormat.setLenient(true);
+		binder.registerCustomEditor(Date.class, "dataInicio", new CustomDateEditor(dateOnlyFormat, true));
 	}
 
 	public ModelAndView AllList(ModelAndView model) {
@@ -145,22 +142,22 @@ public class ItemController {
 	}
 
 	@RequestMapping("insert.it")
-	public ModelAndView insertRewardItem(ModelAndView model, HttpSession session, HttpServletRequest request, @RequestParam("ano") int ano) {
-		//int ano = Integer.parseInt(request.getParameter("ano"));
+	public ModelAndView insertRewardItem(ModelAndView model, HttpSession session, HttpServletRequest request,
+			@RequestParam("ano") int ano) {
+		// int ano = Integer.parseInt(request.getParameter("ano"));
 		System.out.println("ano : " + ano);
 		Item item = new Item();
 		item.setAno(ano);
-		
+
 		int pro_no = itemService.insertRewardItem(item);
-		
+
 		int ii = attachmentService.insertItemImages(pro_no);
-		
+
 		request.setAttribute("ano", ano);
 		request.setAttribute("pro_no", pro_no);
-		
 
 		model.setViewName("redirect:/update.it?pro_no=" + pro_no + "&flag=true");
-		
+
 		return model;
 	}
 
@@ -181,57 +178,53 @@ public class ItemController {
 		return model;
 	}
 
-	
-	@RequestMapping(value ="selectAll.it", method = RequestMethod.GET)
+	@RequestMapping(value = "selectAll.it", method = RequestMethod.GET)
 	public @ResponseBody List<Item> selectAllItem() {
 		List<Item> iList = itemService.AllList();
 		System.out.println("오니?");
-		if(iList != null){
+		if (iList != null) {
 			System.out.println("iList : " + iList);
-		}	
+		}
 		return iList;
 	}
-	
-	@RequestMapping(value ="selectCategory.it", method = RequestMethod.GET)
+
+	@RequestMapping(value = "selectCategory.it", method = RequestMethod.GET)
 	public @ResponseBody List<Item> selectCategoryItem(@RequestParam("category") String category) {
 		System.out.println("category : " + category);
 		List<Item> iList = itemService.categoryList(category);
 		System.out.println("오니?");
-		if(iList != null){
+		if (iList != null) {
 			System.out.println("iList : " + iList);
-		}	
+		}
 		return iList;
 	}
 
-	@RequestMapping(value = "update.it", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "update.it", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView insertRewardItem(ModelAndView model, Item item, HttpServletRequest request) {
 		int result = 0;
 		String flag = request.getParameter("flag");
 		System.out.println(flag);
 		System.out.println(item);
-		if(flag.equals("false")){
+		if (flag.equals("false")) {
 			System.out.println("오니?");
 			result = itemService.updateRewardItem(item);
-			System.out.println("날짜"+item.getS_psdate()+"일");
-			if(!item.getS_psdate().equals("")){
+			System.out.println("날짜" + item.getS_psdate() + "일");
+			if (!item.getS_psdate().equals("")) {
 				String[] psdates = item.getS_psdate().split("-");
 				String s_psdate = psdates[0] + psdates[1] + psdates[2];
 				item.setS_psdate(s_psdate);
 			}
-			
-			
-			if(!item.getS_pedate().equals("")){
+
+			if (!item.getS_pedate().equals("")) {
 				String[] pedates = item.getS_pedate().split("-");
 				String s_pedate = pedates[0] + pedates[1] + pedates[2];
 				item.setS_pedate(s_pedate);
 			}
-			
 
-		
 			MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 			MultipartFile uploadFile = multipartRequest.getFile("uploadFile");
 			MultipartFile uploadFile2 = multipartRequest.getFile("uploadFile2");
-			
+
 			if (!uploadFile.isEmpty()) {
 
 				HttpSession session = request.getSession(false);
@@ -262,19 +255,19 @@ public class ItemController {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				
+
 				Attachment att = new Attachment();
-				
+
 				att.setOrifname(ofileName);
 				att.setRefname(rfileName);
 				att.setFtype("item");
-				att.setFsubtype("titleimg");
+				att.setFsubtype("thumbnail");
 				att.setRefno(item.getPro_no());
-				
+
 				result2 = attachmentService.updateTitleImage(att);
-				
+
 			}
-			
+
 			if (!uploadFile2.isEmpty()) {
 
 				HttpSession session = request.getSession(false);
@@ -305,26 +298,20 @@ public class ItemController {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				
+
 				Attachment att = new Attachment();
-				
+
 				att.setOrifname(ofileName);
 				att.setRefname(rfileName);
 				att.setFtype("item");
 				att.setFsubtype("makerimg");
 				att.setRefno(item.getPro_no());
-				
+
 				result2 = attachmentService.updateMakerImage(att);
-				
+
 			}
 		}
-		
-		
-		
-		
 
-		
-		
 		model.addObject("pro_no", item.getPro_no());
 
 		model.setViewName("makeproject/primaryinfo");
@@ -347,12 +334,13 @@ public class ItemController {
 		List<Itemfund> bestList = itemService.bestList(pro_no);
 		List<FundMenu> mList = fundMenuService.selectList(pro_no);
 		List<ItemAsk> aList = itemAskService.selectList(pro_no);
-		//youtube 주소
-		String vaddress = item.getPvideo();
-		String[] pvideoAddress = vaddress.split("/");
-		vaddress = pvideoAddress[pvideoAddress.length - 1];
-		
-		item.setPvideo(vaddress);
+		if (item.getPvideo() != null || item.getPvideo() == "") {
+			// youtube 주소
+			String vaddress = item.getPvideo();
+			String[] pvideoAddress = vaddress.split("/");
+			vaddress = pvideoAddress[pvideoAddress.length - 1];
+			item.setPvideo(vaddress);
+		};
 		model.addObject("item", item);
 		model.addObject("mList", mList);
 		model.addObject("aList", aList);

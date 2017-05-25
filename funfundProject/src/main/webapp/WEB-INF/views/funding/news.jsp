@@ -46,6 +46,7 @@ li {
 
 .box2 {
 	padding-top: 10px;
+	text-align:center;
 }
 
 .info {
@@ -275,7 +276,7 @@ button {
 		</c:if>
 	</div>
 
-	<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+	<div class="col-lg-2 col-md-2 hidden-sm hidden-xs">
 		<div class="box2 info">
 			<p id="box2">
 				<script>

@@ -57,7 +57,7 @@ public interface AccountService {
 
 	Party selectResult(int ano);
 
-	Account changePwd(Account account);
+	Account createTempPwd(Account account);
 	
 	//미추가된 함수 : 프로젝트별 후원자 리스트
 

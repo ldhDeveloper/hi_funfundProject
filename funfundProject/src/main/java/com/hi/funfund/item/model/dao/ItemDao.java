@@ -39,7 +39,7 @@ public class ItemDao {
 	public Item selectOne(int pro_no) {
 		System.out.println("no: "+pro_no);
 		Item result = (Item) sqlSession.selectOne(nameSpace+"selectOne", pro_no); 
-		System.out.println("result: "+result);
+		System.out.println("result22222: "+result);
 		return result;
 	}
 

@@ -28,9 +28,9 @@ public class AccountServiceIm implements AccountService {
 	}
 
 	@Override
-	public Account changePwd(Account account) {
+	public Account createTempPwd(Account account) {
 		
-		return accountDao.changePwd(account);
+		return accountDao.createTempPwd(account);
 	}
 
 	@Override
