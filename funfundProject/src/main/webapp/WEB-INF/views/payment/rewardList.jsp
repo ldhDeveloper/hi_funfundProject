@@ -100,18 +100,27 @@ input[type="checkbox"] {
 				</div>
 		</div>
 	</div> 
-
-
-
+	
 	<div>
-		<div id="guide">리워드 선택 결제 예약</div>
-
-		<form method="post" id="" name="">
-			<div id="rewardList">
-				<input type="checkbox" name="menu" value=""> <label
-					for="checkbox">원 펀딩합니다.</label>
-			</div>
+		추가 후원 금액 : <input type="text" > 원
+	</div>
+	<br>
+	<div>
+		<div>
+			<label>최종 결제 금액 : 원</label>
+		</div>
+		<form id="payinfo" action="gopayment.fl">
+		
 		</form>
+		<div>
+			<button class="btn btn-default">취소하기</button>
+			<button class="btn btn-warning" onclick="gotopay();">결제하기</button>
+		</div>
+		<script>
+			function gotopay(){
+				$("#payinfo").submit();
+			}
+		</script>
 
 
 
