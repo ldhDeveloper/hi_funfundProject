@@ -54,9 +54,10 @@ public class AccountController {
 	@RequestMapping("/login.ao")
 	public ModelAndView login(Party party, Account account, ModelAndView mv, HttpServletRequest request){
 		account = accountService.login(account);
-		Party p = accountService.loginParty(account.getAno());
+		
 		HttpSession session = request.getSession(false);
 		if(account != null){
+			Party p = accountService.loginParty(account.getAno());
 			session.setAttribute("account", account);
 			session.setAttribute("party", p);
 		}
@@ -104,19 +105,40 @@ public class AccountController {
 		session.invalidate();
 		return "redirect:/";
 	}
-	//비밀 번호 찾기 및 변경
 	
+	//임시 비밀번호 생성
 	@RequestMapping(value="changePw.ao")
 	public ModelAndView changePw(Account account, ModelAndView model ){	
-		Account ac = accountService.changePwd(account);
-		System.out.println(ac);
-		model.addObject("tempEmail", account.getEmail());
+		Account ac = accountService.createTempPwd(account);
+		model.addObject("tempEmail", ac.getEmail());
+		model.addObject("ano", ac.getAno());
 		sendTempPwd(ac);
 		model.setViewName("home");
 		
 		return model;
 	}
 	
+	//임시비밀번호로 비밀번호 변경
+	@RequestMapping(value= "setPwd.ao")
+	public ModelAndView setPassword(@RequestParam("newPwd") String newPwd, Account account, ModelAndView model ){
+		
+		Account checkTemp = accountService.login(account);
+		if(checkTemp != null){
+			
+		int result = accountService.updatePwd(account.getAno(), newPwd);
+		if(result > 0 ){
+			model.addObject("pwdMessage", "비밀번호가 성공적으로 변경되었습니다.");
+		
+		}else{
+			model.addObject("pwdMessage", "비밀번호 변경에 실패했습니다.");
+		}	
+		}else{
+			model.addObject("pwdMessage", "임시비밀번호가 맞지않습니다.");
+		}
+		model.setViewName("home");
+		
+		return model;
+	}
 	
 	// myinfo 회원정보 설정 시작
 	
@@ -238,6 +260,7 @@ public class AccountController {
 	
 	// myinfo 이메일 인증 시작
 	
+	//임시비밀번호 발송과 인증번호 발송 부분에서 공통점
 	private void sendTempPwd(Account account){
 	ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Mail.xml");	
 	AuthMail mm = (AuthMail)context.getBean("mailMail");

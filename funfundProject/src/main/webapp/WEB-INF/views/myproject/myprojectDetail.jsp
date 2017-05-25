@@ -67,6 +67,7 @@
 	<jsp:include page="/WEB-INF/views/common/menubar.jsp" flush="true" />
 	<script>
 	$(function(){
+		var pro_no = "<c:out value='${proItem.pro_no}'/>";
 		var ecost = "<c:out value='${proItem.ecost}'/>";
 		var fundamount = "<c:out value='${proItem.fundamount}'/>";
 		var persent = fundamount/ecost * 100;
@@ -79,6 +80,24 @@
 			console.log("num : " + num);
 			$("#detailList" + num).toggle("fast");
 		})
+		
+		$("#exexport").click(function(){
+			$.ajax({	
+				url: "exportExcel.fl",
+				type: "post",
+				data : {"pro_no" : pro_no},
+				success: function(data){
+					window.location.assign(data);
+				},
+				error: function(xhr, status, error){
+	                alert(xhr, status, error);
+	            }
+			});
+		});
+		
+		$("#eximport").click(function(){
+			
+		});
 	});
 </script>
 <div style="background-color:#F6F5F5">
@@ -114,6 +133,7 @@
 			<div class="col-xs-1 col-sm-1 col-md-2 col-lg-2"></div>
 		</div>
 		<div class="row">
+			<input type="hidden" name="pro_no" value="${proItem.pro_no }"/>
 				<div class="container">
 			<table class="table table-hover funderTable">
 			    <thead>
@@ -170,7 +190,14 @@
 			      </tr>
 			      </c:forEach>
 			    </tbody>
+		
 			  </table>
+			  <div class="row" style="margin:0px; float:right;">
+			  		<button class="btn btn-default" id="exexport">Excel Export</button>
+			  		<button class="btn btn-default" id="eximport">Excel Import</button>
+			  		<input type="file" id="excelFile">
+			  		<button class="btn btn-primary" id="tchange">변경하기</button>
+			  </div>
 		</div>
 		</div>
 		</div>
