@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hi.funfund.notice.model.service.NoticeService;
@@ -17,15 +19,26 @@ public class NoticeController {
 	private NoticeService noticeService;
 	
 	
-	@RequestMapping("nList.no")
-	public String notice(/*int bno, int page,*/ ModelAndView model){
-		
-		//List<Notice> nList = noticeService.selectList(bno, page);
-		
-		//model.addObject("nList", nList);
-				
-		return "notice/notice";
+	@RequestMapping(value="nList.no",  method=RequestMethod.GET)
+	public ModelAndView notice(@RequestParam("sbno") String sbno, @RequestParam("spage") String spage, 
+						ModelAndView model){
+		int bno =Integer.valueOf(sbno);
+		int page =Integer.valueOf(spage);
+		List<Notice> nList = noticeService.selectList(bno, page);
+		int listCount = getListCount(bno);
+		System.out.println(listCount);
+		model.addObject("sbno", sbno);
+		model.addObject("spage", spage);
+		model.addObject("listCount", listCount);
+		model.addObject("nList", nList);
+		model.setViewName("notice/notice");
+		return model;
 	}
+	private int getListCount(int bno){
+		int result = noticeService.getListCount(bno);
+		return  result;
+	}
+	
 	
 	@RequestMapping("nSearchTitle.no")
 	public String searchTitle(int bno,int page, String nTitle, ModelAndView model){

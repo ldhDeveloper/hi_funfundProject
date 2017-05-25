@@ -3,5 +3,26 @@
 "-//mybatis.org//DTD mapper 3.0//en"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace = "noticeMapper">
+<resultMap type="notice" id="noticeResult">
+<id property="nno" column="nno" />
+<result property="ntitle" column="ntitle" />
+<result property="ncontent" column="ncontent" />
+<result property="ndate" column="ndate" />
+<result property="upbno" column="upbno" />
+<result property="bname" column="bname" />
+<result property="readcount" column="readcount"/>
+<result property="nickname" column="nickname" />
+</resultMap>
+
+	<select id="selectList" parameterType="HashMap" resultMap="noticeResult">
+		select nno, ntitle, ncontent, ndate, upbno, bname, readcount, nickname from
+		(select ranks, nno, ntitle, ncontent, ndate, upbno, bname, readcount, ano from
+		(select rank() over(order by nno) ranks, nno, ntitle, ncontent, ndate, upbno, bname, readcount, ano
+		 from notice n , board b where n.bno = b.bno and (upbno = 0 and n.bno = #{bno})) where ranks between #{sNum} and #{eNum}) x, account a 
+		 where x.ano =a.ano
+	</select>
 	
+	<select id="getListCount" parameterType="int" resultType="int">
+	select count(*) from notice where bno = #{bno}
+	</select>
 </mapper>

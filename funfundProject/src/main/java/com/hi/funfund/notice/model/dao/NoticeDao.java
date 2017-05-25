@@ -1,5 +1,6 @@
 package com.hi.funfund.notice.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -14,12 +15,24 @@ public class NoticeDao {
 	private static final String nameSpace = "noticeMapper.";
 	@Autowired
 	private SqlSession sqlSession;
-	public List selectList(int bno, int page) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Notice> selectList(int bno, int page) {
+		int startNumber = (page * 10 +1) -10;
+		int endNumber = startNumber +10; 
+		HashMap map = new HashMap();
+		map.put("bno", bno);
+		map.put("sNum", startNumber);
+		map.put("eNum", endNumber);
+		List<Notice> nList = sqlSession.selectList(nameSpace+"selectList", map);
+			
+		return nList;
 	}
-	public List searchTitle(int bno, int page, String ntitle) {
-		// TODO Auto-generated method stub
+	public List<Notice>  searchTitle(int bno, int page, String ntitle) {
+		
+		HashMap map = new HashMap();
+		map.put("bno", bno);
+		map.put("page", page);
+		map.put("ntitle", ntitle);
+		List<Notice> nList = (List<Notice>)sqlSession.selectList(nameSpace+"searchTitle", map);
 		return null;
 	}
 	public Notice selectOne(int nno) {
@@ -37,6 +50,10 @@ public class NoticeDao {
 	public int insert(Notice notice) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	public int getListCount(int bno) {
+	
+		return (int)sqlSession.selectOne("getListCount", bno);
 	}
 	
 

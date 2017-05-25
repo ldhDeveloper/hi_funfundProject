@@ -51,5 +51,11 @@ public class NoticeServiceIm implements NoticeService{
 		return noticeDao.insert(notice);
 	}
 
+	@Override
+	public int getListCount(int bno) {
+		
+		return noticeDao.getListCount(bno);
+	}
+
 	
 }
