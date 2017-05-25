@@ -53,6 +53,7 @@
 		});
 	loginFail();
 	changeTempPwd();
+	setPwd();
 	})
 	
 	
@@ -66,10 +67,31 @@
 	home();
 	}
 	}
+	//임시비밀번호로 변경성공시 모달창 띄우기
 	function changeTempPwd(){
 		var tempE = "${tempEmail}";
 		if(tempE !== ""){
 			$("#myModal9").modal("show");
+		}
+	}
+	//임시비밀번호 및 새 비밀번호 설정
+	function checkPwd(){
+		if($("#newPwd").text() != $("#confirmPwd").text()){
+			return false;
+		}
+	}
+	//새 비밀번호 설정시 결과값 받는 함수
+	function setPwd(){
+		var message = "${pwdMessage}";
+		if(message != ""){
+		alert(message);
+		
+		if(message =="임시비밀번호가 맞지않습니다." || message == "비밀번호 변경에 실패했습니다."){
+			
+			$("#myModal9").modal("show");
+		}else{
+			home();
+		}
 		}
 	}
 </script>
@@ -838,12 +860,12 @@ label.sign-form_title {
 	$(function(){
 		$("#linkSignup").click(function(){
 			$("#myModal").modal("hide");
-			$("#myModal2").modal("show");
-		});
-		$("#emailSignup").click(function(){
-			$("#myModal2").modal("hide");
 			$("#myModal3").modal("show");
 		});
+	/* 	$("#emailSignup").click(function(){
+			$("#myModal2").modal("hide");
+			$("#myModal3").modal("show");
+		}); */
 	});
 	function findPwd(){
 		$("#myModal").modal("hide");
@@ -883,24 +905,25 @@ label.sign-form_title {
 	 console.log(xhttp.status);
 		  */
 	}
-</script>
+</script><!-- 
 <div id="myModal2" class="modal fade" role="dialog">
   <div class="modal-dialog">
-    <!-- Modal content-->
+    Modal content
     <div class="modal-content">
       <div class="modal-header">
             <span class="modal-close" data-dismiss="modal" onclick="closeSignupBox();">&nbsp;</span>
             <h2 class="p-t-signup">회원가입</h2>
        </div>
       <div class="modal-body" style="padding:30px;">
-      	<form>
+     
+       삭제	<form>
               <fieldset>
                 <legend class="login-title-txt">소셜 회원가입</legend>
                
-                <!-- <a href="#" class="signup-social p-login_btn login-social-facebook" data-sns="facebook" alt="페이스북으로 회원가입" >페이스북으로 회원가입</a>
+                <a href="#" class="signup-social p-login_btn login-social-facebook" data-sns="facebook" alt="페이스북으로 회원가입" >페이스북으로 회원가입</a>
             	<a href="javascript:loginWithKakao();" id="custom-login-btn" class="signup-social p-login_btn login-social-kakao" alt="카카오로 회원가입" >카카오로 회원가입</a>
             	<a href="#" onclick="google();" id="gSigninBt" class="signup-social p-login_btn login-social-google" alt="구글로 회원가입" >구글로 회원가입</a>
-           		<a href="#" id="nSignUpBt" class="signin-social p-login_btn login-social-naver"  data-sns="naver"  alt="네이버로 로그인" >네이버 회원가입</a> -->
+           		<a href="#" id="nSignUpBt" class="signin-social p-login_btn login-social-naver"  data-sns="naver"  alt="네이버로 로그인" >네이버 회원가입</a>
               </fieldset>
             </form>
             <p class="lineor_bg"><span class="lineor">또는</span></p>
@@ -915,7 +938,7 @@ label.sign-form_title {
       </div>
     </div> 
   </div>
-</div>
+</div> -->
 <div id="myModal3" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
@@ -955,16 +978,13 @@ label.sign-form_title {
        </div>
       <div class="modal-body" style="padding:30px;">
       	<form id="join_form" action="changePw.ao" method="post">
-          	<input type="hidden" name="secuToken" value="7QD6StfHBmmEFvusyATSQA"/>
-          	<input type="hidden" name="nmLast" value=""/>
-          	<input type="hidden" name="mobile" value=""/>
             <fieldset  style="border:0; margin:0; padding:0;">
               <legend class="signup-title-txt">이메일</legend>
                   <input type="email" id="signup-form_id" name="email" placeholder="아이디(이메일)" class="sign-form_input">
             </fieldset>
             <div class="modal-footer">
             	<button class="btn-login_pop">임시비밀번호 전송</button>
-            	<p class="go_signup">입력된 이메일로 임시비밀번호를 전송합니다.</p>
+            	<p class="go_signup">입력된 이메일로 임시비밀번호를 보내드립니다.</p>
             </div>
 		  </form>          
       </div>
@@ -980,20 +1000,22 @@ label.sign-form_title {
           <h2 class="p-t-signup">비밀번호 찾기</h2>
        </div>
       <div class="modal-body" style="padding:30px;">
-      	<form id="join_form" action="setPwd.ao" method="post">
+      	<form id="join_form" action="setPwd.ao" method="post" onsubmit ="return checkPwd();">
           	<input type="hidden" name="secuToken" value="7QD6StfHBmmEFvusyATSQA"/>
           	<input type="hidden" name="nmLast" value=""/>
           	<input type="hidden" name="mobile" value=""/>
             <fieldset  style="border:0; margin:0; padding:0;">
               <legend class="signup-title-txt">이메일</legend>
+              	<input type="hidden" name ="ano" value="${ano}" >
                   <input type="hidden" name = "email" value= "${tempEmail}">
-                   <input type="text" id="signup-form_id" name="tempPwd" placeholder="임시비밀번호" class="sign-form_input">
-                    <input type="text" id="signup-form_id" name="pwd" placeholder="번경할 비밀번호" class="sign-form_input">
+                    <input type="hidden" name = "id" value= "${tempEmail}">
+                   <input type="text" id="signup-form_id" name="pwd" placeholder="임시비밀번호" class="sign-form_input">
+                    <input type="text" id="signup-form_id" name="newPwd" placeholder="번경할 비밀번호" class="sign-form_input">
                      <input type="text" id="signup-form_id" name="confirmPwd" placeholder="비밀번호 재입력" class="sign-form_input">
             </fieldset>
             <div class="modal-footer">
             	<button class="btn-login_pop">비밀번호 변경</button>
-            	<p class="go_signup">비밀 번호를 변경합니다.</p>
+            	<p class="go_signup"> 신규비밀번호를 설정합니다.</p>
             </div>
 		  </form>          
       </div>
