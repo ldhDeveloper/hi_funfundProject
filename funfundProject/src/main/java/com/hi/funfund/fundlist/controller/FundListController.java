@@ -3,9 +3,11 @@ package com.hi.funfund.fundlist.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,9 +27,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hi.funfund.account.model.vo.Account;
+import com.hi.funfund.attachment.model.vo.Attachment;
 import com.hi.funfund.fundlist.model.service.FundListService;
 import com.hi.funfund.fundlist.model.vo.FundList;
 import com.hi.funfund.fundlist.model.vo.Myfunding;
@@ -58,7 +63,7 @@ public class FundListController {
 
 
 @RequestMapping(value = "exportExcel.fl", method = RequestMethod.POST)
-public @ResponseBody String exportExcel(@RequestParam int pro_no, HttpServletRequest request, HttpServletResponse response){
+public @ResponseBody String exportExcel(@RequestParam int pro_no, HttpServletRequest request, HttpServletResponse response) throws Exception{
 	System.out.println("오니?!?");
 	System.out.println("pro_no : " + pro_no);
 	String filePath ="";
@@ -68,7 +73,7 @@ public @ResponseBody String exportExcel(@RequestParam int pro_no, HttpServletReq
 	
 	HSSFWorkbook workbook = new HSSFWorkbook();
 	HSSFSheet sheet = workbook.createSheet("mySheet");
-
+	File file = null;
 	row = sheet.createRow(0);
 	row.createCell(0).setCellValue("후원번호");
 	row.createCell(1).setCellValue("닉네임");
@@ -106,7 +111,6 @@ public @ResponseBody String exportExcel(@RequestParam int pro_no, HttpServletReq
 	}
 	
 	FileOutputStream outFile;
-	try {
 		String root = request.getSession().getServletContext().getRealPath("/");
 		System.out.println("root : " + root);
 		String[] roots = root.split("\\\\");
@@ -121,30 +125,18 @@ public @ResponseBody String exportExcel(@RequestParam int pro_no, HttpServletReq
 		SimpleDateFormat simDf = new SimpleDateFormat("yyyyMMddHHmmss");
 		String rfileName = simDf.format(new Date(currentTime)) +".xls";
 		filePath =savePath + rfileName;
-		File file = new File(filePath);
+		file = new File(filePath);
 		outFile = new FileOutputStream(file);
 		workbook.write(outFile);
 		outFile.close();
 		
 		System.out.println("파일생성 완료");
-		response.setContentType("application/octet-stream");
-		filePath = new String(filePath.getBytes("UTF-8"), "iso-8859-1");
-		response.setHeader("Content-Disposition", "attachment; filename=\"supporter"+ rfileName +".xls\"");
-		OutputStream os = response.getOutputStream();
+	/*	if(!file.canRead()){
+			throw new Exception("File can't read(파일을 찾을 수 없습니다)");
+		}
 
-	    FileInputStream fis = new FileInputStream(filePath);
-	    int n = 0;
-	    byte[] b = new byte[512];
-	    while((n = fis.read(b)) != -1 ) {
-	        os.write(b, 0, n);
-	    }
-	    fis.close();
-	    os.close();
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
-
-	return filePath;
+	return new ModelAndView("fileDownloadView", "downloadFile", file);*/
+	return "src/main/webapp/excel/" + rfileName;
 }
 
 
@@ -190,5 +182,73 @@ public ModelAndView selectList(ModelAndView model){
 		model.setViewName("myinfo/myfundingDetail");
 		
 		return model;
+	}
+	
+	@RequestMapping(value = "fileDown.fl")
+	public ModelAndView fileDownLoad(ModelAndView model, HttpServletRequest request) {
+		System.out.println("파일오니?");
+		
+		String f = request.getParameter("downloadFile");
+		System.out.println("f나와 : " + f);
+		File file = new File(f);
+		model.addObject("downloadFile", file);
+		model.setViewName("fileDownloadView");
+		return model;
+	}
+	
+	@RequestMapping(value = "importExcel.fl", method=RequestMethod.POST)
+	public @ResponseBody List<Mysponsor> importExcelLoad(Mysponsor mysponsor, HttpServletRequest request) throws  IOException{
+		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest)request;
+		MultipartFile fileObj = multipartRequest.getFile("fileObj");
+		
+		List<Mysponsor> mlist = new ArrayList<Mysponsor>();
+		HttpSession session = request.getSession(false);
+		//FileInputStream fis = null;
+		HSSFWorkbook workbook = null;
+		
+		try {
+			workbook = new HSSFWorkbook(fileObj.getInputStream());
+			HSSFSheet sheet;
+			HSSFRow row;
+			HSSFCell cell;
+			Mysponsor vo;
+			String value;
+			sheet = workbook.getSheetAt(0);
+			for(int i=0; i < sheet.getPhysicalNumberOfRows(); i++){
+				if(i != 0){
+					row = sheet.getRow(i);
+					vo = new Mysponsor();
+					if(!"".equals(row.getCell(0).getStringCellValue())){
+						for(int j=0; j < row.getPhysicalNumberOfCells(); j++){
+							cell = row.getCell(j);
+							System.out.println(cell.toString());
+							switch(j){
+							case 0 : vo.setFund_no((int) cell.getNumericCellValue()); break;
+							case 1 : vo.setNickname(cell.getStringCellValue()); break;
+							case 2 : vo.setMname(cell.getStringCellValue()); break;
+							case 3 : vo.setTcost((int) cell.getNumericCellValue()); break;
+							case 4 : vo.setFunstatus(cell.getStringCellValue()); break;
+							case 5 : vo.setDelstatus(cell.getStringCellValue()); break;
+							case 6 : vo.setPayment(cell.getStringCellValue()); break;
+							case 7 : vo.setEvidence(cell.getStringCellValue()); break;
+							case 8 : vo.setFundcount((int) cell.getNumericCellValue()); break;
+							case 9 : vo.setRecname(cell.getStringCellValue()); break;
+							case 10 : vo.setRephone(cell.getStringCellValue()); break;
+							case 11 : vo.setEmail(cell.getStringCellValue()); break;
+							case 12 : vo.setAddcost((int) cell.getNumericCellValue()); break;
+							case 13 : vo.setDel_no(cell.getStringCellValue()); break;
+							case 14 : vo.setDeladdress(cell.getStringCellValue()); break;
+							}
+						}
+						mlist.add(vo);
+					}
+				}
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("mlist : " + mlist);
+		return mlist;
 	}
 }
