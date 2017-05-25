@@ -166,6 +166,12 @@ button {
 	text-align: center;
 	display: none;
 }
+
+.img {
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+}
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -380,10 +386,15 @@ button {
 				style="font-size: 10pt; text-align: left; padding-top: 20px; padding-bottom: 5px; margin-left: 20px;">메이커
 				정보</p>
 			<div class="makerbox2">
-				<div class="makerinfo">사진</div>
+				<div class="makerinfo img"><c:if test="${!empty pimage }">
+									<img class="img" src="/funfund/images/myinfo/${pimage }">
+								</c:if>
+								<c:if test="${empty pimage }">
+									<img class="img" src="/funfund/images/myinfo/dimages.png">
+								</c:if></div>
 				<div class="makerinfo">${item.cname }</div>
 				<div>
-					<p>문의처</p>
+					<div class="makerinfo">문의처</div>
 					<div class="makerinfo">${item.cs_email}</div>
 					<div class="makerinfo">${item.cs_phone}</div>
 				</div>
