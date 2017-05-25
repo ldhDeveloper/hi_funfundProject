@@ -268,7 +268,7 @@ public class ItemController {
 				att.setOrifname(ofileName);
 				att.setRefname(rfileName);
 				att.setFtype("item");
-				att.setFsubtype("titleimg");
+				att.setFsubtype("thumbnail");
 				att.setRefno(item.getPro_no());
 				
 				result2 = attachmentService.updateTitleImage(att);

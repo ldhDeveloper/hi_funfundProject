@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>rewardList</title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <style>
 .background {
 	background: #ff9966;
@@ -26,43 +27,27 @@ ol li {
 #rewardList {
 	
 }
+input[type="checkbox"] {
+    display:none;
+}
+
+
 </style>
 <script src="/funfund/lib/js/jquery-3.2.1.min.js"></script>
 <script>
-	$(function() {
-		var pro_no = '${item.pro_no}';
-		$.ajax({
-					url : "selectList.fm",
-					type : "get",
-					async : true,
-					data : {
-						"pro_no" : pro_no
-					},
-					success : function(data) {
-						console.log(data);
-						/* var html = "";
-						for (var i=0; i<data.length; i++) {
-							var pro_no = data[i].pro_no;
-							var mno = data[i].mno;
-							var mname = data[i].mname;
-							var cost = data[i].mcost;
-							var mcontent = data[i].mcontent;
-							var mdate = data[i].mdate;
-							var mnum = data[i].mnum;
-							var mcount = data[i].mcount;
-							var delyn = data[i].delyn;
-							var dcost = data[i].dcost;
-							var mdate2 = new date(mdate);
-							 html += '<input type="checkbox" id="'+mno+'" value="'+mname+'">';
-							html += '<label for="'+data.mList[i].mno+'">';
-							html += '<span>' + data.mList[i].mcost
-									+ '원 펀딩합니다.<br></span></label>';
-						}
-						$('#rewardList').html(html); */
-					}, error:function(request,status,error){
-				        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-				       }
-				});
+	
+	
+	
+	$(function() {	
+		$(".widjet").mouseenter(function(){
+			$(this).css("background", "orange");
+			$(this).css("cursor", "pointer");
+			$(this).css("color", "white");
+		});
+		$(".widjet").mouseleave(function(){
+			$(this).css("background", "white");
+			$(this).css("color", "black");
+		});
 	});
 </script>
 </head>
@@ -82,6 +67,41 @@ ol li {
 			<h2 align="center" class="font">${item.pname}</h2>
 		</div>
 	</div>
+	<br><br><br>
+
+	
+	<div class="row">
+			<div class="container">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+				<c:forEach var="fundMenu" items="${mList}" varStatus="status">
+						<%-- <c:out value="${fundMenu.mname }"/> --%>
+					<div id="choiceitem<c:out value='${status.index }'/>" style="border:1px blue solid;border-radius:5px;" class="widjet">
+						<table>
+							<tr>
+								<td style="width:50px;padding:15px;">
+									<input type="checkbox" name="choice" id="check-style">
+									<label for="check-style"><span class="checked"><img src='images/funding/checkbox.png'></span></label>
+								</td>
+								<td>
+									<h4><c:out value="${fundMenu.mcost }"/>원 펀딩합니다.</h4>
+									<label><c:out value="${fundMenu.mname }"/></label>
+									<p><c:out value="${fundMenu.mname }"/></p><br>
+									배송비 : <c:out value="${fundMenu.dcost }"/> | 예상 배송일 : <c:out value="${fundMenu.mdate }"/><br>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<br>
+    				
+					
+					
+					
+				</c:forEach>
+				</div>
+		</div>
+	</div> 
+
+
 
 	<div>
 		<div id="guide">리워드 선택 결제 예약</div>

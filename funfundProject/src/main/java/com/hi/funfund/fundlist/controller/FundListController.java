@@ -38,13 +38,6 @@ public ModelAndView selectMyProject(ModelAndView model, HttpSession session, Htt
 	return model;
 }
 
-public ModelAndView selectList(ModelAndView model){
-	
-	List<FundList> fList = fundListService.selectList();
-	
-	return model;
-	
-}
  
 	public ModelAndView selectList(ModelAndView model) {
 		List<FundList> fList = fundListService.selectList();
