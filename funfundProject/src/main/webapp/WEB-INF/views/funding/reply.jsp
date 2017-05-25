@@ -231,15 +231,16 @@ textarea {
 	box-sizing: border-box !important;
 }
 
-.cmtId { 
-	margin-top:10px;
+.cmtId {
+	margin-top: 10px;
 	font-size: 15px;
 	height: 30px;
 }
 
 .cmtco {
 	margin-bottom: 10px;
-	margin-top: 10px; font-size : 13px;
+	margin-top: 10px;
+	font-size: 13px;
 	line-height: 18px;
 	font-size: 13px;
 }
@@ -278,14 +279,13 @@ textarea {
 	background: orange;
 }
 
-img {
-	vertical-align: middle;
-	width:40px;
-	height:40px;
-}
 
-.img{
- display:inline-block;
+
+.img {
+	display: inline-block;
+	vertical-align: middle;
+	width: 40px;
+	height: 40px;
 }
 </style>
 <script src="/funfund/lib/js/jquery-3.2.1.min.js"></script>
@@ -382,7 +382,14 @@ img {
 				<div id="comment-box">
 					<c:forEach var="ask" items="${aList}">
 						<c:if test="${ask.ask_type eq '댓글' }">
-							<div class="img"><img src="/funfund/images/myinfo/${ask.pimage }"></div>
+							<div class="img">
+								<c:if test="${!empty ask.pimage }">
+									<img class="img" src="/funfund/images/myinfo/${ask.pimage }">
+								</c:if>
+								<c:if test="${empty ask.pimage }">
+									<img class="img" src="/funfund/images/myinfo/dimages.png">
+								</c:if>
+							</div>
 							<span class="cmtId">${ask.nickname }</span>
 							<c:if test="${ask.idtype eq '메이커' }">
 								<span class="cmtst">메이커</span>
@@ -405,7 +412,14 @@ img {
 						</c:if>
 						<c:if test="${ask.ask_type eq '답글' }">
 							<div id="comment-box2">
-								<div class="img"><img src="/funfund/images/myinfo/${ask.pimage }"></div>
+								<div class="img">
+									<c:if test="${!empty ask.pimage }">
+										<img class="img" src="/funfund/images/myinfo/${ask.pimage }">
+									</c:if>
+									<c:if test="${empty ask.pimage }">
+										<img class="img" src="/funfund/images/myinfo/dimages.png">
+									</c:if>
+								</div>
 								<span class="cmtId">${ask.nickname }</span>
 								<c:if test="${ask.idtype eq '메이커' }">
 									<span class="cmtst">메이커</span>
@@ -420,7 +434,7 @@ img {
 		</div>
 	</div>
 
-	<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+	<div class="col-lg-2 col-md-2 hidden-sm hidden-xs">
 		<div class="box2 info">
 			<p id="box2">
 				<script>

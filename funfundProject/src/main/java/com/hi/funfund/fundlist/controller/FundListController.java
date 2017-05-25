@@ -45,13 +45,7 @@ public ModelAndView selectList(ModelAndView model){
 	return model;
 	
 }
- 
-	public ModelAndView selectList(ModelAndView model) {
-		List<FundList> fList = fundListService.selectList();
 
-		return model;
-
-	}
 
 	public String insert(FundList fList) {
 
