@@ -87,18 +87,40 @@
 				type: "post",
 				data : {"pro_no" : pro_no},
 				success: function(data){
-					window.location.assign(data);
+					console.log("성공!!?");
+					$(location).attr('href', "fileDown.fl?downloadFile=" + data);
 				},
 				error: function(xhr, status, error){
 	                alert(xhr, status, error);
+	                alert("실패!!!")
 	            }
 			});
 		});
 		
 		$("#eximport").click(function(){
-			
+			$("#excelFile").click();
 		});
 	});
+	
+	function fileChange(){
+		var form = $("inputExcelForm")[0];
+		var formData = new FormData(form);
+		formData.append("fileObj", $("#excelFile")[0].files[0]);
+		$.ajax({
+			url: "importExcel.fl",
+			type: "post",
+			data : formData,
+			dataType : "json",
+			processData : false,
+			contentType : false,
+			error: function(xhr, status, error){
+                alert(error);
+            },
+            success : function(data){
+                alert(data)
+            }
+		});
+	};
 </script>
 <div style="background-color:#F6F5F5">
 	<div class="row" style="position: relative">
@@ -195,8 +217,10 @@
 			  <div class="row" style="margin:0px; float:right;">
 			  		<button class="btn btn-default" id="exexport">Excel Export</button>
 			  		<button class="btn btn-default" id="eximport">Excel Import</button>
-			  		<input type="file" id="excelFile">
+			  		<form name="inputExcelForm">
+			  		<input type="file" name="excelFile" id="excelFile" onchange="fileChange();">
 			  		<button class="btn btn-primary" id="tchange">변경하기</button>
+			  		</form>
 			  </div>
 		</div>
 		</div>
