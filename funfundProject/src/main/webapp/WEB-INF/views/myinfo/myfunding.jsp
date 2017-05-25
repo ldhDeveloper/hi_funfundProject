@@ -160,11 +160,12 @@
 
 .state {
 	border: none;
-	border-radius: 9px;
+	border-radius: 15px;
 	background-color: #E25253;
-	width: 30%;
+	width: 40%;
 	height: 25px;
 	color: white;
+	padding: 2%;
 }
 
 .mfthr {
@@ -186,12 +187,13 @@
 <jsp:include page="/WEB-INF/views/common/menubar.jsp" flush="true"/>
 
 <script type="text/javascript">
-$(function(){	
-	$(".mftdrL").click(function(){
-		location.href = "myfundingDetail.fl?fund_no=" + $(this).find(".fundNo").val();
-		console.log("나오니?");
+	$(function() {
+		$(".mftdrL").click(
+				function() {
+					location.href = "myfundingDetail.fl?fund_no="
+							+ $(this).find(".fundNo").val();
+				});
 	});
-});
 </script>
 
 <br><br>
@@ -257,9 +259,17 @@ $(function(){
 												
     						<div class="panel panel-success">
       							<div class="panel-heading">리워드형 프로젝트</div>
-      							<!-- <div class="panel-body">아직 참여한 프로젝트가 없습니다.</div> -->
+      							
+      							<c:forEach var="fundList" items="${ mfList }">
+      							<c:if test="${ empty fundList.fund_no }">
+      								<div class="panel-body">아직 참여한 프로젝트가 없습니다.</div>
+      							</c:if>
+      							</c:forEach>
       							
       							<br>
+      							
+      							<c:forEach var="fundList" items="${ mfList }">
+      							<c:if test="${ ! empty fundList.fund_no }">
 									<div class="tableStart">
 										<table class="table table-hover">
     										<thead>
@@ -272,70 +282,26 @@ $(function(){
       											</tr>
     										</thead>
     
-    										<tbody>
-      											<!-- <tr class="mftdr">
-        											<td class="mftd"><b class="state">진행중</b> 들고다니면서 마시는 미니 고급 콜드...</td>
-        											<td class="mftd">2017.06.16</td>
-        											<td class="mftd">17,500원</td>
-        											<td class="mftd">결제예정</td>
-        											<td class="mftd">정보변경/취소</td>
-      											</tr> -->
-      											
-      											<c:forEach var="fundList" items="${ mfList }">
+    										<tbody>     											
+      											<%-- <c:forEach var="fundList" items="${ mfList }"> --%>
       											<tr class="mftdrL">
       												<td class="mftd" style="display:none;"><input class="fundNo" type="hidden" value="<c:out value='${ fundList.fund_no }'/>"/></td>
-        											<td class="mftd"><b class="state">진행중</b>&nbsp;&nbsp;&nbsp;${ fundList.pname }</td>
+        											<td class="mftd"><b class="state" id="progress"><!-- 진행중 --></b>&nbsp;&nbsp;&nbsp;${ fundList.pname }</td>
         											<td class="mftd">${ fundList.pedate } </td>
-        											<td class="mftd">${ fundList.sumcost }</td>
+        											<td class="mftd">${ fundList.sumcost }원</td>
         											<td class="mftd">${ fundList.funstatus }</td>
         											<td class="mftd">변경/취소 값 넣기</td>
       											</tr>
-      											</c:forEach>
+      											<%-- </c:forEach> --%>
     										</tbody>
   										</table>
   									</div>
-  									
-  	<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+  									</c:if>
+  									</c:forEach>
   									
   									<br><br><br><br><br><br>
   									
-  									<!-- <div class="tableStart">
-  									
-  									<h3>결제 정보 변경 및 취소</h3>
-  									<br>
-  									<label>참여한 프로젝트 정보</label><input type="button" value="참여취소">
-  									<br>
-										<table class="table">
-    										<thead>
-    											
-      											<tr class="mfthr">
-        											<th class="mfth">주문번호</th>
-        											<th class="mfth">리워드 프로젝트</th>
-        											<th class="mfth">마감날짜</th>
-        											<th class="mfth">참여금액</th>
-        											<th class="mfth">결제상태</th>
-      											</tr>
-    										</thead>
-    
-    										<tbody>
-      											<tr class="mftdr">
-        											<td class="mftd">-4854-20170522180209-323532</td>
-        											<td class="mftd"><b class="state">진행중</b> 들고다니면서 마시는 미니 고급 콜드...</td>
-        											<td class="mftd">2017.06.16</td>
-        											<td class="mftd">17,500원</td>
-        											<td class="mftd">결제예정</td>
-      											</tr>
-      											
-      											<tr class="mftdr">
-        											<td class="mftd">-4854-20170522180209-323532</td>
-        											<td class="mftd"><b class="state">진행중</b> 들고다니면서 마시는 미니 고급 콜드...</td>
-        											<td class="mftd">2017.06.16</td>
-        											<td class="mftd">17,500원</td>
-        											<td class="mftd">결제예정</td>
-      											</tr>      											
-    										</tbody>
-  										</table>
-  									</div>  --> 								
+  																
   								<br>
     						</div>
     					</div>
