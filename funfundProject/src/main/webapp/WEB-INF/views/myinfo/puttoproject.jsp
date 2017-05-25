@@ -269,32 +269,32 @@
 													  <div id="enditemper<c:out value='${status.index}'/>" class="panel-heading">펀딩 종료</div>
 													  <div class="panel-body">
 													    <div class="thumbnail" align="center">
-							<a href="detail.it?pro_no=<c:out value="${item.pro_no}"/>"> <img
-								src="/funfund/images/funding/thumbnail/<c:out value="${item.thumbnail }"/>" alt="사진1"
-								style="width: 100%">
-																<div id="progress<c:out value='${status.index}'/>" class="progress">
-									<div class="progress-bar progress-bar-warning"
-										id="progressbar<c:out value='${status.index}'/>"
-										role="progressbar" aria-valuenow="60" aria-valuemin="0"
-										aria-valuemax="<c:out value="${item.ecost}"/>" style="width: 60%;">
-										<span class="sr-only"></span>
-									</div>
-								</div>
-								<p>
-									<span id="persent<c:out value='${status.index}'/>"></span> % &nbsp;&nbsp; <span><c:out value="${item.fundamount }"/></span>원 달성 &nbsp;&nbsp; 
-									<span id="edate<c:out value='${status.index}'/>"></span>
-									<span id="yet<c:out value='${status.index}'/>">일 남음</span>
-									<span id="complete<c:out value='${status.index}'/>">펀딩종료</span>
-								</p>
-
-								<div class="caption">
-									<p>
-										<c:out value="${item.pcontent }" />
-									</p>
-									<span><c:out value="${item.category}" /></span>
-								</div>
-							</a>
-						</div>
+														<a href="detail.it?pro_no=<c:out value="${item.pro_no}"/>"> <img
+															src="/funfund/images/funding/thumbnail/<c:out value="${item.thumbnail }"/>" alt="사진1"
+															style="width: 100%">
+																							<div id="progress<c:out value='${status.index}'/>" class="progress">
+																<div class="progress-bar progress-bar-warning"
+																	id="progressbar<c:out value='${status.index}'/>"
+																	role="progressbar" aria-valuenow="60" aria-valuemin="0"
+																	aria-valuemax="<c:out value="${item.ecost}"/>" style="width: 60%;">
+																	<span class="sr-only"></span>
+																</div>
+															</div>
+															<p>
+																<span id="persent<c:out value='${status.index}'/>"></span> % &nbsp;&nbsp; <span><c:out value="${item.fundamount }"/></span>원 달성 &nbsp;&nbsp; 
+																<span id="edate<c:out value='${status.index}'/>"></span>
+																<span id="yet<c:out value='${status.index}'/>">일 남음</span>
+																<span id="complete<c:out value='${status.index}'/>">펀딩종료</span>
+															</p>
+							
+															<div class="caption">
+																<p>
+																	<c:out value="${item.pcontent }" />
+																</p>
+																<span><c:out value="${item.category}" /></span>
+															</div>
+														</a>
+													</div>
 													  </div>
 												</div>
       										</div>
