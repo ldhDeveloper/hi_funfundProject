@@ -47,6 +47,7 @@
 			JOIN FUNDLIST FL ON (FM.MNO = FL.MNO)
 			WHERE FL.ANO=#{ano}
 		]]>
+	</select>
 	<select id="sponsorList" parameterType="int" resultMap="mysponsorResult">
 		select fl.*, fm.mname, fm.mcost, a.nickname, fm.mcost * fl.fundcount as tcost, a.email
 		from fundlist fl left join (select mno, mname, mcost, Pro_no
