@@ -23,7 +23,7 @@ $(function(){
 	
 	}
 		
-		
+
 });
 </script>
 <style>
@@ -36,7 +36,7 @@ color : rgb(124, 130, 136);
 width:970px;
 margin:auto;
 padding:24px;
-
+display : block;
 }
 .nList:hover {
 background : RGB(245,247,250);
@@ -120,6 +120,7 @@ button {
     border: 1px solid #e4e4e4;
     background: #fff;
 }
+
 </style>
 
 </head>
@@ -135,14 +136,14 @@ button {
 	<div class="container">
 		<div class="col-lg-12 col-md-12 col-xs-12">
 			<div class="nlist">
-				<p class="totalN">총 건수 </p>
+				<p class="totalN">총 ${listCount} 건수 </p>
 					<button onclick="categoty(1);" id="no">공지사항</button>
 	 				<button onclick="categoty(2);" id="fnq">FnQ</button>
 	 				<button onclick="categoty(3);" id="qna">QnA</button>
 					<!-- 1.여기서부터  -->
 					<hr>
 					<c:forEach var="nlist" items="${nList}">
-						<a class="nList" style="display:block;" href="nDetail.no?sbno=${sbno}&nno=${nlist.nno}">
+						<a class="nList" style="display:block;" href="nDetail.no?sbno=${sbno}&snno=${nlist.nno}&spage=${spage}">
 							<p> <em>${nlist.bname}</em>  <span class="nTitle">${nlist.ntitle}</span> </p>
 							<p> <span class="nWriter"> ${nlist.nickname }</span> <span class="nDate">${nlist.ndate}</span> </p>
 							<hr>
@@ -154,7 +155,7 @@ button {
 						<fmt:parseNumber var = "page" value = "${listCount}" type="number"/>
 						<c:set var ="pageNumber" value="${page/10 +1}"/>
 						<c:forEach var="i" begin='1' end="${pageNumber}">
-							<a href="nList.no?sbno=${sbno}&spage=${i}">${i}</a> &nbsp;
+							<a class="nPage" href="nList.no?sbno=${sbno}&spage=${i}">${i}</a> &nbsp;
 						</c:forEach>
 						<!--  조건절 필요 -->
 						<a href="nInsertView.no?sbno=${sbno}">글쓰기</a>
@@ -165,7 +166,7 @@ button {
 								<option value="title">제목</option>
 								<option value="writer">작성자</option>
 	 						</select>
-		 					<input type="text" placeholder="내용을 입력하세요">
+		 					<input type="text" name="nTitle" placeholder="내용을 입력하세요">
 	 						<input type="hidden" name="sbno" value="${sbno}">
 	 						<input type="hidden" name="spage" value="1">
 	 						<input type="submit" value="검색">  

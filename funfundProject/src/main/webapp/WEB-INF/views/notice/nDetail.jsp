@@ -6,6 +6,17 @@ pageEncoding="utf-8"/>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+// 불러온 리스트 값을 여기서 뿌린다.
+$(function(){
+$(".nDetailCategory").html();
+$("").html();
+
+
+	
+	
+});
+</script>
 <style>
 body {
 line-height : 1px;
@@ -83,6 +94,10 @@ font-size: 13px;
     line-height: 16px;
     color: #7C8288;
 }
+.title{
+float : left;
+font-size: 22px;
+}
 </style>
 </head>
 <body>
@@ -94,10 +109,17 @@ font-size: 13px;
 		<div class="col-lg-3 col-md-0 col-sm-0 col-xs-0"></div>
 		<div class=" col-lg-6 col-md-12 col-sm-12 col-xs-12">
 		<div class="category">
-			<p class="categoryName"><a>&lt; 공지사항</a></p>
+			<p class="categoryName"><a class="nDetailCategory">&lt; </a></p>
+			
 		</div>
+		<br>
+		<p class="title">&nbsp; &nbsp; ${n.ntitle}</p>
+		<br>
+		<p>${n.nickname}</p>
+		<p>${n.ndate}</p>
 		</div>
-		<div class="col-lg-3 col-md-0 col-sm-0 col-xs-0"></div>
+		<div id="nDetailContent" class="col-lg-3 col-md-0 col-sm-0 col-xs-0"></div>
+		
 	</div>
 	<div class="row"></div>
 	<div class="replyTable">
