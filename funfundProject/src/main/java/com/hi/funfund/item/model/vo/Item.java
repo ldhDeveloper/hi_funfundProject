@@ -40,16 +40,13 @@ public class Item implements Serializable {
 	private int upcount;
 	private int repcount;
 	private String thumbnail;
-	
-	
-	
-	
+	private String pimage;
 
 	public Item(int pro_no, int ano, String pname, String pcontent, String category, Date psdate, String s_psdate,
 			Date pedate, String s_pedate, String pshort, Integer ecost, String refund, String pvideo, String pstatus,
 			int likecount, String sharelink, String bankcode, String accpnm, String accnum, String cname,
 			String cs_email, String cs_phone, int fundamount, int fundcount, int supportcount, int upcount,
-			int repcount, String thumbnail) {
+			int repcount, String thumbnail, String pimage) {
 		super();
 		this.pro_no = pro_no;
 		this.ano = ano;
@@ -79,6 +76,7 @@ public class Item implements Serializable {
 		this.upcount = upcount;
 		this.repcount = repcount;
 		this.thumbnail = thumbnail;
+		this.pimage = pimage;
 	}
 
 	public String getS_psdate() {
@@ -305,6 +303,14 @@ public class Item implements Serializable {
 		this.cs_phone = cs_phone;
 	}
 
+	public String getPimage() {
+		return pimage;
+	}
+
+	public void setPimage(String pimage) {
+		this.pimage = pimage;
+	}
+
 	@Override
 	public String toString() {
 		return "Item [pro_no=" + pro_no + ", ano=" + ano + ", pname=" + pname + ", pcontent=" + pcontent + ", category="
@@ -314,14 +320,7 @@ public class Item implements Serializable {
 				+ bankcode + ", accpnm=" + accpnm + ", accnum=" + accnum + ", cname=" + cname + ", cs_email=" + cs_email
 				+ ", cs_phone=" + cs_phone + ", fundamount=" + fundamount + ", fundcount=" + fundcount
 				+ ", supportcount=" + supportcount + ", upcount=" + upcount + ", repcount=" + repcount + ", thumbnail="
-				+ thumbnail + "]";
+				+ thumbnail + ", pimage=" + pimage + "]";
 	}
-
-
-
-
-	
-
-	
 
 }

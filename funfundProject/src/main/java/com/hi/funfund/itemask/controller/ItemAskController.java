@@ -38,7 +38,6 @@ public class ItemAskController {
 		String pro_no = request.getParameter("pro_no");
 		String acontent = request.getParameter("acontent");
 		String ask_no = request.getParameter("ask_no");
-		String upask_no = request.getParameter("upask_no");
 		Account account = (Account) session.getAttribute("account");
 		System.out.println("account"+account);
 		System.out.println("acontent"+acontent);
@@ -49,11 +48,9 @@ public class ItemAskController {
 		cmap.put("acontent", acontent);
 		cmap.put("id_no", Integer.toString(account.getAno()));
 		cmap.put("ask_no", ask_no);
-		cmap.put("upask_no", upask_no);
 		int result = itemAskService.insert(cmap);
 		model.setViewName("funding/reply");
 		redirect.addAttribute("pro_no", pro_no);
-		redirect.addAttribute("upask_no", upask_no);
 		return "redirect:/reply.ask";
 	}
 
@@ -61,9 +58,9 @@ public class ItemAskController {
 	public String reinsert(HttpSession session, HttpServletRequest request, ModelAndView model,
 			RedirectAttributes redirect) {
 		String pro_no = request.getParameter("pro_no");
+		Account account = (Account) session.getAttribute("account");
 		String acontent = request.getParameter("acontent2");
 		String upask_no = request.getParameter("upask_no");
-		Account account = (Account) session.getAttribute("account");
 		System.out.println("account"+account);
 		System.out.println("acontent"+acontent);
 		System.out.println(pro_no);
@@ -80,21 +77,21 @@ public class ItemAskController {
 		return "redirect:/reply.ask";
 	}
 	
-	/*@RequestMapping("update.ask")
+	@RequestMapping("update.ask")
 	public String update(HttpServletRequest request, RedirectAttributes redirect) {
-		System.out.println("오니???");
-		String pro_no = request.getParameter("pro_no");
-		String upask_no = request.getParameter("upask_no");
+		String pro_no=request.getParameter("pro_no");
+		String ask_no = request.getParameter("ask_no");
+		String acontent = request.getParameter("acontent");
 		HashMap<String, String> umap = new HashMap<String, String>();
-		umap.put("pro_no", pro_no);
-		umap.put("upask_no", upask_no);
-	    System.out.println("upask_no:"+upask_no);
+		umap.put("ask_no", ask_no);
+		umap.put("acontent", acontent);
+	    System.out.println("update ask_no:"+ask_no);
 		int result = itemAskService.update(umap);
 		redirect.addAttribute("pro_no", pro_no);
-		redirect.addAttribute("upask_no", upask_no);
 		return "redirect:/reply.ask";
-	}*/
+	}
 
+	@RequestMapping("delete.ask")
 	public String delete(int ask_no) {
 		int result = itemAskService.delete(ask_no);
 

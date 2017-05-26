@@ -32,6 +32,7 @@
 		<result property="upcount" column="upcount" />
 		<result property="repcount" column="repcount" />
 		<result property="thumbnail" column="thumbnail" />
+		<result property="pimage" column="pimage" />
 	</resultMap>
 
 	<resultMap type="itemfund" id="itemResult2">
@@ -58,7 +59,7 @@
 			pshort, ecost, refund, pvideo, pstatus, likecount, sharelink, bankcode, accpnm, 
 			accnum, cname, cs_email, cs_phone from item ]]> -->
 	        <![CDATA[
-	        select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount, i7.thumbnail as thumbnail
+	         select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount, i7.thumbnail as thumbnail, ac.pimage
 			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost), 0) as fundamount 
 			from item i2 join fundmenu fm2 on (i2.pro_no = fm2.pro_no)
 			             join fundlist fl2 on (fm2.mno = fl2.mno)
@@ -82,12 +83,14 @@
 			                  left join (select refno, refname as thumbnail 
 			                             from attachment
 			                             where ftype='item' and fsubtype='thumbnail') i7 on(i1.pro_no = i7.refno)
+                                   left join (select ano, pimage
+                                                from account) ac on (ac.ano=i1.ano)
 			]]>
 	</select>
 
 	<select id="selectOne" parameterType="int" resultMap="itemResult">
 	        <![CDATA[
-	        select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount, i7.thumbnail as thumbnail
+	        select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount, i7.thumbnail as thumbnail, ac.pimage
 			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost), 0) as fundamount 
 			from item i2 join fundmenu fm2 on (i2.pro_no = fm2.pro_no)
 			             join fundlist fl2 on (fm2.mno = fl2.mno)
@@ -111,6 +114,8 @@
 			                  left join (select refno, refname as thumbnail 
 			                             from attachment
 			                             where ftype='item' and fsubtype='thumbnail') i7 on(i1.pro_no = i7.refno)
+			                  left join(select ano, pimage
+                                    from account) ac on(ac.ano=i1.ano)      
 	        where i1.pro_no= #{pro_no}
 	  ]]>
 	</select>

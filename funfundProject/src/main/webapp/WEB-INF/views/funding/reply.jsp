@@ -332,6 +332,7 @@ textarea {
 			$('.comment-area2').toggle();
 		});
 	});
+	
 </script>
 </head>
 <body>
@@ -374,7 +375,7 @@ textarea {
 				<div id="upload">
 					<input type="submit" value="댓글달기"> <input type="hidden"
 						value="${param.pro_no}" name="pro_no"><input type="hidden"
-						value="${ask.ask_no}" name="upask_no">
+						value="${ask.ask_no}" name="ask_no">
 				</div>
 			</form>
 
@@ -396,6 +397,10 @@ textarea {
 							</c:if>
 							<p class="cmtco">${ask.ask_content }</p>
 							<span class="cmtda">${ask.ask_date }</span>
+							<c:if test="${sessionScope.account.ano eq ask.id_no }">
+							 <a onclick="update()">수정</a><a href="delete.ask">삭제</a>
+							</c:if>
+							
 							<a id="recmtbutton">답글달기</a>
 							<form action="reinsert.ask" id="comment-area2"
 								class="comment-area2">

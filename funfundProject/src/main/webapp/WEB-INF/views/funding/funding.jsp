@@ -103,25 +103,24 @@ button {
 .slide {
 	width: 500px;
 	align: left;
-	/* display: inline-block; */
-	float:left;
+	 display: inline-block;
+	/* float: left; */
 }
 
-.slide img{
-  margin:0px !important;
+.slide img {
+	margin: 0px !important;
 }
 
 .align {
-	/* display: inline-block; */
-	margin: 0px;
-	float:left;
-	padding-top:20px;
+ display: inline-block;
+	margin: -5px;
+	padding-top: 20px;
 }
 
 .isize {
 	max-width: 250px !important;
-	max-height: 158px !important;
-	margin:0px !important;
+	max-height: 160px !important;
+	margin: 0px !important;
 }
 </style>
 <script>
@@ -319,46 +318,40 @@ button {
 	<jsp:include page="/WEB-INF/views/common/menubar.jsp" flush="true" />
 	<div class="titlebar" align="center">
 		<div class="col-lg-2 col-md-0 col-sm-0 col-xs-0"></div>
-		<div class="col-lg-8 col-md-12 col-sm-12 col-xs-12" >
+		<div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+		
+				<!-- 슬라이드 -->
+				<div id="carousel-example-generic" class="carousel slide"
+					data-ride="carousel" style="padding-top: 20px;">
 
-			<!-- 슬라이드 -->
-			<div id="carousel-example-generic" class="carousel slide"
-				data-ride="carousel" style="padding-top: 20px;">
-
-				<!-- Wrapper for slides -->
-				<div class="carousel-inner" role="listbox">
-					<div class="item active">
-						<img src="/funfund/images/funding/thumbnail/pr1.jpg"
-							class="img-responsive">
-						<div class="carousel-caption">
-							아아
+					<!-- Wrapper for slides -->
+					<div class="carousel-inner" role="listbox">
+						<div class="item active">
+							<img src="/funfund/images/funding/thumbnail/pr1.jpg"
+								class="img-responsive">
+							<div class="carousel-caption">아아</div>
 						</div>
-					</div>
-					<div class="item ">
-						<img src="/funfund/images/funding/thumbnail/pr2.jpg"
-							class="img-responsive">
-						<div class="carousel-caption">
-							이이
+						<div class="item ">
+							<img src="/funfund/images/funding/thumbnail/pr2.jpg"
+								class="img-responsive">
+							<div class="carousel-caption">이이</div>
 						</div>
-					</div>
-					<div class="item ">
-						<img src="/funfund/images/funding/thumbnail/pr3.jpg"
-							class="img-responsive">
-						<div class="carousel-caption">
-							오오
+						<div class="item ">
+							<img src="/funfund/images/funding/thumbnail/pr3.jpg"
+								class="img-responsive">
+							<div class="carousel-caption">오오</div>
 						</div>
 					</div>
 				</div>
-			</div>
 
-			<!-- 오른쪽 이미지(2개) -->
-			<div class="align">
-				<img src="/funfund/images/funding/thumbnail/pr4.jpg"
-					class="img-responsive isize"> <img
-					src="/funfund/images/funding/thumbnail/pr4.jpg"
-					class="img-responsive isize">
-			</div>
-
+				<!-- 오른쪽 이미지(2개) -->
+				<div class="align">
+					<img src="/funfund/images/funding/thumbnail/pr4.jpg"
+						class="img-responsive isize"> <img
+						src="/funfund/images/funding/thumbnail/pr4.jpg"
+						class="img-responsive isize">
+				</div>
+			
 		</div>
 		<div class="col-lg-2 col-md-0 col-sm-0 col-xs-0"></div>
 	</div>
@@ -392,8 +385,7 @@ button {
 		<div class="container" style="clear: both">
 			<div class="row">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin"
-					align="center">
-				</div>
+					align="center"></div>
 			</div>
 			<div id="fundItemList" class="row">
 

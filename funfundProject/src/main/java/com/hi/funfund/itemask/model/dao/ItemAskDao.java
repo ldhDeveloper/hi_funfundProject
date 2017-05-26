@@ -22,12 +22,12 @@ public class ItemAskDao {
 
 	public int update(HashMap<String, String> umap) {
 		int result=sqlSession.update(nameSpace+"updateAsk", umap);
-		return 0;
+		return result;
 	}
 
 	public int delete(int ask_no) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result=sqlSession.update(nameSpace+"deleteAsk", ask_no);
+		return result;
 	}
 
 	public List<ItemAsk> selectList(int pro_no) {
