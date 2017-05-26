@@ -9,6 +9,7 @@
 		<typeAlias type="com.hi.funfund.attachment.model.vo.Attachment" alias="attachment" />
 		<typeAlias type="com.hi.funfund.fundlist.model.vo.FundList" alias="fundList" />
 		<typeAlias type="com.hi.funfund.fundmenu.model.vo.FundMenu" alias="fundMenu" />
+		<typeAlias type="com.hi.funfund.fundmenu.model.vo.FundMenuFundList" alias="fundMenufundList" />
 		<typeAlias type="com.hi.funfund.item.model.vo.Item" alias="item" />
 		<typeAlias type="com.hi.funfund.item.model.vo.Itemfund" alias="itemfund" />
 		<typeAlias type="com.hi.funfund.itemask.model.vo.ItemAsk" alias="itemAsk" />
