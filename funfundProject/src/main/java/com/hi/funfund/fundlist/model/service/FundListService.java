@@ -20,4 +20,6 @@ public interface FundListService {
 
 	Myfunding selectMyfundingDetail(int fund_no);
 
+	int cancleMyfundingDetail(int fund_no);
+
 }

@@ -55,4 +55,12 @@ public class FundListServiceIm implements FundListService {
 	public Myfunding selectMyfundingDetail(int fund_no) {
 		return fundListDao.selectMyfundingDetail(fund_no);
 	}
+
+	@Override
+	public int cancleMyfundingDetail(int fund_no) {
+		System.out.println("update Service fund_no : " + fund_no);
+		return fundListDao.cancleMyfundingDetail(fund_no);
+	}
+
+
 }

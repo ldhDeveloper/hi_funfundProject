@@ -144,7 +144,7 @@
 	text-align: center;
 }
 
-.mftd {
+.mftd, .pedate {
 	text-align: center;
 	cursor:pointer;
 }
@@ -188,12 +188,10 @@
 
 <script type="text/javascript">
 	$(function() {
-		$(".mftdrL").click(
-				function() {
-					location.href = "myfundingDetail.fl?fund_no="
-							+ $(this).find(".fundNo").val();
-				});
-	});
+		$(".mftdrL").click(function() {
+			location.href = "myfundingDetail.fl?fund_no=" + $(this).find(".fundNo").val();
+		});	
+	});	
 </script>
 
 <br><br>
@@ -260,16 +258,35 @@
     						<div class="panel panel-success">
       							<div class="panel-heading">리워드형 프로젝트</div>
       							
-      							<c:forEach var="fundList" items="${ mfList }">
-      							<c:if test="${ empty fundList.fund_no }">
+      							
+      							<c:if test="${ empty mfList }">
       								<div class="panel-body">아직 참여한 프로젝트가 없습니다.</div>
       							</c:if>
-      							</c:forEach>
-      							
-      							<br>
-      							
+      							      							
       							<c:forEach var="fundList" items="${ mfList }">
+      							
+      							<script type="text/javascript">
+									$(function(){
+										var d = new Date();
+										var pedate = new Date("<c:out value='${fundList.pedate}'/>");
+										
+										var today = new Date(d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());										
+										
+										var progress = pedate.getTime() - today.getTime();				
+	
+										if(progress >= 0) {
+											$("#progress").html("진행중");		
+										}
+									
+										else {
+											$("#progress").html("마 감").css({"background-color" : "#C1C1C1", "color" : "#F1F1F1"});		
+										}	
+									});
+								</script>
+								
       							<c:if test="${ ! empty fundList.fund_no }">
+      								<br>
+      								
 									<div class="tableStart">
 										<table class="table table-hover">
     										<thead>
@@ -282,27 +299,21 @@
       											</tr>
     										</thead>
     
-    										<tbody>     											
-      											<%-- <c:forEach var="fundList" items="${ mfList }"> --%>
-      											<tr class="mftdrL">
+    										<tbody>
+    											<tr class="mftdrL">
       												<td class="mftd" style="display:none;"><input class="fundNo" type="hidden" value="<c:out value='${ fundList.fund_no }'/>"/></td>
         											<td class="mftd"><b class="state" id="progress"><!-- 진행중 --></b>&nbsp;&nbsp;&nbsp;${ fundList.pname }</td>
-        											<td class="mftd">${ fundList.pedate } </td>
+        											<td class="pedate">${ fundList.pedate }</td>
         											<td class="mftd">${ fundList.sumcost }원</td>
         											<td class="mftd">${ fundList.funstatus }</td>
         											<td class="mftd">변경/취소 값 넣기</td>
       											</tr>
-      											<%-- </c:forEach> --%>
     										</tbody>
   										</table>
+  										<br><br><br>
   									</div>
   									</c:if>
   									</c:forEach>
-  									
-  									<br><br><br><br><br><br>
-  									
-  																
-  								<br>
     						</div>
     					</div>
     					

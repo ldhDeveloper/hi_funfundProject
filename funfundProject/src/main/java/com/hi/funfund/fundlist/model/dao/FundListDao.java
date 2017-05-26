@@ -43,4 +43,13 @@ public class FundListDao {
 		return myfunding;
 	}
 
+	public int cancleMyfundingDetail(int fund_no) {
+		System.out.println("update Dao 1 fund_no : " + fund_no);
+		int result = sqlSession.update(nameSpace+"cancleMyfundingDetail", fund_no);
+		System.out.println("dao result : " + result);
+		System.out.println("update Dao 2 fund_no : " + fund_no);
+		return result;
+	}
+	
+
 }
