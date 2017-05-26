@@ -18,6 +18,9 @@ import com.hi.funfund.fundmenu.model.service.FundMenuService;
 import com.hi.funfund.fundmenu.model.vo.FundMenu;
 import com.hi.funfund.item.model.service.ItemService;
 import com.hi.funfund.item.model.vo.Item;
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
+
+import net.sf.json.JSONObject;
 
 @Controller
 
@@ -42,20 +45,7 @@ public class FundMenuController {
 	}
 	
 	
-	@RequestMapping("selectlist.fm")
-	public @ResponseBody ArrayList<FundMenu> selectfList(@RequestParam("pro_no")int pro_no, FundMenu fundMenu, ModelAndView model) {
-		Gson g = new Gson();
-		System.out.println("ppppp:"+pro_no);
-		ArrayList<FundMenu> mList = fundMenuService.selectList(pro_no);
-		System.out.println("오니?");
-		g.toJson(mList);
-		if (mList != null) {
-			System.out.println("ajaxmList: " + mList);
-			/*model.addObject("mList", mList);
-			model.setViewName("jsonView");*/
-		}
-		return mList;
-	}
+	
 
 	public String insert(FundMenu fm) {
 

@@ -13,6 +13,7 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Enumeration;
 import java.util.GregorianCalendar;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,6 +45,8 @@ import com.hi.funfund.fundlist.model.service.FundListService;
 import com.hi.funfund.fundlist.model.vo.FundList;
 import com.hi.funfund.fundlist.model.vo.Myfunding;
 import com.hi.funfund.fundlist.model.vo.Mysponsor;
+import com.hi.funfund.fundmenu.model.service.FundMenuService;
+import com.hi.funfund.fundmenu.model.vo.FundMenu;
 import com.hi.funfund.fundlist.model.vo.UpdateSponsor;
 import com.hi.funfund.item.model.service.ItemService;
 import com.hi.funfund.item.model.vo.Item;
@@ -55,13 +58,16 @@ import com.siot.IamportRestClient.response.AccessToken;
 import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Schedule;
 
+import net.sf.json.JSONObject;
+
 @Controller
 // @RequestMapping("fundList")
 public class FundListController {
 
 	@Autowired
 	private FundListService fundListService;
-
+	@Autowired
+	private FundMenuService fundMenuService;
 	@Autowired
 	private ItemService itemService;
 
@@ -153,6 +159,33 @@ public @ResponseBody String exportExcel(@RequestParam int pro_no, HttpServletReq
 	return new ModelAndView("fileDownloadView", "downloadFile", file);*/
 	return "src/main/webapp/excel/" + rfileName;
 }
+@RequestMapping(value = "selectlist.fl", produces = "application/json")
+public @ResponseBody ArrayList<FundMenu> selectfList(ModelAndView model, HttpServletRequest request, HttpServletResponse response) {
+	ArrayList<FundMenu> fmlist = new ArrayList<FundMenu>();
+	
+	Enumeration em = request.getParameterNames();
+	while(em.hasMoreElements()){
+	    String parameterName = (String)em.nextElement();
+	    String parameterValue = request.getParameter(parameterName);
+	    String[] parameterValues = request.getParameterValues(parameterName);
+	    if(parameterValues != null){
+	         for(int i=0; i< parameterValues.length; i++){
+	        	 FundMenu fm = new FundMenu();
+	        	 fm = fundMenuService.selectOne(Integer.parseInt(parameterValues[i]));
+	             System.out.println("array_" + parameterName + "=" + parameterValues[i]);
+	             fmlist.add(fm);
+	         }
+	    }
+	}
+	
+	System.out.println("fmlist : " + fmlist);
+	
+	/*model.addObject("fmlist", fmlist);
+	model.setViewName("jsonView");*/
+	
+	return fmlist;
+}
+
 
 
 public ModelAndView selectList(ModelAndView model){

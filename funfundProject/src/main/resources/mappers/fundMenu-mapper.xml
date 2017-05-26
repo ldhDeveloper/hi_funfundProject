@@ -35,4 +35,10 @@
 		update fundmenu set mname = #{mname, jdbcType=VARCHAR}, mcost = #{mcost, jdbcType=INTEGER}, mcontent = #{mcontent, jdbcType=VARCHAR}, mdate = #{mdate, jdbcType=DATE}, mnum = #{mnum}, mcount = #{mcount, jdbcType=INTEGER}, delyn = #{delyn, jdbcType=VARCHAR}, dcost = #{dcost, jdbcType=INTEGER} where mno=#{mno}
 	</update>
 	
+	<select id="selectFM" parameterType="int" resultMap="fundMenuResult">
+		select mno, mname, mcost, pro_no, mcontent, mdate, mnum, mcount, delyn, dcost
+		from fundmenu 
+		where mno = #{mno}
+	</select>
+	
 </mapper>
