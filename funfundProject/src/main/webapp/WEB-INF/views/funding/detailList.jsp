@@ -190,7 +190,7 @@ button {
 		}); */
 		var likeList = localStorage.getItem("likeList");
 		console.log("likeList : " + likeList);
-		var pro_no = "<c:out value='${param.pro_no}'/>";
+		var pro_no = "_$tag___________________________";
 		console.log("pro_no : " + pro_no);
 		if (likeList != null && likeList.includes("${param.pro_no}")) {
 			$("#btn-like").hide();
@@ -209,13 +209,7 @@ button {
 					$('.btn-fund').css('background-color', '#fec250').css(
 							'border-color', 'transparent');
 				});
-
-		$('.makerbox').hover(function() {
-			$(this).css('background-color', '#c6ebd9');
-		}, function() {
-			$(this).css('background-color', 'white');
-		});
-
+		
 		console.log('${item.pcontent}');
 		$("#content").html('${item.pcontent}');
 		$("#btn-like").click(function() {
@@ -267,7 +261,7 @@ button {
 		$(".pay").click(function() {
 			location.href = "reward.fm?pro_no=${item.pro_no}";
 		});
-	});
+	})
 </script>
 </head>
 <body>
@@ -386,12 +380,14 @@ button {
 				style="font-size: 10pt; text-align: left; padding-top: 20px; padding-bottom: 5px; margin-left: 20px;">메이커
 				정보</p>
 			<div class="makerbox2">
-				<div class="makerinfo img"><c:if test="${!empty pimage }">
-									<img class="img" src="/funfund/images/myinfo/${pimage }">
-								</c:if>
-								<c:if test="${empty pimage }">
-									<img class="img" src="/funfund/images/myinfo/dimages.png">
-								</c:if></div>
+				<div class="makerinfo img">
+					<c:if test="${!empty item.pimage }">
+						<img class="img" src="/funfund/images/myinfo/${item.pimage }">
+					</c:if>
+					<c:if test="${empty item.pimage }">
+						<img class="img" src="/funfund/images/myinfo/dimages.png">
+					</c:if>
+				</div>
 				<div class="makerinfo">${item.cname }</div>
 				<div>
 					<div class="makerinfo">문의처</div>
@@ -409,7 +405,10 @@ button {
 				<c:if test="${!empty bestList}">
 					<c:forEach var="bestList" items="${bestList }">
 						<div class="supportinfo">
-							<p>${bestList.pimage }</p>
+							<p>
+								<img src="/funfund/images/myinfo/${bestList.pimage }"
+									class="img">
+							</p>
 							<p>${bestList.nickname }</p>
 							<p>${bestList.mcost }원펀딩</p>
 						</div>
@@ -430,10 +429,10 @@ button {
 		<div class="">
 			<p
 				style="font-size: 10pt; text-align: left; padding-bottom: 5px; margin-left: 20px;">리워드선택</p>
-			<c:forEach var="reward" items="${mList}">
-				<ul class="makerbox pay">
+			<c:forEach var="reward" items="${mList}" varStatus="status">
+				<ul class="makerbox pay" >
 					<li style="font-size: 15pt;"><strong><fmt:formatNumber
-								var="mcost" value="${reward.mcost}" /> ${mcost }원</strong></li>
+								var="mcost" value="${reward.mcost}" /> ${mcost}원</strong></li>
 					<li class="makerinfo">작성자이름
 						<dl>${item.pname}</dl>
 					</li>
@@ -452,11 +451,15 @@ button {
 					<li class="makerinfo">제한 수량</li>
 					<dl>${reward.mcount }개
 					</dl>
-					<li class="makerinfo">현재 <c:set var="result"
+					<li class="makerinfo">현재 
+					<c:set var="result"
 							value="${reward.mcount - item.fundcount }" /> <c:if
 							test="${result > 0}">
 					${reward.mcount - item.fundcount  }</c:if> 
-					<c:if test="${result <= 0 }">
+					<!-- 잔여수량 정보보냄--> <input
+						type="hidden" value="${result }"
+						name="currentcount${status.index }"> 
+						<c:if test="${result <= 0 }">
 					0
 					</c:if>개 남음
 					</li>
@@ -468,7 +471,18 @@ button {
 		</div>
 	</div>
 
-
-
+<script>
+   $(function(){
+	   $('.makerbox').hover(function() {
+			  if(result > 0){
+				 $(this).css('background-color', '#c6ebd9');
+			  }else{
+				 $(this).css('background-color', '#d9d9d9');
+			  }
+			}, function() {
+				$(this).css('background-color', 'white');
+			});
+   });
+</script>
 </body>
 </html>
