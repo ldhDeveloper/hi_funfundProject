@@ -236,7 +236,7 @@ public ModelAndView selectList(ModelAndView model){
 	// joinCancle.fl 참여 취소
 	
 	@RequestMapping(value = "joinCancle.fl", method = RequestMethod.POST)
-	public String joinCancle(ModelAndView model, HttpSession session, HttpServletRequest request) {
+	public String joinCancle(RedirectAttributes ra, HttpSession session, HttpServletRequest request) {
 		System.out.println("오니?");
 		
 		int fund_no = Integer.parseInt(request.getParameter("fund_no"));
@@ -247,7 +247,9 @@ public ModelAndView selectList(ModelAndView model){
 		
 		System.out.println("delete Controller 2 fund_no : " + fund_no);
 		
-		return "myinfo/myfundingDetail";
+		ra.addAttribute("fund_no", fund_no);
+		
+		return "redirect:myfundingDetail.fl";
 	}
 	
 	@RequestMapping("gopayment.fl")
