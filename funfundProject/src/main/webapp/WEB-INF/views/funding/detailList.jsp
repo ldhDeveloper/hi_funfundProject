@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -451,14 +452,14 @@ button {
 					<li class="makerinfo">제한 수량</li>
 					<dl>${reward.mcount }개
 					</dl>
-					<li class="makerinfo">현재 
+					<li class="makerinfo current" >현재 
 					<c:set var="result"
-							value="${reward.mcount - item.fundcount }" /> <c:if
-							test="${result > 0}">
-					${reward.mcount - item.fundcount  }</c:if> 
+							value="${reward.mcount - reward.fundcount }" /> 
+							<c:if test="${result > 0}">
+					${result }</c:if> 
 					<!-- 잔여수량 정보보냄--> <input
 						type="hidden" value="${result }"
-						name="currentcount${status.index }"> 
+						name="currentcount"> 
 						<c:if test="${result <= 0 }">
 					0
 					</c:if>개 남음
@@ -473,8 +474,11 @@ button {
 
 <script>
    $(function(){
+	   for(var i=0; i<${fn:length(mList)}; i++){
 	   $('.makerbox').hover(function() {
-			  if(result > 0){
+		   var regex = /[^0-9]/g;
+		   var result=$(this).find($('.current')).html().replace(regex,'');
+			  if(result> 0){
 				 $(this).css('background-color', '#c6ebd9');
 			  }else{
 				 $(this).css('background-color', '#d9d9d9');
@@ -482,6 +486,7 @@ button {
 			}, function() {
 				$(this).css('background-color', 'white');
 			});
+	   }
    });
 </script>
 </body>

@@ -15,24 +15,49 @@
 		<result property="delyn" column="delyn" />
 		<result property="dcost" column="dcost" />
 	</resultMap>
+	<resultMap type="fundMenufundList" id="fundMenuResult2">
+		<id property="mno" column="mno" />
+		<result property="mname" column="mname" />
+		<result property="mcost" column="mcost" />
+		<result property="pro_no" column="pro_no" />
+		<result property="mcontent" column="mcontent" />
+		<result property="mdate" column="mdate" />
+		<result property="mnum" column="mnum" />
+		<result property="mcount" column="mcount" />
+		<result property="delyn" column="delyn" />
+		<result property="dcost" column="dcost" />
+		<result property="fundcount" column="fundcount" />
+	</resultMap>
 
-	<select id="selectMlist" parameterType="int" resultMap="fundMenuResult">
-		select mno, mname, mcost, pro_no, mcontent, mdate, mnum, mcount, delyn, dcost
-		from fundmenu 
-		where pro_no = #{pro_no}
-		order by mno, mnum
+	<select id="selectMlist" parameterType="int" resultMap="fundMenuResult2">
+		select f2.mno, mname, mcost, f2.pro_no, mcontent, mdate, mnum, mcount, delyn,dcost ,f1.fundcount
+		from (select sum(fundcount)fundcount, mno
+		         from fundlist
+		         group by mno) f1
+		left join fundmenu f2 on f1.mno=f2.mno
+		where f2.pro_no =1
+		order by f2.mno
 	</select>
 
 	<select id="selectMno" parameterType="FundMenu" resultMap="fundMenuResult">
 		select mno from fundmenu where pro_no = #{pro_no} and mnum = #{mnum}
 	</select>
-	
+
 	<insert id="insertFM" parameterType="FundMenu">
-		insert into fundmenu values (seq_mno.nextval, #{mname, jdbcType=VARCHAR}, #{mcost, jdbcType=INTEGER}, #{pro_no}, #{mcontent, jdbcType=VARCHAR}, #{mdate, jdbcType=DATE}, #{mnum}, #{mcount, jdbcType=INTEGER}, #{delyn, jdbcType=VARCHAR},  #{dcost, jdbcType=INTEGER})
+		insert into fundmenu values
+		(seq_mno.nextval, #{mname, jdbcType=VARCHAR}, #{mcost,
+		jdbcType=INTEGER}, #{pro_no}, #{mcontent, jdbcType=VARCHAR}, #{mdate,
+		jdbcType=DATE}, #{mnum}, #{mcount, jdbcType=INTEGER}, #{delyn,
+		jdbcType=VARCHAR}, #{dcost, jdbcType=INTEGER})
 	</insert>
-	
+
 	<update id="updateFM" parameterType="FundMenu">
-		update fundmenu set mname = #{mname, jdbcType=VARCHAR}, mcost = #{mcost, jdbcType=INTEGER}, mcontent = #{mcontent, jdbcType=VARCHAR}, mdate = #{mdate, jdbcType=DATE}, mnum = #{mnum}, mcount = #{mcount, jdbcType=INTEGER}, delyn = #{delyn, jdbcType=VARCHAR}, dcost = #{dcost, jdbcType=INTEGER} where mno=#{mno}
+		update fundmenu set mname =
+		#{mname, jdbcType=VARCHAR}, mcost = #{mcost, jdbcType=INTEGER},
+		mcontent = #{mcontent, jdbcType=VARCHAR}, mdate = #{mdate,
+		jdbcType=DATE}, mnum = #{mnum}, mcount = #{mcount, jdbcType=INTEGER},
+		delyn = #{delyn, jdbcType=VARCHAR}, dcost = #{dcost, jdbcType=INTEGER}
+		where mno=#{mno}
 	</update>
-	
+
 </mapper>

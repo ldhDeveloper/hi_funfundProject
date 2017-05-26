@@ -331,8 +331,14 @@ textarea {
 		$('#recmtbutton').click(function() {
 			$('.comment-area2').toggle();
 		});
+		/* $("#hongup").click(function(){
+			 $('.upcmt').html("<form action='update.ask'><div id='reupload'><input type='submit' value='수정하기'><input type='hidden' value='<c:out value=${param.pro_no}/>' name='pro_no'><input type='hidden' value='<c:out value=${ask.ask_no}/>' name='ask_no'></div></form>");
+		}); */
 	});
 	
+	/*  function update(){
+    	 $('.upcmt').html("<form action='update.ask'><div id='reupload'><input type='submit' value='수정하기'><input type='hidden' value='${param.pro_no}' name='pro_no'><input type='hidden'value='${ask.ask_no}' name='ask_no'></div></form>");
+     } */
 </script>
 </head>
 <body>
@@ -373,7 +379,7 @@ textarea {
 				<textarea id="acontent" name="acontent" style="overflow-y: hidden;"
 					rows="3" cols="50" maxlength="140;" placeholder="댓글을 입력하세요"></textarea>
 				<div id="upload">
-					<input type="submit" value="댓글달기"> <input type="hidden"
+					<input type="submit" value="댓글달기"><input type="hidden"
 						value="${param.pro_no}" name="pro_no"><input type="hidden"
 						value="${ask.ask_no}" name="ask_no">
 				</div>
@@ -395,10 +401,10 @@ textarea {
 							<c:if test="${ask.idtype eq '메이커' }">
 								<span class="cmtst">메이커</span>
 							</c:if>
-							<p class="cmtco">${ask.ask_content }</p>
+							<p class="cmtco upcmt" >${ask.ask_content }</p>
 							<span class="cmtda">${ask.ask_date }</span>
 							<c:if test="${sessionScope.account.ano eq ask.id_no }">
-							 <a onclick="update()">수정</a><a href="delete.ask">삭제</a>
+							 <a href="">수정</a><a href="delete.ask">삭제</a>
 							</c:if>
 							
 							<a id="recmtbutton">답글달기</a>
