@@ -68,4 +68,10 @@
 			WHERE FL.FUND_NO=#{fund_no}
 		]]>
 	</select>
+	
+	<update id="cancleMyfundingDetail" parameterType="int">
+		<![CDATA[
+			update fundlist set funstatus = '취소요청중' where fund_no=#{fund_no}
+		]]>
+	</update>
 </mapper>

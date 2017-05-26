@@ -182,11 +182,11 @@ public ModelAndView selectList(ModelAndView model){
 		int result = fundListService.update(fList);
 		return null;
 	}
+	
+	// myfundingDetail.fl 상세 페이지 select
 
 	@RequestMapping(value = "myfundingDetail.fl")
-	public ModelAndView myfundingDetail(ModelAndView model, HttpSession session, HttpServletRequest request) {
-		System.out.println("오니?");
-		
+	public ModelAndView myfundingDetail(ModelAndView model, HttpSession session, HttpServletRequest request) {		
 		int fund_no = Integer.parseInt(request.getParameter("fund_no"));
 		
 		Myfunding myfunding = fundListService.selectMyfundingDetail(fund_no);
@@ -196,6 +196,25 @@ public ModelAndView selectList(ModelAndView model){
 		
 		return model;
 	}
+	
+	
+	// joinCancle.fl 참여 취소
+	
+	@RequestMapping(value = "joinCancle.fl", method = RequestMethod.POST)
+	public String joinCancle(ModelAndView model, HttpSession session, HttpServletRequest request) {
+		System.out.println("오니?");
+		
+		int fund_no = Integer.parseInt(request.getParameter("fund_no"));
+		
+		System.out.println("delete Controller 1 fund_no : " + fund_no);
+		
+		int result = fundListService.cancleMyfundingDetail(fund_no);
+		
+		System.out.println("delete Controller 2 fund_no : " + fund_no);
+		
+		return "myinfo/myfundingDetail";
+	}
+	
 	@RequestMapping("gopayment.fl")
 	public ModelAndView sendPayInfo(ModelAndView model){
 		

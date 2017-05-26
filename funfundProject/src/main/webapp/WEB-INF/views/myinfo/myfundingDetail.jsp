@@ -369,7 +369,9 @@ label {
   									
   								<h3 align="center">결제 정보 변경 및 취소</h3>
       							
-      							<label id="delivery">참여한 프로젝트 정보</label><input class="joinBtn" type="button" value="참여취소">
+      							<form action="joinCancle.fl" method="post" enctype="multipart/form-data">
+      							<input type="hidden" value="${ myfunding.fund_no }" name="fund_no">
+      							<label id="delivery">참여한 프로젝트 정보</label><input class="joinBtn" type="submit" value="참여취소">
   									<br><br><br>
   									<table class="table">
     										<thead class="paddingGo">								
@@ -385,14 +387,34 @@ label {
     										<tbody class="paddingGo">
       											<tr class="joinProjecttr">
         											<td class="jptd">${ myfunding.fund_no }</td>
-        											<td class="jptd"><b class="state">진행중</b>&nbsp;&nbsp;&nbsp;${ myfunding.pname }</td>
+        											<td class="jptd"><b class="state" id="progress"></b>&nbsp;&nbsp;&nbsp;${ myfunding.pname }</td>
         											<td class="jptd">${ myfunding.pedate }</td>
         											<td class="jptd">${ myfunding.sumcost }원</td>
         											<td class="jptd">${ myfunding.funstatus }</td>
       											</tr>    										      											      											
     										</tbody>
-  										</table>  						
+  										</table>
   										
+  										<script type="text/javascript">
+											$(function(){
+												var d = new Date();
+												var pedate = new Date("<c:out value='${myfunding.pedate}'/>");
+										
+												var today = new Date(d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());										
+										
+												var progress = pedate.getTime() - today.getTime();				
+	
+												if(progress >= 0) {
+													$("#progress").html("진행중");		
+												}
+									
+												else {
+													$("#progress").html("마 감").css({"background-color" : "#C1C1C1", "color" : "#F1F1F1"});		
+												}	
+											});
+										</script> 						
+  										
+  										</form>
   										<br><br><br>
   										
   										<div class="choiceReward">
@@ -456,6 +478,7 @@ label {
     										</tbody>
   										</table>
   									</div>  								
+  								
   								<br>
     						</div>
     					</div>
