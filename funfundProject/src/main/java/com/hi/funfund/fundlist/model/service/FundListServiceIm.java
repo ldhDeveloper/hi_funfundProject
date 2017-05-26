@@ -9,6 +9,7 @@ import com.hi.funfund.fundlist.model.dao.FundListDao;
 import com.hi.funfund.fundlist.model.vo.FundList;
 import com.hi.funfund.fundlist.model.vo.Myfunding;
 import com.hi.funfund.fundlist.model.vo.Mysponsor;
+import com.hi.funfund.fundlist.model.vo.UpdateSponsor;
 
 
 @Service("fundListService")
@@ -60,6 +61,11 @@ public class FundListServiceIm implements FundListService {
 	public int cancleMyfundingDetail(int fund_no) {
 		System.out.println("update Service fund_no : " + fund_no);
 		return fundListDao.cancleMyfundingDetail(fund_no);
+	}
+
+	@Override
+	public int changeSupporterList(UpdateSponsor updatesponsor) {
+		return fundListDao.changeSupporterList(updatesponsor);
 	}
 
 

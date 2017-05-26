@@ -127,12 +127,12 @@
               var bodyHtml = "";
               for(var i = 0; i < data.length; i++){
             		bodyHtml += "<tr id='firstList" + i + "' onclick='tclick(this);'>";
-            		bodyHtml += "<td><a name='fund_no'>" + data[i].fund_no + "</a></td>";
-            		bodyHtml += "<td><a name='nickname'>" + data[i].nickname + "</a></td>";
-            		bodyHtml += "<td><a name='mname'>" + data[i].mname + "</a></td>";
-            		bodyHtml += "<td><a name='tcost'>" + data[i].tcost + "</a></td>";
-            		bodyHtml += "<td><a name='funstatus'>" + data[i].funstatus + "</a></td>";
-            		bodyHtml += "<td><a name='delstatus'>" + data[i].delstatus + "</a></td></tr>";
+            		bodyHtml += "<td><input type='hidden' name='fund_no' value='" + data[i].fund_no + "'>" + data[i].fund_no + "</a></td>";
+            		bodyHtml += "<td><input type='hidden' name='nickname' value='" + data[i].nickname + "'>" + data[i].nickname + "</a></td>";
+            		bodyHtml += "<td><input type='hidden' name='mname' value='" + data[i].mname + "'>" + data[i].mname + "</a></td>";
+            		bodyHtml += "<td><input type='hidden' name='tcost' value='" + data[i].tcost + "'>" + data[i].tcost + "</a></td>";
+            		bodyHtml += "<td><input type='hidden' name='funstatus' value='" + data[i].funstatus + "'>" + data[i].funstatus + "</a></td>";
+            		bodyHtml += "<td><input type='hidden' name='delstatus' value='" + data[i].delstatus + "'>" + data[i].delstatus + "</a></td></tr>";
             		bodyHtml += "<tr id='detailList" + i + "' style='display:none;'><td colspan='6'> <div class='row tmargin'>";
             		bodyHtml += "<div class='col-xs-12 col-sm-12 col-md-2 col-lg-2'><h6>결재방법</h6></div>";
             		bodyHtml += "<div class='col-xs-12 col-sm-12 col-md-4 col-lg-4'><input type='text' name='payment' class='form-control' value='" + data[i].payment + "' readonly></div>";
@@ -147,7 +147,7 @@
             		bodyHtml += "<div class='col-xs-12 col-sm-12 col-md-2 col-lg-2'><h6>연락처</h6></div>";
             		bodyHtml += "<div class='col-xs-12 col-sm-12 col-md-4 col-lg-4'><input type='text' name='rephone' class='form-control' value=" + data[i].rephone + " readonly></div>";
             		bodyHtml += "<div class='col-xs-12 col-sm-12 col-md-2 col-lg-2'><h6>이메일</h6></div>";
-            		bodyHtml += "<div class='col-xs-12 col-sm-12 col-md-4 col-lg-4'><input type='text' name='email' class='form-control' value=" + data[i].email + " readonly></div></div>";
+            		bodyHtml += "<div class='col-xs-12 col-sm-12 col-md-4 col-lg-4'><input type='text' name='email' class='form-control' value='" + data[i].email + "' readonly></div></div>";
             		bodyHtml += "<div class='row tmargin'>";
             		bodyHtml += "<div class='col-xs-12 col-sm-12 col-md-2 col-lg-2'><h6>추가금액</h6></div>";
             		bodyHtml += "<div class='col-xs-12 col-sm-12 col-md-4 col-lg-4'><input type='text' name='addcost' class='form-control' value=" + data[i].addcost + " readonly></div>";
@@ -215,12 +215,12 @@
 			    <tbody id="itemTableBody">
 			      <c:forEach var="item" items="${mlist}" varStatus="status">
 			      <tr id="firstList<c:out value='${status.index }'/>" onclick="tclick(this);">
-			        <td><a name="fund_no"><c:out value="${item.fund_no }"/></a></td>    
-			        <td><a name="nickname"><c:out value="${item.nickname }"/></a></td>
-			        <td><a name="mname"><c:out value="${item.mname }"/></a></td>
-			        <td><a name="tcost"><c:out value="${item.tcost }"/></a></td>
-			        <td><a name="funstatus"><c:out value="${item.funstatus }"/></a></td>
-			        <td><a name="delstatus"><c:out value="${item.delstatus }"/></a></td>
+			        <td><input type="hidden" name="fund_no" value="${item.fund_no }"><c:out value="${item.fund_no }"/></td>    
+			        <td><input type="hidden" name="nickname" value="${item.nickname }"><c:out value="${item.nickname }"/></td>
+			        <td><input type="hidden" name="mname" value="${item.mname }"><c:out value="${item.mname }"/></td>
+			        <td><input type="hidden" name="tcost" value="${item.tcost }"><c:out value="${item.tcost }"/></td>
+			        <td><input type="hidden" name="funstatus" value="${item.funstatus }"><c:out value="${item.funstatus }"/></td>
+			        <td><input type="hidden" name="delstatus" value="${item.delstatus }"><c:out value="${item.delstatus }"/></td>
 			      </tr>
 			      <tr id="detailList<c:out value='${status.index }'/>" style="display:none;">
 			        <td colspan="6">

@@ -37,7 +37,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hi.funfund.account.model.vo.Account;
 import com.hi.funfund.attachment.model.vo.Attachment;
@@ -47,6 +47,7 @@ import com.hi.funfund.fundlist.model.vo.Myfunding;
 import com.hi.funfund.fundlist.model.vo.Mysponsor;
 import com.hi.funfund.fundmenu.model.service.FundMenuService;
 import com.hi.funfund.fundmenu.model.vo.FundMenu;
+import com.hi.funfund.fundlist.model.vo.UpdateSponsor;
 import com.hi.funfund.item.model.service.ItemService;
 import com.hi.funfund.item.model.vo.Item;
 import com.siot.IamportRestClient.IamportClient;
@@ -392,7 +393,7 @@ public ModelAndView selectList(ModelAndView model){
 							if(cell != null){
 								switch(cell.getCellTypeEnum()){
 								case BLANK : 
-									value = null;
+									value = "";
 									break;
 								case FORMULA :
 									value = cell.getCellFormula() + "";
@@ -441,5 +442,14 @@ public ModelAndView selectList(ModelAndView model){
 		}
 		System.out.println("mlist : " + mlist);
 		return mlist;
+	}
+	
+	@RequestMapping(value = "changeSupporterList.fl", method =RequestMethod.POST)
+	public String changeSupporterList(RedirectAttributes ra, UpdateSponsor updatesponsor, ModelAndView model, HttpServletRequest request) {
+		System.out.println(updatesponsor);
+		int result = fundListService.changeSupporterList(updatesponsor);
+		System.out.println("수정한 컬럼수 : " + result);
+		ra.addAttribute("pro_no", updatesponsor.getPro_no());
+		return "redirect:myproject.fl";
 	}
 }
