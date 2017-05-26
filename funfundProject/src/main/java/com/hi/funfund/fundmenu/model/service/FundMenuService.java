@@ -20,4 +20,6 @@ public interface FundMenuService {
 
 	int insertFundMenu(FundMenu fmenu);
 
+	FundMenu selectOne(int parseInt);
+
 }

@@ -84,10 +84,10 @@ input[type="checkbox"] {
 			var i = 0;
 			$("#show-area").html("<tr><td>&nbsp</td></tr>");
 			
-			 $find('input:checkbox[name="choice"]:checked').each(function() {
+			 $('input:checkbox[name="choice"]:checked').each(function(index) {
 				arr[i] = $(this).val();
 				
-				$("#show-area").html($("#show-area").html() + "<tr><td>오니?"+ arr[i] +"</td></tr>");
+				//$("#show-area").html($("#show-area").html() + "<tr><td>"+ mname +"</td><td></td></tr>");
 				
 				i++;
 				
@@ -99,6 +99,28 @@ input[type="checkbox"] {
 		
 		function showlist(arr){
 			console.log("array : " + arr);
+			
+			$.ajax({
+				url:"selectlist.fl",
+				data:{"arr": arr},
+				dataType: 'json',
+				success:function(data){
+					console.log("length : " + data.length);
+					
+					
+					for(var i = 0; i < data.length; i++){
+						var mname = data[i].mname;
+						var mcontent = data[i].mcontent;
+						
+						$("#show-area").html($("#show-area").html() + "<tr><td style='border-radius:5px;border:1px violet solid;padding-left:50px;background:rgba(255,0,255,0.2);'><br>리워드명 : "+ mname + "<br>"
+								+ "상세설명 : " + mcontent + "<br><br>"
+								+ "</td></tr>");
+						
+					}
+				}
+					
+			});
+			
 		}
 	});
 </script>
@@ -133,14 +155,15 @@ input[type="checkbox"] {
 							<tr>
 								<td style="width:150px;padding:30px;" class="click-area">
 									<input class="flag" type="checkbox" name="choice" value="<c:out value="${fundMenu.mno}"/>">
-									<input type="hidden" class="mno" value="<c:out value="${fundMenu.mno}"/>">
-									<input type="hidden" class="mname" value="<c:out value="${fundMenu.mname}"/>">
-									<input type="hidden" class="mcost" value="<c:out value="${fundMenu.mcost}"/>">
-									<input type="hidden" class="mcontent" value="<c:out value="${fundMenu.mcontent}"/>">
-									<input type="hidden" class="mdate" value="<c:out value="${fundMenu.mdate}"/>">
-									<input type="hidden" class="mcount" value="<c:out value="${fundMenu.mcount}"/>">
-									<input type="hidden" class="delyn" value="<c:out value="${fundMenu.delyn}"/>">
-									<input type="hidden" class="dcost" value="<c:out value="${fundMenu.dcost}"/>">
+									<input type="hidden" class="mnum<c:out value='${status.index}'/>" value="<c:out value='${fundMenu.mnum}'/>">
+									<input type="hidden" class="mno<c:out value='${status.index}'/>" value="<c:out value="${fundMenu.mno}"/>">
+									<input type="hidden" class="mname<c:out value='${status.index}'/>" value="<c:out value="${fundMenu.mname}"/>">
+									<input type="hidden" class="mcost<c:out value='${status.index}'/>" value="<c:out value="${fundMenu.mcost}"/>">
+									<input type="hidden" class="mcontent<c:out value='${status.index}'/>" value="<c:out value="${fundMenu.mcontent}"/>">
+									<input type="hidden" class="mdate<c:out value='${status.index}'/>" value="<c:out value="${fundMenu.mdate}"/>">
+									<input type="hidden" class="mcount<c:out value='${status.index}'/>" value="<c:out value="${fundMenu.mcount}"/>">
+									<input type="hidden" class="delyn<c:out value='${status.index}'/>" value="<c:out value="${fundMenu.delyn}"/>">
+									<input type="hidden" class="dcost<c:out value='${status.index}'/>" value="<c:out value="${fundMenu.dcost}"/>">
 									<i class="fa fa-3x fa-square-o unchecked" aria-hidden="true" style="color:violet"></i>
 									<i class="fa fa-3x fa-check-square-o checked" aria-hidden="true" style="color:violet;display:none"></i>
 								</td>

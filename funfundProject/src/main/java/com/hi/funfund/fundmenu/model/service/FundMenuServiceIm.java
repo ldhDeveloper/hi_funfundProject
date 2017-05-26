@@ -47,4 +47,8 @@ public class FundMenuServiceIm implements FundMenuService {
 	public int insertFundMenu(FundMenu fmenu){
 		return fundMenuDao.insertFundMenu(fmenu);
 	}
+	@Override
+	public FundMenu selectOne(int mno){
+		return fundMenuDao.selectOne(mno);
+	}
 }
