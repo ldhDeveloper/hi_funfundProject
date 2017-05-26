@@ -284,6 +284,17 @@
 	box-shadow: 2px 2px #ddd;
 	height: 30px;
 	text-size: 2vw;	
+}
+
+.completeBtn {
+	border: 1px solid #28B5A9;
+	background-color: #31C698;
+	color: snow;
+	border: none;
+	border-radius: 20px;
+	box-shadow: 2px 2px #ddd;
+	height: 30px;
+	text-size: 2vw;
 } 
 
 label {
@@ -421,16 +432,36 @@ label {
   											<h3 align="center">선택한 리워드</h3>
   											
   											<p>&nbsp;&nbsp;&nbsp;${ myfunding.pname }</p>
-  											<p>&nbsp;&nbsp;&nbsp;${ myfunding.fundcount }개 / ${ myfunding.mcost }원</p>
-  											<p>&nbsp;&nbsp;&nbsp;옵션 : <input class="optionBtn" type="button" value="옵션 변경"/></p>
+  											<p id="fundCount">&nbsp;&nbsp;&nbsp;${ myfunding.fundcount }개 / ${ myfunding.mcost }원</p>
+  											<div id="countInput" style="display:none;"><input class="btn" style="width:5%; margin-left:10px;" id="countResult" type="number" value="${ myfunding.fundcount }"/>개/${ myfunding.mcost }원</div>
+  											<p>&nbsp;&nbsp;&nbsp;옵션 : <input class="optionBtn" id="optionBtn" type="button" value="옵션 변경"/><input class="completeBtn" id="completeBtn" type="button" value="변경 완료" style="display:none"/><input class="completeBtn" id="completeBtn" type="button" value="취소" style="display:none"/></p>
   										</div>
   										
   										<br><br><br>
   										
+  										<script type="text/javascript">
+  											$(function(){
+  												var countResult = $("#countResult").val();
+												var fundcount = "<c:out value='${ myfunding.fundcount }'/>";
+												var count = countResult + fundcount;
+													
+  												$("#optionBtn").click(function(){
+  													$("#countInput").show();
+  													$("#completeBtn").show();
+  													$("#fundCount").hide();
+  													$("#optionBtn").hide();
+  												});
+  												
+  												$("#completeBtn").click(function(){
+  														
+  												});
+  											});
+  										</script>
+  										
   										
   					
   									
-  									<label id="delivery">결제정보</label><input class="payBtn" type="button" value="결제정보변경">
+  									<label id="delivery">결제정보</label>
   									<br><br>
   									<table class="table">
     										<thead class="paddingGo">								
