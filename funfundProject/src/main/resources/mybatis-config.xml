@@ -18,6 +18,7 @@
 		<typeAlias type="com.hi.funfund.pupdate.model.vo.Pupdate" alias="pupdate" />
 		<typeAlias type="com.hi.funfund.fundlist.model.vo.Myfunding" alias="myfunding" />
 		<typeAlias type="com.hi.funfund.fundlist.model.vo.Mysponsor" alias="mysponsor" />
+		<typeAlias type="com.hi.funfund.fundlist.model.vo.UpdateSponsor" alias="updatesponsor" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/account-mapper.xml" />
