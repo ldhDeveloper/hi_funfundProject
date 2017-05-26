@@ -74,12 +74,12 @@
 		console.log("persent : " + persent);
 		$("#itemPersent").html(persent + " %");
 		
-		$("tr[id ^= firstList]").click(function(){
+		/* $("tr[id ^= firstList]").click(function(){
 			var name = $(this).attr("id");
 			var num = name.substr(name.length - 1, 1);
 			console.log("num : " + num);
 			$("#detailList" + num).toggle("fast");
-		})
+		}) */
 		
 		$("#exexport").click(function(){
 			$.ajax({	
@@ -102,6 +102,13 @@
 		});
 	});
 	
+	function tclick(a){
+		var name = $(a).attr("id");
+		var num = name.substr(name.length - 1, 1);
+		console.log("num : " + num);
+		$("#detailList" + num).toggle("fast");
+	}
+	
 	function fileChange(){
 		var form = $("inputExcelForm")[0];
 		var formData = new FormData(form);
@@ -117,7 +124,42 @@
                 alert(error);
             },
             success : function(data){
-                alert(data)
+              var bodyHtml = "";
+              for(var i = 0; i < data.length; i++){
+            		bodyHtml += "<tr id='firstList" + i + "' onclick='tclick(this);'>";
+            		bodyHtml += "<td><a name='fund_no'>" + data[i].fund_no + "</a></td>";
+            		bodyHtml += "<td><a name='nickname'>" + data[i].nickname + "</a></td>";
+            		bodyHtml += "<td><a name='mname'>" + data[i].mname + "</a></td>";
+            		bodyHtml += "<td><a name='tcost'>" + data[i].tcost + "</a></td>";
+            		bodyHtml += "<td><a name='funstatus'>" + data[i].funstatus + "</a></td>";
+            		bodyHtml += "<td><a name='delstatus'>" + data[i].delstatus + "</a></td></tr>";
+            		bodyHtml += "<tr id='detailList" + i + "' style='display:none;'><td colspan='6'> <div class='row tmargin'>";
+            		bodyHtml += "<div class='col-xs-12 col-sm-12 col-md-2 col-lg-2'><h6>결재방법</h6></div>";
+            		bodyHtml += "<div class='col-xs-12 col-sm-12 col-md-4 col-lg-4'><input type='text' name='payment' class='form-control' value='" + data[i].payment + "' readonly></div>";
+            		bodyHtml += "<div class='col-xs-12 col-sm-12 col-md-2 col-lg-2'><h6>결재근거</h6></div>";
+            		bodyHtml += "<div class='col-xs-12 col-sm-12 col-md-4 col-lg-4'><input type='text' name='evidence' class='form-control' value='" + data[i].evidence + "' readonly></div></div>";
+            		bodyHtml += "<div class='row tmargin'>";
+            		bodyHtml += "<div class='col-xs-12 col-sm-12 col-md-2 col-lg-2'><h6>수량</h6></div>";
+            		bodyHtml += "<div class='col-xs-12 col-sm-12 col-md-4 col-lg-4'><input type='text' name='fundcount' class='form-control' value=" + data[i].fundcount + " readonly></div>";
+            		bodyHtml += "<div class='col-xs-12 col-sm-12 col-md-2 col-lg-2'><h6>수신자</h6></div>";
+            		bodyHtml += "<div class='col-xs-12 col-sm-12 col-md-4 col-lg-4'><input type='text' name='recname' class='form-control' value='" + data[i].recname + "' readonly></div></div>";
+            		bodyHtml += "<div class='row tmargin'>";
+            		bodyHtml += "<div class='col-xs-12 col-sm-12 col-md-2 col-lg-2'><h6>연락처</h6></div>";
+            		bodyHtml += "<div class='col-xs-12 col-sm-12 col-md-4 col-lg-4'><input type='text' name='rephone' class='form-control' value=" + data[i].rephone + " readonly></div>";
+            		bodyHtml += "<div class='col-xs-12 col-sm-12 col-md-2 col-lg-2'><h6>이메일</h6></div>";
+            		bodyHtml += "<div class='col-xs-12 col-sm-12 col-md-4 col-lg-4'><input type='text' name='email' class='form-control' value=" + data[i].email + " readonly></div></div>";
+            		bodyHtml += "<div class='row tmargin'>";
+            		bodyHtml += "<div class='col-xs-12 col-sm-12 col-md-2 col-lg-2'><h6>추가금액</h6></div>";
+            		bodyHtml += "<div class='col-xs-12 col-sm-12 col-md-4 col-lg-4'><input type='text' name='addcost' class='form-control' value=" + data[i].addcost + " readonly></div>";
+            		bodyHtml += "<div class='col-xs-12 col-sm-12 col-md-2 col-lg-2'><h6>운송장번호</h6></div>";
+            		bodyHtml += "<div class='col-xs-12 col-sm-12 col-md-4 col-lg-4'><input type='text' name='del_no' class='form-control' value='" + data[i].del_no + "'></div></div>";
+            		bodyHtml += "<div class='row tmargin'>";
+            		bodyHtml += "<div class='col-xs-12 col-sm-12 col-md-2 col-lg-2'><h6>주소</h6></div>";
+            		bodyHtml += "<div class='col-xs-12 col-sm-12 col-md-10 col-lg-10'><input type='text' name='deladdress' class='form-control' value='" + data[i].deladdress + "' readonly></div></div></td></tr>";
+              }
+              $("#itemTableBody").html(bodyHtml);
+              console.log("호출됨!!");
+              $("#tchange").show();
             }
 		});
 	};
@@ -155,6 +197,7 @@
 			<div class="col-xs-1 col-sm-1 col-md-2 col-lg-2"></div>
 		</div>
 		<div class="row">
+			<form action="changeSupporterList.fl" method="post">
 			<input type="hidden" name="pro_no" value="${proItem.pro_no }"/>
 				<div class="container">
 			<table class="table table-hover funderTable">
@@ -168,35 +211,36 @@
 			        <th class="thcenter">배송상태</th>
 			      </tr>
 			    </thead>
-			    <tbody>
+			    <%-- <c:out value='${status.index }'/> --%>
+			    <tbody id="itemTableBody">
 			      <c:forEach var="item" items="${mlist}" varStatus="status">
-			      <tr id="firstList<c:out value='${status.index }'/>">
-			        <td><a name="fund_no<c:out value='${status.index }'/>"><c:out value="${item.fund_no }"/></a></td>    
-			        <td><a name="nickname<c:out value='${status.index }'/>"><c:out value="${item.nickname }"/></a></td>
-			        <td><a name="mname<c:out value='${status.index }'/>"><c:out value="${item.mname }"/></a></td>
-			        <td><a name="tcost<c:out value='${status.index }'/>"><c:out value="${item.tcost }"/></a></td>
-			        <td><a name="funstatus<c:out value='${status.index }'/>"><c:out value="${item.funstatus }"/></a></td>
-			        <td><a name="delstatus<c:out value='${status.index }'/>"><c:out value="${item.delstatus }"/></a></td>
+			      <tr id="firstList<c:out value='${status.index }'/>" onclick="tclick(this);">
+			        <td><a name="fund_no"><c:out value="${item.fund_no }"/></a></td>    
+			        <td><a name="nickname"><c:out value="${item.nickname }"/></a></td>
+			        <td><a name="mname"><c:out value="${item.mname }"/></a></td>
+			        <td><a name="tcost"><c:out value="${item.tcost }"/></a></td>
+			        <td><a name="funstatus"><c:out value="${item.funstatus }"/></a></td>
+			        <td><a name="delstatus"><c:out value="${item.delstatus }"/></a></td>
 			      </tr>
 			      <tr id="detailList<c:out value='${status.index }'/>" style="display:none;">
 			        <td colspan="6">
 			            <div class="row tmargin">
 							<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><h6>결재방법</h6></div>
-							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><input type="text" name="payment<c:out value='${status.index }'/>" class="form-control" value="${item.payment }" readonly></div>
+							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><input type="text" name="payment" class="form-control" value="${item.payment }" readonly></div>
 							<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><h6>결재근거</h6></div>
-							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><input type="text" name="fund_no<c:out value='${status.index }'/>" class="form-control" value="${item.evidence }" readonly></div>
+							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><input type="text" name="evidence" class="form-control" value="${item.evidence }" readonly></div>
 						</div>
 						<div class="row tmargin">
 							<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><h6>수량</h6></div>
-							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><input type="text" name="fundcount<c:out value='${status.index }'/>" class="form-control" value="${item.fundcount }" readonly></div>
+							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><input type="text" name="fundcount" class="form-control" value="${item.fundcount }" readonly></div>
 							<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><h6>수신자</h6></div>
-							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><input type="text" name="recname<c:out value='${status.index }'/>" class="form-control" value="${item.recname }" readonly></div>
+							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><input type="text" name="recname" class="form-control" value="${item.recname }" readonly></div>
 						</div>
 						<div class="row tmargin">	
 							<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><h6>연락처</h6></div>
-							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><input type="text" name="rephone<c:out value='${status.index }'/>" class="form-control" value="${item.rephone }" readonly></div>
+							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><input type="text" name="rephone" class="form-control" value="${item.rephone }" readonly></div>
 							<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><h6>이메일</h6></div>
-							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><input type="text" name="email<c:out value='${status.index }'/>" class="form-control" value="${item.email }" readonly></div>
+							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><input type="text" name="email" class="form-control" value="${item.email }" readonly></div>
 						</div>
 						<div class="row tmargin">	
 							<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><h6>추가금액</h6></div>
@@ -206,7 +250,7 @@
 						</div>		
 						<div class="row tmargin">	
 							<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><h6>주소</h6></div>
-							<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10"><input type="text" name="deladdress<c:out value='${status.index }'/>" class="form-control" value="${item.deladdress }" readonly></div>
+							<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10"><input type="text" name="deladdress" class="form-control" value="${item.deladdress }" readonly></div>
 						</div>
 					</td>
 			      </tr>
@@ -215,11 +259,12 @@
 		
 			  </table>
 			  <div class="row" style="margin:0px; float:right;">
-			  		<button class="btn btn-default" id="exexport">Excel Export</button>
-			  		<button class="btn btn-default" id="eximport">Excel Import</button>
-			  		<form name="inputExcelForm">
-			  		<input type="file" name="excelFile" id="excelFile" onchange="fileChange();">
-			  		<button class="btn btn-primary" id="tchange">변경하기</button>
+			  		<button class="btn btn-default" id="exexport" type="button">Excel Export</button>
+			  		<button class="btn btn-default" id="eximport" type="button">Excel Import</button>
+			  		<button class="btn btn-primary" id="tchange" style="display:none;" type="submit">변경하기</button>
+			  		</form>
+			  		<form name="inputExcelForm" style="display:none;">
+			  		<input type="file" name="excelFile" id="excelFile" onchange="fileChange();" >
 			  		</form>
 			  </div>
 		</div>

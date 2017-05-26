@@ -26,6 +26,7 @@ import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.CellType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -328,35 +329,59 @@ public ModelAndView selectList(ModelAndView model){
 			Mysponsor vo;
 			String value;
 			sheet = workbook.getSheetAt(0);
-			for(int i=0; i < sheet.getPhysicalNumberOfRows(); i++){
-				if(i != 0){
+			for(int i=1; i < sheet.getPhysicalNumberOfRows(); i++){
+				//if(i != 0){
 					row = sheet.getRow(i);
 					vo = new Mysponsor();
-					if(!"".equals(row.getCell(0).getStringCellValue())){
-						for(int j=0; j < row.getPhysicalNumberOfCells(); j++){
+					//if(row.getCell(0).getNumericCellValue()){
+						for(int j=0; j <= row.getPhysicalNumberOfCells(); j++){
 							cell = row.getCell(j);
-							System.out.println(cell.toString());
-							switch(j){
-							case 0 : vo.setFund_no((int) cell.getNumericCellValue()); break;
-							case 1 : vo.setNickname(cell.getStringCellValue()); break;
-							case 2 : vo.setMname(cell.getStringCellValue()); break;
-							case 3 : vo.setTcost((int) cell.getNumericCellValue()); break;
-							case 4 : vo.setFunstatus(cell.getStringCellValue()); break;
-							case 5 : vo.setDelstatus(cell.getStringCellValue()); break;
-							case 6 : vo.setPayment(cell.getStringCellValue()); break;
-							case 7 : vo.setEvidence(cell.getStringCellValue()); break;
-							case 8 : vo.setFundcount((int) cell.getNumericCellValue()); break;
-							case 9 : vo.setRecname(cell.getStringCellValue()); break;
-							case 10 : vo.setRephone(cell.getStringCellValue()); break;
-							case 11 : vo.setEmail(cell.getStringCellValue()); break;
-							case 12 : vo.setAddcost((int) cell.getNumericCellValue()); break;
-							case 13 : vo.setDel_no(cell.getStringCellValue()); break;
-							case 14 : vo.setDeladdress(cell.getStringCellValue()); break;
+							value = "";
+							if(cell != null){
+								switch(cell.getCellTypeEnum()){
+								case BLANK : 
+									value = null;
+									break;
+								case FORMULA :
+									value = cell.getCellFormula() + "";
+									break;
+								case NUMERIC : 
+									value = (int)cell.getNumericCellValue() + "";
+									break;
+								case STRING :
+									value = cell.getStringCellValue() + "";
+									break;
+								case ERROR :
+									value = cell.getErrorCellValue() + "";
+									break;
+								default :
+									value = new String();
+									break;
+								}
 							}
+							System.out.println(value);
+							switch(j){
+							case 0 : vo.setFund_no(Integer.parseInt(value)); break;
+							case 1 : vo.setNickname(value); break;
+							case 2 : vo.setMname(value); break;
+							case 3 : vo.setTcost(Integer.parseInt(value)); break;
+							case 4 : vo.setFunstatus(value); break;
+							case 5 : vo.setDelstatus(value); break;
+							case 6 : vo.setPayment(value); break;
+							case 7 : vo.setEvidence(value); break;
+							case 8 : vo.setFundcount(Integer.parseInt(value)); break;
+							case 9 : vo.setRecname(value); break;
+							case 10 : vo.setRephone(value); break;
+							case 11 : vo.setEmail(value); break;
+							case 12 : vo.setAddcost(Integer.parseInt(value)); break;
+							case 13 : vo.setDel_no(value); break;
+							case 14 : vo.setDeladdress(value); break;
+							}
+							System.out.println(vo);
 						}
 						mlist.add(vo);
-					}
-				}
+					//}
+				//}
 			}
 			
 		} catch (Exception e) {
