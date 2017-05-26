@@ -8,6 +8,7 @@ public class Notice implements Serializable {
 	public Notice(){};
 	
 	private int nno;
+	private int bno;
 	private String ntitle;
 	private String ncontent;
 	private Date ndate;
@@ -15,13 +16,20 @@ public class Notice implements Serializable {
 	private String bname;
 	private String nickname;
 	private int readcount;
+	private int ano;
 	public int getNno() {
 		return nno;
 	}
 	public void setNno(int nno) {
 		this.nno = nno;
 	}
-
+	
+	public int getBno() {
+		return bno;
+	}
+	public void setBno(int bno) {
+		this.bno = bno;
+	}
 	public String getNtitle() {
 		return ntitle;
 	}
@@ -59,8 +67,12 @@ public class Notice implements Serializable {
 		this.nickname = nickname;
 	}
 	
-	
-	
+	public int getAno() {
+		return ano;
+	}
+	public void setAno(int ano) {
+		this.ano = ano;
+	}
 	public int getReadcount() {
 		return readcount;
 	}
@@ -68,7 +80,7 @@ public class Notice implements Serializable {
 		this.readcount = readcount;
 	}
 	public Notice(int nno, String ntitle, String ncontent, Date ndate, int upbno, String bname, String nickname,
-			int readcount) {
+			int readcount, int ano) {
 		super();
 		this.nno = nno;
 		this.ntitle = ntitle;
@@ -78,12 +90,14 @@ public class Notice implements Serializable {
 		this.bname = bname;
 		this.nickname = nickname;
 		this.readcount = readcount;
+		this.ano = ano;
 	}
 	@Override
 	public String toString() {
 		return nno + ", " + ntitle + ", " + ncontent + ", " + ndate + ", " + upbno + ", " + bname + ", " + nickname
-				+ ", " + readcount;
+				+ ", " + readcount + ", " + ano;
 	}
+	
 	
 	
 	

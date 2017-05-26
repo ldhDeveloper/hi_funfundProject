@@ -15,29 +15,26 @@ public class NoticeDao {
 	private static final String nameSpace = "noticeMapper.";
 	@Autowired
 	private SqlSession sqlSession;
-	public List<Notice> selectList(int bno, int page) {
+	public List<Notice> selectList(HashMap map) {
+		
+		List<Notice> nList = sqlSession.selectList(nameSpace+"selectList", map);
+			
+		return nList;
+	}
+	public List<Notice> searchTitle(int bno, int page, String ntitle) {
 		int startNumber = (page * 10 +1) -10;
 		int endNumber = startNumber +10; 
 		HashMap map = new HashMap();
 		map.put("bno", bno);
 		map.put("sNum", startNumber);
 		map.put("eNum", endNumber);
-		List<Notice> nList = sqlSession.selectList(nameSpace+"selectList", map);
-			
+		map.put("title", ntitle);
+		List<Notice> nList = (List<Notice>)sqlSession.selectList(nameSpace+"searchTitle", map);
 		return nList;
 	}
-	public List<Notice>  searchTitle(int bno, int page, String ntitle) {
-		
-		HashMap map = new HashMap();
-		map.put("bno", bno);
-		map.put("page", page);
-		map.put("ntitle", ntitle);
-		List<Notice> nList = (List<Notice>)sqlSession.selectList(nameSpace+"searchTitle", map);
-		return null;
-	}
 	public Notice selectOne(int nno) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return (Notice)sqlSession.selectOne(nameSpace + "selectOne", nno);
 	}
 	public int update(Notice notice) {
 		// TODO Auto-generated method stub
@@ -51,9 +48,26 @@ public class NoticeDao {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	public int getListCount(int bno) {
+	public int getListCount(int bno, int upbno) {
 	
-		return (int)sqlSession.selectOne("getListCount", bno);
+		HashMap map = new HashMap();
+		map.put("bno", bno);
+		map.put("upbno", upbno);
+		return (int)sqlSession.selectOne("getListCount", map);
+	}
+	public int getListCountWithTitle(int bno, String nTitle) {
+		HashMap map = new HashMap();
+		map.put("bno", bno);
+		map.put("title", nTitle);
+		return (int)sqlSession.selectOne("getListCountWithTitle", map);
+	}
+	public List<Notice> selectDetailList(HashMap map) {
+	
+		return (List<Notice>)sqlSession.selectList(nameSpace+"selectDetailList", map);
+	}
+	public int getReplyCount(int nno) {
+		
+		return (int)sqlSession.selectOne(nameSpace+"getReplyCount", nno);
 	}
 	
 

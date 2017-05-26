@@ -1,5 +1,6 @@
 package com.hi.funfund.notice.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,18 @@ public class NoticeController {
 	@RequestMapping(value="nList.no",  method=RequestMethod.GET)
 	public ModelAndView notice(@RequestParam("sbno") String sbno, @RequestParam("spage") String spage, 
 						ModelAndView model){
+		HashMap map = new HashMap();
 		int bno =Integer.valueOf(sbno);
 		int page =Integer.valueOf(spage);
-		List<Notice> nList = noticeService.selectList(bno, page);
-		int listCount = getListCount(bno);
+		int sNum = page * 10 +1 -10;
+		int eNum = sNum + 9;
+		int upbno = 0;
+		map.put("bno", bno);
+		map.put("sNum", sNum);
+		map.put("eNum", eNum);
+		map.put("upbno", 0);
+		List<Notice> nList = noticeService.selectList(map);
+		int listCount = noticeService.getListCount(bno, upbno);
 		System.out.println(listCount);
 		model.addObject("sbno", sbno);
 		model.addObject("spage", spage);
@@ -34,49 +43,77 @@ public class NoticeController {
 		model.setViewName("notice/notice");
 		return model;
 	}
-	private int getListCount(int bno){
-		int result = noticeService.getListCount(bno);
-		return  result;
-	}
-	
 	
 	@RequestMapping("nSearchTitle.no")
-	public String searchTitle(int bno,int page, String nTitle, ModelAndView model){
-		
+	public ModelAndView searchTitle(@RequestParam("sbno") String sbno,
+			@RequestParam("spage") String spage, @RequestParam("nTitle") String nTitle, ModelAndView model){
+		HashMap map = new HashMap();
+		int bno = Integer.valueOf(sbno);
+		int page = Integer.valueOf(spage);
+		int listCount = noticeService.getListCountWithTitle(bno, nTitle);
 		List<Notice> nList = noticeService.searchTitle(bno, page, nTitle);
-		
-		return "";
+		model.addObject("sbno", sbno);
+		model.addObject("spage", spage);
+		model.addObject("listCount", listCount);
+		model.addObject("nList", nList);
+		model.setViewName("notice/notice");
+		System.out.println("search result : " +nList);
+		return model;
 	}
-
 	
 	@RequestMapping("nInsertView.no")
 	public String Write(){
-		
 		
 		return "notice/ninsert";
 	}
 	
 	@RequestMapping("nDetail.no")
-	public String selectOne(/*int nno,*/ ModelAndView model){
-		/*Notice n = noticeService.selectOne(nno);
-		model.addObject("n", n);*/
-		return "notice/noticeDetail";
+	public ModelAndView selectDetailList(@RequestParam("snno") String snno, @RequestParam("sbno") String sbno,
+			@RequestParam("spage") String spage, ModelAndView model){
+		int nno = Integer.valueOf(snno);
+		int bno = Integer.valueOf(sbno);
+		HashMap map = new HashMap();
+		map.put("bno", bno);
+		map.put("upbno", nno);
+		int replyCount = noticeService.getReplyCount(nno);
+		List<Notice> nList = noticeService.selectDetailList(map);
+		model.addObject("snno", snno);
+		model.addObject("sbno", sbno);
+		model.addObject("spage", spage);
+		model.addObject("nList", nList );
+		model.addObject("replyCount", replyCount );
+		model.setViewName("notice/nDetail");
+		return model;
 	}
 	@RequestMapping("nUpdate.no")
-	public String update(Notice notice){
-				
+	public String update(Notice notice, @RequestParam("sbno") String sbno ){
+		int result = noticeService.update(notice);
+		String address = null;
+		if(result >0){
+			address = "redirect:/nDetail.no?snno" +notice.getNno() +"&sbno="+sbno ;
+		}
 		return null;
 		
 	}
 	@RequestMapping("nDelete.no")
 	public String delete(int nno){
+		int result = noticeService.delete(nno);
+		String address = null;
+		if(result >0){
+			address="redirect:/";
+		}
+			
 		
-		return null;
+		return address;
 	}
 	@RequestMapping("nInsert.no")
 	public String insert(Notice notice){
-		
-		return null;
+		int result = noticeService.insert(notice);
+		String address = null;
+		if(result >0){
+			address ="redirect:/nList.no?sbno=1&spage=1";
+		}
+		return address;
 	}
 	
 }

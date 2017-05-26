@@ -110,4 +110,8 @@
 	SET PWD = ENCRYPTION_AES.ENC_AES(#{pwd}) WHERE EMAIL = #{email}
 	</update>
 	
+	<delete id="delete" parameterType="HashMap">
+	delete from notice
+	where nno = #{nno} and upbno = #{upbno}
+	</delete>
 </mapper>

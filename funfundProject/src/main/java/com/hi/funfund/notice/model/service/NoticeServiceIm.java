@@ -1,5 +1,6 @@
 package com.hi.funfund.notice.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -16,9 +17,9 @@ public class NoticeServiceIm implements NoticeService{
 	NoticeDao noticeDao;
 
 	@Override
-	public List selectList(int bno, int page) {
+	public List selectList(HashMap map) {
 		
-		return noticeDao.selectList(bno, page);
+		return noticeDao.selectList(map);
 	}
 
 	@Override
@@ -52,9 +53,27 @@ public class NoticeServiceIm implements NoticeService{
 	}
 
 	@Override
-	public int getListCount(int bno) {
+	public int getListCount(int bno, int upbno) {
 		
-		return noticeDao.getListCount(bno);
+		return noticeDao.getListCount(bno, upbno);
+	}
+
+	@Override
+	public int getListCountWithTitle(int bno, String nTitle) {
+		
+		return noticeDao.getListCountWithTitle(bno, nTitle);
+	}
+
+	@Override
+	public List<Notice> selectDetailList(HashMap map) {
+		
+		return noticeDao.selectDetailList(map);
+	}
+
+	@Override
+	public int getReplyCount(int nno) {
+		
+		return noticeDao.getReplyCount(nno);
 	}
 
 	
