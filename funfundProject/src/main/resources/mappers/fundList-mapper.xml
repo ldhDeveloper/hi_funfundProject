@@ -38,7 +38,6 @@
 		<result property="nickname" column="nickname" />
 		<result property="email" column="email" />
 	</resultMap>
-	
 	<select id="selectMyfunding" parameterType="int" resultMap="myfundingResult">
 		<![CDATA[
 			SELECT FL.FUND_NO, I.PNAME, FM.MNAME, FM.MCOST, I.PEDATE, FL.DELADDRESS, FL.FUNDCOUNT, FL.REPHONE, FL.RECNAME, FL.FUNSTATUS, FL.PAYMENT, FL.EVIDENCE, (FM.MCOST*FL.FUNDCOUNT) AS SUMCOST
@@ -72,6 +71,12 @@
 	<update id="cancleMyfundingDetail" parameterType="int">
 		<![CDATA[
 			update fundlist set funstatus = '취소요청중' where fund_no=#{fund_no}
+		]]>
+	</update>
+	<update id="changeSupporterList" parameterType="HashMap">
+		<![CDATA[
+			update fundlist set del_no = #{del_no}
+			where fund_no = #{fund_no} 
 		]]>
 	</update>
 </mapper>
