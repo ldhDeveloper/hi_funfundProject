@@ -1,5 +1,6 @@
 package com.hi.funfund.fundlist.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.hi.funfund.fundlist.model.vo.FundList;
 import com.hi.funfund.fundlist.model.vo.Myfunding;
 import com.hi.funfund.fundlist.model.vo.Mysponsor;
+import com.hi.funfund.fundlist.model.vo.UpdateSponsor;
 
 
 @Repository("fundListDao")
@@ -48,6 +50,16 @@ public class FundListDao {
 		int result = sqlSession.update(nameSpace+"cancleMyfundingDetail", fund_no);
 		System.out.println("dao result : " + result);
 		System.out.println("update Dao 2 fund_no : " + fund_no);
+		return result;
+	}
+	public int changeSupporterList(UpdateSponsor updatesponsor) {
+		int result = 0;
+		for(int i = 0; i < updatesponsor.getFund_no().size(); i++){
+			HashMap<String, String> hmap = new HashMap<String, String>();
+			hmap.put("fund_no", updatesponsor.getFund_no().get(i).toString());
+			hmap.put("del_no", updatesponsor.getDel_no().get(i).toString());
+			result += sqlSession.update(nameSpace+"changeSupporterList", hmap) ;
+		}
 		return result;
 	}
 	

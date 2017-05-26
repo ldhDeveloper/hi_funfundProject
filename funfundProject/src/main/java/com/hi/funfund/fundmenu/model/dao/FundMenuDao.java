@@ -65,10 +65,15 @@ public class FundMenuDao {
 		return result;
 	}
 
-	public int insertFundMenu(FundMenu fmenu) {
+	public int insertFundMenu(FundMenu fmenu) { 
 		
 		int result = sqlSession.insert(nameSpace + "insertFM", fmenu);
 		
 		return result;
+	}
+
+	public FundMenu selectOne(int mno) {
+		FundMenu fm = (FundMenu) sqlSession.selectOne(nameSpace + "selectFM", mno);
+		return fm;
 	}
 }

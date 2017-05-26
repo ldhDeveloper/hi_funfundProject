@@ -13,6 +13,7 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Enumeration;
 import java.util.GregorianCalendar;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,7 +37,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hi.funfund.account.model.vo.Account;
 import com.hi.funfund.attachment.model.vo.Attachment;
@@ -44,6 +45,9 @@ import com.hi.funfund.fundlist.model.service.FundListService;
 import com.hi.funfund.fundlist.model.vo.FundList;
 import com.hi.funfund.fundlist.model.vo.Myfunding;
 import com.hi.funfund.fundlist.model.vo.Mysponsor;
+import com.hi.funfund.fundmenu.model.service.FundMenuService;
+import com.hi.funfund.fundmenu.model.vo.FundMenu;
+import com.hi.funfund.fundlist.model.vo.UpdateSponsor;
 import com.hi.funfund.item.model.service.ItemService;
 import com.hi.funfund.item.model.vo.Item;
 import com.siot.IamportRestClient.IamportClient;
@@ -54,13 +58,16 @@ import com.siot.IamportRestClient.response.AccessToken;
 import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Schedule;
 
+import net.sf.json.JSONObject;
+
 @Controller
 // @RequestMapping("fundList")
 public class FundListController {
 
 	@Autowired
 	private FundListService fundListService;
-
+	@Autowired
+	private FundMenuService fundMenuService;
 	@Autowired
 	private ItemService itemService;
 
@@ -152,6 +159,33 @@ public @ResponseBody String exportExcel(@RequestParam int pro_no, HttpServletReq
 	return new ModelAndView("fileDownloadView", "downloadFile", file);*/
 	return "src/main/webapp/excel/" + rfileName;
 }
+@RequestMapping(value = "selectlist.fl", produces = "application/json")
+public @ResponseBody ArrayList<FundMenu> selectfList(ModelAndView model, HttpServletRequest request, HttpServletResponse response) {
+	ArrayList<FundMenu> fmlist = new ArrayList<FundMenu>();
+	
+	Enumeration em = request.getParameterNames();
+	while(em.hasMoreElements()){
+	    String parameterName = (String)em.nextElement();
+	    String parameterValue = request.getParameter(parameterName);
+	    String[] parameterValues = request.getParameterValues(parameterName);
+	    if(parameterValues != null){
+	         for(int i=0; i< parameterValues.length; i++){
+	        	 FundMenu fm = new FundMenu();
+	        	 fm = fundMenuService.selectOne(Integer.parseInt(parameterValues[i]));
+	             System.out.println("array_" + parameterName + "=" + parameterValues[i]);
+	             fmlist.add(fm);
+	         }
+	    }
+	}
+	
+	System.out.println("fmlist : " + fmlist);
+	
+	/*model.addObject("fmlist", fmlist);
+	model.setViewName("jsonView");*/
+	
+	return fmlist;
+}
+
 
 
 public ModelAndView selectList(ModelAndView model){
@@ -202,7 +236,7 @@ public ModelAndView selectList(ModelAndView model){
 	// joinCancle.fl 참여 취소
 	
 	@RequestMapping(value = "joinCancle.fl", method = RequestMethod.POST)
-	public String joinCancle(ModelAndView model, HttpSession session, HttpServletRequest request) {
+	public String joinCancle(RedirectAttributes ra, HttpSession session, HttpServletRequest request) {
 		System.out.println("오니?");
 		
 		int fund_no = Integer.parseInt(request.getParameter("fund_no"));
@@ -213,7 +247,9 @@ public ModelAndView selectList(ModelAndView model){
 		
 		System.out.println("delete Controller 2 fund_no : " + fund_no);
 		
-		return "myinfo/myfundingDetail";
+		ra.addAttribute("fund_no", fund_no);
+		
+		return "redirect:myfundingDetail.fl";
 	}
 	
 	@RequestMapping("gopayment.fl")
@@ -359,7 +395,7 @@ public ModelAndView selectList(ModelAndView model){
 							if(cell != null){
 								switch(cell.getCellTypeEnum()){
 								case BLANK : 
-									value = null;
+									value = "";
 									break;
 								case FORMULA :
 									value = cell.getCellFormula() + "";
@@ -408,5 +444,14 @@ public ModelAndView selectList(ModelAndView model){
 		}
 		System.out.println("mlist : " + mlist);
 		return mlist;
+	}
+	
+	@RequestMapping(value = "changeSupporterList.fl", method =RequestMethod.POST)
+	public String changeSupporterList(RedirectAttributes ra, UpdateSponsor updatesponsor, ModelAndView model, HttpServletRequest request) {
+		System.out.println(updatesponsor);
+		int result = fundListService.changeSupporterList(updatesponsor);
+		System.out.println("수정한 컬럼수 : " + result);
+		ra.addAttribute("pro_no", updatesponsor.getPro_no());
+		return "redirect:myproject.fl";
 	}
 }

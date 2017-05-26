@@ -5,6 +5,7 @@ import java.util.List;
 import com.hi.funfund.fundlist.model.vo.FundList;
 import com.hi.funfund.fundlist.model.vo.Myfunding;
 import com.hi.funfund.fundlist.model.vo.Mysponsor;
+import com.hi.funfund.fundlist.model.vo.UpdateSponsor;
 
 public interface FundListService {
 
@@ -21,5 +22,7 @@ public interface FundListService {
 	Myfunding selectMyfundingDetail(int fund_no);
 
 	int cancleMyfundingDetail(int fund_no);
+
+	int changeSupporterList(UpdateSponsor updatesponsor);
 
 }
