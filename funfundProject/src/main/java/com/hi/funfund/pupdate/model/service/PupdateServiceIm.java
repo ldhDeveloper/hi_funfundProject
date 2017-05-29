@@ -1,5 +1,6 @@
 package com.hi.funfund.pupdate.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,4 +37,5 @@ public class PupdateServiceIm implements PupdateService{
 		// TODO Auto-generated method stub
 		return  PupdateDao.delete(upno);
 	}
+
 }
