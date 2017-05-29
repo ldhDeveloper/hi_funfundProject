@@ -543,11 +543,7 @@ li {
 					$("#addReward")
 							.click(
 									function() {
-										var pro_no = $
-										{
-											pro_no
-										}
-										;
+										var pro_no = ${pro_no};
 
 										console.log("pro_no : " + pro_no);
 
@@ -680,28 +676,19 @@ li {
 								.click(
 										function() {
 											var formData = new FormData();
-											var pro_no = $
-											{
-												pro_no
-											}
-											;
+											var pro_no = ${pro_no};
 											console.log("pro_no" + pro_no);
 
 											for (var i = 0; i < $("#slidefile")[0].files.length; i++) {
 												formData
 														.append(
-																"slidefile["
-																		+ i
-																		+ "]",
+																"slidefile["+ i + "]",
 																$("#slidefile")[0].files[i]);
 												console
 														.log($("#slidefile")[0].files[i]);
 											}
 											console.log("전송" + positions);
-											var url = "insertSlide.at?positions="
-													+ positions
-													+ "&pro_no="
-													+ pro_no;
+											var url = "insertSlide.at?positions="+ positions+ "&pro_no="+ pro_no;
 											$.ajax({
 												type : 'post',
 												url : url,
@@ -1071,10 +1058,46 @@ li {
 	<br>
 	<div align="center">
 		<button class="btn btn-warning" onclick="tempsave();">임시저장하기</button>
+		
 		<script>
-			function tempsave() {
 
-				document.getElementById('frm').submit();
+			function tempsave() {
+				var url = 'updateajax.it?pro_no=' + ${ pro_no } +"&flag='false'";
+				var pname = $('[name=pname]').val();
+				
+				/* PRO_NO
+				ANO
+				PNAME
+				PCONTENT
+				CATEGORY
+				PSDATE
+				PEDATE
+				PSHORT
+				ECOST
+				REFUND
+				PVIDEO
+				PSTATUS
+				LIKECOUNT
+				SHARELINK
+				BANKCODE
+				ACCPNM
+				ACCNUM
+				CNAME
+				CS_EMAIL
+				CS_PHONE */
+				console.log(pname);
+				$.ajax({
+					url : url,
+					data: {"pname":pname},
+					success:function(data){
+						alert("임시저장 성공");
+					}
+				});
+					
+					
+				
+
+				//document.getElementById('frm').submit();
 			}
 		</script>
 		&nbsp; &nbsp;
@@ -1090,9 +1113,7 @@ li {
 	</form>
 
 	<!-- 계좌본인인증 API -->
-	<!-- <script type="text/javascript" src='/funfund/lib/js/jquery-2.2.2.min.js'></script> -->
-	<script type="text/javascript" src='/funfund/lib/js/system.js'></script>
-	<script type="text/javascript" src='/funfund/lib/js/util.js'></script>
+	
 
 	<div>
 		<table>
@@ -1173,6 +1194,9 @@ li {
 		</table>
 
 	</div>
+	<!-- <script type="text/javascript" src='/funfund/lib/js/jquery-2.2.2.min.js'></script> -->
+	<script type="text/javascript" src='/funfund/lib/js/system.js'></script>
+	<script type="text/javascript" src='/funfund/lib/js/util.js'></script>
 	<script type="text/javascript">
 		$.support.cors = true;
 		var currentTime = new Date().format("yyyyMMddHHmmss");

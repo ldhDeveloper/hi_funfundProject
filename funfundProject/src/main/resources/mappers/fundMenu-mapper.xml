@@ -37,7 +37,7 @@
 		         from fundlist
 		         group by mno) f1
 		right join fundmenu f2 on f1.mno=f2.mno
-		where f2.pro_no =1
+		where f2.pro_no = #{pro_no}
 		order by f2.mno
 	</select>
 

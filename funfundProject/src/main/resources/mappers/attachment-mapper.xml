@@ -39,7 +39,7 @@
 	<insert id="insertTitleImage" parameterType="Integer">
 		<![CDATA[
 			INSERT INTO ATTACHMENT (fno, orifname, refname, ftype, fsubtype, refno)
-			VALUES(seq_fno.nextval, null, null, 'item', 'titleimg', #{pro_no})
+			VALUES(seq_fno.nextval, null, null, 'item', 'thumbnail', #{pro_no})
 		]]>
 	</insert>
 	<insert id="insertMakerImage" parameterType="Integer">
