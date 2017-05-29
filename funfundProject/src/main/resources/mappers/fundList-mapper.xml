@@ -85,4 +85,10 @@
 			update fundlist set fundcount=#{fundcount} where fund_no=#{fund_no}
 		]]>
 	</update>
+	
+	<update id="updateDelivery" parameterType="HashMap">
+		<![CDATA[
+			update fundlist set recname=#{recname}, rephone=#{rephone}, deladdress=#{deladdress} where fund_no=#{fund_no}
+		]]>
+	</update>
 </mapper>

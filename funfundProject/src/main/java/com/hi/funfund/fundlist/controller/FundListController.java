@@ -256,23 +256,35 @@ public ModelAndView selectList(ModelAndView model){
 		return "redirect:myfundingDetail.fl";
 	}
 	
-	// changeOption 옵션 변경
-	@RequestMapping(value = "changeOption.fl")
-	public String changeOption(RedirectAttributes ra, HttpSession session, HttpServletRequest request) {
+	// deliveryChange.fl 배송지 정보 변경
+	
+	@RequestMapping(value = "deliveryChange.fl", method = RequestMethod.POST)
+	public String deliveryChange(RedirectAttributes ra, HttpSession session, HttpServletRequest request) {
 		System.out.println("오니?");
 		
 		int fund_no = Integer.parseInt(request.getParameter("fund_no"));
+		String recname = request.getParameter("recname");
+		String rephone = request.getParameter("rephone");
+		String deladdress = request.getParameter("deladdress");
+		
+		System.out.println("deliveryChange controller 1 fund_no : " + fund_no + " recname : " + recname + " rephone : " + rephone + " deladdress : " + deladdress);
+		
+		int result = fundListService.updateDelivery(fund_no, recname, rephone, deladdress);
+		
+		System.out.println("deliveryChange controller 2 fund_no : " + fund_no + " recname : " + recname + " rephone : " + rephone + " deladdress : " + deladdress);
+		
+		ra.addAttribute("fund_no", fund_no);
+		
+		return "redirect:myfundingDetail.fl";
+	}
+	
+	// changeOption 옵션 변경
+	@RequestMapping(value = "changeOption.fl")
+	public String changeOption(RedirectAttributes ra, HttpSession session, HttpServletRequest request) {		
+		int fund_no = Integer.parseInt(request.getParameter("fund_no"));
 		int fundcount = Integer.parseInt(request.getParameter("fundcount"));
 		
-		System.out.println("changeOption controller 1 fund_no : " + fund_no + " fundcount : " + fundcount);
-		
 		int result = fundListService.updateOption(fund_no, fundcount);
-		
-		System.out.println("changeOption controller 2 fund_no : " + fund_no + " fundcount : " + fundcount);
-		
-		/*Myfunding myfunding = fundListService.selectMyfundingDetail(fund_no);
-		
-		System.out.println("changeOption controller 3 fund_no : " + fund_no);*/
 		
 		ra.addAttribute("fund_no", fund_no);
 		

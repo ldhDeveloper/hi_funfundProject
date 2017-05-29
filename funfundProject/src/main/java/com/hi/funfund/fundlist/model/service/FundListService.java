@@ -27,4 +27,6 @@ public interface FundListService {
 
 	int updateOption(int fund_no, int fundcount);
 
+	int updateDelivery(int fund_no, String recname, String rephone, String deladdress);
+
 }

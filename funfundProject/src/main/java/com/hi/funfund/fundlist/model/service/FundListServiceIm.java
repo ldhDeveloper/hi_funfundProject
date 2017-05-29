@@ -71,8 +71,13 @@ public class FundListServiceIm implements FundListService {
 	// 옵션 변경
 	@Override
 	public int updateOption(int fund_no, int fundcount) {
-		System.out.println("changeOption service fund_no : " + fund_no + " fundcount : " + fundcount);
 		return fundListDao.updateOption(fund_no, fundcount);
+	}
+
+	@Override
+	public int updateDelivery(int fund_no, String recname, String rephone, String deladdress) {
+		System.out.println("updateDelivery service fund_no : " + fund_no + " recname : " + recname + " rephone : " + rephone + " deladdress : " + deladdress);
+		return fundListDao.updateDelivery(fund_no, recname, rephone, deladdress);
 	}
 
 

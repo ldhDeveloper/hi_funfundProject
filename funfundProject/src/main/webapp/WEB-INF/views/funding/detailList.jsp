@@ -470,7 +470,8 @@ button {
 
 	<script>
    $(function(){
-	   for(var i=0; i<${fn:length(mList)}; i++){
+	   var mlength = ${mList};
+	   for(var i=0; i<mlength.length; i++){
 	   $('.makerbox').hover(function() {
 		   var regex = /[^0-9]/g;
 		   var result=$(this).find($('.current')).html().replace(regex,'');
