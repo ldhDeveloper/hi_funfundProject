@@ -79,4 +79,10 @@
 			where fund_no = #{fund_no} 
 		]]>
 	</update>
+	
+	<update id="updateOption" parameterType="HashMap">
+		<![CDATA[
+			update fundlist set fundcount=#{fundcount} where fund_no=#{fund_no}
+		]]>
+	</update>
 </mapper>

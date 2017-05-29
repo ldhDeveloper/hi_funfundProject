@@ -236,21 +236,40 @@ public ModelAndView selectList(ModelAndView model){
 	// joinCancle.fl 참여 취소
 	
 	@RequestMapping(value = "joinCancle.fl", method = RequestMethod.POST)
-	public String joinCancle(RedirectAttributes ra, HttpSession session, HttpServletRequest request) {
-		System.out.println("오니?");
-		
+	public String joinCancle(RedirectAttributes ra, HttpSession session, HttpServletRequest request) {		
 		int fund_no = Integer.parseInt(request.getParameter("fund_no"));
 		
-		System.out.println("delete Controller 1 fund_no : " + fund_no);
-		
 		int result = fundListService.cancleMyfundingDetail(fund_no);
-		
-		System.out.println("delete Controller 2 fund_no : " + fund_no);
 		
 		ra.addAttribute("fund_no", fund_no);
 		
 		return "redirect:myfundingDetail.fl";
 	}
+	
+	// changeOption 옵션 변경
+	@RequestMapping(value = "changeOption.fl")
+	public String changeOption(RedirectAttributes ra, HttpSession session, HttpServletRequest request) {
+		System.out.println("오니?");
+		
+		int fund_no = Integer.parseInt(request.getParameter("fund_no"));
+		int fundcount = Integer.parseInt(request.getParameter("fundcount"));
+		
+		System.out.println("changeOption controller 1 fund_no : " + fund_no + " fundcount : " + fundcount);
+		
+		int result = fundListService.updateOption(fund_no, fundcount);
+		
+		System.out.println("changeOption controller 2 fund_no : " + fund_no + " fundcount : " + fundcount);
+		
+		/*Myfunding myfunding = fundListService.selectMyfundingDetail(fund_no);
+		
+		System.out.println("changeOption controller 3 fund_no : " + fund_no);*/
+		
+		ra.addAttribute("fund_no", fund_no);
+		
+		return "redirect:myfundingDetail.fl";
+	}
+	
+	
 	
 	@RequestMapping("gopayment.fl")
 	public ModelAndView sendPayInfo(ModelAndView model){
