@@ -8,6 +8,8 @@
 <meta charset="UTF-8">
 <title>rewardList</title>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="/funfund/lib/css/sellerinfo.css">
+
 <style>
 .background {
 	background: #ff9966;
@@ -30,15 +32,42 @@ ol li {
 input[type="checkbox"] {
     display:none;
 }
-
+.btn-darkgray5 {
+    display: inline-block;
+    width: 48%;
+    height: 44px;
+    font-size: 13px;
+    line-height: 46px;
+    text-align: center;
+    color: #fff;
+    background: #50E3C2;
+    border: none;
+    box-sizing: border-box;
+}
+.input-text1 {
+    box-sizing: border-box;
+    display: inline-block;
+    width: 48%;
+    margin-bottom: 7px;
+    height: 45px;
+    line-height: 48px;
+    font-size: 13px;
+    color: #4a4a4a;
+    background: #fff;
+    border: 1px solid #e4e4e4;
+    outline: none;
+    padding-top: 1%;
+    padding-left: 4.5%;
+}
 
 </style>
 <script src="/funfund/lib/js/jquery-3.2.1.min.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
 	$(function() {
 		var plustotal = 0;
 		var orderlist = new Array();
-		
+		var ordercount = new Array();
 		$(".checked").hide();
 		
 		
@@ -95,7 +124,7 @@ input[type="checkbox"] {
 			var length = $('input:checkbox[name="choice"]:checked').length;
 			console.log("length : " + length);
 			var arr = new Array(length);
-			var ordercount = new Array(length);
+			ordercount = new Array(length);
 			var i = 0;
 			$("#show-area").html("<tr><td>&nbsp</td></tr>");
 			
@@ -118,7 +147,7 @@ input[type="checkbox"] {
 			var length = $('input:checkbox[name="choice"]:checked').length;
 			console.log("length : " + length);
 			var arr = new Array(length);
-			var ordercount = new Array(length);
+			ordercount = new Array(length);
 			var i = 0;
 			$("#show-area").html("<tr><td>&nbsp</td></tr>");
 			
@@ -140,7 +169,7 @@ input[type="checkbox"] {
 			var length = $('input:checkbox[name="choice"]:checked').length;
 			console.log("length : " + length);
 			var arr = new Array(length);
-			var ordercount = new Array(length);
+			ordercount = new Array(length);
 			var i = 0;
 			$("#show-area").html("<tr><td>&nbsp</td></tr>");
 			
@@ -162,7 +191,7 @@ input[type="checkbox"] {
 			var length = $('input:checkbox[name="choice"]:checked').length;
 			console.log("length : " + length);
 			var arr = new Array(length);
-			var ordercount = new Array(length);
+			ordercount = new Array(length);
 			var i = 0;
 			$("#show-area").html("<tr><td>&nbsp</td></tr>");
 			
@@ -226,14 +255,54 @@ input[type="checkbox"] {
 		}
 		
 		$("#gotopay").click(function(){
-			gotopay(orderlist);
+			gotopay(orderlist, ordercount);
 		});
 	});
+	function sample6_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var fullAddr = ''; // 최종 주소 변수
+                var extraAddr = ''; // 조합형 주소 변수
+
+                // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    fullAddr = data.roadAddress;
+
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    fullAddr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+                if(data.userSelectedType === 'R'){
+                    //법정동명이 있을 경우 추가한다.
+                    if(data.bname !== ''){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있을 경우 추가한다.
+                    if(data.buildingName !== ''){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                    fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('sample6_postcode').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('sample6_address').value = fullAddr;
+
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById('sample6_address2').focus();
+            }
+        }).open();
+    }
 </script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/menubar.jsp" flush="true" />
-
 	<div class="row background">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<a style="text-align: left; font-size: 11pt"
@@ -305,6 +374,35 @@ input[type="checkbox"] {
 	</div>
 	<br>
 	<hr>
+	<div id="waccountWrap">	    	
+	        			<div class="waccount-wrap">
+	     					<div id="waccountContainer">
+					<form id="sellerChange" action="changSeller.ao" method="post" enctype="multipart/form-data" onsubmit="return saveSeller();">
+		                    	<h5>수신자 성명</h5>
+		       					
+		       					<div class="input-area">
+		       						<input type="text" class="input-text" id="rename" value=""  placeholder="이름" />
+		       					</div>
+		       							       					
+		       					<h5>수신자 휴대폰 번호</h5>	
+		       						<input type="text" class="input-text" id="rephone" name="phone" value=""  placeholder="휴대폰" />                                                            
+	                           	
+	                           	
+								<h5>수신자 주소</h5>
+		       					<div class="input-area">
+		       						<input type="text" class="input-text1" id="sample6_postcode" name="address1" placeholder="우편번호" readonly/>	&nbsp;&nbsp;
+		       						<input type="button" class="btn-darkgray5" onclick="sample6_execDaumPostcode();" value="우편번호 검색">
+			              			<input type="text" id="sample6_address" name="address2" class="input-text" placeholder="도로명주소" readonly/> 
+			              			<input type="text" id="sample6_address2" name="address3" class="input-text" placeholder="상세주소" />
+                                	<p id="addrError" class="error-text">주소를 검색하세요.</p>
+                                	<br>
+		       					</div>
+		       			</form>
+		       			</div>
+		     	</div>
+		 </div>
+	<br>
+	<hr>
 	<div class="row">
 		<div class="container">
 			<div class="col-lg-1"></div>
@@ -370,9 +468,14 @@ input[type="checkbox"] {
 		<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
 		<script>
 			
-				function gotopay(orderlist){
-					
-					console.log("orderlist : " + orderlist);
+				function gotopay(orderlist, ordercount){
+					var rename = $("#rename").val();
+					var rephone = $("#rephone").val();
+					var readdress = $("input[name=address2]").val() + " " + $("input[name=address3]").val();
+					var inputaddress = $("input[name=address1]").val() + "@" + $("input[name=address2]").val() + "@" + $("input[name=address3]").val();
+					var postnum = $("input[name=address1]").val();
+					console.log("orderlista : " + orderlist);
+					console.log("ordercounta : " + ordercount);
 					
 					IMP.init('imp47847979'); 
 					
@@ -380,13 +483,13 @@ input[type="checkbox"] {
 					    pg : 'uplus', // version 1.1.0부터 지원.
 					    pay_method : 'card',
 					    merchant_uid : 'merchant_' + new Date().getTime(),
-					    name : '주문명:결제테스트',
+					    name : '주문명: <c:out value="${item.pname}"/>',
 					    amount : 100,
-					    buyer_email : 'iamport@siot.do',
-					    buyer_name : '구매자이름',
-					    buyer_tel : '010-1234-5678',
-					    buyer_addr : '서울특별시 강남구 삼성동',
-					    buyer_postcode : '123-456',
+					    buyer_email : '<c:out value="${sessionScope.account.email}"/>',
+					    buyer_name : rename,
+					    buyer_tel : rephone,
+					    buyer_addr : readdress,
+					    buyer_postcode : readdress,
 					    m_redirect_url : 'http://127.0.0.1:9998/funfund/reward.fm?pro_no='
 					}, function(rsp) {
 					    if ( rsp.success ) {
@@ -395,6 +498,17 @@ input[type="checkbox"] {
 					        msg += '상점 거래ID : ' + rsp.merchant_uid;
 					        msg += '결제 금액 : ' + rsp.paid_amount;
 					        msg += '카드 승인번호 : ' + rsp.apply_num;
+					        $.ajax({
+					        	url : "gopayment.fl",
+					        	type : "post",
+					        	data : {"orderlist" : orderlist, "ordercount" : ordercount, "rename" : rename, "rephone" : rephone, "address" : inputaddress, "cardnum" : rsp.apply_num},
+					        	success : function(data){
+					        		alert("결제완료!");
+					        	},
+					        	error : function(error){
+					        		alert("결제실패!!!");
+					        	}
+					        })
 					    } else {
 					        var msg = '결제에 실패하였습니다.';
 					        msg += '에러내용 : ' + rsp.error_msg;

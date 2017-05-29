@@ -1,5 +1,7 @@
 package com.hi.funfund.fundlist.model.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.hi.funfund.fundlist.model.vo.FundList;
@@ -29,4 +31,6 @@ public interface FundListService {
 
 	int updateDelivery(int fund_no, String recname, String rephone, String deladdress);
 
+	int insertFundingList(ArrayList<HashMap<String, String>> alist);
+	
 }

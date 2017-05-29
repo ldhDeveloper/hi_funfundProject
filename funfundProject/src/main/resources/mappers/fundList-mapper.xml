@@ -91,4 +91,9 @@
 			update fundlist set recname=#{recname}, rephone=#{rephone}, deladdress=#{deladdress} where fund_no=#{fund_no}
 		]]>
 	</update>
+	<insert id="insertFundingList" parameterType="HashMap">
+		<![CDATA[
+			insert into fundlist values(seq_fund_no.nextval, #{ano}, #{mno}, #{deladdress}, #{rephone}, '배송전', null, #{recname}, sysdate, '결제완료', 0, #{fundcount}, '신용카드', #{evidence}) 
+		]]>
+	</insert>
 </mapper>
