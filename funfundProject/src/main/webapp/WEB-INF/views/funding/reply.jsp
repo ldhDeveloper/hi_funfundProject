@@ -413,7 +413,7 @@ textarea {
 							<textarea class="form-control" id="updatereply${status.index }" style="display:none;"></textarea>
 							<span class="cmtda">${ask.ask_date }</span>
 							<c:if test="${sessionScope.account.ano eq ask.id_no }">
-							 <a id="uprepnum${status.index }" style="cursor:pointer;">수정</a><a href="delete.ask">삭제</a>
+							 <a id="uprepnum${status.index }" style="cursor:pointer;">수정</a><a href="delete.ask?ask_no=${ask.ask_no}">삭제</a>
 							</c:if>
 							
 							<a id="recmtbutton">답글달기</a>
