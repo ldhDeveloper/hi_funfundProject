@@ -40,4 +40,9 @@ public class ItemAskDao {
 		return result;
 	}
 
+	public int redelete(int ask_no) {
+		int result=sqlSession.update(nameSpace+"redeleteAsk", ask_no);
+		return result;
+	}
+
 }
