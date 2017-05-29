@@ -331,8 +331,7 @@ textarea {
 		$('#recmtbutton').click(function() {
 			$('.comment-area2').toggle();
 		});
-	
-		
+
 		$("a[id^=uprepnum]").click(function(){
 			var repId = $(this).attr("id");
 			var repnum = repId.substr(repId.length - 1, 1);
@@ -342,6 +341,7 @@ textarea {
 			$('#updatereply' + repnum).text(txt);
 			$('#updatereply' + repnum).show();	
 		});
+
 	});
 	
 	/*  function update(){
