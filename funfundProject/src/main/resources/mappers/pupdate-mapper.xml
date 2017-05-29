@@ -16,5 +16,8 @@
 		from pupdate
 		where pro_no=#{pro_no}
 	</select>
+	<insert id="insertNews" parameterType="pupdate">
+		insert into pupdate values(seq_upno.nextval, #{pro_no}, #{uptitle}, #{upname}, sysdate)
+	</insert>
 
 </mapper>

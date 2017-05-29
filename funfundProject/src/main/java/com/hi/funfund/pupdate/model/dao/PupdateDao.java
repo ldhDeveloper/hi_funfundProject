@@ -21,8 +21,8 @@ public class PupdateDao {
 	}
 
 	public int insert(Pupdate Pupdate) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = sqlSession.insert(nameSpace + "insertNews", Pupdate);
+		return result;
 	}
 
 	public int delete(int upno) {
