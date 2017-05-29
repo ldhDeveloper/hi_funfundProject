@@ -92,10 +92,11 @@ public class ItemAskController {
 	}
 
 	@RequestMapping("delete.ask")
-	public String delete(int ask_no) {
+	public String delete(int ask_no, RedirectAttributes redirect, HttpServletRequest request) {
+		String pro_no=request.getParameter("pro_no");
 		int result = itemAskService.delete(ask_no);
-
-		return null;
+		redirect.addAttribute("pro_no", pro_no);
+		return "redirect:/reply.ask";
 	}
 
 	@RequestMapping("reply.ask")
