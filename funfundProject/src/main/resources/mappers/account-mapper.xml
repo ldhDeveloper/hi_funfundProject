@@ -92,8 +92,8 @@
 	
 	<insert id="insertThirdParty" parameterType="account">
 	<![CDATA[
-			INSERT INTO	ACCOUNT (ano, id, email, idtype, idtoken, seller, outyn, nickname)
-			VALUES(seq_ano.nextval, #{id}, #{email}, '일반회원', #{idtoken},'N', 'N', #{nickname})	
+			INSERT INTO	ACCOUNT (ano, id, email, pimage, idtype, idtoken, seller, outyn, nickname)
+			VALUES(seq_ano.nextval, #{id}, #{email}, #{pimage}, '일반회원', #{idtoken},'N', 'N', #{nickname})	
 		]]>
 		<selectKey keyProperty="ano" resultType="Integer" order="AFTER">
 			select seq_ano.currval from dual

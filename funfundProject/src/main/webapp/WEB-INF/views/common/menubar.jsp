@@ -123,11 +123,12 @@
     	   
     	   nickname = profile.getName();
     	   email = profile.getEmail();
+    	   pimage = profile.getImageUrl();
     	   /* alert(auth2.currentUser.getAuthResponse().id_token); */
     	   idtoken = auth2.currentUser.get().getId();
     	   access_token =  "없음";
  			
-    	   loginWithThirdParty(email, nickname, idtoken, access_token);
+    	   loginWithThirdParty(email, nickname, idtoken, access_token, pimage);
     	  });
     
     
@@ -143,9 +144,10 @@
 <script type='text/javascript'>
 //common function for sns user
 
-function loginWithThirdParty(email, name, idtoken, access_token ){
+function loginWithThirdParty(email, name, idtoken, access_token, pimage ){
 	
-location.href="loginWithApi.ao?email="+email +"&nickname="+ name + "&idtoken="+ idtoken +"&access_token="+access_token;
+location.href="loginWithApi.ao?email="+email +"&nickname="+ name + "&idtoken="+ idtoken +"&access_token="+access_token
+		"$pimage="+pimage;
 } 
  var nickname;
  var email;
@@ -165,9 +167,10 @@ location.href="loginWithApi.ao?email="+email +"&nickname="+ name + "&idtoken="+ 
     			success: function(res){
     			nickname = res.properties.nickname;
     			email = res.kaccount_email;
-    			
+    			pimage= res.properties.profile_image;
+    			alert(JSON.stringify(res));
     			idtoken = res.id;
-    			loginWithThirdParty(email, nickname, idtoken, access_token);  
+    			loginWithThirdParty(email, nickname, idtoken, access_token, pimage);  
     			},
     			fail: function(error){
     				alert(JSON.stringify(error));

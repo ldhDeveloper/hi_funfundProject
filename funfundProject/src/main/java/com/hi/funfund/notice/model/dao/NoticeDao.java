@@ -19,6 +19,7 @@ public class NoticeDao {
 		
 		List<Notice> nList = sqlSession.selectList(nameSpace+"selectList", map);
 			
+		System.out.println(nList);
 		return nList;
 	}
 	public List<Notice> searchTitle(int bno, int page, String ntitle) {

@@ -21,8 +21,8 @@ public class NoticeController {
 	
 	
 	@RequestMapping(value="nList.no",  method=RequestMethod.GET)
-	public ModelAndView notice(@RequestParam("sbno") String sbno, @RequestParam("spage") String spage, 
-						ModelAndView model){
+	public ModelAndView notice(@RequestParam("sbno") String sbno, @RequestParam("spage") String spage,
+								 ModelAndView model){
 		HashMap map = new HashMap();
 		int bno =Integer.valueOf(sbno);
 		int page =Integer.valueOf(spage);
@@ -77,11 +77,13 @@ public class NoticeController {
 		map.put("upbno", nno);
 		int replyCount = noticeService.getReplyCount(nno);
 		List<Notice> nList = noticeService.selectDetailList(map);
+		Notice n = noticeService.selectOne(nno);
 		model.addObject("snno", snno);
 		model.addObject("sbno", sbno);
 		model.addObject("spage", spage);
 		model.addObject("nList", nList );
 		model.addObject("replyCount", replyCount );
+		model.addObject("n", n);
 		model.setViewName("notice/nDetail");
 		return model;
 	}
