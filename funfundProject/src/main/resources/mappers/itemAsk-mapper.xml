@@ -52,7 +52,7 @@
 	
 	<update id="updateAsk" parameterType="HashMap">
 	   update itemask
-	   set acontent = #{acontent}
+	   set ask_content = #{acontent}
 	   where ask_no = #{ask_no}
 	</update>
 	
