@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html >
 <html>
 <head>
@@ -138,11 +139,10 @@ button {
 	margin: 10px;
 }
 
-#viewon {
-	position: fixed;
-	right: 5px;
-	z-index: 100;
-	top: 600px;
+.img {
+	display: inline-block;
+	width: 40px;
+	height: 40px;
 }
 
 .backpink {
@@ -187,6 +187,10 @@ button {
 	padding-top: 10px;
 }
 
+.commentbox{
+  margin-bottom:10px;
+  position:relative;
+}
 </style>
 <script src="/funfund/lib/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
@@ -215,15 +219,12 @@ button {
 							'border-color', 'transparent');
 				});
 
-		$('.makerbox').hover(function() {
-			$(this).css('background-color', '#c6ebd9');
-		}, function() {
-			$(this).css('background-color', 'white');
-		});
-
 		var co = '<c:out value="${item.pcontent}"/>';
 		$("#content").html(co);
 
+		$(".pay").click(function() {
+			location.href = "reward.fm?pro_no=${item.pro_no}";
+		});
 	});
 </script>
 </head>
@@ -244,8 +245,7 @@ button {
 	<div align="center">
 		<ul class="w3-border-bottom w3-border-gray">
 			<li class="active"><a href="detail.it?pro_no=${param.pro_no }">스토리</a></li>
-			<li><a href="reply.ask?pro_no=${param.pro_no }">댓글(${item.repcount }
-					)</a></li>
+			<li><a href="reply.ask?pro_no=${param.pro_no }">댓글(${fn:length(aList) })</a></li>
 			<li><a href="news.up?pro_no=${item.pro_no}">새소식(
 					${item.upcount })</a></li>
 		</ul>
@@ -269,7 +269,7 @@ button {
 					<div class="datanum">#${update.upno }</div> <span
 						class="datatitle">${update.uptitle}</span> <span class="ddate">
 						<fmt:formatDate value="${update.uploaddate}" var="date"
-							pattern="yyyyMMdd" /> ${date }
+							pattern="yyyy-MM-dd" /> ${date }
 					</span>
 					<div class="content">${update.upname }</div>
 					<hr>
@@ -320,10 +320,17 @@ button {
 				style="font-size: 10pt; text-align: left; padding-top: 20px; padding-bottom: 5px; margin-left: 20px;">메이커
 				정보</p>
 			<div class="makerbox2">
-				<div class="makerinfo">사진</div>
+				<div class="makerinfo img">
+					<c:if test="${!empty item.pimage }">
+						<img class="img" src="/funfund/images/myinfo/${item.pimage }">
+					</c:if>
+					<c:if test="${empty item.pimage }">
+						<img class="img" src="/funfund/images/myinfo/dimages.png">
+					</c:if>
+				</div>
 				<div class="makerinfo">${item.cname }</div>
 				<div>
-					<p>문의처</p>
+					<div class="makerinfo">문의처</div>
 					<div class="makerinfo">${item.cs_email}</div>
 					<div class="makerinfo">${item.cs_phone}</div>
 				</div>
@@ -338,7 +345,10 @@ button {
 				<c:if test="${!empty bestList}">
 					<c:forEach var="bestList" items="${bestList }">
 						<div class="supportinfo">
-							<p>${bestList.pimage }</p>
+							<p>
+								<img src="/funfund/images/myinfo/${bestList.pimage }"
+									class="img">
+							</p>
 							<p>${bestList.nickname }</p>
 							<p>${bestList.mcost }원펀딩</p>
 						</div>
@@ -353,10 +363,10 @@ button {
 		<div class="">
 			<p
 				style="font-size: 10pt; text-align: left; padding-bottom: 5px; margin-left: 20px;">리워드선택</p>
-			<div class=""></div>
-			<c:forEach var="reward" items="${mList}">
-				<ul class="makerbox">
-					<li style="font-size: 15pt;"><strong>${reward.mcost}원</strong></li>
+			<c:forEach var="reward" items="${mList}" varStatus="status">
+				<ul class="makerbox pay">
+					<li style="font-size: 15pt;"><strong><fmt:formatNumber
+								var="mcost" value="${reward.mcost}" /> ${mcost}원</strong></li>
 					<li class="makerinfo">작성자이름
 						<dl>${item.pname}</dl>
 					</li>
@@ -375,10 +385,11 @@ button {
 					<li class="makerinfo">제한 수량</li>
 					<dl>${reward.mcount }개
 					</dl>
-					<li class="makerinfo">현재 <c:set var="result"
-							value="${reward.mcount - item.fundcount }" /> <c:if
-							test="${result > 0}">
-					${reward.mcount - item.fundcount  }</c:if> <c:if test="${result <= 0 }">
+					<li class="makerinfo current">현재 
+					<c:set var="result" value="${reward.remain}" /> 
+					<c:if test="${result > 0}">
+					${result }</c:if> 
+					<c:if test="${result <= 0 }">
 					0
 					</c:if>개 남음
 					</li>
@@ -386,9 +397,28 @@ button {
 			</c:forEach>
 		</div>
 		<div>
-			<button class="btn-fund">펀딩하기</button>
+			<button class="btn-fund pay">펀딩하기</button>
 		</div>
 	</div>
+
+<script>
+   $(function(){
+	   
+	   for(var i=0; i<${fn:length(mList)}; i++){
+	   $('.makerbox').hover(function() {
+		   var regex = /[^0-9]/g;
+		   var result=$(this).find($('.current')).html().replace(regex,'');
+			  if(result> 0){
+				 $(this).css('background-color', '#c6ebd9');
+			  }else{
+				 $(this).css('background-color', '#d9d9d9');
+			  }
+			}, function() {
+				$(this).css('background-color', 'white');
+			});
+	   }
+   });
+</script>
 
 
 </body>

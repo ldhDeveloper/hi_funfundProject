@@ -12,6 +12,7 @@
 <link href="/funfund/lib/css/bootstrap.min.css" rel="stylesheet">
 <link href="/funfund/lib/font-awesome/font-awesome/css/font-awesome.css"
 	rel="stylesheet">
+<link href="/funfund/lib/css/common/font.css" rel="stylesheet">
 <style>
 .background {
 	background-color: black;
@@ -173,6 +174,9 @@ button {
 	width: 40px;
 	height: 40px;
 }
+body{
+font-family: 'Hanna' !important;
+}
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -281,7 +285,7 @@ button {
 	<div align="center">
 		<ul class="w3-border-bottom w3-border-gray">
 			<li class="active"><a href="detail.it?pro_no=${item.pro_no }">스토리</a></li>
-			<li><a href="reply.ask?pro_no=${item.pro_no }">댓글(${item.repcount})</a></li>
+			<li><a href="reply.ask?pro_no=${item.pro_no }">댓글(${fn:length(aList) })</a></li>
 			<li><a href="news.up?pro_no=${item.pro_no}">새소식(
 					${item.upcount})</a></li>
 		</ul>
@@ -333,7 +337,7 @@ button {
 		</div>
 		<div style="text-align: center;">
 			<button class="btn btn-default" id="btn-like">
-				<i class="fa fa-heart-o" aria-hidden="true"></i><i>(${item.likecount})</i>
+				<i class="fa fa-heart-o" aria-hidden="true"></i>
 			</button>
 			<button class="btn btn-default backpink" id="btn-nonlike"
 				style="display: none;">
@@ -470,8 +474,8 @@ button {
 
 	<script>
    $(function(){
-	   var mlength = ${mList};
-	   for(var i=0; i<mlength.length; i++){
+	   
+	   for(var i=0; i<${fn:length(mList)}; i++){
 	   $('.makerbox').hover(function() {
 		   var regex = /[^0-9]/g;
 		   var result=$(this).find($('.current')).html().replace(regex,'');

@@ -112,9 +112,9 @@ button {
 }
 
 .align {
- display: inline-block;
-	margin: -5px;
+   display: inline-block;
 	padding-top: 20px;
+	margin-left:-5px;
 }
 
 .isize {
@@ -318,7 +318,7 @@ button {
 	<jsp:include page="/WEB-INF/views/common/menubar.jsp" flush="true" />
 	<div class="titlebar" align="center">
 		<div class="col-lg-2 col-md-0 col-sm-0 col-xs-0"></div>
-		<div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+		<div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 contatiner">
 		
 				<!-- 슬라이드 -->
 				<div id="carousel-example-generic" class="carousel slide"
@@ -345,11 +345,14 @@ button {
 				</div>
 
 				<!-- 오른쪽 이미지(2개) -->
-				<div class="align">
+				<div class="align" style="position:relative">
 					<img src="/funfund/images/funding/thumbnail/pr4.jpg"
-						class="img-responsive isize"> <img
+						class="img-responsive isize">
+						<div class="text" style="position:absolute; top:40px;left:50px;"><h5>글 내용</h5></div> 
+					<img
 						src="/funfund/images/funding/thumbnail/pr4.jpg"
 						class="img-responsive isize">
+						<div class="text" style="position:absolute; top:200px;left:50px;"><h5>글 내용2</h5></div> 
 				</div>
 			
 		</div>

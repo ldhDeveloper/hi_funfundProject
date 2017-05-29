@@ -147,7 +147,7 @@
 						<span class="datatitle"
 							style="font-size: 20px; margin-bottom: 10px;">${update.uptitle}</span>
 						<span class="ddate" style="font-size: 12px"> <fmt:formatDate
-								value="${update.uploaddate}" var="date" pattern="yyyyMMdd" />
+								value="${update.uploaddate}" var="date" pattern="yyyy-MM-dd" />
 							${date }
 						</span>
 						<div class="content">${update.upname }</div>
