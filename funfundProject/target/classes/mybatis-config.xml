@@ -2,17 +2,24 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"   
                                "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+
 	<typeAliases>
 		<typeAlias type="com.hi.funfund.account.model.vo.Account" alias="account" />
 		<typeAlias type="com.hi.funfund.account.model.vo.Party" alias="party" />
 		<typeAlias type="com.hi.funfund.attachment.model.vo.Attachment" alias="attachment" />
 		<typeAlias type="com.hi.funfund.fundlist.model.vo.FundList" alias="fundList" />
 		<typeAlias type="com.hi.funfund.fundmenu.model.vo.FundMenu" alias="fundMenu" />
+		<typeAlias type="com.hi.funfund.fundmenu.model.vo.FundMenuFundList" alias="fundMenufundList" />
 		<typeAlias type="com.hi.funfund.item.model.vo.Item" alias="item" />
+		<typeAlias type="com.hi.funfund.item.model.vo.Itemfund" alias="itemfund" />
 		<typeAlias type="com.hi.funfund.itemask.model.vo.ItemAsk" alias="itemAsk" />
+		<typeAlias type="com.hi.funfund.itemask.model.vo.ItemAskAccount" alias="itemAskAccount" />
 		<typeAlias type="com.hi.funfund.myitem.model.vo.MyItem" alias="myItem" />
 		<typeAlias type="com.hi.funfund.notice.model.vo.Notice" alias="notice" />
-		<typeAlias type="com.hi.funfund.pupdate.model.vo.Pupdate" alias="pUpdate" />
+		<typeAlias type="com.hi.funfund.pupdate.model.vo.Pupdate" alias="pupdate" />
+		<typeAlias type="com.hi.funfund.fundlist.model.vo.Myfunding" alias="myfunding" />
+		<typeAlias type="com.hi.funfund.fundlist.model.vo.Mysponsor" alias="mysponsor" />
+		<typeAlias type="com.hi.funfund.fundlist.model.vo.UpdateSponsor" alias="updatesponsor" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/account-mapper.xml" />
@@ -24,11 +31,9 @@
 		<mapper resource="mappers/itemAsk-mapper.xml" />
 		<mapper resource="mappers/myItem-mapper.xml" />
 		<mapper resource="mappers/notice-mapper.xml" />
-		<mapper resource="mappers/pUpdate-mapper.xml" />
-		
-		
+		<mapper resource="mappers/pupdate-mapper.xml" />
 	</mappers>
-
+	
 
 
 </configuration>

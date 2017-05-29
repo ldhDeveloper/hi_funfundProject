@@ -294,11 +294,27 @@ public ModelAndView selectList(ModelAndView model){
 	
 	
 	@RequestMapping("gopayment.fl")
-	public ModelAndView sendPayInfo(ModelAndView model){
+	public @ResponseBody int sendPayInfo(HttpSession session, HttpServletRequest request, @RequestParam(value="orderlist[]") List<Integer> orderlist
+			, @RequestParam(value="ordercount[]") List<Integer> ordercount, @RequestParam String rename, @RequestParam String rephone,
+			@RequestParam String address, @RequestParam String cardnum){
+		ArrayList<HashMap<String, String>> alist = new ArrayList<HashMap<String, String>>();
+		session = request.getSession(false);
+		Account account = (Account) session.getAttribute("account");
+		int ano = account.getAno();
+		for(int i = 0; i < orderlist.size(); i++){
+			HashMap<String, String> hmap = new HashMap<String, String>();
+			hmap.put("mno", Integer.toString(orderlist.get(i)));
+			hmap.put("fundcount", Integer.toString(ordercount.get(i)));
+			hmap.put("recname", rename);
+			hmap.put("rephone", rephone);
+			hmap.put("deladdress", address);
+			hmap.put("evidence", cardnum);
+			hmap.put("ano", Integer.toString(ano));
+			alist.add(hmap);
+		}
+		int result = fundListService.insertFundingList(alist);
 		
-		model.setViewName("payment/paymentform");
-		
-		return model;
+		return result;
 	}
 	
 	@RequestMapping("payment.fl")

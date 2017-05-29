@@ -1,5 +1,6 @@
 package com.hi.funfund.fundlist.model.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -79,6 +80,14 @@ public class FundListDao {
 		System.out.println("updateDelivery Dao 1-2 rephone : " + rephone + " deladdress : " + deladdress);
 		int result = sqlSession.update("updateDelivery", hmap);
 		System.out.println("updateDelivery Dao 2 result : " + result + " hmap : " + hmap);
+		return result;
+	}
+	public int insertFundingList(ArrayList<HashMap<String, String>> alist) {
+		//System.out.println("alistData : " + alist);
+		int result = 0;
+		for(HashMap<String, String> hmap : alist){
+			result += sqlSession.insert("insertFundingList", hmap);
+		}
 		return result;
 	}
 }

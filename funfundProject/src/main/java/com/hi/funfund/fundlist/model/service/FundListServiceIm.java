@@ -1,5 +1,7 @@
 package com.hi.funfund.fundlist.model.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,6 +80,11 @@ public class FundListServiceIm implements FundListService {
 	public int updateDelivery(int fund_no, String recname, String rephone, String deladdress) {
 		System.out.println("updateDelivery service fund_no : " + fund_no + " recname : " + recname + " rephone : " + rephone + " deladdress : " + deladdress);
 		return fundListDao.updateDelivery(fund_no, recname, rephone, deladdress);
+	}
+
+	@Override
+	public int insertFundingList(ArrayList<HashMap<String, String>> alist) {
+		return fundListDao.insertFundingList(alist);
 	}
 
 
