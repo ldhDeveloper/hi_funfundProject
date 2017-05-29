@@ -159,16 +159,17 @@ button {
 	border-bottom: 1px solid #e4;
 	display: block;
 	margin-bottom: 20px;
+	text-align:left;
 }
 
 .datanum {
 	display: block;
-	margin-bottom: 10px;
 	font-size: 20px;
 }
 
 .datatitle {
 	display: inline-block;
+	margin-bottom: 20px;
 	font-size: 20px;
 }
 
@@ -185,6 +186,7 @@ button {
 #box2 {
 	padding-top: 10px;
 }
+
 </style>
 <script src="/funfund/lib/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
@@ -264,7 +266,7 @@ button {
 		<c:if test="${!empty pList }">
 			<c:forEach var="update" items="${pList}">
 				<div class="block">
-					<span class="datanum">#${update.upno }</span> <span
+					<div class="datanum">#${update.upno }</div> <span
 						class="datatitle">${update.uptitle}</span> <span class="ddate">
 						<fmt:formatDate value="${update.uploaddate}" var="date"
 							pattern="yyyyMMdd" /> ${date }
