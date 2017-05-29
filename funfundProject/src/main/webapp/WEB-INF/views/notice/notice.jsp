@@ -11,7 +11,6 @@
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.4.js"></script> <!-- 아임포트 본인 인증 -->
 <title>Insert title here</title>
 <script>
-
 $(function(){
 	switch('${sbno}'){
 	case '1' :$('#no').css({"background": "#00CCA3", "border-color" : "#00CCA3", "color": "#fff" });     
@@ -20,11 +19,26 @@ $(function(){
 		break;
 	case '3' :$('#qna').css({"background": "#00CCA3", "border-color" : "#00CCA3", "color": "#fff" });
 		break;
-	
 	}
-		
-
 });
+
+</script>
+<!-- 게시판넘기는버튼  -->
+<script>
+
+function category(x){
+
+switch(x){
+
+case 1 :  location.href="nList.no?sbno=1&spage=1"; break;
+case 2 :  location.href="nList.no?sbno=2&spage=1"; break;
+case 3 :  location.href="nList.no?sbno=3&spage=1"; break;
+}
+
+} 
+
+
+
 </script>
 <style>
 .totalN{
@@ -137,9 +151,9 @@ button {
 		<div class="col-lg-12 col-md-12 col-xs-12">
 			<div class="nlist">
 				<p class="totalN">총 ${listCount} 건수 </p>
-					<button onclick="categoty(1);" id="no">공지사항</button>
-	 				<button onclick="categoty(2);" id="fnq">FnQ</button>
-	 				<button onclick="categoty(3);" id="qna">QnA</button>
+					<button onclick="category(1);" id="no">공지사항</button>
+	 				<button onclick="category(2);" id="fnq">FnQ</button>
+	 				<button onclick="category(3);" id="qna">QnA</button>
 					<!-- 1.여기서부터  -->
 					<hr>
 					<c:forEach var="nlist" items="${nList}">
