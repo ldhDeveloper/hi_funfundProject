@@ -37,7 +37,7 @@ input[type="checkbox"] {
 <script>
 	$(function() {
 		var plustotal = 0;
-		
+		var orderlist = new Array();
 		
 		$(".checked").hide();
 		
@@ -109,7 +109,7 @@ input[type="checkbox"] {
 				}
 				
 			 });
-			 
+			 orderlist = arr;
 			 showlist(arr, ordercount, plustotal);
 			 
 		});
@@ -132,6 +132,7 @@ input[type="checkbox"] {
 				}
 				
 			 });
+			 orderlist = arr;
 			 showlist(arr, ordercount, plustotal);
 		});
 		
@@ -153,6 +154,7 @@ input[type="checkbox"] {
 				}
 				
 			 });
+			 orderlist = arr;
 			 showlist(arr, ordercount, plustotal);
 		});
 		
@@ -174,6 +176,7 @@ input[type="checkbox"] {
 				}
 				
 			 });
+			 orderlist = arr;
 			 showlist(arr, ordercount, plustotal);
 		});
 		
@@ -221,6 +224,10 @@ input[type="checkbox"] {
 			});
 			
 		}
+		
+		$("#gotopay").click(function(){
+			gotopay(orderlist);
+		});
 	});
 </script>
 </head>
@@ -358,40 +365,45 @@ input[type="checkbox"] {
 		</form>
 		<div align="center">
 			<button class="btn btn-default">취소하기</button>
-			<button class="btn btn-warning" onclick="gotopay();">결제하기</button>
+			<button class="btn btn-warning" id="gotopay">결제하기</button>
 		</div>
 		<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
 		<script>
 			
-			function gotopay(){
-				IMP.init('imp47847979'); 
-				
-				IMP.request_pay({
-				    pg : 'uplus', // version 1.1.0부터 지원.
-				    pay_method : 'card',
-				    merchant_uid : 'merchant_' + new Date().getTime(),
-				    name : '주문명:결제테스트',
-				    amount : 100,
-				    buyer_email : 'iamport@siot.do',
-				    buyer_name : '구매자이름',
-				    buyer_tel : '010-1234-5678',
-				    buyer_addr : '서울특별시 강남구 삼성동',
-				    buyer_postcode : '123-456',
-				    m_redirect_url : 'http://127.0.0.1:9998/funfund/reward.fm?pro_no='
-				}, function(rsp) {
-				    if ( rsp.success ) {
-				        var msg = '결제가 완료되었습니다.';
-				        msg += '고유ID : ' + rsp.imp_uid;
-				        msg += '상점 거래ID : ' + rsp.merchant_uid;
-				        msg += '결제 금액 : ' + rsp.paid_amount;
-				        msg += '카드 승인번호 : ' + rsp.apply_num;
-				    } else {
-				        var msg = '결제에 실패하였습니다.';
-				        msg += '에러내용 : ' + rsp.error_msg;
-				    }
-				    alert(msg);
-				});
-			}
+				function gotopay(orderlist){
+					
+					console.log("orderlist : " + orderlist);
+					
+					IMP.init('imp47847979'); 
+					
+					IMP.request_pay({
+					    pg : 'uplus', // version 1.1.0부터 지원.
+					    pay_method : 'card',
+					    merchant_uid : 'merchant_' + new Date().getTime(),
+					    name : '주문명:결제테스트',
+					    amount : 100,
+					    buyer_email : 'iamport@siot.do',
+					    buyer_name : '구매자이름',
+					    buyer_tel : '010-1234-5678',
+					    buyer_addr : '서울특별시 강남구 삼성동',
+					    buyer_postcode : '123-456',
+					    m_redirect_url : 'http://127.0.0.1:9998/funfund/reward.fm?pro_no='
+					}, function(rsp) {
+					    if ( rsp.success ) {
+					        var msg = '결제가 완료되었습니다.';
+					        msg += '고유ID : ' + rsp.imp_uid;
+					        msg += '상점 거래ID : ' + rsp.merchant_uid;
+					        msg += '결제 금액 : ' + rsp.paid_amount;
+					        msg += '카드 승인번호 : ' + rsp.apply_num;
+					    } else {
+					        var msg = '결제에 실패하였습니다.';
+					        msg += '에러내용 : ' + rsp.error_msg;
+					    }
+					    alert(msg);
+					});
+				}
+			
+			
 		</script>
 	</div>
 
