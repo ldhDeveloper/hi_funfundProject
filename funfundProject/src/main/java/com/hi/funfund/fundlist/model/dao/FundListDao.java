@@ -66,9 +66,19 @@ public class FundListDao {
 		HashMap<String, String> hmap = new HashMap<String, String>();
 		hmap.put("fund_no", Integer.toString(fund_no));
 		hmap.put("fundcount", Integer.toString(fundcount));
-		System.out.println("changeOption Dao 1 fund_no : " + fund_no + " fundcount : " + fundcount);
 		int result = sqlSession.update("updateOption", hmap);
-		System.out.println("changeOption Dao 2 result : " + result + " hmap : " + hmap);
+		return result;
+	}
+	public int updateDelivery(int fund_no, String recname, String rephone, String deladdress) {
+		HashMap<String, String> hmap = new HashMap<String, String>();
+		hmap.put("fund_no", Integer.toString(fund_no));
+		hmap.put("recname", recname);
+		hmap.put("rephone", rephone);
+		hmap.put("deladdress", deladdress);
+		System.out.println("updateDelivery Dao 1 fund_no : " + fund_no + " recname : " + recname);
+		System.out.println("updateDelivery Dao 1-2 rephone : " + rephone + " deladdress : " + deladdress);
+		int result = sqlSession.update("updateDelivery", hmap);
+		System.out.println("updateDelivery Dao 2 result : " + result + " hmap : " + hmap);
 		return result;
 	}
 }

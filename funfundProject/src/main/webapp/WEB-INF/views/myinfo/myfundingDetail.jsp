@@ -433,53 +433,9 @@ label {
   											
   											<p>&nbsp;&nbsp;&nbsp;${ myfunding.pname }</p>
   											<p id="fundCount">&nbsp;&nbsp;&nbsp;${ myfunding.fundcount }개 / ${ myfunding.mcost }원</p>
-  											<div id="countInput" style="display:none;"><input class="btn" style="width:7%; margin-left:10px;" id="countResult" type="number" value="${ myfunding.fundcount }"/>개/${ myfunding.mcost }원</div>
-  											<p>&nbsp;&nbsp;&nbsp;옵션 : <input class="optionBtn" id="optionBtn" type="button" value="옵션 변경"/><input class="completeBtn" id="completeBtn" type="button" value="변경 완료" style="display:none"/><input class="cancleBtn" id="cancleBtn" type="button" value="취소" style="display:none"/></p>
   										</div>
   										
   										<br><br><br>
-  										
-  										<script type="text/javascript">
-  											$(function(){
-													
-  												$("#optionBtn").click(function(){
-  													$("#countInput").show();
-  													$("#completeBtn").show();
-  													$("#cancleBtn").show();
-  													$("#fundCount").hide();
-  													$("#optionBtn").hide();
-  												});
-  												
-  												$("#completeBtn").click(function(){
-  													/* $.ajax({
-  														url: "changeOption.fl",
-  														type: "get",
-  														data: {"fund_no" : "${ myfunding.fund_no }", "fundcount" : $("#countResult").val()},
-  														success: function(data){
-  															alert("수량이 변경되었습니다.");
-  															
-  															$("#fundCount").val();
-  															$("#fundCount").show();
-  															
-  															console.log("fundCount : " + $("#fundCount").val());  															
-  															console.log("countResult : " + $("#countResult").val());
-  															
-  															$("#optionBtn").show();
-  															$("#cancleBtn").hide();
-  															$("#countInput").hide();
-  		  													$("#completeBtn").hide();  		  													
-  														}
-  													}); */
-  													
-  													var fundcount= $('#countResult').val();
-  													
-  													location.href = "changeOption.fl?fund_no=${ myfunding.fund_no }&fundcount=" + fundcount;
-  												});
-  											});
-  										</script>
-  										
-  										
-  					
   									
   									<label id="delivery">결제정보</label>
   									<br><br>
@@ -503,18 +459,20 @@ label {
   										
   										<br><br><br>
   										
-  										<label id="delivery">배송지정보</label><input class="deliveryBtn" type="button" value="배송지정보변경">
+  										<form action="deliveryChange.fl" method="post">
+  										<input type="hidden" name="fund_no" value="${ myfunding.fund_no }">
+  										<label id="delivery">배송지정보</label><input id="deliveryChangeBtn" class="deliveryBtn" type="button" value="배송지 정보 변경"><input id="dcCompleteBtn" class="deliveryBtn" type="submit" value="배송지 변경 완료" style="display:none;">
   										<br><br>
   										<table class="table">
   											<tbody class="paddingGo">
       											<tr class="mdtrs">
         											<td class="mdtd">받으시는 분</td>
-        											<td class="mdtdv">${ myfunding.recname }</td>
+        											<td class="mdtdv"><b id="recnameb" class="">${ myfunding.recname }</b><input class="" id="recnamei" name="recname" placeholder="변경할 이름을 입력하세요." value="" style="display:none;border:none;" required autofocus></td>
       											</tr>
       											
       											<tr class="mdtr">
         											<td class="mdtd">연&nbsp;&nbsp;&nbsp;락&nbsp;&nbsp;&nbsp;처</td>
-        											<td class="mdtdv">${ myfunding.rephone }</td>
+        											<td class="mdtdv"><b id="rephoneb" class="">${ myfunding.rephone }</b><input class="" id="rephonei" name="rephone" placeholder="변경할 연락처를 입력하세요." value="" style="display:none;border:none;" required></td>
       											</tr>
       											
       											<tr class="mdtr">
@@ -524,10 +482,27 @@ label {
       											
       											<tr class="mdtrf mdtr">
         											<td class="mdtd">주&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</td>
-        											<td class="mdtdv">${ myfunding.deladdress }</td>
+        											<td class="mdtdv"><b id="deladdressb" class="">${ myfunding.deladdress }</b><input class="" id="deladdressi" name="deladdress" placeholder="변경할 주소를 입력하세요." value="" style="display:none;border:none;" required></td>
       											</tr>    										      											      											
     										</tbody>
   										</table>
+  										
+  										</form>
+  										
+  										<script type="text/javascript">
+  											$(function(){
+  												$("#deliveryChangeBtn").click(function(){
+  													$("#recnameb").hide();
+  													$("#rephoneb").hide();
+  													$("#deladdressb").hide();
+  													$("#deliveryChangeBtn").hide();
+  													$("#recnamei").show();
+  													$("#rephonei").show();
+  													$("#deladdressi").show();
+  													$("#dcCompleteBtn").show();  													  													
+  												});	
+  											});
+  										</script>
   									</div>  								
   								
   								<br>
