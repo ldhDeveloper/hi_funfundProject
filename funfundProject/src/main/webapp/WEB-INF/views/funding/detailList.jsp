@@ -431,7 +431,7 @@ button {
 			<p
 				style="font-size: 10pt; text-align: left; padding-bottom: 5px; margin-left: 20px;">리워드선택</p>
 			<c:forEach var="reward" items="${mList}" varStatus="status">
-				<ul class="makerbox pay" >
+				<ul class="makerbox pay">
 					<li style="font-size: 15pt;"><strong><fmt:formatNumber
 								var="mcost" value="${reward.mcost}" /> ${mcost}원</strong></li>
 					<li class="makerinfo">작성자이름
@@ -452,15 +452,11 @@ button {
 					<li class="makerinfo">제한 수량</li>
 					<dl>${reward.mcount }개
 					</dl>
-					<li class="makerinfo current" >현재 
-					<c:set var="result"
-							value="${reward.mcount - reward.fundcount }" /> 
-							<c:if test="${result > 0}">
+					<li class="makerinfo current">현재 
+					<c:set var="result" value="${reward.remain}" /> 
+					<c:if test="${result > 0}">
 					${result }</c:if> 
-					<!-- 잔여수량 정보보냄--> <input
-						type="hidden" value="${result }"
-						name="currentcount"> 
-						<c:if test="${result <= 0 }">
+					<c:if test="${result <= 0 }">
 					0
 					</c:if>개 남음
 					</li>
@@ -472,7 +468,7 @@ button {
 		</div>
 	</div>
 
-<script>
+	<script>
    $(function(){
 	   for(var i=0; i<${fn:length(mList)}; i++){
 	   $('.makerbox').hover(function() {

@@ -331,9 +331,6 @@ textarea {
 		$('#recmtbutton').click(function() {
 			$('.comment-area2').toggle();
 		});
-		/* $("#hongup").click(function(){
-			 $('.upcmt').html("<form action='update.ask'><div id='reupload'><input type='submit' value='수정하기'><input type='hidden' value='<c:out value=${param.pro_no}/>' name='pro_no'><input type='hidden' value='<c:out value=${ask.ask_no}/>' name='ask_no'></div></form>");
-		}); */
 	});
 	
 	/*  function update(){

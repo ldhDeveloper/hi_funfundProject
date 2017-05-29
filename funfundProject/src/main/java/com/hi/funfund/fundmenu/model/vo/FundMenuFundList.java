@@ -17,14 +17,14 @@ public class FundMenuFundList {
 	private Integer mcount;
 	private String delyn;
 	private String dcost;
-	private int fundcount;
+	private int remain;
 
 	public FundMenuFundList() {
 		super();
 	}
 
-	public FundMenuFundList(int mno, String mname, Integer mcost, int pro_no, String mcontent,
-			Date mdate, Integer mnum, Integer mcount, String delyn, String dcost, int fundcount) {
+	public FundMenuFundList(int mno, String mname, Integer mcost, int pro_no, String mcontent, Date mdate, Integer mnum,
+			Integer mcount, String delyn, String dcost, int remain) {
 		super();
 		this.mno = mno;
 		this.mname = mname;
@@ -36,7 +36,7 @@ public class FundMenuFundList {
 		this.mcount = mcount;
 		this.delyn = delyn;
 		this.dcost = dcost;
-		this.fundcount = fundcount;
+		this.remain = remain;
 	}
 
 	public int getMno() {
@@ -119,20 +119,21 @@ public class FundMenuFundList {
 		this.dcost = dcost;
 	}
 
-	public int getFundcount() {
-		return fundcount;
+	public int getRemain() {
+		return remain;
 	}
 
-	public void setFundcount(int fundcount) {
-		this.fundcount = fundcount;
+	public void setRemain(int remain) {
+		this.remain = remain;
 	}
 
 	@Override
 	public String toString() {
-		return "FundMenuFundList [mno=" + mno + ", mname=" + mname + ", mcost=" + mcost
-				+ ", pro_no=" + pro_no + ", mcontent=" + mcontent + ", mdate=" + mdate + ", mnum="
-				+ mnum + ", mcount=" + mcount + ", delyn=" + delyn + ", dcost=" + dcost
-				+ ", fundcount=" + fundcount + "]";
+		return "FundMenuFundList [mno=" + mno + ", mname=" + mname + ", mcost=" + mcost + ", pro_no=" + pro_no
+				+ ", mcontent=" + mcontent + ", mdate=" + mdate + ", mnum=" + mnum + ", mcount=" + mcount + ", delyn="
+				+ delyn + ", dcost=" + dcost + ", remain=" + remain + "]";
 	}
+
+	
 
 }

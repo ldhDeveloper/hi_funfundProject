@@ -26,15 +26,15 @@
 		<result property="mcount" column="mcount" />
 		<result property="delyn" column="delyn" />
 		<result property="dcost" column="dcost" />
-		<result property="fundcount" column="fundcount" />
+		<result property="remain" column="remain" />
 	</resultMap>
 
 	<select id="selectMlist" parameterType="int" resultMap="fundMenuResult2">
-		select f2.mno, mname, mcost, f2.pro_no, mcontent, mdate, mnum, mcount, delyn,dcost ,f1.fundcount
+		select f2.mno, mname, mcost, f2.pro_no, mcontent, mdate, mnum, mcount, delyn,dcost , (mcount - f1.fundcount) as remain
 		from (select sum(fundcount)fundcount, mno
 		         from fundlist
 		         group by mno) f1
-		left join fundmenu f2 on f1.mno=f2.mno
+		right join fundmenu f2 on f1.mno=f2.mno
 		where f2.pro_no =1
 		order by f2.mno
 	</select>
