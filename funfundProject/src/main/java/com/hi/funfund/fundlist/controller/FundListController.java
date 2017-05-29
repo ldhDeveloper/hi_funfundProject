@@ -71,6 +71,7 @@ public class FundListController {
 	@Autowired
 	private ItemService itemService;
 
+	//내가 작성한 프로젝트 상세
 	@RequestMapping(value = "myproject.fl", method = RequestMethod.GET)
 	public ModelAndView selectMyProject(ModelAndView model, HttpSession session, HttpServletRequest request) {
 		String pro_no = request.getParameter("pro_no");
@@ -82,6 +83,15 @@ public class FundListController {
 		return model;
 	}
 
+	//프로젝트 새소식
+	@RequestMapping(value = "myprojectnews.fl", method = RequestMethod.GET)
+	public ModelAndView selectMyProjectNews(ModelAndView model, HttpSession session, HttpServletRequest request) {
+		String pro_no = request.getParameter("pro_no");
+		Item proItem = itemService.selectOne(Integer.parseInt(pro_no));
+		model.addObject("proItem", proItem);
+		model.setViewName("myproject/inputnews");
+		return model;
+	}
 
 @RequestMapping(value = "exportExcel.fl", method = RequestMethod.POST)
 public @ResponseBody String exportExcel(@RequestParam int pro_no, HttpServletRequest request, HttpServletResponse response) throws Exception{

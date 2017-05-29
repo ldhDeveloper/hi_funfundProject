@@ -187,8 +187,8 @@
 				<div class="middle-submenu">
 					<ul class="nav nav-pills middle-submenu"
 						style="width: 900px; align: center;">
-						<li id="info1" class="active-active"><a href="#">펀딩현황</a></li>
-						<li id="info2"><a href="#">새소식</a></li>
+						<li id="info1" class="active-active"><a href="myproject.fl?pro_no=${proItem.pro_no }">펀딩현황</a></li>
+						<li id="info2"><a href="myprojectnews.fl?pro_no=${proItem.pro_no }">새소식</a></li>
 						<li id="info3"><a href="#">댓글</a></li>
 						<li id="info4"><a href="#">문의</a></li>
 					</ul>
