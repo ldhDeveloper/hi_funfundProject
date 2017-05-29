@@ -318,6 +318,13 @@ public class ItemController {
 
 		return model;
 	}
+	@RequestMapping(value = "updateajax.it", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView updateAjaxItem(ModelAndView model, Item item, HttpServletRequest request){
+		//String pname = request.getParameter("pname");
+		System.out.println(item);
+		return null;
+	}
+	
 
 	@RequestMapping("funding.it")
 	public ModelAndView funding(ModelAndView model) {

@@ -7,11 +7,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class Item implements Serializable {
 
-	public Item() {
-	};
+	
 
-	private int pro_no;
-	private int ano;
+	private Integer pro_no;
+	private Integer ano;
 	private String pname;
 	private String pcontent;
 	private String category;
@@ -34,19 +33,22 @@ public class Item implements Serializable {
 	private String cname;
 	private String cs_email;
 	private String cs_phone;
-	private int fundamount;
-	private int fundcount;
-	private int supportcount;
-	private int upcount;
-	private int repcount;
+	private Integer fundamount;
+	private Integer fundcount;
+	private Integer supportcount;
+	private Integer upcount;
+	private Integer repcount;
 	private String thumbnail;
 	private String pimage;
 
-	public Item(int pro_no, int ano, String pname, String pcontent, String category, Date psdate, String s_psdate,
-			Date pedate, String s_pedate, String pshort, Integer ecost, String refund, String pvideo, String pstatus,
-			int likecount, String sharelink, String bankcode, String accpnm, String accnum, String cname,
-			String cs_email, String cs_phone, int fundamount, int fundcount, int supportcount, int upcount,
-			int repcount, String thumbnail, String pimage) {
+	public Item() {
+	}
+
+	public Item(Integer pro_no, Integer ano, String pname, String pcontent, String category, Date psdate,
+			String s_psdate, Date pedate, String s_pedate, String pshort, Integer ecost, String refund, String pvideo,
+			String pstatus, int likecount, String sharelink, String bankcode, String accpnm, String accnum,
+			String cname, String cs_email, String cs_phone, Integer fundamount, Integer fundcount, Integer supportcount,
+			Integer upcount, Integer repcount, String thumbnail, String pimage) {
 		super();
 		this.pro_no = pro_no;
 		this.ano = ano;
@@ -79,83 +81,19 @@ public class Item implements Serializable {
 		this.pimage = pimage;
 	}
 
-	public String getS_psdate() {
-		return s_psdate;
-	}
-
-	public String getS_pedate() {
-		return s_pedate;
-	}
-
-	public void setS_psdate(String s_psdate) {
-		this.s_psdate = s_psdate;
-	}
-
-	public void setS_pedate(String s_pedate) {
-		this.s_pedate = s_pedate;
-	}
-
-	public String getThumbnail() {
-		return thumbnail;
-	}
-
-	public void setThumbnail(String thumbnail) {
-		this.thumbnail = thumbnail;
-	}
-
-	public int getUpcount() {
-		return upcount;
-	}
-
-	public void setUpcount(int upcount) {
-		this.upcount = upcount;
-	}
-
-	public int getRepcount() {
-		return repcount;
-	}
-
-	public void setRepcount(int repcount) {
-		this.repcount = repcount;
-	}
-
-	public int getFundamount() {
-		return fundamount;
-	}
-
-	public void setFundamount(int fundamount) {
-		this.fundamount = fundamount;
-	}
-
-	public int getFundcount() {
-		return fundcount;
-	}
-
-	public void setFundcount(int fundcount) {
-		this.fundcount = fundcount;
-	}
-
-	public int getSupportcount() {
-		return supportcount;
-	}
-
-	public void setSupportcount(int supportcount) {
-		this.supportcount = supportcount;
-	}
-
-	public int getPro_no() {
+	public Integer getPro_no() {
 		return pro_no;
 	}
 
-	public void setPro_no(int pro_no) {
+	public void setPro_no(Integer pro_no) {
 		this.pro_no = pro_no;
 	}
 
-	public int getAno() {
+	public Integer getAno() {
 		return ano;
 	}
 
-	public void setAno(int ano) {
+	public void setAno(Integer ano) {
 		this.ano = ano;
 	}
 
@@ -191,12 +129,28 @@ public class Item implements Serializable {
 		this.psdate = psdate;
 	}
 
+	public String getS_psdate() {
+		return s_psdate;
+	}
+
+	public void setS_psdate(String s_psdate) {
+		this.s_psdate = s_psdate;
+	}
+
 	public Date getPedate() {
 		return pedate;
 	}
 
 	public void setPedate(Date pedate) {
 		this.pedate = pedate;
+	}
+
+	public String getS_pedate() {
+		return s_pedate;
+	}
+
+	public void setS_pedate(String s_pedate) {
+		this.s_pedate = s_pedate;
 	}
 
 	public String getPshort() {
@@ -303,6 +257,54 @@ public class Item implements Serializable {
 		this.cs_phone = cs_phone;
 	}
 
+	public Integer getFundamount() {
+		return fundamount;
+	}
+
+	public void setFundamount(Integer fundamount) {
+		this.fundamount = fundamount;
+	}
+
+	public Integer getFundcount() {
+		return fundcount;
+	}
+
+	public void setFundcount(Integer fundcount) {
+		this.fundcount = fundcount;
+	}
+
+	public Integer getSupportcount() {
+		return supportcount;
+	}
+
+	public void setSupportcount(Integer supportcount) {
+		this.supportcount = supportcount;
+	}
+
+	public Integer getUpcount() {
+		return upcount;
+	}
+
+	public void setUpcount(Integer upcount) {
+		this.upcount = upcount;
+	}
+
+	public Integer getRepcount() {
+		return repcount;
+	}
+
+	public void setRepcount(Integer repcount) {
+		this.repcount = repcount;
+	}
+
+	public String getThumbnail() {
+		return thumbnail;
+	}
+
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
+
 	public String getPimage() {
 		return pimage;
 	}
@@ -321,6 +323,10 @@ public class Item implements Serializable {
 				+ ", cs_phone=" + cs_phone + ", fundamount=" + fundamount + ", fundcount=" + fundcount
 				+ ", supportcount=" + supportcount + ", upcount=" + upcount + ", repcount=" + repcount + ", thumbnail="
 				+ thumbnail + ", pimage=" + pimage + "]";
-	}
-
+	};
+	
+	
+	
+	
+	
 }
