@@ -62,6 +62,13 @@ public class FundListDao {
 		}
 		return result;
 	}
-	
-
+	public int updateOption(int fund_no, int fundcount) {
+		HashMap<String, String> hmap = new HashMap<String, String>();
+		hmap.put("fund_no", Integer.toString(fund_no));
+		hmap.put("fundcount", Integer.toString(fundcount));
+		System.out.println("changeOption Dao 1 fund_no : " + fund_no + " fundcount : " + fundcount);
+		int result = sqlSession.update("updateOption", hmap);
+		System.out.println("changeOption Dao 2 result : " + result + " hmap : " + hmap);
+		return result;
+	}
 }

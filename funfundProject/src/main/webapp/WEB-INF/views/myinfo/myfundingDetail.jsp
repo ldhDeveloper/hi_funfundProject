@@ -433,27 +433,47 @@ label {
   											
   											<p>&nbsp;&nbsp;&nbsp;${ myfunding.pname }</p>
   											<p id="fundCount">&nbsp;&nbsp;&nbsp;${ myfunding.fundcount }개 / ${ myfunding.mcost }원</p>
-  											<div id="countInput" style="display:none;"><input class="btn" style="width:5%; margin-left:10px;" id="countResult" type="number" value="${ myfunding.fundcount }"/>개/${ myfunding.mcost }원</div>
-  											<p>&nbsp;&nbsp;&nbsp;옵션 : <input class="optionBtn" id="optionBtn" type="button" value="옵션 변경"/><input class="completeBtn" id="completeBtn" type="button" value="변경 완료" style="display:none"/><input class="completeBtn" id="completeBtn" type="button" value="취소" style="display:none"/></p>
+  											<div id="countInput" style="display:none;"><input class="btn" style="width:7%; margin-left:10px;" id="countResult" type="number" value="${ myfunding.fundcount }"/>개/${ myfunding.mcost }원</div>
+  											<p>&nbsp;&nbsp;&nbsp;옵션 : <input class="optionBtn" id="optionBtn" type="button" value="옵션 변경"/><input class="completeBtn" id="completeBtn" type="button" value="변경 완료" style="display:none"/><input class="cancleBtn" id="cancleBtn" type="button" value="취소" style="display:none"/></p>
   										</div>
   										
   										<br><br><br>
   										
   										<script type="text/javascript">
   											$(function(){
-  												var countResult = $("#countResult").val();
-												var fundcount = "<c:out value='${ myfunding.fundcount }'/>";
-												var count = countResult + fundcount;
 													
   												$("#optionBtn").click(function(){
   													$("#countInput").show();
   													$("#completeBtn").show();
+  													$("#cancleBtn").show();
   													$("#fundCount").hide();
   													$("#optionBtn").hide();
   												});
   												
   												$("#completeBtn").click(function(){
-  														
+  													/* $.ajax({
+  														url: "changeOption.fl",
+  														type: "get",
+  														data: {"fund_no" : "${ myfunding.fund_no }", "fundcount" : $("#countResult").val()},
+  														success: function(data){
+  															alert("수량이 변경되었습니다.");
+  															
+  															$("#fundCount").val();
+  															$("#fundCount").show();
+  															
+  															console.log("fundCount : " + $("#fundCount").val());  															
+  															console.log("countResult : " + $("#countResult").val());
+  															
+  															$("#optionBtn").show();
+  															$("#cancleBtn").hide();
+  															$("#countInput").hide();
+  		  													$("#completeBtn").hide();  		  													
+  														}
+  													}); */
+  													
+  													var fundcount= $('#countResult').val();
+  													
+  													location.href = "changeOption.fl?fund_no=${ myfunding.fund_no }&fundcount=" + fundcount;
   												});
   											});
   										</script>

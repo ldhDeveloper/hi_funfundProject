@@ -68,5 +68,12 @@ public class FundListServiceIm implements FundListService {
 		return fundListDao.changeSupporterList(updatesponsor);
 	}
 
+	// 옵션 변경
+	@Override
+	public int updateOption(int fund_no, int fundcount) {
+		System.out.println("changeOption service fund_no : " + fund_no + " fundcount : " + fundcount);
+		return fundListDao.updateOption(fund_no, fundcount);
+	}
+
 
 }

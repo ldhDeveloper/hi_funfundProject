@@ -25,4 +25,6 @@ public interface FundListService {
 
 	int changeSupporterList(UpdateSponsor updatesponsor);
 
+	int updateOption(int fund_no, int fundcount);
+
 }
