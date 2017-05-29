@@ -14,6 +14,8 @@
 		<result property="mcount" column="mcount" />
 		<result property="delyn" column="delyn" />
 		<result property="dcost" column="dcost" />
+		<result property="remain" column="remain" />
+		<result property="fundcount" column="fundcount" />
 	</resultMap>
 	<resultMap type="fundMenufundList" id="fundMenuResult2">
 		<id property="mno" column="mno" />
@@ -29,8 +31,8 @@
 		<result property="remain" column="remain" />
 	</resultMap>
 
-	<select id="selectMlist" parameterType="int" resultMap="fundMenuResult2">
-		select f2.mno, mname, mcost, f2.pro_no, mcontent, mdate, mnum, mcount, delyn,dcost , (mcount - f1.fundcount) as remain
+	<select id="selectMlist" parameterType="int" resultMap="fundMenuResult">
+		select f2.mno, mname, mcost, f2.pro_no, mcontent, mdate, mnum, mcount, delyn, dcost , fundcount, (mcount - f1.fundcount) as remain
 		from (select sum(fundcount)fundcount, mno
 		         from fundlist
 		         group by mno) f1
