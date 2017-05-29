@@ -82,6 +82,9 @@ public class ItemAskController {
 		String pro_no=request.getParameter("pro_no");
 		String ask_no = request.getParameter("ask_no");
 		String acontent = request.getParameter("acontent");
+		System.out.println("pro_no : " + pro_no);
+		System.out.println("ask_no : " + ask_no);
+		System.out.println("acontent : " + acontent);
 		HashMap<String, String> umap = new HashMap<String, String>();
 		umap.put("ask_no", ask_no);
 		umap.put("acontent", acontent);

@@ -345,13 +345,16 @@ textarea {
 			$('#rebutton'+repnum).show();
 		});
 		
-	
+		/* $("a[id^=uprepcontent]").click(function(){
+			var repId = $(this).attr("id");
+			var repnum = repId.substr(repId.length - 1, 1);
+			location.href="update.ask?pro_no=${param.pro_no}&ask_no=${ask.ask_no}&acontent=" + $('#updatereply' + repnum).val();
+		}) */
 		
 	});
 	
-	function updateReply(){
-		var acontent = $().text();
-		location.href="update.ask?pro_no='${param.pro_no}'&ask_no='${ask.ask_no}'";
+	function updateReply(index, ask_no){
+		location.href="update.ask?pro_no=${param.pro_no}&ask_no=" + ask_no + "&acontent=" + $('#updatereply' + index).val();
 	}
 </script>
 </head>
@@ -415,12 +418,12 @@ textarea {
 							</c:if>
 							<p id="replynum${status.index }" class="cmtco upcmt" >${ask.ask_content }</p>
 							<textarea class="form-control" id="updatereply${status.index }" style="display:none;"></textarea>
-							<c:set var="acontent" value="$(.form-control).val();"/>
+							<%-- <c:set var="acontent" value="$(.form-control).val();"/> --%>
 							<span id="rebutton${status.index}" class="rebtn">
-							<a class="val" href="update.ask?pro_no=${param.pro_no}&ask_no=${ask.ask_no}&acontent=${acontent }">수정</a><a>취소</a></span>
+							<a id="uprepcontent${status.index }" class="val" onclick="updateReply(${status.index }, ${ask.ask_no });">수정</a><a>취소</a></span>
 							<span class="cmtda">${ask.ask_date }</span>
 							<c:if test="${sessionScope.account.ano eq ask.id_no }">
-							 <a id="uprepnum${status.index }" style="cursor:pointer;" >댓글수정</a><a href="delete.ask?ask_no=${ask.ask_no}&pro_no=${param.pro_no}">댓글삭제</a>
+							 <a id="uprepnum${status.index }" style="cursor:pointer;">댓글수정</a><a href="delete.ask?ask_no=${ask.ask_no}&pro_no=${param.pro_no}">댓글삭제</a>
 							</c:if>
 							
 							<a id="recmtbutton">답글달기</a>
