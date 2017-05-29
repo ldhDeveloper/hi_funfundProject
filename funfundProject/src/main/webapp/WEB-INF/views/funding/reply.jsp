@@ -344,9 +344,6 @@ textarea {
 
 	});
 	
-	/*  function update(){
-    	 $('.upcmt').html("<form action='update.ask'><div id='reupload'><input type='submit' value='수정하기'><input type='hidden' value='${param.pro_no}' name='pro_no'><input type='hidden'value='${ask.ask_no}' name='ask_no'></div></form>");
-     } */
 </script>
 </head>
 <body>
@@ -413,7 +410,7 @@ textarea {
 							<textarea class="form-control" id="updatereply${status.index }" style="display:none;"></textarea>
 							<span class="cmtda">${ask.ask_date }</span>
 							<c:if test="${sessionScope.account.ano eq ask.id_no }">
-							 <a id="uprepnum${status.index }" style="cursor:pointer;">수정</a><a href="delete.ask?ask_no=${ask.ask_no}">삭제</a>
+							 <a id="uprepnum${status.index }" style="cursor:pointer;">댓글수정</a><a href="delete.ask?ask_no=${ask.ask_no}">댓글삭제</a>
 							</c:if>
 							
 							<a id="recmtbutton">답글달기</a>
@@ -446,6 +443,10 @@ textarea {
 								</c:if>
 								<p class="cmtco">${ask.ask_content }</p>
 								<span class="cmtda">${ask.ask_date }</span>
+								<c:if test="${sessionScope.account.ano eq ask.id_no }">
+							 <a style="cursor:pointer;">답글수정</a><a href="delete.ask?ask_no=${ask.ask_no}">답글삭제</a>
+							 <input type="hidden" value="${ask.pro_no }" name="pro_no">
+							</c:if>
 							</div>
 						</c:if>
 					</c:forEach>

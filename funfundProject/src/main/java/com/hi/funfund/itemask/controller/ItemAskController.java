@@ -98,7 +98,17 @@ public class ItemAskController {
 		redirect.addAttribute("pro_no", pro_no);
 		return "redirect:/reply.ask";
 	}
-
+	
+	@RequestMapping("redelete.ask")
+	public String redelete(int ask_no, RedirectAttributes redirect, HttpServletRequest request) {
+		String pro_no=request.getParameter("pro_no");
+		System.out.println("repro:"+pro_no);
+		System.out.println("ask::"+ask_no);
+		int result = itemAskService.redelete(ask_no);
+		redirect.addAttribute("pro_no", pro_no);
+		return "redirect:/reply.ask";
+	}
+	
 	@RequestMapping("reply.ask")
 	public ModelAndView selectList(ModelAndView model, HttpServletRequest request) {
 		int pro_no = Integer.parseInt(request.getParameter("pro_no"));

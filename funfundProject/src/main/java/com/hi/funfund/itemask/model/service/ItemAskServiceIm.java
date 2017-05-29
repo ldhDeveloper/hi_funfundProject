@@ -43,5 +43,10 @@ public class ItemAskServiceIm implements ItemAskService {
 		return itemAskDao.reinsert(cmap);
 	}
 
+	@Override
+	public int redelete(int ask_no) {
+		return itemAskDao.redelete(ask_no);
+	}
+
 	
 }

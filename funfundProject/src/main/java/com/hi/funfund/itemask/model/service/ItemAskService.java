@@ -17,4 +17,6 @@ public interface ItemAskService {
 
 	int update(HashMap<String, String> umap);
 
+	int redelete(int ask_no);
+
 }

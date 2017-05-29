@@ -58,6 +58,11 @@
 	
 	<delete id="deleteAsk" parameterType="int">
 	    delete from itemask
+	    where upask_no = #{ask_no}
+	</delete>
+	
+	<delete id="redeleteAsk" parameterType="int">
+	    delete from itemask
 	    where ask_no = #{ask_no}
 	</delete>
 
