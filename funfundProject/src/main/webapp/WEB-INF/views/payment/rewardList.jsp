@@ -36,6 +36,8 @@ input[type="checkbox"] {
 <script src="/funfund/lib/js/jquery-3.2.1.min.js"></script>
 <script>
 	$(function() {
+		var plustotal = 0;
+		
 		
 		$(".checked").hide();
 		
@@ -44,28 +46,40 @@ input[type="checkbox"] {
 			$(this).css("background", "orange");
 			$(this).css("cursor", "pointer");
 			$(this).css("color", "white");
-			$(this).find(".ordercount").css("color", "black");
+			$(this).find("[class^=ordercount]").css("color", "black");
 			$(this).find("i").css("color", "violet");
 		});
 		$(".widjet").mouseleave(function(){
 			$(this).css("background", "white");
 			$(this).css("color", "black");
+			$(this).find("[class^=ordercount]").css("color", "black");
 		});
 		
 		$(".amount").find(".plus-btn").click(function(){
 			event.stopPropagation();
-			var i = $(this).find(".ordercount").val();
+			var i = Number($(this).parent().find('input').val());
 			console.log(i);
-			$(this).find(".ordercount").val(i+1);
+			$(this).parent().find('input').val(i+1);
 		});
 		
 		$(".amount").find(".minus-btn").click(function(){
 			event.stopPropagation();
-			$(this).find(".ordercount").val(Number($(this).find(".ordercount").val()) - 1);
+			var i = Number($(this).parent().find('input').val());
+			console.log(i);
+			$(this).parent().find('input').val(i-1);
 		});
 		
-		$(".amount").find(".ordercount").click(function(){
+		$(".amount").find("[class^=ordercount]").click(function(){
 			event.stopPropagation();
+			$(this).select();
+		});
+		
+		$("#plusreward").keyup(function(){
+			$("#plus-total").html($("#plusreward").val());
+			plustotal = $("#plusreward").val();
+		});
+		$("#plusreward").click(function(){
+			$(this).select();
 		});
 		
 		$(".widjet").click(function(){
@@ -81,42 +95,127 @@ input[type="checkbox"] {
 			var length = $('input:checkbox[name="choice"]:checked').length;
 			console.log("length : " + length);
 			var arr = new Array(length);
+			var ordercount = new Array(length);
 			var i = 0;
 			$("#show-area").html("<tr><td>&nbsp</td></tr>");
 			
-			 $('input:checkbox[name="choice"]:checked').each(function(index) {
-				arr[i] = $(this).val();
-				
-				//$("#show-area").html($("#show-area").html() + "<tr><td>"+ mname +"</td><td></td></tr>");
-				
-				i++;
+			 $('input:checkbox[name="choice"]').each(function(index) {
+				if($(this).is(":checked") == true){
+					arr[i] = $(this).val();
+					ordercount[i] = $(".ordercount"+index).val();
+					
+					i++;
+				}else{
+				}
 				
 			 });
 			 
+			 showlist(arr, ordercount, plustotal);
 			 
-			 showlist(arr);
 		});
 		
-		function showlist(arr){
-			console.log("array : " + arr);
+		$("#plusreward").change(function(){
+			var length = $('input:checkbox[name="choice"]:checked').length;
+			console.log("length : " + length);
+			var arr = new Array(length);
+			var ordercount = new Array(length);
+			var i = 0;
+			$("#show-area").html("<tr><td>&nbsp</td></tr>");
 			
+			 $('input:checkbox[name="choice"]').each(function(index) {
+				if($(this).is(":checked") == true){
+					arr[i] = $(this).val();
+					ordercount[i] = $(".ordercount"+index).val();
+					
+					i++;
+				}else{
+				}
+				
+			 });
+			 showlist(arr, ordercount, plustotal);
+		});
+		
+		$("[class^=ordercount]").change(function(){
+			var length = $('input:checkbox[name="choice"]:checked').length;
+			console.log("length : " + length);
+			var arr = new Array(length);
+			var ordercount = new Array(length);
+			var i = 0;
+			$("#show-area").html("<tr><td>&nbsp</td></tr>");
+			
+			 $('input:checkbox[name="choice"]').each(function(index) {
+				if($(this).is(":checked") == true){
+					arr[i] = $(this).val();
+					ordercount[i] = $(".ordercount"+index).val();
+					
+					i++;
+				}else{
+				}
+				
+			 });
+			 showlist(arr, ordercount, plustotal);
+		});
+		
+		$(".plus-btn, .minus-btn").click(function(){
+			var length = $('input:checkbox[name="choice"]:checked').length;
+			console.log("length : " + length);
+			var arr = new Array(length);
+			var ordercount = new Array(length);
+			var i = 0;
+			$("#show-area").html("<tr><td>&nbsp</td></tr>");
+			
+			 $('input:checkbox[name="choice"]').each(function(index) {
+				if($(this).is(":checked") == true){
+					arr[i] = $(this).val();
+					ordercount[i] = $(".ordercount"+index).val();
+					
+					i++;
+				}else{
+				}
+				
+			 });
+			 showlist(arr, ordercount, plustotal);
+		});
+		
+		function showlist(arr, ordercount, plustotal){
+			console.log("array : " + arr);
+			console.log("ordercount : " + ordercount);
 			$.ajax({
 				url:"selectlist.fl",
 				data:{"arr": arr},
 				dataType: 'json',
 				success:function(data){
 					console.log("length : " + data.length);
-					
+					var subtotal = 0;
 					
 					for(var i = 0; i < data.length; i++){
 						var mname = data[i].mname;
 						var mcontent = data[i].mcontent;
+						var fundcount = data[i].fundcount;
+						var mcost = data[i].mcost;
 						
-						$("#show-area").html($("#show-area").html() + "<tr><td style='border-radius:5px;border:1px violet solid;padding-left:50px;background:rgba(255,0,255,0.2);'><br>리워드명 : "+ mname + "<br>"
+						
+						$("#show-area").html($("#show-area").html() + "<tr style='border-radius:5px;border:1px violet solid;padding-left:50px;background:rgba(255,0,255,0.2);'>"
+								+ "<td><br>리워드명 : "+ mname + "<br>"
 								+ "상세설명 : " + mcontent + "<br><br>"
-								+ "</td></tr>");
-						
+								+ "</td>"
+								+ "<td><label>주문 수량 : &nbsp;</label><label>" + ordercount[i] + "</label><label>&nbsp; 개</label></td>"
+								+ "<td><label>금액 : &nbsp;</label><label>" + (ordercount[i] * mcost) + "</label><label>&nbsp; 원</label></td>"
+								+ "</tr>");
+					
+						subtotal += (ordercount[i] * mcost);
 					}
+					$("#sub-total").html(0);
+					$("#sub-total").html(Number($("#sub-total").html()) + subtotal);
+					
+					$("#funding-total").html(0);
+					$("#funding-total").html(subtotal);
+					
+					finaltotal = Number(subtotal) + Number(plustotal);
+					
+					$("#final-total").html(0);
+					$("#final-total").html(finaltotal);
+					
 				}
 					
 			});
@@ -172,13 +271,13 @@ input[type="checkbox"] {
 									<label><c:out value="${fundMenu.mname}"/></label>
 									<p><c:out value="${fundMenu.mcontent}"/></p><br>
 									배송비 : <c:out value="${fundMenu.dcost}"/> | 예상 배송일 : <c:out value="${fundMenu.mdate}"/><br>
-									제한 수량 : <c:out value="${fundMenu.mcount}"/> | 남은 수량 : <br><br>
+									제한 수량 : <c:out value="${fundMenu.mcount}"/> | 남은 수량 : <c:out value="${fundMenu.remain}"/><br><br>
 								</td>
 								<td style="width:200px;min-width:150px;text-align:center;align:center;">
 									<div id="plusminus" style="display:none" class="amount">
 										주문수량<br>
 										<i class="fa fa-minus-square fa-2x minus-btn" aria-hidden="true" style="color:violet" id="minus"></i>
-										<input type="text" value="1" size="2" style="text-align:center;" class="ordercount">
+										<input type="text" value="1" size="2" style="text-align:center;" class="ordercount<c:out value='${status.index}'/>" name="fundcount">
 										<i class="fa fa-plus-square fa-2x plus-btn" aria-hidden="true" style="color:violet" id="plus"></i>
 									</div>
 								
@@ -194,8 +293,8 @@ input[type="checkbox"] {
 		</div>
 	</div> 
 	
-	<div>
-		추가 후원 금액 : <input type="text" > 원
+	<div align="center">
+		추가 후원 금액 : <input type="text" value="0" id="plusreward" style="text-align:right"> 원
 	</div>
 	<br>
 	<hr>
@@ -206,7 +305,7 @@ input[type="checkbox"] {
 				<table style="width:100%;">
 					<tr style="background:rgba(255,0,255,0.2);">
 						<th colspan="4" style="color:rgba(255,0,255,1);text-align:center;height:50px;">
-							리워드
+							<label>주문내역</label>
 						</th>
 					</tr>
 				</table>
@@ -217,44 +316,28 @@ input[type="checkbox"] {
 					<tr style="center;height:50px;">
 						<td style="width:30%">&nbsp;</td>
 						<td style="width:40%">&nbsp;</td>
-						<td style="width:15%">수량: 1개</td>
-						<td style="width:15%;text-align:right;">59,000원</td>
+						<td style="width:15%"><label>소계 : </label></td>
+						<td style="width:15%;text-align:right;"><label id="sub-total">0</label><label>&nbsp; 원</label></td>
 					</tr>
-					<tr style="center;height:50px;">
-						<td>추가 후원금</td>
-						<td></td>
-						<td></td>
-						<td style="text-align:right;">0원</td>
-					</tr>
-					<tr style="center;height:50px;">
-						<td>배송비</td>
-						<td></td>
-						<td></td>
-						<td style="text-align:right;">2500원</td>
-					</tr>
+					
 					<tr style="center;height:30px;background:rgba(255,0,255,0.2);">
 						<td>펀딩금액</td>
 						<td></td>
 						<td></td>
-						<td style="text-align:right;">59000원</td>
+						<td style="text-align:right;"><label id="funding-total">0</label><label>&nbsp; 원</label></td>
 					</tr>
 					<tr style="center;height:30px;background:rgba(255,0,255,0.2);">
 						<td>추가 후원금</td>
 						<td></td>
 						<td></td>
-						<td style="text-align:right;">0원</td>
+						<td style="text-align:right;"><label id="plus-total">0</label><label>&nbsp; 원</label></td>
 					</tr>
-					<tr style="center;height:30px;background:rgba(255,0,255,0.2);">
-						<td>배송비</td>
-						<td></td>
-						<td></td>
-						<td style="text-align:right;">2500원</td>
-					</tr>
+					
 					<tr style="center;height:50px;background:rgba(255,0,255,0.2);">
 						<td style="color:rgba(255,0,255,1);">최종결제금액</td>
 						<td></td>
 						<td></td>
-						<td style="text-align:right;color:rgba(255,0,255,1);">61500원</td>
+						<td style="text-align:right;color:rgba(255,0,255,1);"><label id="final-total">0</label><label>&nbsp; 원</label></td>
 					</tr>
 				</table>
 			</div>
@@ -264,7 +347,7 @@ input[type="checkbox"] {
 	
 	
 	
-	
+	<br>
 	<!-- 결제정보 전송용 -->
 	<div>
 		<form id="payinfo" action="gopayment.fl">
@@ -273,13 +356,41 @@ input[type="checkbox"] {
 		
 		
 		</form>
-		<div>
+		<div align="center">
 			<button class="btn btn-default">취소하기</button>
 			<button class="btn btn-warning" onclick="gotopay();">결제하기</button>
 		</div>
+		<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
 		<script>
+			
 			function gotopay(){
-				$("#payinfo").submit();
+				IMP.init('imp47847979'); 
+				
+				IMP.request_pay({
+				    pg : 'uplus', // version 1.1.0부터 지원.
+				    pay_method : 'card',
+				    merchant_uid : 'merchant_' + new Date().getTime(),
+				    name : '주문명:결제테스트',
+				    amount : 100,
+				    buyer_email : 'iamport@siot.do',
+				    buyer_name : '구매자이름',
+				    buyer_tel : '010-1234-5678',
+				    buyer_addr : '서울특별시 강남구 삼성동',
+				    buyer_postcode : '123-456',
+				    m_redirect_url : 'http://127.0.0.1:9998/funfund/reward.fm?pro_no='
+				}, function(rsp) {
+				    if ( rsp.success ) {
+				        var msg = '결제가 완료되었습니다.';
+				        msg += '고유ID : ' + rsp.imp_uid;
+				        msg += '상점 거래ID : ' + rsp.merchant_uid;
+				        msg += '결제 금액 : ' + rsp.paid_amount;
+				        msg += '카드 승인번호 : ' + rsp.apply_num;
+				    } else {
+				        var msg = '결제에 실패하였습니다.';
+				        msg += '에러내용 : ' + rsp.error_msg;
+				    }
+				    alert(msg);
+				});
 			}
 		</script>
 	</div>
