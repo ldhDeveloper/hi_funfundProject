@@ -331,6 +331,17 @@ textarea {
 		$('#recmtbutton').click(function() {
 			$('.comment-area2').toggle();
 		});
+
+		$("a[id^=uprepnum]").click(function(){
+			var repId = $(this).attr("id");
+			var repnum = repId.substr(repId.length - 1, 1);
+			console.log("repnum : " + repnum);
+			var txt = $('#replynum' + repnum).text();
+			$('#replynum' + repnum).hide();
+			$('#updatereply' + repnum).text(txt);
+			$('#updatereply' + repnum).show();	
+		});
+
 	});
 	
 	/*  function update(){
@@ -384,7 +395,7 @@ textarea {
 
 			<c:if test="${!empty aList}">
 				<div id="comment-box">
-					<c:forEach var="ask" items="${aList}">
+					<c:forEach var="ask" items="${aList}" varStatus="status">
 						<c:if test="${ask.ask_type eq '댓글' }">
 							<div class="img">
 								<c:if test="${!empty ask.pimage }">
@@ -398,10 +409,11 @@ textarea {
 							<c:if test="${ask.idtype eq '메이커' }">
 								<span class="cmtst">메이커</span>
 							</c:if>
-							<p class="cmtco upcmt" >${ask.ask_content }</p>
+							<p id="replynum${status.index }" class="cmtco upcmt" >${ask.ask_content }</p>
+							<textarea class="form-control" id="updatereply${status.index }" style="display:none;"></textarea>
 							<span class="cmtda">${ask.ask_date }</span>
 							<c:if test="${sessionScope.account.ano eq ask.id_no }">
-							 <a href="">수정</a><a href="delete.ask?ask_no=${ask.ask_no}">삭제</a>
+							 <a id="uprepnum${status.index }" style="cursor:pointer;">수정</a><a href="delete.ask?ask_no=${ask.ask_no}">삭제</a>
 							</c:if>
 							
 							<a id="recmtbutton">답글달기</a>
