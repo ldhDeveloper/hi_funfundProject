@@ -65,15 +65,21 @@ public class NoticeServiceIm implements NoticeService{
 	}
 
 	@Override
-	public List<Notice> selectDetailList(HashMap map) {
+	public List<Notice> selectDetailList(int nno) {
 		
-		return noticeDao.selectDetailList(map);
+		return noticeDao.selectDetailList(nno);
 	}
 
 	@Override
 	public int getReplyCount(int nno) {
 		
 		return noticeDao.getReplyCount(nno);
+	}
+
+	@Override
+	public int upReadCount(int nno) {
+		
+		return noticeDao.upReadCount(nno);
 	}
 
 	
