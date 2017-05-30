@@ -46,6 +46,7 @@ public class Item implements Serializable {
 	private Integer firstprice;
 	private Integer secondprice;
 	private String icomment;
+	private String checkacc;
 	
 	public Item() {
 	}
@@ -55,7 +56,7 @@ public class Item implements Serializable {
 			String pstatus, int likecount, String sharelink, String bankcode, String accpnm, String accnum,
 			String cname, String cs_email, String cs_phone, Integer fundamount, Integer fundcount, Integer supportcount,
 			Integer upcount, Integer repcount, String thumbnail, String pimage, String billstatus, Date firstdeposit,
-			Date seconddeposit, Integer firstprice, Integer secondprice, String icomment) {
+			Date seconddeposit, Integer firstprice, Integer secondprice, String icomment, String checkacc) {
 		super();
 		this.pro_no = pro_no;
 		this.ano = ano;
@@ -92,56 +93,7 @@ public class Item implements Serializable {
 		this.firstprice = firstprice;
 		this.secondprice = secondprice;
 		this.icomment = icomment;
-	}
-
-	
-
-	public String getBillstatus() {
-		return billstatus;
-	}
-
-	public void setBillstatus(String billstatus) {
-		this.billstatus = billstatus;
-	}
-
-	public Date getFirstdeposit() {
-		return firstdeposit;
-	}
-
-	public void setFirstdeposit(Date firstdeposit) {
-		this.firstdeposit = firstdeposit;
-	}
-
-	public Date getSeconddeposit() {
-		return seconddeposit;
-	}
-
-	public void setSeconddeposit(Date seconddeposit) {
-		this.seconddeposit = seconddeposit;
-	}
-
-	public Integer getFirstprice() {
-		return firstprice;
-	}
-
-	public void setFirstprice(Integer firstprice) {
-		this.firstprice = firstprice;
-	}
-
-	public Integer getSecondprice() {
-		return secondprice;
-	}
-
-	public void setSecondprice(Integer secondprice) {
-		this.secondprice = secondprice;
-	}
-
-	public String getIcomment() {
-		return icomment;
-	}
-
-	public void setIcomment(String icomment) {
-		this.icomment = icomment;
+		this.checkacc = checkacc;
 	}
 
 	public Integer getPro_no() {
@@ -376,6 +328,62 @@ public class Item implements Serializable {
 		this.pimage = pimage;
 	}
 
+	public String getBillstatus() {
+		return billstatus;
+	}
+
+	public void setBillstatus(String billstatus) {
+		this.billstatus = billstatus;
+	}
+
+	public Date getFirstdeposit() {
+		return firstdeposit;
+	}
+
+	public void setFirstdeposit(Date firstdeposit) {
+		this.firstdeposit = firstdeposit;
+	}
+
+	public Date getSeconddeposit() {
+		return seconddeposit;
+	}
+
+	public void setSeconddeposit(Date seconddeposit) {
+		this.seconddeposit = seconddeposit;
+	}
+
+	public Integer getFirstprice() {
+		return firstprice;
+	}
+
+	public void setFirstprice(Integer firstprice) {
+		this.firstprice = firstprice;
+	}
+
+	public Integer getSecondprice() {
+		return secondprice;
+	}
+
+	public void setSecondprice(Integer secondprice) {
+		this.secondprice = secondprice;
+	}
+
+	public String getIcomment() {
+		return icomment;
+	}
+
+	public void setIcomment(String icomment) {
+		this.icomment = icomment;
+	}
+
+	public String getCheckacc() {
+		return checkacc;
+	}
+
+	public void setCheckacc(String checkacc) {
+		this.checkacc = checkacc;
+	}
+
 	@Override
 	public String toString() {
 		return "Item [pro_no=" + pro_no + ", ano=" + ano + ", pname=" + pname + ", pcontent=" + pcontent + ", category="
@@ -387,7 +395,9 @@ public class Item implements Serializable {
 				+ ", supportcount=" + supportcount + ", upcount=" + upcount + ", repcount=" + repcount + ", thumbnail="
 				+ thumbnail + ", pimage=" + pimage + ", billstatus=" + billstatus + ", firstdeposit=" + firstdeposit
 				+ ", seconddeposit=" + seconddeposit + ", firstprice=" + firstprice + ", secondprice=" + secondprice
-				+ ", icomment=" + icomment + "]";
+				+ ", icomment=" + icomment + ", checkacc=" + checkacc + "]";
 	}
+
+	
 	
 }

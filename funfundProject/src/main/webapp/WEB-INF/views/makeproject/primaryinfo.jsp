@@ -202,7 +202,68 @@ li {
 	</div>
 	<script>
 		$(function(){
-			
+			var pro_no = ${pro_no};
+			$.ajax({
+				url:"selectone.it?pro_no=" + pro_no,
+				success:function(data){
+					console.log($(data));
+					console.log("프로젝트명 : " + data.item.pname)
+					if(data.item.pname != null){
+						$('[name=pname]').val(data.item.pname);
+					} 
+					if(data.item.pcontent != null){
+						$('[name=pcontent]').froalaEditor('html.set', data.item.pcontent);;
+					} 
+					if(data.item.category != null){
+						$('[name=category]').val(data.item.category);
+					}
+					if(data.item.s_psdate != null){
+						$('[name=s_psdate]').val(data.item.s_psdate);
+					}
+					if(data.item.s_pedate != null){
+						$('[name=s_pedate]').val(data.item.s_pedate);
+					}
+					if(data.item.pshort != null){
+						$('[name=pshort]').val(data.item.pshort);
+					}
+					if(data.item.ecost != null){
+						$('[name=ecost]').val(data.item.ecost);
+					}
+					if(data.item.refund != null){
+						$('[name=refund]').val(data.item.refund);
+					} 
+					if(data.item.pvideo != null){
+						$('[name=pvideo]').val(data.item.pvideo);
+					}
+					
+					if($("#sbm-flag").is(":checked") == true){
+						if(data.item.bankcode != null){
+							$('[name=bankcode]').val(data.item.bankcode);
+						} 
+						if(data.item.accpnm != null){
+							$('[name=accpnm]').val(data.item.accpnm);
+						} 
+						if(data.item.accnum != null){
+							$('[name=accnum]').val(data.item.accnum);
+						} 
+						
+						$("#sbm-ok").show();
+						$("#sbm-no").hide();
+					}
+					if(data.item.cname != null){
+						$('[name=cname]').val(data.item.cname);
+					}
+					if(data.item.cs_email != null){
+						$('[name=cs_email]').val(data.item.cs_email);
+					} 
+					if(data.item.cs_phone != null){
+						$('[name=cs_phone]').val(data.item.cs_phone);
+					} 
+					
+					
+					
+				} 
+			});
 		});
 	
 	
@@ -361,16 +422,16 @@ li {
 						<div
 							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px; padding: 10px;">
 							<select name="category">
-								<option value="">선택하세요</option>
-								<option value="테크">테크</option>
-								<option value="패션/뷰티">패션/뷰티</option>
-								<option value="푸드">푸드</option>
-								<option value="디자인">디자인제품</option>
-								<option value="예술">예술</option>
-								<option value="게임">게임</option>
-								<option value="여행">여행</option>
-								<option value="스포츠">스포츠</option>
-								<option value="공익">공익</option>
+								<option value="">선택하세요
+								<option value="테크">테크
+								<option value="패션/뷰티">패션/뷰티
+								<option value="푸드">푸드
+								<option value="디자인">디자인제품
+								<option value="예술">예술
+								<option value="게임">게임
+								<option value="여행">여행
+								<option value="스포츠">스포츠
+								<option value="공익">공익
 							</select>
 						</div>
 					</td>
@@ -1062,9 +1123,16 @@ li {
 							계좌번호 &nbsp;<input type="text" size="25"
 								placeholder="'-'를 제외하고 입력하세요." name="accnum" id="accnum">
 							&nbsp;
+							<input type="checkbox" id="sbm-flag" name="checkacc" style="display:none" checked>
+							<label id="sbm-no" style="background:red;color:white;border-radius:3px;padding:3px;">미인증</label>
+							<label id="sbm-ok" style="background:green;color:white;border-radius:3px;padding:3px;display:none">인증됨</label>
+						</div>
+						<div align="center">
+						<br>
 							<button class="btn btn-primary btn-xs"
 								onclick="fnSearchAccessToken()">확인하기</button>
 						</div>
+						
 					</td>
 					<td>&nbsp;</td>
 				</tr>
@@ -1087,29 +1155,29 @@ li {
 			function tempsave() {
 				var url = 'updateajax.it?pro_no=' + ${ pro_no } +"&flag='false'";
 				
-				
+				var checkacc = $('[name=checkacc]').val();
 				var pname = $('[name=pname]').val();
 				var pcontent = $('[name=pcontent]').val();
-				var category = $('select[name=category]').val();
+				var category = $('[name=category]').val();
 				var s_psdate = $('[name=s_psdate]').val();
 				var s_pedate = $('[name=s_pedate]').val();
 				var pshort = $('[name=pshort]').val();
 				var ecost = $('[name=ecost]').val();
 				var refund = $('[name=refund]').val();
 				var pvideo = $('[name=pvideo]').val();
-				var bankcode = $('[name=bankcode]').val();
-				var accpnm = $('[name=accpnm]').val();
-				var accnum = $('[name=accnum]').val();
 				var cname = $('[name=cname]').val();
 				var cs_email = $('[name=cs_email]').val();
 				var cs_phone = $('[name=cs_phone]').val();
+				var bankcode = $('[name=bankcode]').val();
+				var accpnm = $('[name=accpnm]').val();
+				var accnum = $('[name=accnum]').val();
 				
 				
 				
 				$.ajax({
 					url : url,
 					data: {"pname":pname, "pcontent":pcontent, "category":category, "s_psdate":s_psdate, "s_pedate":s_pedate, "pshort":pshort, "ecost":ecost, "refund":refund,
-						"pvideo":pvideo, "bankcode": bankcode, "accpnm":accpnm, "accnum":accnum, "cname":cname, "cs_email":cs_email, "cs_phone":cs_phone},
+						"pvideo":pvideo, "bankcode": bankcode, "accpnm":accpnm, "accnum":accnum, "cname":cname, "cs_email":cs_email, "cs_phone":cs_phone, "checkacc":checkacc},
 					success:function(){
 						saveImg();
 					}
@@ -1329,9 +1397,23 @@ li {
 							//$("#real_name").text(data3.responseText.replace(/,/gi, ",\n"));
 							if (data.account_holder_name == $("#accpnm").val()) {
 								alert('인증 성공!!!');
+								$("#sbm-flag").attr("cheked", true);
+								$("#sbm-flag").val("Y");
+								$("#sbm-ok").show();
+								$("#sbm-no").hide();
+								
 							} else {
 								alert('인증 실패');
+								$("#sbm-flag").attr("cheked", false);
+								$("#sbm-flag").val("N");
+								$("#sbm-ok").hide();
+								$("#sbm-no").show();
 							}
+							
+							
+								
+								
+							
 						},
 						error : function(data, data2, data3) {
 							alert('error!!!');

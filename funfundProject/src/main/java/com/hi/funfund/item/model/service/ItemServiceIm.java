@@ -151,6 +151,11 @@ public class ItemServiceIm implements ItemService{
 	public List<Item> selectRequestItem() {
 		return itemDao.selectRequestItem();
 	}
+	
+	@Override
+	public Item selectOneForUpdate(int pro_no){
+		return itemDao.selectOneForUpdate(pro_no);
+	}
 
 	
 }
