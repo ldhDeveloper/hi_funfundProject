@@ -39,6 +39,7 @@
 		<result property="firstprice" column="firstprice" />
 		<result property="secondprice" column="secondprice" />
 		<result property="icomment" column="icomment" />
+		<result property="checkacc" column="checkacc" />
 	</resultMap>
 
 	<resultMap type="itemfund" id="itemResult2">
@@ -52,7 +53,7 @@
 
 	<insert id="insert" parameterType="Item">
 		<![CDATA[
-			insert into item values(seq_pro_no.nextval, #{ano}, 'null', null, null, null, null, null, 0, null, null, null, 0, null, null, null, null, null, null, null, null, null, null, 0, 0, null);	
+			insert into item values(seq_pro_no.nextval, #{ano}, null, null, null, null, null, null, 0, null, null, null, 0, null, null, null, null, null, null, null, null, null, null, 0, 0, null, 'N')
 		]]>
 
 		<selectKey keyProperty="pro_no" resultType="Integer" order="AFTER">
@@ -319,4 +320,15 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
             where i1.pstatus = '작성중'
 			]]>
 	</select>
+	
+	<select id="selectOneForUpdate" parameterType="int" resultMap="itemResult" >
+		<![CDATA[
+			select pname, pcontent, to_char(psdate, 'yyyy-mm-dd')as s_psdate, to_char(pedate, 'yyyy-mm-dd')as s_pedate, pshort, ecost, category,
+			refund, pvideo, bankcode, accpnm, accnum, cname, cs_email, cs_phone, checkacc
+			from item
+			where pro_no = #{pro_no}
+			
+		]]>
+	</select>
+	
 </mapper>

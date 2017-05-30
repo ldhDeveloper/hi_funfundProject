@@ -98,5 +98,10 @@ public class ItemDao {
 		List<Item> iList = (List<Item>) sqlSession.selectList(nameSpace + "selectRequestItem");
 		return iList;
 	}
+
+	public Item selectOneForUpdate(int pro_no) {
+		Item item = (Item) sqlSession.selectOne(nameSpace + "selectOneForUpdate", pro_no);
+		return item;
+	}
 	
 }

@@ -55,4 +55,6 @@ public interface ItemService {
 
 	List<Item> selectRequestItem();
 
+	Item selectOneForUpdate(int pro_no);
+
 }
