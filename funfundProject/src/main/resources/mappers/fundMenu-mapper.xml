@@ -10,6 +10,7 @@
 		<result property="pro_no" column="pro_no" />
 		<result property="mcontent" column="mcontent" />
 		<result property="mdate" column="mdate" />
+		<result property="s_mdate" column="s_mdate" />
 		<result property="mnum" column="mnum" />
 		<result property="mcount" column="mcount" />
 		<result property="delyn" column="delyn" />
@@ -23,6 +24,7 @@
 		<result property="mcost" column="mcost" />
 		<result property="pro_no" column="pro_no" />
 		<result property="mcontent" column="mcontent" />
+		<result property="s_mdate" column="s_mdate" />
 		<result property="mdate" column="mdate" />
 		<result property="mnum" column="mnum" />
 		<result property="mcount" column="mcount" />
@@ -30,9 +32,18 @@
 		<result property="dcost" column="dcost" />
 		<result property="remain" column="remain" />
 	</resultMap>
-
 	<select id="selectMlist" parameterType="int" resultMap="fundMenuResult">
 		select f2.mno, mname, mcost, f2.pro_no, mcontent, mdate, mnum, mcount, delyn, dcost , fundcount, (mcount - f1.fundcount) as remain
+		from (select sum(fundcount)fundcount, mno
+		         from fundlist
+		         group by mno) f1
+		right join fundmenu f2 on f1.mno=f2.mno
+		where f2.pro_no = #{pro_no}
+		order by f2.mno
+	</select>
+	
+	<select id="selectMlist2" parameterType="int" resultMap="fundMenuResult">
+		select f2.mno, mname, mcost, f2.pro_no, mcontent, to_char(mdate, 'yyyy-mm-dd')as s_mdate, mnum, mcount, delyn, dcost , fundcount, (mcount - f1.fundcount) as remain
 		from (select sum(fundcount)fundcount, mno
 		         from fundlist
 		         group by mno) f1
@@ -48,21 +59,19 @@
 	<insert id="insertFM" parameterType="FundMenu">
 		insert into fundmenu values
 		(seq_mno.nextval, #{mname, jdbcType=VARCHAR}, #{mcost,
-		jdbcType=INTEGER}, #{pro_no}, #{mcontent, jdbcType=VARCHAR}, #{mdate,
-		jdbcType=DATE}, #{mnum}, #{mcount, jdbcType=INTEGER}, #{delyn,
+		jdbcType=INTEGER}, #{pro_no}, #{mcontent, jdbcType=VARCHAR}, to_date(#{s_mdate,jdbcType=VARCHAR}, 'yyyy-mm-dd'), #{mnum}, #{mcount, jdbcType=INTEGER}, #{delyn,
 		jdbcType=VARCHAR}, #{dcost, jdbcType=INTEGER})
 	</insert>
 
 	<update id="updateFM" parameterType="FundMenu">
 		update fundmenu set mname =
 		#{mname, jdbcType=VARCHAR}, mcost = #{mcost, jdbcType=INTEGER},
-		mcontent = #{mcontent, jdbcType=VARCHAR}, mdate = #{mdate,
-		jdbcType=DATE}, mnum = #{mnum}, mcount = #{mcount, jdbcType=INTEGER},
-		delyn = #{delyn, jdbcType=VARCHAR}, dcost = #{dcost, jdbcType=INTEGER}
+		mcontent = #{mcontent, jdbcType=VARCHAR}, mdate=to_date(#{s_mdate, jdbcType=VARCHAR},'yyyy-mm-dd'), mnum = #{mnum}, mcount = #{mcount, jdbcType=INTEGER}
+		
 		where mno=#{mno}
 	</update>
 	<select id="selectFM" parameterType="int" resultMap="fundMenuResult">
-		select mno, mname, mcost, pro_no, mcontent, mdate, mnum, mcount, delyn, dcost
+		select mno, mname, mcost, pro_no, mcontent, to_char(mdate, 'yyyy-mm-dd')as s_mdate, mnum, mcount, delyn, dcost
 		from fundmenu 
 		where mno = #{mno}
 	</select>
