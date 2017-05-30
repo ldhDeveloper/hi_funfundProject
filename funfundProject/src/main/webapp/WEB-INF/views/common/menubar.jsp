@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<% String cp = request.getContextPath(); %>
-<% String path = request.getSession().getServletContext().getRealPath("/");%>
+<%
+	String cp = request.getContextPath();
+%>
+<%
+	String path = request.getSession().getServletContext().getRealPath("/");
+%>
 <!DOCTYPE html >
 <html>
 <head>
@@ -20,174 +24,188 @@
 	href="/funfund/lib/font-awesome/font-awesome/css/font-awesome.css">
 <script type="text/javascript" src="/funfund/lib/js/jquery-3.2.1.min.js"></script>
 <script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
-<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script> <!-- 카카오  -->
-  <script src="https://apis.google.com/js/api:client.js"></script>
-
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.min.css">
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<!-- 카카오  -->
+<script src="https://apis.google.com/js/api:client.js"></script>
+<link href="/funfund/lib/css/common/font.css" rel="stylesheet" />
 
 <script type="text/javascript">
-	$(function(){
+	$(function() {
 
 		Kakao.init('c04a7d5e62e926cf85109fde19aa531a');
-		$("#login_form").submit(function(){
-			var email=$("#login_form input[name=email]").val();
-			var pwd=$("#login_form input[name=pwd]").val();
-			var rememberEmail=$("#login_form input[name=remember_email]").is(":checked");
-			if(rememberEmail){
-				$.cookie("user_email", email);
-			}else{
-				$.removeCookie("user_email");
-			}
-			if(email==""){
-				fadeOutMessage("이메일을 입력하세요", 2000);
-				$("#login_form input[name=email]").focus();
-				return false;
-			}
-			if(pwd==""){
-				fadeOutMessage("비밀번호를 입력하세요", 2000);
-				$("#login_form input[name=pwd]").focus();
-				return false;
-			}
-		});
-	loginFail();
-	changeTempPwd();
-	setPwd();
+		$("#login_form").submit(
+				function() {
+					var email = $("#login_form input[name=email]").val();
+					var pwd = $("#login_form input[name=pwd]").val();
+					var rememberEmail = $(
+							"#login_form input[name=remember_email]").is(
+							":checked");
+					if (rememberEmail) {
+						$.cookie("user_email", email);
+					} else {
+						$.removeCookie("user_email");
+					}
+					if (email == "") {
+						fadeOutMessage("이메일을 입력하세요", 2000);
+						$("#login_form input[name=email]").focus();
+						return false;
+					}
+					if (pwd == "") {
+						fadeOutMessage("비밀번호를 입력하세요", 2000);
+						$("#login_form input[name=pwd]").focus();
+						return false;
+					}
+				});
+		loginFail();
+		changeTempPwd();
+		setPwd();
 	})
-	
-	
-	function home(){
-		location.href="/funfund";
+
+	function home() {
+		location.href = "/funfund";
 	}
-	function loginFail(){
-	var loginFail = '${loginFail}';//구글등으로 로그인시 회원가입실패한 경우 날라오는 경고문
-	if(loginFail !== ""){
-	alert(loginFail);
-	home();
-	}
+	function loginFail() {
+		var loginFail = '${loginFail}';//구글등으로 로그인시 회원가입실패한 경우 날라오는 경고문
+		if (loginFail !== "") {
+			alert(loginFail);
+			home();
+		}
 	}
 	//임시비밀번호로 변경성공시 모달창 띄우기
-	function changeTempPwd(){
+	function changeTempPwd() {
 		var tempE = "${tempEmail}";
-		if(tempE !== ""){
+		if (tempE !== "") {
 			$("#myModal9").modal("show");
 		}
 	}
 	//임시비밀번호 및 새 비밀번호 설정
-	function checkPwd(){
-		if($("#newPwd").text() != $("#confirmPwd").text()){
+	function checkPwd() {
+		if ($("#newPwd").text() != $("#confirmPwd").text()) {
 			return false;
 		}
 	}
 	//새 비밀번호 설정시 결과값 받는 함수
-	function setPwd(){
+	function setPwd() {
 		var message = "${pwdMessage}";
-		if(message != ""){
-		alert(message);
-		
-		if(message =="임시비밀번호가 맞지않습니다." || message == "비밀번호 변경에 실패했습니다."){
-			
-			$("#myModal9").modal("show");
-		}else{
-			home();
-		}
+		if (message != "") {
+			alert(message);
+
+			if (message == "임시비밀번호가 맞지않습니다." || message == "비밀번호 변경에 실패했습니다.") {
+
+				$("#myModal9").modal("show");
+			} else {
+				home();
+			}
 		}
 	}
 </script>
 <!-- 결제 함수 -->
 
 
-<script>//구글
-  var googleUser = {};
-  var profile;
-  var nickname;
-  var emaill
-  var idtoken;
-  var access_token;
-   function googleLogin() {
-    gapi.load('auth2', function(){
-      // Retrieve the singleton for the GoogleAuth library and set up the client.
-      auth2 = gapi.auth2.init({
-        client_id: '659736995246-ddl5nvftj5f76j3gk122g03t00n18pl7.apps.googleusercontent.com',
-        cookiepolicy: 'single_host_origin',
-        scope: 'profile'
-      });
-      auth2.attachClickHandler(document.getElementById('gSignupBt'), {},
-    	        function(googleUser) {
-    	        }, function(error) {
-    	          alert(JSON.stringify(error, undefined, 2));
-    	        });
-      auth2.signIn().then(function() {
-    	   profile = auth2.currentUser.get().getBasicProfile();
-    	   
-    	   nickname = profile.getName();
-    	   email = profile.getEmail();
-    	   pimage = profile.getImageUrl();
-    	   /* alert(auth2.currentUser.getAuthResponse().id_token); */
-    	   idtoken = auth2.currentUser.get().getId();
-    	   access_token =  "없음";
- 			
-    	   loginWithThirdParty(email, nickname, idtoken, access_token, pimage);
-    	  });
-    
-    
-    });
-  };
-  /* function googleSignOut() {
+<script>
+	//구글
+	var googleUser = {};
+	var profile;
+	var nickname;
+	var emaill
+	var idtoken;
+	var access_token;
+	function googleLogin() {
+		gapi
+				.load(
+						'auth2',
+						function() {
+							// Retrieve the singleton for the GoogleAuth library and set up the client.
+							auth2 = gapi.auth2
+									.init({
+										client_id : '659736995246-ddl5nvftj5f76j3gk122g03t00n18pl7.apps.googleusercontent.com',
+										cookiepolicy : 'single_host_origin',
+										scope : 'profile'
+									});
+							auth2.attachClickHandler(document
+									.getElementById('gSignupBt'), {}, function(
+									googleUser) {
+							}, function(error) {
+								alert(JSON.stringify(error, undefined, 2));
+							});
+							auth2.signIn().then(
+									function() {
+										profile = auth2.currentUser.get()
+												.getBasicProfile();
+
+										nickname = profile.getName();
+										email = profile.getEmail();
+										pimage = profile.getImageUrl();
+										/* alert(auth2.currentUser.getAuthResponse().id_token); */
+										idtoken = auth2.currentUser.get()
+												.getId();
+										access_token = "없음";
+
+										loginWithThirdParty(email, nickname,
+												idtoken, access_token, pimage);
+									});
+
+						});
+	};
+	/* function googleSignOut() {
 	    var auth2 = gapi.auth2.getAuthInstance();
 	    auth2.signOut().then(function () {
 	      console.log('User signed out.');
 	    });} */
-  </script>
+</script>
 
 <script type='text/javascript'>
-//common function for sns user
+	//common function for sns user
+	function loginWithThirdParty(email, name, idtoken, access_token, pimage) {
 
-function loginWithThirdParty(email, name, idtoken, access_token, pimage ){
-	
-location.href="loginWithApi.ao?email="+email +"&nickname="+ name + "&idtoken="+ idtoken +"&access_token="+access_token
-		"$pimage="+pimage;
-} 
- var nickname;
- var email;
- var idtoken;
- var access_token;
- 
-//카카오톡 회원 로그인 
+		location.href = "loginWithApi.ao?email=" + email + "&nickname=" + name
+				+ "&idtoken=" + idtoken + "&access_token=" + access_token
+		"$pimage=" + pimage;
+	}
+	var nickname;
+	var email;
+	var idtoken;
+	var access_token;
 
-    // 카카오 로그인 버튼을 생성합니다.
-  function loginWithKakao(){
-	  Kakao.Auth.login({
-    		success: function(authObj){//로그인시도
-    			//alert(JSON.stringify(authObj));
-    			access_token = authObj.access_token;
-    			Kakao.API.request({
-    			url: '/v1/user/me',
-    			success: function(res){
-    			nickname = res.properties.nickname;
-    			email = res.kaccount_email;
-    			pimage= res.properties.profile_image;
-    			alert(JSON.stringify(res));
-    			idtoken = res.id;
-    			loginWithThirdParty(email, nickname, idtoken, access_token, pimage);  
-    			},
-    			fail: function(error){
-    				alert(JSON.stringify(error));
-    			}
-    			});
-    		},
-    		fail : function(err){
-    			alert(JSON.stringify(err));
-    		},
-    		persistAccessToken : true
-    	});
-	  };
-  //]]>
-/*   function KakaoLogout(){
-	  Kakao.Auth.logout();
-  } */
-   
+	//카카오톡 회원 로그인 
+
+	// 카카오 로그인 버튼을 생성합니다.
+	function loginWithKakao() {
+		Kakao.Auth.login({
+			success : function(authObj) {//로그인시도
+				//alert(JSON.stringify(authObj));
+				access_token = authObj.access_token;
+				Kakao.API.request({
+					url : '/v1/user/me',
+					success : function(res) {
+						nickname = res.properties.nickname;
+						email = res.kaccount_email;
+						pimage = res.properties.profile_image;
+						alert(JSON.stringify(res));
+						idtoken = res.id;
+						loginWithThirdParty(email, nickname, idtoken,
+								access_token, pimage);
+					},
+					fail : function(error) {
+						alert(JSON.stringify(error));
+					}
+				});
+			},
+			fail : function(err) {
+				alert(JSON.stringify(err));
+			},
+			persistAccessToken : true
+		});
+	};
+	//]]>
+	/*   function KakaoLogout(){
+	 Kakao.Auth.logout();
+	 } */
 </script>
 
 <style>
@@ -693,15 +711,15 @@ input.input_tel {
 }
 
 .text-center {
-	text-align: center !ortant;
+	text-align: center!ortant;
 }
 
 .text-left {
-	text-align: left !ortant;
+	text-align: left!ortant;
 }
 
 .text-right {
-	text-align: right !ortant;
+	text-align: right!ortant;
 }
 
 label.sign-form_title {
@@ -713,202 +731,223 @@ label.sign-form_title {
 }
 
 /* left right show */
-	.modal.left .modal-dialog,
-	.modal.right .modal-dialog {
-		position: fixed;
-		margin: auto;
-		width: 320px;
-		height: 100%;
-		-webkit-transform: translate3d(0%, 0, 0);
-		    -ms-transform: translate3d(0%, 0, 0);
-		     -o-transform: translate3d(0%, 0, 0);
-		        transform: translate3d(0%, 0, 0);
-	}
+.modal.left .modal-dialog, .modal.right .modal-dialog {
+	position: fixed;
+	margin: auto;
+	width: 320px;
+	height: 100%;
+	-webkit-transform: translate3d(0%, 0, 0);
+	-ms-transform: translate3d(0%, 0, 0);
+	-o-transform: translate3d(0%, 0, 0);
+	transform: translate3d(0%, 0, 0);
+}
 
-	.modal.left .modal-content,
-	.modal.right .modal-content {
-		height: 100%;
-		overflow-y: auto;
-	}
-	
-	.modal.left .modal-body,
-	.modal.right .modal-body {
-		padding: 15px 15px 80px;
-	}
+.modal.left .modal-content, .modal.right .modal-content {
+	height: 100%;
+	overflow-y: auto;
+}
+
+.modal.left .modal-body, .modal.right .modal-body {
+	padding: 15px 15px 80px;
+}
 
 /*Left*/
-	.modal.left.fade .modal-dialog{
-		left: -320px;
-		-webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
-		   -moz-transition: opacity 0.3s linear, left 0.3s ease-out;
-		     -o-transition: opacity 0.3s linear, left 0.3s ease-out;
-		        transition: opacity 0.3s linear, left 0.3s ease-out;
-	}
-	
-	.modal.left.fade.in .modal-dialog{
-		left: 0;
-	}
-        
+.modal.left.fade .modal-dialog {
+	left: -320px;
+	-webkit-transition: opacity 0.3s linear, left 0.3s ease-out;
+	-moz-transition: opacity 0.3s linear, left 0.3s ease-out;
+	-o-transition: opacity 0.3s linear, left 0.3s ease-out;
+	transition: opacity 0.3s linear, left 0.3s ease-out;
+}
+
+.modal.left.fade.in .modal-dialog {
+	left: 0;
+}
+
 /*Right*/
-	.modal.right.fade .modal-dialog {
-		right: -320px;
-		-webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
-		   -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
-		     -o-transition: opacity 0.3s linear, right 0.3s ease-out;
-		        transition: opacity 0.3s linear, right 0.3s ease-out;
-	}
-	
-	.modal.right.fade.in .modal-dialog {
-		right: 0;
-	}
+.modal.right.fade .modal-dialog {
+	right: -320px;
+	-webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+	-moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+	-o-transition: opacity 0.3s linear, right 0.3s ease-out;
+	transition: opacity 0.3s linear, right 0.3s ease-out;
+}
+
+.modal.right.fade.in .modal-dialog {
+	right: 0;
+}
 
 /* ----- MODAL STYLE ----- */
-	.modal-content {
-		border-radius: 0;
-		border: none;
-	}
-
-	.modal-header {
-		border-bottom-color: #EEEEEE;
-		background-color: #FAFAFA;
-	}
-.profile-image{
-	width:34px;
-	height:34px;
+.modal-content {
+	border-radius: 0;
+	border: none;
 }
+
+.modal-header {
+	border-bottom-color: #EEEEEE;
+	background-color: #FAFAFA;
+}
+
+.profile-image {
+	width: 34px;
+	height: 34px;
+}
+
 </style>
 
 <title>Insert title here</title>
 
 </head>
 <body>
-   <div class="row middle-menubar hidden-xs">
-   
-   <div class="col-lg-2 col-md-2 col-sm-2">
-   	<img src="/funfund/images/common/logo.png" style="widht:400px;height:70px;cursor:pointer" onclick="home();">
-   </div>
-   <div class="col-lg-5 col-md-3 col-sm-2">
-   	&nbsp;
-   </div>
-   <div class="col-lg-5 col-md-7 col-sm-8">
-   		<table style="width:610px">
-        	<tr>
-            	<c:if test="${empty sessionScope.account.id }">
-            		<td style="width:150px;"><a class="fun-menu" href="make.do">프로젝트 등록하기</a></td>
-           	 		<td style="width:150px;"><a class="fun-menu" href="funding.it">프로젝트 둘러보기</a></td>
-            		<td style="width:80px;"><a class="fun-menu" href="nList.no?sbno=1&spage=1">고객센터</a></td>
-            		<td style="width:80px;"><a class="fun-menu" href="#"  data-toggle="modal" data-target="#myModal">로그인</a></td>
-            	</c:if>
-            	<c:if test="${not empty sessionScope.account.id }">
-            		<td style="width:80px;"><a class="fun-menu" href="#"><c:out value="${sessionScope.account.nickname}" /></a></td>
-            		<td style="width:80px;"><a class="fun-menu" data-toggle="modal" data-target="#myModal4" style="cursor:pointer">
-            		
-            		
-          
-            		<c:if test="${!empty sessionScope.account.pimage }">
-            			<img style="width:34px;" class="img-circle img-responsive" src="images/myinfo/<c:out value='${sessionScope.account.pimage }'/>"/>
-            		</c:if>
-            		<c:if test="${empty sessionScope.account.pimage }">
-            			<img style="width:34px;" class="img-circle img-responsive" src="images/myinfo/basic.png"/>
-            		</c:if>
-            		</td>
-            		
-            		<!-- <td style="width:80px;"><a class="fun-menu" href="logout.ao">로그아웃</a></td>
-            		<td style="width:150px;"><a class="fun-menu" href="myinfo.ao">회원정보보기</a></td> -->
-            	</c:if>  	
-         	</tr>
-      </table>
-   </div>   
-   </div>
-  <div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-            <span class="modal-close" data-dismiss="modal" >&nbsp;</span>
-            <h2 class="p-t-login">로그인</h2>
-       </div>
-      <div class="modal-body" style="padding:30px;">
-      	<form id="login_form" action="login.ao" method="post">
-		<!-- <input type="hidden" name="secuToken" value="AMGTeZ912mzkHTrXtwiEPA"/> -->
-        <div class="modal-body modal-body-login">
-              <fieldset style="border:0; margin:0; padding:0;">
-                <legend class="login-title-txt">소셜 로그인</legend>
-                <a href="#" class="signin-social p-login_btn login-social-facebook" data-sns="facebook" alt="페이스북으로 로그인" >페이스북으로 로그인</a>
-           		<a href="#" onclick="loginWithKakao()" id="cSignInBt" class="signin-social p-login_btn login-social-kakao"  data-sns="kakao"  alt="카카오로 로그인" >카카오로 로그인</a>
-           		<a href="javascript:googleLogin()" id="gSignupBt" class="signin-social p-login_btn login-social-google"  data-sns="google"  alt="구글로 로그인" >구글로 로그인</a>
-           		<div class="g-signin2" data-onsuccess="onSignIn"></div>
-           		<a href="#" id="nSignInBt" class="signin-social p-login_btn login-social-naver"  data-sns="naver"  alt="네이버로 로그인" >네이버 로그인</a>
-              </fieldset>
+	<div class="row middle-menubar hidden-xs">
 
-            <p class="lineor_bg"><span class="lineor">또는</span></p>
-            <div class="login-email">
-	            <input type="email" name="id" placeholder="이메일주소" autofocus="autofocus" required /> <!-- 20160727 autofocus 추가 -->
-	            <input type="password" name="pwd" placeholder="영문+숫자포함 6~20자" required/>
-	            <a href="javascript:void(0);" class="find_pwd" onclick="findPwd();">비밀번호를 잊으셨나요?</a>
-            </div>
-            <label for="rememberemail" class="remeber_email">
-            <input type="checkbox" id="rememberemail" name="remember_email" class="remeber_check"/>이메일기억하기</label>
-        </div>
-        <div class="modal-footer">
-            <button class="btn-login_pop">로그인하기</button>
-            <p class="go_signup">펀펀회원이 아니신가요? <a id="linkSignup" href="javascript:void(0);" >회원가입</a></p>
-        </div>
-        </form>  	
-      </div>
-    </div>
-  </div>
-</div>
-<script type="text/javascript">
-	$(function(){
-		$("#linkSignup").click(function(){
-			$("#myModal").modal("hide");
-			$("#myModal3").modal("show");
+		<div class="col-lg-2 col-md-2 col-sm-2">
+			<img src="/funfund/images/common/logo.png"
+				style="widht: 400px; height: 70px; cursor: pointer"
+				onclick="home();">
+		</div>
+		<div class="col-lg-5 col-md-3 col-sm-2">&nbsp;</div>
+		<div class="col-lg-5 col-md-7 col-sm-8">
+			<table style="width: 610px">
+				<tr>
+					<c:if test="${empty sessionScope.account.id }">
+						<td style="width: 150px;"><a class="fun-menu" href="make.do">프로젝트
+								등록하기</a></td>
+						<td style="width: 150px;"><a class="fun-menu"
+							href="funding.it">프로젝트 둘러보기</a></td>
+						<td style="width: 80px;"><a class="fun-menu"
+							href="nList.no?sbno=1&spage=1">고객센터</a></td>
+						<td style="width: 80px;"><a class="fun-menu" href="#"
+							data-toggle="modal" data-target="#myModal">로그인</a></td>
+					</c:if>
+					<c:if test="${not empty sessionScope.account.id }">
+						<td style="width: 80px;"><a class="fun-menu" href="#"><c:out
+									value="${sessionScope.account.nickname}" /></a></td>
+						<td style="width: 80px;"><a class="fun-menu"
+							data-toggle="modal" data-target="#myModal4"
+							style="cursor: pointer"> <c:if
+									test="${!empty sessionScope.account.pimage }">
+									<img style="width: 34px;" class="img-circle img-responsive"
+										src="images/myinfo/<c:out value='${sessionScope.account.pimage }'/>" />
+								</c:if> <c:if test="${empty sessionScope.account.pimage }">
+									<img style="width: 34px;" class="img-circle img-responsive"
+										src="images/myinfo/basic.png" />
+								</c:if></td>
+
+						<!-- <td style="width:80px;"><a class="fun-menu" href="logout.ao">로그아웃</a></td>
+            		<td style="width:150px;"><a class="fun-menu" href="myinfo.ao">회원정보보기</a></td> -->
+					</c:if>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div id="myModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<span class="modal-close" data-dismiss="modal">&nbsp;</span>
+					<h2 class="p-t-login">로그인</h2>
+				</div>
+				<div class="modal-body" style="padding: 30px;">
+					<form id="login_form" action="login.ao" method="post">
+						<!-- <input type="hidden" name="secuToken" value="AMGTeZ912mzkHTrXtwiEPA"/> -->
+						<div class="modal-body modal-body-login">
+							<fieldset style="border: 0; margin: 0; padding: 0;">
+								<legend class="login-title-txt">소셜 로그인</legend>
+								<a href="#"
+									class="signin-social p-login_btn login-social-facebook"
+									data-sns="facebook" alt="페이스북으로 로그인">페이스북으로 로그인</a> <a href="#"
+									onclick="loginWithKakao()" id="cSignInBt"
+									class="signin-social p-login_btn login-social-kakao"
+									data-sns="kakao" alt="카카오로 로그인">카카오로 로그인</a> <a
+									href="javascript:googleLogin()" id="gSignupBt"
+									class="signin-social p-login_btn login-social-google"
+									data-sns="google" alt="구글로 로그인">구글로 로그인</a>
+								<div class="g-signin2" data-onsuccess="onSignIn"></div>
+								<a href="#" id="nSignInBt"
+									class="signin-social p-login_btn login-social-naver"
+									data-sns="naver" alt="네이버로 로그인">네이버 로그인</a>
+							</fieldset>
+
+							<p class="lineor_bg">
+								<span class="lineor">또는</span>
+							</p>
+							<div class="login-email">
+								<input type="email" name="id" placeholder="이메일주소"
+									autofocus="autofocus" required />
+								<!-- 20160727 autofocus 추가 -->
+								<input type="password" name="pwd" placeholder="영문+숫자포함 6~20자"
+									required /> <a href="javascript:void(0);" class="find_pwd"
+									onclick="findPwd();">비밀번호를 잊으셨나요?</a>
+							</div>
+							<label for="rememberemail" class="remeber_email"> <input
+								type="checkbox" id="rememberemail" name="remember_email"
+								class="remeber_check" />이메일기억하기
+							</label>
+						</div>
+						<div class="modal-footer">
+							<button class="btn-login_pop">로그인하기</button>
+							<p class="go_signup">
+								펀펀회원이 아니신가요? <a id="linkSignup" href="javascript:void(0);">회원가입</a>
+							</p>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$(function() {
+			$("#linkSignup").click(function() {
+				$("#myModal").modal("hide");
+				$("#myModal3").modal("show");
+			});
+			/* 	$("#emailSignup").click(function(){
+					$("#myModal2").modal("hide");
+					$("#myModal3").modal("show");
+				}); */
 		});
-	/* 	$("#emailSignup").click(function(){
-			$("#myModal2").modal("hide");
-			$("#myModal3").modal("show");
-		}); */
-	});
-	function findPwd(){
-		$("#myModal").modal("hide");
-		$("#myModal5").modal("show");
-	}
-	
-	function trytopay(){
-		
-/* 		IMP.init("imp79484327");
-	//권한 불승인 !!!
-		 $.ajax({
-		url :"https://api.iamport.kr/users/getToken",
-		
-		crossDomain : true,
-		data : {"imp_key" : "0181304251894926", "imp_secret" : "tCrG13c6c1hA3LPBWFBnAOZhKq8cNlUhYlYZoa6Bbnbf91R5Gstghsy2THeG29Y0uW0T76vjuGyEIpKp"},
-		contentType: 'application/json; charset=utf-8',
-		dataType : "JSON",
-		success : function(data){
-			console.log(data);
-		},
-		error: function(jqXHR, textStatus, errorThrown) {
-		    var err;
-		    if (textStatus !== "abort" && errorThrown !== "abort") {
-		        try {
-		            err = $.parseJSON(jqXHR.responseText);
-		            alert(err.Message);
-		        } catch(e) {
-		            alert("ERROR:\n" + jqXHR.responseText);
-		        }
-		    }
+		function findPwd() {
+			$("#myModal").modal("hide");
+			$("#myModal5").modal("show");
 		}
-	});	   */
-	/*    var xhttp = new XMLHttpRequest();
-	 xhttp.open("POST", "https://api.iamport.kr/users/getToken?_token=1a2662c58b3a491bf3bb1bd0a87c0f82b31c8be3", false);
-	 xhttp.setRequestHeader("Content-type", "application/json");
-	 xhttp.send();
-	 console.log(xhttp.status);
-		  */
-	}
-</script><!-- 
+
+		function trytopay() {
+
+			/* 		IMP.init("imp79484327");
+			 //권한 불승인 !!!
+			 $.ajax({
+			 url :"https://api.iamport.kr/users/getToken",
+			
+			 crossDomain : true,
+			 data : {"imp_key" : "0181304251894926", "imp_secret" : "tCrG13c6c1hA3LPBWFBnAOZhKq8cNlUhYlYZoa6Bbnbf91R5Gstghsy2THeG29Y0uW0T76vjuGyEIpKp"},
+			 contentType: 'application/json; charset=utf-8',
+			 dataType : "JSON",
+			 success : function(data){
+			 console.log(data);
+			 },
+			 error: function(jqXHR, textStatus, errorThrown) {
+			 var err;
+			 if (textStatus !== "abort" && errorThrown !== "abort") {
+			 try {
+			 err = $.parseJSON(jqXHR.responseText);
+			 alert(err.Message);
+			 } catch(e) {
+			 alert("ERROR:\n" + jqXHR.responseText);
+			 }
+			 }
+			 }
+			 });	   */
+			/*    var xhttp = new XMLHttpRequest();
+			 xhttp.open("POST", "https://api.iamport.kr/users/getToken?_token=1a2662c58b3a491bf3bb1bd0a87c0f82b31c8be3", false);
+			 xhttp.setRequestHeader("Content-type", "application/json");
+			 xhttp.send();
+			 console.log(xhttp.status);
+			 */
+		}
+	</script>
+	<!-- 
 <div id="myModal2" class="modal fade" role="dialog">
   <div class="modal-dialog">
     Modal content
@@ -942,178 +981,209 @@ label.sign-form_title {
     </div> 
   </div>
 </div> -->
-<div id="myModal3" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-           <span class="modal-close"  data-dismiss="modal" onclick="closeEmailSignupBox();">&nbsp;</span>
-          <h2 class="p-t-signup">회원가입</h2>
-       </div>
-      <div class="modal-body" style="padding:30px;">
-      	<form id="join_form" action="signup.ao" method="post">
-          	<input type="hidden" name="secuToken" value="7QD6StfHBmmEFvusyATSQA"/>
-          	<input type="hidden" name="nmLast" value=""/>
-          	<input type="hidden" name="mobile" value=""/>
-            <fieldset  style="border:0; margin:0; padding:0;">
-              <legend class="signup-title-txt">기본정보</legend>
-                  <input type="email" id="signup-form_id" name="id" placeholder="아이디(이메일)" class="sign-form_input">
-                  <input type="password" id="signup-form_pw" name="pwd" placeholder="영문+숫자포함 6~20자" class="sign-form_input">
-                  <input type="password" id="signup-form_pw" placeholder="비밀번호확인" class="sign-form_input">
-                  <input type="text" id="signup-form_pw" name="nickname" placeholder="닉네임" class="sign-form_input">
-            </fieldset>
-            <div class="modal-footer">
-            	<button class="btn-login_pop">회원가입하기</button>
-            	<p class="go_signup">위의 버튼을 눌러 약관에 동의하고 회원가입합니다.</p>
-            </div>
-		  </form>          
-      </div>
-    </div> 
-  </div>
-</div>
-<div id="myModal5" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-           <span class="modal-close"  data-dismiss="modal" onclick="closeEmailSignupBox();">&nbsp;</span>
-          <h2 class="p-t-signup">비밀번호 찾기</h2>
-       </div>
-      <div class="modal-body" style="padding:30px;">
-      	<form id="join_form" action="changePw.ao" method="post">
-            <fieldset  style="border:0; margin:0; padding:0;">
-              <legend class="signup-title-txt">이메일</legend>
-                  <input type="email" id="signup-form_id" name="email" placeholder="아이디(이메일)" class="sign-form_input">
-            </fieldset>
-            <div class="modal-footer">
-            	<button class="btn-login_pop">임시비밀번호 전송</button>
-            	<p class="go_signup">입력된 이메일로 임시비밀번호를 보내드립니다.</p>
-            </div>
-		  </form>          
-      </div>
-    </div> 
-  </div>
-</div>
-<div id="myModal9" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-           <span class="modal-close"  data-dismiss="modal" onclick="closeEmailSignupBox();">&nbsp;</span>
-          <h2 class="p-t-signup">비밀번호 찾기</h2>
-       </div>
-      <div class="modal-body" style="padding:30px;">
-      	<form id="join_form" action="setPwd.ao" method="post" onsubmit ="return checkPwd();">
-          	<input type="hidden" name="secuToken" value="7QD6StfHBmmEFvusyATSQA"/>
-          	<input type="hidden" name="nmLast" value=""/>
-          	<input type="hidden" name="mobile" value=""/>
-            <fieldset  style="border:0; margin:0; padding:0;">
-              <legend class="signup-title-txt">이메일</legend>
-              	<input type="hidden" name ="ano" value="${ano}" >
-                  <input type="hidden" name = "email" value= "${tempEmail}">
-                    <input type="hidden" name = "id" value= "${tempEmail}">
-                   <input type="text" id="signup-form_id" name="pwd" placeholder="임시비밀번호" class="sign-form_input">
-                    <input type="text" id="signup-form_id" name="newPwd" placeholder="번경할 비밀번호" class="sign-form_input">
-                     <input type="text" id="signup-form_id" name="confirmPwd" placeholder="비밀번호 재입력" class="sign-form_input">
-            </fieldset>
-            <div class="modal-footer">
-            	<button class="btn-login_pop">비밀번호 변경</button>
-            	<p class="go_signup"> 신규비밀번호를 설정합니다.</p>
-            </div>
-		  </form>          
-      </div>
-    </div> 
-  </div>
-</div>
-<style>
-#navlist .navheader{
+	<div id="myModal3" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<span class="modal-close" data-dismiss="modal"
+						onclick="closeEmailSignupBox();">&nbsp;</span>
+					<h2 class="p-t-signup">회원가입</h2>
+				</div>
+				<div class="modal-body" style="padding: 30px;">
+					<form id="join_form" action="signup.ao" method="post">
+						<input type="hidden" name="secuToken"
+							value="7QD6StfHBmmEFvusyATSQA" /> <input type="hidden"
+							name="nmLast" value="" /> <input type="hidden" name="mobile"
+							value="" />
+						<fieldset style="border: 0; margin: 0; padding: 0;">
+							<legend class="signup-title-txt">기본정보</legend>
+							<input type="email" id="signup-form_id" name="id"
+								placeholder="아이디(이메일)" class="sign-form_input"> <input
+								type="password" id="signup-form_pw" name="pwd"
+								placeholder="영문+숫자포함 6~20자" class="sign-form_input"> <input
+								type="password" id="signup-form_pw" placeholder="비밀번호확인"
+								class="sign-form_input"> <input type="text"
+								id="signup-form_pw" name="nickname" placeholder="닉네임"
+								class="sign-form_input">
+						</fieldset>
+						<div class="modal-footer">
+							<button class="btn-login_pop">회원가입하기</button>
+							<p class="go_signup">위의 버튼을 눌러 약관에 동의하고 회원가입합니다.</p>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="myModal5" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<span class="modal-close" data-dismiss="modal"
+						onclick="closeEmailSignupBox();">&nbsp;</span>
+					<h2 class="p-t-signup">비밀번호 찾기</h2>
+				</div>
+				<div class="modal-body" style="padding: 30px;">
+					<form id="join_form" action="changePw.ao" method="post">
+						<fieldset style="border: 0; margin: 0; padding: 0;">
+							<legend class="signup-title-txt">이메일</legend>
+							<input type="email" id="signup-form_id" name="email"
+								placeholder="아이디(이메일)" class="sign-form_input">
+						</fieldset>
+						<div class="modal-footer">
+							<button class="btn-login_pop">임시비밀번호 전송</button>
+							<p class="go_signup">입력된 이메일로 임시비밀번호를 보내드립니다.</p>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="myModal9" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<span class="modal-close" data-dismiss="modal"
+						onclick="closeEmailSignupBox();">&nbsp;</span>
+					<h2 class="p-t-signup">비밀번호 찾기</h2>
+				</div>
+				<div class="modal-body" style="padding: 30px;">
+					<form id="join_form" action="setPwd.ao" method="post"
+						onsubmit="return checkPwd();">
+						<input type="hidden" name="secuToken"
+							value="7QD6StfHBmmEFvusyATSQA" /> <input type="hidden"
+							name="nmLast" value="" /> <input type="hidden" name="mobile"
+							value="" />
+						<fieldset style="border: 0; margin: 0; padding: 0;">
+							<legend class="signup-title-txt">이메일</legend>
+							<input type="hidden" name="ano" value="${ano}"> <input
+								type="hidden" name="email" value="${tempEmail}"> <input
+								type="hidden" name="id" value="${tempEmail}"> <input
+								type="text" id="signup-form_id" name="pwd" placeholder="임시비밀번호"
+								class="sign-form_input"> <input type="text"
+								id="signup-form_id" name="newPwd" placeholder="번경할 비밀번호"
+								class="sign-form_input"> <input type="text"
+								id="signup-form_id" name="confirmPwd" placeholder="비밀번호 재입력"
+								class="sign-form_input">
+						</fieldset>
+						<div class="modal-footer">
+							<button class="btn-login_pop">비밀번호 변경</button>
+							<p class="go_signup">신규비밀번호를 설정합니다.</p>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<style>
+#navlist .navheader {
 	border-radius: 0px !important;
-    -webkit-border-radius: 0px !important;
-    -ms-border-radius: 0px !important;
-    -moz-border-radius: 0px !important;
+	-webkit-border-radius: 0px !important;
+	-ms-border-radius: 0px !important;
+	-moz-border-radius: 0px !important;
 	height: 120px !important;
 	position: relative;
-    padding: 16px;
-    background: #40C9A1;
+	padding: 16px;
+	background: #40C9A1;
 }
-#navlist .navproimage{
-	width:66px; 
-	height:66px; 
-	margin-right:12px; 
-	display:inline-block;
+
+#navlist .navproimage {
+	width: 66px;
+	height: 66px;
+	margin-right: 12px;
+	display: inline-block;
 }
-#navlist .navproimage img{
-	float:left;
+
+#navlist .navproimage img {
+	float: left;
 	border-radius: 50%;
-	width:64px;
-	height:64px;
+	width: 64px;
+	height: 64px;
 }
+
 #navlist .profileinfo {
 	display: inline-block;
 	width: 144px;
 }
+
 #navlist .profileinfo .nickname {
-    font-size: 17px;
-    font-weight: 500;
-    line-height: 23px;
-    color: #fff;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+	font-size: 17px;
+	font-weight: 500;
+	line-height: 23px;
+	color: #fff;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
+
 #navlist .profileinfo .username {
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 18px;
-    color: #fff;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+	font-size: 13px;
+	font-weight: 400;
+	line-height: 18px;
+	color: #fff;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
+
 #navlist .profileinfo .accnttype {
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 16px;
-    color: #fff;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 16px;
+	color: #fff;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
+
 #navlist .navmenu-list ul {
-    padding: 7px 0 8px;
-    border-bottom: 1px solid #e6eaed;
+	padding: 7px 0 8px;
+	border-bottom: 1px solid #e6eaed;
 }
+
 #navlist .navmenu-list li {
 	list-style: none;
 }
+
 #navlist .navmenu-list li a {
-    font-size: 15px;
-    font-weight: 400;
-    display: block;
-    padding: 0 16px;
-    height: 48px;
-    
+	font-size: 15px;
+	font-weight: 400;
+	display: block;
+	padding: 0 16px;
+	height: 48px;
 }
 </style>
-<div class="modal right fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+	<div class="modal right fade" id="myModal4" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel2">
 		<div class="modal-dialog" role="document">
 			<div id="navlist" class="modal-content">
 
 				<div class="modal-header navheader">
 					<div class="navproimage">
-					<c:if test="${empty sessionScope.account.pimage }">
-						<img src="images/myinfo/basic.png">
-					</c:if>
-					<c:if test="${!empty sessionScope.account.pimage }">
-						<img src="images/myinfo/<c:out value='${sessionScope.account.pimage }'/>">
-					</c:if>
+						<c:if test="${empty sessionScope.account.pimage }">
+							<img src="images/myinfo/basic.png">
+						</c:if>
+						<c:if test="${!empty sessionScope.account.pimage }">
+							<img
+								src="images/myinfo/<c:out value='${sessionScope.account.pimage }'/>">
+						</c:if>
 					</div>
 					<div class="profileinfo">
-						<p class="nickname"><c:out value="${sessionScope.account.nickname}"/></p>
-						<p class="username"><c:out value="${sessionScope.account.id}"/></p>
+						<p class="nickname">
+							<c:out value="${sessionScope.account.nickname}" />
+						</p>
+						<p class="username">
+							<c:out value="${sessionScope.account.id}" />
+						</p>
 						<p class="accnttype">개인투자자</p>
 					</div>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
 				</div>
 				<div class="modal-body">
 					<div class="navmenu-list">
@@ -1126,15 +1196,19 @@ label.sign-form_title {
 							<li><a href="myinfo.ao">회원정보보기</a>
 						</ul>
 						<ul>
-							<li><a href="logout.ao" onclick="googleSignOut();KakaoLogout();">로그아웃</a>
+							<li><a href="logout.ao"
+								onclick="googleSignOut();KakaoLogout();">로그아웃</a>
 						</ul>
 					</div>
 					<div></div>
 				</div>
 
-			</div><!-- modal-content -->
-		</div><!-- modal-dialog -->
-	</div><!-- modal -->
+			</div>
+			<!-- modal-content -->
+		</div>
+		<!-- modal-dialog -->
+	</div>
+	<!-- modal -->
 
 </body>
 </html>

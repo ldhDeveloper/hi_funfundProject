@@ -59,6 +59,7 @@ public class ItemController {
 	@Autowired
 	private AttachmentService attachmentService;
 
+	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	@InitBinder
@@ -341,6 +342,7 @@ public class ItemController {
 		List<Itemfund> bestList = itemService.bestList(pro_no);
 		List<FundMenu> mList = fundMenuService.selectList(pro_no);
 		List<ItemAsk> aList = itemAskService.selectList(pro_no);
+		List<Attachment> sList = attachmentService.selectimgList(pro_no);
 		if (item.getPvideo() != null || item.getPvideo() == "") {
 			// youtube 주소
 			String vaddress = item.getPvideo();
@@ -352,6 +354,7 @@ public class ItemController {
 		model.addObject("mList", mList);
 		model.addObject("aList", aList);
 		model.addObject("bestList", bestList);
+		model.addObject("sList", sList);
 		model.setViewName("funding/detailList");
 		return model;
 	}

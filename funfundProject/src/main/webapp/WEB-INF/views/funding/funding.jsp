@@ -60,10 +60,6 @@ li {
 	float: left;
 }
 
-img {
-	vertical-align: middle;
-}
-
 .background {
 	background-color: #F9F7F5;
 }
@@ -97,11 +93,10 @@ button {
 	position: relative;
 	width: 100%;
 	overflow: hidden;
-	max-width: 500px !important;
 }
 
 .slide {
-	width: 500px;
+	max-width: 500px;
 	align: left;
 	 display: inline-block;
 	/* float: left; */
@@ -113,7 +108,6 @@ button {
 
 .align {
    display: inline-block;
-	padding-top: 20px;
 	margin-left:-5px;
 }
 
@@ -311,6 +305,8 @@ button {
 										}
 									});
 						})
+						
+						$('.carousel').carousel({ interval:2500 });
 	});
 </script>
 </head>
@@ -318,34 +314,31 @@ button {
 	<jsp:include page="/WEB-INF/views/common/menubar.jsp" flush="true" />
 	<div class="titlebar" align="center">
 		<div class="col-lg-2 col-md-0 col-sm-0 col-xs-0"></div>
-		<div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 contatiner">
+		<div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
 		
 				<!-- 슬라이드 -->
-				<div id="carousel-example-generic" class="carousel slide"
+				<div id="myCarousel" class="carousel slide"
 					data-ride="carousel" style="padding-top: 20px;">
 
 					<!-- Wrapper for slides -->
 					<div class="carousel-inner" role="listbox">
 						<div class="item active">
-							<img src="/funfund/images/funding/thumbnail/pr1.jpg"
-								class="img-responsive">
+							<img src="/funfund/images/funding/thumbnail/pr1.jpg">
 							<div class="carousel-caption">아아</div>
 						</div>
 						<div class="item ">
-							<img src="/funfund/images/funding/thumbnail/pr2.jpg"
-								class="img-responsive">
+							<img src="/funfund/images/funding/thumbnail/pr2.jpg">
 							<div class="carousel-caption">이이</div>
 						</div>
 						<div class="item ">
-							<img src="/funfund/images/funding/thumbnail/pr3.jpg"
-								class="img-responsive">
+							<img src="/funfund/images/funding/thumbnail/pr3.jpg">
 							<div class="carousel-caption">오오</div>
 						</div>
 					</div>
 				</div>
 
 				<!-- 오른쪽 이미지(2개) -->
-				<div class="align" style="position:relative">
+				<div class="align hidden-sm hidden-xs" style="position:relative">
 					<img src="/funfund/images/funding/thumbnail/pr4.jpg"
 						class="img-responsive isize">
 						<div class="text" style="position:absolute; top:40px;left:50px;"><h5>글 내용</h5></div> 
@@ -356,7 +349,17 @@ button {
 				</div>
 			
 		</div>
-		<div class="col-lg-2 col-md-0 col-sm-0 col-xs-0"></div>
+		<div class="col-lg-2 col-md-12 col-sm-12 col-xs-12 hidden-lg hidden-md  " style="margin-top:-5px;">
+				 <div style="display: inline-block; position:relative; max-width: 500px !important;">
+					<img src="/funfund/images/funding/thumbnail/pr4.jpg"
+						class="img-responsive" >
+						<div class="text" style="position:absolute; top:40px;left:50px;"><h5>글 내용</h5></div> 
+					<img
+						src="/funfund/images/funding/thumbnail/pr4.jpg"
+						class="img-responsive">
+						<div class="text" style="position:absolute; top:200px;left:50px;"><h5>글 내용2</h5></div> 
+				</div>
+		</div>
 	</div>
 
 	<!-- 카테고리바 -->

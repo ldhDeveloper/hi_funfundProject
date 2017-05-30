@@ -3,7 +3,7 @@
 /* dx 로고*/
 @font-face {
 	font-family: 'DXLogB-KSCpc-EUC-H';
-	src: url('/funfund/lib/css/fonts/DXLogB-KSCpc-EUC-H.woff')
+	src: local(※), url('/funfund/lib/css/fonts/DXLogB-KSCpc-EUC-H.woff')
 		format('woff');
 	font-weight: normal;
 	font-style: normal;
@@ -11,21 +11,27 @@
 
 /* 작은 글씨 나눔고딕 */
 @font-face {
-	font–family: Nanum Gothic;
-	src: url('/funfund/lib/css/fonts/NanumGothic.ttf' );
+	font–family: Nanum;
+	src: local(※), url('/funfund/lib/css/fonts/NanumGothic.ttf' );
+}
+
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+@font-face {
+	font-family: 'Noto', sans-serif;
 }
 
 /* 한나체 */
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 
 @font-face {
-	font-family: 'Hanna';
+	font-family: 'Hanna', serif;
 }
 
 /*트렉체 (영문, 숫자)*/
 @font-face {
 	font-family: 'Track';
-	src: url('/funfund/lib/css/fonts/Track.woff') format('woff');
+	src: local(※), url('/funfund/lib/css/fonts/Track.woff') format('woff');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -33,7 +39,7 @@
 /*훈고딕 */
 @font-face {
 	font-family: 'HoonGogulimR';
-	src: url('/funfund/lib/css/fonts/HoonGogulimR.woff') format('woff');
+	src: local(※), url('/funfund/lib/css/fonts/HoonGothicgulimR.ttf) format('truetype');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -41,18 +47,18 @@
 /*이롭게바탕체 */
 @font-face {
 	font–family: irop;
-	src: url('/funfund/lib/css/fonts/TIropkeBatangM.woff') format(' woff ');
+	src: local(※), url('/funfund/lib/css/fonts/TIropkeBatangM.woff') format(' woff ');
 }
 
 /* 텐바이텐 체 */
 @font-face {
 	font-family: ten;
-	src: url('/funfund/lib/css/fonts/10X10.woff') format('woff');
+	src: local(※), url('/funfund/lib/css/fonts/10X10.ttf');
 }
 
 /* ? 체 */
 @font-face {
 	font–family: gly;
-	src: url('/funfund/lib/css/fonts/glyphicons-halflings-regular.woff')
+	src: local(※), url('/funfund/lib/css/fonts/glyphicons-halflings-regular.woff')
 		format('woff');
 }

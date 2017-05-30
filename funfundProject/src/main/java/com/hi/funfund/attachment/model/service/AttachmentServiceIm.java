@@ -30,8 +30,13 @@ public class AttachmentServiceIm implements AttachmentService {
 
 	@Override
 	public List<Attachment> selectList(int ref_no) {
-
 		return attachmentDao.selectList(ref_no);
+	}
+	
+	//detail리스트에 slide 이미지
+	@Override
+	public List<Attachment> selectimgList(int pro_no) {
+		return attachmentDao.selectimgList(pro_no);
 	}
 
 	/*

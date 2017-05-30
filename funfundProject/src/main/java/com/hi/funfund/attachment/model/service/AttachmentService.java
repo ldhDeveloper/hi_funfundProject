@@ -35,4 +35,6 @@ public interface AttachmentService {
 	int updateIdImage(Attachment vo);
 
 	int partyIdImage(HashMap<String, String> hmap);
+
+	List<Attachment> selectimgList(int pro_no);
 }

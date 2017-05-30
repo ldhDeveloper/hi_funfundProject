@@ -174,9 +174,11 @@ button {
 	width: 40px;
 	height: 40px;
 }
-body{
-font-family: 'Hanna' !important;
+
+body {
+	font-family: 'Hanna' !important;
 }
+
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -296,11 +298,27 @@ font-family: 'Hanna' !important;
 
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 box2"
 		style="padding: 10px;" align="center">
-		<!-- video작성영역 -->
+		<!-- video or slide작성영역 -->
 		<c:if test="${!empty item.pvideo}">
-			<iframe width="560" height="315"
-				src="https://www.youtube.com/embed/${item.pvideo }" frameborder="0"
-				allowfullscreen></iframe>
+			<div class="embed-responsive embed-responsive-16by9">
+				<iframe width="560" height="315"
+					src="https://www.youtube.com/embed/${item.pvideo }" frameborder="0"
+					allowfullscreen></iframe>
+			</div>
+		</c:if>
+		<c:if test="${empty item.pvideo}">
+			<div id="myCarousel" class="carousel slide" data-ride="carousel"
+				style="padding-top: 20px;">
+
+				<div class="carousel-inner" role="listbox">
+					<c:forEach var="slide" items="${sList}">
+						<div class="item active">
+							<img src="/funfund/images/makerproject/slideimg/${slide.refname}">
+						</div>
+					</c:forEach>
+				</div>
+
+			</div>
 		</c:if>
 		<!-- 게시글작성영역 -->
 		<div id="content"></div>
@@ -426,7 +444,7 @@ font-family: 'Hanna' !important;
 		</div>
 
 		<!-- 뷰온버튼 -->
-		<button id="scrollbutton" style="bottom: 50px;">
+		<button id="scrollbutton" style="bottom: 50px;"class="hidden-sm hidden-xs">
 			<i class="fa fa-angle-up fa-2x" aria-hidden="true"
 				style="display: block;"></i>TOP
 		</button>
@@ -456,11 +474,9 @@ font-family: 'Hanna' !important;
 					<li class="makerinfo">제한 수량</li>
 					<dl>${reward.mcount }개
 					</dl>
-					<li class="makerinfo current">현재 
-					<c:set var="result" value="${reward.remain}" /> 
-					<c:if test="${result > 0}">
-					${result }</c:if> 
-					<c:if test="${result <= 0 }">
+					<li class="makerinfo current">현재 <c:set var="result"
+							value="${reward.remain}" /> <c:if test="${result > 0}">
+					${result }</c:if> <c:if test="${result <= 0 }">
 					0
 					</c:if>개 남음
 					</li>
