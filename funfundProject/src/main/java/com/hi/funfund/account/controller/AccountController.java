@@ -57,7 +57,7 @@ public class AccountController {
 	private FundListService fundListService;
 	
 	@RequestMapping("/login.ao")
-	public ModelAndView login(Party party, Account account, ModelAndView mv, HttpServletRequest request){
+	public String login(Party party, Account account, HttpServletRequest request){
 		account = accountService.login(account);
 		
 		HttpSession session = request.getSession(false);
@@ -66,8 +66,8 @@ public class AccountController {
 			session.setAttribute("account", account);
 			session.setAttribute("party", p);
 		}
-		mv.setViewName("home");
-		return mv;
+		//mv.setViewName("home");
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value = "/loginWithApi.ao") // 타 사이트 정보로 회원가입

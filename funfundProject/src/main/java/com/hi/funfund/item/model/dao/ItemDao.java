@@ -1,6 +1,7 @@
 package com.hi.funfund.item.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -97,6 +98,16 @@ public class ItemDao {
 	public List<Item> selectRequestItem() {
 		List<Item> iList = (List<Item>) sqlSession.selectList(nameSpace + "selectRequestItem");
 		return iList;
+	}
+
+	public int updateConfirmStatus(int pro_no) {
+		int result = sqlSession.update(nameSpace + "updateConfirmStatus", pro_no);
+		return result;
+	}
+
+	public int updateRejectStatus(HashMap<String, String> hmap) {
+		int result = sqlSession.update(nameSpace + "updateRejectStatus", hmap);
+		return result;
 	}
 	
 }
