@@ -35,7 +35,8 @@ $(function() {
 			  				'specialCharacters', 'insertHR', 'selectAll',
 			  				'clearFormatting', '|', 'print', 
 			  				'html', '|', 'undo', 'redo']
-	  })
+	  });
+	  $('#ntitle').focus();
 	});
 </script>
 </head>
@@ -54,31 +55,39 @@ margin:auto;
 padding:80px;
 text-align: right;
 }
+
 .ntable {
-width:700px;
-margin:auto;
-
-}
-
-.ntable, th, td {
-
+width : 800px; 
+margin : auto;
 font-weight:bold;
 text-align:center;
 font-size: 13px;
 border: 1px solid #aaaaaa;
 }
 .column{
-background : #cccccc;
+background : #ffbb99;
+width: 70px;
+height: 50px;
+font-size: 17px;
+border : 1px solid gray;
 }
 .details{
 width: 100%;
+
+height : 50px;
+font-size : 20px;
 }
 form {
-
+border-style : outset;
+border-bottom: none;
 }
 .submit{
 width: 100px !important;
 
+}
+
+.fr-element {
+min-height : 500px !important;
 }
 </style>
 </head>

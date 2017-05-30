@@ -16,8 +16,8 @@
 </resultMap> 
 
 	<select id="selectList" parameterType="HashMap" resultMap="noticeResult">
-		select ranks, nno, ntitle, ncontent, ndate, upbno, bname, readcount, ano, nickname from
-		(select rank() over(order by nno desc) ranks, nno, ntitle, ncontent, ndate, upbno, bname, readcount, n.ano ano, nickname
+		select ranks, nno, bno, ntitle, ncontent, ndate, upbno, bname, readcount, ano, nickname from
+		(select rank() over(order by nno desc) ranks, n.bno bno, nno, ntitle, ncontent, ndate, upbno, bname, readcount, n.ano ano, nickname
 		 from notice n , board b, account a where n.bno = b.bno and a.ano=n.ano and (upbno = 0 and n.bno = #{bno})) where ranks between #{sNum} and #{eNum} 
 			</select>
 	

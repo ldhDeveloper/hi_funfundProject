@@ -816,14 +816,14 @@ label.sign-form_title {
 						<td style="width: 150px;"><a class="fun-menu"
 							href="funding.it">프로젝트 둘러보기</a></td>
 						<td style="width: 80px;"><a class="fun-menu"
-							href="nList.no?sbno=1&spage=1">고객센터</a></td>
+							href="nList.no?bno=1&page=1">고객센터</a></td>
 						<td style="width: 80px;"><a class="fun-menu" href="#"
 							data-toggle="modal" data-target="#myModal">로그인</a></td>
 					</c:if>
 					<c:if test="${not empty sessionScope.account.id }">
 						<td style="width: 80px;"><a class="fun-menu" href="#"><c:out
 									value="${sessionScope.account.nickname}" /></a></td>
-						<td style="width: 80px;"><a class="fun-menu"
+						<td style="width : 80px;"><a class="fun-menu"
 							data-toggle="modal" data-target="#myModal4"
 							style="cursor: pointer"> <c:if
 									test="${!empty sessionScope.account.pimage }">
@@ -1192,7 +1192,7 @@ label.sign-form_title {
 							<li><a href="funding.it">프로젝트 둘러보기</a></li>
 						</ul>
 						<ul>
-							<li><a href="nList.no">고객센터</a></li>
+							<li><a href="nList.no?bno=1&page=1">고객센터</a></li>
 							<li><a href="myinfo.ao">회원정보보기</a>
 						</ul>
 						<ul>

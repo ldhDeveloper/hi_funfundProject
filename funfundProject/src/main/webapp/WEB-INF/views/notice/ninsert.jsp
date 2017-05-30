@@ -33,7 +33,8 @@ $(function() {
 			  				'specialCharacters', 'insertHR', 'selectAll',
 			  				'clearFormatting', '|', 'print', 
 			  				'html', '|', 'undo', 'redo']
-	  })
+	  });
+	  $('#ntitle').focus();
 	});
 </script>
 </head>
@@ -53,30 +54,43 @@ padding:80px;
 text-align: right;
 }
 .ntable {
-width:700px;
+width:800px;
 margin:auto;
 
 }
 
-.ntable, th, td {
-
+.ntable {
+width : 800px; 
+margin : auto;
 font-weight:bold;
 text-align:center;
 font-size: 13px;
 border: 1px solid #aaaaaa;
 }
 .column{
-background : #cccccc;
+background : #ff9dff;
+width: 70px;
+height: 50px;
+font-size: 20px;
 }
+
 .details{
 width: 100%;
+border : none;
+height : 50px;
+font-size : 20px;
 }
-form {
 
-}
 .submit{
 width: 100px !important;
 
+}
+.fr-element {
+min-height : 500px !important;
+}
+form {
+border-style : outset;
+border-bottom: none;
 }
 </style>
 </head>
@@ -92,10 +106,10 @@ width: 100px !important;
 <form action="#" method="post" onsubmit="return false" >
 <table class="ntable">
 	<tr><td class="column">제목</td><td> 
-<input class="details" id="ntitle" name="ntitle" required> </td></tr>
+<input class="details" id="ntitle" name="ntitle" required > </td></tr>
 	<tr><td class="column">이름</td><td><input id="writer"  class="details" value="${account.nickname}" readonly></td></tr>
-	<tr><td class="column">내용</td>
-		<td><textarea id="froala-editor" required>
+	
+		<tr><td colspan="2" class="insertContext"><textarea id="froala-editor" required>
 		
 		</textarea></td></tr>
 
