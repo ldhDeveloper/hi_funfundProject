@@ -200,10 +200,18 @@ li {
 					요청하기</a></li>
 		</ul>
 	</div>
+	<script>
+		$(function(){
+			
+		});
+	
+	
+	</script>
+	
 
 
 	<form id="frm" action="update.it?pro_no=${ pro_no }" method="post"
-		onsubmit="return false;" enctype="multipart/form-data">
+		onsubmit="return false;" enctype="multipart/form-data" name="frm">
 
 		<input type="hidden" name="flag" value="false">
 		<%-- <input type="hidden" name="pro_no" value="${pro_no }"> --%>
@@ -278,8 +286,7 @@ li {
 						<div
 							style="width: 450px; border: 1px solid #ddd; height: 350px; background: #f8f8f8; margin-left: 10px; padding-left: 75px; padding-top: 30px; cursor: pointer;"
 							onclick="document.all.uploadFile.click();">
-							<input id="titleimagefile" type="file" name="uploadFile"
-								style="display: none;" onchange="LoadImg(this);"> <img
+							 <img
 								id="titleimage" src="images/makeproject/camera.PNG"
 								style="max-width: 300px; max-height: 200px; width: 300px; heigh: 200px;">
 							<br> <br>
@@ -453,9 +460,8 @@ li {
 									<th>순서</th>
 									<th>리워드명</th>
 									<th>금액</th>
-									<th>배송조건</th>
 									<th>제한수량</th>
-									<th>배송일</th>
+									<th>배송예정일</th>
 									<th>수정/삭제</th>
 								</tr>
 							</table>
@@ -494,20 +500,11 @@ li {
 								</tr>
 								<tr>
 									<td>&nbsp;</td>
-									<td>배송조건</td>
-									<td><input type="checkbox" name="delyn"><font
-										size="0.8em"> 배송받을 주소가 필요합니다.</font></td>
-									<td colspan="2">&nbsp;</td>
-									<td>배송료</td>
-									<td><input type="text" size="5" name="dcost"></td>
-								</tr>
-								<tr>
-									<td>&nbsp;</td>
 									<td>제한수량</td>
 									<td><input type="text" size="3" name="mcount"></td>
-									<td colspan="2">배송일</td>
-									<td colspan="2"><input type="text" class="datepicker3"
-										style="padding-left: 15px" name="mdate" size="13"> <!-- <script
+									<td>배송일</td>
+									<td colspan="2"><input type="text" class="datepicker3" id="datepicker3"
+										style="padding-left: 15px" name="s_mdate" size="13"> <!-- <script
 											src="https://code.jquery.com/jquery-1.12.4.js"></script> <script
 											src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 										<script>
@@ -518,7 +515,9 @@ li {
 																	showOn : "button",
 																	buttonImage : "images/makeproject/calendar2.png",
 																	buttonImageOnly : true,
-																	buttonText : "Select date"
+																	buttonText : "Select date",
+																	altField : "#datepicker3",
+																	altFormat : "yy-mm-dd"
 																});
 											});
 										</script></td>
@@ -539,7 +538,38 @@ li {
 			<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 			<script>
 				$(function() {
+					var pro_no = ${pro_no};
+					var urladd = "selectfmenu.fm?pro_no=" + pro_no;
+					$.ajax({
+						url:urladd,
+						success:function(data){
+							
+							console.log($(data));
+							var length = data.fmenulist.length;
+							
+							for(var i = 0; i < length; i++){
+								$("#rlist")
+								.html(
+										$(
+												"#rlist")
+												.html()
+												+ "<tr><td>"
+												+ data.fmenulist[i].mnum
+												+ "</td><td>"
+												+ data.fmenulist[i].mname
+												+ "</td><td>"
+												+ data.fmenulist[i].mcost
+												+ "</td><td>"
+												+ data.fmenulist[i].mcount
+												+ "</td><td>"
+												+ data.fmenulist[i].s_mdate
+												+ "</td><td><button class='btn btn-xs btn-success'>수정</button>&nbsp; <button class='btn btn-xs btn-danger'>삭제</button></td></tr>")
 
+							}
+							
+						}
+					});
+					
 					$("#addReward")
 							.click(
 									function() {
@@ -550,10 +580,8 @@ li {
 										var mname = $("[name=mname]").val();
 										var mcost = $("[name=mcost]").val();
 										var mnum = $("[name=mnum]").val();
-										var dcost = $("[name=dcost]").val();
-										var mdate = $("[name=mdate]").val();
+										var s_mdate = $("[name=s_mdate]").val();
 										var mcount = $("[name=mcount]").val();
-										var delyn = $("[name=delyn]").val();
 										var mcontent = $("[name=mcontent]")
 												.val();
 
@@ -567,10 +595,8 @@ li {
 														"mname" : mname,
 														"mcost" : mcost,
 														"mnum" : mnum,
-														"dcost" : dcost,
-														"mdate" : mdate,
+														"s_mdate" : s_mdate,
 														"mcount" : mcount,
-														"delyn" : delyn,
 														"mcontent" : mcontent
 													},
 													success : function(data) {
@@ -591,12 +617,10 @@ li {
 																				+ "</td><td>"
 																				+ data.fmlist[i].mcost
 																				+ "</td><td>"
-																				+ data.fmlist[i].delyn
-																				+ "</td><td>"
 																				+ data.fmlist[i].mcount
 																				+ "</td><td>"
-																				+ data.fmlist[i].mdata
-																				+ "</td><td><button value='수정'/>&nbsp; <button value='삭제'/></td></tr>")
+																				+ data.fmlist[i].s_mdate
+																				+ "</td><td><button class='btn btn-xs btn-success'>수정</button>&nbsp; <button class='btn btn-xs btn-danger'>삭제</button></td></tr>")
 
 													}
 
@@ -909,8 +933,7 @@ li {
 					<td>
 						<div
 							style="border: 1px solid #ddd; background: #f8f8f8; padding: 10px; margin-left: 10px; width: 440px; height: 180px; padding-left: 160px;">
-							<input id="makerprofileimagefile" type="file" name="uploadFile2"
-								style="display: none;" onchange="LoadImg2(this);"> <img
+							 <img
 								id="makerprofileimage" class="img-circle"
 								src="images/myinfo/basic.png"
 								style="min-width: 120px; min-height: 120px; width: 120px; heigh: 120px; cursor: pointer"
@@ -1063,38 +1086,59 @@ li {
 
 			function tempsave() {
 				var url = 'updateajax.it?pro_no=' + ${ pro_no } +"&flag='false'";
-				var pname = $('[name=pname]').val();
 				
-				/* PRO_NO
-				ANO
-				PNAME
-				PCONTENT
-				CATEGORY
-				PSDATE
-				PEDATE
-				PSHORT
-				ECOST
-				REFUND
-				PVIDEO
-				PSTATUS
-				LIKECOUNT
-				SHARELINK
-				BANKCODE
-				ACCPNM
-				ACCNUM
-				CNAME
-				CS_EMAIL
-				CS_PHONE */
-				console.log(pname);
+				
+				var pname = $('[name=pname]').val();
+				var pcontent = $('[name=pcontent]').val();
+				var category = $('select[name=category]').val();
+				var s_psdate = $('[name=s_psdate]').val();
+				var s_pedate = $('[name=s_pedate]').val();
+				var pshort = $('[name=pshort]').val();
+				var ecost = $('[name=ecost]').val();
+				var refund = $('[name=refund]').val();
+				var pvideo = $('[name=pvideo]').val();
+				var bankcode = $('[name=bankcode]').val();
+				var accpnm = $('[name=accpnm]').val();
+				var accnum = $('[name=accnum]').val();
+				var cname = $('[name=cname]').val();
+				var cs_email = $('[name=cs_email]').val();
+				var cs_phone = $('[name=cs_phone]').val();
+				
+				
+				
 				$.ajax({
 					url : url,
-					data: {"pname":pname},
-					success:function(data){
-						alert("임시저장 성공");
+					data: {"pname":pname, "pcontent":pcontent, "category":category, "s_psdate":s_psdate, "s_pedate":s_pedate, "pshort":pshort, "ecost":ecost, "refund":refund,
+						"pvideo":pvideo, "bankcode": bankcode, "accpnm":accpnm, "accnum":accnum, "cname":cname, "cs_email":cs_email, "cs_phone":cs_phone},
+					success:function(){
+						saveImg();
 					}
 				});
 					
+				
+				
+				function saveImg(){
+					var url2 = 'updateimgajax.at?pro_no=' + ${ pro_no } +"&flag=false";
+					var form = $('ajaxfileform')[0];
+	                var formData = new FormData(form);
+					formData.append("uploadFile", $("[name=uploadFile]")[0].files[0]);
+					formData.append("uploadFile2", $("[name=uploadFile2]")[0].files[0]);
 					
+					console.log($("[name=uploadFile]")[0].files[0]);
+					
+					$.ajax({
+						url : url2,
+						data:formData,
+						dataType : "json",
+						contentType: false,
+						processData: false,
+						success:function(){
+							alert("임시저장 성공!!")
+						}
+						
+						
+					});	
+				}
 				
 
 				//document.getElementById('frm').submit();
@@ -1109,6 +1153,14 @@ li {
 		onsubmit="return false;">
 		<input type="file" size="20" multiple="multiple" name="slidefile[]"
 			id="slidefile" style="display: none;" onchange="LoadSlideImg(this);">
+		<input type="hidden" name="pro_no" value="${ pro_no }">
+	</form>
+	<form id="ajaxfileform" method="post" enctype="multipart/form-data"
+		onsubmit="return false;" name="ajaxfileform">
+		<input id="titleimagefile" type="file" name="uploadFile"
+								style="display: none;" onchange="LoadImg(this);">
+		<input id="makerprofileimagefile" type="file" name="uploadFile2"
+								style="display: none;" onchange="LoadImg2(this);">						
 		<input type="hidden" name="pro_no" value="${ pro_no }">
 	</form>
 
