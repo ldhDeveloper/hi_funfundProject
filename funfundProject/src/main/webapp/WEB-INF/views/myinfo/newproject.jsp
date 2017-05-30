@@ -145,6 +145,70 @@
 	width: 40%;
 	background-color: #F8F8F8;
 }
+
+.tableStart {
+	width: 98%;
+	padding-left: 2%;
+}
+
+.state {
+	border: none;
+	border-radius: 15px;
+	background-color: #E25253;
+	width: 40%;
+	height: 25px;
+	color: white;
+	padding: 2%;
+}
+
+.mfth {
+	text-align: center;
+	padding-top: 1.5% !important;
+	padding-bottom: 1.5% !important;
+}
+
+.mftd, .pedate {
+	text-align: center;
+	cursor:pointer;
+	border-bottom: 1px solid #dff0d8;
+	padding-top: 1.5% !important;
+	padding-bottom: 1.5% !important;
+	
+}
+
+.mftdrL {
+	border-bottom : 1px solid #ddd;
+}
+
+.tableStart {
+	width: 98%;
+	padding-left: 2%;
+}
+
+.state {
+	border: none;
+	border-radius: 15px;
+	background-color: #E25253;
+	width: 40%;
+	height: 25px;
+	color: white;
+	padding: 2%;
+}
+
+.mfthr {
+	border-top: 3px solid #dff0d8;
+	border-bottom: 3px solid #dff0d8;
+}
+
+.panelStart {
+	width: 100%;
+	height: 500px;
+}
+
+.panelStart1{
+	width: 100%;
+	height: 100px;
+}
 </style>
 
 <title>Insert title here</title>
@@ -199,7 +263,6 @@
       							<ul class="nav navbar-nav">
       								<li><a href="myinfo.ao" class="otherActive">회원 정보 설정</a></li>
         							<li><a href="sellerinfo.ao" class="otherActive">판매자 정보 변경</a></li>
-        							<li><a href="joinproject.ao" class="otherActive">참여한 프로젝트</a></li>
         							<li><a href="puttoproject.ao" class="otherActive">찜한 프로젝트</a></li>
         							<li class="act"><a class="active" href="newproject.ao">개설한 프로젝트<span class="sr-only">(current)</span></a></li>      							        							        							        							
         							<li><a href="myfunding.ao" class="otherActive">나의 펀딩 현황</a></li>
@@ -208,13 +271,160 @@
   						</div>
 					</nav>
 					
-					<div class="row">
-						<div class="newproject">아직 개설한 프로젝트가 없습니다.</div>
-						<form action="myproject.fl" method="get">
-							<input type="hidden" name="pro_no" value=1>
-							<button type="submit">테스트버튼</button>
-						</form>
-					</div>										
+					<br>
+					<c:if test="${ empty iList }"> 
+					<div class="panel-group">
+						<div class="well">												
+    						<div class="panelStart1 panel panel-success">    						
+      							<div class="panel-heading">리워드형 프로젝트</div> 
+      							     							  							
+      							<div class="panel-body">아직 개설한 프로젝트가 없습니다.</div>								      							
+      						</div>
+      					</div>
+      				</div>
+      				</c:if>	  
+						
+						
+					<div class="panel-group">
+						<c:if test="${ ! empty iList }">
+						<div class="well">												
+    						<div class="panelStart panel panel-success">
+    						
+      							<div class="panel-heading">리워드형 프로젝트</div>
+      							
+      							<br>    						    							
+      							
+      							<c:forEach var="item" items="${ iList }" varStatus="status">
+      							<!-- 만약 작성중일 때  -->
+      							<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+      								<div id="itempanel<c:out value='${status.index}'/>" class="panel panel-warning">
+      									<div id="conitemper<c:out value='${status.index}'/>" class="panel-heading">작성중<!-- 진행상태 --></div>
+      									<div id="enditemper<c:out value='${status.index}'/>" class="panel-body">
+      										<div class="thumbnail" align="center">      										
+	      										<a href="detail.it?pro_no=<c:out value="${item.pro_no}"/>">
+	      											<img alt="작성중인 이미지입니다." src="/funfund/images/funding/thumbnail/<c:out value="${item.thumbnail}"/>" style="width: 100%">      											
+	      											
+	      											<div id="progress<c:out value='${status.index}'/>" class="progress" style="display:none;">
+	  													<div id="progressbar<c:out value='${status.index}'/>" 
+	  														 class="w3-red progress-bar progress-bar-striped active" 
+	  														 role="progressbar" 
+	  														 aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" 
+	  														 style="width:70%;">70%</div>
+	  														 <span class="sr-only"></span>
+													</div>
+	      											
+	      											<p>
+														<span id="persent<c:out value='${status.index}'/>"></span> % &nbsp;&nbsp; <span></span>원 달성 &nbsp;&nbsp; 
+														<span id="edate<c:out value='${status.index}'/>"></span>
+														<span id="yet<c:out value='${status.index}'/>">일 남음</span>
+														<span id="complete<c:out value='${status.index}'/>">펀딩종료</span>
+													</p>     
+																								
+	      										 	<div class="caption">
+	            										<p>${ item.pname }</p>
+	            										<span>${ item.category }</span>            										
+	          										</div>
+	          									</a>
+      										</div>
+      									</div>
+    								</div>
+    							</div>
+    							
+    							<!-- 진행상태, 사진, progress, %, 원, 남은 일자, 제목,분류 -->
+      							
+      							<!-- 만약 진행중 일 때  -->
+      							<%-- <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+      								<div class="panel panel-danger">
+      									<div class="panel-heading">진행중</div>
+      									<div class="panel-body">
+											<div class="thumbnail" align="center">
+      											<img alt="진행중인 이미지입니다." src="/funfund/images/funding/thumbnail/" style="width:100%">
+      											
+      											<div class="progress">
+  													<div class="w3-red progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:70%">
+  														70%
+  													</div>
+												</div>
+												
+      										 	<p>
+													<span id=""></span> % &nbsp;&nbsp; <span></span>원 달성 &nbsp;&nbsp; 
+													<span id=""></span>
+													<span id="">일 남음</span>
+													<span id="">펀딩종료</span>
+												</p>     
+																							
+      										 	<div class="caption">
+            										<p>${ item.pname }</p>
+            										<span>${ item.category }</span>            										
+          										</div>
+      										</div>
+										</div>
+    								</div>
+    							</div> --%>
+    								
+    							<!-- 만약 마감 일 때  -->	
+    							<%-- <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+    								<div class="panel panel-default">
+      									<div class="panel-heading">마감</div>
+      									<div class="panel-body">
+											<div class="thumbnail" align="center">
+      											<img alt="마감된 이미지입니다." src="/funfund/images/funding/thumbnail/" style="width:100%">
+      											
+      											<div class="progress">
+  													<div class="w3-gray progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:80%">
+  														40%
+  													</div>
+												</div>
+      											
+      										 	<p>
+													<span id=""></span> % &nbsp;&nbsp; <span></span>원 달성 &nbsp;&nbsp; 
+													<span id=""></span>
+													<span id="">일 남음</span>
+													<span id="">펀딩종료</span>
+												</p>     
+																							
+      										 	<div class="caption">
+            										<p>${ item.pname }</p>
+            										<span>${ item.category }</span>            										
+          										</div>
+      										</div>
+										</div>
+    								</div>
+    							</div> --%>
+    							
+    							</c:forEach> 							
+  									
+  									<br>
+    							</div>
+    						</div>
+    						
+    						
+    						</c:if>
+    						
+    						<script type="text/javascript">
+    							$(function(){
+    								$(".mftdrL").click(function(){
+        								location.href="newProject.it"
+        							});
+    							});    							
+    						</script>
+    					
+    					<br>
+      					
+      						<div class="well">   					   					
+    							<div class="panel panel-info">
+      								<div class="panel-heading">투자형 프로젝트</div>
+      								<div class="panel-body">아직 참여한 프로젝트가 없습니다.</div>
+      								
+      								<form action="myproject.fl" method="get">
+										<input type="hidden" name="pro_no" value=1>
+										<button type="submit">테스트버튼</button>
+									</form>
+    							</div>
+    						</div>
+    					 									
+  						<br><br><br>						
+					</div>																					
 				</div>				
 			</div>
 		</div>

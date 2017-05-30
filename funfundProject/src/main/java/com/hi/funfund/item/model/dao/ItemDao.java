@@ -88,6 +88,12 @@ public class ItemDao {
 		return iList;
 	}
 
+
+	public List<Item> selectNewProject(int ano) {
+		List<Item> iList = (List<Item>) sqlSession.selectList(nameSpace + "selectNewProject", ano);
+  	return iList;
+	}
+  
 	public List<Item> selectRequestItem() {
 		List<Item> iList = (List<Item>) sqlSession.selectList(nameSpace + "selectRequestItem");
 		return iList;

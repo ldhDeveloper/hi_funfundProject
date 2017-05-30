@@ -186,9 +186,25 @@ public class AccountController {
 		return model;
 	}
 	
-	@RequestMapping(value = "newproject.ao")
+	/*@RequestMapping(value = "newproject.ao")
 	public String newproject(){
 		return "myinfo/newproject";
+	}*/
+	
+	// 개설한 프로젝트 리스트 가져오기
+	
+	@RequestMapping(value = "newproject.ao")
+	public ModelAndView newproject(ModelAndView model, HttpSession session, HttpServletRequest request){
+		session = request.getSession(false);
+		Account account = (Account)session.getAttribute("account");
+		int ano = account.getAno();
+		
+		List <Item> iList = itemService.selectNewProject(ano);
+			
+		model.addObject("iList", iList);
+		model.setViewName("myinfo/newproject");
+			
+		return model;
 	}
 	
 	@RequestMapping(value = "myfunding.ao")	
