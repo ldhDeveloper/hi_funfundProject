@@ -24,7 +24,7 @@ public class AttachmentDao {
 		return 0;
 	}
 	public List<Attachment> selectList(int ref_no) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}	
 	
@@ -82,5 +82,9 @@ public class AttachmentDao {
 	public int partyIdImage(HashMap<String, String> hmap) {		
 		int result = sqlSession.update("partyIdImage", hmap);
 		return result;		
+	}
+	public List<Attachment> selectimgList(int pro_no) {
+		List<Attachment> sList = sqlSession.selectList("selectslideImage", pro_no);
+		return sList;
 	}
 }

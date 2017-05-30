@@ -251,10 +251,6 @@ button {
 		</ul>
 	</div>
 
-	<button id="viewon" class="hidden-lg hidden-md visible-sm visible-xs">이
-		프로젝트 펀딩하기</button>
-
-
 	<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12"></div>
 
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 box2"

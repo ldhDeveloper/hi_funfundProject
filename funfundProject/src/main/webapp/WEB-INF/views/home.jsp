@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -6,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="/funfund/lib/css/common/font.css" rel="stylesheet"/>
 <meta charset="UTF-8">
 <style>
 .contain {
@@ -24,6 +24,16 @@
 	max-height: 540px !important;
 	margin: auto;
 }
+
+h3{
+   font-family: Noto !important;
+}
+
+body{
+   font-family: ten !important;
+}
+
+
 </style>
 
 <title>home</title>

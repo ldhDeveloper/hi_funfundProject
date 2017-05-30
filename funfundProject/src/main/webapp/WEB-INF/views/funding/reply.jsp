@@ -138,13 +138,6 @@ button {
 	margin: 10px;
 }
 
-#viewon {
-	position: fixed;
-	right: 5px;
-	z-index: 100;
-	top: 600px;
-}
-
 .backpink {
 	background-color: #FFC4B7 !important;
 	border-color: #ee7f69 !important;
@@ -401,10 +394,6 @@ textarea {
 		</ul>
 	</div>
 
-	<button id="viewon" class="hidden-lg hidden-md visible-sm visible-xs">이
-		프로젝트 펀딩하기</button>
-
-
 	<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12"></div>
 
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 box2"
@@ -570,7 +559,7 @@ textarea {
 		</div>
 
 		<!-- 뷰온버튼 -->
-		<button id="scrollbutton" style="bottom: 50px;">
+		<button id="scrollbutton" style="bottom: 50px;"class="hidden-sm hidden-xs">
 			<i class="fa fa-angle-up fa-2x" aria-hidden="true"
 				style="display: block;"></i>TOP
 		</button>

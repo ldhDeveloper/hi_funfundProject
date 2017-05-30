@@ -3,12 +3,17 @@
 "-//mybatis.org//DTD mapper 3.0//en"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace = "attachmentMapper">
-	<!-- <insert id="myprofileImg" parameterType="attachment">
-		<![CDATA[
-			INSERT INTO ATTACHMENT (fno, orifname, refname, ftype, refno)
-			VALUES(seq_fno.nextval, #{orifname}, #{refname}, '회원정보이미지', #{ano})
-		]]>
-	</insert> -->
+	<resultMap type="attachment" id="attachmentResult">
+		<id column="fno" property="fno" />
+		<result column="refname" property="refname"/>
+		<result column="ftype" property="ftype"/>
+		<result column="refno" property="refno"/>
+		<result column="fsubtype" property="fsubtype"/>
+		<result column="fnum" property="fnum"/>
+	</resultMap>
+	
+	
+	
 	<insert id="insertprofileImage" parameterType="attachment">
 		<![CDATA[
 			INSERT INTO ATTACHMENT (fno, orifname, refname, ftype, fsubtype, refno)
@@ -74,5 +79,13 @@
 		]]>
 	</update>
 	
+	<select id="selectslideImage" parameterType="int" resultMap="attachmentResult">
+	   select fno, refname, ftype, refno, fsubtype, fnum
+	   from attachment
+	   where ftype='item' and refno=#{pro_no}
+	   order by fnum
+	</select>
 	
+
+
 </mapper>
