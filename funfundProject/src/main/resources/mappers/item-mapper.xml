@@ -140,7 +140,7 @@
 			it.psdate as psdate, it.pedate as pedate, it.pshort as pshort, it.ecost as ecost, it.refund as refund, it.pvideo as pvideo,
 			it.pstatus as pstatus, it.likecount as likecount, it.sharelink as sharelink, it.bankcode as bankcode, it.accpnm as accpnm,
 			it.accnum as accnum, it.cname as cname, it.cs_email as cs_email, it.cs_phone as cs_phone, it.fundamount as fundamount, 
-			it.fundcount as fundcount, it.supportcount as supportcount, it.upcount as upcount, it.repcount as repcount, it.thumbnail as thumbnail, it.billstatus as billstatus, it.firstdeposit as firstdeposit, it.seconddeposit as seconddeposit, it.firstprice as firstprice, it.secondprice as secondprice, it.icomment as icomment
+			it.fundcount as fundcount, it.supportcount as supportcount, it.upcount as upcount, it.repcount as repcount, it.thumbnail as thumbnail, it.billstatus as billstatus, it.firstdeposit as firstdeposit, it.seconddeposit as seconddeposit, it.firstprice as firstprice, it.secondprice as secondprice, it.icomment as icomment, it.checkacc as checkacc
 						from(SELECT item.*, ROW_NUMBER() OVER (ORDER BY fundcount DESC) rnum
 			     				FROM (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount, i7.thumbnail as thumbnail
 			                  from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost), 0) as fundamount 
@@ -317,9 +317,18 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
 			                             where ftype='item' and fsubtype='thumbnail') i7 on(i1.pro_no = i7.refno)
                                    left join (select ano, pimage
                                                 from account) ac on (ac.ano=i1.ano)
-            where i1.pstatus = '작성중'
+            where i1.pstatus = '승인요청'
 			]]>
 	</select>
+	<update id="updateConfirmStatus" parameterType="int">
+		update item set pstatus = '승인완료'
+		where pro_no = #{pro_no}
+	</update>
+	<update id="updateRejectStatus" parameterType="int">
+		update item set pstatus = '승인취소', icomment = #{comment}
+		where pro_no = #{pro_no}
+	</update>
+
 	
 	<select id="selectOneForUpdate" parameterType="int" resultMap="itemResult" >
 		<![CDATA[
@@ -330,5 +339,4 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
 			
 		]]>
 	</select>
-	
 </mapper>

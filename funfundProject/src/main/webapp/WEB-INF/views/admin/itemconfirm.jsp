@@ -67,6 +67,12 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		$(function(){
+			var list = "<c:out value='${alist}'/>"
+			console.log("list : " + list);
+		});
+	</script>
 		<div class="row" style="top: -7.0rem; position: relative;">
 			<div class="col-xs-1 col-sm-1 col-md-2 col-lg-2"></div>
 			<div class="col-xs-10 col-sm-10 col-md-8 col-lg-8 menubox">
@@ -88,29 +94,66 @@
   <table class="table table-hover">
     <thead>
       <tr>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        <th>Email</th>
+        <th>프로젝트번호</th>
+        <th>프로젝트명</th>
+        <th>신청자</th>
+        <th>프로젝트상태</th>
+        <th>프로젝트보기</th>
+        <th>프로젝트승인</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-      </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>july@example.com</td>
-      </tr>
+    	<c:forEach var="item" items="${alist }" varStatus="status">
+      	<tr>
+        	<td><c:out value="${item.pro_no }"/></td>
+        	<td><c:out value="${item.pname }"/></td>
+        	<td><c:out value="${item.cname }"/></td>
+        	<td><c:out value="${item.pstatus }"/></td>
+        	<td><input type="button" class="btn btn-primary" value="프로젝트보기" onclick="popen(${item.pro_no})"></td>
+        	<td><span><input type="button" class="btn btn-success" value="프로젝트승인" onclick="pconfirm(${item.pro_no})"></span>
+        	<span><input id="openReject<c:out value='${status.index }'/>" style="position:inline-block;" type="button" class="btn btn-warning" value="프로젝트거절" onclick="openReject(${status.index })"></span></td>        	
+      	</tr>
+      	<tr id="rejectform<c:out value='${status.index }'/>" style="display:none;">
+      		<td>거절사유</td>
+      		<td colspan="4"><input type="text" class="form-control" id="rejectcomment<c:out value='${status.index }'/>"></td>
+      		<td><input style="position:inline-block;" type="button" class="btn btn-danger" value="거절사유작성" onclick="pcancel(${item.pro_no}, ${status.index })"></td>
+      	</tr>
+      </c:forEach>
     </tbody>
   </table>
+  <script>
+  	function popen(pro_no){
+  		url = "detail.it?pro_no=" + pro_no;
+  		window.open(url);
+  	}
+  	
+  	function openReject(index){
+  		$('#rejectform' + index).toggle();
+  	}
+  	
+  	function pconfirm(pro_no){
+  		$.post( "confirmstatus.am", {"pro_no" : pro_no})
+  		.done(function(data){
+			if(data > 0){
+				console.log("실행");
+				location.href ="itemconfirm.am";
+			}
+  		});
+  	}
+  	
+  	function pcancel(pro_no, index){
+  		var comment = $('#rejectform' + index).val();
+  		if(comment != ""){
+  			$.post( "rejectstatus.am", {"pro_no" : pro_no, "comment" : comment})
+  	  		.done(function(data){
+  				if(data > 0){
+  					console.log("거절 실행");
+  					location.href ="itemconfirm.am";
+  				}
+  	  		});
+  		}
+  	}
+  </script>
 </div>
 </body>
 </html>

@@ -2,6 +2,7 @@ package com.hi.funfund.item.model.service;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -155,6 +156,16 @@ public class ItemServiceIm implements ItemService{
 	@Override
 	public Item selectOneForUpdate(int pro_no){
 		return itemDao.selectOneForUpdate(pro_no);
+	}
+
+	@Override
+	public int updateConfirmStatus(int pro_no) {
+		return itemDao.updateConfirmStatus(pro_no);
+	}
+
+	@Override
+	public int updateRejectStatus(HashMap<String, String> hmap) {
+		return itemDao.updateRejectStatus(hmap);
 	}
 
 	

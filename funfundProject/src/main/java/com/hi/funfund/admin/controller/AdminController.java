@@ -8,6 +8,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hi.funfund.account.model.vo.Account;
@@ -28,5 +31,21 @@ public class AdminController {
 		mv.addObject("alist", alist);
 		mv.setViewName("admin/itemconfirm");
 		return mv;
+	}
+	
+	@RequestMapping(value ="/confirmstatus.am", method = RequestMethod.POST)
+	public @ResponseBody int updateConfirmStatus(@RequestParam("pro_no") String prono){
+		int pro_no = Integer.parseInt(prono);
+		int result = itemService.updateConfirmStatus(pro_no);
+		return result;
+	}
+	
+	@RequestMapping(value ="/rejectstatus.am", method = RequestMethod.POST)
+	public @ResponseBody int updateRejectStatus(@RequestParam("pro_no") String pro_no, @RequestParam("comment") String comment){
+		HashMap<String, String> hmap = new HashMap<String, String>();
+		hmap.put("pro_no", pro_no);
+		hmap.put("comment", comment);
+		int result = itemService.updateRejectStatus(hmap);
+		return result;
 	}
 }

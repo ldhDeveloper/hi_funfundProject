@@ -2,6 +2,7 @@ package com.hi.funfund.item.model.service;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.hi.funfund.item.model.vo.Item;
@@ -55,6 +56,12 @@ public interface ItemService {
 
 	List<Item> selectRequestItem();
 
+
+	int updateConfirmStatus(int pro_no);
+
+	int updateRejectStatus(HashMap<String, String> hmap);
+
 	Item selectOneForUpdate(int pro_no);
+
 
 }

@@ -1194,6 +1194,7 @@ label.sign-form_title {
 						<ul>
 							<li><a href="nList.no?bno=1&page=1">고객센터</a></li>
 							<li><a href="myinfo.ao">회원정보보기</a>
+							<li><a href="itemconfirm.am">관리자</a>
 						</ul>
 						<ul>
 							<li><a href="logout.ao"
