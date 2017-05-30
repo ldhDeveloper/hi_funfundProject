@@ -25,7 +25,6 @@
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 	width: 100%;
-	height: 80px;
 	color: #fff;
 	font-size: 2vw;
 	padding-top: 1.5%;
@@ -39,7 +38,6 @@
 	border-right: 1px solid #ddd;
 	background-color: #F8F8F8;
 	width: 100%;
-	height : 20%;
 	padding-top: 3%;
 	padding-left: 8%;
 	padding-right: 8%;
@@ -102,7 +100,6 @@
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 	width: 100%;
-	height : 900px;
 	padding-top: 2%;
 }
 
@@ -156,7 +153,6 @@
 	border-radius: 15px;
 	background-color: #E25253;
 	width: 40%;
-	height: 25px;
 	color: white;
 	padding: 2%;
 }
@@ -190,7 +186,6 @@
 	border-radius: 15px;
 	background-color: #E25253;
 	width: 40%;
-	height: 25px;
 	color: white;
 	padding: 2%;
 }
@@ -202,12 +197,15 @@
 
 .panelStart {
 	width: 100%;
-	height: 500px;
 }
 
 .panelStart1{
 	width: 100%;
-	height: 100px;
+}
+
+.myItemList{
+	margin : 0px !important;
+	padding : 0px !important;
 }
 </style>
 
@@ -294,27 +292,29 @@
       							
       							<br>    						    							
       							
-      							<c:forEach var="item" items="${ iList }" varStatus="status">
+      							
       							<!-- 만약 작성중일 때  -->
-      							<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+      							<div class="row myItemList">
+      							<c:forEach var="item" items="${ iList }" varStatus="status">
+      							<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">     							
       								<div id="itempanel<c:out value='${status.index}'/>" class="panel panel-warning">
-      									<div id="conitemper<c:out value='${status.index}'/>" class="panel-heading">작성중<!-- 진행상태 --></div>
+      									<div id="conitemper<c:out value='${status.index}'/>" class="panel-heading">${ item.pstatus }</div>
       									<div id="enditemper<c:out value='${status.index}'/>" class="panel-body">
       										<div class="thumbnail" align="center">      										
 	      										<a href="detail.it?pro_no=<c:out value="${item.pro_no}"/>">
-	      											<img alt="작성중인 이미지입니다." src="/funfund/images/funding/thumbnail/<c:out value="${item.thumbnail}"/>" style="width: 100%">      											
+	      											<img alt="작성중인 이미지입니다." src="/funfund/images/funding/thumbnail/<c:out value="${item.thumbnail}"/>" style="width: 100%;margin-bottom:2%;">      											
 	      											
 	      											<div id="progress<c:out value='${status.index}'/>" class="progress" style="display:none;">
 	  													<div id="progressbar<c:out value='${status.index}'/>" 
 	  														 class="w3-red progress-bar progress-bar-striped active" 
 	  														 role="progressbar" 
-	  														 aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" 
-	  														 style="width:70%;">70%</div>
+	  														 aria-valuenow="70" aria-valuemin="0" aria-valuemax="<c:out value="${item.ecost}"/>" 
+	  														 style="width: 70%;"></div>
 	  														 <span class="sr-only"></span>
 													</div>
 	      											
-	      											<p>
-														<span id="persent<c:out value='${status.index}'/>"></span> % &nbsp;&nbsp; <span></span>원 달성 &nbsp;&nbsp; 
+	      											<p id="pTag" style="display:none;">
+														<span id="persent<c:out value='${status.index}'/>"></span>% &nbsp;&nbsp; <span></span>원 달성 &nbsp;&nbsp; 
 														<span id="edate<c:out value='${status.index}'/>"></span>
 														<span id="yet<c:out value='${status.index}'/>">일 남음</span>
 														<span id="complete<c:out value='${status.index}'/>">펀딩종료</span>
@@ -328,73 +328,61 @@
       										</div>
       									</div>
     								</div>
+    								
+    								
+    							</div>
+    								<script type="text/javascript">
+	    							var ecost = "<c:out value='${item.ecost}'/>";
+									var fundamount = "<c:out value='${item.fundamount}'/>"
+									var persent = Math.round(fundamount * 100 / ecost);
+									var bar=0;
+									if(persent > 100){
+										bar=100;
+									} else {
+										bar=persent;
+									}
+									var edate = new Date("<c:out value='${item.pedate}'/>");
+									var todate = new Date();
+									var btMs = edate.getTime() - todate.getTime() ;
+								    var btDay = Math.round(btMs / (1000*60*60*24)) ;
+								    
+								    $("#persent<c:out value='${status.index}'/>").html(persent);
+									$("#progressbar<c:out value='${status.index}'/>").attr("aria-valuenow", persent);
+									$("#progressbar<c:out value='${status.index}'/>").css("width", bar + "%");
+									$("#edate<c:out value='${status.index}'/>").text(btDay);
+									
+									var pstatus = "<c:out value='${item.pstatus}'/>";
+									console.log(pstatus);
+									if(pstatus == "진행중") {
+										$("#itempanel<c:out value='${status.index}'/>").removeClass("panel-warning");
+										$("#itempanel<c:out value='${status.index}'/>").addClass("panel-danger");
+										$("#progress<c:out value='${status.index}'/>").show();
+										$("#progressbar<c:out value='${status.index}'/>").show();
+										$("#progressbar<c:out value='${status.index}'/>").html(persent+"%");
+										$("#persent<c:out value='${status.index}'/>").show();
+										$("#persent<c:out value='${status.index}'/>").show();
+									}
+									
+									else if(pstatus == "마감") {
+										$("#itempanel<c:out value='${status.index}'/>").removeClass("panel-warning");
+										$("#itempanel<c:out value='${status.index}'/>").addClass("panel-default");
+										$("#progress<c:out value='${status.index}'/>").show();
+										$("#progressbar<c:out value='${status.index}'/>").show();
+										$("#progressbar<c:out value='${status.index}'/>").html(persent+"%");
+										$("#pTag").show();
+									}
+								    
+								 </script>
+    							
+    							   </c:forEach>  							
     							</div>
     							
-    							<!-- 진행상태, 사진, progress, %, 원, 남은 일자, 제목,분류 -->
-      							
-      							<!-- 만약 진행중 일 때  -->
-      							<%-- <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-      								<div class="panel panel-danger">
-      									<div class="panel-heading">진행중</div>
-      									<div class="panel-body">
-											<div class="thumbnail" align="center">
-      											<img alt="진행중인 이미지입니다." src="/funfund/images/funding/thumbnail/" style="width:100%">
-      											
-      											<div class="progress">
-  													<div class="w3-red progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:70%">
-  														70%
-  													</div>
-												</div>
-												
-      										 	<p>
-													<span id=""></span> % &nbsp;&nbsp; <span></span>원 달성 &nbsp;&nbsp; 
-													<span id=""></span>
-													<span id="">일 남음</span>
-													<span id="">펀딩종료</span>
-												</p>     
-																							
-      										 	<div class="caption">
-            										<p>${ item.pname }</p>
-            										<span>${ item.category }</span>            										
-          										</div>
-      										</div>
-										</div>
-    								</div>
-    							</div> --%>
-    								
-    							<!-- 만약 마감 일 때  -->	
-    							<%-- <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-    								<div class="panel panel-default">
-      									<div class="panel-heading">마감</div>
-      									<div class="panel-body">
-											<div class="thumbnail" align="center">
-      											<img alt="마감된 이미지입니다." src="/funfund/images/funding/thumbnail/" style="width:100%">
-      											
-      											<div class="progress">
-  													<div class="w3-gray progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:80%">
-  														40%
-  													</div>
-												</div>
-      											
-      										 	<p>
-													<span id=""></span> % &nbsp;&nbsp; <span></span>원 달성 &nbsp;&nbsp; 
-													<span id=""></span>
-													<span id="">일 남음</span>
-													<span id="">펀딩종료</span>
-												</p>     
-																							
-      										 	<div class="caption">
-            										<p>${ item.pname }</p>
-            										<span>${ item.category }</span>            										
-          										</div>
-      										</div>
-										</div>
-    								</div>
-    							</div> --%>
     							
-    							</c:forEach> 							
+								 <br>
+    							
+    														
   									
-  									<br>
+  									
     							</div>
     						</div>
     						

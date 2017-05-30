@@ -260,9 +260,9 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
 			    <![CDATA[
    select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount, i7.thumbnail as thumbnail, ac.pimage
 			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost), 0) as fundamount 
-			from item i2 join fundmenu fm2 on (i2.pro_no = fm2.pro_no)
-			             join fundlist fl2 on (fm2.mno = fl2.mno)
-			group by i2.pro_no) i2 on(i1.pro_no = i2.pro_no)
+										from item i2 join fundmenu fm2 on (i2.pro_no = fm2.pro_no)
+										             join fundlist fl2 on (fm2.mno = fl2.mno)
+										group by i2.pro_no) i2 on(i1.pro_no = i2.pro_no)
 			left join (select i3.pro_no, count(fl3.ano) as fundcount
 			           from item i3 join fundmenu fm3 on (i3.pro_no = fm3.pro_no)
 			                        join fundlist fl3 on (fm3.mno = fl3.mno)
