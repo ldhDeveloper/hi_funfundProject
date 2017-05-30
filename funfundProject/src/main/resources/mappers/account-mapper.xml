@@ -91,10 +91,16 @@
 	</select>
 	
 	<insert id="insertThirdParty" parameterType="account">
-	<![CDATA[
+	<choose>
+	<when test="pimage != null">
 			INSERT INTO	ACCOUNT (ano, id, email, pimage, idtype, idtoken, seller, outyn, nickname)
 			VALUES(seq_ano.nextval, #{id}, #{email}, #{pimage}, '일반회원', #{idtoken},'N', 'N', #{nickname})	
-		]]>
+		</when>
+		<otherwise>
+			INSERT INTO	ACCOUNT (ano, id, email,  idtype, idtoken, seller, outyn, nickname)
+			VALUES(seq_ano.nextval, #{id}, #{email}, '일반회원', #{idtoken},'N', 'N', #{nickname})	
+		</otherwise>
+		</choose>
 		<selectKey keyProperty="ano" resultType="Integer" order="AFTER">
 			select seq_ano.currval from dual
 		</selectKey>

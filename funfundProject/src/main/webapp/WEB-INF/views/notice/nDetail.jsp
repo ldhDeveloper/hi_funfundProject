@@ -37,7 +37,7 @@ display: inline-block;
     padding: 20px;
     width: 100%;
   display:block;
-  height : auto;
+  height :auto !important;
    background-color: #F9F7F5;
   
 }
@@ -60,7 +60,7 @@ display: inline-block;
 .replyContent{
 background : white;
 border : 1px solid #e4e4e4;
-
+height : initial;
 }
 em{
     display: inline-block;
@@ -91,8 +91,22 @@ height : 100%;
 width : 100%;
 }
 .rImage {
-height : 15%;
-width : 15%;
+height : 40px;
+width : 40px;
+}
+
+@media screen and (min-width : 380px)
+{
+.nImage{
+height : 100px;
+width : 100px;
+}
+}
+@media screen and (max-width :379px){
+.nImage{
+height : 20px;
+width : 20px;
+}
 }
 .nInfo{
 display : inline-block;
@@ -100,6 +114,17 @@ display : inline-block;
 
 .nDate{
 color : gray;
+font-size : 17px;
+}
+#nDetailContent{
+min-height : 500px;
+}
+.buttons{
+float:right;
+}
+.buttons a{
+display:block;
+
 }
 </style>
 </head>
@@ -127,7 +152,6 @@ function redactForm(x, y){
 		+	"<input type='hidden' name='upbno' value=${n.nno}>"
 		+   "<br><button onclick='updateReply("+ x + ");'>수정</button>"
 	);	
-	
 }
 function updateReply(x){
 	var division =  '.replyContent' + x;
@@ -143,9 +167,9 @@ function updateReply(x){
 
 
 </script>
-	<div id="nDetailContainer">
-		<div class="col-lg-3 col-md-0 col-sm-0 col-xs-0"></div>
-		<div class=" col-lg-6 col-md-12 col-sm-12 col-xs-12">
+<div class="container">
+		<div class="col-lg-4 col-md-0 col-sm-0 col-xs-0"></div>
+		<div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<div class="category">
 				<p class="categoryName"><a class="nDetailCategory">&lt; ${n.bname} </a></p>
 			</div>
@@ -153,27 +177,29 @@ function updateReply(x){
 		<p class="title">&nbsp; &nbsp; ${n.ntitle}</p>
 		
 		<p class ="nInfo">
-		<c:if test="${empty reply.pimage }"> <img class="rImage" src="/funfund/images/myinfo/dimages.png"></c:if>
-			<c:if test="${!empty reply.pimage }"> <img class="rImage" src="${n.pimage}"></c:if>
+		<c:if test="${empty reply.pimage }"> <img class="nImage" src="/funfund/images/myinfo/dimages.png"></c:if>
+			<c:if test="${!empty reply.pimage }"> <img class="nImage" src="${n.pimage}"></c:if>
 		<span>${n.nickname}</span>
-		<p/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="nDate">${n.ndate}</span>
+		<p></p>
+		<span class="nDate">${n.ndate}</span>
+		<br>
 		</p>
 			<div id="nDetailContent"> ${n.ncontent}</div>
-			<div>
+			<div class="buttons">
 				<c:if test="${account.ano eq n.ano }">
 				<a href="goUpdateView.no?nno=${n.nno}&page=${page}">수정하기</a>
 				<a href="nDelete.no?ntitle=${n.ntitle}&nno=${n.nno}&bno=${n.bno}&page=${page}">삭제하기</a></c:if>
 			</div>
 		</div>
-		<div class="col-lg-3 col-md-0 col-sm-0 col-xs-0" > </div>
+		<div class="col-lg-4 col-md-0 col-sm-0 col-xs-0" > </div>
 	</div>
-	
-
-	<div class="replyTable">
+<div class="row replyTable">
+	<div class="">
 	<div class="col-lg-3 col-md-0 col-sm-0 col-xs-0"></div>
 		<div class=" col-lg-6 col-md-12 col-sm-12 col-xs-12">
 		<div class="category">
 			<p class="categoryName">${fn:length(nList)}개의 댓글이 달려있습니다.</p>
+		</div>
 			<br>
 			<br>
 			<%-- <c:if test="${!empty account}"> --%>
@@ -195,16 +221,15 @@ function updateReply(x){
 			
 			<button onclick="redactForm(${status.index}, ${ reply.nno})" >댓글수정</button>
 			<a href="nDelete.no?nno=${reply.nno}&bno=${reply.bno}&upbno=${reply.upbno}&page=${page}" >댓글삭제</a>
-			
 			</div>
 			<br>
 			</c:forEach>
 			<div align="right">
 			<a href="javascript:history.go(-1)">목록으로 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
 			</div>
-		</div>
-		</div>
-		</div>
 		
+		</div>
+		</div>
+		</div>
 </body>
 </html>
