@@ -33,6 +33,12 @@
 		<result property="repcount" column="repcount" />
 		<result property="thumbnail" column="thumbnail" />
 		<result property="pimage" column="pimage" />
+		<result property="billstatus" column="billstatus" />
+		<result property="firstdeposit" column="firstdeposit" />
+		<result property="seconddeposit" column="seconddeposit" />
+		<result property="firstprice" column="firstprice" />
+		<result property="secondprice" column="secondprice" />
+		<result property="icomment" column="icomment" />
 	</resultMap>
 
 	<resultMap type="itemfund" id="itemResult2">
@@ -46,7 +52,7 @@
 
 	<insert id="insert" parameterType="Item">
 		<![CDATA[
-			insert into item values(seq_pro_no.nextval, #{ano}, '테스트1', null, null, null, null, null, 0, null, null, null, 0, null, null, null, null, null, null, null)	
+			insert into item values(seq_pro_no.nextval, #{ano}, 'null', null, null, null, null, null, 0, null, null, null, 0, null, null, null, null, null, null, null, null, null, null, 0, 0, null);	
 		]]>
 
 		<selectKey keyProperty="pro_no" resultType="Integer" order="AFTER">
@@ -133,7 +139,7 @@
 			it.psdate as psdate, it.pedate as pedate, it.pshort as pshort, it.ecost as ecost, it.refund as refund, it.pvideo as pvideo,
 			it.pstatus as pstatus, it.likecount as likecount, it.sharelink as sharelink, it.bankcode as bankcode, it.accpnm as accpnm,
 			it.accnum as accnum, it.cname as cname, it.cs_email as cs_email, it.cs_phone as cs_phone, it.fundamount as fundamount, 
-			it.fundcount as fundcount, it.supportcount as supportcount, it.upcount as upcount, it.repcount as repcount, it.thumbnail as thumbnail
+			it.fundcount as fundcount, it.supportcount as supportcount, it.upcount as upcount, it.repcount as repcount, it.thumbnail as thumbnail, it.billstatus as billstatus, it.firstdeposit as firstdeposit, it.seconddeposit as seconddeposit, it.firstprice as firstprice, it.secondprice as secondprice, it.icomment as icomment
 						from(SELECT item.*, ROW_NUMBER() OVER (ORDER BY fundcount DESC) rnum
 			     				FROM (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount, i7.thumbnail as thumbnail
 			                  from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost), 0) as fundamount 
@@ -249,9 +255,41 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
                                                        where ftype='item' and fsubtype='thumbnail') i7 on(i1.pro_no = i7.refno)) ia on (mi1.pro_no = ia.pro_no)
 							where mi1.ano = #{ano} and ia.category != 'pinterest'
 	</select>
-	
+
 	<select id="selectNewProject" parameterType="int" resultMap="itemResult">
-			        <![CDATA[
+			    <![CDATA[
+   select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount, i7.thumbnail as thumbnail, ac.pimage
+			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost), 0) as fundamount 
+			from item i2 join fundmenu fm2 on (i2.pro_no = fm2.pro_no)
+			             join fundlist fl2 on (fm2.mno = fl2.mno)
+			group by i2.pro_no) i2 on(i1.pro_no = i2.pro_no)
+			left join (select i3.pro_no, count(fl3.ano) as fundcount
+			           from item i3 join fundmenu fm3 on (i3.pro_no = fm3.pro_no)
+			                        join fundlist fl3 on (fm3.mno = fl3.mno)
+			           group by i3.pro_no) i3 on(i1.pro_no = i3.pro_no)
+			left join (select i3.pro_no, count(distinct fl3.ano) as supportcount
+			from item i3 join fundmenu fm3 on (i3.pro_no = fm3.pro_no)
+			             join fundlist fl3 on (fm3.mno = fl3.mno)
+			group by i3.pro_no) i4 on(i1.pro_no = i4.pro_no)
+			left join (select i.pro_no, count(p.upno) as upcount
+			                             from item i left join pupdate p on (i.pro_no = p.pro_no)
+			                             group by i.pro_no) i5 on (i1.pro_no = i5.pro_no)
+			                  left join (select i.pro_no, count(ia.ask_no) as repcount
+			                             from item i left join (select ask_no, pro_no
+			                                                    from itemask
+			                                                    where ask_type='댓글') ia on(i.pro_no = ia.pro_no)
+			                             group by i.pro_no) i6 on (i1.pro_no = i6.pro_no)
+			                  left join (select refno, refname as thumbnail 
+			                             from attachment
+			                             where ftype='item' and fsubtype='thumbnail') i7 on(i1.pro_no = i7.refno)
+                                   left join (select ano, pimage
+                                                from account) ac on (ac.ano=i1.ano)
+    where i1.ano=#{ano}
+	  ]]>
+	</select>
+
+	<select id="selectRequestItem" resultMap="itemResult">
+	        <![CDATA[
 	         select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount, i7.thumbnail as thumbnail, ac.pimage
 			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost), 0) as fundamount 
 			from item i2 join fundmenu fm2 on (i2.pro_no = fm2.pro_no)
@@ -278,7 +316,7 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
 			                             where ftype='item' and fsubtype='thumbnail') i7 on(i1.pro_no = i7.refno)
                                    left join (select ano, pimage
                                                 from account) ac on (ac.ano=i1.ano)
-              where i1.ano=#{ano}
+            where i1.pstatus = '작성중'
 			]]>
 	</select>
 </mapper>

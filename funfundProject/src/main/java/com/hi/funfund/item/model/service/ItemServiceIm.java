@@ -1,6 +1,7 @@
 package com.hi.funfund.item.model.service;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -144,6 +145,11 @@ public class ItemServiceIm implements ItemService{
 	@Override
 	public List<Item> selectNewProject(int ano) {
 		return itemDao.selectNewProject(ano);
+	}
+
+	@Override
+	public List<Item> selectRequestItem() {
+		return itemDao.selectRequestItem();
 	}
 
 	

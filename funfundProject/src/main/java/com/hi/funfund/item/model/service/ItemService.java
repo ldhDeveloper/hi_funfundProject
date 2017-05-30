@@ -53,6 +53,6 @@ public interface ItemService {
 
 	List<Item> selectNewProject(int ano); // 개설한 프로젝트
 
-
+	List<Item> selectRequestItem();
 
 }

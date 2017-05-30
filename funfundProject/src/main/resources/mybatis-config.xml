@@ -32,6 +32,7 @@
 		<mapper resource="mappers/myItem-mapper.xml" />
 		<mapper resource="mappers/notice-mapper.xml" />
 		<mapper resource="mappers/pupdate-mapper.xml" />
+		<mapper resource="mappers/admin-mapper.xml" />
 	</mappers>
 	
 
