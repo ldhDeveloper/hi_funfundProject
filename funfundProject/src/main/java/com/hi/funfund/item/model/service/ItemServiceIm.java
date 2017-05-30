@@ -139,6 +139,12 @@ public class ItemServiceIm implements ItemService{
 	public List<Item> selectMyItems(int ano) {
 		return itemDao.selectMyItems(ano);
 	}
+	
+	// 개설한 프로젝트
+	@Override
+	public List<Item> selectNewProject(int ano) {
+		return itemDao.selectNewProject(ano);
+	}
 
 	
 }

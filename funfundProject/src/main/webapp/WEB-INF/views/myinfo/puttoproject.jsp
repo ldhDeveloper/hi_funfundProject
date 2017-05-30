@@ -266,7 +266,7 @@
       											<div id="itempanel<c:out value='${status.index}'/>" class="panel panel-default">
       													
 													  <div id="conitemper<c:out value='${status.index}'/>" class="panel-heading panel-primary">진행중</div>
-													  <div id="enditemper<c:out value='${status.index}'/>" class="panel-heading">펀딩 종료</div>
+													  <div id="enditemper<c:out value='${status.index}'/>" class="panel-heading ">펀딩 종료</div>
 													  <div class="panel-body">
 													    <div class="thumbnail" align="center">
 														<a href="detail.it?pro_no=<c:out value="${item.pro_no}"/>"> <img
