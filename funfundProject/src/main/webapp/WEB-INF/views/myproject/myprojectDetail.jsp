@@ -211,7 +211,6 @@
 			        <th class="thcenter">배송상태</th>
 			      </tr>
 			    </thead>
-			    <%-- <c:out value='${status.index }'/> --%>
 			    <tbody id="itemTableBody">
 			      <c:forEach var="item" items="${mlist}" varStatus="status">
 			      <tr id="firstList<c:out value='${status.index }'/>" onclick="tclick(this);">

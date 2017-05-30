@@ -1,5 +1,6 @@
 package com.hi.funfund.item.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -84,6 +85,11 @@ public class ItemDao {
 
 	public List<Item> selectMyItems(int ano) {
 		List<Item> iList = (List<Item>) sqlSession.selectList(nameSpace + "selectMyItems", ano);
+		return iList;
+	}
+
+	public List<Item> selectRequestItem() {
+		List<Item> iList = (List<Item>) sqlSession.selectList(nameSpace + "selectRequestItem");
 		return iList;
 	}
 	

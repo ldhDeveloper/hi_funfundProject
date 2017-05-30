@@ -51,6 +51,8 @@ public interface ItemService {
 
 	List<Item> selectMyItems(int ano);
 
+	List<Item> selectRequestItem();
+
 
 
 }
