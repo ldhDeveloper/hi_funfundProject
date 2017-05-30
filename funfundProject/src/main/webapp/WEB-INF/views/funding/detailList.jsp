@@ -36,6 +36,7 @@ li {
 
 .font {
 	color: white;
+	font-family: ten !important;
 }
 
 .align {
@@ -178,7 +179,6 @@ button {
 body {
 	font-family: 'Hanna' !important;
 }
-
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -325,9 +325,9 @@ body {
 	</div>
 
 	<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-		<div class="box2 info">
-			<p id="box2">
-				<script>
+			<div class="box2 info">
+				<p id="box2">
+					<script>
 					$(function() {
 						var date = "<c:out value='${item.pedate}'/>";
 						console.log("date : " + date);
@@ -341,18 +341,20 @@ body {
 					});
 				</script>
 
-			</p>
-			<em class="infoBar"></em>
-			<p class="info">
-				<c:set var="ecost" value="${item.ecost }" />
-				<c:set var="fundamount" value="${item.fundamount}" />
-				<c:out value="${ fundamount * 100 / ecost}" />
-				% 달성
-			</p>
-			<p class="info">${item.fundamount }원의펀딩</p>
-			<p class="info">${item.supportcount }명의서포터</p>
-			<button class="btn-fund pay">펀딩하기</button>
-		</div>
+				</p>
+				<em class="infoBar"></em>
+				<p class="info">
+					<c:set var="ecost" value="${item.ecost }" />
+					<c:set var="fundamount" value="${item.fundamount}" />
+					<c:out value="${ fundamount * 100 / ecost}" />
+					% 달성
+				</p>
+				<p class="info">${item.fundamount }원의펀딩</p>
+				<p class="info">${item.supportcount }명의서포터</p>
+				<button class="btn-fund pay">펀딩하기</button>
+			</div>
+		
+		<div class="">
 		<div style="text-align: center;">
 			<button class="btn btn-default" id="btn-like">
 				<i class="fa fa-heart-o" aria-hidden="true"></i>
@@ -365,6 +367,7 @@ body {
 				<i class="fa fa-share" aria-hidden="true"></i>
 			</button>
 		</div>
+	</div>
 
 
 		<script>
@@ -398,6 +401,7 @@ body {
 			
 			} */
 		</script>
+		
 		<div class="">
 			<p
 				style="font-size: 10pt; text-align: left; padding-top: 20px; padding-bottom: 5px; margin-left: 20px;">메이커
@@ -418,13 +422,11 @@ body {
 					<div class="makerinfo">${item.cs_phone}</div>
 				</div>
 			</div>
-		</div>
 
-		<div class="">
-			<p
-				style="font-size: 10pt; text-align: left; padding-top: 20px; padding-bottom: 5px; margin-left: 20px;">베스트
+	
+			<p style="font-size: 10pt; text-align: left; padding-top: 20px; padding-bottom: 5px; margin-left: 20px;" class="hidden-sm hidden-xs">베스트
 				서포터</p>
-			<div class="makerbox2">
+			<div class="makerbox2 hidden-sm hidden-xs"">
 				<c:if test="${!empty bestList}">
 					<c:forEach var="bestList" items="${bestList }">
 						<div class="supportinfo">
@@ -444,12 +446,13 @@ body {
 		</div>
 
 		<!-- 뷰온버튼 -->
-		<button id="scrollbutton" style="bottom: 50px;"class="hidden-sm hidden-xs">
+		<button id="scrollbutton" style="bottom: 50px;"
+			class="hidden-sm hidden-xs">
 			<i class="fa fa-angle-up fa-2x" aria-hidden="true"
 				style="display: block;"></i>TOP
 		</button>
 
-		<div class="">
+		<div class="hidden-sm hidden-xs">
 			<p
 				style="font-size: 10pt; text-align: left; padding-bottom: 5px; margin-left: 20px;">리워드선택</p>
 			<c:forEach var="reward" items="${mList}" varStatus="status">
@@ -483,7 +486,9 @@ body {
 				</ul>
 			</c:forEach>
 		</div>
-		<div>
+		
+		
+		<div class="hidden-sm hidden-xs">
 			<button class="btn-fund pay">펀딩하기</button>
 		</div>
 	</div>
