@@ -20,6 +20,10 @@ public class FundMenuServiceIm implements FundMenuService {
 	public ArrayList<FundMenu> selectList(int pro_no) {
 		return fundMenuDao.selectList(pro_no);
 	}
+	@Override
+	public ArrayList<FundMenu> selectList2(int pro_no) {
+		return fundMenuDao.selectList2(pro_no);
+	}
 
 	@Override
 	public int insert(FundMenu fm) {

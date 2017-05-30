@@ -25,6 +25,12 @@ public class FundMenuDao {
 		System.out.println("mlist: "+mList);
 		return mList;
 	}
+	public ArrayList<FundMenu> selectList2(int pro_no) {
+		System.out.println("pro: "+pro_no);
+		ArrayList<FundMenu> mList =  (ArrayList<FundMenu>) sqlSession.selectList("selectMlist2", pro_no);
+		System.out.println("mlist: "+mList);
+		return mList;
+	}
 
 	public int insert(FundMenu fm) {
 		// TODO Auto-generated method stub

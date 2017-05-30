@@ -21,5 +21,6 @@ public interface FundMenuService {
 	int insertFundMenu(FundMenu fmenu);
 
 	FundMenu selectOne(int parseInt);
+	ArrayList<FundMenu> selectList2(int pro_no);
 
 }
