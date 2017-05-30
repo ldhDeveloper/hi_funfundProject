@@ -3,7 +3,40 @@
 <!DOCTYPE html >
 <html>
 <head>
-
+<script type="text/javascript" src="/funfund/lib/js/jquery-3.2.1.min.js">
+</script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css" />
+<link rel="stylesheet"
+ href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0/css/froala_editor.pkgd.min.css"
+ rel="stylesheet" type="text/css" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0/css/froala_style.min.css"
+ rel="stylesheet" type="text/css" />
+ <script>
+$(function() {
+	  $('textarea#froala-editor').froalaEditor({
+		  theme: 'Royal',
+		  heightMin : '900',
+		  heightMax : '1500',
+		  language: 'ko',
+		  toolbarButtons : ['fullscreen', 
+			  				'bold', 'italic', 'underline',
+			  				'|', 'fontFamily', 'fontSize', 'color',
+			  				'inlineStyle', 'paragraphStyle', '|',
+			  				'paragraphFormat', 'align', 'formatOL',
+			  				'formatUL', 'outdent', 'indent', 
+			  				'-', 'insertLink', 'insertImage', 
+			  				 'insertTable', '|',
+			  				'specialCharacters', 'insertHR', 'selectAll',
+			  				'clearFormatting', '|', 'print', 
+			  				'html', '|', 'undo', 'redo']
+	  })
+	});
+</script>
+</head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
@@ -35,7 +68,7 @@ border: 1px solid #aaaaaa;
 .column{
 background : #cccccc;
 }
-input {
+.details{
 width: 100%;
 }
 form {
@@ -56,15 +89,46 @@ width: 100px !important;
 <div class="container">
 <div class="col-lg-12 col-md-12 col-xs-12">
 <div class="ndetail">
-<form action="#" method="post">
+<form action="#" method="post" onsubmit="return false" >
 <table class="ntable">
-<tr><td class="column">제목</td><td><input id="ntitle" name="ntitle"> </td></tr>
-<tr><td class="column">이름</td><td><input id="writer" value="" readonly></td></tr>
-<tr><td class="column">내용</td><td><div></div></td></tr>
-<tr><td class="column">첨부파일</td><td><input type="file"></td></tr>
+	<tr><td class="column">제목</td><td> 
+<input class="details" id="ntitle" name="ntitle" required> </td></tr>
+	<tr><td class="column">이름</td><td><input id="writer"  class="details" value="${account.nickname}" readonly></td></tr>
+	<tr><td class="column">내용</td>
+		<td><textarea id="froala-editor" required>
+		
+		</textarea></td></tr>
+
 </table>
-<input class="submit" type="submit" value="작성">
+<button onclick="insertN()">작성</button>
 </form> 
+<div class = "down"></div>
+<script>
+function insertN(){
+
+var ncontent =  $('textarea#froala-editor').froalaEditor('html.get');
+var ano = ${account.ano};
+var bno = ${bno};
+var page = ${page};
+var ntitle = $('input[name=ntitle]').val();
+alert(ntitle);
+
+ location.href = "nInsert.no?ano=${account.ano}&bno=${bno}&ntitle="+ntitle+"&ncontent="+ncontent+"&page=${page}";
+
+
+	
+}
+</script>
+<script type="text/javascript" src="/funfund/lib/froala_editor_2.5.1/js/languages/ko.js">
+</script>
+ <script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script type="text/javascript" 
+  src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js">
+  </script><script type="text/javascript" 
+  src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
+  <script type="text/javascript" 
+  src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0//js/froala_editor.pkgd.min.js"></script>
  </div>
 </div>
 </div>

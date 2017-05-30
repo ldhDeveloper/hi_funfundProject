@@ -17,9 +17,9 @@ public interface NoticeService {
 	int insert(Notice notice);
 	int getListCount(int bno, int upbno);
 	int getListCountWithTitle(int bno, String nTitle);
-	List<Notice> selectDetailList(HashMap map);
+	List<Notice> selectDetailList(int nno);
 	int getReplyCount(int nno);
-	
+	int upReadCount(int nno);
 
 	
 	
