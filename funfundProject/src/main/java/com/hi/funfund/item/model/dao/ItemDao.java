@@ -108,6 +108,10 @@ public class ItemDao {
 	public int updateRejectStatus(HashMap<String, String> hmap) {
 		int result = sqlSession.update(nameSpace + "updateRejectStatus", hmap);
 		return result;
+  }
+	public Item selectOneForUpdate(int pro_no) {
+		Item item = (Item) sqlSession.selectOne(nameSpace + "selectOneForUpdate", pro_no);
+		return item;
 	}
 	
 }

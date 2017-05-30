@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -329,6 +330,27 @@ public class ItemController {
 		model.addObject("bestList", bestList);
 		model.addObject("sList", sList);
 		model.setViewName("funding/detailList");
+		return model;
+	}
+	
+	@RequestMapping(value="selectone.it")
+	public ModelAndView selectOne(@RequestParam("pro_no") int pro_no, ModelAndView model, HttpServletRequest request, HttpServletResponse response){
+		Item item = itemService.selectOneForUpdate(pro_no);
+		
+		System.out.println("start select : " + item);
+		model.addObject("item", item);
+		model.setViewName("jsonView");
+		
+		return model;
+	}
+	
+	@RequestMapping(value="chekeaccount.it")
+	public ModelAndView updateAcc(@RequestParam("sbmflag") String flag, ModelAndView model, HttpServletRequest request, HttpServletResponse response){
+		
+		System.out.println(flag);
+		
+		
+		
 		return model;
 	}
 
