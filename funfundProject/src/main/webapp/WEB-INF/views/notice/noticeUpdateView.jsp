@@ -121,7 +121,7 @@ function updateN(){
 
 var ncontent =  $('textarea#froala-editor').froalaEditor('html.get');
 var ntitle = $('input[name=ntitle]').val();
-location.href = "nUpdate.no?nno=${n.nno}&bno=${n.bno}&ntitle="+ntitle+"&ncontent="+ncontent+"&page=${page}";	
+location.href = "nUpdate.no?nno=${n.nno}&bname=${n.bname}&ntitle="+ntitle+"&ncontent="+ncontent+"&page=${page}";	
 }
 </script>
 <script type="text/javascript" src="/funfund/lib/froala_editor_2.5.1/js/languages/ko.js">

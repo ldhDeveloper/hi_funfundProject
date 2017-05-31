@@ -816,7 +816,7 @@ label.sign-form_title {
 						<td style="width: 150px;"><a class="fun-menu"
 							href="funding.it">프로젝트 둘러보기</a></td>
 						<td style="width: 80px;"><a class="fun-menu"
-							href="nList.no?bno=1&page=1">고객센터</a></td>
+							href="nList.no?bname=공지사항&page=1">고객센터</a></td>
 						<td style="width: 80px;"><a class="fun-menu" href="#"
 							data-toggle="modal" data-target="#myModal">로그인</a></td>
 					</c:if>
@@ -1192,7 +1192,7 @@ label.sign-form_title {
 							<li><a href="funding.it">프로젝트 둘러보기</a></li>
 						</ul>
 						<ul>
-							<li><a href="nList.no?bno=1&page=1">고객센터</a></li>
+							<li><a href="nList.no?bname=공지사항&page=1">고객센터</a></li>
 							<li><a href="myinfo.ao">회원정보보기</a>
 							<li><a href="itemconfirm.am">관리자</a>
 						</ul>

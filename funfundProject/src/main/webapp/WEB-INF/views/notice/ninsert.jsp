@@ -21,7 +21,7 @@ $(function() {
 		  theme: 'Royal',
 		  heightMin : '900',
 		  heightMax : '1500',
-		  language: 'ko',
+		  LANGUAGE : 'ko',
 		  toolbarButtons : ['fullscreen', 
 			  				'bold', 'italic', 'underline',
 			  				'|', 'fontFamily', 'fontSize', 'color',
@@ -106,13 +106,10 @@ border-bottom: none;
 <form action="#" method="post" onsubmit="return false" >
 <table class="ntable">
 	<tr><td class="column">제목</td><td> 
-<input class="details" id="ntitle" name="ntitle" required > </td></tr>
+<input class="details" id="ntitle" name="ntitle" required></td></tr>
 	<tr><td class="column">이름</td><td><input id="writer"  class="details" value="${account.nickname}" readonly></td></tr>
-	
 		<tr><td colspan="2" class="insertContext"><textarea id="froala-editor" required>
-		
 		</textarea></td></tr>
-
 </table>
 <button onclick="insertN()">작성</button>
 </form> 
@@ -122,18 +119,18 @@ function insertN(){
 
 var ncontent =  $('textarea#froala-editor').froalaEditor('html.get');
 var ano = ${account.ano};
-var bno = ${bno};
+var bname = ${bname};
 var page = ${page};
 var ntitle = $('input[name=ntitle]').val();
 alert(ntitle);
 
- location.href = "nInsert.no?ano=${account.ano}&bno=${bno}&ntitle="+ntitle+"&ncontent="+ncontent+"&page=${page}";
+ location.href = "nInsert.no?ano=${account.ano}&bname=${bname}&ntitle="+ntitle+"&ncontent="+ncontent+"&page=${page}";
 
 
 	
 }
 </script>
-<script type="text/javascript" src="/funfund/lib/froala_editor_2.5.1/js/languages/ko.js">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0/js/languages/ko.js">
 </script>
  <script type="text/javascript"
   src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>

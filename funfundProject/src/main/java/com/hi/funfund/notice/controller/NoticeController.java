@@ -27,14 +27,14 @@ public class NoticeController {
 		int sNum = page * 10 +1 -10;
 		int eNum = sNum + 9;
 		int upbno = 0;
-		map.put("bno", notice.getBno());
+		map.put("bname", notice.getBname());
 		map.put("sNum", sNum);
 		map.put("eNum", eNum);
 		map.put("upbno", 0);
 		List<Notice> nList = noticeService.selectList(map);
-		int listCount = noticeService.getListCount(notice.getBno(), upbno);
+		int listCount = noticeService.getListCount(notice.getBname(), upbno);
 		
-		model.addObject("bno", notice.getBno());
+		model.addObject("bname", notice.getBname());
 		model.addObject("page", page);
 		model.addObject("listCount", listCount);
 		model.addObject("nList", nList);
@@ -44,12 +44,12 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("nSearchTitle.no")
-	public ModelAndView searchTitle(@RequestParam("bno") int bno,
+	public ModelAndView searchTitle(@RequestParam("bname") String bname,
 			@RequestParam("page") int page, @RequestParam("nTitle") String nTitle, ModelAndView model){
 		HashMap map = new HashMap();
-		int listCount = noticeService.getListCountWithTitle(bno, nTitle);
-		List<Notice> nList = noticeService.searchTitle(bno, page, nTitle);
-		model.addObject("sbno", bno);
+		int listCount = noticeService.getListCountWithTitle(bname, nTitle);
+		List<Notice> nList = noticeService.searchTitle(bname, page, nTitle);
+		model.addObject("bname", bname);
 		model.addObject("page", page);
 		model.addObject("listCount", listCount);
 		model.addObject("nList", nList);
@@ -59,8 +59,8 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("nInsertView.no")
-	public ModelAndView Write(@RequestParam("bno") int bno, @RequestParam("page") int page, ModelAndView model  ){
-		model.addObject("bno", bno );
+	public ModelAndView Write(@RequestParam("bname") String bname, @RequestParam("page") int page, ModelAndView model  ){
+		model.addObject("bname", bname );
 		model.addObject("page", page );
 		model.setViewName("notice/ninsert");
 		return model;
@@ -99,9 +99,9 @@ public class NoticeController {
 		String address = null;
 		if(result >0){
 			if(notice.getNtitle() != null){
-			address = "redirect:/nDetail.no?nno=" +notice.getNno() +"&bno="+notice.getBno()+"&page="+page;	
+			address = "redirect:/nDetail.no?nno=" +notice.getNno() +"&bname="+notice.getBname()+"&page="+page;	
 			}else{
-				address = "redirect:/nDetail.no?nno=" +notice.getUpbno() +"&bno="+notice.getBno()+"&page="+page;		
+				address = "redirect:/nDetail.no?nno=" +notice.getUpbno() +"&bname="+notice.getBname()+"&page="+page;		
 			}
 			}
 		return address;
@@ -114,9 +114,9 @@ public class NoticeController {
 		System.out.println(notice);
 		if(result >0){
 			if(notice.getNtitle() !=null){
-			address = "redirect:/nList.no?bno="+notice.getBno()+"&page=1";
+			address = "redirect:/nList.no?bname="+notice.getBname()+"&page=1";
 			}else{
-			address = "redirect:/nDetail.no?nno="+notice.getUpbno()+"&bno="+notice.getBno()+"&page="+page;
+			address = "redirect:/nDetail.no?nno="+notice.getUpbno()+"&bname="+notice.getBname()+"&page="+page;
 			}
 		}
 		return address;
@@ -128,9 +128,9 @@ public class NoticeController {
 		String address = null;
 		if(result >0){
 			if(notice.getNtitle() != null){
-			address ="redirect:/nList.no?bno="+ notice.getBno()+ "&page="+page;
+			address ="redirect:/nList.no?bname="+ notice.getBname()+ "&page="+page;
 			}else{
-				address ="redirect:/nDetail.no?bno="+notice.getBno()+"&nno="+notice.getUpbno()+"&page="+page;
+				address ="redirect:/nDetail.no?bname="+notice.getBname()+"&nno="+notice.getUpbno()+"&page="+page;
 			}
 		}
 		return address;
