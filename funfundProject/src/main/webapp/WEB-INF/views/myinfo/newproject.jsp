@@ -207,6 +207,67 @@
 	margin : 0px !important;
 	padding : 0px !important;
 }
+
+/* Style the tab */
+div.tab {
+    overflow: hidden;
+    border: 1px solid #DFF0D8;
+    background-color: #DFF0D8;
+    color: #3C763D;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    background-color: #28B5A9;
+    color: white;
+}
+
+/* Create an active/current tablink class */
+div.tab button.active {
+    background-color: #33C79A;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #DFF0D8;
+    border-top: none;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+/* Style the close button */
+.topright {
+    float: right;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.topright:hover {color: red;}
+
+.tabStart {
+	width: 96%;
+	margin-left: 1.3%;
+}
+
+.tab {
+	border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+}
+
 </style>
 
 <title>Insert title here</title>
@@ -260,7 +321,7 @@
     						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       							<ul class="nav navbar-nav">
       								<li><a href="myinfo.ao" class="otherActive">회원 정보 설정</a></li>
-        							<li><a href="sellerinfo.ao" class="otherActive">판매자 정보 변경</a></li>
+      								<li><a class="otherActive" id="goSellerinfo" style="cursor:pointer;">판매자 정보 변경</a></li>
         							<li><a href="puttoproject.ao" class="otherActive">찜한 프로젝트</a></li>
         							<li class="act"><a class="active" href="newproject.ao">개설한 프로젝트<span class="sr-only">(current)</span></a></li>      							        							        							        							
         							<li><a href="myfunding.ao" class="otherActive">나의 펀딩 현황</a></li>
@@ -289,7 +350,65 @@
     						<div class="panelStart panel panel-success">   						
       							<div class="panel-heading">리워드형 프로젝트</div>
       							
-      							<br>    						    							
+      							<br>
+      							
+      							<div class="row tabStart" style="margin-left: 2%;">
+	      							<div class="tab">
+									  <button class="tablinks" onclick="tabBtn(event, '모두보기')" id="defaultOpen">모두보기</button>
+									  <button class="tablinks" onclick="tabBtn(event, '작성중')">작성중</button>
+									  <button class="tablinks" onclick="tabBtn(event, '진행중')">진행중</button>
+									  <button class="tablinks" onclick="tabBtn(event, '마감')">마감</button>
+									</div>
+									
+									<div id="모두보기" class="tabcontent">
+									  <span onclick="this.parentElement.style.display='none'" class="topright">x</span>
+									  <h3>모두보기</h3>
+									  <p>모두보기 is the capital city of England.</p>
+									</div>
+									
+									<div id="작성중" class="tabcontent">
+									  <span onclick="this.parentElement.style.display='none'" class="topright">x</span>
+									  <h3>작성중</h3>
+									  <p>작성중 is the capital of France.</p> 
+									</div>								
+									
+									<div id="진행중" class="tabcontent">
+									  <span onclick="this.parentElement.style.display='none'" class="topright">x</span>
+									  <h3>진행중</h3>
+									  <p>진행중 is the capital of Japan.</p>
+									</div>
+									
+									<div id="마감" class="tabcontent">
+									  <span onclick="this.parentElement.style.display='none'" class="topright">x</span>
+									  <h3>마감</h3>
+									  <p>마감 is the capital of Japan.</p>
+									</div>
+									
+									<script>
+										function tabBtn(evt, progress) {
+										    var i, tabcontent, tablinks;
+										    tabcontent = document.getElementsByClassName("tabcontent");
+										    
+										    for (i = 0; i < tabcontent.length; i++) {
+										        tabcontent[i].style.display = "none";
+										    }
+										    
+										    tablinks = document.getElementsByClassName("tablinks");
+										    
+										    for (i = 0; i < tablinks.length; i++) {
+										        tablinks[i].className = tablinks[i].className.replace(" active", "");
+										    }
+										    
+										    document.getElementById(progress).style.display = "block";
+										    evt.currentTarget.className += " active";
+										}
+										
+										// Get the element with id="defaultOpen" and click on it
+										document.getElementById("defaultOpen").click();
+									</script>
+								</div>
+								
+      							<br>   						    							
      							
       							<!-- 만약 작성중일 때  -->
       							<div class="row myItemList">
@@ -415,6 +534,19 @@
     									else if(btDay>=0) {
     										$("#complete<c:out value='${status.index}'/>").hide();
     									}
+    									
+    									var name ='<c:out value="${sessionScope.party.pname}"/>';
+    									
+    									$("#goSellerinfo").click(function() {
+    										if(name == "") {
+    											alert("회원정보 설정에서 이름을 반드시 입력하세요!");
+    											return result;
+    										}
+    										
+    										else {
+    											location.href = "sellerinfo.ao";
+    										}
+    									});
     								});
 								 </script>
     							

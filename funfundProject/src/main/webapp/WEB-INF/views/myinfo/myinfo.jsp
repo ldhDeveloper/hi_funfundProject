@@ -248,18 +248,19 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 						</div>
 						
 						<script>
-						function LoadImg(value){
-						 	if(value.files && value.files[0]){
-						 		var reader = new FileReader();
-						 		reader.onload = function (e){
-						 			$("#profileimage").attr("src", e.target.result);
+							function LoadImg(value){
+						 		if(value.files && value.files[0]){
+						 			var reader = new FileReader();
+						 			reader.onload = function (e){
+						 				$("#profileimage").attr("src", e.target.result);
+						 			}
+						 			reader.readAsDataURL(value.files[0]);
 						 		}
-						 		reader.readAsDataURL(value.files[0]);
-						 	}
-						}
-						function photosubmit(){
-							$("#imageform").submit();
-						}
+							}
+							
+							function photosubmit(){
+								$("#imageform").submit();
+							}
 						</script>
 						
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow mname" align="center">
@@ -273,6 +274,7 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 		                 			</c:if>
 		       
 							</div>
+							
 							<div style="margin-top:20px;">
 		                 		<c:if test="${empty sessionScope.account.pimage }">
 		                 			<button id="insertphoto" class="btn btn-info" onclick="photosubmit();">사진추가하기</button>
@@ -300,21 +302,8 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 
 								<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 									<ul class="nav navbar-nav">
-										<li class="act"><a class="active" href="myinfo.ao">회원 정보 설정<span class="sr-only">(current)</span></a></li>
-										
-										
+										<li class="act"><a class="active" href="myinfo.ao">회원 정보 설정<span class="sr-only">(current)</span></a></li>										
 										<li><a class="otherActive" id="goSellerinfo" style="cursor:pointer;">판매자 정보 변경</a></li>
-										
-										<!-- <li><a href="sellerinfo.ao" class="otherActive" id="goSellerinfo">판매자 정보 변경</a></li> -->
-										
-										<%-- <c:if test="${ empty sessionScope.party.pname }">
-											<li><a href="sellerinfo.ao" class="otherActive">판매자 정보 변경</a></li>
-										</c:if>
-										
-										<c:if test="${ ! empty sessionScope.party.pname }">
-											<li><a href="sellerinfo.ao" class="otherActive">판매자 정보 변경</a></li>
-										</c:if> --%>
-										
 										<li><a href="puttoproject.ao" class="otherActive">찜한 프로젝트</a></li>
 										<li><a href="newproject.ao" class="otherActive">개설한 프로젝트</a></li>
 										<li><a href="myfunding.ao" class="otherActive">나의 펀딩 현황</a></li>
@@ -545,12 +534,7 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
         									});
        									});
         								
-        								function sendAuthMail() {
-        									/* if($("#userEmail").val() == "") {
-    											alert("이메일을 입력해주세요.");
-    											return;
-    										} */
-    										        								    
+        								function sendAuthMail() {							        								    
         									for(var i=0; i<8; i++){
         								    	var num = Math.floor(Math.random() * 33);
         								    	authNumber += codeList[num];
@@ -571,21 +555,18 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
     										if($("#oldPwd").val() == "") {
     											$("#oldPwdInput").addClass("alert alert-danger");
     											$("#oldPwdInput").html("현재 비밀번호를 입력해주세요.");
-    											/* alert("현재 비밀번호를 입력해주세요."); */
     											return false;
     										}
     										
     										else if($("#newPwd").val() == "") {
     											$("#newPwdInput").addClass("alert alert-danger");
     											$("#newPwdInput").html("새 비밀번호를 입력해주세요.");
-    											/* alert("새 비밀번호를 입력해주세요."); */
     											return false;
     										}
     										
     										else if($("#newPwd2").val() == "") {
     											$("#newPwdInput2").addClass("alert alert-danger");
     											$("#newPwdInput2").html("새 비밀번호를 입력해주세요.");
-    											/* alert("새 비밀번호를 입력해주세요."); */
     											return false;
     										}
     										

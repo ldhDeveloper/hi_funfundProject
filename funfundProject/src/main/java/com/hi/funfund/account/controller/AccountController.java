@@ -271,16 +271,18 @@ public class AccountController {
 		
 		int ano = account.getAno();
 		String oldPwd = request.getParameter("oldPwd");
-		String newPwd = request.getParameter("newPwd");		
+		String newPwd = request.getParameter("newPwd");
+		
+		System.out.println("PWD Controller1 ano : " + ano + " oldPwd : " + oldPwd);
 		
 		Account account2 = accountService.selectOldPwd(ano, oldPwd);
 		
-		System.out.println("PWD Controller ano : " + ano + " oldPwd : " + oldPwd);
+		System.out.println("PWD Controller2 ano : " + ano + " oldPwd : " + oldPwd);
 		
 		if(account2 != null) {
 			int result = accountService.updatePwd(ano, newPwd);
 			
-			System.out.println("PWD Controller2 ano : " + ano + " newPwd : " + newPwd);
+			System.out.println("PWD Controller3 ano : " + ano + " newPwd : " + newPwd);
 		}
 		
 		model.addObject("account", account2);
