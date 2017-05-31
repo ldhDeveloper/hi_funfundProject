@@ -253,7 +253,7 @@ public ModelAndView selectList(ModelAndView model){
 		
 		ra.addAttribute("fund_no", fund_no);
 		
-		return "redirect:myfundingDetail.fl";
+		return "redirect:myfunding.ao";
 	}
 	
 	// deliveryChange.fl 배송지 정보 변경

@@ -309,7 +309,7 @@
     					
     					<div class="well">  					
     						<div class="panel panel-info">
-      							<div class="panel-heading">찜한 투자형 프로젝트</div>
+      							<div class="panel-heading">찜한 후원형 프로젝트</div>
       							<div class="panel-body">아직 찜한 프로젝트가 없습니다.</div>
     						</div>
     					</div>
