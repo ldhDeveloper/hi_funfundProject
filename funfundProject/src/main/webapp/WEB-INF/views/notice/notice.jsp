@@ -12,16 +12,16 @@
 <title>Insert title here</title>
 <script>
 $(function(){
-	switch('${bno}'){
-	case '1' :$('#no').css({"background": "#00CCA3", "border-color" : "#00CCA3", "color": "#fff" });
+	switch('${bname}'){
+	case '공지사항' :$('#no').css({"background": "#00CCA3", "border-color" : "#00CCA3", "color": "#fff" });
 		$('#bTitle').text('공지사항');
 		$('#bComent').text('절세미인의 공지사항입니다.');
 		break;
-	case '2' :$('#fnq').css({"background": "#00CCA3", "border-color" : "#00CCA3", "color": "#fff" });
+	case 'FnQ' :$('#fnq').css({"background": "#00CCA3", "border-color" : "#00CCA3", "color": "#fff" });
 	$('#bTitle').text('FnQ');
 	$('#bComent').text('자주묻는 질문입니다.');
 		break;
-	case '3' :$('#qna').css({"background": "#00CCA3", "border-color" : "#00CCA3", "color": "#fff" });
+	case 'QnA' :$('#qna').css({"background": "#00CCA3", "border-color" : "#00CCA3", "color": "#fff" });
 	$('#bTitle').text('QnA');
 	$('#bComent').text('사용자와의 소통이 이루어 집니다.');
 		break;
@@ -36,9 +36,9 @@ function category(x){
 
 switch(x){
 
-case 1 :  location.href="nList.no?bno=1&page=1"; break;
-case 2 :  location.href="nList.no?bno=2&page=1"; break;
-case 3 :  location.href="nList.no?bno=3&page=1"; break;
+case 1 :  location.href="nList.no?bname=공지사항&page=1"; break;
+case 2 :  location.href="nList.no?bname=FnQ&page=1"; break;
+case 3 :  location.href="nList.no?bname=QnA&page=1"; break;
 }
 
 } 
@@ -164,7 +164,7 @@ button {
 					<!-- 1.여기서부터  -->
 					<hr>
 					<c:forEach var="nlist" items="${nList}">
-						<a class="nList" style="display:block;" href="nDetail.no?bno=${bno}&nno=${nlist.nno}&page=${page}">
+						<a class="nList" style="display:block;" href="nDetail.no?bname=${nlist.bname}&nno=${nlist.nno}&page=${page}">
 							<p> <em>${nlist.bname}</em>  <span class="nTitle">${nlist.ntitle}</span> </p>
 							<p> <span class="nWriter"> ${nlist.nickname }</span> <span class="nDate">${nlist.ndate}</span> </p>
 							<hr>
@@ -176,11 +176,11 @@ button {
 						<fmt:parseNumber var = "pageCount" value = "${listCount}" type="number"/>
 						<c:set var ="pageNumber" value="${pageCount/10 +1}"/>
 						<c:forEach var="i" begin='1' end="${pageNumber}">
-							<a class="nPage" href="nList.no?bno=${bno}&page=${i}">${i}</a> &nbsp;
+							<a class="nPage" href="nList.no?bname=${bname}&page=${i}">${i}</a> &nbsp;
 						</c:forEach>
 						<!--  조건절 필요 -->
 						<c:if test="${!empty account}">
-						<a href="nInsertView.no?bno=${bno}&page=${page}">글쓰기</a>
+						<a href="nInsertView.no?bname=${bname}&page=${page}">글쓰기</a>
 						</c:if>
 					</div>
 					<div align="center">
@@ -190,7 +190,7 @@ button {
 								<option value="writer">작성자</option>
 	 						</select>
 		 					<input type="text" name="nTitle" placeholder="내용을 입력하세요">
-	 						<input type="hidden" name="bno" value="${bno}">
+	 						<input type="hidden" name="bname" value="${bname}">
 	 						<input type="hidden" name="page" value="1">
 	 						<input type="submit" value="검색">
 	 						  

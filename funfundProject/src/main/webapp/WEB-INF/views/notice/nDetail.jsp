@@ -140,15 +140,15 @@ function insertReply(){
 	var ncontent = $("#ncontent").val();
 	var ano = '${account.ano}';
 	var upbno = '${n.nno}';
-	var bno = '${n.bno}';
-	location.href= "nInsert.no?ano="+ano+"&upbno="+upbno+"&ncontent="+ncontent +"&bno="+bno+"&spage='${spage}'";
+	var bname = '${n.bname}';
+	location.href= "nInsert.no?ano="+ano+"&upbno="+upbno+"&ncontent="+ncontent +"&bname="+bname+"&spage='${spage}'";
 }
 function redactForm(x, y){
  var division =  '.replyContent' + x;
 
 	$(division).html("<textarea id='ncontent' name='ncontent' rows='6' cols='77' style='overflow-y:hidden' maxlength='150px'></textarea>"
 		+	"<input type='hidden' name='nno' value= " + y + ">" 
-		+	"<input type='hidden' name='bno' value=${n.bno}>"
+		+	"<input type='hidden' name='bname' value=${n.bname}>"
 		+	"<input type='hidden' name='upbno' value=${n.nno}>"
 		+   "<br><button onclick='updateReply("+ x + ");'>수정</button>"
 	);	
@@ -157,12 +157,12 @@ function updateReply(x){
 	var division =  '.replyContent' + x;
 	var nno = $(division).children('input[name=nno]').val();
 	var ano = '${account.ano}';
-	var bno =  $(division).children('input[name=bno]').val();
+	var bname =  $(division).children('input[name=bname]').val();
 
 	var upbno = $(division).children('input[name=upbno]').val();
 	var ncontent = $(division).children('textarea').val();
 	
-	location.href="nUpdate.no?ano="+ano+"&bno="+bno+"&ncontent="+ncontent +"&upbno="+upbno+"&page=${page}&nno="+nno;
+	location.href="nUpdate.no?ano="+ano+"&bname="+bname+"&ncontent="+ncontent +"&upbno="+upbno+"&page=${page}&nno="+nno;
 }
 
 
@@ -188,7 +188,7 @@ function updateReply(x){
 			<div class="buttons">
 				<c:if test="${account.ano eq n.ano }">
 				<a href="goUpdateView.no?nno=${n.nno}&page=${page}">수정하기</a>
-				<a href="nDelete.no?ntitle=${n.ntitle}&nno=${n.nno}&bno=${n.bno}&page=${page}">삭제하기</a></c:if>
+				<a href="nDelete.no?ntitle=${n.ntitle}&nno=${n.nno}&bname=${n.bname}&page=${page}">삭제하기</a></c:if>
 			</div>
 		</div>
 		<div class="col-lg-4 col-md-0 col-sm-0 col-xs-0" > </div>
@@ -220,7 +220,7 @@ function updateReply(x){
 			<p>${reply.ndate}</p>
 			
 			<button onclick="redactForm(${status.index}, ${ reply.nno})" >댓글수정</button>
-			<a href="nDelete.no?nno=${reply.nno}&bno=${reply.bno}&upbno=${reply.upbno}&page=${page}" >댓글삭제</a>
+			<a href="nDelete.no?nno=${reply.nno}&bname=${reply.bname}&upbno=${reply.upbno}&page=${page}" >댓글삭제</a>
 			</div>
 			<br>
 			</c:forEach>

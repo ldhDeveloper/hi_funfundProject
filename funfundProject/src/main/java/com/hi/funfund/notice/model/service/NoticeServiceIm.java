@@ -23,9 +23,9 @@ public class NoticeServiceIm implements NoticeService{
 	}
 
 	@Override
-	public List searchTitle(int bno, int page, String ntitle) {
+	public List searchTitle(String bname, int page, String ntitle) {
 	
-		return noticeDao.searchTitle(bno, page, ntitle);
+		return noticeDao.searchTitle(bname, page, ntitle);
 	}
 
 	@Override
@@ -53,15 +53,15 @@ public class NoticeServiceIm implements NoticeService{
 	}
 
 	@Override
-	public int getListCount(int bno, int upbno) {
+	public int getListCount(String bname, int upbno) {
 		
-		return noticeDao.getListCount(bno, upbno);
+		return noticeDao.getListCount(bname, upbno);
 	}
 
 	@Override
-	public int getListCountWithTitle(int bno, String nTitle) {
+	public int getListCountWithTitle(String bname, String nTitle) {
 		
-		return noticeDao.getListCountWithTitle(bno, nTitle);
+		return noticeDao.getListCountWithTitle(bname, nTitle);
 	}
 
 	@Override

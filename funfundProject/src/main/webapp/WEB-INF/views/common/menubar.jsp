@@ -61,9 +61,12 @@
 						return false;
 					}
 				});
-		loginFail();
-		changeTempPwd();
-		setPwd();
+		loginFail(); //api 회원가입실패처리용 함수
+		changeTempPwd(); //임시비밀번호전송용함수
+		setPwd(); //임시비밀번호관련함수
+		if('${signupSuccess}' != ""){
+			alert('${signupSuccess}');
+		}
 	})
 
 	function home() {
@@ -85,7 +88,7 @@
 	}
 	//임시비밀번호 및 새 비밀번호 설정
 	function checkPwd() {
-		if ($("#newPwd").text() != $("#confirmPwd").text()) {
+		if ($("input[name=newPwd]").text() != $("input[name=confirmPwd]").text()) {
 			return false;
 		}
 	}
@@ -206,6 +209,39 @@
 	/*   function KakaoLogout(){
 	 Kakao.Auth.logout();
 	 } */
+	 
+	 function infoCheck(){
+			var email = $(".signupFieldset").children('input[name=id]').val();
+			var emailCheck =/^[a-zA-Z][a-zA-Z0-9]+\@[a-zA-Z0-9]+\.[a-z]+/;
+			if(!emailCheck.test(email)){
+				alert('잘못된 형식의 이메일 입니다.');
+				$(".signupFieldset").children($('#id')).focus();
+				return false;
+			}
+			 var pwd = $(".signupFieldset").children('input[name=pwd]').val(); 
+			var confirmPwd = $(".signupFieldset").children('input[name=confirmPwd]').val();
+			if(pwd != confirmPwd){
+				alert('비밀번호와 확인문자가 일치하지않습니다.');
+				$(".signupFieldset").children('input[name=confirmPwd]').focus();
+				return false;
+			}else{
+				var pwdCheck = /^[a-zA-Z][a-zA-Z!@#$%^&]+{6, 20}$/;
+				if(!pwdCheck.text(pwd)){
+					alert('비밀번호 길이는 6 ~ 20자 사이여야 합니다.')
+					return false;
+				}
+			} 
+			var nickname =	$(".signupFieldset").children('input[name=nickname]').val();
+			var nicknameCheck= /[a-zA-Z0-9가-힣]+{2, 10}$/;
+			if(!nicknameCheck.test(nickname)){
+				alert('닉네임 생성 규칙에 어긋납니다.');
+				$(".signupFieldset").children('#nickname').focus();
+				return false;
+			} 
+			alert('표현식성공');
+		return false;
+		} 
+	 
 </script>
 
 <style>
@@ -816,7 +852,7 @@ label.sign-form_title {
 						<td style="width: 150px;"><a class="fun-menu"
 							href="funding.it">프로젝트 둘러보기</a></td>
 						<td style="width: 80px;"><a class="fun-menu"
-							href="nList.no?bno=1&page=1">고객센터</a></td>
+							href="nList.no?bname=공지사항&page=1">고객센터</a></td>
 						<td style="width: 80px;"><a class="fun-menu" href="#"
 							data-toggle="modal" data-target="#myModal">로그인</a></td>
 					</c:if>
@@ -912,7 +948,7 @@ label.sign-form_title {
 			$("#myModal").modal("hide");
 			$("#myModal5").modal("show");
 		}
-
+		
 		function trytopay() {
 
 			/* 		IMP.init("imp79484327");
@@ -991,21 +1027,21 @@ label.sign-form_title {
 					<h2 class="p-t-signup">회원가입</h2>
 				</div>
 				<div class="modal-body" style="padding: 30px;">
-					<form id="join_form" action="signup.ao" method="post">
+					<form id="join_form" action="signup.ao" method="post" onsubmit="return infoCheck();">
 						<input type="hidden" name="secuToken"
 							value="7QD6StfHBmmEFvusyATSQA" /> <input type="hidden"
 							name="nmLast" value="" /> <input type="hidden" name="mobile"
 							value="" />
-						<fieldset style="border: 0; margin: 0; padding: 0;">
+						<fieldset class="signupFieldset" style="border: 0; margin: 0; padding: 0;">
 							<legend class="signup-title-txt">기본정보</legend>
 							<input type="email" id="signup-form_id" name="id"
-								placeholder="아이디(이메일)" class="sign-form_input"> <input
-								type="password" id="signup-form_pw" name="pwd"
-								placeholder="영문+숫자포함 6~20자" class="sign-form_input"> <input
-								type="password" id="signup-form_pw" placeholder="비밀번호확인"
-								class="sign-form_input"> <input type="text"
-								id="signup-form_pw" name="nickname" placeholder="닉네임"
-								class="sign-form_input">
+							 placeholder="아이디(이메일)" class="sign-form_input" maxlength="35"> 
+							<input type="password" id="signup-form_pw" name="pwd"
+							 placeholder="영문+숫자+특수문자포함 6~20자" class="sign-form_input"  maxlength="14">
+							<input type="password" id="signup-form_pw" placeholder="비밀번호확인"
+							 class="sign-form_input" name=confirmPwd maxlength="14">
+							<input type="text" id="signup-form_pw" name="nickname" placeholder="닉네임은 2에서 10자안에 작성해주세요"
+							 class="sign-form_input" maxlength ="10">
 						</fieldset>
 						<div class="modal-footer">
 							<button class="btn-login_pop">회원가입하기</button>
@@ -1192,7 +1228,7 @@ label.sign-form_title {
 							<li><a href="funding.it">프로젝트 둘러보기</a></li>
 						</ul>
 						<ul>
-							<li><a href="nList.no?bno=1&page=1">고객센터</a></li>
+							<li><a href="nList.no?bname=공지사항&page=1">고객센터</a></li>
 							<li><a href="myinfo.ao">회원정보보기</a>
 							<li><a href="itemconfirm.am">관리자</a>
 						</ul>

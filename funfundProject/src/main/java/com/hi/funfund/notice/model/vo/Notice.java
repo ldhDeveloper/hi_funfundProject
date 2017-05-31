@@ -8,7 +8,6 @@ public class Notice implements Serializable {
 	public Notice(){};
 	
 	private int nno;
-	private int bno;
 	private String ntitle;
 	private String ncontent;
 	private Date ndate;
@@ -25,12 +24,7 @@ public class Notice implements Serializable {
 		this.nno = nno;
 	}
 	
-	public int getBno() {
-		return bno;
-	}
-	public void setBno(int bno) {
-		this.bno = bno;
-	}
+	
 	public String getNtitle() {
 		return ntitle;
 	}
@@ -88,11 +82,10 @@ public class Notice implements Serializable {
 	public void setPimage(String pimage) {
 		this.pimage = pimage;
 	}
-	public Notice(int nno, int bno, String ntitle, String ncontent, Date ndate, int upbno, String bname,
+	public Notice(int nno,  String ntitle, String ncontent, Date ndate, int upbno, String bname,
 			String nickname, int readcount, int ano, String pimage) {
 		super();
 		this.nno = nno;
-		this.bno = bno;
 		this.ntitle = ntitle;
 		this.ncontent = ncontent;
 		this.ndate = ndate;
@@ -105,9 +98,11 @@ public class Notice implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return nno + ", " + bno + ", " + ntitle + ", " + ncontent + ", " + ndate + ", " + upbno + ", " + bname + ", "
-				+ nickname + ", " + readcount + ", " + ano + ", " + pimage;
+		return "Notice [nno=" + nno + ", ntitle=" + ntitle + ", ncontent=" + ncontent + ", ndate=" + ndate + ", upbno="
+				+ upbno + ", bname=" + bname + ", nickname=" + nickname + ", readcount=" + readcount + ", ano=" + ano
+				+ ", pimage=" + pimage + "]";
 	}
+	
 	
 	
 	
