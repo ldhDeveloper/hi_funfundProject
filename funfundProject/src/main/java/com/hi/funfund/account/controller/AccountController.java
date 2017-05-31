@@ -99,14 +99,23 @@ public class AccountController {
 	
 	@RequestMapping(value = "/signup.ao", produces = "text/plain;charset=UTF-8")
 	public ModelAndView signup(Account account, ModelAndView model){
-		int ok = accountService.insert(account);
+		Account ac = accountService.checkId(account);
+			
 		String result="";
-		if(ok > 0){
-			model.addObject("signupSuccess", "회원가입에 성공하셧습니다. 즐거움을 위한 공간 펀펀드!");
-		model.setViewName("home");
+		if(ac ==null){
+		int ok = accountService.insert(account);
+			if(ok > 0){
+				result ="회원가입에 성공하셧습니다. 즐거움을 위한 공간 펀펀드로 바로 로그인 하시겠습니까?";
+				model.addObject("signupSuccess", result );
+			}
 		}
+		else{
+			result = "가입된 이메일이 이미 존재합니다.";
+			model.addObject("duplicateId", result);
+		}
+		model.setViewName("home");
 		return model;
-	}
+		}
 	
 	@RequestMapping("/logout.ao")
 	public String logout(HttpSession session){

@@ -195,6 +195,13 @@ body {
 				$(this).addClass("backpink");
 			}
 		}); */
+		var preview = '${preview}';
+		 if(preview != null){
+			$('a').attr("href", "#");
+			$('button').attr('disabled', true);
+		
+		 }
+		
 		var likeList = localStorage.getItem("likeList");
 		console.log("likeList : " + likeList);
 		var pro_no = "_$tag___________________________";
@@ -268,7 +275,13 @@ body {
 		$(".pay").click(function() {
 			location.href = "reward.fm?pro_no=${item.pro_no}";
 		});
-	})
+		$(".makerbox").click(function(){
+			var mno = $(this).children('input').val();
+			location.href = "reward.fm?pro_no=${item.pro_no}&mno="+mno;
+		});
+	});
+	
+	
 </script>
 </head>
 <body>
@@ -456,7 +469,8 @@ body {
 			<p
 				style="font-size: 10pt; text-align: left; padding-bottom: 5px; margin-left: 20px;">리워드선택</p>
 			<c:forEach var="reward" items="${mList}" varStatus="status">
-				<ul class="makerbox pay">
+				<ul class="makerbox" >
+				<input type="hidden" value="${reward.mno}">
 					<li style="font-size: 15pt;"><strong><fmt:formatNumber
 								var="mcost" value="${reward.mcost}" /> ${mcost}원</strong></li>
 					<li class="makerinfo">작성자이름

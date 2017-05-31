@@ -61,50 +61,63 @@
 						return false;
 					}
 				});
-		loginFail(); //api 회원가입실패처리용 함수
+		/* loginFail(); //api 회원가입실패처리용 함수
 		changeTempPwd(); //임시비밀번호전송용함수
-		setPwd(); //임시비밀번호관련함수
-		if('${signupSuccess}' != ""){
-			alert('${signupSuccess}');
-		}
-	})
-
-	function home() {
-		location.href = "/funfund";
-	}
-	function loginFail() {
+		setPwd(); //임시비밀번호관련함수 */
+		controllerReceiver();
+	});
+	function controllerReceiver(){
+		//api 로그인 실패시
 		var loginFail = '${loginFail}';//구글등으로 로그인시 회원가입실패한 경우 날라오는 경고문
 		if (loginFail !== "") {
 			alert(loginFail);
 			home();
 		}
-	}
-	//임시비밀번호로 변경성공시 모달창 띄우기
-	function changeTempPwd() {
-		var tempE = "${tempEmail}";
-		if (tempE !== "") {
+		//임시비밀번호 띄우는창
+		if ( "${tempEmail}" !== "") {
 			$("#myModal9").modal("show");
 		}
-	}
-	//임시비밀번호 및 새 비밀번호 설정
-	function checkPwd() {
-		if ($("input[name=newPwd]").text() != $("input[name=confirmPwd]").text()) {
-			return false;
-		}
-	}
-	//새 비밀번호 설정시 결과값 받는 함수
-	function setPwd() {
+		//임시비밀번호 변경실패시
 		var message = "${pwdMessage}";
 		if (message != "") {
 			alert(message);
-
 			if (message == "임시비밀번호가 맞지않습니다." || message == "비밀번호 변경에 실패했습니다.") {
-
 				$("#myModal9").modal("show");
 			} else {
 				home();
 			}
 		}
+		//로그인 성공시
+		if('${signupSuccess}' != ""){
+		var answer =	confirm('${signupSuccess}');
+			if(answer){
+				$("#myModal").modal("show");
+			}else{
+				home();
+			}
+		}
+		//일반 회원가입시 중복된아이디 존재시
+		if('${duplicateId}' != ""){
+			alert('${duplicateId}');
+			home();
+		}
+	}
+	function home() {
+		location.href = "/funfund";
+	}
+	function checkPwd() {
+		var pwdCheck = /^(?=.*[a-zA-Z]).(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,20}$/;
+		var pwd =$("input[name=newPwd]").text()
+		if(!pwdCheck.test(pwd)){
+			alert('비밀번호는 영문, 숫자, 특수문자 포함 6~20자리 입니다.');
+			$("input[name=newPwd]").focus();
+			return false;
+		}else if(pwd != $("input[name=confirmPwd]").text()) {
+			alert('비밀번호와 확인란이 맞지않습니다.');
+			$("input[name=confirmPwd]").focus();
+			return false;
+		}
+	
 	}
 </script>
 <!-- 결제 함수 -->
@@ -176,7 +189,6 @@
 	var access_token;
 
 	//카카오톡 회원 로그인 
-
 	// 카카오 로그인 버튼을 생성합니다.
 	function loginWithKakao() {
 		Kakao.Auth.login({
@@ -209,39 +221,44 @@
 	/*   function KakaoLogout(){
 	 Kakao.Auth.logout();
 	 } */
-	 
-	 function infoCheck(){
+	 //회원가입 체크 정규식
+	 function infoCheck(flag){
+		 if(flag){
 			var email = $(".signupFieldset").children('input[name=id]').val();
 			var emailCheck =/^[a-zA-Z][a-zA-Z0-9]+\@[a-zA-Z0-9]+\.[a-z]+/;
 			if(!emailCheck.test(email)){
 				alert('잘못된 형식의 이메일 입니다.');
 				$(".signupFieldset").children($('#id')).focus();
 				return false;
-			}
-			 var pwd = $(".signupFieldset").children('input[name=pwd]').val(); 
-			var confirmPwd = $(".signupFieldset").children('input[name=confirmPwd]').val();
-			if(pwd != confirmPwd){
-				alert('비밀번호와 확인문자가 일치하지않습니다.');
-				$(".signupFieldset").children('input[name=confirmPwd]').focus();
-				return false;
 			}else{
-				var pwdCheck = /^[a-zA-Z][a-zA-Z!@#$%^&]+{6, 20}$/;
-				if(!pwdCheck.text(pwd)){
-					alert('비밀번호 길이는 6 ~ 20자 사이여야 합니다.')
-					return false;
+				 var pwd = $(".signupFieldset").children('input[name=pwd]').val(); 
+				 alert(pwd);
+					var confirmPwd = $(".signupFieldset").children('input[name=confirmPwd]').val();
+					/* pwd.length < 6 || pwd.length > 20 || */
+					if(pwd != confirmPwd){
+						alert('비밀번호와 확인문자가 일치하지않습니다.');
+						$(".signupFieldset").children('input[name=confirmPwd]').focus();
+						return false;
+					}else{
+						var pwdCheck = /^(?=.*[a-zA-Z]).(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,20}$/;
+						if(!pwdCheck.test(pwd)){
+							alert('비밀번호 길이는 6 ~ 20자 사이의 영문, 숫자 , 특수문자의 혼합이어야 합니다.')
+							return false;
+							}
+						} 
+					var nickname =	$(".signupFieldset").children('input[name=nickname]').val();
+					var nicknameCheck= /(?=.*[a-zA-z0-9가-힣]).{2,10}$/;
+					if(!nicknameCheck.test(nickname)){
+						alert('닉네임 생성 규칙에 어긋납니다.');
+						$(".signupFieldset").children('#nickname').focus();
+						return false;
+					} 
 				}
-			} 
-			var nickname =	$(".signupFieldset").children('input[name=nickname]').val();
-			var nicknameCheck= /[a-zA-Z0-9가-힣]+{2, 10}$/;
-			if(!nicknameCheck.test(nickname)){
-				alert('닉네임 생성 규칙에 어긋납니다.');
-				$(".signupFieldset").children('#nickname').focus();
-				return false;
-			} 
-			alert('표현식성공');
-		return false;
-		} 
-	 
+			return true;
+	 }else{
+		 return false;
+	 } 
+	 }
 </script>
 
 <style>
@@ -1143,7 +1160,7 @@ label.sign-form_title {
 					<h2 class="p-t-signup">회원가입</h2>
 				</div>
 				<div class="modal-body" style="padding: 30px;">
-					<form id="join_form" action="signup.ao" method="post" onsubmit="return infoCheck();">
+					<form id="join_form" action="signup.ao" method="post" onsubmit="return infoCheck(true);">
 						<input type="hidden" name="secuToken"
 							value="7QD6StfHBmmEFvusyATSQA" /> <input type="hidden"
 							name="nmLast" value="" /> <input type="hidden" name="mobile"

@@ -15,11 +15,12 @@ $(function(){
 	switch('${bname}'){
 	case '공지사항' :$('#no').css({"background": "#00CCA3", "border-color" : "#00CCA3", "color": "#fff" });
 		$('#bTitle').text('공지사항');
-		$('#bComent').text('절세미인의 공지사항입니다.');
+		$('#bComent').text('펀펀드의 공지사항입니다.');
 		break;
 	case 'FnQ' :$('#fnq').css({"background": "#00CCA3", "border-color" : "#00CCA3", "color": "#fff" });
 	$('#bTitle').text('FnQ');
 	$('#bComent').text('자주묻는 질문입니다.');
+	$()
 		break;
 	case 'QnA' :$('#qna').css({"background": "#00CCA3", "border-color" : "#00CCA3", "color": "#fff" });
 	$('#bTitle').text('QnA');

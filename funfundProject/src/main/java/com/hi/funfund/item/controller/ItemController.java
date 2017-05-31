@@ -341,6 +341,10 @@ public class ItemController {
 			vaddress = pvideoAddress[pvideoAddress.length - 1];
 			item.setPvideo(vaddress);
 		};
+		if(request.getParameter("preview") != null){
+			model.addObject("preview", true);
+		}
+		
 		model.addObject("item", item);
 		model.addObject("mList", mList);
 		model.addObject("aList", aList);
