@@ -33,6 +33,24 @@ public class AdminController {
 		return mv;
 	}
 	
+	@RequestMapping("/requestdeleteitem.am")
+	public ModelAndView selectDeleteRequest(ModelAndView mv, HttpServletRequest request){
+		List<Item> alist = itemService.selectDeleteRequest();
+		
+		mv.addObject("alist", alist);
+		mv.setViewName("admin/requestDeleteItem");
+		return mv;
+	}
+	
+	@RequestMapping("/resultitem.am")
+	public ModelAndView selectEndItem(ModelAndView mv, HttpServletRequest request){
+		List<Item> alist = itemService.selectEndItem();
+		
+		mv.addObject("alist", alist);
+		mv.setViewName("admin/funddingResult");
+		return mv;
+	}
+	
 	@RequestMapping(value ="/confirmstatus.am", method = RequestMethod.POST)
 	public @ResponseBody int updateConfirmStatus(@RequestParam("pro_no") String prono){
 		int pro_no = Integer.parseInt(prono);
@@ -48,4 +66,21 @@ public class AdminController {
 		int result = itemService.updateRejectStatus(hmap);
 		return result;
 	}
+	
+	@RequestMapping(value ="/deletestatus.am", method = RequestMethod.POST)
+	public @ResponseBody int updateDeleteStatus(@RequestParam("pro_no") String pro_no, @RequestParam("comment") String comment){
+		HashMap<String, String> hmap = new HashMap<String, String>();
+		hmap.put("pro_no", pro_no);
+		hmap.put("comment", comment);
+		int result = itemService.updateDeleteStatus(hmap);
+		return result;
+	}
+	
+	@RequestMapping(value ="/successstatus.am", method = RequestMethod.POST)
+	public @ResponseBody int updateSuccessStatus(@RequestParam("pro_no") String prono){
+		int pro_no = Integer.parseInt(prono);
+		int result = itemService.updateSuccessStatus(pro_no);
+		return result;
+	}
+	
 }

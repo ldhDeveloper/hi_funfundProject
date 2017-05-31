@@ -113,5 +113,25 @@ public class ItemDao {
 		Item item = (Item) sqlSession.selectOne(nameSpace + "selectOneForUpdate", pro_no);
 		return item;
 	}
+
+	public List<Item> selectDeleteRequest() {
+		List<Item> iList = (List<Item>) sqlSession.selectList(nameSpace + "selectDeleteRequest");
+		return iList;
+	}
+
+	public int updateDeleteStatus(HashMap<String, String> hmap) {
+		int result = sqlSession.update(nameSpace + "updateDeleteStatus", hmap);
+		return result;
+	}
+
+	public List<Item> selectEndItem() {
+		List<Item> iList = (List<Item>) sqlSession.selectList(nameSpace + "selectEndItem");
+		return iList;
+	}
+
+	public int updateSuccessStatus(int pro_no) {
+		int result = sqlSession.update(nameSpace + "updateSuccessStatus", pro_no);
+		return result;
+	}
 	
 }
