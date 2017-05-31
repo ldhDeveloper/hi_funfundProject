@@ -6,6 +6,7 @@
 <html>
 <head>
 <link href="/funfund/lib/css/common/font.css" rel="stylesheet" />
+<link href="/funfund/lib/css/swiper.min.css" rel="stylesheet" />
 <meta charset="UTF-8">
 <style>
 .contain {
@@ -17,22 +18,13 @@
 	.contain {
 		top: 10px;
 	}
-	
 	.container {
-	   padding-top:50px !important;
+		padding-top: 50px !important;
 	}
 }
 
 .fun-menu {
 	color: white !important;
-}
-
-.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive,
-	.thumbnail a>img, .thumbnail>img {
-	display: block;
-	max-width: 100%;
-	max-height: 540px !important;
-	margin: auto;
 }
 
 h3 {
@@ -41,6 +33,30 @@ h3 {
 
 body {
 	font-family: myFirstFont !important;
+}
+
+.swiper-container {
+	width: 100%;
+	max-height: 540px !important;
+}
+
+.swiper-slide {
+	text-align: center;
+	font-size: 18px;
+	background: #fff;
+	/* Center slide text vertically */
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	-webkit-align-items: center;
+	align-items: center;
 }
 </style>
 
@@ -56,35 +72,29 @@ body {
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="contain"
 				style="padding-left: 0px; padding-right: 0px; width: 100%; clear: both;">
-				<div id="myCarousel" class="carousel slide" data-ride="carousel">
-					<!-- Indicators -->
-					<ol class="carousel-indicators">
-						<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-						<li data-target="#myCarousel" data-slide-to="1"></li>
-						<li data-target="#myCarousel" data-slide-to="2"></li>
-					</ol>
-
-					<!-- Wrapper for slides -->
-					<div class="carousel-inner">
-
-						<div class="item active">
-							<img src="images/home/slide1.gif" alt="" style="width: 100%;">
+				<!-- Slider main container -->
+				<div class="swiper-container">
+					<!-- Additional required wrapper -->
+					<div class="swiper-wrapper">
+						<!-- 슬라이더 입니다. -->
+						<div class="swiper-slide">
+							<img src="images/home/slide1.gif" style="width: 100%; max-height:540px;" class="img-responsive">
 							<div class="carousel-caption">
 								<h3>즐거움을 펀딩하라!</h3>
 								<p>enjoy funding funny!</p>
 							</div>
 						</div>
 
-						<div class="item">
-							<img src="images/home/slide2.gif" alt="" style="width: 100%;">
+						<div class="swiper-slide">
+							<img src="images/home/slide2.gif" style="width: 100%;max-height:540px;"class="img-responsive">
 							<div class="carousel-caption">
 								<h3>아름다움을 펀딩하라!</h3>
 								<p>enjoy funding beautiful!</p>
 							</div>
 						</div>
 
-						<div class="item">
-							<img src="images/home/slide3.gif" alt="" style="width: 100%;">
+						<div class="swiper-slide">
+							<img src="images/home/slide3.gif" style="width: 100%;max-height:540px;"class="img-responsive">
 							<div class="carousel-caption">
 								<h3>여유로움을 펀딩하라!</h3>
 								<p>Enjoy funding relaxedly!</p>
@@ -92,21 +102,33 @@ body {
 						</div>
 
 					</div>
+					<!-- 만약 페이지네비게이션이 필요하다면 추가하세요 -->
+					<div
+						class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+						<span class="swiper-pagination-bullet"></span> <span
+							class="swiper-pagination-bullet"></span> <span
+							class="swiper-pagination-bullet"></span>
+					</div>
+					<!-- 양옆에 좌우 버튼이 필요하다면 추가하세요 -->
+					
 
-					<a class="left carousel-control" href="#myCarousel"
-						data-slide="prev"> <span
-						class="glyphicon glyphicon-chevron-left"></span> <span
-						class="sr-only">Previous</span>
-					</a> <a class="right carousel-control" href="#myCarousel"
-						data-slide="next"> <span
-						class="glyphicon glyphicon-chevron-right"></span> <span
-						class="sr-only">Next</span>
-					</a>
 				</div>
 			</div>
 		</div>
 	</div>
 
+	<script src="/funfund/lib/js/swiper.jquery.min.js"></script>
+	<script>
+		var swiper = new Swiper('.swiper-container', {
+			pagination : '.swiper-pagination',
+			slidesPerView : 1,
+			paginationClickable : true,
+			spaceBetween : 30,
+			autoplay:3000,
+			autoplayDisableOnInteraction: false, 
+			loop : true
+		});
+	</script>
 
 	<div class="container" style="clear: both">
 		<div class="row" style="margin: 0px 20px 0 20px;">
@@ -202,7 +224,5 @@ body {
 			</c:forEach>
 		</div>
 	</div>
-
-
 </body>
 </html>
