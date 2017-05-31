@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>프로젝트승인요청</title>
+<title>프로젝트삭제요청</title>
 </head>
 <style>
 .itemImage {
@@ -95,9 +95,9 @@
 	</div>
 	<div class="container">
   <ul class="nav nav-tabs">
-	  <li class="active"><a href="itemconfirm.am">프로젝트 승인요청</a></li>
-	  <li><a href="requestdeleteitem.am">프로젝트 삭제요청</a></li>
-	  <li><a href="resultitem.am">프로젝트 종료관리</a></li>
+	  <li><a href="itemconfirm.am">프로젝트 승인요청</a></li>
+	  <li class="active"><a href="requestdeleteitem.am">프로젝트 삭제요청</a></li>
+	  <li><a href="#">새소식 삭제요청</a></li>
  </ul>  
   <table class="table table-hover adminTable">
     <thead>
@@ -107,7 +107,7 @@
         <th>신청자</th>
         <th>프로젝트상태</th>
         <th>프로젝트보기</th>
-        <th>프로젝트승인</th>
+        <th>프로젝트삭제</th>
       </tr>
     </thead>
     <tbody>
@@ -118,13 +118,12 @@
         	<td><c:out value="${item.cname }"/></td>
         	<td><c:out value="${item.pstatus }"/></td>
         	<td><input type="button" class="btn btn-primary" value="프로젝트보기" onclick="popen(${item.pro_no})"></td>
-        	<td><span><input type="button" class="btn btn-success" value="프로젝트승인" onclick="pconfirm(${item.pro_no})"></span>
-        	<span><input id="openReject<c:out value='${status.index }'/>" style="position:inline-block;" type="button" class="btn btn-warning" value="프로젝트거절" onclick="openReject(${status.index })"></span></td>        	
+        	<td><span><input type="button" class="btn btn-warnning" value="삭제사유보기" onclick="opendelete(${status.index })"></span></td>        	
       	</tr>
-      	<tr id="rejectform<c:out value='${status.index }'/>" style="display:none;">
-      		<td>거절사유</td>
-      		<td colspan="4"><input type="text" class="form-control" id="rejectcomment<c:out value='${status.index }'/>"></td>
-      		<td><input style="position:inline-block;" type="button" class="btn btn-danger" value="거절사유작성" onclick="pcancel(${item.pro_no}, ${status.index })"></td>
+      	<tr id="deleteform<c:out value='${status.index }'/>" style="display:none;">
+      		<td>삭제사유</td>
+      		<td colspan="4"><input type="text" class="form-control" id="deletecomment<c:out value='${status.index }'/>" value="${item.icomment }"></td>
+      		<td><input style="position:inline-block;" type="button" class="btn btn-danger" value="프로젝트삭제" onclick="pdelete(${item.pro_no}, ${status.index })"></td>
       	</tr>
       </c:forEach>
     </tbody>
@@ -135,36 +134,23 @@
   		window.open(url);
   	}
   	
-  	function openReject(index){
-  		$('#rejectform' + index).toggle();
+  	function opendelete(index){
+  		$('#deleteform' + index).toggle();
   	}
-  	
-  	function pconfirm(pro_no){
-  		$.post( "confirmstatus.am", {"pro_no" : pro_no})
-  		.done(function(data){
-			if(data > 0){
-				alert("프로젝트를 승인을 성공하였습니다.");
-				location.href ="itemconfirm.am";
-			} else {
-				alert("프로젝트를 승인을 실패하였습니다.");
-				location.href ="itemconfirm.am";
-			}
-  		});
-  	}
-  	
-  	function pcancel(pro_no, index){
+  
+  	function pdelete(pro_no, index){
   		console.log("pcancel실행");
-  		var comment = $('#rejectcomment' + index).val();
+  		var comment = $('#deletecomment' + index).val();
   		console.log(comment);
   		if(comment != ""){
-  			$.post( "rejectstatus.am", {"pro_no" : pro_no, "comment" : comment})
+  			$.post( "deletestatus.am", {"pro_no" : pro_no, "comment" : comment})
   	  		.done(function(data){
   				if(data > 0){
-  					alert("프로젝트 승인을 거부하였습니다.");
-  					location.href ="itemconfirm.am";
+  					alert("프로젝트 삭제에 성공하였습니다.");
+  					location.href ="requestdeleteitem.am";
   				} else {
-  					alert("프로젝트 승인거부를 실패 하였습니다.");
-  					location.href ="itemconfirm.am";
+  					alert("프로젝트 삭제에 실패하였습니다.");
+  					location.href ="requestdeleteitem.am";
   				}
   	  		});
   		}

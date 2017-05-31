@@ -63,5 +63,13 @@ public interface ItemService {
 
 	Item selectOneForUpdate(int pro_no);
 
+	List<Item> selectDeleteRequest();
+
+	int updateDeleteStatus(HashMap<String, String> hmap);
+
+	List<Item> selectEndItem();
+
+	int updateSuccessStatus(int pro_no);
+
 
 }

@@ -245,7 +245,7 @@
 											$("#progressbar<c:out value='${status.index}'/>").css("width", bar + "%");
 											$("#edate<c:out value='${status.index}'/>").text(btDay);
 											
-											if(btDay < 0){
+											if(btDay < 1){
 												$("#edate<c:out value='${status.index}'/>").hide();
 												$("#yet<c:out value='${status.index}'/>").hide();
 												$("#complete<c:out value='${status.index}'/>").show();
