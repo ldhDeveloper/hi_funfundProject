@@ -87,4 +87,5 @@ public class AttachmentDao {
 		List<Attachment> sList = sqlSession.selectList("selectslideImage", pro_no);
 		return sList;
 	}
+	
 }

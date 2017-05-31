@@ -37,4 +37,6 @@ public interface AttachmentService {
 	int partyIdImage(HashMap<String, String> hmap);
 
 	List<Attachment> selectimgList(int pro_no);
+
+	List<Attachment> selectTempImage(int pro_no);
 }

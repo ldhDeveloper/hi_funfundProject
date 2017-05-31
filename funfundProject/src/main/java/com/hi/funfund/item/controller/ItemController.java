@@ -353,7 +353,7 @@ public class ItemController {
 	@RequestMapping(value="selectone.it")
 	public ModelAndView selectOne(@RequestParam("pro_no") int pro_no, ModelAndView model, HttpServletRequest request, HttpServletResponse response){
 		Item item = itemService.selectOneForUpdate(pro_no);
-		
+		List<Attachment> alist = attachmentService.selectTempImage(pro_no);
 		System.out.println("start select : " + item);
 		model.addObject("item", item);
 		model.setViewName("jsonView");

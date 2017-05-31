@@ -181,14 +181,15 @@ public class AttachmentController {
 	}
 	
 	@RequestMapping("/updateimgajax.at")
-	public ModelAndView updateAjaxImg(ModelAndView model, HttpServletRequest request) throws  IOException{
+	public ModelAndView updateAjaxImg(ModelAndView model, HttpServletRequest request, MultipartHttpServletRequest req) throws  IOException{
 		int pro_no = Integer.parseInt(request.getParameter("pro_no"));
 		System.out.println("사진업로드 : " + pro_no);
 		
-		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-		MultipartFile uploadFile = multipartRequest.getFile("uploadFile");
-		MultipartFile uploadFile2 = multipartRequest.getFile("uploadFile2");
-
+		//MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+		MultipartFile uploadFile = req.getFile("uploadFile");
+		MultipartFile uploadFile2 = req.getFile("uploadFile2");
+		System.out.println("uploadFile : " + uploadFile);
+		System.out.println("uploadFile2 : " + uploadFile2);
 		if (!uploadFile.isEmpty()) {
 
 			HttpSession session = request.getSession(false);

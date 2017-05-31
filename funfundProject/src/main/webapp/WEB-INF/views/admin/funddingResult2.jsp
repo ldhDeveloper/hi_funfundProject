@@ -87,9 +87,9 @@
 				<div class="middle-submenu">
 					<ul class="nav nav-pills middle-submenu"
 						style="width: 900px; align: center;">
-						<li id="info1"><a href="itemconfirm.am">프로젝트 관리</a></li>
+						<li id="info1" class="active-active"><a href="itemconfirm.am">프로젝트 관리</a></li>
 						<li id="info2"><a href="#">펀딩금액 관리</a></li>
-						<li id="info3" class="active-active"><a href="#">funfund 현황</a></li>
+						<li id="info3"><a href="#">funfund 현황</a></li>
 					</ul>
 				</div>
 			</div>
@@ -98,9 +98,9 @@
 	</div>
 	<div class="container">
   <ul class="nav nav-tabs">
-	  <li><a href="itemconfirm.am">프로젝트 승인요청</a></li>
+	  <li class="active"><a href="itemconfirm.am">프로젝트 승인요청</a></li>
 	  <li><a href="requestdeleteitem.am">프로젝트 삭제요청</a></li>
-	  <li class="active"><a href="resultitem.am">프로젝트 종료관리</a></li>
+	  <li><a href="resultitem.am">프로젝트 종료관리</a></li>
  </ul>  
   <table class="table table-hover adminTable">
     <thead>
@@ -123,7 +123,7 @@
 			var ecost = "<c:out value='${item.ecost}'/>";
 			var fundamount = "<c:out value='${item.fundamount}'/>"
 			var persent = Math.round(fundamount * 100 / ecost);
-			$("#ipersent<c:out value='${status.index }'/>").html(persent + "%");
+			$("#ipersent<c:out value='${status.index }'/>").html(persent);
 		});
 		</script>
 		<tr>
@@ -133,15 +133,42 @@
         	<td><c:out value="${item.pstatus }"/></td>
         	<td><c:out value="${item.pedate }"/></td>
         	<td><c:out value="${item.fundamount}"/></td>
-        	<td id="ipersent<c:out value='${status.index }'/>"></td>		
+        	<td id="ipersent<c:out value='${status.index }'/>"><c:out value="${item.pedate }"/></td>
+        	
         	<td><input type="button" class="btn btn-primary" value="프로젝트보기" onclick="popen(${item.pro_no})"></td>
-        	<td><span><input type="button" class="btn btn-success" value="프로젝트성공" onclick="psuccess(${item.pro_no})"></span>
-        	<span><input id="openReject<c:out value='${status.index }'/>" style="position:inline-block;" type="button" class="btn btn-warning" value="프로젝트실패" onclick="openFail(${status.index })"></span></td>        	
+        	<td><span><input type="button" class="btn btn-warnning" value="정보상세보기" onclick="opendetail(${status.index })"></span></td>        	
       	</tr>
-      	<tr id="failform<c:out value='${status.index }'/>" style="display:none;">
-      		<td>실패사유</td>
-      		<td colspan="7"><input type="text" class="form-control" id="failcomment<c:out value='${status.index }'/>"></td>
-      		<td><input style="position:inline-block;" type="button" class="btn btn-danger" value="실패사유작성" onclick="pfail(${item.pro_no}, ${status.index })"></td>
+      	<tr id="detailform<c:out value='${status.index }'/>" style="display:none;">
+      		<td colspan="9">
+			            <div class="row tmargin">
+							<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><h6>상호명</h6></div>
+							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><input type="text" name="cname" class="form-control" value="${item.cname }" readonly></div>
+							<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><h6>회사메일</h6></div>
+							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><input type="text" name="cs_email" class="form-control" value="${item.cs_email }" readonly></div>
+						</div>
+						<div class="row tmargin">
+							<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><h6>회사전화</h6></div>
+							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><input type="text" name="cs_phone" class="form-control" value="${item.cs_phone }" readonly></div>
+							<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><h6>수신자</h6></div>
+							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><input type="text" name="recname" class="form-control" value="${item.recname }" readonly></div>
+						</div>
+						<div class="row tmargin">	
+							<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><h6>연락처</h6></div>
+							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><input type="text" name="rephone" class="form-control" value="${item.rephone }" readonly></div>
+							<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><h6>이메일</h6></div>
+							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><input type="text" name="email" class="form-control" value="${item.email }" readonly></div>
+						</div>
+						<div class="row tmargin">	
+							<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><h6>추가금액</h6></div>
+							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><input type="text" name="addcost<c:out value='${status.index }'/>" class="form-control" value="${item.addcost }" readonly></div>
+							<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><h6>운송장번호</h6></div>
+							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><input type="text" name="del_no<c:out value='${status.index }'/>" class="form-control" value="${item.del_no }"></div>
+						</div>		
+						<div class="row tmargin">	
+							<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><h6>주소</h6></div>
+							<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10"><input type="text" name="deladdress" class="form-control" value="${item.deladdress }" readonly></div>
+						</div>
+					</td>
       	</tr>
       </c:forEach>
     </tbody>
@@ -152,35 +179,23 @@
   		window.open(url);
   	}
   	
-  	function openFail(index){
-  		$('#failform' + index).toggle();
+  	function opendetail(index){
+  		$('#detailform' + index).toggle();
   	}
   
-  	function psuccess(pro_no){
-  		$.post( "successstatus.am", {"pro_no" : pro_no})
-  		.done(function(data){
-			if(data > 0){
-				alert("프로젝트를 승인을 성공하였습니다.");
-				location.href ="resultitem.am";
-			} else {
-				alert("프로젝트를 승인을 실패하였습니다.");
-				location.href ="resultitem.am";
-			}
-  		});
-  	}
-  	
-  	function pfail(pro_no, index){
-  		var comment = $('#failcomment' + index).val();
+  	function pdelete(pro_no, index){
+  		console.log("pcancel실행");
+  		var comment = $('#deletecomment' + index).val();
   		console.log(comment);
   		if(comment != ""){
-  			$.post( "failstatus.am", {"pro_no" : pro_no, "comment" : comment})
+  			$.post( "deletestatus.am", {"pro_no" : pro_no, "comment" : comment})
   	  		.done(function(data){
   				if(data > 0){
-  					alert("프로젝트 실패에 성공하였습니다.");
-  					location.href ="resultitem.am";
+  					alert("프로젝트 삭제에 성공하였습니다.");
+  					location.href ="requestdeleteitem.am";
   				} else {
-  					alert("프로젝트 실패에 실패하였습니다.");
-  					location.href ="resultitem.am";
+  					alert("프로젝트 삭제에 실패하였습니다.");
+  					location.href ="requestdeleteitem.am";
   				}
   	  		});
   		}

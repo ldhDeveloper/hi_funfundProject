@@ -203,5 +203,10 @@ public class ItemServiceIm implements ItemService{
 		return itemDao.updateSuccessStatus(pro_no);
 	}
 
+	@Override
+	public int updateFailStatus(HashMap<String, String> hmap) {
+		return itemDao.updateFailStatus(hmap);
+	}
+
 	
 }
