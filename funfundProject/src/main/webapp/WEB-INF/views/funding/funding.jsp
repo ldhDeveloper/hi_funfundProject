@@ -350,7 +350,7 @@ button {
 			
 		</div>
 		<div class="col-lg-2 col-md-12 col-sm-12 col-xs-12 hidden-lg hidden-md  " style="margin-top:-5px;">
-				 <div style="display: inline-block; position:relative; max-width: 500px !important;">
+				 <div style="display: inline-block; position:relative; max-width: 250px !important;">
 					<img src="/funfund/images/funding/thumbnail/pr4.jpg"
 						class="img-responsive" >
 						<div class="text" style="position:absolute; top:40px;left:50px;"><h5>글 내용</h5></div> 
