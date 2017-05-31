@@ -15,7 +15,7 @@ public interface AccountService {
 	
 	 String findId(Account account); //아이디찾기
 	
-	 Account checkId(String Id); // 중복확인
+	 Account checkId(Account account); // 중복확인
 	
 	 int update(Account account); //회원정보변경 
 	

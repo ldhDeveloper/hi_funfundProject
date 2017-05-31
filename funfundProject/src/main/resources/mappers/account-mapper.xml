@@ -85,9 +85,15 @@
 	</update>
 
 	<select id="selectWithEmail" parameterType="account" resultMap="accountResult">
-	<![CDATA[
+
+		<choose>
+		<when test="email !=null">
 			SELECT * FROM ACCOUNT WHERE email = #{email}
-		]]>
+			</when>
+			<otherwise>
+			SELECT * FROM ACCOUNT WHERE id = #{id}
+			</otherwise>
+		</choose>
 	</select>
 	
 	<insert id="insertThirdParty" parameterType="account">

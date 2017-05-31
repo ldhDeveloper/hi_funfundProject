@@ -155,4 +155,9 @@ public class AccountDao {
 		}
 		return ac;
 	}
+
+	public Account checkId(Account account) {
+		
+		return (Account)sqlSession.selectOne("selectWithEmail", account);
+	}
 }

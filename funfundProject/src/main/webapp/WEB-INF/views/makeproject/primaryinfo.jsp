@@ -182,7 +182,7 @@ li {
 				}
 			});
 			$("#showpage").click(function(){
-				var url = 'detail.it?pro_no=' + ${pro_no};
+				var url = "detail.it?pro_no=${pro_no}&preview="true";
 				window.open(url, "", "channelmode");
 			});
 			

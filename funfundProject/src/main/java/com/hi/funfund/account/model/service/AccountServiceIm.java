@@ -34,9 +34,9 @@ public class AccountServiceIm implements AccountService {
 	}
 
 	@Override
-	public Account checkId(String Id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Account checkId(Account account) {
+		
+		return accountDao.checkId(account);
 	}
 
 	@Override
