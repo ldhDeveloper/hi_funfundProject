@@ -269,6 +269,15 @@ a:active, a:hover {
 	top: 20px;
 }
 
+.fun-menu2 {
+	color: orange;
+	font-weight: bold;
+	top: 20px;
+	display:inline-block;
+	font-size:10pt;
+	vertical-align:middle;
+}
+
 .login-title-txt {
 	font-size: 0;
 }
@@ -829,12 +838,24 @@ label.sign-form_title {
 	height: 34px;
 }
 
+.navbar-brand {
+	float: left;
+	height: 50px;
+	padding: 0px;
+	font-size: 18px;
+	line-height: 20px;
+}
+
+/* .navbar-default .navbar-toggle .icon-bar {
+	background-color: orange;
+} */
 </style>
 
 <title>Insert title here</title>
 
 </head>
 <body>
+	<!-- pc 메뉴바 -->
 	<div class="row middle-menubar hidden-xs">
 
 		<div class="col-lg-2 col-md-2 col-sm-2">
@@ -857,6 +878,7 @@ label.sign-form_title {
 							data-toggle="modal" data-target="#myModal">로그인</a></td>
 					</c:if>
 					<c:if test="${not empty sessionScope.account.id }">
+
 						<td style="width: 80px;"><a class="fun-menu" href="#"><c:out
 									value="${sessionScope.account.nickname}" /></a></td>
 						<td style="width : 80px;"><a class="fun-menu"
@@ -869,6 +891,9 @@ label.sign-form_title {
 									<img style="width: 34px;" class="img-circle img-responsive"
 										src="images/myinfo/basic.png" />
 								</c:if></td>
+						<td style="width: 80px;"><a class="fun-menu" href="#"><c:out
+									value="${sessionScope.account.nickname}" /></a></td>
+
 
 						<!-- <td style="width:80px;"><a class="fun-menu" href="logout.ao">로그아웃</a></td>
             		<td style="width:150px;"><a class="fun-menu" href="myinfo.ao">회원정보보기</a></td> -->
@@ -877,6 +902,79 @@ label.sign-form_title {
 			</table>
 		</div>
 	</div>
+
+	<!-- 모바일 메뉴바 -->
+	<div class="row middle-menubar hidden-lg hidden-md hidden-sm">
+		<c:if test="${empty sessionScope.account.id}">
+			<nav class="navbar navbar-default">
+				<div class="container-fluid">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed"
+							data-toggle="collapse"
+							data-target="#bs-example-navbar-collapse-1" aria-expanded="false"
+							id="mbtn">
+							<span class="sr-only"></span> <span class="icon-bar"></span> <span
+								class="icon-bar"></span> <span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand"><img
+							src="/funfund/images/common/logo.png"
+							style="width: 130px; height: 50px; cursor: pointer"
+							onclick="home();"></a>
+					</div>
+
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse"
+						id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li style="display: inline-block"><a href="#"
+								onclick="alert('모바일에서는 등록이 불가능합니다.');return false;">프로젝트
+									등록하기<span class="sr-only">(current)</span>
+							</a></li>
+							<li style="display: inline-block"><a href="funding.it">프로젝트
+									둘러보기</a></li>
+							<!-- <li style="display:inline-block"><a href="nList.no" onclick="alert('로그인하셔야 볼 수 있습니다.');return false">고객센터</a></li> -->
+							<li style="display: inline-block"><a data-toggle="modal"
+								data-target="#myModal" style="cursor: pointer">로그인</a></li>
+						</ul>
+					</div>
+					<!-- /.navbar-collapse -->
+				</div>
+				<!-- /.container-fluid -->
+			</nav>
+		</c:if>
+		<c:if test="${!empty sessionScope.account.id}">
+			<nav class="navbar navbar-default">
+				<div class="container-fluid">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<div style="float: right; padding-right: 30px; padding-top: 12px;">
+							<a class="fun-menu2" data-toggle="modal" data-target="#myModal4"
+								style="cursor: pointer"><c:if
+									test="${!empty sessionScope.account.pimage }">
+									<img style="width: 34px;vertical-align:middle; "  class="img-circle img-responsive"
+										src="images/myinfo/<c:out value='${sessionScope.account.pimage }'/>" />
+								</c:if> <c:if test="${empty sessionScope.account.pimage }">
+									<img style="width: 34px;vertical-align:middle; " class="img-circle img-responsive"
+										src="images/myinfo/basic.png" />
+								</c:if>
+							</a> <a class="fun-menu2" data-toggle="modal" data-target="#myModal4"
+								style="cursor: pointer;"><c:out
+									value="${sessionScope.account.nickname}" /></a>
+						</div>
+
+						<a class="navbar-brand"><img
+							src="/funfund/images/common/logo.png"
+							style="width: 130px; height: 50px; cursor: pointer"
+							onclick="home();"></a>
+					</div>
+				</div>
+				<!-- /.container-fluid -->
+			</nav>
+		</c:if>
+
+	</div>
+
 	<div id="myModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 			<!-- Modal content-->
@@ -1100,7 +1198,7 @@ label.sign-form_title {
 								type="hidden" name="id" value="${tempEmail}"> <input
 								type="text" id="signup-form_id" name="pwd" placeholder="임시비밀번호"
 								class="sign-form_input"> <input type="text"
-								id="signup-form_id" name="newPwd" placeholder="번경할 비밀번호"
+								id="signup-form_id" name="newPwd" placeholder="변경할 비밀번호"
 								class="sign-form_input"> <input type="text"
 								id="signup-form_id" name="confirmPwd" placeholder="비밀번호 재입력"
 								class="sign-form_input">
@@ -1246,6 +1344,7 @@ label.sign-form_title {
 		<!-- modal-dialog -->
 	</div>
 	<!-- modal -->
+
 
 </body>
 </html>
