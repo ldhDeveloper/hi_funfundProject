@@ -5,6 +5,7 @@
 <head>
 <script type="text/javascript" src="/funfund/lib/js/jquery-3.2.1.min.js">
 </script>
+<link rel="canonical" href="https://github.com/froala/wysiwyg-editor/blob/master/js/languages/ko.js" data-pjax-transient>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css"
@@ -21,7 +22,7 @@ $(function() {
 		  theme: 'Royal',
 		  heightMin : '900',
 		  heightMax : '1500',
-		  LANGUAGE : 'ko',
+		  language : 'fr',
 		  toolbarButtons : ['fullscreen', 
 			  				'bold', 'italic', 'underline',
 			  				'|', 'fontFamily', 'fontSize', 'color',
@@ -88,7 +89,7 @@ width: 100px !important;
 .fr-element {
 min-height : 500px !important;
 }
-form {
+.insertF {
 border-style : outset;
 border-bottom: none;
 }
@@ -103,7 +104,7 @@ border-bottom: none;
 <div class="container">
 <div class="col-lg-12 col-md-12 col-xs-12">
 <div class="ndetail">
-<form action="#" method="post" onsubmit="return false" >
+<form class="insertF" action="#" method="post" onsubmit="return false" >
 <table class="ntable">
 	<tr><td class="column">제목</td><td> 
 <input class="details" id="ntitle" name="ntitle" required></td></tr>
@@ -130,13 +131,13 @@ alert(ntitle);
 	
 }
 </script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0/js/languages/ko.js">
-</script>
+<script type="text/javascript" src="/funfund/langs/ko.js">
  <script type="text/javascript"
   src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script type="text/javascript" 
   src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js">
-  </script><script type="text/javascript" 
+  </script>
+  <script type="text/javascript" 
   src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
   <script type="text/javascript" 
   src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0//js/froala_editor.pkgd.min.js"></script>

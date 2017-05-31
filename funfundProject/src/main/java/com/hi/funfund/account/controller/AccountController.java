@@ -2,6 +2,7 @@ package com.hi.funfund.account.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -12,6 +13,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,13 +98,14 @@ public class AccountController {
 	
 	
 	@RequestMapping(value = "/signup.ao", produces = "text/plain;charset=UTF-8")
-	public String signup(Account account){
+	public ModelAndView signup(Account account, ModelAndView model){
 		int ok = accountService.insert(account);
 		String result="";
 		if(ok > 0){
-			result = "home";
+			model.addObject("signupSuccess", "회원가입에 성공하셧습니다. 즐거움을 위한 공간 펀펀드!");
+		model.setViewName("home");
 		}
-		return result;
+		return model;
 	}
 	
 	@RequestMapping("/logout.ao")
