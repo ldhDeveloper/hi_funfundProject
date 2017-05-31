@@ -504,6 +504,7 @@ input[type="checkbox"] {
 					        	data : {"orderlist" : orderlist, "ordercount" : ordercount, "rename" : rename, "rephone" : rephone, "address" : inputaddress, "cardnum" : rsp.apply_num},
 					        	success : function(data){
 					        		alert("결제완료!");
+					        		location.href="myfunding.ao";
 					        	},
 					        	error : function(error){
 					        		alert("결제실패!!!");

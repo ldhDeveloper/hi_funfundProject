@@ -148,5 +148,10 @@ public class ItemDao {
 		int result = sqlSession.update(nameSpace + "updateSuccessStatus", pro_no);
 		return result;
 	}
+
+	public int updateFailStatus(HashMap<String, String> hmap) {
+		int result = sqlSession.update(nameSpace + "updateFailStatus", hmap);
+		return result;
+	}
 	
 }

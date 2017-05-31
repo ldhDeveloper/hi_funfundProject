@@ -84,8 +84,8 @@
 				<div class="middle-submenu">
 					<ul class="nav nav-pills middle-submenu"
 						style="width: 900px; align: center;">
-						<li id="info1" class="active-active"><a href="itemconfirm.am">프로젝트 관리</a></li>
-						<li id="info2"><a href="#">펀딩금액 관리</a></li>
+						<li id="info1"><a href="itemconfirm.am">프로젝트 관리</a></li>
+						<li id="info2" class="active-active"><a href="#">펀딩금액 관리</a></li>
 						<li id="info3"><a href="#">funfund 현황</a></li>
 					</ul>
 				</div>
@@ -97,8 +97,8 @@
   <ul class="nav nav-tabs">
 	  <li><a href="itemconfirm.am">프로젝트 승인요청</a></li>
 	  <li class="active"><a href="requestdeleteitem.am">프로젝트 삭제요청</a></li>
-	  <li><a href="#">새소식 삭제요청</a></li>
- </ul>  
+	  <li><a href="resultitem.am">프로젝트 종료관리</a></li>
+ </ul>
   <table class="table table-hover adminTable">
     <thead>
       <tr>

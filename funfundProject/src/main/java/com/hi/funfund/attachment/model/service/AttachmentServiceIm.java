@@ -116,4 +116,10 @@ public class AttachmentServiceIm implements AttachmentService {
 		int result = attachmentDao.partyIdImage(hmap);
 		return result;
 	}
+
+	@Override
+	public List<Attachment> selectTempImage(int pro_no) {
+		List<Attachment> alist = attachmentDao.selectimgList(pro_no);
+		return alist;
+	}
 }

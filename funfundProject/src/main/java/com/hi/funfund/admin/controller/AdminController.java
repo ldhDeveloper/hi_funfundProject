@@ -79,7 +79,17 @@ public class AdminController {
 	@RequestMapping(value ="/successstatus.am", method = RequestMethod.POST)
 	public @ResponseBody int updateSuccessStatus(@RequestParam("pro_no") String prono){
 		int pro_no = Integer.parseInt(prono);
+		System.out.println("pro_no : " + pro_no);
 		int result = itemService.updateSuccessStatus(pro_no);
+		return result;
+	}
+	
+	@RequestMapping(value ="/failstatus.am", method = RequestMethod.POST)
+	public @ResponseBody int updateFailStatus(@RequestParam("pro_no") String pro_no, @RequestParam("comment") String comment){
+		HashMap<String, String> hmap = new HashMap<String, String>();
+		hmap.put("pro_no", pro_no);
+		hmap.put("comment", comment);
+		int result = itemService.updateFailStatus(hmap);
 		return result;
 	}
 	

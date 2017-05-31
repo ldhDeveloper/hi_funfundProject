@@ -78,5 +78,7 @@ public interface ItemService {
 
 	int updateSuccessStatus(int pro_no);
 
+	int updateFailStatus(HashMap<String, String> hmap);
+
 
 }

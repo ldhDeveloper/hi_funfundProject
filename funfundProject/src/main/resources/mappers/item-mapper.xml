@@ -393,6 +393,7 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
                                    left join (select ano, pimage
                                                 from account) ac on (ac.ano=i1.ano)
             where i1.pedate < sysdate and i1.pstatus = '승인완료'
+            order by i1.pedate
 			]]>
 	</select>
 	<update id="updateConfirmStatus" parameterType="int">
@@ -407,7 +408,11 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
 		update item set pstatus = '삭제', icomment = #{comment}
 		where pro_no = #{pro_no}
 	</update>
-
+	
+	<update id="updateFailStatus" parameterType="HashMap">
+		update item set pstatus = '펀딩실패', icomment = #{comment}
+		where pro_no = #{pro_no}
+	</update>
 	
 	<select id="selectOneForUpdate" parameterType="int" resultMap="itemResult" >
 		<![CDATA[
@@ -415,7 +420,6 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
 			refund, pvideo, bankcode, accpnm, accnum, cname, cs_email, cs_phone, checkacc
 			from item
 			where pro_no = #{pro_no}
-			
 		]]>
 	</select>
 	<select id="selectItemList" parameterType="int" resultMap="itemResult" >
@@ -424,5 +428,12 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
 			
 		]]>
 	</select>
+	
+	<update id="updateSuccessStatus" parameterType="int">
+		<![CDATA[
+		update item set pstatus = '펀딩성공'
+		where pro_no = #{pro_no}
+		]]>
+	</update>
 	
 </mapper>

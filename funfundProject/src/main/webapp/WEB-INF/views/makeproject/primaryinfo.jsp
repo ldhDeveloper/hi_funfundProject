@@ -136,7 +136,7 @@ li {
 <body oncontextmenu="return false">
 
 	<jsp:include page="/WEB-INF/views/common/menubar.jsp" />
-
+	<script type="text/javascript" src="/funfund/lib/js/jquery.form.min.js"></script>
 	<script>
 		$(function() {
 
@@ -301,8 +301,6 @@ li {
 					if(data.item.cs_phone != null){
 						$('[name=cs_phone]').val(data.item.cs_phone);
 					} 
-					
-					
 					
 				} 
 			});
@@ -1239,19 +1237,19 @@ li {
 				
 				function saveImg(){
 					var url2 = 'updateimgajax.at?pro_no=' + ${ pro_no } +"&flag=false";
-					var form = $('ajaxfileform')[0];
-	                var formData = new FormData(form);
-					formData.append("uploadFile", $("[name=uploadFile]")[0].files[0]);
-					formData.append("uploadFile2", $("[name=uploadFile2]")[0].files[0]);
+					var form = $('#ajaxfileform')[0];
+	                var formData = new FormData(form); 
+					/* formData.append("uploadFile", $("input[name=uploadFile]")[0].files[0]);
+					formData.append("uploadFile", $("input[name=uploadFile]")[1].files[0]); */
 					
 					console.log($("[name=uploadFile]")[0].files[0]);
 					
 					$.ajax({
 						url : url2,
-						data:formData,
-						dataType : "json",
-						contentType: false,
-						processData: false,
+						type : 'post',
+						data : formData,
+						processData : false,
+			            contentType : false,
 						success:function(){
 							alert("임시저장 성공!!")
 						}
