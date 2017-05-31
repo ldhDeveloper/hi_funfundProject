@@ -282,10 +282,11 @@
     										</thead>
    
     										<tbody>
-    											<c:forEach var="fundList" items="${ mfList }">
+    											<c:forEach var="fundList" items="${ mfList }" varStatus="status">
+    																							
     											<tr class="mftdrL">
       												<td class="mftd" style="display:none;"><input class="fundNo" type="hidden" value="<c:out value='${ fundList.fund_no }'/>"/></td>
-        											<td class="mftd"><b class="state" id="progress"><!-- 진행중 --></b>&nbsp;&nbsp;&nbsp;${ fundList.pname }</td>
+        											<td class="mftd"><b class="state" id="progress<c:out value='${status.index}'/>"></b>&nbsp;&nbsp;&nbsp;${ fundList.pname }</td>
         											<td class="pedate">${ fundList.pedate }</td>
         											<td class="mftd">${ fundList.sumcost }원</td>
         											<td class="mftd">${ fundList.funstatus }</td>
@@ -301,11 +302,11 @@
 														var progress = pedate.getTime() - today.getTime();				
 					
 														if(progress >= 0) {
-															$("#progress").html("진행중");		
+															$("#progress<c:out value='${status.index}'/>").html("진행중");		
 														}
 													
 														else {
-															$("#progress").html("마 감").css({"background-color" : "#C1C1C1", "color" : "#F1F1F1"});		
+															$("#progress<c:out value='${status.index}'/>").html("마 감").css({"background-color" : "#C1C1C1", "color" : "#F1F1F1"});		
 														}	
 													});
 												</script>
@@ -330,7 +331,7 @@
 							</div>
     					   					
     						<div class="panel panel-info">
-      							<div class="panel-heading">투자형 프로젝트</div>
+      							<div class="panel-heading">후원형 프로젝트</div>
       							<div class="panel-body">아직 참여한 프로젝트가 없습니다.</div>
     						</div>
     					</div>
