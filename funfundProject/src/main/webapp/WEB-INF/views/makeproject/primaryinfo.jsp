@@ -181,6 +181,25 @@ li {
 					$('#nextorsave').show();
 				}
 			});
+			$("#showpage").click(function(){
+				var url = 'detail.it?pro_no=' + ${pro_no};
+				window.open(url, "", "channelmode");
+			});
+			
+			$("#sendadmin").click(function(){
+				var url = "updateStatus.it";
+				var pro_no = ${pro_no};
+				var pstatus = "승인요청";
+				$.ajax({
+					url:url,
+					data:{"pro_no":pro_no, "pstatus" : pstatus},
+					success:function(){
+						alert("검토 요청 완료!!");
+						document.location.href="newproject.ao";
+					}
+				});
+				
+			});
 		});
 	</script>
 
@@ -195,13 +214,15 @@ li {
 			<li id="info4"><a href="#">메이커정보</a></li>
 			<li id="info5"><a href="#">정산</a></li>
 			<li id="showpage" style="margin-left: 20px;"><a
-				href="detail.it?pro_no=${pro_no }">미리보기</a></li>
+				<%-- href="detail.it?pro_no=${pro_no }" --%>>미리보기</a></li>
 			<li id="sendadmin" style="margin-left: 20px;"><a href="#">검토
 					요청하기</a></li>
 		</ul>
 	</div>
 	<script>
 		$(function(){
+			
+			
 			var pro_no = ${pro_no};
 			$.ajax({
 				url:"selectone.it?pro_no=" + pro_no,
@@ -226,17 +247,32 @@ li {
 					if(data.item.pshort != null){
 						$('[name=pshort]').val(data.item.pshort);
 					}
-					if(data.item.ecost != null){
+					if(data.item.ecost != 0){
 						$('[name=ecost]').val(data.item.ecost);
 					}
 					if(data.item.refund != null){
-						$('[name=refund]').val(data.item.refund);
-					} 
+						var refundarr = data.item.refund.split('^');
+						$('[name=refund]').html("");
+						for(var i = 0; i < refundarr.length; i++){
+							$('[name=refund]').html($('[name=refund]').html() + refundarr[i] + "<br>");
+						} 
+						
+						
+					}
 					if(data.item.pvideo != null){
 						$('[name=pvideo]').val(data.item.pvideo);
 					}
+					if(data.item.checkacc == "인증됨"){
+						$("#sbm-flag").attr("checked", "checked");
+						$("#sbm-ok").show();
+						$("#sbm-no").hide();
+						$("#confirmacc").hide();
+						$("#changeacc").show();
+						$("[name=accpnm]").attr("readonly", "readonly");
+						$("[name=accnum]").attr("readonly", "readonly");
+						$("[name=bankcode]").not(":selected").attr("disabled", "disabled");
+
 					
-					if($("#sbm-flag").is(":checked") == true){
 						if(data.item.bankcode != null){
 							$('[name=bankcode]').val(data.item.bankcode);
 						} 
@@ -247,8 +283,6 @@ li {
 							$('[name=accnum]').val(data.item.accnum);
 						} 
 						
-						$("#sbm-ok").show();
-						$("#sbm-no").hide();
 					}
 					if(data.item.cname != null){
 						$('[name=cname]').val(data.item.cname);
@@ -263,6 +297,19 @@ li {
 					
 					
 				} 
+			});
+			
+			$("#changeacc").click(function(){
+				$("#sbm-ok").hide();
+				$("#sbm-no").show();
+				$("#confirmacc").show();
+				$("#changeacc").hide();
+				$("[name=accpnm]").attr("readonly", false);
+				$("[name=accnum]").attr("readonly", false);
+				$("[name=bankcode]").not(":selected").attr("disabled", false);
+				$("[name=accpnm]").val("");
+				$("[name=accnum]").val("");
+				$("[name=bankcode]").val("");
 			});
 		});
 	
@@ -1055,6 +1102,7 @@ li {
 				</tr>
 			</table>
 		</div>
+		</form>
 
 		<!-- 정산 입력 화면 -->
 		<div id="primary-info5" class="input-form">
@@ -1123,14 +1171,16 @@ li {
 							계좌번호 &nbsp;<input type="text" size="25"
 								placeholder="'-'를 제외하고 입력하세요." name="accnum" id="accnum">
 							&nbsp;
-							<input type="checkbox" id="sbm-flag" name="checkacc" style="display:none" checked>
+							<input type="checkbox" id="sbm-flag" name="checkacc" style="display:none">
 							<label id="sbm-no" style="background:red;color:white;border-radius:3px;padding:3px;">미인증</label>
 							<label id="sbm-ok" style="background:green;color:white;border-radius:3px;padding:3px;display:none">인증됨</label>
 						</div>
 						<div align="center">
 						<br>
-							<button class="btn btn-primary btn-xs"
+							<button class="btn btn-primary btn-xs" id="confirmacc"
 								onclick="fnSearchAccessToken()">확인하기</button>
+							<button class="btn btn-primary btn-xs" style="display:none" id="changeacc"
+								onclick="">변경하기</button>
 						</div>
 						
 					</td>
@@ -1144,7 +1194,7 @@ li {
 			</table>
 		</div>
 
-	</form>
+	
 	<br>
 	<br>
 	<div align="center">
@@ -1155,7 +1205,6 @@ li {
 			function tempsave() {
 				var url = 'updateajax.it?pro_no=' + ${ pro_no } +"&flag='false'";
 				
-				var checkacc = $('[name=checkacc]').val();
 				var pname = $('[name=pname]').val();
 				var pcontent = $('[name=pcontent]').val();
 				var category = $('[name=category]').val();
@@ -1168,16 +1217,11 @@ li {
 				var cname = $('[name=cname]').val();
 				var cs_email = $('[name=cs_email]').val();
 				var cs_phone = $('[name=cs_phone]').val();
-				var bankcode = $('[name=bankcode]').val();
-				var accpnm = $('[name=accpnm]').val();
-				var accnum = $('[name=accnum]').val();
-				
-				
 				
 				$.ajax({
 					url : url,
 					data: {"pname":pname, "pcontent":pcontent, "category":category, "s_psdate":s_psdate, "s_pedate":s_pedate, "pshort":pshort, "ecost":ecost, "refund":refund,
-						"pvideo":pvideo, "bankcode": bankcode, "accpnm":accpnm, "accnum":accnum, "cname":cname, "cs_email":cs_email, "cs_phone":cs_phone, "checkacc":checkacc},
+						"pvideo":pvideo, "cname":cname, "cs_email":cs_email, "cs_phone":cs_phone},
 					success:function(){
 						saveImg();
 					}
@@ -1203,13 +1247,8 @@ li {
 						success:function(){
 							alert("임시저장 성공!!")
 						}
-						
-						
 					});	
 				}
-				
-
-				//document.getElementById('frm').submit();
 			}
 		</script>
 		&nbsp; &nbsp;
@@ -1378,42 +1417,44 @@ li {
 						beforeSend : function(request) {
 							request.setRequestHeader("Authorization",
 									access_token);
-							//request.setRequestHeader("Content-Type", "application/json");
 						},
 						type : "POST",
-						//data: {"bank_code_std":bank_code_std,"account_num":account_num,"account_holder_info":account_holder_info,"tran_dtime":tran_dtime},
 						data : JSON.stringify(resData),
 						dataType : "json",
 						success : function(data, data2, data3) {
-
-							console.log("data==" + data);
-							console.log("data2==" + data2);
-							console.log("data3==" + data3);
-							console.log($(data));
-							console.log("data3.res==" + data3.responseText);
-							console.log("data3.name=="
-									+ data.account_holder_name);
-							//var list = JSON.parse(data);	 
-							//$("#real_name").text(data3.responseText.replace(/,/gi, ",\n"));
 							if (data.account_holder_name == $("#accpnm").val()) {
-								alert('인증 성공!!!');
-								$("#sbm-flag").attr("cheked", true);
-								$("#sbm-flag").val("Y");
+								
+								$("#sbm-flag").attr("checked", true);
 								$("#sbm-ok").show();
 								$("#sbm-no").hide();
+								var checkacc = "인증됨";
+								var pro_no = ${pro_no};
+								var bankcode = $('[name=bankcode]').val();
+								var accpnm = $('[name=accpnm]').val();
+								var accnum = $('[name=accnum]').val();
+								
+								$.ajax({
+									url:"checkaccount.it",
+									data:{"pro_no":pro_no, "checkacc":checkacc, "bankcode":bankcode, "accpnm":accpnm, "accnum":accnum},
+									success:function(){
+										alert('인증 성공!!!');
+										$("#confirmacc").hide();
+										$("#changeacc").show();
+										$("#sbm-flag").attr("checked", true);
+										$("#sbm-ok").show();
+										$("#sbm-no").hide();
+										$("[name=accpnm]").attr("readonly", "readonly");
+										$("[name=accnum]").attr("readonly", "readonly");
+										$("[name=bankcode]").not(":selected").attr("disabled", "disabled");
+									}
+								});
 								
 							} else {
 								alert('인증 실패');
-								$("#sbm-flag").attr("cheked", false);
-								$("#sbm-flag").val("N");
+								$("#sbm-flag").attr("checked", false);
 								$("#sbm-ok").hide();
 								$("#sbm-no").show();
 							}
-							
-							
-								
-								
-							
 						},
 						error : function(data, data2, data3) {
 							alert('error!!!');

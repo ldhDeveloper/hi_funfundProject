@@ -167,6 +167,21 @@ public class ItemServiceIm implements ItemService{
 	public int updateRejectStatus(HashMap<String, String> hmap) {
 		return itemDao.updateRejectStatus(hmap);
 	}
+	
+	@Override
+	public List<Item> selectItemList(int ano){
+		return itemDao.selectItemList(ano);
+	}
+	
+	@Override
+	public int updateAcc(Item item){
+		return itemDao.updateAcc(item);
+	}
+	
+	@Override
+	public int updateStatus(Item item){
+		return itemDao.updateStatus(item);
+	}
 
 	@Override
 	public List<Item> selectDeleteRequest() {

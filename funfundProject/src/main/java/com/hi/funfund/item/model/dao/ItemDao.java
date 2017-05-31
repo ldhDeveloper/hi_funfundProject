@@ -114,6 +114,21 @@ public class ItemDao {
 		return item;
 	}
 
+	public List<Item> selectItemList(int ano) {
+		List<Item> plist = (List<Item>) sqlSession.selectList(nameSpace + "selectItemList", ano);
+		return plist;
+	}
+
+	public int updateAcc(Item item) {
+		int result = sqlSession.update(nameSpace + "accupdate", item);
+		return result;
+	}
+
+	public int updateStatus(Item item) {
+		int result = sqlSession.update(nameSpace + "updatestatus", item);
+    return result;
+  }
+  
 	public List<Item> selectDeleteRequest() {
 		List<Item> iList = (List<Item>) sqlSession.selectList(nameSpace + "selectDeleteRequest");
 		return iList;
