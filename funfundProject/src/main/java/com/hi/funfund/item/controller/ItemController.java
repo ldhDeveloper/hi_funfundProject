@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -87,60 +88,7 @@ public class ItemController {
 		return model;
 	}
 
-	public ModelAndView selectFunddingList(ModelAndView model) {
-
-		return model;
-	}
-
-	public ModelAndView PickList(ModelAndView model) {
-
-		return model;
-	}
-
-	public ModelAndView selectMyList(int pro_no, ModelAndView model) {
-
-		return model;
-	}
-
-	public ModelAndView selectRecommendList(ModelAndView model) {
-
-		return model;
-	}
-
-	public ModelAndView categoryList(ModelAndView model) {
-
-		return model;
-	}
-
-	public ModelAndView searchItemWriter(ModelAndView model) {
-
-		return model;
-	}
-
-	public ModelAndView searchItemTitle(ModelAndView model) {
-
-		return model;
-	}
-
-	public ModelAndView selectOne(ModelAndView model) {
-
-		return model;
-	}
-
-	public ModelAndView selectOngoingItemList(ModelAndView model) {
-
-		return model;
-	}
-
-	public ModelAndView selectEndItemList(ModelAndView model) {
-
-		return model;
-	}
-
-	public ModelAndView getGrowRate(ModelAndView model) {
-
-		return model;
-	}
+	
 
 	@RequestMapping("insert.it")
 	public ModelAndView insertRewardItem(ModelAndView model, HttpSession session, HttpServletRequest request,
@@ -166,11 +114,15 @@ public class ItemController {
 	public ModelAndView insertRewardItem(ModelAndView model, FundMenu fmenu) {
 		System.out.println(fmenu);
 		ArrayList<FundMenu> fmlist = null;
-
+		if (!fmenu.getS_mdate().equals("")) {
+			String[] mdates = fmenu.getS_mdate().split("-");
+			String s_mdate = mdates[0] + mdates[1] + mdates[2];
+			fmenu.setS_mdate(s_mdate);
+		}
 		int result = fundMenuService.insertFundMenu(fmenu);
 
 		if (result > 0) {
-			fmlist = fundMenuService.selectList(fmenu.getPro_no());
+			fmlist = fundMenuService.selectList2(fmenu.getPro_no());
 			model.setViewName("jsonView");
 			model.addObject("fmlist", fmlist);
 			System.out.println("fmlist : " + fmlist);
@@ -321,10 +273,32 @@ public class ItemController {
 	}
 	@RequestMapping(value = "updateajax.it", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView updateAjaxItem(ModelAndView model, Item item, HttpServletRequest request){
-		//String pname = request.getParameter("pname");
+		
 		System.out.println(item);
-		return null;
+		
+		if (!item.getS_psdate().equals("")) {
+			String[] psdates = item.getS_psdate().split("-");
+			String s_psdate = psdates[0] + psdates[1] + psdates[2];
+			item.setS_psdate(s_psdate);
+		}
+
+		if (!item.getS_pedate().equals("")) {
+			String[] pedates = item.getS_pedate().split("-");
+			String s_pedate = pedates[0] + pedates[1] + pedates[2];
+			item.setS_pedate(s_pedate);
+		}
+		
+		int result = itemService.updateRewardItem(item);
+		System.out.println("날짜변환 : " + item);
+		
+		model.addObject("pro_no", item.getPro_no());
+		model.setViewName("makeproject/primaryinfo");
+		
+		return model;
 	}
+	
+	
+	
 	
 
 	@RequestMapping("funding.it")
@@ -356,6 +330,27 @@ public class ItemController {
 		model.addObject("bestList", bestList);
 		model.addObject("sList", sList);
 		model.setViewName("funding/detailList");
+		return model;
+	}
+	
+	@RequestMapping(value="selectone.it")
+	public ModelAndView selectOne(@RequestParam("pro_no") int pro_no, ModelAndView model, HttpServletRequest request, HttpServletResponse response){
+		Item item = itemService.selectOneForUpdate(pro_no);
+		
+		System.out.println("start select : " + item);
+		model.addObject("item", item);
+		model.setViewName("jsonView");
+		
+		return model;
+	}
+	
+	@RequestMapping(value="chekeaccount.it")
+	public ModelAndView updateAcc(@RequestParam("sbmflag") String flag, ModelAndView model, HttpServletRequest request, HttpServletResponse response){
+		
+		System.out.println(flag);
+		
+		
+		
 		return model;
 	}
 

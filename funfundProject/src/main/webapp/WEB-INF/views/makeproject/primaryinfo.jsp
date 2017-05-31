@@ -200,10 +200,79 @@ li {
 					요청하기</a></li>
 		</ul>
 	</div>
+	<script>
+		$(function(){
+			var pro_no = ${pro_no};
+			$.ajax({
+				url:"selectone.it?pro_no=" + pro_no,
+				success:function(data){
+					console.log($(data));
+					console.log("프로젝트명 : " + data.item.pname)
+					if(data.item.pname != null){
+						$('[name=pname]').val(data.item.pname);
+					} 
+					if(data.item.pcontent != null){
+						$('[name=pcontent]').froalaEditor('html.set', data.item.pcontent);;
+					} 
+					if(data.item.category != null){
+						$('[name=category]').val(data.item.category);
+					}
+					if(data.item.s_psdate != null){
+						$('[name=s_psdate]').val(data.item.s_psdate);
+					}
+					if(data.item.s_pedate != null){
+						$('[name=s_pedate]').val(data.item.s_pedate);
+					}
+					if(data.item.pshort != null){
+						$('[name=pshort]').val(data.item.pshort);
+					}
+					if(data.item.ecost != null){
+						$('[name=ecost]').val(data.item.ecost);
+					}
+					if(data.item.refund != null){
+						$('[name=refund]').val(data.item.refund);
+					} 
+					if(data.item.pvideo != null){
+						$('[name=pvideo]').val(data.item.pvideo);
+					}
+					
+					if($("#sbm-flag").is(":checked") == true){
+						if(data.item.bankcode != null){
+							$('[name=bankcode]').val(data.item.bankcode);
+						} 
+						if(data.item.accpnm != null){
+							$('[name=accpnm]').val(data.item.accpnm);
+						} 
+						if(data.item.accnum != null){
+							$('[name=accnum]').val(data.item.accnum);
+						} 
+						
+						$("#sbm-ok").show();
+						$("#sbm-no").hide();
+					}
+					if(data.item.cname != null){
+						$('[name=cname]').val(data.item.cname);
+					}
+					if(data.item.cs_email != null){
+						$('[name=cs_email]').val(data.item.cs_email);
+					} 
+					if(data.item.cs_phone != null){
+						$('[name=cs_phone]').val(data.item.cs_phone);
+					} 
+					
+					
+					
+				} 
+			});
+		});
+	
+	
+	</script>
+	
 
 
 	<form id="frm" action="update.it?pro_no=${ pro_no }" method="post"
-		onsubmit="return false;" enctype="multipart/form-data">
+		onsubmit="return false;" enctype="multipart/form-data" name="frm">
 
 		<input type="hidden" name="flag" value="false">
 		<%-- <input type="hidden" name="pro_no" value="${pro_no }"> --%>
@@ -278,8 +347,7 @@ li {
 						<div
 							style="width: 450px; border: 1px solid #ddd; height: 350px; background: #f8f8f8; margin-left: 10px; padding-left: 75px; padding-top: 30px; cursor: pointer;"
 							onclick="document.all.uploadFile.click();">
-							<input id="titleimagefile" type="file" name="uploadFile"
-								style="display: none;" onchange="LoadImg(this);"> <img
+							 <img
 								id="titleimage" src="images/makeproject/camera.PNG"
 								style="max-width: 300px; max-height: 200px; width: 300px; heigh: 200px;">
 							<br> <br>
@@ -354,16 +422,16 @@ li {
 						<div
 							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px; padding: 10px;">
 							<select name="category">
-								<option value="">선택하세요</option>
-								<option value="테크">테크</option>
-								<option value="패션/뷰티">패션/뷰티</option>
-								<option value="푸드">푸드</option>
-								<option value="디자인">디자인제품</option>
-								<option value="예술">예술</option>
-								<option value="게임">게임</option>
-								<option value="여행">여행</option>
-								<option value="스포츠">스포츠</option>
-								<option value="공익">공익</option>
+								<option value="">선택하세요
+								<option value="테크">테크
+								<option value="패션/뷰티">패션/뷰티
+								<option value="푸드">푸드
+								<option value="디자인">디자인제품
+								<option value="예술">예술
+								<option value="게임">게임
+								<option value="여행">여행
+								<option value="스포츠">스포츠
+								<option value="공익">공익
 							</select>
 						</div>
 					</td>
@@ -453,9 +521,8 @@ li {
 									<th>순서</th>
 									<th>리워드명</th>
 									<th>금액</th>
-									<th>배송조건</th>
 									<th>제한수량</th>
-									<th>배송일</th>
+									<th>배송예정일</th>
 									<th>수정/삭제</th>
 								</tr>
 							</table>
@@ -494,20 +561,11 @@ li {
 								</tr>
 								<tr>
 									<td>&nbsp;</td>
-									<td>배송조건</td>
-									<td><input type="checkbox" name="delyn"><font
-										size="0.8em"> 배송받을 주소가 필요합니다.</font></td>
-									<td colspan="2">&nbsp;</td>
-									<td>배송료</td>
-									<td><input type="text" size="5" name="dcost"></td>
-								</tr>
-								<tr>
-									<td>&nbsp;</td>
 									<td>제한수량</td>
 									<td><input type="text" size="3" name="mcount"></td>
-									<td colspan="2">배송일</td>
-									<td colspan="2"><input type="text" class="datepicker3"
-										style="padding-left: 15px" name="mdate" size="13"> <!-- <script
+									<td>배송일</td>
+									<td colspan="2"><input type="text" class="datepicker3" id="datepicker3"
+										style="padding-left: 15px" name="s_mdate" size="13"> <!-- <script
 											src="https://code.jquery.com/jquery-1.12.4.js"></script> <script
 											src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 										<script>
@@ -518,7 +576,9 @@ li {
 																	showOn : "button",
 																	buttonImage : "images/makeproject/calendar2.png",
 																	buttonImageOnly : true,
-																	buttonText : "Select date"
+																	buttonText : "Select date",
+																	altField : "#datepicker3",
+																	altFormat : "yy-mm-dd"
 																});
 											});
 										</script></td>
@@ -539,7 +599,38 @@ li {
 			<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 			<script>
 				$(function() {
+					var pro_no = ${pro_no};
+					var urladd = "selectfmenu.fm?pro_no=" + pro_no;
+					$.ajax({
+						url:urladd,
+						success:function(data){
+							
+							console.log($(data));
+							var length = data.fmenulist.length;
+							
+							for(var i = 0; i < length; i++){
+								$("#rlist")
+								.html(
+										$(
+												"#rlist")
+												.html()
+												+ "<tr><td>"
+												+ data.fmenulist[i].mnum
+												+ "</td><td>"
+												+ data.fmenulist[i].mname
+												+ "</td><td>"
+												+ data.fmenulist[i].mcost
+												+ "</td><td>"
+												+ data.fmenulist[i].mcount
+												+ "</td><td>"
+												+ data.fmenulist[i].s_mdate
+												+ "</td><td><button class='btn btn-xs btn-success'>수정</button>&nbsp; <button class='btn btn-xs btn-danger'>삭제</button></td></tr>")
 
+							}
+							
+						}
+					});
+					
 					$("#addReward")
 							.click(
 									function() {
@@ -550,10 +641,8 @@ li {
 										var mname = $("[name=mname]").val();
 										var mcost = $("[name=mcost]").val();
 										var mnum = $("[name=mnum]").val();
-										var dcost = $("[name=dcost]").val();
-										var mdate = $("[name=mdate]").val();
+										var s_mdate = $("[name=s_mdate]").val();
 										var mcount = $("[name=mcount]").val();
-										var delyn = $("[name=delyn]").val();
 										var mcontent = $("[name=mcontent]")
 												.val();
 
@@ -567,10 +656,8 @@ li {
 														"mname" : mname,
 														"mcost" : mcost,
 														"mnum" : mnum,
-														"dcost" : dcost,
-														"mdate" : mdate,
+														"s_mdate" : s_mdate,
 														"mcount" : mcount,
-														"delyn" : delyn,
 														"mcontent" : mcontent
 													},
 													success : function(data) {
@@ -591,12 +678,10 @@ li {
 																				+ "</td><td>"
 																				+ data.fmlist[i].mcost
 																				+ "</td><td>"
-																				+ data.fmlist[i].delyn
-																				+ "</td><td>"
 																				+ data.fmlist[i].mcount
 																				+ "</td><td>"
-																				+ data.fmlist[i].mdata
-																				+ "</td><td><button value='수정'/>&nbsp; <button value='삭제'/></td></tr>")
+																				+ data.fmlist[i].s_mdate
+																				+ "</td><td><button class='btn btn-xs btn-success'>수정</button>&nbsp; <button class='btn btn-xs btn-danger'>삭제</button></td></tr>")
 
 													}
 
@@ -909,8 +994,7 @@ li {
 					<td>
 						<div
 							style="border: 1px solid #ddd; background: #f8f8f8; padding: 10px; margin-left: 10px; width: 440px; height: 180px; padding-left: 160px;">
-							<input id="makerprofileimagefile" type="file" name="uploadFile2"
-								style="display: none;" onchange="LoadImg2(this);"> <img
+							 <img
 								id="makerprofileimage" class="img-circle"
 								src="images/myinfo/basic.png"
 								style="min-width: 120px; min-height: 120px; width: 120px; heigh: 120px; cursor: pointer"
@@ -1039,9 +1123,16 @@ li {
 							계좌번호 &nbsp;<input type="text" size="25"
 								placeholder="'-'를 제외하고 입력하세요." name="accnum" id="accnum">
 							&nbsp;
+							<input type="checkbox" id="sbm-flag" name="checkacc" style="display:none" checked>
+							<label id="sbm-no" style="background:red;color:white;border-radius:3px;padding:3px;">미인증</label>
+							<label id="sbm-ok" style="background:green;color:white;border-radius:3px;padding:3px;display:none">인증됨</label>
+						</div>
+						<div align="center">
+						<br>
 							<button class="btn btn-primary btn-xs"
 								onclick="fnSearchAccessToken()">확인하기</button>
 						</div>
+						
 					</td>
 					<td>&nbsp;</td>
 				</tr>
@@ -1063,38 +1154,59 @@ li {
 
 			function tempsave() {
 				var url = 'updateajax.it?pro_no=' + ${ pro_no } +"&flag='false'";
-				var pname = $('[name=pname]').val();
 				
-				/* PRO_NO
-				ANO
-				PNAME
-				PCONTENT
-				CATEGORY
-				PSDATE
-				PEDATE
-				PSHORT
-				ECOST
-				REFUND
-				PVIDEO
-				PSTATUS
-				LIKECOUNT
-				SHARELINK
-				BANKCODE
-				ACCPNM
-				ACCNUM
-				CNAME
-				CS_EMAIL
-				CS_PHONE */
-				console.log(pname);
+				var checkacc = $('[name=checkacc]').val();
+				var pname = $('[name=pname]').val();
+				var pcontent = $('[name=pcontent]').val();
+				var category = $('[name=category]').val();
+				var s_psdate = $('[name=s_psdate]').val();
+				var s_pedate = $('[name=s_pedate]').val();
+				var pshort = $('[name=pshort]').val();
+				var ecost = $('[name=ecost]').val();
+				var refund = $('[name=refund]').val();
+				var pvideo = $('[name=pvideo]').val();
+				var cname = $('[name=cname]').val();
+				var cs_email = $('[name=cs_email]').val();
+				var cs_phone = $('[name=cs_phone]').val();
+				var bankcode = $('[name=bankcode]').val();
+				var accpnm = $('[name=accpnm]').val();
+				var accnum = $('[name=accnum]').val();
+				
+				
+				
 				$.ajax({
 					url : url,
-					data: {"pname":pname},
-					success:function(data){
-						alert("임시저장 성공");
+					data: {"pname":pname, "pcontent":pcontent, "category":category, "s_psdate":s_psdate, "s_pedate":s_pedate, "pshort":pshort, "ecost":ecost, "refund":refund,
+						"pvideo":pvideo, "bankcode": bankcode, "accpnm":accpnm, "accnum":accnum, "cname":cname, "cs_email":cs_email, "cs_phone":cs_phone, "checkacc":checkacc},
+					success:function(){
+						saveImg();
 					}
 				});
 					
+				
+				
+				function saveImg(){
+					var url2 = 'updateimgajax.at?pro_no=' + ${ pro_no } +"&flag=false";
+					var form = $('ajaxfileform')[0];
+	                var formData = new FormData(form);
+					formData.append("uploadFile", $("[name=uploadFile]")[0].files[0]);
+					formData.append("uploadFile2", $("[name=uploadFile2]")[0].files[0]);
 					
+					console.log($("[name=uploadFile]")[0].files[0]);
+					
+					$.ajax({
+						url : url2,
+						data:formData,
+						dataType : "json",
+						contentType: false,
+						processData: false,
+						success:function(){
+							alert("임시저장 성공!!")
+						}
+						
+						
+					});	
+				}
 				
 
 				//document.getElementById('frm').submit();
@@ -1109,6 +1221,14 @@ li {
 		onsubmit="return false;">
 		<input type="file" size="20" multiple="multiple" name="slidefile[]"
 			id="slidefile" style="display: none;" onchange="LoadSlideImg(this);">
+		<input type="hidden" name="pro_no" value="${ pro_no }">
+	</form>
+	<form id="ajaxfileform" method="post" enctype="multipart/form-data"
+		onsubmit="return false;" name="ajaxfileform">
+		<input id="titleimagefile" type="file" name="uploadFile"
+								style="display: none;" onchange="LoadImg(this);">
+		<input id="makerprofileimagefile" type="file" name="uploadFile2"
+								style="display: none;" onchange="LoadImg2(this);">						
 		<input type="hidden" name="pro_no" value="${ pro_no }">
 	</form>
 
@@ -1277,9 +1397,23 @@ li {
 							//$("#real_name").text(data3.responseText.replace(/,/gi, ",\n"));
 							if (data.account_holder_name == $("#accpnm").val()) {
 								alert('인증 성공!!!');
+								$("#sbm-flag").attr("cheked", true);
+								$("#sbm-flag").val("Y");
+								$("#sbm-ok").show();
+								$("#sbm-no").hide();
+								
 							} else {
 								alert('인증 실패');
+								$("#sbm-flag").attr("cheked", false);
+								$("#sbm-flag").val("N");
+								$("#sbm-ok").hide();
+								$("#sbm-no").show();
 							}
+							
+							
+								
+								
+							
 						},
 						error : function(data, data2, data3) {
 							alert('error!!!');

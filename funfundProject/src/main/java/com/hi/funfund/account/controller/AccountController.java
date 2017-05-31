@@ -2,6 +2,7 @@ package com.hi.funfund.account.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -12,6 +13,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +59,7 @@ public class AccountController {
 	private FundListService fundListService;
 	
 	@RequestMapping("/login.ao")
-	public ModelAndView login(Party party, Account account, ModelAndView mv, HttpServletRequest request){
+	public String login(Party party, Account account, HttpServletRequest request){
 		account = accountService.login(account);
 		
 		HttpSession session = request.getSession(false);
@@ -66,8 +68,8 @@ public class AccountController {
 			session.setAttribute("account", account);
 			session.setAttribute("party", p);
 		}
-		mv.setViewName("home");
-		return mv;
+		//mv.setViewName("home");
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value = "/loginWithApi.ao") // 타 사이트 정보로 회원가입
@@ -96,13 +98,14 @@ public class AccountController {
 	
 	
 	@RequestMapping(value = "/signup.ao", produces = "text/plain;charset=UTF-8")
-	public String signup(Account account){
+	public ModelAndView signup(Account account, ModelAndView model){
 		int ok = accountService.insert(account);
 		String result="";
 		if(ok > 0){
-			result = "home";
+			model.addObject("signupSuccess", "회원가입에 성공하셧습니다. 즐거움을 위한 공간 펀펀드!");
+		model.setViewName("home");
 		}
-		return result;
+		return model;
 	}
 	
 	@RequestMapping("/logout.ao")
@@ -186,9 +189,25 @@ public class AccountController {
 		return model;
 	}
 	
-	@RequestMapping(value = "newproject.ao")
+	/*@RequestMapping(value = "newproject.ao")
 	public String newproject(){
 		return "myinfo/newproject";
+	}*/
+	
+	// 개설한 프로젝트 리스트 가져오기
+	
+	@RequestMapping(value = "newproject.ao")
+	public ModelAndView newproject(ModelAndView model, HttpSession session, HttpServletRequest request){
+		session = request.getSession(false);
+		Account account = (Account)session.getAttribute("account");
+		int ano = account.getAno();
+		
+		List <Item> iList = itemService.selectNewProject(ano);
+			
+		model.addObject("iList", iList);
+		model.setViewName("myinfo/newproject");
+			
+		return model;
 	}
 	
 	@RequestMapping(value = "myfunding.ao")	

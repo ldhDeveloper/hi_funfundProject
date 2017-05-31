@@ -45,7 +45,17 @@ public class FundMenuController {
 	}
 	
 	
-	
+	@RequestMapping(value="selectfmenu.fm" ,method=RequestMethod.GET)
+	public ModelAndView selectfmenuList(@RequestParam("pro_no")int pro_no, ModelAndView model) {
+		ArrayList<FundMenu> fmenulist = null;
+		fmenulist = fundMenuService.selectList2(pro_no);
+		
+		model.setViewName("jsonView");
+		model.addObject("fmenulist", fmenulist);
+		
+		return model;
+
+	}
 
 	public String insert(FundMenu fm) {
 

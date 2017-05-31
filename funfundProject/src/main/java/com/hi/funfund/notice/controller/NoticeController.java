@@ -21,99 +21,117 @@ public class NoticeController {
 	
 	
 	@RequestMapping(value="nList.no",  method=RequestMethod.GET)
-	public ModelAndView notice(@RequestParam("sbno") String sbno, @RequestParam("spage") String spage,
+	public ModelAndView notice(Notice notice, @RequestParam("page") int page,
 								 ModelAndView model){
 		HashMap map = new HashMap();
-		int bno =Integer.valueOf(sbno);
-		int page =Integer.valueOf(spage);
 		int sNum = page * 10 +1 -10;
 		int eNum = sNum + 9;
 		int upbno = 0;
-		map.put("bno", bno);
+		map.put("bname", notice.getBname());
 		map.put("sNum", sNum);
 		map.put("eNum", eNum);
 		map.put("upbno", 0);
 		List<Notice> nList = noticeService.selectList(map);
-		int listCount = noticeService.getListCount(bno, upbno);
-		System.out.println(listCount);
-		model.addObject("sbno", sbno);
-		model.addObject("spage", spage);
+		int listCount = noticeService.getListCount(notice.getBname(), upbno);
+		
+		model.addObject("bname", notice.getBname());
+		model.addObject("page", page);
 		model.addObject("listCount", listCount);
 		model.addObject("nList", nList);
+		
 		model.setViewName("notice/notice");
 		return model;
 	}
 	
 	@RequestMapping("nSearchTitle.no")
-	public ModelAndView searchTitle(@RequestParam("sbno") String sbno,
-			@RequestParam("spage") String spage, @RequestParam("nTitle") String nTitle, ModelAndView model){
+	public ModelAndView searchTitle(@RequestParam("bname") String bname,
+			@RequestParam("page") int page, @RequestParam("nTitle") String nTitle, ModelAndView model){
 		HashMap map = new HashMap();
-		int bno = Integer.valueOf(sbno);
-		int page = Integer.valueOf(spage);
-		int listCount = noticeService.getListCountWithTitle(bno, nTitle);
-		List<Notice> nList = noticeService.searchTitle(bno, page, nTitle);
-		model.addObject("sbno", sbno);
-		model.addObject("spage", spage);
+		int listCount = noticeService.getListCountWithTitle(bname, nTitle);
+		List<Notice> nList = noticeService.searchTitle(bname, page, nTitle);
+		model.addObject("bname", bname);
+		model.addObject("page", page);
 		model.addObject("listCount", listCount);
 		model.addObject("nList", nList);
 		model.setViewName("notice/notice");
-		System.out.println("search result : " +nList);
+		
 		return model;
 	}
 	
 	@RequestMapping("nInsertView.no")
-	public String Write(){
-		
-		return "notice/ninsert";
+	public ModelAndView Write(@RequestParam("bname") String bname, @RequestParam("page") int page, ModelAndView model  ){
+		model.addObject("bname", bname );
+		model.addObject("page", page );
+		model.setViewName("notice/ninsert");
+		return model;
 	}
 	
 	@RequestMapping("nDetail.no")
-	public ModelAndView selectDetailList(@RequestParam("snno") String snno, @RequestParam("sbno") String sbno,
-			@RequestParam("spage") String spage, ModelAndView model){
-		int nno = Integer.valueOf(snno);
-		int bno = Integer.valueOf(sbno);
-		HashMap map = new HashMap();
-		map.put("bno", bno);
-		map.put("upbno", nno);
-		int replyCount = noticeService.getReplyCount(nno);
-		List<Notice> nList = noticeService.selectDetailList(map);
-		Notice n = noticeService.selectOne(nno);
-		model.addObject("snno", snno);
-		model.addObject("sbno", sbno);
-		model.addObject("spage", spage);
+	public ModelAndView selectDetailList(Notice notice,
+			@RequestParam("page") String page, ModelAndView model){
+		int upReadCount = noticeService.upReadCount(notice.getNno());
+		int replyCount = noticeService.getReplyCount(notice.getNno());
+		List<Notice> nList = noticeService.selectDetailList(notice.getNno());
+		Notice n = noticeService.selectOne(notice.getNno());
+		model.addObject("page", page);
 		model.addObject("nList", nList );
+		System.out.println(nList);
 		model.addObject("replyCount", replyCount );
 		model.addObject("n", n);
 		model.setViewName("notice/nDetail");
+	
 		return model;
 	}
+	
+	@RequestMapping("goUpdateView.no")
+	public ModelAndView goUpdateView(@RequestParam("nno") int nno, @RequestParam("page") int page, ModelAndView model ){
+	Notice n = noticeService.selectOne(nno);
+	model.addObject("n", n);	
+	model.addObject("page", page);
+	model.setViewName("notice/noticeUpdateView");
+	return model;	
+	}
+	
+	
 	@RequestMapping("nUpdate.no")
-	public String update(Notice notice, @RequestParam("sbno") String sbno ){
+	public String update(Notice notice, @RequestParam("page") int page){
 		int result = noticeService.update(notice);
 		String address = null;
 		if(result >0){
-			address = "redirect:/nDetail.no?snno" +notice.getNno() +"&sbno="+sbno ;
-		}
-		return null;
+			if(notice.getNtitle() != null){
+			address = "redirect:/nDetail.no?nno=" +notice.getNno() +"&bname="+notice.getBname()+"&page="+page;	
+			}else{
+				address = "redirect:/nDetail.no?nno=" +notice.getUpbno() +"&bname="+notice.getBname()+"&page="+page;		
+			}
+			}
+		return address;
 		
 	}
 	@RequestMapping("nDelete.no")
-	public String delete(int nno){
-		int result = noticeService.delete(nno);
+	public String delete(Notice notice, ModelAndView model, @RequestParam("page") int page){
+		int result = noticeService.delete(notice.getNno());
 		String address = null;
+		System.out.println(notice);
 		if(result >0){
-			address="redirect:/";
+			if(notice.getNtitle() !=null){
+			address = "redirect:/nList.no?bname="+notice.getBname()+"&page=1";
+			}else{
+			address = "redirect:/nDetail.no?nno="+notice.getUpbno()+"&bname="+notice.getBname()+"&page="+page;
+			}
 		}
-			
-		
 		return address;
 	}
 	@RequestMapping("nInsert.no")
-	public String insert(Notice notice){
+	public String insert(Notice notice, @RequestParam("page") String page){
+	
 		int result = noticeService.insert(notice);
 		String address = null;
 		if(result >0){
-			address ="redirect:/nList.no?sbno=1&spage=1";
+			if(notice.getNtitle() != null){
+			address ="redirect:/nList.no?bname="+ notice.getBname()+ "&page="+page;
+			}else{
+				address ="redirect:/nDetail.no?bname="+notice.getBname()+"&nno="+notice.getUpbno()+"&page="+page;
+			}
 		}
 		return address;
 	}

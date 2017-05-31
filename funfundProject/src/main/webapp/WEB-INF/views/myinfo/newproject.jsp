@@ -25,7 +25,6 @@
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 	width: 100%;
-	height: 80px;
 	color: #fff;
 	font-size: 2vw;
 	padding-top: 1.5%;
@@ -39,7 +38,6 @@
 	border-right: 1px solid #ddd;
 	background-color: #F8F8F8;
 	width: 100%;
-	height : 20%;
 	padding-top: 3%;
 	padding-left: 8%;
 	padding-right: 8%;
@@ -102,7 +100,6 @@
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 	width: 100%;
-	height : 900px;
 	padding-top: 2%;
 }
 
@@ -144,6 +141,71 @@
 	color: #4D525B;
 	width: 40%;
 	background-color: #F8F8F8;
+}
+
+.tableStart {
+	width: 98%;
+	padding-left: 2%;
+}
+
+.state {
+	border: none;
+	border-radius: 15px;
+	background-color: #E25253;
+	width: 40%;
+	color: white;
+	padding: 2%;
+}
+
+.mfth {
+	text-align: center;
+	padding-top: 1.5% !important;
+	padding-bottom: 1.5% !important;
+}
+
+.mftd, .pedate {
+	text-align: center;
+	cursor:pointer;
+	border-bottom: 1px solid #dff0d8;
+	padding-top: 1.5% !important;
+	padding-bottom: 1.5% !important;
+	
+}
+
+.mftdrL {
+	border-bottom : 1px solid #ddd;
+}
+
+.tableStart {
+	width: 98%;
+	padding-left: 2%;
+}
+
+.state {
+	border: none;
+	border-radius: 15px;
+	background-color: #E25253;
+	width: 40%;
+	color: white;
+	padding: 2%;
+}
+
+.mfthr {
+	border-top: 3px solid #dff0d8;
+	border-bottom: 3px solid #dff0d8;
+}
+
+.panelStart {
+	width: 100%;
+}
+
+.panelStart1{
+	width: 100%;
+}
+
+.myItemList{
+	margin : 0px !important;
+	padding : 0px !important;
 }
 </style>
 
@@ -199,7 +261,6 @@
       							<ul class="nav navbar-nav">
       								<li><a href="myinfo.ao" class="otherActive">회원 정보 설정</a></li>
         							<li><a href="sellerinfo.ao" class="otherActive">판매자 정보 변경</a></li>
-        							<li><a href="joinproject.ao" class="otherActive">참여한 프로젝트</a></li>
         							<li><a href="puttoproject.ao" class="otherActive">찜한 프로젝트</a></li>
         							<li class="act"><a class="active" href="newproject.ao">개설한 프로젝트<span class="sr-only">(current)</span></a></li>      							        							        							        							
         							<li><a href="myfunding.ao" class="otherActive">나의 펀딩 현황</a></li>
@@ -208,13 +269,150 @@
   						</div>
 					</nav>
 					
-					<div class="row">
-						<div class="newproject">아직 개설한 프로젝트가 없습니다.</div>
-						<form action="myproject.fl" method="get">
-							<input type="hidden" name="pro_no" value=1>
-							<button type="submit">테스트버튼</button>
-						</form>
-					</div>										
+					<br>
+					<c:if test="${ empty iList }"> 
+					<div class="panel-group">
+						<div class="well">												
+    						<div class="panelStart1 panel panel-success">    						
+      							<div class="panel-heading">리워드형 프로젝트</div> 
+      							     							  							
+      							<div class="panel-body">아직 개설한 프로젝트가 없습니다.</div>								      							
+      						</div>
+      					</div>
+      				</div>
+      				</c:if>	  
+						
+						
+					<div class="panel-group">
+						<c:if test="${ ! empty iList }">
+						<div class="well">												
+    						<div class="panelStart panel panel-success">
+    						
+      							<div class="panel-heading">리워드형 프로젝트</div>
+      							
+      							<br>    						    							
+      							
+      							
+      							<!-- 만약 작성중일 때  -->
+      							<div class="row myItemList">
+      							<c:forEach var="item" items="${ iList }" varStatus="status">
+      							<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">     							
+      								<div id="itempanel<c:out value='${status.index}'/>" class="panel panel-warning">
+      									<div id="conitemper<c:out value='${status.index}'/>" class="panel-heading">${ item.pstatus }</div>
+      									<div id="enditemper<c:out value='${status.index}'/>" class="panel-body">
+      										<div class="thumbnail" align="center">      										
+	      										<a href="detail.it?pro_no=<c:out value="${item.pro_no}"/>">
+	      											<img alt="작성중인 이미지입니다." src="/funfund/images/funding/thumbnail/<c:out value="${item.thumbnail}"/>" style="width: 100%;margin-bottom:2%;">      											
+	      											
+	      											<div id="progress<c:out value='${status.index}'/>" class="progress" style="display:none;">
+	  													<div id="progressbar<c:out value='${status.index}'/>" 
+	  														 class="w3-red progress-bar progress-bar-striped active" 
+	  														 role="progressbar" 
+	  														 aria-valuenow="70" aria-valuemin="0" aria-valuemax="<c:out value="${item.ecost}"/>" 
+	  														 style="width: 70%;"></div>
+	  														 <span class="sr-only"></span>
+													</div>
+	      											
+	      											<p id="pTag" style="display:none;">
+														<span id="persent<c:out value='${status.index}'/>"></span>% &nbsp;&nbsp; <span></span>원 달성 &nbsp;&nbsp; 
+														<span id="edate<c:out value='${status.index}'/>"></span>
+														<span id="yet<c:out value='${status.index}'/>">일 남음</span>
+														<span id="complete<c:out value='${status.index}'/>">펀딩종료</span>
+													</p>     
+																								
+	      										 	<div class="caption">
+	            										<p>${ item.pname }</p>
+	            										<span>${ item.category }</span>            										
+	          										</div>
+	          									</a>
+      										</div>
+      									</div>
+    								</div>
+    								
+    								
+    							</div>
+    								<script type="text/javascript">
+	    							var ecost = "<c:out value='${item.ecost}'/>";
+									var fundamount = "<c:out value='${item.fundamount}'/>"
+									var persent = Math.round(fundamount * 100 / ecost);
+									var bar=0;
+									if(persent > 100){
+										bar=100;
+									} else {
+										bar=persent;
+									}
+									var edate = new Date("<c:out value='${item.pedate}'/>");
+									var todate = new Date();
+									var btMs = edate.getTime() - todate.getTime() ;
+								    var btDay = Math.round(btMs / (1000*60*60*24)) ;
+								    
+								    $("#persent<c:out value='${status.index}'/>").html(persent);
+									$("#progressbar<c:out value='${status.index}'/>").attr("aria-valuenow", persent);
+									$("#progressbar<c:out value='${status.index}'/>").css("width", bar + "%");
+									$("#edate<c:out value='${status.index}'/>").text(btDay);
+									
+									var pstatus = "<c:out value='${item.pstatus}'/>";
+									console.log(pstatus);
+									if(pstatus == "진행중") {
+										$("#itempanel<c:out value='${status.index}'/>").removeClass("panel-warning");
+										$("#itempanel<c:out value='${status.index}'/>").addClass("panel-danger");
+										$("#progress<c:out value='${status.index}'/>").show();
+										$("#progressbar<c:out value='${status.index}'/>").show();
+										$("#progressbar<c:out value='${status.index}'/>").html(persent+"%");
+										$("#persent<c:out value='${status.index}'/>").show();
+										$("#persent<c:out value='${status.index}'/>").show();
+									}
+									
+									else if(pstatus == "마감") {
+										$("#itempanel<c:out value='${status.index}'/>").removeClass("panel-warning");
+										$("#itempanel<c:out value='${status.index}'/>").addClass("panel-default");
+										$("#progress<c:out value='${status.index}'/>").show();
+										$("#progressbar<c:out value='${status.index}'/>").show();
+										$("#progressbar<c:out value='${status.index}'/>").html(persent+"%");
+										$("#pTag").show();
+									}
+								    
+								 </script>
+    							
+    							   </c:forEach>  							
+    							</div>
+    							
+    							
+								 <br>
+    							
+    														
+  									
+  									
+    							</div>
+    						</div>
+    						
+    						
+    						</c:if>
+    						
+    						<script type="text/javascript">
+    							$(function(){
+    								$(".mftdrL").click(function(){
+        								location.href="newProject.it"
+        							});
+    							});    							
+    						</script>
+    					
+    					<br>
+      					
+      						<div class="well">   					   					
+    							<div class="panel panel-info">
+      								<div class="panel-heading">투자형 프로젝트</div>
+      								<div class="panel-body">아직 참여한 프로젝트가 없습니다.</div>
+      								
+      								<form action="myproject.fl" method="get">
+										<input type="hidden" name="pro_no" value=1>
+										<button type="submit">테스트버튼</button>
+									</form>
+    							</div>
+    						</div>
+    					 									
+  						<br><br><br>						
+					</div>																					
 				</div>				
 			</div>
 		</div>

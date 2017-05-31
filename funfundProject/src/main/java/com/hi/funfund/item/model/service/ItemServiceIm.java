@@ -1,6 +1,8 @@
 package com.hi.funfund.item.model.service;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -138,6 +140,52 @@ public class ItemServiceIm implements ItemService{
 	@Override
 	public List<Item> selectMyItems(int ano) {
 		return itemDao.selectMyItems(ano);
+	}
+	
+	// 개설한 프로젝트
+	@Override
+	public List<Item> selectNewProject(int ano) {
+		return itemDao.selectNewProject(ano);
+	}
+
+	@Override
+	public List<Item> selectRequestItem() {
+		return itemDao.selectRequestItem();
+	}
+	
+	@Override
+	public Item selectOneForUpdate(int pro_no){
+		return itemDao.selectOneForUpdate(pro_no);
+	}
+
+	@Override
+	public int updateConfirmStatus(int pro_no) {
+		return itemDao.updateConfirmStatus(pro_no);
+	}
+
+	@Override
+	public int updateRejectStatus(HashMap<String, String> hmap) {
+		return itemDao.updateRejectStatus(hmap);
+	}
+
+	@Override
+	public List<Item> selectDeleteRequest() {
+		return itemDao.selectDeleteRequest();
+	}
+
+	@Override
+	public int updateDeleteStatus(HashMap<String, String> hmap) {
+		return itemDao.updateDeleteStatus(hmap);
+	}
+
+	@Override
+	public List<Item> selectEndItem() {
+		return itemDao.selectEndItem();
+	}
+
+	@Override
+	public int updateSuccessStatus(int pro_no) {
+		return itemDao.updateSuccessStatus(pro_no);
 	}
 
 	

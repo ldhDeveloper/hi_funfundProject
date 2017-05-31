@@ -2,29 +2,26 @@
 pageEncoding="utf-8"/>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<!DOCTYPE html >
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javasrcipt" src="funfund/lib/js/jquery-3.2.1.min.js"></script>
+
 <style>
 body {
 line-height : 1px;
 }
 #nDetailContainer{
-
-    text-align: center;
-    
     padding: 20px;
     width: 100%;
-    height: 450px;
-    float: left;
+    min-height: 600px;
+    height: auto;
 }
 .category{
     padding: 15px 10px 10px 10px;
     border-bottom: 1px solid #e4e4e4;
-    height : $)
+    height : 80px;
 }
 .categoryName{
 float: left;
@@ -39,9 +36,10 @@ display: inline-block;
 .replyTable{
     padding: 20px;
     width: 100%;
-    float: left;
-  display: block;
+  display:block;
+  height :auto !important;
    background-color: #F9F7F5;
+  
 }
 #content{
 width : 100%;
@@ -62,7 +60,7 @@ display: inline-block;
 .replyContent{
 background : white;
 border : 1px solid #e4e4e4;
-border-
+height : initial;
 }
 em{
     display: inline-block;
@@ -83,13 +81,50 @@ font-size: 13px;
     color: #7C8288;
 }
 .title{
-float : left;
+
 font-size: 22px;
 }
-#rContent{
+#ncontent{
+
 resize : none;
 height : 100%;
 width : 100%;
+}
+.rImage {
+height : 40px;
+width : 40px;
+}
+
+@media screen and (min-width : 380px)
+{
+.nImage{
+height : 100px;
+width : 100px;
+}
+}
+@media screen and (max-width :379px){
+.nImage{
+height : 20px;
+width : 20px;
+}
+}
+.nInfo{
+display : inline-block;
+}
+
+.nDate{
+color : gray;
+font-size : 17px;
+}
+#nDetailContent{
+min-height : 500px;
+}
+.buttons{
+float:right;
+}
+.buttons a{
+display:block;
+
 }
 </style>
 </head>
@@ -98,59 +133,101 @@ width : 100%;
 <jsp:include page="/WEB-INF/views/common/menubar.jsp" flush="true" />
 <hr>
 
-	<div id="nDetailContainer">
-		<div class="col-lg-3 col-md-0 col-sm-0 col-xs-0"></div>
-		<div class=" col-lg-6 col-md-12 col-sm-12 col-xs-12">
-		<div class="category">
-			<p class="categoryName"><a class="nDetailCategory">&lt; </a></p>
-			
-		</div>
+<script>
+
+
+function insertReply(){
+	var ncontent = $("#ncontent").val();
+	var ano = '${account.ano}';
+	var upbno = '${n.nno}';
+	var bname = '${n.bname}';
+	location.href= "nInsert.no?ano="+ano+"&upbno="+upbno+"&ncontent="+ncontent +"&bname="+bname+"&spage='${spage}'";
+}
+function redactForm(x, y){
+ var division =  '.replyContent' + x;
+
+	$(division).html("<textarea id='ncontent' name='ncontent' rows='6' cols='77' style='overflow-y:hidden' maxlength='150px'></textarea>"
+		+	"<input type='hidden' name='nno' value= " + y + ">" 
+		+	"<input type='hidden' name='bname' value=${n.bname}>"
+		+	"<input type='hidden' name='upbno' value=${n.nno}>"
+		+   "<br><button onclick='updateReply("+ x + ");'>수정</button>"
+	);	
+}
+function updateReply(x){
+	var division =  '.replyContent' + x;
+	var nno = $(division).children('input[name=nno]').val();
+	var ano = '${account.ano}';
+	var bname =  $(division).children('input[name=bname]').val();
+
+	var upbno = $(division).children('input[name=upbno]').val();
+	var ncontent = $(division).children('textarea').val();
+	
+	location.href="nUpdate.no?ano="+ano+"&bname="+bname+"&ncontent="+ncontent +"&upbno="+upbno+"&page=${page}&nno="+nno;
+}
+
+
+</script>
+<div class="container">
+		<div class="col-lg-4 col-md-0 col-sm-0 col-xs-0"></div>
+		<div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="category">
+				<p class="categoryName"><a class="nDetailCategory">&lt; ${n.bname} </a></p>
+			</div>
 		<br>
 		<p class="title">&nbsp; &nbsp; ${n.ntitle}</p>
 		
-		<p>${n.nickname}</p>
-		<p>${n.ndate}</p>
+		<p class ="nInfo">
+		<c:if test="${empty reply.pimage }"> <img class="nImage" src="/funfund/images/myinfo/dimages.png"></c:if>
+			<c:if test="${!empty reply.pimage }"> <img class="nImage" src="${n.pimage}"></c:if>
+		<span>${n.nickname}</span>
+		<p></p>
+		<span class="nDate">${n.ndate}</span>
+		<br>
+		</p>
+			<div id="nDetailContent"> ${n.ncontent}</div>
+			<div class="buttons">
+				<c:if test="${account.ano eq n.ano }">
+				<a href="goUpdateView.no?nno=${n.nno}&page=${page}">수정하기</a>
+				<a href="nDelete.no?ntitle=${n.ntitle}&nno=${n.nno}&bname=${n.bname}&page=${page}">삭제하기</a></c:if>
+			</div>
 		</div>
-		<div id="nDetailContent" class="col-lg-3 col-md-0 col-sm-0 col-xs-0"></div>
-		
+		<div class="col-lg-4 col-md-0 col-sm-0 col-xs-0" > </div>
 	</div>
-	<div class="row"></div>
-	<div class="replyTable">
+<div class="row replyTable">
+	<div class="">
 	<div class="col-lg-3 col-md-0 col-sm-0 col-xs-0"></div>
 		<div class=" col-lg-6 col-md-12 col-sm-12 col-xs-12">
 		<div class="category">
 			<p class="categoryName">${fn:length(nList)}개의 댓글이 달려있습니다.</p>
+		</div>
 			<br>
 			<br>
-			<form>
-			<textarea id="rContent" name="rContent" rows="6" cols="77" style="overflow-y:hidden" maxlength="150px";></textarea>
-			<input type="hidden" value="작성자">
-			<input type="hidden" value="프로젝트번호">
-			<input type="hidden" value="작성자번호">
+			<%-- <c:if test="${!empty account}"> --%>
+			<textarea id="ncontent" name="ncontent" rows="6" cols="77" style="overflow-y:hidden" maxlength="150px" required ></textarea>
+			<br>
+			<button class="replyButton" onclick="insertReply();">작성하기</button>
 			
-			<br>
-			<input class="replyButton" type="submit" value="작성하기">
-			</form>
+			<%-- </c:if> --%>
 			<br><br>
-			<c:forEach var="reply" items="${ nList}">
-			<div class="replyContent">
-			<img src="${reply.pimage}"><p>${reply.nickname}</p>
-			<p>${reply.ncontent}</p>
+			<c:forEach var="reply" items="${ nList}" varStatus="status">
+			<div class="replyContent replyContent${status.index}">
+			<p>
+			<c:if test="${empty reply.pimage }"> <img class="rImage" src="/funfund/images/myinfo/dimages.png"></c:if>
+			<c:if test="${!empty reply.pimage }"> <img class="rImage" src="${reply.pimage}"></c:if>
+			
+			${reply.nickname}</p>
+			<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${reply.ncontent}</p>
 			<p>${reply.ndate}</p>
 			
+			<button onclick="redactForm(${status.index}, ${ reply.nno})" >댓글수정</button>
+			<a href="nDelete.no?nno=${reply.nno}&bname=${reply.bname}&upbno=${reply.upbno}&page=${page}" >댓글삭제</a>
 			</div>
 			<br>
 			</c:forEach>
-			<div >
-			<br>
-			<p> 다른 게시물</p>
-			<hr>				
-				<p> <em>공지사항</em>  <span class="nTitle"> 제목</span> </p>
-				<p> <span class="nWriter"> 작성자</span> <span class="nDate">작성일</span> </p>
-			<hr>
-			<div>
+			<div align="right">
+			<a href="javascript:history.go(-1)">목록으로 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
 			</div>
-		</div>
+		
 		</div>
 		</div>
 		</div>

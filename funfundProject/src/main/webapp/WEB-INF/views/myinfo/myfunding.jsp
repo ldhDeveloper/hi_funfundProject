@@ -142,11 +142,17 @@
 
 .mfth {
 	text-align: center;
+	padding-top: 1.5% !important;
+	padding-bottom: 1.5% !important;
 }
 
 .mftd, .pedate {
 	text-align: center;
 	cursor:pointer;
+	border-bottom: 1px solid #dff0d8;
+	padding-top: 1.5% !important;
+	padding-bottom: 1.5% !important;
+	
 }
 
 .mftdrL {
@@ -169,14 +175,10 @@
 }
 
 .mfthr {
-	padding-top: 3%;
-	padding-bottom: 3%;
+	border-top: 3px solid #dff0d8;
+	border-bottom: 3px solid #dff0d8;
 }
 
-.mftdr {
-	padding-top: 3%;
-	padding-bottom: 3%;
-}
 </style>
 
 
@@ -263,28 +265,9 @@
       								<div class="panel-body">아직 참여한 프로젝트가 없습니다.</div>
       							</c:if>
       							      							
-      							<c:forEach var="fundList" items="${ mfList }">
       							
-      							<script type="text/javascript">
-									$(function(){
-										var d = new Date();
-										var pedate = new Date("<c:out value='${fundList.pedate}'/>");
-										
-										var today = new Date(d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());										
-										
-										var progress = pedate.getTime() - today.getTime();				
-	
-										if(progress >= 0) {
-											$("#progress").html("진행중");		
-										}
-									
-										else {
-											$("#progress").html("마 감").css({"background-color" : "#C1C1C1", "color" : "#F1F1F1"});		
-										}	
-									});
-								</script>
 								
-      							<c:if test="${ ! empty fundList.fund_no }">
+      							<c:if test="${ ! empty mfList }">
       								<br>
       								
 									<div class="tableStart">
@@ -295,25 +278,47 @@
         											<th class="mfth">마감날짜</th>
         											<th class="mfth">금액</th>
         											<th class="mfth">결제상태</th>
-        											<th class="mfth">변경/취소</th>
       											</tr>
     										</thead>
-    
+   
     										<tbody>
+    											<c:forEach var="fundList" items="${ mfList }">
     											<tr class="mftdrL">
       												<td class="mftd" style="display:none;"><input class="fundNo" type="hidden" value="<c:out value='${ fundList.fund_no }'/>"/></td>
         											<td class="mftd"><b class="state" id="progress"><!-- 진행중 --></b>&nbsp;&nbsp;&nbsp;${ fundList.pname }</td>
         											<td class="pedate">${ fundList.pedate }</td>
         											<td class="mftd">${ fundList.sumcost }원</td>
         											<td class="mftd">${ fundList.funstatus }</td>
-        											<td class="mftd">변경/취소 값 넣기</td>
       											</tr>
-    										</tbody>
+      											
+      											<script type="text/javascript">
+													$(function(){
+														var d = new Date();
+														var pedate = new Date("<c:out value='${fundList.pedate}'/>");
+														
+														var today = new Date(d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());										
+														
+														var progress = pedate.getTime() - today.getTime();				
+					
+														if(progress >= 0) {
+															$("#progress").html("진행중");		
+														}
+													
+														else {
+															$("#progress").html("마 감").css({"background-color" : "#C1C1C1", "color" : "#F1F1F1"});		
+														}	
+													});
+												</script>
+												
+      											</c:forEach>
+    										</tbody>   										
   										</table>
   										<br><br><br>
+  										
   									</div>
+  									
   									</c:if>
-  									</c:forEach>
+  									
     						</div>
     					</div>
     					

@@ -16,67 +16,78 @@
 </resultMap> 
 
 	<select id="selectList" parameterType="HashMap" resultMap="noticeResult">
-		select nno, ntitle, ncontent, ndate, upbno, bname, readcount, nickname from
-		(select ranks, nno, ntitle, ncontent, ndate, upbno, bname, readcount, ano from
-		(select rank() over(order by nno) ranks, nno, ntitle, ncontent, ndate, upbno, bname, readcount, ano
-		 from notice n , board b where n.bno = b.bno and (upbno = 0 and n.bno = #{bno})) where ranks between #{sNum} and #{eNum}) x, account a 
-		 where x.ano =a.ano
-	</select>
+		select ranks, nno, ntitle, ncontent, ndate, upbno, bname, readcount, ano, nickname from
+		(select rank() over(order by nno desc) ranks, nno, ntitle, ncontent, ndate, upbno, bname, readcount, n.ano ano, nickname
+		 from notice n , account a where a.ano=n.ano and (upbno = 0 and bname = #{bname})) where ranks between #{sNum} and #{eNum} 
+			</select>
 	
 	<select id="searchTitle" parameterType="HashMap" resultMap="noticeResult">
-		select nno, ntitle, ncontent, ndate, upbno, bname, readcount, nickname from
-		(select ranks, nno, ntitle, ncontent, ndate, upbno, bname, readcount, ano from
-		(select rank() over(order by nno) ranks, nno, ntitle, ncontent, ndate, upbno, bname, readcount, ano
-		 from notice n , board b where n.bno = b.bno and (upbno = 0 and n.bno = #{bno})) where ranks between #{sNum} and #{eNum}) x, account a 
-		 where x.ano =a.ano and ntitle like '%'||#{title}||'%'
+		select ranks, nno, ntitle, ncontent, ndate, upbno, bname, readcount, ano, nickname from
+		(select rank() over(order by nno desc) ranks, nno,  ntitle, ncontent, ndate, upbno, bname, readcount, n.ano ano, nickname
+		 from notice n ,  account a where a.ano=n.ano and (upbno = 0 and bname = #{bname})) where ranks between #{sNum} and #{eNum} 
+		 and ntitle like '%'||#{title}||'%'
 	</select>
 	
 	<select id="getListCount" parameterType="HashMap" resultType="int">
-	select count(*) from notice where bno = #{bno} and upbno = #{upbno}
+	select count(*) from notice where bname = #{bname} and upbno = #{upbno}
 	</select>
 	
 	<select id="getListCountWithTitle" parameterType="HashMap" resultType="int">
-	select count(*) from notice where bno = #{bno} and ntitle like '%'||#{title}||'%'
+	select count(*) from notice where bname = #{bname} and ntitle like '%'||#{title}||'%'
 	</select>
 	
 	<select id="selectOne" parameterType="int" resultType="notice">
-	select nno, ntitle, ncontent, ndate, upbno, bname, readcount, nickname, pimage from notice n, account a, board b where
-	  n.ano = a.ano and b.bno = n.bno and n.nno = #{nno}   
+	select nno, ntitle, ncontent, ndate, upbno, bname, readcount, nickname, pimage, n.ano ano from notice n, account a where
+	  n.ano = a.ano and n.nno = #{nno}   
 	</select>
 	
-	<select id="selectDetailList" parameterType="HashMap" resultMap="noticeResult" >
-	
-	select nno, ntitle, ncontent, ndate, upbno, bname, readcount, nickname, x.ano, pimage from
-		(select ranks, nno, ntitle, ncontent, ndate, upbno, bname, readcount, ano from
-		(select rank() over(order by nno) ranks, nno, ntitle, ncontent, ndate, upbno, bname, readcount, ano
-		 from notice n , board b where n.bno = b.bno and (upbno = #{upbno} and n.bno = #{bno}))) x, account a 
-		 where x.ano =a.ano
+	<select id="selectDetailList" parameterType="int" resultMap="noticeResult" >
+
+		select nno, ntitle, ncontent, ndate, upbno, bname, readcount, n.ano ano, nickname, pimage
+		from notice n, account a where n.ano = a.ano and upbno = #{nno} order by ndate desc
+
 	</select>
 	
 	<select id="getReplyCount" parameterType="int" resultType="int">
 	select count(*) from notice where upbno = #{nno} and  nno != #{nno}
 	</select>
 	
-	<update id="addReadCount" parameterType="int">
+	<update id="upReadCount" parameterType="int">
 	update notice
 	set readcount = readcount + 1 where nno = #{nno}
 	</update>
 	
 	<!-- 게시판 댓글 공용으로 쓰느 update -->
 	<update id="update" parameterType="notice">
+	<choose>
+	<when test="ntitle !=null">
+		update notice
+	set ntitle = #{ntitle}, ncontent = #{ncontent} where nno = #{nno}
+	</when>
+	<otherwise>
 	update notice
-	set ntitle = #{ntitle}, ncontent = #{ncontent}
+	set ncontent = #{ncontent} where nno = #{nno}
+	</otherwise>
+	</choose>
+	
 	</update>
 	
-	<insert id="insertNotice" parameterType="notice">
-	insert into notice
-	values(seq_nno.nextval, #{bno}, #{ntitle}, #{ncontent}, sysdate, #{upbno}, 0, #{ano})
+	<insert id="insert" parameterType="notice">
+	<choose>
+	<when test="ntitle !=null">
+	insert into notice(nno, ntitle, ncontent, ndate, upbno, readcount, ano, bname)
+	values(seq_nno.nextval, #{ntitle}, #{ncontent}, sysdate, 0, 0, #{ano}, #{bname})
+	</when>
+	<otherwise>
+	insert into notice(nno, ncontent, ndate, upbno, readcount, ano, bname)
+	values(seq_nno.nextval, #{ncontent}, sysdate, #{upbno}, 0, #{ano}, #{bname})
+	</otherwise>
+	</choose>
 	</insert>
 	
-	<delete id="delete" parameterType="HashMap">
+	<delete id="delete" parameterType="int">
 	delete from notice
-	where nno = #{nno} and upbno = #{upbno}
-	
+	where nno = #{nno} or upbno = #{nno}
 	</delete>
 	
 </mapper>

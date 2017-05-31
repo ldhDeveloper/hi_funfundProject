@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -179,6 +180,105 @@ public class AttachmentController {
 		return model;
 	}
 	
+	@RequestMapping("/updateimgajax.at")
+	public ModelAndView updateAjaxImg(ModelAndView model, HttpServletRequest request) throws  IOException{
+		int pro_no = Integer.parseInt(request.getParameter("pro_no"));
+		System.out.println("사진업로드 : " + pro_no);
+		
+		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+		MultipartFile uploadFile = multipartRequest.getFile("uploadFile");
+		MultipartFile uploadFile2 = multipartRequest.getFile("uploadFile2");
+
+		if (!uploadFile.isEmpty()) {
+
+			HttpSession session = request.getSession(false);
+
+			String page = "";
+			String root = request.getSession().getServletContext().getRealPath("/");
+			System.out.println("root : " + root);
+			String[] roots = root.split("\\\\");
+			String marger = "";
+			for (int i = 0; i < roots.length - 3; i++) {
+				marger += roots[i] + "\\";
+			}
+
+			System.out.println("marger : " + marger);
+			String savePath = marger + "src/main/webapp/images/makeproject/titleimg/";
+			System.out.println("savepath : " + savePath);
+
+			int result2 = 0;
+			String ofileName = uploadFile.getOriginalFilename();
+
+			long currentTime = System.currentTimeMillis();
+			SimpleDateFormat simDf = new SimpleDateFormat("yyyyMMddHHmmss");
+			String rfileName = simDf.format(new Date(currentTime)) + "(1)."
+					+ ofileName.substring(ofileName.lastIndexOf(".") + 1);
+			;
+			try {
+				uploadFile.transferTo(new File(savePath + rfileName));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			Attachment att = new Attachment();
+
+			att.setOrifname(ofileName);
+			att.setRefname(rfileName);
+			att.setFtype("item");
+			att.setFsubtype("thumbnail");
+			att.setRefno(pro_no);
+
+			result2 = attachmentService.updateTitleImage(att);
+
+		}
+
+		if (!uploadFile2.isEmpty()) {
+
+			HttpSession session = request.getSession(false);
+
+			String page = "";
+			String root = request.getSession().getServletContext().getRealPath("/");
+			System.out.println("root : " + root);
+			String[] roots = root.split("\\\\");
+			String marger = "";
+			for (int i = 0; i < roots.length - 3; i++) {
+				marger += roots[i] + "\\";
+			}
+
+			System.out.println("marger : " + marger);
+			String savePath = marger + "src/main/webapp/images/makeproject/makerimg/";
+			System.out.println("savepath : " + savePath);
+
+			int result2 = 0;
+			String ofileName = uploadFile2.getOriginalFilename();
+
+			long currentTime = System.currentTimeMillis();
+			SimpleDateFormat simDf = new SimpleDateFormat("yyyyMMddHHmmss");
+			String rfileName = simDf.format(new Date(currentTime)) + "(2)."
+					+ ofileName.substring(ofileName.lastIndexOf(".") + 1);
+			;
+			try {
+				uploadFile2.transferTo(new File(savePath + rfileName));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			Attachment att = new Attachment();
+
+			att.setOrifname(ofileName);
+			att.setRefname(rfileName);
+			att.setFtype("item");
+			att.setFsubtype("makerimg");
+			att.setRefno(pro_no);
+
+			result2 = attachmentService.updateMakerImage(att);
+
+		}
+		
+		model.setViewName("makeproject/primaryinfo");
+		
+		return model;
+	}
 	
 	public String insert(Attachment attachment) {
 
