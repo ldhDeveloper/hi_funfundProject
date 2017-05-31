@@ -242,7 +242,7 @@
     						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       							<ul class="nav navbar-nav">
       								<li><a href="myinfo.ao" class="otherActive">회원 정보 설정</a></li>
-        							<li><a href="sellerinfo.ao" class="otherActive">판매자 정보 변경</a></li>
+        							<li><a class="otherActive" id="goSellerinfo" style="cursor:pointer;">판매자 정보 변경</a></li>
         							<li><a href="puttoproject.ao" class="otherActive">찜한 프로젝트</a></li>
         							<li><a href="newproject.ao" class="otherActive">개설한 프로젝트</a></li>
         							<li class="act"><a class="active" href="myfunding.ao">나의 펀딩 현황<span class="sr-only">(current)</span></a></li>      							        							        							        							       							
@@ -307,7 +307,20 @@
 													
 														else {
 															$("#progress<c:out value='${status.index}'/>").html("마 감").css({"background-color" : "#C1C1C1", "color" : "#F1F1F1"});		
-														}	
+														}
+														
+														var name ='<c:out value="${sessionScope.party.pname}"/>';
+			        									
+			        									$("#goSellerinfo").click(function() {
+			        										if(name == "") {
+			        											alert("회원정보 설정에서 이름을 반드시 입력하세요!");
+			        											return result;
+			        										}
+			        										
+			        										else {
+			        											location.href = "sellerinfo.ao";
+			        										}
+			        									});
 													});
 												</script>
 												
