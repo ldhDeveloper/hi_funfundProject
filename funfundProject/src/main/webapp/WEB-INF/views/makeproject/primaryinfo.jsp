@@ -28,6 +28,7 @@
 	rel="stylesheet" type="text/css" />
 <link href="/funfund/lib/froala_editor_2.5.1/css/themes/royal.min.css"
 	rel="stylesheet" type="text/css" />
+
 <!-- <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
 <!-- Include external JS libs. -->
@@ -40,7 +41,14 @@
 <!-- 끝 -->
 
 <style>
+@font-face {
+    font-family: myFirstFont;
+    src: url('fonts/10X10.ttf');
+    font-weight: bold;
+}
+
 body {
+	font-family:myFirstFont;
 	background: #f8f8f8 !important;
 }
 

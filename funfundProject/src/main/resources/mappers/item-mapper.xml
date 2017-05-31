@@ -130,7 +130,7 @@
 
 	<update id="tempupdate" parameterType="Item">
 			<![CDATA[
-				update item set pname=#{pname, jdbcType=VARCHAR}, pcontent=#{pcontent, jdbcType=VARCHAR}, category=#{category, jdbcType=VARCHAR}, psdate=to_date(#{s_psdate, jdbcType=VARCHAR},'yyyy-mm-dd'), pedate=to_date(#{s_pedate, jdbcType=VARCHAR}, 'yyyy-mm-dd'), pshort=#{pshort, jdbcType=VARCHAR}, ecost=#{ecost, jdbcType=INTEGER}, refund=#{refund, jdbcType=VARCHAR}, pvideo=#{pvideo, jdbcType=VARCHAR}, pstatus=#{pstatus, jdbcType=VARCHAR}, cname=#{cname, jdbcType=VARCHAR}, cs_email=#{cs_email, jdbcType=VARCHAR}, cs_phone=#{cs_phone, jdbcType=VARCHAR} where pro_no =#{pro_no}
+				update item set pname=#{pname, jdbcType=VARCHAR}, pcontent=#{pcontent, jdbcType=VARCHAR}, category=#{category, jdbcType=VARCHAR}, psdate=to_date(#{s_psdate, jdbcType=VARCHAR},'yyyy-mm-dd'), pedate=to_date(#{s_pedate, jdbcType=VARCHAR}, 'yyyy-mm-dd'), pshort=#{pshort, jdbcType=VARCHAR}, ecost=#{ecost, jdbcType=INTEGER}, refund=#{refund, jdbcType=VARCHAR}, pvideo=#{pvideo, jdbcType=VARCHAR}, cname=#{cname, jdbcType=VARCHAR}, cs_email=#{cs_email, jdbcType=VARCHAR}, cs_phone=#{cs_phone, jdbcType=VARCHAR} where pro_no =#{pro_no}
 	       ]]>
 	</update>
 	

@@ -36,11 +36,11 @@
 }
 
 h3 {
-	font-family: Noto !important;
+	font-family: irop !important;
 }
 
 body {
-	font-family: ten !important;
+	font-family: myFirstFont !important;
 }
 </style>
 
