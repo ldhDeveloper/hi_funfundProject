@@ -1289,6 +1289,16 @@ label.sign-form_title {
 	padding: 0 16px;
 	height: 48px;
 }
+
+@font-face {
+    font-family: myFirstFont;
+    src: url('fonts/10X10.ttf');
+    font-weight: bold;
+}
+
+body{
+	font-family:myFirstFont;
+}
 </style>
 	<div class="modal right fade" id="myModal4" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel2">
