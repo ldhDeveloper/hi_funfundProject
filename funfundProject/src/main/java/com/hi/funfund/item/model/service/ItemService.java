@@ -63,5 +63,11 @@ public interface ItemService {
 
 	Item selectOneForUpdate(int pro_no);
 
+	List<Item> selectItemList(int ano);
+
+	int updateAcc(Item item);
+
+	int updateStatus(Item item);
+
 
 }

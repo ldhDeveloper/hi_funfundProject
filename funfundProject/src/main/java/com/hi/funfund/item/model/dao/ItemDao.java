@@ -113,5 +113,20 @@ public class ItemDao {
 		Item item = (Item) sqlSession.selectOne(nameSpace + "selectOneForUpdate", pro_no);
 		return item;
 	}
+
+	public List<Item> selectItemList(int ano) {
+		List<Item> plist = (List<Item>) sqlSession.selectList(nameSpace + "selectItemList", ano);
+		return plist;
+	}
+
+	public int updateAcc(Item item) {
+		int result = sqlSession.update(nameSpace + "accupdate", item);
+		return result;
+	}
+
+	public int updateStatus(Item item) {
+		int result = sqlSession.update(nameSpace + "updatestatus", item);
+		return result;
+	}
 	
 }

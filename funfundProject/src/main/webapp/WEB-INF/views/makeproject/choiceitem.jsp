@@ -48,10 +48,15 @@ img{
 	$(function(){
 		var ano = ${sessionScope.account.ano};
 		$.ajax({
-			url:"checkproject.it",
-			data:ano,
-			success:function(){
-				
+			url:"checkproject.it?ano=" + ano,
+			success:function(data){
+				if(data.plist[0] != null){
+					$("#modalpop").show();
+					$("#makeproject").hide();
+				}else{
+					$("#modalpop").hide();
+					$("#makeproject").show();
+				}
 			}
 		});
 	});
@@ -66,8 +71,8 @@ img{
             리워드형 크라우드펀딩은 제품/서비스를<br>보상으로 주면서 자금을 조달할 수 있는 방법입니다.<br>공익 목적의 캠페인에서부터 하드웨어까지,<br>다양한 아이디어를 알리고 현실로 만들 수 있습니다.
             <br><br><br><br><br><br><br><br>
             
-            <button id="modalpop" class="btn btn-makeitem" align="center" data-toggle="modal" data-target="#projectcheck">신청하기(모달)</button>
-            <button id="makeproject" class="btn btn-makeitem" onclick="location.href='insert.it?ano=${sessionScope.account.ano}'">신청하기(바로)</button>
+            <button id="modalpop" class="btn btn-makeitem" align="center" data-toggle="modal" data-target="#projectcheck" >신청하기</button>
+            <button id="makeproject" class="btn btn-makeitem" onclick="location.href='insert.it?ano=${sessionScope.account.ano}'" style="display:none">신청하기</button>
          </p>
       </div>
       </div>
@@ -86,7 +91,7 @@ img{
         <div class="modal-body" align="center">
           <p style="text-align:center">작성중인 프로젝트가 있습니다.<br>수정페이지로 이동하시겠습니까?</p><br><br>
           <button type="button" class="btn btn-default" data-dismiss="modal" onclick="location.href='insert.it?ano=${sessionScope.account.ano}'">새로 작성</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">수정 하기</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="location.href='newproject.ao'" >수정 하기</button>
         </div>
        
       </div>
