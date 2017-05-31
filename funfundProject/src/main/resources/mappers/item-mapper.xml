@@ -333,12 +333,78 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
             where i1.pstatus = '승인요청'
 			]]>
 	</select>
+	<select id="selectDeleteRequest" resultMap="itemResult">
+		<![CDATA[
+	         select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount, i7.thumbnail as thumbnail, ac.pimage
+			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost), 0) as fundamount 
+			from item i2 join fundmenu fm2 on (i2.pro_no = fm2.pro_no)
+			             join fundlist fl2 on (fm2.mno = fl2.mno)
+			group by i2.pro_no) i2 on(i1.pro_no = i2.pro_no)
+			left join (select i3.pro_no, count(fl3.ano) as fundcount
+			           from item i3 join fundmenu fm3 on (i3.pro_no = fm3.pro_no)
+			                        join fundlist fl3 on (fm3.mno = fl3.mno)
+			           group by i3.pro_no) i3 on(i1.pro_no = i3.pro_no)
+			left join (select i3.pro_no, count(distinct fl3.ano) as supportcount
+			from item i3 join fundmenu fm3 on (i3.pro_no = fm3.pro_no)
+			             join fundlist fl3 on (fm3.mno = fl3.mno)
+			group by i3.pro_no) i4 on(i1.pro_no = i4.pro_no)
+			left join (select i.pro_no, count(p.upno) as upcount
+			                             from item i left join pupdate p on (i.pro_no = p.pro_no)
+			                             group by i.pro_no) i5 on (i1.pro_no = i5.pro_no)
+			                  left join (select i.pro_no, count(ia.ask_no) as repcount
+			                             from item i left join (select ask_no, pro_no
+			                                                    from itemask
+			                                                    where ask_type='댓글') ia on(i.pro_no = ia.pro_no)
+			                             group by i.pro_no) i6 on (i1.pro_no = i6.pro_no)
+			                  left join (select refno, refname as thumbnail 
+			                             from attachment
+			                             where ftype='item' and fsubtype='thumbnail') i7 on(i1.pro_no = i7.refno)
+                                   left join (select ano, pimage
+                                                from account) ac on (ac.ano=i1.ano)
+            where i1.pstatus = '삭제요청'
+			]]>
+	</select>
+	<select id="selectEndItem" resultMap="itemResult">
+		<![CDATA[
+	         select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount, i7.thumbnail as thumbnail, ac.pimage
+			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost), 0) as fundamount 
+			from item i2 join fundmenu fm2 on (i2.pro_no = fm2.pro_no)
+			             join fundlist fl2 on (fm2.mno = fl2.mno)
+			group by i2.pro_no) i2 on(i1.pro_no = i2.pro_no)
+			left join (select i3.pro_no, count(fl3.ano) as fundcount
+			           from item i3 join fundmenu fm3 on (i3.pro_no = fm3.pro_no)
+			                        join fundlist fl3 on (fm3.mno = fl3.mno)
+			           group by i3.pro_no) i3 on(i1.pro_no = i3.pro_no)
+			left join (select i3.pro_no, count(distinct fl3.ano) as supportcount
+			from item i3 join fundmenu fm3 on (i3.pro_no = fm3.pro_no)
+			             join fundlist fl3 on (fm3.mno = fl3.mno)
+			group by i3.pro_no) i4 on(i1.pro_no = i4.pro_no)
+			left join (select i.pro_no, count(p.upno) as upcount
+			                             from item i left join pupdate p on (i.pro_no = p.pro_no)
+			                             group by i.pro_no) i5 on (i1.pro_no = i5.pro_no)
+			                  left join (select i.pro_no, count(ia.ask_no) as repcount
+			                             from item i left join (select ask_no, pro_no
+			                                                    from itemask
+			                                                    where ask_type='댓글') ia on(i.pro_no = ia.pro_no)
+			                             group by i.pro_no) i6 on (i1.pro_no = i6.pro_no)
+			                  left join (select refno, refname as thumbnail 
+			                             from attachment
+			                             where ftype='item' and fsubtype='thumbnail') i7 on(i1.pro_no = i7.refno)
+                                   left join (select ano, pimage
+                                                from account) ac on (ac.ano=i1.ano)
+            where i1.pedate < sysdate and i1.pstatus = '승인완료'
+			]]>
+	</select>
 	<update id="updateConfirmStatus" parameterType="int">
 		update item set pstatus = '승인완료'
 		where pro_no = #{pro_no}
 	</update>
-	<update id="updateRejectStatus" parameterType="int">
-		update item set pstatus = '승인취소', icomment = #{comment}
+	<update id="updateRejectStatus" parameterType="HashMap">
+		update item set pstatus = '승인거부', icomment = #{comment}
+		where pro_no = #{pro_no}
+	</update>
+	<update id="updateDeleteStatus" parameterType="HashMap">
+		update item set pstatus = '삭제', icomment = #{comment}
 		where pro_no = #{pro_no}
 	</update>
 

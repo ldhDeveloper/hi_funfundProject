@@ -16,35 +16,35 @@
 </resultMap> 
 
 	<select id="selectList" parameterType="HashMap" resultMap="noticeResult">
-		select ranks, nno, bno, ntitle, ncontent, ndate, upbno, bname, readcount, ano, nickname from
-		(select rank() over(order by nno desc) ranks, n.bno bno, nno, ntitle, ncontent, ndate, upbno, bname, readcount, n.ano ano, nickname
-		 from notice n , board b, account a where n.bno = b.bno and a.ano=n.ano and (upbno = 0 and n.bno = #{bno})) where ranks between #{sNum} and #{eNum} 
+		select ranks, nno, ntitle, ncontent, ndate, upbno, bname, readcount, ano, nickname from
+		(select rank() over(order by nno desc) ranks, nno, ntitle, ncontent, ndate, upbno, bname, readcount, n.ano ano, nickname
+		 from notice n , account a where a.ano=n.ano and (upbno = 0 and bname = #{bname})) where ranks between #{sNum} and #{eNum} 
 			</select>
 	
 	<select id="searchTitle" parameterType="HashMap" resultMap="noticeResult">
 		select ranks, nno, ntitle, ncontent, ndate, upbno, bname, readcount, ano, nickname from
-		(select rank() over(order by nno desc) ranks, nno, ntitle, ncontent, ndate, upbno, bname, readcount, n.ano ano, nickname
-		 from notice n , board b, account a where n.bno = b.bno and a.ano=n.ano and (upbno = 0 and n.bno = #{bno})) where ranks between #{sNum} and #{eNum} 
+		(select rank() over(order by nno desc) ranks, nno,  ntitle, ncontent, ndate, upbno, bname, readcount, n.ano ano, nickname
+		 from notice n ,  account a where a.ano=n.ano and (upbno = 0 and bname = #{bname})) where ranks between #{sNum} and #{eNum} 
 		 and ntitle like '%'||#{title}||'%'
 	</select>
 	
 	<select id="getListCount" parameterType="HashMap" resultType="int">
-	select count(*) from notice where bno = #{bno} and upbno = #{upbno}
+	select count(*) from notice where bname = #{bname} and upbno = #{upbno}
 	</select>
 	
 	<select id="getListCountWithTitle" parameterType="HashMap" resultType="int">
-	select count(*) from notice where bno = #{bno} and ntitle like '%'||#{title}||'%'
+	select count(*) from notice where bname = #{bname} and ntitle like '%'||#{title}||'%'
 	</select>
 	
 	<select id="selectOne" parameterType="int" resultType="notice">
-	select nno, ntitle, n.bno bno, ncontent, ndate, upbno, bname, readcount, nickname, pimage, n.ano ano from notice n, account a, board b where
-	  n.ano = a.ano and b.bno = n.bno and n.nno = #{nno}   
+	select nno, ntitle, ncontent, ndate, upbno, bname, readcount, nickname, pimage, n.ano ano from notice n, account a where
+	  n.ano = a.ano and n.nno = #{nno}   
 	</select>
 	
 	<select id="selectDetailList" parameterType="int" resultMap="noticeResult" >
 
-		select nno, n.bno bno, ntitle, ncontent, ndate, upbno, bname, readcount, n.ano ano, nickname, pimage
-		from notice n, account a, board b where n.bno = b.bno and n.ano = a.ano and upbno = #{nno} order by ndate desc
+		select nno, ntitle, ncontent, ndate, upbno, bname, readcount, n.ano ano, nickname, pimage
+		from notice n, account a where n.ano = a.ano and upbno = #{nno} order by ndate desc
 
 	</select>
 	
@@ -75,12 +75,12 @@
 	<insert id="insert" parameterType="notice">
 	<choose>
 	<when test="ntitle !=null">
-	insert into notice
-	values(seq_nno.nextval, #{bno}, #{ntitle}, #{ncontent}, sysdate, 0, 0, #{ano})
+	insert into notice(nno, ntitle, ncontent, ndate, upbno, readcount, ano, bname)
+	values(seq_nno.nextval, #{ntitle}, #{ncontent}, sysdate, 0, 0, #{ano}, #{bname})
 	</when>
 	<otherwise>
-	insert into notice(nno, bno, ncontent, ndate, upbno, readcount, ano)
-	values(seq_nno.nextval, #{bno}, #{ncontent}, sysdate, #{upbno}, 0, #{ano})
+	insert into notice(nno, ncontent, ndate, upbno, readcount, ano, bname)
+	values(seq_nno.nextval, #{ncontent}, sysdate, #{upbno}, 0, #{ano}, #{bname})
 	</otherwise>
 	</choose>
 	</insert>

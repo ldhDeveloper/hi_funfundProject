@@ -61,9 +61,12 @@
 						return false;
 					}
 				});
-		loginFail();
-		changeTempPwd();
-		setPwd();
+		loginFail(); //api 회원가입실패처리용 함수
+		changeTempPwd(); //임시비밀번호전송용함수
+		setPwd(); //임시비밀번호관련함수
+		if('${signupSuccess}' != ""){
+			alert('${signupSuccess}');
+		}
 	})
 
 	function home() {
@@ -85,7 +88,7 @@
 	}
 	//임시비밀번호 및 새 비밀번호 설정
 	function checkPwd() {
-		if ($("#newPwd").text() != $("#confirmPwd").text()) {
+		if ($("input[name=newPwd]").text() != $("input[name=confirmPwd]").text()) {
 			return false;
 		}
 	}
@@ -206,6 +209,39 @@
 	/*   function KakaoLogout(){
 	 Kakao.Auth.logout();
 	 } */
+	 
+	 function infoCheck(){
+			var email = $(".signupFieldset").children('input[name=id]').val();
+			var emailCheck =/^[a-zA-Z][a-zA-Z0-9]+\@[a-zA-Z0-9]+\.[a-z]+/;
+			if(!emailCheck.test(email)){
+				alert('잘못된 형식의 이메일 입니다.');
+				$(".signupFieldset").children($('#id')).focus();
+				return false;
+			}
+			 var pwd = $(".signupFieldset").children('input[name=pwd]').val(); 
+			var confirmPwd = $(".signupFieldset").children('input[name=confirmPwd]').val();
+			if(pwd != confirmPwd){
+				alert('비밀번호와 확인문자가 일치하지않습니다.');
+				$(".signupFieldset").children('input[name=confirmPwd]').focus();
+				return false;
+			}else{
+				var pwdCheck = /^[a-zA-Z][a-zA-Z!@#$%^&]+{6, 20}$/;
+				if(!pwdCheck.text(pwd)){
+					alert('비밀번호 길이는 6 ~ 20자 사이여야 합니다.')
+					return false;
+				}
+			} 
+			var nickname =	$(".signupFieldset").children('input[name=nickname]').val();
+			var nicknameCheck= /[a-zA-Z0-9가-힣]+{2, 10}$/;
+			if(!nicknameCheck.test(nickname)){
+				alert('닉네임 생성 규칙에 어긋납니다.');
+				$(".signupFieldset").children('#nickname').focus();
+				return false;
+			} 
+			alert('표현식성공');
+		return false;
+		} 
+	 
 </script>
 
 <style>
@@ -231,6 +267,15 @@ a:active, a:hover {
 	font-weight: bold;
 	position: relative;
 	top: 20px;
+}
+
+.fun-menu2 {
+	color: orange;
+	font-weight: bold;
+	top: 20px;
+	display:inline-block;
+	font-size:10pt;
+	vertical-align:middle;
 }
 
 .login-title-txt {
@@ -793,12 +838,24 @@ label.sign-form_title {
 	height: 34px;
 }
 
+.navbar-brand {
+	float: left;
+	height: 50px;
+	padding: 0px;
+	font-size: 18px;
+	line-height: 20px;
+}
+
+/* .navbar-default .navbar-toggle .icon-bar {
+	background-color: orange;
+} */
 </style>
 
 <title>Insert title here</title>
 
 </head>
 <body>
+	<!-- pc 메뉴바 -->
 	<div class="row middle-menubar hidden-xs">
 
 		<div class="col-lg-2 col-md-2 col-sm-2">
@@ -816,11 +873,12 @@ label.sign-form_title {
 						<td style="width: 150px;"><a class="fun-menu"
 							href="funding.it">프로젝트 둘러보기</a></td>
 						<td style="width: 80px;"><a class="fun-menu"
-							href="nList.no?bno=1&page=1">고객센터</a></td>
+							href="nList.no?bname=공지사항&page=1">고객센터</a></td>
 						<td style="width: 80px;"><a class="fun-menu" href="#"
 							data-toggle="modal" data-target="#myModal">로그인</a></td>
 					</c:if>
 					<c:if test="${not empty sessionScope.account.id }">
+
 						<td style="width: 80px;"><a class="fun-menu" href="#"><c:out
 									value="${sessionScope.account.nickname}" /></a></td>
 						<td style="width : 80px;"><a class="fun-menu"
@@ -833,6 +891,9 @@ label.sign-form_title {
 									<img style="width: 34px;" class="img-circle img-responsive"
 										src="images/myinfo/basic.png" />
 								</c:if></td>
+						<td style="width: 80px;"><a class="fun-menu" href="#"><c:out
+									value="${sessionScope.account.nickname}" /></a></td>
+
 
 						<!-- <td style="width:80px;"><a class="fun-menu" href="logout.ao">로그아웃</a></td>
             		<td style="width:150px;"><a class="fun-menu" href="myinfo.ao">회원정보보기</a></td> -->
@@ -841,6 +902,79 @@ label.sign-form_title {
 			</table>
 		</div>
 	</div>
+
+	<!-- 모바일 메뉴바 -->
+	<div class="row middle-menubar hidden-lg hidden-md hidden-sm">
+		<c:if test="${empty sessionScope.account.id}">
+			<nav class="navbar navbar-default">
+				<div class="container-fluid">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed"
+							data-toggle="collapse"
+							data-target="#bs-example-navbar-collapse-1" aria-expanded="false"
+							id="mbtn">
+							<span class="sr-only"></span> <span class="icon-bar"></span> <span
+								class="icon-bar"></span> <span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand"><img
+							src="/funfund/images/common/logo.png"
+							style="width: 130px; height: 50px; cursor: pointer"
+							onclick="home();"></a>
+					</div>
+
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse"
+						id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li style="display: inline-block"><a href="#"
+								onclick="alert('모바일에서는 등록이 불가능합니다.');return false;">프로젝트
+									등록하기<span class="sr-only">(current)</span>
+							</a></li>
+							<li style="display: inline-block"><a href="funding.it">프로젝트
+									둘러보기</a></li>
+							<!-- <li style="display:inline-block"><a href="nList.no" onclick="alert('로그인하셔야 볼 수 있습니다.');return false">고객센터</a></li> -->
+							<li style="display: inline-block"><a data-toggle="modal"
+								data-target="#myModal" style="cursor: pointer">로그인</a></li>
+						</ul>
+					</div>
+					<!-- /.navbar-collapse -->
+				</div>
+				<!-- /.container-fluid -->
+			</nav>
+		</c:if>
+		<c:if test="${!empty sessionScope.account.id}">
+			<nav class="navbar navbar-default">
+				<div class="container-fluid">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<div style="float: right; padding-right: 30px; padding-top: 12px;">
+							<a class="fun-menu2" data-toggle="modal" data-target="#myModal4"
+								style="cursor: pointer"><c:if
+									test="${!empty sessionScope.account.pimage }">
+									<img style="width: 34px;vertical-align:middle; "  class="img-circle img-responsive"
+										src="images/myinfo/<c:out value='${sessionScope.account.pimage }'/>" />
+								</c:if> <c:if test="${empty sessionScope.account.pimage }">
+									<img style="width: 34px;vertical-align:middle; " class="img-circle img-responsive"
+										src="images/myinfo/basic.png" />
+								</c:if>
+							</a> <a class="fun-menu2" data-toggle="modal" data-target="#myModal4"
+								style="cursor: pointer;"><c:out
+									value="${sessionScope.account.nickname}" /></a>
+						</div>
+
+						<a class="navbar-brand"><img
+							src="/funfund/images/common/logo.png"
+							style="width: 130px; height: 50px; cursor: pointer"
+							onclick="home();"></a>
+					</div>
+				</div>
+				<!-- /.container-fluid -->
+			</nav>
+		</c:if>
+
+	</div>
+
 	<div id="myModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 			<!-- Modal content-->
@@ -912,7 +1046,7 @@ label.sign-form_title {
 			$("#myModal").modal("hide");
 			$("#myModal5").modal("show");
 		}
-
+		
 		function trytopay() {
 
 			/* 		IMP.init("imp79484327");
@@ -991,21 +1125,21 @@ label.sign-form_title {
 					<h2 class="p-t-signup">회원가입</h2>
 				</div>
 				<div class="modal-body" style="padding: 30px;">
-					<form id="join_form" action="signup.ao" method="post">
+					<form id="join_form" action="signup.ao" method="post" onsubmit="return infoCheck();">
 						<input type="hidden" name="secuToken"
 							value="7QD6StfHBmmEFvusyATSQA" /> <input type="hidden"
 							name="nmLast" value="" /> <input type="hidden" name="mobile"
 							value="" />
-						<fieldset style="border: 0; margin: 0; padding: 0;">
+						<fieldset class="signupFieldset" style="border: 0; margin: 0; padding: 0;">
 							<legend class="signup-title-txt">기본정보</legend>
 							<input type="email" id="signup-form_id" name="id"
-								placeholder="아이디(이메일)" class="sign-form_input"> <input
-								type="password" id="signup-form_pw" name="pwd"
-								placeholder="영문+숫자포함 6~20자" class="sign-form_input"> <input
-								type="password" id="signup-form_pw" placeholder="비밀번호확인"
-								class="sign-form_input"> <input type="text"
-								id="signup-form_pw" name="nickname" placeholder="닉네임"
-								class="sign-form_input">
+							 placeholder="아이디(이메일)" class="sign-form_input" maxlength="35"> 
+							<input type="password" id="signup-form_pw" name="pwd"
+							 placeholder="영문+숫자+특수문자포함 6~20자" class="sign-form_input"  maxlength="14">
+							<input type="password" id="signup-form_pw" placeholder="비밀번호확인"
+							 class="sign-form_input" name=confirmPwd maxlength="14">
+							<input type="text" id="signup-form_pw" name="nickname" placeholder="닉네임은 2에서 10자안에 작성해주세요"
+							 class="sign-form_input" maxlength ="10">
 						</fieldset>
 						<div class="modal-footer">
 							<button class="btn-login_pop">회원가입하기</button>
@@ -1064,7 +1198,7 @@ label.sign-form_title {
 								type="hidden" name="id" value="${tempEmail}"> <input
 								type="text" id="signup-form_id" name="pwd" placeholder="임시비밀번호"
 								class="sign-form_input"> <input type="text"
-								id="signup-form_id" name="newPwd" placeholder="번경할 비밀번호"
+								id="signup-form_id" name="newPwd" placeholder="변경할 비밀번호"
 								class="sign-form_input"> <input type="text"
 								id="signup-form_id" name="confirmPwd" placeholder="비밀번호 재입력"
 								class="sign-form_input">
@@ -1192,7 +1326,7 @@ label.sign-form_title {
 							<li><a href="funding.it">프로젝트 둘러보기</a></li>
 						</ul>
 						<ul>
-							<li><a href="nList.no?bno=1&page=1">고객센터</a></li>
+							<li><a href="nList.no?bname=공지사항&page=1">고객센터</a></li>
 							<li><a href="myinfo.ao">회원정보보기</a>
 							<li><a href="itemconfirm.am">관리자</a>
 						</ul>
@@ -1210,6 +1344,7 @@ label.sign-form_title {
 		<!-- modal-dialog -->
 	</div>
 	<!-- modal -->
+
 
 </body>
 </html>

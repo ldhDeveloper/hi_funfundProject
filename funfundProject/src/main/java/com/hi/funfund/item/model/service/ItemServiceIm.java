@@ -183,5 +183,25 @@ public class ItemServiceIm implements ItemService{
 		return itemDao.updateStatus(item);
 	}
 
+	@Override
+	public List<Item> selectDeleteRequest() {
+		return itemDao.selectDeleteRequest();
+	}
+
+	@Override
+	public int updateDeleteStatus(HashMap<String, String> hmap) {
+		return itemDao.updateDeleteStatus(hmap);
+	}
+
+	@Override
+	public List<Item> selectEndItem() {
+		return itemDao.selectEndItem();
+	}
+
+	@Override
+	public int updateSuccessStatus(int pro_no) {
+		return itemDao.updateSuccessStatus(pro_no);
+	}
+
 	
 }

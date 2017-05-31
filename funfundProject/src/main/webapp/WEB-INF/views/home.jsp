@@ -5,12 +5,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="/funfund/lib/css/common/font.css" rel="stylesheet"/>
+<link href="/funfund/lib/css/common/font.css" rel="stylesheet" />
 <meta charset="UTF-8">
 <style>
 .contain {
-	position:relative;;
+	position: relative;
 	top: -70px;
+}
+
+@media screen and (min-width:1px) and (max-width:767px) {
+	.contain {
+		top: 10px;
+	}
+	
+	.container {
+	   padding-top:50px !important;
+	}
 }
 
 .fun-menu {
@@ -25,15 +35,13 @@
 	margin: auto;
 }
 
-h3{
-   font-family: Noto !important;
+h3 {
+	font-family: Noto !important;
 }
 
-body{
-   font-family: ten !important;
+body {
+	font-family: ten !important;
 }
-
-
 </style>
 
 <title>home</title>
@@ -106,10 +114,10 @@ body{
 				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 					<div class="thumbnail" align="center">
 						<a href="detail.it?pro_no=<c:out value="${item.pro_no}"/>"> <img
-							src="/funfund/images/funding/thumbnail/<c:out value="${item.thumbnail }"/>" alt="사진1"
-							style="width: 100%"> <script>
-								$(function(){
-									
+							src="/funfund/images/funding/thumbnail/<c:out value="${item.thumbnail }"/>"
+							alt="사진1" style="width: 100%"> <script>
+								$(function() {
+
 									var ecost = "<c:out value='${item.ecost}'/>";
 									var fundamount = "<c:out value='${item.fundamount}'/>"
 									var persent = Math.round(fundamount * 100
@@ -194,7 +202,7 @@ body{
 			</c:forEach>
 		</div>
 	</div>
-	
-	
+
+
 </body>
 </html>

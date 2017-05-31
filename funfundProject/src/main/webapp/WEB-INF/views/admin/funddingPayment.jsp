@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>프로젝트승인요청</title>
+<title>완료프로젝트 관리</title>
 </head>
 <style>
 .itemImage {
@@ -56,6 +56,9 @@
 	border-right : 1px solid #dddddd;
 	border-bottom : 1px solid #dddddd;
 }
+.tmargin{
+	margin-bottom:10px;
+}
 </style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/menubar.jsp" flush="true" />
@@ -95,36 +98,47 @@
 	</div>
 	<div class="container">
   <ul class="nav nav-tabs">
-	  <li class="active"><a href="itemconfirm.am">프로젝트 승인요청</a></li>
-	  <li><a href="requestdeleteitem.am">프로젝트 삭제요청</a></li>
-	  <li><a href="resultitem.am">프로젝트 종료관리</a></li>
+	  <li><a href="itemconfirm.am">완료프로젝트 입금</a></li>
+	  <li class="active"><a href="requestdeleteitem.am">지난입금내역</a></li>
  </ul>  
   <table class="table table-hover adminTable">
     <thead>
       <tr>
         <th>프로젝트번호</th>
         <th>프로젝트명</th>
-        <th>신청자</th>
         <th>프로젝트상태</th>
+        <th>프로젝트종료일</th>
+        <th>입금상태</th>
+        <th>총지급예정금액</th>
         <th>프로젝트보기</th>
-        <th>프로젝트승인</th>
+        <th>정보상세보기</th>
       </tr>
     </thead>
     <tbody>
     	<c:forEach var="item" items="${alist }" varStatus="status">
-      	<tr>
+    	<script>
+		$(function(){
+			var ecost = "<c:out value='${item.ecost}'/>";
+			var fundamount = "<c:out value='${item.fundamount}'/>"
+			var persent = Math.round(fundamount * 100 / ecost);
+			$("#ipersent<c:out value='${status.index }'/>").html(persent);
+		});
+		</script>
+		<tr>
         	<td><c:out value="${item.pro_no }"/></td>
         	<td><c:out value="${item.pname }"/></td>
-        	<td><c:out value="${item.cname }"/></td>
         	<td><c:out value="${item.pstatus }"/></td>
+        	<td id="ipersent<c:out value='${status.index }'/>"></td>
+        	<td><c:out value="${item.pedate }"/></td>
+        	<td><c:out value="${item.cname }"/></td> 	
         	<td><input type="button" class="btn btn-primary" value="프로젝트보기" onclick="popen(${item.pro_no})"></td>
-        	<td><span><input type="button" class="btn btn-success" value="프로젝트승인" onclick="pconfirm(${item.pro_no})"></span>
-        	<span><input id="openReject<c:out value='${status.index }'/>" style="position:inline-block;" type="button" class="btn btn-warning" value="프로젝트거절" onclick="openReject(${status.index })"></span></td>        	
+        	<td><span><input type="button" class="btn btn-success" value="프로젝트성공" onclick="psuccess(${item.pro_no})"></span>
+        	<span><input id="openReject<c:out value='${status.index }'/>" style="position:inline-block;" type="button" class="btn btn-warning" value="프로젝트실패" onclick="openFail(${status.index })"></span></td>        	
       	</tr>
-      	<tr id="rejectform<c:out value='${status.index }'/>" style="display:none;">
-      		<td>거절사유</td>
-      		<td colspan="4"><input type="text" class="form-control" id="rejectcomment<c:out value='${status.index }'/>"></td>
-      		<td><input style="position:inline-block;" type="button" class="btn btn-danger" value="거절사유작성" onclick="pcancel(${item.pro_no}, ${status.index })"></td>
+      	<tr id="failform<c:out value='${status.index }'/>" style="display:none;">
+      		<td>실패사유</td>
+      		<td colspan="4"><input type="text" class="form-control" id="failcomment<c:out value='${status.index }'/>"></td>
+      		<td><input style="position:inline-block;" type="button" class="btn btn-danger" value="실패사유작성" onclick="pfail(${item.pro_no}, ${status.index })"></td>
       	</tr>
       </c:forEach>
     </tbody>
@@ -135,36 +149,35 @@
   		window.open(url);
   	}
   	
-  	function openReject(index){
-  		$('#rejectform' + index).toggle();
+  	function openFail(index){
+  		$('#failform' + index).toggle();
   	}
-  	
-  	function pconfirm(pro_no){
-  		$.post( "confirmstatus.am", {"pro_no" : pro_no})
+  
+  	function psuccess(pro_no){
+  		$.post( "successstatus.am", {"pro_no" : pro_no})
   		.done(function(data){
 			if(data > 0){
 				alert("프로젝트를 승인을 성공하였습니다.");
-				location.href ="itemconfirm.am";
+				location.href ="resultitem.am";
 			} else {
 				alert("프로젝트를 승인을 실패하였습니다.");
-				location.href ="itemconfirm.am";
+				location.href ="resultitem.am";
 			}
   		});
   	}
   	
-  	function pcancel(pro_no, index){
-  		console.log("pcancel실행");
-  		var comment = $('#rejectcomment' + index).val();
+  	function pfail(pro_no, index){
+  		var comment = $('#failcomment' + index).val();
   		console.log(comment);
   		if(comment != ""){
-  			$.post( "rejectstatus.am", {"pro_no" : pro_no, "comment" : comment})
+  			$.post( "failstatus.am", {"pro_no" : pro_no, "comment" : comment})
   	  		.done(function(data){
   				if(data > 0){
-  					alert("프로젝트 승인을 거부하였습니다.");
-  					location.href ="itemconfirm.am";
+  					alert("프로젝트 실패에 성공하였습니다.");
+  					location.href ="resultitem.am";
   				} else {
-  					alert("프로젝트 승인거부를 실패 하였습니다.");
-  					location.href ="itemconfirm.am";
+  					alert("프로젝트 실패에 실패하였습니다.");
+  					location.href ="resultitem.am";
   				}
   	  		});
   		}
