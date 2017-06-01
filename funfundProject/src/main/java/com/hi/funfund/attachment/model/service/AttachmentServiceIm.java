@@ -120,12 +120,15 @@ public class AttachmentServiceIm implements AttachmentService {
 	@Override
 	public HashMap<String, String> selectTempImage(int pro_no) {
 		List<Attachment> alist = attachmentDao.selectimgList(pro_no);
+		HashMap<String, String> hmap = null;
 		if(alist != null){
-			HashMap<String, String> hmap = new HashMap<String, String>();
+			hmap = new HashMap<String, String>();
 			for(int i = 0; i< alist.size(); i++){
-				 
+				String fileType = alist.get(i).getFsubtype() + alist.get(i).getFnum().toString();
+				String fileName = alist.get(i).getRefname();
+				hmap.put(fileType, fileName);
 			}
 		}
-		return null;
+		return hmap;
 	}
 }
