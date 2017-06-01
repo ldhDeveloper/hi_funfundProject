@@ -17,6 +17,10 @@
 	color: white;
 }
 
+.fun-menu {
+    color: orange !important;
+}
+
 ol li {
 	list-style: none;
 }
@@ -408,8 +412,8 @@ input[type="checkbox"] {
 			<div class="col-lg-1"></div>
 			<div class="col-lg-10">
 				<table style="width:100%;">
-					<tr style="background:rgba(255,0,255,0.2);">
-						<th colspan="4" style="color:rgba(255,0,255,1);text-align:center;height:50px;">
+					<tr style="background:rgba(255, 153, 102,0.3);">
+						<th colspan="4" style="color:rgba(0,0,0,1);text-align:center;height:50px;">
 							<label>주문내역</label>
 						</th>
 					</tr>
@@ -425,24 +429,24 @@ input[type="checkbox"] {
 						<td style="width:15%;text-align:right;"><label id="sub-total">0</label><label>&nbsp; 원</label></td>
 					</tr>
 					
-					<tr style="center;height:30px;background:rgba(255,0,255,0.2);">
+					<tr style="center;height:30px;background:rgba(255, 153, 102,0.3);">
 						<td>펀딩금액</td>
 						<td></td>
 						<td></td>
 						<td style="text-align:right;"><label id="funding-total">0</label><label>&nbsp; 원</label></td>
 					</tr>
-					<tr style="center;height:30px;background:rgba(255,0,255,0.2);">
+					<tr style="center;height:30px;background:rgba(255, 153, 102,0.3);">
 						<td>추가 후원금</td>
 						<td></td>
 						<td></td>
 						<td style="text-align:right;"><label id="plus-total">0</label><label>&nbsp; 원</label></td>
 					</tr>
 					
-					<tr style="center;height:50px;background:rgba(255,0,255,0.2);">
-						<td style="color:rgba(255,0,255,1);">최종결제금액</td>
+					<tr style="center;height:50px;background:rgba(255, 153, 102,0.3);">
+						<td style="color:rgba(204,0,0,1);">최종결제금액</td>
 						<td></td>
 						<td></td>
-						<td style="text-align:right;color:rgba(255,0,255,1);"><label id="final-total">0</label><label>&nbsp; 원</label></td>
+						<td style="text-align:right;color:rgba(204,0,0,1);"><label id="final-total">0</label><label>&nbsp; 원</label></td>
 					</tr>
 				</table>
 			</div>

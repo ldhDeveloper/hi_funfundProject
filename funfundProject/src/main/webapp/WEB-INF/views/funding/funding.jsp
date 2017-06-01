@@ -116,6 +116,10 @@ button {
 	max-height: 160px !important;
 	margin: 0px !important;
 }
+
+body {
+	font-family: myFirstFont !important;
+}
 </style>
 <script>
 	$(function() {
