@@ -141,7 +141,7 @@ function insertReply(){
 	var ano = '${account.ano}';
 	var upbno = '${n.nno}';
 	var bname = '${n.bname}';
-	location.href= "nInsert.no?ano="+ano+"&upbno="+upbno+"&ncontent="+ncontent +"&bname="+bname+"&spage='${spage}'";
+	location.href= "nInsert.no?ano="+ano+"&upbno="+upbno+"&ncontent="+ncontent +"&bname="+bname+"&page=${page}";
 }
 function redactForm(x, y){
  var division =  '.replyContent' + x;

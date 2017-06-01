@@ -223,41 +223,42 @@
 	 } */
 	 //회원가입 체크 정규식
 	 function infoCheck(flag){
-		 if(flag){
-			var email = $(".signupFieldset").children('input[name=id]').val();
-			var emailCheck =/^[a-zA-Z][a-zA-Z0-9]+\@[a-zA-Z0-9]+\.[a-z]+/;
-			if(!emailCheck.test(email)){
-				alert('잘못된 형식의 이메일 입니다.');
-				$(".signupFieldset").children($('#id')).focus();
-				return false;
-			}else{
-				 var pwd = $(".signupFieldset").children('input[name=pwd]').val(); 
-				 alert(pwd);
-					var confirmPwd = $(".signupFieldset").children('input[name=confirmPwd]').val();
-					/* pwd.length < 6 || pwd.length > 20 || */
-					if(pwd != confirmPwd){
-						alert('비밀번호와 확인문자가 일치하지않습니다.');
-						$(".signupFieldset").children('input[name=confirmPwd]').focus();
-						return false;
-					}else{
-						var pwdCheck = /^(?=.*[a-zA-Z]).(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,20}$/;
-						if(!pwdCheck.test(pwd)){
-							alert('비밀번호 길이는 6 ~ 20자 사이의 영문, 숫자 , 특수문자의 혼합이어야 합니다.')
-							return false;
-							}
-						} 
-					var nickname =	$(".signupFieldset").children('input[name=nickname]').val();
-					var nicknameCheck= /(?=.*[a-zA-z0-9가-힣]).{2,10}$/;
-					if(!nicknameCheck.test(nickname)){
-						alert('닉네임 생성 규칙에 어긋납니다.');
-						$(".signupFieldset").children('#nickname').focus();
-						return false;
-					} 
-				}
-			return true;
-	 }else{
-		 return false;
-	 } 
+		// if(flag){
+			//var email = $(".signupFieldset").children('input[name=id]').val();
+			//var emailCheck =/^[a-zA-Z][a-zA-Z0-9]+\@[a-zA-Z0-9]+\.[a-z]+/;
+			//if(!emailCheck.test(email)){
+				//alert('잘못된 형식의 이메일 입니다.');
+				//$(".signupFieldset").children($('#id')).focus();
+				//return false;
+			//}else{
+				// var pwd = $(".signupFieldset").children('input[name=pwd]').val(); 
+				// alert(pwd);
+				//	var confirmPwd = $(".signupFieldset").children('input[name=confirmPwd]').val();
+				//	/* pwd.length < 6 || pwd.length > 20 || */
+				//	if(pwd != confirmPwd){
+			    //	alert('비밀번호와 확인문자가 일치하지않습니다.');
+				//		$(".signupFieldset").children('input[name=confirmPwd]').focus();
+				//		return false;
+				//	}else{
+				//		var pwdCheck = /^(?=.*[a-zA-Z]).(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,20}$/;
+				//		if(!pwdCheck.test(pwd)){
+				//			alert('비밀번호 길이는 6 ~ 20자 사이의 영문, 숫자 , 특수문자의 혼합이어야 합니다.')
+				//			return false;
+				//			}
+				//		} 
+				//	var nickname =	$(".signupFieldset").children('input[name=nickname]').val();
+				//	var nicknameCheck= /(?=.*[a-zA-z0-9가-힣]).{2,10}$/;
+				//	if(!nicknameCheck.test(nickname)){
+				//		alert('닉네임 생성 규칙에 어긋납니다.');
+				//		$(".signupFieldset").children('#nickname').focus();
+				//		return false;
+				//	} 
+			//	}
+		//	return true;
+//	 }else{
+//		 return false;
+//	 } 
+		return true;
 	 }
 </script>
 
