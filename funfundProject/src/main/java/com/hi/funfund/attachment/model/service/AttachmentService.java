@@ -38,5 +38,5 @@ public interface AttachmentService {
 
 	List<Attachment> selectimgList(int pro_no);
 
-	List<Attachment> selectTempImage(int pro_no);
+	HashMap<String, String> selectTempImage(int pro_no);
 }
