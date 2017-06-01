@@ -195,12 +195,12 @@ body {
 				$(this).addClass("backpink");
 			}
 		}); */
-		var preview = '${preview}';
+		/* var preview = '${preview}';
 		 if(preview != null){
 			$('a').attr("href", "#");
 			$('button').attr('disabled', true);
 		
-		 }
+		 } */
 		
 		var likeList = localStorage.getItem("likeList");
 		console.log("likeList : " + likeList);
