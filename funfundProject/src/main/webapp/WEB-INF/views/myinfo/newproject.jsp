@@ -369,7 +369,54 @@ div.tab button.active {
 									<div id="작성중" class="tabcontent">
 									  <span onclick="this.parentElement.style.display='none'" class="topright">x</span>
 									  <h3>작성중</h3>
-									  <p>작성중 is the capital of France.</p> 
+									  
+									  <p>
+									  	<!-- 만약 작성중일 때  -->
+			      							<div class="row myItemList">
+				      							<c:forEach var="item" items="${ iList }" varStatus="status">
+					      							<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">     							
+					      								<div id="itempanel<c:out value='${status.index}'/>" class="panel">
+					      									<div id="conitemper<c:out value='${status.index}'/>" class="panel-heading">${ item.pstatus }</div>
+					      									<div id="enditemper<c:out value='${status.index}'/>" class="panel-body">
+					      										<div class="thumbnail" align="center">      										
+						      										<a id="displace<c:out value='${status.index}'/>" href="#"> 
+						      											
+						      											<c:if test="${ empty item.thumbnail }">
+						      													<img alt="이미지를 넣으세요" src="/funfund/images/funding/thumbnail/plusImage.png" style="width: 100%;margin-bottom:2%;">
+						      											</c:if>
+						      											<c:if test="${ ! empty item.thumbnail }">
+						      													<img alt="이미지를 넣으세요" src="/funfund/images/funding/thumbnail/<c:out value="${item.thumbnail}"/>" style="width: 100%;margin-bottom:2%;">      											
+						      											</c:if>
+						      												
+						      												<div id="progress<c:out value='${status.index}'/>" class="progress" style="display:none;">
+						  													<div id="progressbar<c:out value='${status.index}'/>" 
+						  														 class="w3-red progress-bar progress-bar-striped active" 
+						  														 role="progressbar" 
+						  														 aria-valuenow="70" aria-valuemin="0" aria-valuemax="<c:out value="${item.ecost}"/>" 
+						  														 style="width: 70%;"></div>
+						  														 <span class="sr-only"></span>
+																		</div>
+																		
+																		<p id="pTag" style="display:none;">
+																			<span style="display:none;" id="persent<c:out value='${status.index}'/>"></span>% &nbsp;&nbsp; <span><c:out value="${item.fundamount }"/></span>원 달성 &nbsp;&nbsp; 
+																			<span style="display:none;" id="edate<c:out value='${status.index}'/>"></span>
+																			<span style="display:none;" id="yet<c:out value='${status.index}'/>">일 남음</span>
+																			<span style="display:none;" id="complete<c:out value='${status.index}'/>">펀딩종료</span>
+																		</p>     
+																													
+						      										 	<div class="caption<c:out value='${status.index}'/>">
+						            										<p>${ item.pname }</p>
+						            										<span>${ item.category }</span>            										
+						          										</div>	 
+						          									</a>
+					      										</div>
+					      									</div>
+					    								</div>					    								
+					    								<br>					    								
+					    							</div>
+				    							</c:forEach>
+			    							</div>
+									  </p> 
 									</div>								
 									
 									<div id="진행중" class="tabcontent">
@@ -504,8 +551,8 @@ div.tab button.active {
     										$("#persent<c:out value='${status.index}'/>").show();
     										$("#edate<c:out value='${status.index}'/>").show();
     										$("#yet<c:out value='${status.index}'/>").show();
-    										
-    										$("#displace<c:out value='${status.index}'/>").attr("href", "detail.it?pro_no=<c:out value="${item.pro_no}"/>");
+    										$("#pTag").show();
+    										$("#displace<c:out value='${status.index}'/>").attr("href", "myproject.fl?pro_no=<c:out value="${item.pro_no}"/>");
     									}
     									
     									else if(pstatus == "마감") {
@@ -564,11 +611,6 @@ div.tab button.active {
     							<div class="panel panel-info">
       								<div class="panel-heading">후원형 프로젝트</div>
       								<div class="panel-body">아직 참여한 프로젝트가 없습니다.</div>
-      								
-      								<form action="myproject.fl" method="get">
-										<input type="hidden" name="pro_no" value=1>
-										<button type="submit">테스트버튼</button>
-									</form>
     							</div>
     						</div>
     					 									
