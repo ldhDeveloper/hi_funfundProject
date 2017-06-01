@@ -190,7 +190,7 @@ li {
 				}
 			});
 			$("#showpage").click(function(){
-				var url = "detail.it?pro_no=${pro_no}&preview="true";
+				var url = "detail.it?pro_no=${pro_no}";
 				window.open(url, "", "channelmode");
 			});
 			
