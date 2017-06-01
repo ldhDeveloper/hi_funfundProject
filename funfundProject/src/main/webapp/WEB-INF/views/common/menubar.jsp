@@ -1327,7 +1327,7 @@ label.sign-form_title {
 
 @font-face {
     font-family: myFirstFont;
-    src: url('fonts/10X10.ttf');
+    src: url('fonts/NanumBarunGothic.ttf');
     font-weight: bold;
 }
 

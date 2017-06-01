@@ -16,7 +16,7 @@
 
 @media screen and (min-width:1px) and (max-width:767px) {
 	.contain {
-		top: 10px;
+		top: -20px;
 	}
 	.container {
 		padding-top: 50px !important;
@@ -25,10 +25,6 @@
 
 .fun-menu {
 	color: white !important;
-}
-
-h3 {
-	font-family: irop !important;
 }
 
 body {
@@ -80,7 +76,7 @@ body {
 						<div class="swiper-slide">
 							<img src="images/home/slide1.gif" style="width: 100%; max-height:540px;" class="img-responsive">
 							<div class="carousel-caption">
-								<h3>즐거움을 펀딩하라!</h3>
+								<p style="font-size:15pt">즐거움을 펀딩하라!</p>
 								<p>enjoy funding funny!</p>
 							</div>
 						</div>
@@ -88,7 +84,7 @@ body {
 						<div class="swiper-slide">
 							<img src="images/home/slide2.gif" style="width: 100%;max-height:540px;"class="img-responsive">
 							<div class="carousel-caption">
-								<h3>아름다움을 펀딩하라!</h3>
+								<p style="font-size:15pt">아름다움을 펀딩하라!</p>
 								<p>enjoy funding beautiful!</p>
 							</div>
 						</div>
@@ -96,7 +92,7 @@ body {
 						<div class="swiper-slide">
 							<img src="images/home/slide3.gif" style="width: 100%;max-height:540px;"class="img-responsive">
 							<div class="carousel-caption">
-								<h3>여유로움을 펀딩하라!</h3>
+								<p style="font-size:15pt">여유로움을 펀딩하라!</p>
 								<p>Enjoy funding relaxedly!</p>
 							</div>
 						</div>
