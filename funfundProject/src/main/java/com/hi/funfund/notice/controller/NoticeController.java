@@ -23,6 +23,7 @@ public class NoticeController {
 	@RequestMapping(value="nList.no",  method=RequestMethod.GET)
 	public ModelAndView notice(Notice notice, @RequestParam("page") int page,
 								 ModelAndView model){
+		System.out.println("nList.no"+notice);
 		HashMap map = new HashMap();
 		int sNum = page * 10 +1 -10;
 		int eNum = sNum + 9;
@@ -68,7 +69,7 @@ public class NoticeController {
 	
 	@RequestMapping("nDetail.no")
 	public ModelAndView selectDetailList(Notice notice,
-			@RequestParam("page") String page, ModelAndView model){
+			@RequestParam("page") int page, ModelAndView model){
 		int upReadCount = noticeService.upReadCount(notice.getNno());
 		int replyCount = noticeService.getReplyCount(notice.getNno());
 		List<Notice> nList = noticeService.selectDetailList(notice.getNno());
@@ -122,18 +123,27 @@ public class NoticeController {
 		return address;
 	}
 	@RequestMapping("nInsert.no")
-	public String insert(Notice notice, @RequestParam("page") String page){
-	
+	public ModelAndView insert(Notice notice, @RequestParam("page") int page, ModelAndView model){
+		System.out.println("insert :"+ notice);
 		int result = noticeService.insert(notice);
 		String address = null;
 		if(result >0){
 			if(notice.getNtitle() != null){
-			address ="redirect:/nList.no?bname="+ notice.getBname()+ "&page="+page;
+			model = notice(notice, page, model);
+				
+				/*	model.setViewName("redirect:/nList.no");
+				model.addObject("notice", notice);
+				model.addObject("page", page);*/
 			}else{
-				address ="redirect:/nDetail.no?bname="+notice.getBname()+"&nno="+notice.getUpbno()+"&page="+page;
+				notice.setNno(notice.getUpbno());
+				model = selectDetailList(notice, page, model);
+				
+				/*model.setViewName("redirect:/nDetail.no");
+				model.addObject("notice", notice);
+				model.addObject("page", page);*/
 			}
 		}
-		return address;
+		return model;
 	}
 	
 }

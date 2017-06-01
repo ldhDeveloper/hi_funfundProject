@@ -23,6 +23,7 @@ $(function() {
 		  heightMin : '900',
 		  heightMax : '1500',
 		  language : 'fr',
+		  direction: 'rtl',
 		  toolbarButtons : ['fullscreen', 
 			  				'bold', 'italic', 'underline',
 			  				'|', 'fontFamily', 'fontSize', 'color',
@@ -120,7 +121,7 @@ function insertN(){
 
 var ncontent =  $('textarea#froala-editor').froalaEditor('html.get');
 var ano = ${account.ano};
-var bname = ${bname};
+var bname = '${bname}';
 var page = ${page};
 var ntitle = $('input[name=ntitle]').val();
 alert(ntitle);
