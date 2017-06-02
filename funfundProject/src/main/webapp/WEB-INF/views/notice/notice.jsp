@@ -12,6 +12,10 @@
 <title>Insert title here</title>
 <script>
 $(function(){
+	$(document).ready(function () {
+		$('#accordion').children(".panel-default").children('.panel-collapse').removeClass('in');
+		});
+	
 	switch('${bname}'){
 	case '공지사항' :$('#no').css({"background": "#00CCA3", "border-color" : "#00CCA3", "color": "#fff" });
 		$('#bTitle').text('공지사항');
@@ -20,7 +24,29 @@ $(function(){
 	case 'FnQ' :$('#fnq').css({"background": "#00CCA3", "border-color" : "#00CCA3", "color": "#fff" });
 	$('#bTitle').text('FnQ');
 	$('#bComent').text('자주묻는 질문입니다.');
-	$()
+	$('.nListContainer').html(
+			 "<br><br><br><div class='panel-group' id='accordion'>" +
+			  "<c:forEach var='nlist' items='${nList}' varStatus='status'><div class='panel panel-default'>" +
+			   " <div class='panel-heading'>" +
+			    "<h4 class='panel-title'>" +  
+			     "<a data-toggle='collapse' data-parent='#accordion' href='#collapse${status.index}'>" +   
+			       " ${nlist.ntitle}" +
+			       " </a>" +
+			     " </h4>" +
+			   "</div>"  +
+			   " <div id='collapse${status.index}' class='panel-collapse collapse'>" +
+			   " <div class='panel-body'>${nlist.ncontent}</div>"  +
+			   " </div>  " +
+			 " </div> </c:forEach>" +
+			 " </div>" 
+			);
+	
+	
+	
+	$("#pageBar").html();
+	$("#searchBar").html();
+	// 아코디언과 내용
+	
 		break;
 	case 'QnA' :$('#qna').css({"background": "#00CCA3", "border-color" : "#00CCA3", "color": "#fff" });
 	$('#bTitle').text('QnA');
@@ -163,6 +189,7 @@ button {
 	 				<button onclick="category(2);" id="fnq">FnQ</button>
 	 				<button onclick="category(3);" id="qna">QnA</button>
 					<!-- 1.여기서부터  -->
+					<div class="nListContainer">
 					<hr>
 					<c:forEach var="nlist" items="${nList}">
 						<a class="nList" style="display:block;" href="nDetail.no?bname=${nlist.bname}&nno=${nlist.nno}&page=${page}">
@@ -171,8 +198,9 @@ button {
 							<hr>
 						</a>
 					</c:forEach>
+					</div>
 					<!-- 1.여기까지 db에서 불러와서 포문으로 풀어넣기 -->
-					<div class="downbar" align="center">
+					<div class="downbar" id="pagebar" align="center">
 						<br>
 						<fmt:parseNumber var = "pageCount" value = "${listCount}" type="number"/>
 						<c:set var ="pageNumber" value="${pageCount/10 +1}"/>
@@ -184,7 +212,7 @@ button {
 						<a href="nInsertView.no?bname=${bname}&page=${page}">글쓰기</a>
 						</c:if>
 					</div>
-					<div align="center">
+					<div align="center" id="searchBar">
 						<form action="nSearchTitle.no" method="post" > 
 							<select>
 								<option value="title">제목</option>
