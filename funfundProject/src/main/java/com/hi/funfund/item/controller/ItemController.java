@@ -360,6 +360,7 @@ public class ItemController {
 		HashMap<String, String> amap = (HashMap<String, String>) attachmentService.selectTempImage(pro_no);
 		System.out.println("start select : " + item);
 		model.addObject("item", item);
+		model.addObject("images", amap);
 		model.setViewName("jsonView");
 		
 		return model;

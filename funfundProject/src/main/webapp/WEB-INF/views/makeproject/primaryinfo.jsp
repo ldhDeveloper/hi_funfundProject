@@ -301,7 +301,12 @@ li {
 					if(data.item.cs_phone != null){
 						$('[name=cs_phone]').val(data.item.cs_phone);
 					} 
-					
+					if(data.images.thumbnail0 !=null){
+						$('#titleimage').attr("src", "images/makeproject/titleimg/" + data.images.thumbnail0);
+					}
+					if(data.images.makerimg0 !=null){
+						$('#makerprofileimage').attr("src", "images/makeproject/makerimg/" + data.images.makerimg0);
+					}	
 				} 
 			});
 			
