@@ -208,5 +208,15 @@ public class ItemServiceIm implements ItemService{
 		return itemDao.updateFailStatus(hmap);
 	}
 
+	@Override
+	public List<Item> selectSuccessItem() {
+		return itemDao.selectSuccessItem();
+	}
+
+	@Override
+	public int changeBillStatus(HashMap<String, String> hmap) {
+		return itemDao.changeBillStatus(hmap);
+	}
+
 	
 }

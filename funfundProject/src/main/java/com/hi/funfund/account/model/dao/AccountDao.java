@@ -160,4 +160,9 @@ public class AccountDao {
 		
 		return (Account)sqlSession.selectOne("selectWithEmail", account);
 	}
+
+	public List<Account> selectRequestSeller() {
+		List<Account> alist = (List<Account>) sqlSession.selectList("selectRequestSeller");
+		return alist;
+	}
 }
