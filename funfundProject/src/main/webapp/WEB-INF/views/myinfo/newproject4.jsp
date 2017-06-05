@@ -18,9 +18,6 @@
 .mlabel {
 	border: 1px solid #ddd;
 	background-color: #24B3A8;
-	/* background: -webkit-linear-gradient(left top, #24B3A8, #58CEB0, #2AC594);
-	background: -o-linear-gradient(bottom right, #24B3A8, #58CEB0, #2AC594);
-	background: -moz-linear-gradient(bottom right, #24B3A8, #58CEB0, #2AC594); */
 	background: linear-gradient(to right, #24B3A8, #58CEB0, #2AC594);
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
@@ -208,66 +205,43 @@
 	padding : 0px !important;
 }
 
-/* Style the tab */
-div.tab {
-    overflow: hidden;
-    border: 1px solid #DFF0D8;
-    background-color: #DFF0D8;
-    color: #3C763D;
+.mainlist {
+	background-color: #31C698 !important;
+	color: white;
 }
 
-/* Style the buttons inside the tab */
-div.tab button {
-    background-color: inherit;
-    float: left;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    transition: 0.3s;
-    font-size: 17px;
+.mlist:hover {
+	background-color: #31C698 !important;
+	color: white;
 }
 
-/* Change background color of buttons on hover */
-div.tab button:hover {
-    background-color: #28B5A9;
-    color: white;
+.listStart {
+	
 }
 
-/* Create an active/current tablink class */
-div.tab button.active {
-    background-color: #33C79A;
+.lStart {
+    background-color: #DFF0D8 !important;
+    width: 88.3%;
+    
 }
 
-/* Style the tab content */
-.tabcontent {
-    display: none;
-    padding: 6px 12px;
-    border: 1px solid #DFF0D8;
-    border-top: none;
-    border-bottom-right-radius: 4px;
-    border-bottom-left-radius: 4px;
+.sidelist {
+	background-color: #DFF0D8 !important;
+	color: #3C763D;	
 }
 
-/* Style the close button */
-.topright {
-    float: right;
-    cursor: pointer;
-    font-size: 20px;
+.slist:hover {
+	background-color: #28B5A9 !important;
+	color: white;
+	border-radius: 0px !important;	
 }
 
-.topright:hover {color: red;}
-
-.tabStart {
-	width: 96%;
-	margin-left: 1.3%;
+.pcontents {
+	border: 1px solid #DFF0D8;
+	width: 88.3%;
+	border-bottom-right-radius: 4px !important;
+	border-bottom-left-radius: 4px !important;
 }
-
-.tab {
-	border-top-right-radius: 4px;
-    border-top-left-radius: 4px;
-}
-
 </style>
 
 <title>Insert title here</title>
@@ -302,7 +276,7 @@ div.tab button.active {
 		                 			</c:if>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">개인 일반 회원 <!-- 회원 등급이 들어갈 곳  --></label></div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input type="button" class="mbtn1" value="투자 회원 신청" onclick='location.href="investRequest.ao"'></div>
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input type="button" class="mbtn1" value="투자 회원 신청" onclick="return goSellerinfo();"></div>
 					</div>
 				</div>
 				
@@ -321,7 +295,7 @@ div.tab button.active {
     						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       							<ul class="nav navbar-nav">
       								<li><a href="myinfo.ao" class="otherActive">회원 정보 설정</a></li>
-      								<li><a class="otherActive" id="goSellerinfo" style="cursor:pointer;">판매자 정보 변경</a></li>
+      								<li style="display:none;"><a class="otherActive" style="cursor:pointer;">판매자 정보 변경</a></li>
         							<li><a href="puttoproject.ao" class="otherActive">찜한 프로젝트</a></li>
         							<li class="act"><a class="active" href="newproject.ao">개설한 프로젝트<span class="sr-only">(current)</span></a></li>      							        							        							        							
         							<li><a href="myfunding.ao" class="otherActive">나의 펀딩 현황</a></li>
@@ -344,28 +318,26 @@ div.tab button.active {
       				</c:if>	  
 						
 						
+					<c:if test="${ ! empty iList }"> 
 					<div class="panel-group">
-						<c:if test="${ ! empty iList }">
 						<div class="well">												
-    						<div class="panelStart panel panel-success">   						
-      							<div class="panel-heading">리워드형 프로젝트</div>
+    						<div class="panelStart1 panel panel-success">    						
+      							<div class="panel-heading">리워드형 프로젝트</div> 
       							
       							<br>
       							
-      							<div class="row tabStart" style="margin-left: 2%;">
-	      							<div class="tab">
-									  <button class="tablinks" onclick="tabBtn(event, '모두보기')" id="defaultOpen">모두보기</button>
-									  <button class="tablinks" onclick="tabBtn(event, '작성중')">작성중</button>
-									  <button class="tablinks" onclick="tabBtn(event, '진행중')">진행중</button>
-									  <button class="tablinks" onclick="tabBtn(event, '마감')">마감</button>
-									</div>
-									
-									<div id="모두보기" class="tabcontent">
-									  <span onclick="this.parentElement.style.display='none'" class="topright">x</span>
-									  <br>
-									  <p>
-										<!-- 모두보기 때  -->
-			      							<div class="row myItemList">
+      							<div class="listStart container">
+			  						<ul class="lStart nav nav-pills">
+			    						<li class="sidelist"><a class="slist" href="newproject.ao">모두보기</a></li>
+			    						<li class="sidelist"><a class="slist" href="inwrite.it">작성중</a></li>
+			    						<li class="sidelist"><a class="slist" href="ongoing.it">진행중</a></li>
+			    						<li class="mainlist"><a class="mlist">펀딩종료</a></li>
+								  	</ul>
+								  	
+								  	<div class="pcontents">
+								  		<br>
+										<!-- 펀딩종료일 때  -->
+			      						<div class="row myItemList">
 				      							<c:forEach var="item" items="${ iList }" varStatus="status">
 					      							<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">     							
 					      								<div id="itempanel<c:out value='${status.index}'/>" class="panel">
@@ -379,7 +351,7 @@ div.tab button.active {
 						      											</c:if>
 						      											
 						      											<c:if test="${ ! empty item.thumbnail }">
-						      													<img alt="이미지를 넣으세요" src="/funfund/images/funding/thumbnail/<c:out value="${item.thumbnail}"/>" style="width: 100%;margin-bottom:2%;">      											
+						      													<img alt="이미지를 넣으세요" src="/funfund/images/makeproject/titleimg/<c:out value="${item.thumbnail}"/>" style="width: 100%;margin-bottom:2%;">      											
 						      											</c:if>
 						      												
 						      												<div id="progress<c:out value='${status.index}'/>" class="progress" style="display:none;">
@@ -410,438 +382,79 @@ div.tab button.active {
 					    							</div>
 					    							
 					    							<script type="text/javascript">    								
-												    $(function(){ 
-												    	var ecost = "<c:out value='${item.ecost}'/>";
-														var fundamount = "<c:out value='${item.fundamount}'/>"
-														var persent = Math.round(fundamount * 100 / ecost);
-														var bar=0;
-														if(persent > 100){
-															bar=100;
-														} else {
-															bar=persent;
-														}
-														var edate = new Date("<c:out value='${item.pedate}'/>");
-														var todate = new Date();
-														var btMs = edate.getTime() - todate.getTime() ;
-													    var btDay = Math.round(btMs / (1000*60*60*24)) ;
+													    $(function(){ 
+													    	var ecost = "<c:out value='${item.ecost}'/>";
+															var fundamount = "<c:out value='${item.fundamount}'/>"
+															var persent = Math.round(fundamount * 100 / ecost);
+															var bar=0;
+															if(persent > 100){
+																bar=100;
+															} else {
+																bar=persent;
+															}
+															
+															var edate = new Date("<c:out value='${item.pedate}'/>");
+															var todate = new Date();
+															var btMs = edate.getTime() - todate.getTime() ;
+														    var btDay = Math.round(btMs / (1000*60*60*24)) ;
+														    
+														    var pstatus = "<c:out value='${item.pstatus}'/>";
+													    	
+					    								    $("#persent<c:out value='${status.index}'/>").html(persent);
+					    									$("#progressbar<c:out value='${status.index}'/>").attr("aria-valuenow", persent);
+					    									$("#progressbar<c:out value='${status.index}'/>").css("width", bar + "%");
+					    									$("#edate<c:out value='${status.index}'/>").text(btDay);					    																		
+					    									
+					    									if(pstatus == "펀딩종료") {
+					    										$("#progress<c:out value='${status.index}'/>").css("margin-top", "5px");
+					    										$(".caption<c:out value='${status.index}'/>").css("margin-bottom", "31px");
+					    										$("#itempanel<c:out value='${status.index}'/>").removeClass("panel-warning");
+					    										$("#itempanel<c:out value='${status.index}'/>").removeClass("bg-danger");
+					    										$("#itempanel<c:out value='${status.index}'/>").addClass("panel-default");
+					    										$("#progress<c:out value='${status.index}'/>").show();
+					    										$("#progressbar<c:out value='${status.index}'/>").show();
+					    										$("#progressbar<c:out value='${status.index}'/>").html(persent+"%");
+					    										$("#persent<c:out value='${status.index}'/>").show();
+					    										$("#edate<c:out value='${status.index}'/>").show();
+					    										$("#yet<c:out value='${status.index}'/>").show();
+					    										$("#pTag").show();
+					    										
+					    										$("#progressbar<c:out value='${status.index}'/>").addClass("w3-gray");
+					    										
+					    										$("#displace<c:out value='${status.index}'/>").attr("href", "javascript:");
+					    									}
+					    									
+					    									else if(btDay<0) {
+					    										$("#complete<c:out value='${status.index}'/>").show();
+					    									}
+					    									
+					    									else if(btDay>=0) {
+					    										$("#complete<c:out value='${status.index}'/>").hide();
+					    									}
+					    								});
 													    
-													    var pstatus = "<c:out value='${item.pstatus}'/>";
-												    	
-				    								    $("#persent<c:out value='${status.index}'/>").html(persent);
-				    									$("#progressbar<c:out value='${status.index}'/>").attr("aria-valuenow", persent);
-				    									$("#progressbar<c:out value='${status.index}'/>").css("width", bar + "%");
-				    									$("#edate<c:out value='${status.index}'/>").text(btDay);
-				    																		
-				    									if(pstatus == "작성중") {	
-				    										$(".caption<c:out value='${status.index}'/>").css("margin-top", "38px");
-				    										$(".caption<c:out value='${status.index}'/>").css("margin-bottom", "38px");
-				    										$("#itempanel<c:out value='${status.index}'/>").css("border", "1px solid #E91E63");
-				    										$("#conitemper<c:out value='${status.index}'/>").addClass("w3-pink");    										
-				    										$("#displace<c:out value='${status.index}'/>").attr("href", "update.it?pro_no=${ item.pro_no }&flag=true");
-				    									}
-				    									
-				    									else if (pstatus == "승인요청") {
-				    										$(".caption<c:out value='${status.index}'/>").css("margin-top", "38px");
-				    										$(".caption<c:out value='${status.index}'/>").css("margin-bottom", "38px");
-				    										$("#itempanel<c:out value='${status.index}'/>").css("border", "1px solid #9C27B0");
-				    										$("#conitemper<c:out value='${status.index}'/>").addClass("w3-purple");
-				    										$("#displace<c:out value='${status.index}'/>").attr("href", "javascript:");
-				    									}
-				    									
-				    									else if(pstatus == "승인완료") {
-				    										$("#conitemper<c:out value='${status.index}'/>").html("진행중");
-				    										$("#itempanel<c:out value='${status.index}'/>").css("border", "1px solid #F44336");
-				    										$("#conitemper<c:out value='${status.index}'/>").addClass("w3-red");
-				    										$("#progress<c:out value='${status.index}'/>").show();
-				    										$("#progressbar<c:out value='${status.index}'/>").show();
-				    										$("#progressbar<c:out value='${status.index}'/>").html(persent+"%");
-				    										$("#persent<c:out value='${status.index}'/>").show();
-				    										$("#edate<c:out value='${status.index}'/>").show();
-				    										$("#yet<c:out value='${status.index}'/>").show();
-				    										$("#pTag").show();
-				    										$("#displace<c:out value='${status.index}'/>").attr("href", "myproject.fl?pro_no=<c:out value="${item.pro_no}"/>");
-				    									}
-				    									
-				    									else if(pstatus == "마감") {
-				    										$("#progress<c:out value='${status.index}'/>").css("margin-top", "5px");
-				    										$(".caption<c:out value='${status.index}'/>").css("margin-bottom", "31px");
-				    										$("#itempanel<c:out value='${status.index}'/>").removeClass("panel-warning");
-				    										$("#itempanel<c:out value='${status.index}'/>").removeClass("bg-danger");
-				    										$("#itempanel<c:out value='${status.index}'/>").addClass("panel-default");
-				    										$("#progress<c:out value='${status.index}'/>").show();
-				    										$("#progressbar<c:out value='${status.index}'/>").show();
-				    										$("#progressbar<c:out value='${status.index}'/>").html(persent+"%");
-				    										$("#persent<c:out value='${status.index}'/>").show();
-				    										$("#edate<c:out value='${status.index}'/>").show();
-				    										$("#yet<c:out value='${status.index}'/>").show();
-				    										$("#pTag").show();
-				    										
-				    										$("#progressbar<c:out value='${status.index}'/>").addClass("w3-gray");
-				    										
-				    										$("#displace<c:out value='${status.index}'/>").attr("href", "javascript:");
-				    									}
-				    									
-				    									else if(btDay<0) {
-				    										$("#complete<c:out value='${status.index}'/>").show();
-				    									}
-				    									
-				    									else if(btDay>=0) {
-				    										$("#complete<c:out value='${status.index}'/>").hide();
-				    									}
-				    									
-				    									var name ='<c:out value="${sessionScope.party.pname}"/>';
-				    									
-				    									$("#goSellerinfo").click(function() {
+				    									function goSellerinfo() {
+															var name ='<c:out value="${sessionScope.party.pname}"/>';
+															console.log(name)
 				    										if(name == "") {
 				    											alert("회원정보 설정에서 이름을 반드시 입력하세요!");
-				    											return result;
+				    											return false;
 				    										}
 				    										
 				    										else {
 				    											location.href = "sellerinfo.ao";
-				    										}
-				    									});
-				    								});
-											 </script>
+				    										}															
+														}
+												 </script>
 				    							</c:forEach>				    											    							
-			    							</div>
-									  </p>
-									</div>
-									
-									<div id="작성중" class="tabcontent">
-									  <span onclick="this.parentElement.style.display='none'" class="topright">x</span>
-									  <br>
-									  
-									  <p>
-									  	<!-- 만약 작성중일 때  -->
-			      							<div class="row myItemList">
-				      							<c:forEach var="item" items="${ iList }" varStatus="status">
-					      							<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">     							
-					      								<div id="itempanel<c:out value='${status.index}'/>" class="panel panel-warning">
-					      									<div id="conitemper<c:out value='${status.index}'/>" class="panel-heading">${ item.pstatus }</div>
-					      									<div id="enditemper<c:out value='${status.index}'/>" class="panel-body">
-					      										<div class="thumbnail" align="center">      										
-						      										<a id="displace<c:out value='${status.index}'/>" href="#"> 
-						      											
-						      											<c:if test="${ empty item.thumbnail }">
-						      													<img alt="이미지를 넣으세요" src="/funfund/images/funding/thumbnail/plusImage.png" style="width: 100%;margin-bottom:2%;">
-						      											</c:if>
-						      											
-						      											<c:if test="${ ! empty item.thumbnail }">
-						      													<img alt="이미지를 넣으세요" src="/funfund/images/funding/thumbnail/<c:out value="${item.thumbnail}"/>" style="width: 100%;margin-bottom:2%;">      											
-						      											</c:if>
-						      												
-						      												<div id="progress<c:out value='${status.index}'/>" class="progress" style="display:none;">
-						  													<div id="progressbar<c:out value='${status.index}'/>" 
-						  														 class="w3-red progress-bar progress-bar-striped active" 
-						  														 role="progressbar" 
-						  														 aria-valuenow="70" aria-valuemin="0" aria-valuemax="<c:out value="${item.ecost}"/>" 
-						  														 style="width: 70%;"></div>
-						  														 <span class="sr-only"></span>
-																		</div>
-																		
-																		<p id="pTag" style="display:none;">
-																			<span style="display:none;" id="persent<c:out value='${status.index}'/>"></span>% &nbsp;&nbsp; <span><c:out value="${item.fundamount }"/></span>원 달성 &nbsp;&nbsp; 
-																			<span style="display:none;" id="edate<c:out value='${status.index}'/>"></span>
-																			<span style="display:none;" id="yet<c:out value='${status.index}'/>">일 남음</span>
-																			<span style="display:none;" id="complete<c:out value='${status.index}'/>">펀딩종료</span>
-																		</p>     
-																													
-						      										 	<div class="caption<c:out value='${status.index}'/>">
-						            										<p>${ item.pname }</p>
-						            										<span>${ item.category }</span>            										
-						          										</div>	 
-						          									</a>
-					      										</div>
-					      									</div>
-					    								</div>					    								
-					    								<br>					    								
-					    							</div>
-				    							</c:forEach>
-			    							</div>
-									  </p> 
-									</div>								
-									
-									<div id="진행중" class="tabcontent">
-									  <span onclick="this.parentElement.style.display='none'" class="topright">x</span>
-									  <br>
-									  <p>
-											<!-- 만약 진행중일 때  -->
-			      							<div class="row myItemList">
-				      							<c:forEach var="item" items="${ iList }" varStatus="status">
-				      							
-				      							<%-- <c:if type="${ item.pstatus == "승인완료" }"></c:if> --%>
-					      							<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">     							
-					      								<div id="itempanel<c:out value='${status.index}'/>" class="panel panel-danger">
-					      									<div id="conitemper<c:out value='${status.index}'/>" class="panel-heading">${ item.pstatus }</div>
-					      									<div id="enditemper<c:out value='${status.index}'/>" class="panel-body">
-					      										<div class="thumbnail" align="center">      										
-						      										<a id="displace<c:out value='${status.index}'/>" href="#"> 
-						      											
-						      											<c:if test="${ empty item.thumbnail }">
-						      													<img alt="이미지를 넣으세요" src="/funfund/images/funding/thumbnail/plusImage.png" style="width: 100%;margin-bottom:2%;">
-						      											</c:if>
-						      											
-						      											<c:if test="${ ! empty item.thumbnail }">
-						      													<img alt="이미지를 넣으세요" src="/funfund/images/funding/thumbnail/<c:out value="${item.thumbnail}"/>" style="width: 100%;margin-bottom:2%;">      											
-						      											</c:if>
-						      												
-						      												<div id="progress<c:out value='${status.index}'/>" class="progress">
-						  													<div id="progressbar<c:out value='${status.index}'/>" 
-						  														 class="w3-red progress-bar progress-bar-striped active" 
-						  														 role="progressbar" 
-						  														 aria-valuenow="70" aria-valuemin="0" aria-valuemax="<c:out value="${item.ecost}"/>" 
-						  														 style="width: 70%;"></div>
-						  														 <span class="sr-only"></span>
-																		</div>
-																		
-																		<p id="pTag">
-																			<span id="persent<c:out value='${status.index}'/>"></span>% &nbsp;&nbsp; <span><c:out value="${item.fundamount }"/></span>원 달성 &nbsp;&nbsp; 
-																			<span id="edate<c:out value='${status.index}'/>"></span>
-																			<span id="yet<c:out value='${status.index}'/>">일 남음</span>
-																			<span id="complete<c:out value='${status.index}'/>">펀딩종료</span>
-																		</p>     
-																													
-						      										 	<div class="caption<c:out value='${status.index}'/>">
-						            										<p>${ item.pname }</p>
-						            										<span>${ item.category }</span>            										
-						          										</div>	 
-						          									</a>
-					      										</div>
-					      									</div>
-					    								</div>					    								
-					    								<br>					    								
-					    							</div>
-				    							</c:forEach>
-			    							</div>
-									  </p>
-									</div>
-									
-									<div id="마감" class="tabcontent">
-									  <span onclick="this.parentElement.style.display='none'" class="topright">x</span>
-									  <br>
-									  <p>
-									  	<!-- 만약 마감일 때  -->
-			      							<div class="row myItemList">
-				      							<c:forEach var="item" items="${ iList }" varStatus="status">
-					      							<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">     							
-					      								<div id="itempanel<c:out value='${status.index}'/>" class="panel panel-default">
-					      									<div id="conitemper<c:out value='${status.index}'/>" class="panel-heading">${ item.pstatus }</div>
-					      									<div id="enditemper<c:out value='${status.index}'/>" class="panel-body">
-					      										<div class="thumbnail" align="center">      										
-						      										<a id="displace<c:out value='${status.index}'/>" href="#"> 
-						      											
-						      											<c:if test="${ empty item.thumbnail }">
-						      													<img alt="이미지를 넣으세요" src="/funfund/images/funding/thumbnail/plusImage.png" style="width: 100%;margin-bottom:2%;">
-						      											</c:if>
-						      											
-						      											<c:if test="${ ! empty item.thumbnail }">
-						      													<img alt="이미지를 넣으세요" src="/funfund/images/funding/thumbnail/<c:out value="${item.thumbnail}"/>" style="width: 100%;margin-bottom:2%;">      											
-						      											</c:if>
-						      												
-						      												<div id="progress<c:out value='${status.index}'/>" class="progress">
-						  													<div id="progressbar<c:out value='${status.index}'/>" 
-						  														 class="w3-gray progress-bar progress-bar-striped active" 
-						  														 role="progressbar" 
-						  														 aria-valuenow="70" aria-valuemin="0" aria-valuemax="<c:out value="${item.ecost}"/>" 
-						  														 style="width: 70%;"></div>
-						  														 <span class="sr-only"></span>
-																		</div>
-																		
-																		<p id="pTag">
-																			<span id="persent<c:out value='${status.index}'/>"></span>% &nbsp;&nbsp; <span><c:out value="${item.fundamount }"/></span>원 달성 &nbsp;&nbsp; 
-																			<span id="edate<c:out value='${status.index}'/>"></span>
-																			<span id="yet<c:out value='${status.index}'/>">일 남음</span>
-																			<span id="complete<c:out value='${status.index}'/>">펀딩종료</span>
-																		</p>     
-																													
-						      										 	<div class="caption<c:out value='${status.index}'/>">
-						            										<p>${ item.pname }</p>
-						            										<span>${ item.category }</span>            										
-						          										</div>	 
-						          									</a>
-					      										</div>
-					      									</div>
-					    								</div>					    								
-					    								<br>					    								
-					    							</div>
-				    							</c:forEach>
-			    							</div>
-									  </p>
-									</div>
-									
-									<script>
-										function tabBtn(evt, progress) {
-										    var i, tabcontent, tablinks;
-										    tabcontent = document.getElementsByClassName("tabcontent");
-										    
-										    for (i = 0; i < tabcontent.length; i++) {
-										        tabcontent[i].style.display = "none";
-										    }
-										    
-										    tablinks = document.getElementsByClassName("tablinks");
-										    
-										    for (i = 0; i < tablinks.length; i++) {
-										        tablinks[i].className = tablinks[i].className.replace(" active", "");
-										    }
-										    
-										    document.getElementById(progress).style.display = "block";
-										    evt.currentTarget.className += " active";
-										}
-										
-										// Get the element with id="defaultOpen" and click on it
-										document.getElementById("defaultOpen").click();
-									</script>
+			    							</div>	
+									</div> 
 								</div>
-								
-      							<br>   						    							
-     							
-      							<%-- <!-- 만약 작성중일 때  -->
-      							<div class="row myItemList">
-      							<c:forEach var="item" items="${ iList }" varStatus="status">
-      							<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">     							
-      								<div id="itempanel<c:out value='${status.index}'/>" class="panel">
-      									<div id="conitemper<c:out value='${status.index}'/>" class="panel-heading">${ item.pstatus }</div>
-      									<div id="enditemper<c:out value='${status.index}'/>" class="panel-body">
-      										<div class="thumbnail" align="center">      										
-	      										<a id="displace<c:out value='${status.index}'/>" href="#"> 
-	      											
-	      											<c:if test="${ empty item.thumbnail }">
-	      													<img alt="이미지를 넣으세요" src="/funfund/images/funding/thumbnail/plusImage.png" style="width: 100%;margin-bottom:2%;">
-	      											</c:if>
-	      											<c:if test="${ ! empty item.thumbnail }">
-	      													<img alt="이미지를 넣으세요" src="/funfund/images/funding/thumbnail/<c:out value="${item.thumbnail}"/>" style="width: 100%;margin-bottom:2%;">      											
-	      											</c:if>
-	      												
-	      												<div id="progress<c:out value='${status.index}'/>" class="progress" style="display:none;">
-	  													<div id="progressbar<c:out value='${status.index}'/>" 
-	  														 class="w3-red progress-bar progress-bar-striped active" 
-	  														 role="progressbar" 
-	  														 aria-valuenow="70" aria-valuemin="0" aria-valuemax="<c:out value="${item.ecost}"/>" 
-	  														 style="width: 70%;"></div>
-	  														 <span class="sr-only"></span>
-													</div>
-													
-													<p id="pTag" style="display:none;">
-														<span style="display:none;" id="persent<c:out value='${status.index}'/>"></span>% &nbsp;&nbsp; <span><c:out value="${item.fundamount }"/></span>원 달성 &nbsp;&nbsp; 
-														<span style="display:none;" id="edate<c:out value='${status.index}'/>"></span>
-														<span style="display:none;" id="yet<c:out value='${status.index}'/>">일 남음</span>
-														<span style="display:none;" id="complete<c:out value='${status.index}'/>">펀딩종료</span>
-													</p>     
-																								
-	      										 	<div class="caption<c:out value='${status.index}'/>">
-	            										<p>${ item.pname }</p>
-	            										<span>${ item.category }</span>            										
-	          										</div>	 
-	          									</a>
-      										</div>
-      									</div>
-    								</div> --%>
-    								
-    								<br>
-    								
-    							</div>
-    								<%-- <script type="text/javascript">    								
-									    $(function(){ 
-									    	var ecost = "<c:out value='${item.ecost}'/>";
-											var fundamount = "<c:out value='${item.fundamount}'/>"
-											var persent = Math.round(fundamount * 100 / ecost);
-											var bar=0;
-											if(persent > 100){
-												bar=100;
-											} else {
-												bar=persent;
-											}
-											var edate = new Date("<c:out value='${item.pedate}'/>");
-											var todate = new Date();
-											var btMs = edate.getTime() - todate.getTime() ;
-										    var btDay = Math.round(btMs / (1000*60*60*24)) ;
-										    
-										    var pstatus = "<c:out value='${item.pstatus}'/>";
-									    	
-	    								    $("#persent<c:out value='${status.index}'/>").html(persent);
-	    									$("#progressbar<c:out value='${status.index}'/>").attr("aria-valuenow", persent);
-	    									$("#progressbar<c:out value='${status.index}'/>").css("width", bar + "%");
-	    									$("#edate<c:out value='${status.index}'/>").text(btDay);
-	    																		
-	    									if(pstatus == "작성중") {	
-	    										$(".caption<c:out value='${status.index}'/>").css("margin-top", "38px");
-	    										$(".caption<c:out value='${status.index}'/>").css("margin-bottom", "38px");
-	    										$("#itempanel<c:out value='${status.index}'/>").css("border", "1px solid #E91E63");
-	    										$("#conitemper<c:out value='${status.index}'/>").addClass("w3-pink");    										
-	    										$("#displace<c:out value='${status.index}'/>").attr("href", "update.it?pro_no=${ item.pro_no }&flag=true");
-	    									}
-	    									
-	    									else if (pstatus == "승인요청") {
-	    										$(".caption<c:out value='${status.index}'/>").css("margin-top", "38px");
-	    										$(".caption<c:out value='${status.index}'/>").css("margin-bottom", "38px");
-	    										$("#itempanel<c:out value='${status.index}'/>").css("border", "1px solid #9C27B0");
-	    										$("#conitemper<c:out value='${status.index}'/>").addClass("w3-purple");
-	    										$("#displace<c:out value='${status.index}'/>").attr("href", "javascript:");
-	    									}
-	    									
-	    									else if(pstatus == "승인완료") {
-	    										$("#conitemper<c:out value='${status.index}'/>").html("진행중");
-	    										$("#itempanel<c:out value='${status.index}'/>").css("border", "1px solid #F44336");
-	    										$("#conitemper<c:out value='${status.index}'/>").addClass("w3-red");
-	    										$("#progress<c:out value='${status.index}'/>").show();
-	    										$("#progressbar<c:out value='${status.index}'/>").show();
-	    										$("#progressbar<c:out value='${status.index}'/>").html(persent+"%");
-	    										$("#persent<c:out value='${status.index}'/>").show();
-	    										$("#edate<c:out value='${status.index}'/>").show();
-	    										$("#yet<c:out value='${status.index}'/>").show();
-	    										$("#pTag").show();
-	    										$("#displace<c:out value='${status.index}'/>").attr("href", "myproject.fl?pro_no=<c:out value="${item.pro_no}"/>");
-	    									}
-	    									
-	    									else if(pstatus == "마감") {
-	    										$("#progress<c:out value='${status.index}'/>").css("margin-top", "5px");
-	    										$(".caption<c:out value='${status.index}'/>").css("margin-bottom", "31px");
-	    										$("#itempanel<c:out value='${status.index}'/>").removeClass("panel-warning");
-	    										$("#itempanel<c:out value='${status.index}'/>").removeClass("bg-danger");
-	    										$("#itempanel<c:out value='${status.index}'/>").addClass("panel-default");
-	    										$("#progress<c:out value='${status.index}'/>").show();
-	    										$("#progressbar<c:out value='${status.index}'/>").show();
-	    										$("#progressbar<c:out value='${status.index}'/>").html(persent+"%");
-	    										$("#persent<c:out value='${status.index}'/>").show();
-	    										$("#edate<c:out value='${status.index}'/>").show();
-	    										$("#yet<c:out value='${status.index}'/>").show();
-	    										$("#pTag").show();
-	    										
-	    										$("#progressbar<c:out value='${status.index}'/>").addClass("w3-gray");
-	    										
-	    										$("#displace<c:out value='${status.index}'/>").attr("href", "javascript:");
-	    									}
-	    									
-	    									else if(btDay<0) {
-	    										$("#complete<c:out value='${status.index}'/>").show();
-	    									}
-	    									
-	    									else if(btDay>=0) {
-	    										$("#complete<c:out value='${status.index}'/>").hide();
-	    									}
-	    									
-	    									var name ='<c:out value="${sessionScope.party.pname}"/>';
-	    									
-	    									$("#goSellerinfo").click(function() {
-	    										if(name == "") {
-	    											alert("회원정보 설정에서 이름을 반드시 입력하세요!");
-	    											return result;
-	    										}
-	    										
-	    										else {
-	    											location.href = "sellerinfo.ao";
-	    										}
-	    									});
-	    								});
-								 </script>
-    							
-    							   </c:forEach>   --%>							
-    							</div>
-								 <br>									
-    							</div>
-    						</div>   						
-    						</c:if>
+								<br>																    							  							     														      							
+      						</div>
+      					</div>
+      				</div>
+      				</c:if>
 
     					
     					<br>
@@ -859,7 +472,6 @@ div.tab button.active {
 			</div>
 		</div>
 	</div>
-</div>
 
 <br><br>
 

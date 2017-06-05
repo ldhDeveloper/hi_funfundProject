@@ -208,5 +208,21 @@ public class ItemServiceIm implements ItemService{
 		return itemDao.updateFailStatus(hmap);
 	}
 
+	@Override
+	public List<Item> selectNewProject2(int ano) {
+		System.out.println("2 service ano : " + ano);
+		return itemDao.selectNewProject2(ano);
+	}
+
+	@Override
+	public List<Item> selectNewProject3(int ano) {
+		return itemDao.selectNewProject3(ano);
+	}
+
+	@Override
+	public List<Item> selectNewProject4(int ano) {
+		return itemDao.selectNewProject4(ano);
+	}
+
 	
 }

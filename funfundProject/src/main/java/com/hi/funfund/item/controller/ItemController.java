@@ -405,4 +405,47 @@ public class ItemController {
 		
 		return model;
 	}
+	
+	@RequestMapping(value = "inwrite.it")
+	public ModelAndView newproject2(ModelAndView model, HttpSession session, HttpServletRequest request){
+		session = request.getSession(false);
+		Account account = (Account)session.getAttribute("account");
+		int ano = account.getAno();
+		
+		List <Item> iList = itemService.selectNewProject2(ano);
+			
+		model.addObject("iList", iList);
+		model.setViewName("myinfo/newproject2");
+			
+		return model;
+	}
+	
+	@RequestMapping(value = "ongoing.it")
+	public ModelAndView newproject3(ModelAndView model, HttpSession session, HttpServletRequest request){	
+		session = request.getSession(false);
+		Account account = (Account)session.getAttribute("account");
+		int ano = account.getAno();
+		
+		List <Item> iList = itemService.selectNewProject3(ano);
+			
+		model.addObject("iList", iList);
+		model.setViewName("myinfo/newproject3");
+			
+		return model;
+	}	
+
+	@RequestMapping(value = "deadline.it")
+	public ModelAndView newproject4(ModelAndView model, HttpSession session, HttpServletRequest request){
+		session = request.getSession(false);
+		Account account = (Account)session.getAttribute("account");
+		int ano = account.getAno();
+		
+		List <Item> iList = itemService.selectNewProject4(ano);
+			
+		model.addObject("iList", iList);
+		model.setViewName("myinfo/newproject4");
+			
+		return model;
+	}
+	
 }

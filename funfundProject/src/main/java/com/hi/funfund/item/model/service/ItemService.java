@@ -80,5 +80,11 @@ public interface ItemService {
 
 	int updateFailStatus(HashMap<String, String> hmap);
 
+	List<Item> selectNewProject2(int ano);
+
+	List<Item> selectNewProject3(int ano);
+
+	List<Item> selectNewProject4(int ano);
+
 
 }

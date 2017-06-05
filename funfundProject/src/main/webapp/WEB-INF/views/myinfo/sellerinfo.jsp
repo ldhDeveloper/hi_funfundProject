@@ -121,7 +121,7 @@ $(function(){
 		                 			</c:if>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">개인 일반 회원 <!-- 회원 등급이 들어갈 곳  --></label></div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input type="button" class="mbtn1" value="투자 회원 신청" onclick='location.href="investRequest.ao"'></div>
+						<div style="display:none;" class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input type="button" class="mbtn1" value="투자 회원 신청" onclick='location.href="investRequest.ao"'></div>
 					</div>
 				</div>
 				
@@ -140,7 +140,7 @@ $(function(){
     						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       							<ul class="nav navbar-nav">      	
         							<li><a href="myinfo.ao" class="otherActive">회원 정보 설정</a></li>
-        							<li class="act"><a class="active" href="myinfo.do">판매자 정보 변경<span class="sr-only">(current)</span></a></li>
+        							<li class="act"><a class="active" href="myinfo.do">판매자 정보 입력<span class="sr-only">(current)</span></a></li>
         							<li><a href="puttoproject.ao" class="otherActive">찜한 프로젝트</a></li>
         							<li><a href="newproject.ao" class="otherActive">개설한 프로젝트</a></li>
         							<li><a href="myfunding.ao" class="otherActive">나의 펀딩 현황</a></li>
@@ -261,7 +261,7 @@ $(function(){
 		        	    		
 		        	    		<br><br>
 		        	    		
-		        	    		<input type="submit" class="btn-darkgray3" id="modifyBtn" value="수정"> &nbsp;&nbsp; <input type="button" class="btn-darkgray4" id="" value="취소">
+		        	    		<input type="submit" class="btn-darkgray3" id="modifyBtn" value="신청하기"> &nbsp;&nbsp; <input type="button" class="btn-darkgray4" id="" value="취소">
 							</form>
 							</div>
 					

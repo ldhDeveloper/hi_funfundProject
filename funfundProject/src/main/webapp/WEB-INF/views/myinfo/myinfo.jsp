@@ -285,7 +285,7 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 		                 	</div>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">개인 일반 회원 <!-- 회원 등급이 들어갈 곳  --></label></div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input type="button" class="mbtn1" value="투자 회원 신청" onclick='location.href="investRequest.ao"'></div>
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input type="button" class="mbtn1" value="투자 회원 신청" onclick="return goSellerinfo();"></div>
 					</div>
 				</div>
 				
@@ -303,7 +303,10 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 								<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 									<ul class="nav navbar-nav">
 										<li class="act"><a class="active" href="myinfo.ao">회원 정보 설정<span class="sr-only">(current)</span></a></li>										
-										<li><a class="otherActive" id="goSellerinfo" style="cursor:pointer;">판매자 정보 변경</a></li>
+										
+										<!-- c:if문 걸어서 일반회원이 아닐때만 조건문  -->
+										<li style="display:none;"><a class="otherActive" style="cursor:pointer;">판매자 정보 변경</a></li>
+										
 										<li><a href="puttoproject.ao" class="otherActive">찜한 프로젝트</a></li>
 										<li><a href="newproject.ao" class="otherActive">개설한 프로젝트</a></li>
 										<li><a href="myfunding.ao" class="otherActive">나의 펀딩 현황</a></li>
@@ -488,20 +491,7 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
         									$("#emailCheckBtn").click(function() {
         										sendAuthMail();        										
         									});
-        									
-        									var name ='<c:out value="${sessionScope.party.pname}"/>';
-        									
-        									$("#goSellerinfo").click(function() {
-        										if(name == "") {
-        											alert("회원정보 설정에서 이름을 반드시 입력하세요!");
-        											return result;
-        										}
-        										
-        										else {
-        											location.href = "sellerinfo.ao";
-        										}
-        									});
-        									
+        									        									
         									$("#certifyNumBtn").click(function() {
         										if($("#authenticNum").val() == "") {        											
         											$("#authComplete").addClass("alert alert-danger");
@@ -575,7 +565,20 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
     											$("#newPwdInputSame").html("새 비밀번호를 동일하게 입력해주세요");
     											return false;
     										}
-    									};    									
+    									};
+    									
+    									function goSellerinfo() {
+											var name ='<c:out value="${sessionScope.party.pname}"/>';
+											console.log(name)
+    										if(name == "") {
+    											alert("회원정보 설정에서 이름을 반드시 입력하세요!");
+    											return false;
+    										}
+    										
+    										else {
+    											location.href = "sellerinfo.ao";
+    										}															
+										}
         							</script>																			
 								</div>
 							</div>
