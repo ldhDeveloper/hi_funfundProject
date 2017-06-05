@@ -916,7 +916,8 @@ label.sign-form_title {
 							href="funding.it">프로젝트 둘러보기</a></td>
 						<td style="width: 80px;"><a class="fun-menu"
 							href="nList.no?bname=공지사항&page=1">고객센터</a></td>
-						<td style="width : 80px;"><a class="fun-menu"
+						
+						<td style="width : 40px;"><a class="fun-menu"
 							data-toggle="modal" data-target="#myModal4"
 							style="cursor: pointer"> <c:if
 									test="${!empty sessionScope.account.pimage }">
@@ -926,10 +927,12 @@ label.sign-form_title {
 									<img style="width: 34px;" class="img-circle img-responsive"
 										src="images/myinfo/basic.png" />
 								</c:if></a></td>
+								
 						<td style="width: 80px;"><a class="fun-menu" data-toggle="modal" data-target="#myModal4"
 							style="cursor: pointer"><c:out
 									value="${sessionScope.account.nickname}" /></a></td>
-
+						
+						<td style="width : 50px;"><a class="fun-menu"><i class="fa fa-envelope-open-o fa-2x" aria-hidden="true" id="message"></i></a></td>
 
 						<!-- <td style="width:80px;"><a class="fun-menu" href="logout.ao">로그아웃</a></td>
             		<td style="width:150px;"><a class="fun-menu" href="myinfo.ao">회원정보보기</a></td> -->
@@ -938,6 +941,18 @@ label.sign-form_title {
 			</table>
 		</div>
 	</div>
+		
+		<script>
+			$(function(){
+				$("#message").click(function(){
+					var url = "messagelist.mg?pro_no=${pro_no}";
+					window.open(url, "", "width=400, height=300, left=600, top=200, status=0, location=0");
+				});
+					
+				
+			});
+		</script>
+
 
 	<!-- 모바일 메뉴바 -->
 	<div class="row middle-menubar hidden-lg hidden-md hidden-sm">
@@ -1353,7 +1368,7 @@ body{
 					</div>
 					<div class="profileinfo">
 						<p class="nickname">
-							<c:out value="${sessionScope.account.nickname}" />
+							<c:out value="${sessionScope.account.nickname}" />님 환영합니다.
 						</p>
 						<p class="username">
 							<c:out value="${sessionScope.account.id}" />

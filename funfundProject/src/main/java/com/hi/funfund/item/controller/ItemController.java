@@ -93,7 +93,7 @@ public class ItemController {
 
 	@RequestMapping("insert.it")
 	public ModelAndView insertRewardItem(ModelAndView model, HttpSession session, HttpServletRequest request,
-			@RequestParam("ano") int ano) {
+			@RequestParam("ano") int ano, @RequestParam("itype")String itype) {
 		// int ano = Integer.parseInt(request.getParameter("ano"));
 		System.out.println("ano : " + ano);
 		Item item = new Item();
@@ -118,11 +118,12 @@ public class ItemController {
 		int pro_no = itemService.insertRewardItem(item);
 
 		int ii = attachmentService.insertItemImages(pro_no);
+		System.out.println("Itype : " + itype);
 
 		request.setAttribute("ano", ano);
 		request.setAttribute("pro_no", pro_no);
-
-		model.setViewName("redirect:/update.it?pro_no=" + pro_no + "&flag=true");
+		request.setAttribute("itype", itype);
+		model.setViewName("redirect:/update.it?pro_no=" + pro_no + "&flag=true&itype=" + itype);
 
 		return model;
 	}
