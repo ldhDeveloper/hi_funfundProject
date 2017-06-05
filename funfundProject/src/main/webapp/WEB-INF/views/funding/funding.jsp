@@ -466,8 +466,7 @@ body {
 									<div class="progress-bar progress-bar-warning"
 										id="progressbar<c:out value='${status.index}'/>"
 										role="progressbar" aria-valuenow="60" aria-valuemin="0"
-										aria-valuemax="<c:out value="${item.ecost}"/>"
-										style="width: 60%;">
+										aria-valuemax="<c:out value="${item.ecost}"/>">
 										<span class="sr-only"></span>
 									</div>
 								</div>

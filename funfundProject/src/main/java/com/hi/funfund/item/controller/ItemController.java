@@ -334,6 +334,7 @@ public class ItemController {
 		List<FundMenu> mList = fundMenuService.selectList(pro_no);
 		List<ItemAsk> aList = itemAskService.selectList(pro_no);
 		List<Attachment> sList = attachmentService.selectimgList(pro_no);
+		System.out.println("sList:"+sList);
 		if (item.getPvideo() != null || item.getPvideo() == "") {
 			// youtube 주소
 			String vaddress = item.getPvideo();
