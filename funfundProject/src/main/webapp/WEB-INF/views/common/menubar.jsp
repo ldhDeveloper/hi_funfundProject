@@ -89,12 +89,7 @@
 		}
 		//로그인 성공시
 		if('${signupSuccess}' != ""){
-		var answer =	confirm('${signupSuccess}');
-			if(answer){
-				$("#myModal").modal("show");
-			}else{
-				home();
-			}
+				$("#asklogin").modal("show");
 		}
 		//일반 회원가입시 중복된아이디 존재시
 		if('${duplicateId}' != ""){
@@ -117,8 +112,12 @@
 			$("input[name=confirmPwd]").focus();
 			return false;
 		}
-	
 	}
+function showMymodal(){
+	$("#asklogin").modal("hide");
+	$("#myModal").modal("show");
+	
+}
 </script>
 <!-- 결제 함수 -->
 
@@ -132,8 +131,7 @@
 	var idtoken;
 	var access_token;
 	function googleLogin() {
-		gapi
-				.load(
+		gapi.load(
 						'auth2',
 						function() {
 							// Retrieve the singleton for the GoogleAuth library and set up the client.
@@ -153,7 +151,7 @@
 									function() {
 										profile = auth2.currentUser.get()
 												.getBasicProfile();
-
+										
 										nickname = profile.getName();
 										email = profile.getEmail();
 										pimage = profile.getImageUrl();
@@ -168,11 +166,6 @@
 
 						});
 	};
-	/* function googleSignOut() {
-	    var auth2 = gapi.auth2.getAuthInstance();
-	    auth2.signOut().then(function () {
-	      console.log('User signed out.');
-	    });} */
 </script>
 
 <script type='text/javascript'>
@@ -217,10 +210,6 @@
 			persistAccessToken : true
 		});
 	};
-	//]]>
-	/*   function KakaoLogout(){
-	 Kakao.Auth.logout();
-	 } */
 	 //회원가입 체크 정규식
 	 function infoCheck(flag){
 		// if(flag){
@@ -232,7 +221,6 @@
 				//return false;
 			//}else{
 				// var pwd = $(".signupFieldset").children('input[name=pwd]').val(); 
-				// alert(pwd);
 				//	var confirmPwd = $(".signupFieldset").children('input[name=confirmPwd]').val();
 				//	/* pwd.length < 6 || pwd.length > 20 || */
 				//	if(pwd != confirmPwd){
@@ -1026,8 +1014,6 @@ label.sign-form_title {
 							<fieldset style="border: 0; margin: 0; padding: 0;">
 								<legend class="login-title-txt">소셜 로그인</legend>
 								<a href="#"
-									class="signin-social p-login_btn login-social-facebook"
-									data-sns="facebook" alt="페이스북으로 로그인">페이스북으로 로그인</a> <a href="#"
 									onclick="loginWithKakao()" id="cSignInBt"
 									class="signin-social p-login_btn login-social-kakao"
 									data-sns="kakao" alt="카카오로 로그인">카카오로 로그인</a> <a
@@ -1035,9 +1021,7 @@ label.sign-form_title {
 									class="signin-social p-login_btn login-social-google"
 									data-sns="google" alt="구글로 로그인">구글로 로그인</a>
 								<div class="g-signin2" data-onsuccess="onSignIn"></div>
-								<a href="#" id="nSignInBt"
-									class="signin-social p-login_btn login-social-naver"
-									data-sns="naver" alt="네이버로 로그인">네이버 로그인</a>
+								
 							</fieldset>
 
 							<p class="lineor_bg">
@@ -1051,10 +1035,6 @@ label.sign-form_title {
 									required /> <a href="javascript:void(0);" class="find_pwd"
 									onclick="findPwd();">비밀번호를 잊으셨나요?</a>
 							</div>
-							<label for="rememberemail" class="remeber_email"> <input
-								type="checkbox" id="rememberemail" name="remember_email"
-								class="remeber_check" />이메일기억하기
-							</label>
 						</div>
 						<div class="modal-footer">
 							<button class="btn-login_pop">로그인하기</button>
@@ -1248,6 +1228,26 @@ label.sign-form_title {
 			</div>
 		</div>
 	</div>
+	
+	<div class="modal fade" id="asklogin" role="dialog">
+		<div class="modal-dialog modal-sm"> 
+			<div  class="modal-content">
+				<button type="button" class="close" data-dismiss="modal">x</button>
+	 			<div class="modal-body" align="center">
+	 			<p style="text-align:center">
+	 			펀펀드의 새로운 구성원이 되신것을 환영합니다.
+	 			<br>
+	 			로그인하시겠습니까?
+	 			</p>
+	 			<a class="btn btn-default" href="#"
+							onclick ="showMymodal();">로그인</a>
+	 			<button type="button" class="btn btn-default" 
+	 			data-dismiss="modal" onclick="home();">아니오</button>
+	 			</div> 
+	 			
+			</div>
+		</div>
+	 </div>
 	<style>
 #navlist .navheader {
 	border-radius: 0px !important;
