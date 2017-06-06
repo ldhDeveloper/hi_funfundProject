@@ -234,5 +234,10 @@ public class ItemServiceIm implements ItemService{
 		return itemDao.changeBillStatus(hmap);
 	}
 
+	@Override
+	public List<Item> selectdefaultpast(String dDate) {
+		return itemDao.selectdefaultpast(dDate);
+	}
+
 	
 }
