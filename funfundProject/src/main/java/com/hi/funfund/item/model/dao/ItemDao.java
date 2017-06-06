@@ -92,7 +92,7 @@ public class ItemDao {
 
 	public List<Item> selectNewProject(int ano) {
 		List<Item> iList = (List<Item>) sqlSession.selectList(nameSpace + "selectNewProject", ano);
-  	return iList;
+		return iList;
 	}
   
 	public List<Item> selectRequestItem() {
@@ -153,6 +153,22 @@ public class ItemDao {
 		int result = sqlSession.update(nameSpace + "updateFailStatus", hmap);
 		return result;
 	}
+
+	public List<Item> selectNewProject2(int ano) {
+		List<Item> iList = (List<Item>) sqlSession.selectList(nameSpace + "selectNewProject2", ano);
+		System.out.println("2 dao ano : " + ano + " iList : " + iList);
+		return iList;
+	}
+
+	public List<Item> selectNewProject3(int ano) {
+		List<Item> iList = (List<Item>) sqlSession.selectList(nameSpace + "selectNewProject3", ano);
+		return iList;
+	}
+
+	public List<Item> selectNewProject4(int ano) {
+		List<Item> iList = (List<Item>) sqlSession.selectList(nameSpace + "selectNewProject4", ano);
+		return iList;
+  }
 
 	public List<Item> selectSuccessItem() {
 		List<Item> iList = (List<Item>) sqlSession.selectList(nameSpace + "selectSuccessFundding") ;

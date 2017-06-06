@@ -185,7 +185,7 @@
 		                 			</c:if>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">개인 일반 회원 <!-- 회원 등급이 들어갈 곳  --></label></div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input type="button" class="mbtn1" value="투자 회원 신청" onclick='location.href="investRequest.ao"'></div>
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input type="button" class="mbtn1" value="투자 회원 신청" onclick="return goSellerinfo();"></div>
 					</div>
 				</div>
 				
@@ -204,7 +204,7 @@
     						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       							<ul class="nav navbar-nav">
       								<li><a href="myinfo.ao" class="otherActive">회원 정보 설정</a></li>
-      								<li><a class="otherActive" id="goSellerinfo" style="cursor:pointer;">판매자 정보 변경</a></li>
+      								<li style="display:none;"><a class="otherActive" id="goSellerinfo" style="cursor:pointer;">판매자 정보 변경</a></li>
         							<li class="act"><a class="active" href="puttoproject.ao">찜한 프로젝트<span class="sr-only">(current)</span></a></li>      							        							        							
         							<li><a href="newproject.ao" class="otherActive">개설한 프로젝트</a></li>
         							<li><a href="myfunding.ao" class="otherActive">나의 펀딩 현황</a></li>
@@ -260,20 +260,20 @@
 												$("#itempanel<c:out value='${status.index}'/>").removeClass("panel-default");
 												$("#itempanel<c:out value='${status.index}'/>").addClass("panel-primary");
 											}
-											
+										});
+										
+    									function goSellerinfo() {
 											var name ='<c:out value="${sessionScope.party.pname}"/>';
-        									
-        									$("#goSellerinfo").click(function() {
-        										if(name == "") {
-        											alert("회원정보 설정에서 이름을 반드시 입력하세요!");
-        											return result;
-        										}
-        										
-        										else {
-        											location.href = "sellerinfo.ao";
-        										}
-        									});
-										})
+											console.log(name)
+    										if(name == "") {
+    											alert("회원정보 설정에서 이름을 반드시 입력하세요!");
+    											return false;
+    										}
+    										
+    										else {
+    											location.href = "sellerinfo.ao";
+    										}															
+										}
 									</script>
       										<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 myListMargin">
       											<div id="itempanel<c:out value='${status.index}'/>" class="panel panel-default">

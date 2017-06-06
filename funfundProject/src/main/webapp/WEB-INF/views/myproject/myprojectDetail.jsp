@@ -167,7 +167,7 @@
 <div style="background-color:#F6F5F5">
 	<div class="row" style="position: relative">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div id=itemImage class="itemImage" style="background-image: url(images/funding/thumbnail/<c:out value="${proItem.thumbnail }"/>);">
+			<div id=itemImage class="itemImage" style="background-image: url(images/makeproject/titleimg/<c:out value="${proItem.thumbnail }"/>);">
 				<div class="itemImageBack">
 					<div class="itemTextBox">
 						<a class="itemname"><c:out value="${proItem.pname }"/></a>
