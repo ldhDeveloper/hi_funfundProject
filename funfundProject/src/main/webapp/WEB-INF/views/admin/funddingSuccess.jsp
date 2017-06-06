@@ -99,7 +99,7 @@
 	<div class="container">
   <ul class="nav nav-tabs">
 	  <li class="active"><a href="successFundding.am">완료프로젝트 입금</a></li>
-	  <li><a href="requestdeleteitem.am">지난입금내역</a></li>
+	  <li><a href="pastFundding.am">지난입금내역</a></li>
  </ul>  
   <table class="table table-hover adminTable">
     <thead>
@@ -125,14 +125,17 @@
 			var persent = Math.round(fundamount * 100 / ecost) + "%";
 			var billstatus = "<c:out value='${item.billstatus}'/>";
 			var firstprice = 0;
+			var firsttemp = "<c:out value='${item.firstprice}'/>";
 			var secondprice = 0;
-			if(<c:out value='${item.firstprice}'/> != ""){
-				firstprice=Number(<c:out value='${item.firstprice}'/>);
+			var secondtemp = "<c:out value='${item.secondprice}'/>"
+			var currentprice = 0;
+			if(firsttemp != ""){
+				firstprice=Number(firsttemp);
 			}
-			if(<c:out value='${item.secondprice}'/> != ""){
-				secondprice=Number(<c:out value='${item.secondprice}'/>);
+			if(secondtemp != ""){
+				secondprice=Number(secondtemp);
 			}
-			var currentprice = firstprice+secondprice;
+			currentprice = firstprice+secondprice;
 			$("#currentprice<c:out value='${status.index }'/>").html(currentprice);
 			$("#ipersent<c:out value='${status.index }'/>").html(persent);
 			if(billstatus == '미입금'){

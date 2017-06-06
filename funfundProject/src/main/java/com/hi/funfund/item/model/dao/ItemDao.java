@@ -177,12 +177,19 @@ public class ItemDao {
 
 	public int changeBillStatus(HashMap<String, String> hmap) {
 		int result = 0;
-		if(hmap.get("secondprice") != null){
+		System.out.println("secondprice : " + hmap.get("secondprice"));
+		System.out.println("firstprice : " + hmap.get("firstprice"));
+		if(hmap.get("secondprice") != ""){
 			result += sqlSession.update(nameSpace + "changeSecondBillStatus", hmap);
-		}else if(hmap.get("firstprice") != null){
+		}else if(hmap.get("firstprice") != ""){
 			result += sqlSession.update(nameSpace + "changeFirstBillStatus", hmap);
 		}
 		return result;
+	}
+
+	public List<Item> selectdefaultpast(String dDate) {
+		List<Item> iList = (List<Item>) sqlSession.selectList(nameSpace + "selectdefaultpast", dDate);
+		return iList;
 	}
 	
 }

@@ -122,4 +122,16 @@ public class AdminController {
 		model.setViewName("admin/confirmSeller");
 		return model;
 	}
+	
+	@RequestMapping("/pastFundding.am")
+	public ModelAndView selectdefaultpast(ModelAndView model){
+		Calendar today = Calendar.getInstance();
+		String year = Integer.toString(today.get(Calendar.YEAR));
+		String month = Integer.toString(today.get(Calendar.MONTH) + 1);
+		String dDate = year + "-" + month;		
+		List<Item> iList = itemService.selectdefaultpast(dDate);
+		model.addObject("iList", iList);
+		model.setViewName("admin/pastFundding");
+		return model;
+	}
 }

@@ -90,6 +90,8 @@ public interface ItemService {
 
 	int changeBillStatus(HashMap<String, String> hmap);
 
+	List<Item> selectdefaultpast(String dDate);
+
 
 
 }
