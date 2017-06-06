@@ -153,5 +153,20 @@ public class ItemDao {
 		int result = sqlSession.update(nameSpace + "updateFailStatus", hmap);
 		return result;
 	}
+
+	public List<Item> selectSuccessItem() {
+		List<Item> iList = (List<Item>) sqlSession.selectList(nameSpace + "selectSuccessFundding") ;
+		return iList;
+	}
+
+	public int changeBillStatus(HashMap<String, String> hmap) {
+		int result = 0;
+		if(hmap.get("secondprice") != null){
+			result += sqlSession.update(nameSpace + "changeSecondBillStatus", hmap);
+		}else if(hmap.get("firstprice") != null){
+			result += sqlSession.update(nameSpace + "changeFirstBillStatus", hmap);
+		}
+		return result;
+	}
 	
 }

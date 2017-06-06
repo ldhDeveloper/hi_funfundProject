@@ -80,5 +80,9 @@ public interface ItemService {
 
 	int updateFailStatus(HashMap<String, String> hmap);
 
+	List<Item> selectSuccessItem();
+
+	int changeBillStatus(HashMap<String, String> hmap);
+
 
 }

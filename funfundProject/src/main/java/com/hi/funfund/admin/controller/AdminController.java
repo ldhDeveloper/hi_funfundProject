@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hi.funfund.account.model.service.AccountService;
 import com.hi.funfund.account.model.vo.Account;
 import com.hi.funfund.account.model.vo.Party;
 import com.hi.funfund.item.model.service.ItemService;
@@ -24,12 +25,24 @@ public class AdminController {
 	@Autowired
 	private ItemService itemService;
 	
+	@Autowired
+	private AccountService accountService;
+	
 	@RequestMapping("/itemconfirm.am")
 	public ModelAndView selectRequestItem(ModelAndView mv, HttpServletRequest request){
 		List<Item> alist = itemService.selectRequestItem();
 		
 		mv.addObject("alist", alist);
 		mv.setViewName("admin/itemconfirm");
+		return mv;
+	}
+	
+	@RequestMapping("/successFundding.am")
+	public ModelAndView selectSuccessItem(ModelAndView mv, HttpServletRequest request){
+		List<Item> alist = itemService.selectSuccessItem();
+		
+		mv.addObject("alist", alist);
+		mv.setViewName("admin/funddingSuccess");
 		return mv;
 	}
 	
@@ -93,4 +106,20 @@ public class AdminController {
 		return result;
 	}
 	
+	@RequestMapping(value ="/changeBillStatus.am", method = RequestMethod.POST)
+	public @ResponseBody int changeBillStatus(@RequestParam("pro_no") String pro_no, @RequestParam("firstprice") String firstprice, @RequestParam("secondprice") String secondprice){
+		HashMap<String, String> hmap = new HashMap<String, String>();
+		hmap.put("pro_no", pro_no);
+		hmap.put("firstprice", firstprice);
+		hmap.put("secondprice", secondprice);
+		int result = itemService.changeBillStatus(hmap);
+		return result;
+	}
+	@RequestMapping(value ="/sellerconfirm.am")
+	public ModelAndView selectRequestSeller(ModelAndView model){
+		List<Account> alist = accountService.selectRequestSeller();
+		model.addObject("alist", alist);
+		model.setViewName("admin/confirmSeller");
+		return model;
+	}
 }

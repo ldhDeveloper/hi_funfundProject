@@ -164,4 +164,9 @@ public class AccountServiceIm implements AccountService {
 	public Party selectResult(int ano) {
 		return accountDao.selectResult(ano);
 	}
+
+	@Override
+	public List<Account> selectRequestSeller() {
+		return accountDao.selectRequestSeller();
+	}
 }

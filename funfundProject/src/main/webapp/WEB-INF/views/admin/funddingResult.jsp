@@ -87,9 +87,9 @@
 				<div class="middle-submenu">
 					<ul class="nav nav-pills middle-submenu"
 						style="width: 900px; align: center;">
-						<li id="info1"><a href="itemconfirm.am">프로젝트 관리</a></li>
-						<li id="info2"><a href="#">펀딩금액 관리</a></li>
-						<li id="info3" class="active-active"><a href="#">funfund 현황</a></li>
+						<li id="info1" class="active-active"><a href="itemconfirm.am">프로젝트 관리</a></li>
+						<li id="info2"><a href="successFundding.am">펀딩금액 관리</a></li>
+						<li id="info3"><a href="#">funfund 현황</a></li>
 					</ul>
 				</div>
 			</div>
