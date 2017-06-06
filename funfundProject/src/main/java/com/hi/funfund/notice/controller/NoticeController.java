@@ -23,38 +23,58 @@ public class NoticeController {
 	@RequestMapping(value="nList.no",  method=RequestMethod.GET)
 	public ModelAndView notice(Notice notice, @RequestParam("page") int page,
 								 ModelAndView model){
-		System.out.println("nList.no"+notice);
+		if(notice.getNtitle() == null){
+		System.out.println("notice upbno = "+ notice.getUpbno());
 		HashMap map = new HashMap();
 		int sNum = page * 10 +1 -10;
 		int eNum = sNum + 9;
-		int upbno = 0;
 		map.put("bname", notice.getBname());
 		map.put("sNum", sNum);
 		map.put("eNum", eNum);
-		map.put("upbno", 0);
+		map.put("upbno", notice.getUpbno());
 		List<Notice> nList = noticeService.selectList(map);
-		int listCount = noticeService.getListCount(notice.getBname(), upbno);
-		
+		int listCount = noticeService.getListCount(notice);
 		model.addObject("bname", notice.getBname());
 		model.addObject("page", page);
 		model.addObject("listCount", listCount);
 		model.addObject("nList", nList);
-		
 		model.setViewName("notice/notice");
-		return model;
-	}
-	
-	@RequestMapping("nSearchTitle.no")
-	public ModelAndView searchTitle(@RequestParam("bname") String bname,
-			@RequestParam("page") int page, @RequestParam("nTitle") String nTitle, ModelAndView model){
-		HashMap map = new HashMap();
-		int listCount = noticeService.getListCountWithTitle(bname, nTitle);
-		List<Notice> nList = noticeService.searchTitle(bname, page, nTitle);
-		model.addObject("bname", bname);
-		model.addObject("page", page);
-		model.addObject("listCount", listCount);
-		model.addObject("nList", nList);
-		model.setViewName("notice/notice");
+		}
+		else if(notice.getNtitle() != null){
+			System.out.println("notice get"+ notice.getNtitle());
+			HashMap map = new HashMap();
+			map.put("bname", notice.getBname());
+			int sNum = page * 10 +1 -10;
+			int eNum = sNum + 9;
+			map.put("sNum", sNum);
+			map.put("eNum", eNum);
+			map.put("upbno", notice.getUpbno());
+			map.put("ntitle", notice.getNtitle());
+			int listCount = noticeService.getListCount(notice);
+			List<Notice> nList = noticeService.selectList(map);
+			model.addObject("bname", notice.getBname());
+			model.addObject("page", page);
+			model.addObject("listCount", listCount);
+			model.addObject("nList", nList);
+			model.setViewName("notice/notice");
+		}else if(notice.getNickname() != null){
+			System.out.println("notice get"+ notice.getNtitle());
+			HashMap map = new HashMap();
+			map.put("bname", notice.getBname());
+			int sNum = page * 10 +1 -10;
+			int eNum = sNum + 9;
+			map.put("sNum", sNum);
+			map.put("eNum", eNum);
+			map.put("upbno", notice.getUpbno());
+			map.put("nickname", notice.getNickname());
+			int listCount = noticeService.getListCount(notice);
+			List<Notice> nList = noticeService.selectList(map);
+			model.addObject("bname", notice.getBname());
+			model.addObject("page", page);
+			model.addObject("listCount", listCount);
+			model.addObject("nList", nList);
+			model.setViewName("notice/notice");
+		}
 		
 		return model;
 	}
@@ -112,7 +132,6 @@ public class NoticeController {
 	public String delete(Notice notice, ModelAndView model, @RequestParam("page") int page){
 		int result = noticeService.delete(notice.getNno());
 		String address = null;
-		System.out.println(notice);
 		if(result >0){
 			if(notice.getNtitle() !=null){
 			address = "redirect:/nList.no?bname="+notice.getBname()+"&page=1";
@@ -124,23 +143,15 @@ public class NoticeController {
 	}
 	@RequestMapping("nInsert.no")
 	public ModelAndView insert(Notice notice, @RequestParam("page") int page, ModelAndView model){
-		System.out.println("insert :"+ notice);
+		
 		int result = noticeService.insert(notice);
 		String address = null;
 		if(result >0){
 			if(notice.getNtitle() != null){
 			model = notice(notice, page, model);
-				
-				/*	model.setViewName("redirect:/nList.no");
-				model.addObject("notice", notice);
-				model.addObject("page", page);*/
 			}else{
 				notice.setNno(notice.getUpbno());
 				model = selectDetailList(notice, page, model);
-				
-				/*model.setViewName("redirect:/nDetail.no");
-				model.addObject("notice", notice);
-				model.addObject("page", page);*/
 			}
 		}
 		return model;

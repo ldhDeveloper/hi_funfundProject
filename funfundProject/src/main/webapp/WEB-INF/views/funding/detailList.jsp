@@ -29,7 +29,6 @@ ul {
 }
 
 li {
-	padding: 10px;
 	text-align: center;
 	display: inline-block;
 }
@@ -109,7 +108,7 @@ button {
 	margin-bottom: 20px;
 	width: 100%;
 	align: center;
-	display: block;
+	display: inline-block;
 	text-align: center;
 }
 
@@ -168,6 +167,8 @@ button {
 	width: 3%;
 	text-align: center;
 	display: none;
+	border-radius: 10px;
+	border: none;
 }
 
 .img {
@@ -226,6 +227,7 @@ body {
 		
 		console.log('${item.pcontent}');
 		$("#content").html('${item.pcontent}');
+		
 		$("#btn-like").click(function() {
 			$.ajax({
 				url : "insertMyitem.mi",
@@ -272,6 +274,7 @@ body {
 			return false;
 		});
 
+
 		$(".pay").click(function() {
 			location.href = "reward.fm?pro_no=${item.pro_no}";
 		});
@@ -297,8 +300,8 @@ body {
 		</div>
 	</div>
 
-	<div align="center">
-		<ul class="w3-border-bottom w3-border-gray">
+	<div class="container">
+		<ul class="nav nav-tabs">
 			<li class="active"><a href="detail.it?pro_no=${item.pro_no }">스토리</a></li>
 			<li><a href="reply.ask?pro_no=${item.pro_no }">댓글(${fn:length(aList) })</a></li>
 			<li><a href="news.up?pro_no=${item.pro_no}">새소식(
@@ -324,10 +327,36 @@ body {
 				style="padding-top: 20px;">
 
 				<div class="carousel-inner" role="listbox">
-					<c:forEach var="slide" items="${sList}">
-						<div class="item active">
-							<img src="/funfund/images/makerproject/slideimg/${slide.refname}">
-						</div>
+					<c:forEach var="slide" items="${sList}" varStatus="status">
+
+						<c:choose>
+							<c:when test="${status.first }">
+								<div class="item active">
+									<img
+										src="/funfund/images/makeproject/slideimg/${slide.refname}">
+								</div>
+							</c:when>
+
+							<c:otherwise>
+								<div class="item">
+									<img
+										src="/funfund/images/makeproject/slideimg/${slide.refname}">
+								</div>
+							</c:otherwise>
+						</c:choose>
+
+						<!-- control -->
+						<a class="left carousel-control" href="#myCarousel" role="button"
+							data-slide="prev"> <span
+							class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+							<span class="sr-only">Previous</span>
+						</a>
+						<a class="right carousel-control" href="#myCarousel" role="button"
+							data-slide="next"> <span
+							class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+							<span class="sr-only">Next</span>
+						</a>
+
 					</c:forEach>
 				</div>
 
@@ -338,9 +367,9 @@ body {
 	</div>
 
 	<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-			<div class="box2 info">
-				<p id="box2">
-					<script>
+		<div class="box2 info">
+			<p id="box2">
+				<script>
 					$(function() {
 						var date = "<c:out value='${item.pedate}'/>";
 						console.log("date : " + date);
@@ -350,37 +379,51 @@ body {
 						console.log("btMs : " + btMs);
 						var btDay = Math.round(btMs / (1000 * 60 * 60 * 24));
 						console.log("btDay : " + btDay);
-						$("#box2").html(btDay + "일 남음");
+						if(btDay <= 0){
+							$("#box2").html("펀딩종료");
+						}else{
+							$("#box2").html(btDay + "일 남음");
+						}
+						
 					});
 				</script>
 
-				</p>
-				<em class="infoBar"></em>
-				<p class="info">
-					<c:set var="ecost" value="${item.ecost }" />
-					<c:set var="fundamount" value="${item.fundamount}" />
-					<c:out value="${ fundamount * 100 / ecost}" />
-					% 달성
-				</p>
-				<p class="info">${item.fundamount }원의펀딩</p>
-				<p class="info">${item.supportcount }명의서포터</p>
-				<button class="btn-fund pay">펀딩하기</button>
+			</p>
+			<div id="progress" class="progress">
+			    <c:set var="ecost" value="${item.ecost }" />
+				<c:set var="fundamount" value="${item.fundamount}" />
+				<c:set var="present" value="${ fundamount * 100 / ecost}" />
+				
+				<div class="progress-bar progress-bar-warning"
+					id="progressbar<c:out value='${status.index}'/>" role="progressbar"
+					aria-valuenow="60" aria-valuemin="0"
+					aria-valuemax="<c:out value="${item.ecost}"/>" style="width:${present}%;">
+					<span class="sr-only"></span>
+				</div>
 			</div>
-		
-		<div class="">
-		<div style="text-align: center;">
-			<button class="btn btn-default" id="btn-like">
-				<i class="fa fa-heart-o" aria-hidden="true"></i>
-			</button>
-			<button class="btn btn-default backpink" id="btn-nonlike"
-				style="display: none;">
-				<i class="fa fa-heart-o" aria-hidden="true"></i>
-			</button>
-			<button class="btn btn-default" id="btn-share" onclick="link();">
-				<i class="fa fa-share" aria-hidden="true"></i>
-			</button>
+			<p class="info">
+				<c:out value="${ fundamount * 100 / ecost}" />
+				% 달성
+			</p>
+			<p class="info">${item.fundamount }원의펀딩</p>
+			<p class="info">${item.supportcount }명의서포터</p>
+			<button class="btn-fund pay">펀딩하기</button>
 		</div>
-	</div>
+
+		<div class="">
+			<div style="text-align: center;">
+				<button class="btn btn-default" id="btn-like">
+					<i class="fa fa-heart-o" aria-hidden="true"></i>
+				</button>
+				<button class="btn btn-default backpink" id="btn-nonlike"
+					style="display: none;">
+					<i class="fa fa-heart-o" aria-hidden="true"></i>
+				</button>
+				<button class="btn btn-default" id="btn-share" onclick="link();">
+					<i class="fa fa-share" aria-hidden="true"></i>
+				</button>
+			</div>
+		</div>
 
 
 		<script>
@@ -414,7 +457,7 @@ body {
 			
 			} */
 		</script>
-		
+
 		<div class="">
 			<p
 				style="font-size: 10pt; text-align: left; padding-top: 20px; padding-bottom: 5px; margin-left: 20px;">메이커
@@ -436,9 +479,10 @@ body {
 				</div>
 			</div>
 
-	
-			<p style="font-size: 10pt; text-align: left; padding-top: 20px; padding-bottom: 5px; margin-left: 20px;" class="hidden-sm hidden-xs">베스트
-				서포터</p>
+
+			<p
+				style="font-size: 10pt; text-align: left; padding-top: 20px; padding-bottom: 5px; margin-left: 20px;"
+				class="hidden-sm hidden-xs">베스트 서포터</p>
 			<div class="makerbox2 hidden-sm hidden-xs"">
 				<c:if test="${!empty bestList}">
 					<c:forEach var="bestList" items="${bestList }">
@@ -468,9 +512,9 @@ body {
 		<div class="hidden-sm hidden-xs">
 			<p
 				style="font-size: 10pt; text-align: left; padding-bottom: 5px; margin-left: 20px;">리워드선택</p>
-			<c:forEach var="reward" items="${mList}" varStatus="status">
-				<ul class="makerbox" >
-				<input type="hidden" value="${reward.mno}">
+			<c:forEach var="reward" items="${mList}">
+				<ul class="makerbox">
+					<input type="hidden" value="${reward.mno}">
 					<li style="font-size: 15pt;"><strong><fmt:formatNumber
 								var="mcost" value="${reward.mcost}" /> ${mcost}원</strong></li>
 					<li class="makerinfo">작성자이름
@@ -479,12 +523,6 @@ body {
 					<li class="makerinfo">품목
 						<dl>${reward.mname}</dl>
 					</li>
-					<li class="makerinfo">배송비</li>
-					<dl>
-						<c:if test="${null eq reward.dcost }">${reward.dcost }</c:if>
-						<c:if test="${reward.dcost != '' || null ne reward.dcost}">0</c:if>
-						원
-					</dl>
 					<li class="makerinfo">리워드 예상일
 						<dl>${reward.mdate}</dl>
 					</li>
@@ -500,8 +538,8 @@ body {
 				</ul>
 			</c:forEach>
 		</div>
-		
-		
+
+
 		<div class="hidden-sm hidden-xs">
 			<button class="btn-fund pay">펀딩하기</button>
 		</div>

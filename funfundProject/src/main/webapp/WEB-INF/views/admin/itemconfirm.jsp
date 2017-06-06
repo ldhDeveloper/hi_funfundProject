@@ -85,7 +85,7 @@
 					<ul class="nav nav-pills middle-submenu"
 						style="width: 900px; align: center;">
 						<li id="info1" class="active-active"><a href="itemconfirm.am">프로젝트 관리</a></li>
-						<li id="info2"><a href="#">펀딩금액 관리</a></li>
+						<li id="info2"><a href="successFundding.am">펀딩금액 관리</a></li>
 						<li id="info3"><a href="#">funfund 현황</a></li>
 					</ul>
 				</div>
@@ -117,7 +117,7 @@
         	<td><c:out value="${item.pname }"/></td>
         	<td><c:out value="${item.cname }"/></td>
         	<td><c:out value="${item.pstatus }"/></td>
-        	<td><input type="button" class="btn btn-primary" value="프로젝트보기" onclick="popen(${item.pro_no})"></td>
+        	<td><input type="button" class="btn btn-primary" value="프로젝트보기" onclick="popen(<c:out value ='${item.pro_no}'/>)"></td>
         	<td><span><input type="button" class="btn btn-success" value="프로젝트승인" onclick="pconfirm(${item.pro_no})"></span>
         	<span><input id="openReject<c:out value='${status.index }'/>" style="position:inline-block;" type="button" class="btn btn-warning" value="프로젝트거절" onclick="openReject(${status.index })"></span></td>        	
       	</tr>

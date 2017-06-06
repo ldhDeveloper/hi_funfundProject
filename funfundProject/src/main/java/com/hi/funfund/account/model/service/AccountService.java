@@ -58,6 +58,8 @@ public interface AccountService {
 	Party selectResult(int ano);
 
 	Account createTempPwd(Account account);
+
+	List<Account> selectRequestSeller();
 	
 	//미추가된 함수 : 프로젝트별 후원자 리스트
 

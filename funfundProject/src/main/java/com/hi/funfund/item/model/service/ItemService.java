@@ -86,5 +86,10 @@ public interface ItemService {
 
 	List<Item> selectNewProject4(int ano);
 
+	List<Item> selectSuccessItem();
+
+	int changeBillStatus(HashMap<String, String> hmap);
+
+
 
 }

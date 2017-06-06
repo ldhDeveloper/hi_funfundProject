@@ -23,7 +23,7 @@ $(function() {
 		  heightMin : '900',
 		  heightMax : '1500',
 		  language : 'fr',
-		  direction: 'rtl',
+		  direction: 'ltr',
 		  toolbarButtons : ['fullscreen', 
 			  				'bold', 'italic', 'underline',
 			  				'|', 'fontFamily', 'fontSize', 'color',
@@ -113,7 +113,7 @@ border-bottom: none;
 		<tr><td colspan="2" class="insertContext"><textarea id="froala-editor" required>
 		</textarea></td></tr>
 </table>
-<button onclick="insertN()">작성</button>
+<button class="btn btn-default" onclick="insertN()">작성</button>
 </form> 
 <div class = "down"></div>
 <script>
@@ -124,7 +124,7 @@ var ano = ${account.ano};
 var bname = '${bname}';
 var page = ${page};
 var ntitle = $('input[name=ntitle]').val();
-alert(ntitle);
+
 
  location.href = "nInsert.no?ano=${account.ano}&bname=${bname}&ntitle="+ntitle+"&ncontent="+ncontent+"&page=${page}";
 

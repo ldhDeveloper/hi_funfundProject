@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="com.hi.funfund.common.*"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
@@ -74,7 +74,7 @@ li {
 	margin-left: auto;
 	margin-right: auto;
 	border: 1px solid gray;
-	margin-top: 100px;
+	margin-top: 50px;
 	padding: 20px;
 	margin-left: auto;
 }
@@ -127,6 +127,12 @@ li {
 	padding: 0 .5em 0 .5em;
 	font-size: 0.75em;
 }
+.option-none{
+	display:none;
+}
+.nav>li>a:active{
+	background-color:orange;
+}
 </style>
 
 
@@ -136,10 +142,9 @@ li {
 <body oncontextmenu="return false">
 
 	<jsp:include page="/WEB-INF/views/common/menubar.jsp" />
-	<script type="text/javascript" src="/funfund/lib/js/jquery.form.min.js"></script>
+	
 	<script>
 		$(function() {
-
 			$('li[id^=info]').click(function() {
 
 				$('li[id^=info]').removeClass("active-active")
@@ -213,9 +218,9 @@ li {
 
 
 	<br>
-	<div class="middle-submenu">
-		<ul class="nav nav-pills middle-submenu"
-			style="width: 900px; align: center;">
+	<div class="middle-submenu" style="width:630px;">
+		<ul class="nav nav-pills"
+			style="width: 100%; align: center;">
 			<li id="info1" class="active-active"><a href="#">기본정보</a></li>
 			<li id="info2"><a href="#">리워드</a></li>
 			<li id="info3"><a href="#">스토리</a></li>
@@ -232,6 +237,8 @@ li {
 			
 			
 			var pro_no = ${pro_no};
+			var itype = "<c:out value='${param.itype}'/>";
+			console.log("itype : " + itype);
 			$.ajax({
 				url:"selectone.it?pro_no=" + pro_no,
 				success:function(data){
@@ -322,6 +329,15 @@ li {
 				$("[name=accnum]").val("");
 				$("[name=bankcode]").val("");
 			});
+			
+			if(itype == 'donation'){
+				$("[name=category]").find(".re-option").addClass("option-none");
+				$("[name=category]").find(".do-option").removeClass("option-none");
+			}
+			if(itype == 'reward'){
+				$("[name=category]").find(".do-option").addClass("option-none");
+				$("[name=category]").find(".re-option").removeClass("option-none");
+			}
 		});
 	
 	
@@ -331,7 +347,7 @@ li {
 
 	<form id="frm" action="update.it?pro_no=${ pro_no }" method="post"
 		onsubmit="return false;" enctype="multipart/form-data" name="frm">
-
+		
 		<input type="hidden" name="flag" value="false">
 		<%-- <input type="hidden" name="pro_no" value="${pro_no }"> --%>
 		<!-- 기본정보 입력 화면 -->
@@ -354,7 +370,7 @@ li {
 					<td>
 						<div
 							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px; padding: 10px;">
-							010-7660-7771</div>
+							${ sessionScope.party.phone }</div>
 					</td>
 					<td></td>
 				</tr>
@@ -370,7 +386,7 @@ li {
 					<td>
 						<div
 							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px; padding: 10px;">
-							<input type="text" name="pname">
+							<input type="text" name="pname" size="52">
 						</div>
 					</td>
 					<td></td>
@@ -387,7 +403,7 @@ li {
 					<td>
 						<div
 							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px; padding: 10px;">
-							<input type="text" name="ecost">&nbsp; 원
+							<input type="text" name="ecost" size="48" style="text-align:right">&nbsp; 원
 						</div>
 					</td>
 					<td></td>
@@ -481,15 +497,15 @@ li {
 							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px; padding: 10px;">
 							<select name="category">
 								<option value="">선택하세요
-								<option value="테크">테크
-								<option value="패션/뷰티">패션/뷰티
-								<option value="푸드">푸드
-								<option value="디자인">디자인제품
-								<option value="예술">예술
-								<option value="게임">게임
-								<option value="여행">여행
-								<option value="스포츠">스포츠
-								<option value="공익">공익
+								<option value="테크" class="re-option">테크
+								<option value="패션/뷰티" class="re-option">패션/뷰티
+								<option value="푸드" class="re-option">푸드
+								<option value="디자인" class="re-option">디자인제품
+								<option value="예술" class="re-option">예술
+								<option value="게임" class="re-option">게임
+								<option value="여행" class="re-option">여행
+								<option value="스포츠" class="re-option">스포츠
+								<option value="후원" class="do-option option-none">후원
 							</select>
 						</div>
 					</td>
@@ -594,7 +610,7 @@ li {
 					<td style="width: 700px;">
 						<div id="reward"
 							style="width: 640px; background: #f8f8f8; border: 1px solid #ddd; padding: 10px;">
-							<table style="width: 620px;">
+							<table style="width: 620px;" cellspacing="3">
 								<tr>
 									<td style="width: 150px;">리워드등록</td>
 									<td style="width: 100px;">금액</td>
@@ -608,7 +624,7 @@ li {
 								<tr>
 									<td>&nbsp;</td>
 									<td>리워드명</td>
-									<td colspan="5"><input type="text" size="44" name="mname"></td>
+									<td colspan="5"><input type="text" size="51" name="mname"></td>
 								</tr>
 								<tr>
 									<td>&nbsp;</td>
@@ -623,7 +639,7 @@ li {
 									<td><input type="text" size="3" name="mcount"></td>
 									<td>배송일</td>
 									<td colspan="2"><input type="text" class="datepicker3" id="datepicker3"
-										style="padding-left: 15px" name="s_mdate" size="13"> <!-- <script
+										style="padding-left: 5px" name="s_mdate" size="11"> <!-- <script
 											src="https://code.jquery.com/jquery-1.12.4.js"></script> <script
 											src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 										<script>

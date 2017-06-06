@@ -10,13 +10,12 @@ public interface NoticeService {
 
 	
 	List selectList(HashMap map);
-	List searchTitle(String bname, int page, String nTitle);
+	List searchTitle(Notice notice, int page);
 	Notice selectOne(int nno);
 	int update(Notice notice);
 	int delete(int nno);
 	int insert(Notice notice);
-	int getListCount(String bname, int upbno);
-	int getListCountWithTitle(String bname, String nTitle);
+	int getListCount(Notice notice);
 	List<Notice> selectDetailList(int nno);
 	int getReplyCount(int nno);
 	int upReadCount(int nno);

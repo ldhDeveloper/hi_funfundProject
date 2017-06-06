@@ -72,7 +72,7 @@ img{
             <br><br><br><br><br><br><br><br>
             
             <button id="modalpop" class="btn btn-makeitem" align="center" data-toggle="modal" data-target="#projectcheck" >신청하기</button>
-            <button id="makeproject" class="btn btn-makeitem" onclick="location.href='insert.it?ano=${sessionScope.account.ano}'" style="display:none">신청하기</button>
+            <button id="makeproject" class="btn btn-makeitem" onclick="location.href='insert.it?ano=${sessionScope.account.ano}&itype=reward'" style="display:none">신청하기</button>
          </p>
       </div>
       </div>
@@ -90,7 +90,7 @@ img{
         
         <div class="modal-body" align="center">
           <p style="text-align:center">작성중인 프로젝트가 있습니다.<br>수정페이지로 이동하시겠습니까?</p><br><br>
-          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="location.href='insert.it?ano=${sessionScope.account.ano}'">새로 작성</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="location.href='insert.it?ano=${sessionScope.account.ano}&itype=reward'">새로 작성</button>
           <button type="button" class="btn btn-default" data-dismiss="modal" onclick="location.href='newproject.ao'" >수정 하기</button>
         </div>
        
@@ -110,13 +110,41 @@ img{
          <p style="color:white;text-align:center;padding-top:50px;font-size:15px;">
             후원형 크라우드펀딩은<br>공익 목적의 자금을 조달할 수 있는 방법입니다.<br>공익 목적의 캠페인에서부터 하드웨어까지,<br>다양한 아이디어를 알리고 후원을 받을 수 있습니다.
             <br><br><br><br><br><br><br><br>
-            <button class="btn btn-makeitem" align="center">신청하기</button>
+            <button id="modalpop2" class="btn btn-makeitem" align="center" data-toggle="modal" data-target="#projectcheck2" >신청하기</button>
+            <button id="makeproject2" class="btn btn-makeitem" onclick="location.href='insert.it?ano=${sessionScope.account.ano}&itype=donation'" style="display:none">신청하기</button>
          </p>
          
       </div>
       </div>
    </div>
+   
+   
+   <!-- 모달영역 -->
+   
+   <div class="modal fade" id="projectcheck2" role="dialog">
+    <div class="modal-dialog modal-sm">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        
+        <div class="modal-body" align="center">
+          <p style="text-align:center">작성중인 프로젝트가 있습니다.<br>수정페이지로 이동하시겠습니까?</p><br><br>
+          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="location.href='insert.it?ano=${sessionScope.account.ano}&itype=donation'">새로 작성</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="location.href='newproject.ao'" >수정 하기</button>
+        </div>
+       
+      </div>
+     </div>
+     </div>
+   
+   
+   
 </div>
+
+
+
 
 </body>
 </html>
