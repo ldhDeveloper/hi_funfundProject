@@ -98,7 +98,15 @@ public class AccountController {
 	
 	
 	@RequestMapping(value = "/signup.ao", produces = "text/plain;charset=UTF-8")
-	public ModelAndView signup(Account account, ModelAndView model){
+	public ModelAndView signup(Account account, ModelAndView model, HttpServletRequest request, HttpServletResponse response){
+		
+		String userAgentInfo = request.getHeader("User-Agent");
+		 if(userAgentInfo.indexOf("MSIE") > -1){ // IE경우는 cache를 설정하지 않는다.
+		  response.setHeader("Cache-Control","no-store");   
+		  response.setHeader("Pragma","no-cache");
+		  response.setDateHeader("Expires",0);
+		  response.setHeader("Cache-Control", "no-cache");
+		 }
 		Account ac = accountService.checkId(account);
 			
 		String result="";
@@ -316,7 +324,7 @@ public class AccountController {
 		ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Mail.xml");
 		
 	    AuthMail mm = (AuthMail) context.getBean("mailMail");
-	    mm.sendMail("from@no-spam.com", email, "Funfund에서 이메일 인증번호를 발송합니다.", "인증번호는 <strong>" + authNumber + "</strong>입니다.");
+	    mm.sendMail("from@no-spam.com", email, "Funfund에서 이메일 인증번호를 발송합니다.", "인증번호는 " + authNumber + " 입니다.");
 	    
 	    return;
 	}

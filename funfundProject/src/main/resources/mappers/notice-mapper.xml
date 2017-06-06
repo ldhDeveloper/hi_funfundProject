@@ -16,25 +16,37 @@
 </resultMap> 
 
 	<select id="selectList" parameterType="HashMap" resultMap="noticeResult">
-		select ranks, nno, ntitle, ncontent, ndate, upbno, bname, readcount, ano, nickname from
+		<choose>
+		<when test='ntitle == null'><!-- 게시판리스트검색 -->
+			select ranks, nno, ntitle, ncontent, ndate, upbno, bname, readcount, ano, nickname from
 		(select rank() over(order by nno desc) ranks, nno, ntitle, ncontent, ndate, upbno, bname, readcount, n.ano ano, nickname
 		 from notice n , account a where a.ano=n.ano and (upbno = 0 and bname = #{bname})) where ranks between #{sNum} and #{eNum} 
-			</select>
-	
-	<select id="searchTitle" parameterType="HashMap" resultMap="noticeResult">
+		</when>
+		<when test="ntitle != null"><!-- 제목으로 리스트검색 -->
 		select ranks, nno, ntitle, ncontent, ndate, upbno, bname, readcount, ano, nickname from
 		(select rank() over(order by nno desc) ranks, nno,  ntitle, ncontent, ndate, upbno, bname, readcount, n.ano ano, nickname
 		 from notice n ,  account a where a.ano=n.ano and (upbno = 0 and bname = #{bname})) where ranks between #{sNum} and #{eNum} 
-		 and ntitle like '%'||#{title}||'%'
-	</select>
-	
-	<select id="getListCount" parameterType="HashMap" resultType="int">
+		 and ntitle like '%'||#{ntitle}||'%'
+		</when>
+		<when test="nickname != null"><!-- 작성자로 리스트검색 -->
+		select ranks, nno, ntitle, ncontent, ndate, upbno, bname, readcount, ano, nickname from
+		(select rank() over(order by nno desc) ranks, nno,  ntitle, ncontent, ndate, upbno, bname, readcount, n.ano ano, nickname
+		 from notice n ,  account a where a.ano=n.ano and (upbno = 0 and bname = #{bname})) where ranks between #{sNum} and #{eNum} 
+		 and nickname like '%'||#{nickname}||'%'
+		</when>
+		</choose>
+
+			</select>
+	<select id="getListCount" parameterType="notice" resultType="int">
+	<choose><when test="ntitle == null">
 	select count(*) from notice where bname = #{bname} and upbno = #{upbno}
+	</when>
+	<otherwise>
+	select count(*) from notice where bname = #{bname} and upbno = 0 and ntitle like '%'||#{ntitle}||'%'
+	</otherwise>
+	</choose>
 	</select>
 	
-	<select id="getListCountWithTitle" parameterType="HashMap" resultType="int">
-	select count(*) from notice where bname = #{bname} and ntitle like '%'||#{title}||'%'
-	</select>
 	
 	<select id="selectOne" parameterType="int" resultType="notice">
 	select nno, ntitle, ncontent, ndate, upbno, bname, readcount, nickname, pimage, n.ano ano from notice n, account a where

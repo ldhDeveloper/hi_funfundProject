@@ -22,14 +22,14 @@ public class NoticeDao {
 		
 		return nList;
 	}
-	public List<Notice> searchTitle(String bname, int page, String ntitle) {
+	public List<Notice> searchTitle(Notice notice, int page) {
 		int startNumber = (page * 10 +1) -10;
 		int endNumber = startNumber +10; 
 		HashMap map = new HashMap();
-		map.put("bname", bname);
+		map.put("bname", notice.getBname());
 		map.put("sNum", startNumber);
 		map.put("eNum", endNumber);
-		map.put("title", ntitle);
+		map.put("title", notice.getNtitle());
 		List<Notice> nList = (List<Notice>)sqlSession.selectList(nameSpace+"searchTitle", map);
 		return nList;
 	}
@@ -50,18 +50,13 @@ public class NoticeDao {
 		
 		return sqlSession.insert(nameSpace+"insert", notice);
 	}
-	public int getListCount(String bname, int upbno) {
+	public int getListCount(Notice notice) {
 	
-		HashMap map = new HashMap();
-		map.put("bname", bname);
-		map.put("upbno", upbno);
-		return (int)sqlSession.selectOne("getListCount", map);
+		return (int)sqlSession.selectOne("getListCount", notice);
 	}
-	public int getListCountWithTitle(String bname, String nTitle) {
-		HashMap map = new HashMap();
-		map.put("bname", bname);
-		map.put("title", nTitle);
-		return (int)sqlSession.selectOne("getListCountWithTitle", map);
+	public int getListCountWithTitle(Notice notice) {
+		
+		return (int)sqlSession.selectOne("getListCountWithTitle", notice);
 	}
 	public List<Notice> selectDetailList(int nno) {
 	

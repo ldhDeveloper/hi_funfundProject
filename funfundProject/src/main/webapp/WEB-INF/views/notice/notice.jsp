@@ -8,51 +8,80 @@
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.4.js"></script> <!-- 아임포트 본인 인증 -->
 <title>Insert title here</title>
 <script>
 $(function(){
-	$(document).ready(function () {
-		$('#accordion').children(".panel-default").children('.panel-collapse').removeClass('in');
-		});
+	
+	$('.panel-heading').hover(function(){
+		$(this).css('cursor', 'pointer');
+	});
+	$('.panel-heading').click(function(){
+		var cname = $(this).siblings("div:first").attr("class");
+		if(cname =="panel-collapse collapse"){
+			$(this).siblings().attr("class", "panel-collapse collapse in");
+		} else {
+			$(this).siblings().attr("class", "panel-collapse collapse");
+		}
+		
+	});
+	
+
 	
 	switch('${bname}'){
 	case '공지사항' :$('#no').css({"background": "#00CCA3", "border-color" : "#00CCA3", "color": "#fff" });
 		$('#bTitle').text('공지사항');
 		$('#bComent').text('펀펀드의 공지사항입니다.');
+		$("#searchBar").children("form").children("#searchCategory").html(
+		"<option value='ntitle'>제목</option>");	
+		if('${account.idtype}' == "관리자"){
+		$("#searchBar").children("form").html($("#searchBar").children("form").html()
+				+" &nbsp; <a class='btn btn-default' href='nInsertView.no?bname=${bname}&page=${page}'>글쓰기</a>");
+		}
 		break;
-	case 'FnQ' :$('#fnq').css({"background": "#00CCA3", "border-color" : "#00CCA3", "color": "#fff" });
-	$('#bTitle').text('FnQ');
-	$('#bComent').text('자주묻는 질문입니다.');
-	$('.nListContainer').html(
-			 "<br><br><br><div class='panel-group' id='accordion'>" +
-			  "<c:forEach var='nlist' items='${nList}' varStatus='status'><div class='panel panel-default'>" +
-			   " <div class='panel-heading'>" +
-			    "<h4 class='panel-title'>" +  
-			     "<a data-toggle='collapse' data-parent='#accordion' href='#collapse${status.index}'>" +   
-			       " ${nlist.ntitle}" +
-			       " </a>" +
-			     " </h4>" +
-			   "</div>"  +
-			   " <div id='collapse${status.index}' class='panel-collapse collapse'>" +
-			   " <div class='panel-body'>${nlist.ncontent}</div>"  +
-			   " </div>  " +
-			 " </div> </c:forEach>" +
-			 " </div>" 
-			);
+		
+		
 	
-	
-	
-	$("#pageBar").html();
-	$("#searchBar").html();
+	 case 'FnQ' : $('#fnq').css({"background": "#00CCA3", "border-color" : "#00CCA3", "color": "#fff" });
+					$('#bTitle').text('FnQ');
+			     	$('#bComent').text('자주묻는 질문입니다.');
+					$('.nListContainer').html( 
+			  										"<div class='panel-group' id='accordion'>"+
+			  										"<c:forEach var='nlist' items='${nList}' varStatus='status'>" +
+			  										"<div class='panel panel-default'>"+
+			  										"<div class='panel-heading'>"+
+			  										"<h4 class='panel-title'>"+
+			  										"<a href='#collapse2' class='fontfamily1' style='text-decoration: none;'>${nlist.ntitle}</a>"+
+			  										"</h4>"+
+			  										"</div>"+
+			  										"<div id='collapse2' class='panel-collapse collapse'>"+
+			  										"<div class='panel-body fontfamily2'>${nlist.ncontent}</div>"+
+			  										"</div>"+
+			  										"</div>"+
+			  										"</c:forEach>" +
+			  										"</div>"
+			  										
+											);
+					$("#pageBar").attr('hidden', true);
+					$("#searchBar").attr('hidden', true);
 	// 아코디언과 내용
-	
-		break;
+		break; 
 	case 'QnA' :$('#qna').css({"background": "#00CCA3", "border-color" : "#00CCA3", "color": "#fff" });
 	$('#bTitle').text('QnA');
 	$('#bComent').text('사용자와의 소통이 이루어 집니다.');
+	$("#searchBar").children("form").children("#searchCategory").html(
+	"<option value='ntitle'>제목</option><option value='nickname'>작성자</option>");	
+	if('${account}' != ""){
+		$("#searchBar").children("form").html($("#searchBar").children("form").html()
+				+" &nbsp; <a class='btn btn-default' href='nInsertView.no?bname=${bname}&page=${page}'>글쓰기</a>");
+		}
 		break;
 	}
+	
+
+	
+	
 });
 
 </script>
@@ -69,11 +98,54 @@ case 3 :  location.href="nList.no?bname=QnA&page=1"; break;
 }
 
 } 
-
+function checkOption(){
+	if($("select").val() == 'nickname'){
+	$('input[name=ntitle]').attr('name', 'nickname');
+	}
+	return true;
+}
 
 
 </script>
 <style>
+button.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+.panel-heading {
+	background: -webkit-linear-gradient(#ffffff, #b0e0e6);
+	background: -o-linear-gradient(#ffffff, #b0e0e6);
+	background: -moz-linear-gradient(#ffffff, #b0e0e6);
+	background: linear-gradient(#ffffff, #b0e0e6);
+	border: solid 1px #2a82a3;
+	height: 52px;
+	border-radius: 4px;
+	padding-top: 0.8%;
+	font-size: 12pt;
+	box-shadow: 3px 3px 5px silver;
+}
+button.accordion.active, button.accordion:hover {
+    background-color: #ddd;
+}
+
+.fontfamily2 {
+	font-family: google !important;
+}
+/* Style the accordion panel. Note: hidden by default */
+div.panel {
+    padding: 0 18px;
+    background-color: white;
+    display: none;
+}
+
+
 .totalN{
 font-size : 13px;
 color : rgb(124, 130, 136);
@@ -98,6 +170,10 @@ background : RGB(96,101,106);
 height : 150px;
 
 }
+.FnQtitle{ display: block;}
+.FnQcontent{
+display : none;}
+
 
 .titleContainer h2 {
 font-size:36px;
@@ -168,6 +244,29 @@ button {
     border: 1px solid #e4e4e4;
     background: #fff;
 }
+.FnQcontainer{
+display : block;
+background : gray;
+
+
+}
+.FnQtitle {
+  color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+.FnQtitle.active .FnQtitle:hover{
+background-color = #444;
+}
+div.FnQcontent {
+padding : 0 18px;
+background-color : white;
+display:none;}
 
 </style>
 
@@ -200,33 +299,34 @@ button {
 					</c:forEach>
 					</div>
 					<!-- 1.여기까지 db에서 불러와서 포문으로 풀어넣기 -->
-					<div class="downbar" id="pagebar" align="center">
+					<div class="downbar" id="pageBar" align="center">
 						<br>
 						<fmt:parseNumber var = "pageCount" value = "${listCount}" type="number"/>
 						<c:set var ="pageNumber" value="${pageCount/10 +1}"/>
 						<c:forEach var="i" begin='1' end="${pageNumber}">
 							<a class="nPage" href="nList.no?bname=${bname}&page=${i}">${i}</a> &nbsp;
-						</c:forEach>
-						<!--  조건절 필요 -->
-						<c:if test="${!empty account}">
-						<a href="nInsertView.no?bname=${bname}&page=${page}">글쓰기</a>
-						</c:if>
+						</c:forEach>						
 					</div>
 					<div align="center" id="searchBar">
-						<form action="nSearchTitle.no" method="post" > 
-							<select>
-								<option value="title">제목</option>
-								<option value="writer">작성자</option>
+						<form action="nList.no"  onsubmit="return checkOption();" > 
+							<select id="searchCategory">
+							
 	 						</select>
-		 					<input type="text" name="nTitle" placeholder="내용을 입력하세요">
+		 					<input type="text" name="ntitle" placeholder="내용을 입력하세요" required>
 	 						<input type="hidden" name="bname" value="${bname}">
 	 						<input type="hidden" name="page" value="1">
-	 						<input type="submit" value="검색">
-	 						  
+	 						<input type="submit" class="btn btn-default" value="검색"> 
 	 					</form>
 					</div>
 				</div>
 			</div>
+						
+			
+			
+			
+			
+			
+			
 		</div>
 	</body>
 </html>
