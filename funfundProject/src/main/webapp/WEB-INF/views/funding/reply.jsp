@@ -24,9 +24,8 @@ ul {
 }
 
 li {
-	padding: 10px;
 	text-align: center;
-	display: inline-block;
+	display:inline-block;
 }
 
 .font {
@@ -114,7 +113,7 @@ button {
 }
 
 .makerinfo {
-	display: inline-block;
+    display: inline-block;
 	padding: 10px;
 	text-align: center;
 }
@@ -149,6 +148,8 @@ button {
 	width: 3%;
 	text-align: center;
 	display: none;
+	border-radius:10px;
+	border:none;
 }
 
 #btn-like {
@@ -256,9 +257,9 @@ textarea {
 
 #recmtbutton {
 	display: inline-block;
-	font-size: 12px;
-	margin-top: 10px;
 	color: #92;
+	cursor:pointer;
+	color:orange;
 }
 
 .supportinfo {
@@ -289,24 +290,62 @@ textarea {
 	width: 40px;
 	height: 40px;
 }
+
+.warning{
+ background-color: #ff9800;
+ border:none;
+ color:white ;
+ width:12%;
+ height:100%;
+}
+
 </style>
 <script src="/funfund/lib/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 	$(function() {
-		$('#btn-like').click(function() {
-			if ($(this).hasClass("backpink")) {
-				$(this).removeClass("backpink");
-			} else {
-				$(this).addClass("backpink");
-			}
-		}).hover(function() {
-			if ($(this).hasClass("backpink")) {
-				$(this).removeClass("backpink");
-			} else {
-				$(this).addClass("backpink");
-			}
-		});
+		var likeList = localStorage.getItem("likeList");
+		console.log("likeList : " + likeList);
+		var pro_no = "_$tag___________________________";
+		console.log("pro_no : " + pro_no);
+		if (likeList != null && likeList.includes("${param.pro_no}")) {
+			$("#btn-like").hide();
+			$("#btn-nonlike").show();
+		} else {
+			$("#btn-like").show();
+			$("#btn-nonlike").hide();
+		}
 
+		$("#btn-like").click(function() {
+			$.ajax({
+				url : "insertMyitem.mi",
+				data : {
+					"pro_no" : "${param.pro_no}",
+					"ano" : "${sessionScope.account.ano}"
+				},
+				success : function(data) {
+					console.log("ajax like : " + data);
+					localStorage.setItem("likeList", data);
+					$("#btn-like").hide();
+					$("#btn-nonlike").show();
+				}
+			})
+		})
+		$("#btn-nonlike").click(function() {
+			$.ajax({
+				url : "deleteMyitem.mi",
+				data : {
+					"pro_no" : "${param.pro_no}",
+					"ano" : "${sessionScope.account.ano}"
+				},
+				success : function(data) {
+					console.log("ajax like : " + data);
+					localStorage.setItem("likeList", data);
+					$("#btn-like").show();
+					$("#btn-nonlike").hide();
+				}
+			})
+		})
+		
 		$('.btn-fund').hover(
 				function() {
 					$('.btn-fund').css('background-color', '#fedb9a').css(
@@ -326,7 +365,7 @@ textarea {
 	$(function() {
 		$('.comment-area2').hide();
 		$('#recmtbutton').click(function() {
-			$('.comment-area2').toggle();
+			$(this).siblings('.comment-area2' ).toggle();
 		});
 
         $('.rebtn').hide();
@@ -364,6 +403,10 @@ textarea {
 		$(".pay").click(function() {
 			location.href = "reward.fm?pro_no=${item.pro_no}";
 		});
+		$(".makerbox").click(function(){
+			var mno = $(this).children('input').val();
+			location.href = "reward.fm?pro_no=${item.pro_no}&mno="+mno;
+		});
 		
 	});
 	
@@ -385,12 +428,12 @@ textarea {
 		</div>
 	</div>
 
-	<div align="center">
-		<ul class="w3-border-bottom w3-border-gray">
-			<li class="active"><a href="detail.it?pro_no=${param.pro_no }">스토리</a></li>
-			<li><a href="reply.ask?pro_no=${param.pro_no }">댓글(${fn:length(aList) })</a></li>
+	<div class="container">
+		<ul class="nav nav-tabs">
+			<li><a href="detail.it?pro_no=${item.pro_no }">스토리</a></li>
+			<li class="active"><a href="reply.ask?pro_no=${item.pro_no }">댓글(${fn:length(aList) })</a></li>
 			<li><a href="news.up?pro_no=${item.pro_no}">새소식(
-					${item.upcount })</a></li>
+					${item.upcount})</a></li>
 		</ul>
 	</div>
 
@@ -405,7 +448,7 @@ textarea {
 				<textarea id="acontent" name="acontent" style="overflow-y: hidden;"
 					rows="3" cols="50" maxlength="140;" placeholder="댓글을 입력하세요"></textarea>
 				<div id="upload">
-					<input type="submit" value="댓글달기"><input type="hidden"
+					<input type="submit"  class="warning" value="댓글달기"><input type="hidden"
 						value="${param.pro_no}" name="pro_no"><input type="hidden"
 						value="${ask.ask_no}" name="ask_no">
 				</div>
@@ -425,15 +468,18 @@ textarea {
 							<c:if test="${ask.idtype eq '메이커' }">
 								<span class="cmtst">메이커</span>
 							</c:if>
+							
+							<c:if test="${sessionScope.account.ano eq ask.id_no }">
+							 <a id="uprepnum${status.index }" style="cursor:pointer;">수정</a>&nbsp;<a href="delete.ask?ask_no=${ask.ask_no}&pro_no=${param.pro_no}" style="cursor:pointer;">삭제</a>
+							</c:if>
+						
+						
 							<p id="replynum${status.index }" class="cmtco upcmt" >${ask.ask_content }</p>
 							<textarea class="form-control" id="updatereply${status.index }" style="display:none;"></textarea>
 							<%-- <c:set var="acontent" value="$(.form-control).val();"/> --%>
 							<span id="rebutton${status.index}" class="rebtn">
-							<a id="uprepcontent${status.index }" class="val" onclick="updateReply(${status.index }, ${ask.ask_no });">수정</a><a>취소</a></span>
+							<a id="uprepcontent${status.index }" class="val" onclick="updateReply(${status.index }, ${ask.ask_no });" style="cursor:pointer;">수정</a><a style="cursor:pointer;">취소</a></span>
 							<span class="cmtda">${ask.ask_date }</span>
-							<c:if test="${sessionScope.account.ano eq ask.id_no }">
-							 <a id="uprepnum${status.index }" style="cursor:pointer;">댓글수정</a><a href="delete.ask?ask_no=${ask.ask_no}&pro_no=${param.pro_no}">댓글삭제</a>
-							</c:if>
 							
 							<a id="recmtbutton">답글달기</a>
 							<form action="reinsert.ask" id="comment-area2"
@@ -442,11 +488,12 @@ textarea {
 									style="overflow-y: hidden;" rows="3" cols="50" maxlength="140;"
 									placeholder="답글을 입력하세요"></textarea>
 								<div id="upload">
-									<input type="submit" value="답글달기"> <input type="hidden"
+									<input type="submit" class="warning" value="답글달기"> <input type="hidden"
 										value="${param.pro_no}" name="pro_no"> <input
 										type="hidden" value="${ask.ask_no}" name="upask_no">
 								</div>
 							</form>
+							
 							<hr>
 						</c:if>
 						
@@ -465,7 +512,7 @@ textarea {
 								<p class="cmtco">${ask.ask_content }</p>
 								<span class="cmtda">${ask.ask_date }</span>
 								<c:if test="${sessionScope.account.ano eq ask.id_no }">
-							 <a style="cursor:pointer;">답글수정</a><a href="redelete.ask?ask_no=${ask.ask_no}&pro_no=${param.pro_no}">답글삭제</a>
+							 <a style="cursor:pointer;">수정</a>&nbsp;<a href="redelete.ask?ask_no=${ask.ask_no}&pro_no=${param.pro_no}">삭제</a>
 							 <input type="hidden" value="${ask.pro_no }" name="pro_no">
 							</c:if>
 							</div>
@@ -493,21 +540,34 @@ textarea {
 					});
 				</script>
 			</p>
-			<em class="infoBar"></em>
-			<p class="info">
-				<c:set var="ecost" value="${item.ecost }" />
+			<div id="progress" class="progress">
+			    <c:set var="ecost" value="${item.ecost }" />
 				<c:set var="fundamount" value="${item.fundamount}" />
+				<c:set var="present" value="${ fundamount * 100 / ecost}" />
+				
+				<div class="progress-bar progress-bar-warning"
+					id="progressbar<c:out value='${status.index}'/>" role="progressbar"
+					aria-valuenow="60" aria-valuemin="0"
+					aria-valuemax="<c:out value="${item.ecost}"/>" style="width:${present}%;">
+					<span class="sr-only"></span>
+				</div>
+			</div>
+			<p class="info">
 				<c:out value="${ fundamount * 100 / ecost}" />
 				% 달성
 			</p>
 			<p class="info">${item.fundamount }원의펀딩</p>
 			<p class="info">${item.supportcount }명의서포터</p>
-			<button class="btn-fund">펀딩하기</button>
+			<button class="btn-fund pay">펀딩하기</button>
 		</div>
 		<div style="text-align: center;">
 			<button class="btn btn-default" id="btn-like">
 				<i class="fa fa-heart-o" aria-hidden="true"></i>
 			</button>
+			<button class="btn btn-default backpink" id="btn-nonlike"
+					style="display: none;">
+					<i class="fa fa-heart-o" aria-hidden="true"></i>
+				</button>
 			<button class="btn btn-default" id="btn-share">
 				<i class="fa fa-share" aria-hidden="true"></i>
 			</button>
@@ -568,7 +628,7 @@ textarea {
 			<p
 				style="font-size: 10pt; text-align: left; padding-bottom: 5px; margin-left: 20px;">리워드선택</p>
 			<c:forEach var="reward" items="${mList}" varStatus="status">
-				<ul class="makerbox pay">
+				<ul class="makerbox">
 					<li style="font-size: 15pt;"><strong><fmt:formatNumber
 								var="mcost" value="${reward.mcost}" /> ${mcost}원</strong></li>
 					<li class="makerinfo">작성자이름
@@ -577,18 +637,11 @@ textarea {
 					<li class="makerinfo">품목
 						<dl>${reward.mname}</dl>
 					</li>
-					<li class="makerinfo">배송비</li>
-					<dl>
-						<c:if test="${null eq reward.dcost }">${reward.dcost }</c:if>
-						<c:if test="${reward.dcost != '' || null ne reward.dcost}">0</c:if>
-						원
-					</dl>
 					<li class="makerinfo">리워드 예상일
 						<dl>${reward.mdate}</dl>
 					</li>
-					<li class="makerinfo">제한 수량</li>
-					<dl>${reward.mcount }개
-					</dl>
+					<li class="makerinfo">제한 수량<dl>${reward.mcount }개
+					</dl></li>
 					<li class="makerinfo current">현재 
 					<c:set var="result" value="${reward.remain}" /> 
 					<c:if test="${result > 0}">

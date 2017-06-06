@@ -24,7 +24,6 @@ ul {
 }
 
 li {
-	padding: 10px;
 	text-align: center;
 	display: inline-block;
 }
@@ -195,19 +194,48 @@ button {
 <script src="/funfund/lib/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 	$(function() {
-		$('#btn-like').click(function() {
-			if ($(this).hasClass("backpink")) {
-				$(this).removeClass("backpink");
-			} else {
-				$(this).addClass("backpink");
-			}
-		}).hover(function() {
-			if ($(this).hasClass("backpink")) {
-				$(this).removeClass("backpink");
-			} else {
-				$(this).addClass("backpink");
-			}
-		});
+		var likeList = localStorage.getItem("likeList");
+		console.log("likeList : " + likeList);
+		var pro_no = "_$tag___________________________";
+		console.log("pro_no : " + pro_no);
+		if (likeList != null && likeList.includes("${param.pro_no}")) {
+			$("#btn-like").hide();
+			$("#btn-nonlike").show();
+		} else {
+			$("#btn-like").show();
+			$("#btn-nonlike").hide();
+		}
+
+		$("#btn-like").click(function() {
+			$.ajax({
+				url : "insertMyitem.mi",
+				data : {
+					"pro_no" : "${param.pro_no}",
+					"ano" : "${sessionScope.account.ano}"
+				},
+				success : function(data) {
+					console.log("ajax like : " + data);
+					localStorage.setItem("likeList", data);
+					$("#btn-like").hide();
+					$("#btn-nonlike").show();
+				}
+			})
+		})
+		$("#btn-nonlike").click(function() {
+			$.ajax({
+				url : "deleteMyitem.mi",
+				data : {
+					"pro_no" : "${param.pro_no}",
+					"ano" : "${sessionScope.account.ano}"
+				},
+				success : function(data) {
+					console.log("ajax like : " + data);
+					localStorage.setItem("likeList", data);
+					$("#btn-like").show();
+					$("#btn-nonlike").hide();
+				}
+			})
+		})
 
 		$('.btn-fund').hover(
 				function() {
@@ -224,6 +252,10 @@ button {
 
 		$(".pay").click(function() {
 			location.href = "reward.fm?pro_no=${item.pro_no}";
+		});
+		$(".makerbox").click(function(){
+			var mno = $(this).children('input').val();
+			location.href = "reward.fm?pro_no=${item.pro_no}&mno="+mno;
 		});
 	});
 </script>
@@ -242,12 +274,12 @@ button {
 		</div>
 	</div>
 
-	<div align="center">
-		<ul class="w3-border-bottom w3-border-gray">
-			<li class="active"><a href="detail.it?pro_no=${param.pro_no }">스토리</a></li>
-			<li><a href="reply.ask?pro_no=${param.pro_no }">댓글(${fn:length(aList) })</a></li>
-			<li><a href="news.up?pro_no=${item.pro_no}">새소식(
-					${item.upcount })</a></li>
+	<div class="container">
+		<ul class="nav nav-tabs">
+			<li ><a href="detail.it?pro_no=${item.pro_no }">스토리</a></li>
+			<li><a href="reply.ask?pro_no=${item.pro_no }">댓글(${fn:length(aList) })</a></li>
+			<li class="active"><a href="news.up?pro_no=${item.pro_no}">새소식(
+					${item.upcount})</a></li>
 		</ul>
 	</div>
 
@@ -287,25 +319,42 @@ button {
 						console.log("btMs : " + btMs);
 						var btDay = Math.round(btMs / (1000 * 60 * 60 * 24));
 						console.log("btDay : " + btDay);
-						$("#box2").html(btDay + "일 남음");
+						if(btDay <= 0){
+							$("#box2").html("펀딩종료");
+						}else{
+							$("#box2").html(btDay + "일 남음");
+						}
 					});
 				</script>
 			</p>
-			<em class="infoBar"></em>
-			<p class="info">
-				<c:set var="ecost" value="${item.ecost }" />
+			<div id="progress" class="progress">
+			    <c:set var="ecost" value="${item.ecost }" />
 				<c:set var="fundamount" value="${item.fundamount}" />
+				<c:set var="present" value="${ fundamount * 100 / ecost}" />
+				
+				<div class="progress-bar progress-bar-warning"
+					id="progressbar<c:out value='${status.index}'/>" role="progressbar"
+					aria-valuenow="60" aria-valuemin="0"
+					aria-valuemax="<c:out value="${item.ecost}"/>" style="width:${present}%;">
+					<span class="sr-only"></span>
+				</div>
+			</div>
+			<p class="info">
 				<c:out value="${ fundamount * 100 / ecost}" />
 				% 달성
 			</p>
 			<p class="info">${item.fundamount }원의펀딩</p>
 			<p class="info">${item.supportcount }명의서포터</p>
-			<button class="btn-fund">펀딩하기</button>
+			<button class="btn-fund pay">펀딩하기</button>
 		</div>
 		<div style="text-align: center;">
 			<button class="btn btn-default" id="btn-like">
 				<i class="fa fa-heart-o" aria-hidden="true"></i>
 			</button>
+			<button class="btn btn-default backpink" id="btn-nonlike"
+					style="display: none;">
+					<i class="fa fa-heart-o" aria-hidden="true"></i>
+				</button>
 			<button class="btn btn-default" id="btn-share">
 				<i class="fa fa-share" aria-hidden="true"></i>
 			</button>
@@ -369,12 +418,6 @@ button {
 					<li class="makerinfo">품목
 						<dl>${reward.mname}</dl>
 					</li>
-					<li class="makerinfo">배송비</li>
-					<dl>
-						<c:if test="${null eq reward.dcost }">${reward.dcost }</c:if>
-						<c:if test="${reward.dcost != '' || null ne reward.dcost}">0</c:if>
-						원
-					</dl>
 					<li class="makerinfo">리워드 예상일
 						<dl>${reward.mdate}</dl>
 					</li>
@@ -411,6 +454,15 @@ button {
 			  }
 			}, function() {
 				$(this).css('background-color', 'white');
+			})
+	   $('.makerbox').click(function() {
+		   var regex = /[^0-9]/g;
+		   var result=$(this).find($('.current')).html().replace(regex,'');
+			  if(result> 0){
+				 $(this).bind('click', true);
+			  }else{
+				 $(this).bind('click', false);
+			  }
 			});
 	   }
    });

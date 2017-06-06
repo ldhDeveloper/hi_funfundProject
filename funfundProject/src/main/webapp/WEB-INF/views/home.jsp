@@ -120,7 +120,7 @@ body {
 			slidesPerView : 1,
 			paginationClickable : true,
 			spaceBetween : 30,
-			autoplay:3000,
+			autoplay:5000,
 			autoplayDisableOnInteraction: false, 
 			loop : true
 		});
