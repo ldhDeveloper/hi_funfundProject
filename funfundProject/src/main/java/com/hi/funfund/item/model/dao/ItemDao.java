@@ -191,5 +191,15 @@ public class ItemDao {
 		List<Item> iList = (List<Item>) sqlSession.selectList(nameSpace + "selectdefaultpast", dDate);
 		return iList;
 	}
+
+	public List<Item> endeditemsearch(String period) {
+		List<Item> iList = (List<Item>) sqlSession.selectList(nameSpace + "endeditemsearch", period);
+		return iList;
+	}
+
+	public List<Item> yearitemsearch(HashMap<String, String> hmap) {
+		List<Item> iList = (List<Item>) sqlSession.selectList(nameSpace + "yearitemsearch", hmap);
+		return iList;
+	}
 	
 }

@@ -3,5 +3,16 @@
 "-//mybatis.org//DTD mapper 3.0//en"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="adminMapper">
-	
+	<resultMap type="accInfo" id="accInfoResult">
+		<id property="ano" column="ano" />
+		<result property="id" column="id" />
+		<result property="idtype" column="idtype" />
+		<result property="phone" column="phone" />
+		<result property="idimage" column="idimage" />
+	</resultMap>
+	<select id="selectRequestSeller" resultMap="accInfoResult">
+		<![CDATA[
+			
+		]]>
+	</select>
 </mapper>

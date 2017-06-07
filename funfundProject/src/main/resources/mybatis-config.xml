@@ -20,6 +20,7 @@
 		<typeAlias type="com.hi.funfund.fundlist.model.vo.Myfunding" alias="myfunding" />
 		<typeAlias type="com.hi.funfund.fundlist.model.vo.Mysponsor" alias="mysponsor" />
 		<typeAlias type="com.hi.funfund.fundlist.model.vo.UpdateSponsor" alias="updatesponsor" />
+		<typeAlias type="com.hi.funfund.admin.model.vo.AccInfo" alias="accInfo" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/account-mapper.xml" />

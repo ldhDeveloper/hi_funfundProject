@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>성공프로젝트 금액관리</title>
+<title>종료펀딩 금액관리</title>
 </head>
 <style>
 .itemImage {
@@ -32,7 +32,7 @@
     font-size: 1.7em;
     color: #fff;
     line-height: 1.4;
-    text-shadow: 0 2px 2px rgba(0,0,0,.2);
+    text-shadow: 0 2px 2px rgba(0,0,0,.2); 
 }
 .itemdetail{
     font-size: 1em;
@@ -87,10 +87,9 @@
 				<div class="middle-submenu">
 					<ul class="nav nav-pills middle-submenu"
 						style="width: 900px; align: center;">
-						<li id="info1"><a href="sellerconfirm.am">회원 관리</a></li>
-						<li id="info2"><a href="itemconfirm.am">프로젝트 관리</a></li>
-						<li id="info3" class="active-active"><a href="successFundding.am">펀딩금액 관리</a></li>
-						<li id="info4"><a href="#">funfund 현황</a></li>
+						<li id="info1"><a href="itemconfirm.am">프로젝트 관리</a></li>
+						<li id="info2" class="active-active"><a href="successFundding.am">펀딩금액 관리</a></li>
+						<li id="info3"><a href="#">funfund 현황</a></li>
 					</ul>
 				</div>
 			</div>
@@ -99,8 +98,8 @@
 	</div>
 	<div class="container">
   <ul class="nav nav-tabs">
-	  <li class="active"><a href="successFundding.am">완료프로젝트 입금</a></li>
-	  <li><a href="pastFundding.am">지난입금내역</a></li>
+	  <li><a href="successFundding.am">완료프로젝트 입금</a></li>
+	  <li class="active"><a href="requestdeleteitem.am">지난입금내역</a></li>
  </ul>  
   <table class="table table-hover adminTable">
     <thead>
@@ -126,17 +125,14 @@
 			var persent = Math.round(fundamount * 100 / ecost) + "%";
 			var billstatus = "<c:out value='${item.billstatus}'/>";
 			var firstprice = 0;
-			var firsttemp = "<c:out value='${item.firstprice}'/>";
 			var secondprice = 0;
-			var secondtemp = "<c:out value='${item.secondprice}'/>"
-			var currentprice = 0;
-			if(firsttemp != ""){
-				firstprice=Number(firsttemp);
+			if(<c:out value='${item.firstprice}'/> != ""){
+				firstprice=Number(<c:out value='${item.firstprice}'/>);
 			}
-			if(secondtemp != ""){
-				secondprice=Number(secondtemp);
+			if(<c:out value='${item.secondprice}'/> != ""){
+				secondprice=Number(<c:out value='${item.secondprice}'/>);
 			}
-			currentprice = firstprice+secondprice;
+			var currentprice = firstprice+secondprice;
 			$("#currentprice<c:out value='${status.index }'/>").html(currentprice);
 			$("#ipersent<c:out value='${status.index }'/>").html(persent);
 			if(billstatus == '미입금'){
@@ -213,37 +209,6 @@
   		$('#infoDetailForm' + index).toggle();
   	}
   
-  	
-  	function changeStatus(pro_no, index){
-  		var firstprice = "";
-  		var secondprice = "";
-  		  		
-  		if($('#firstprice' + index).val() != ""){
-  			firstprice = $('#firstprice' + index).val();
-  		} else {
-  			firstprice = null;
-  		}
-  		if($('#secondprice' + index).val() != ""){
-  			secondprice = $('#secondprice' + index).val();
-  		} else {
-  			secondprice = null;
-  		}
-  		
-  		console.log("firstprice : "  + firstprice);
-  		console.log("secondprice : "  + secondprice);
-  	
-  		$.post( "changeBillStatus.am", {"pro_no" : pro_no, "firstprice" : firstprice, "secondprice" : secondprice})
-	  		.done(function(data){
-				if(data > 0){
-					alert("펀딩금액상태 변경에 성공하였습니다.");
-					location.href ="successFundding.am";
-				} else {
-					alert("펀딩금액상태 변경에 실패하였습니다.");
-					location.href ="successFundding.am";
-				}
-	  		});	
-  		
-  	}
   </script>
 </div>
 </body>

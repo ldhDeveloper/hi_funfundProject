@@ -16,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hi.funfund.account.model.service.AccountService;
 import com.hi.funfund.account.model.vo.Account;
 import com.hi.funfund.account.model.vo.Party;
+import com.hi.funfund.admin.model.service.AdminService;
+import com.hi.funfund.admin.model.vo.AccInfo;
 import com.hi.funfund.item.model.service.ItemService;
 import com.hi.funfund.item.model.vo.Item;
 
@@ -24,6 +26,9 @@ public class AdminController {
 
 	@Autowired
 	private ItemService itemService;
+	
+	@Autowired
+	private AdminService adminService;
 	
 	@Autowired
 	private AccountService accountService;
@@ -117,8 +122,8 @@ public class AdminController {
 	}
 	@RequestMapping(value ="/sellerconfirm.am")
 	public ModelAndView selectRequestSeller(ModelAndView model){
-		List<Account> alist = accountService.selectRequestSeller();
-		model.addObject("alist", alist);
+		List<AccInfo> acList = adminService.selectRequestSeller();
+		model.addObject("acList", acList);
 		model.setViewName("admin/confirmSeller");
 		return model;
 	}
@@ -133,5 +138,27 @@ public class AdminController {
 		model.addObject("iList", iList);
 		model.setViewName("admin/pastFundding");
 		return model;
+	}
+	
+	@RequestMapping(value ="/endeditemsearch.am", method = RequestMethod.POST)
+	public @ResponseBody List<Item> endeditemsearch(@RequestParam("year") String year, @RequestParam("month") String month){
+		HashMap<String, String> hmap = new HashMap<String, String>();
+		List<Item> iList = new ArrayList<Item>();
+		String period="";
+		String speriod ="";
+		String eperiod ="";
+		if(!month.equals("전체보기")){
+			period = year + "-0" + month;
+			iList = itemService.endeditemsearch(period);
+		} else {
+			speriod = year + "-01";
+			eperiod = year + "-12";
+			hmap.put("speriod", speriod);
+			hmap.put("eperiod", eperiod);
+			iList = itemService.yearitemsearch(hmap);
+		}
+		
+		
+		return iList;
 	}
 }
