@@ -130,4 +130,8 @@
 		select * from account 
 		where idtype='승인요청'
 	</select>
+	
+	<update id="updateIdtype" parameterType="int">
+		update account set idtype='승인요청' where ano=#{ano}
+	</update>
 </mapper>

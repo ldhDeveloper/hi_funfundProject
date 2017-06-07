@@ -63,7 +63,7 @@
 }
 
 .mgrade {
-	width: 80%;
+	width: 70%;
 	position: relation;
 	z-index: 20px;
 	background-color: #3DB8CC;
@@ -283,9 +283,16 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 		                 			<button id="updatephoto" class="btn btn-info" onclick="photosubmit();">사진변경하기</button>
 		                 		</c:if>
 		                 	</div>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">개인 일반 회원 <!-- 회원 등급이 들어갈 곳  --></label></div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input type="button" class="mbtn1" value="투자 회원 신청" onclick="return goSellerinfo();"></div>
+						</div>						
+						
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">${ sessionScope.account.idtype }</label></div>
+													
+						<c:choose>
+        					<c:when test="${ sessionScope.account.idtype == '일반회원' || sessionScope.account.idtype == '승인요청'}">
+								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input type="button" class="mbtn1" value="투자 회원 신청" onclick='location.href="sellerinfo.ao"'></div>
+							</c:when>
+						</c:choose>
+						<!-- <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input type="button" class="mbtn1" value="투자 회원 신청" onclick="return goSellerinfo();"></div> -->
 					</div>
 				</div>
 				
@@ -305,7 +312,12 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 										<li class="act"><a class="active" href="myinfo.ao">회원 정보 설정<span class="sr-only">(current)</span></a></li>										
 										
 										<!-- c:if문 걸어서 일반회원이 아닐때만 조건문  -->
-										<li style="display:none;"><a class="otherActive" style="cursor:pointer;">판매자 정보 변경</a></li>
+										<!-- <li style="display:none;"><a class="otherActive" style="cursor:pointer;">판매자 정보 변경</a></li> -->
+										<c:choose>
+        									<c:when test="${ sessionScope.account.idtype == '판매자'}">
+        										<li><a href="sellerinfo.ao" class="otherActive">판매자 정보 수정</a></li>
+        									</c:when>
+        								</c:choose>
 										
 										<li><a href="puttoproject.ao" class="otherActive">찜한 프로젝트</a></li>
 										<li><a href="newproject.ao" class="otherActive">개설한 프로젝트</a></li>
@@ -330,17 +342,17 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 		                 				</c:if>
 		                 			
 		                 				<c:if test="${ !empty sessionScope.party.pname}">
-		                 					<input type="text" name="name" class="input-text" placeholder="이름" value="${ sessionScope.party.pname }"/>
+		                 					<input type="text" name="name" class="input-text" placeholder="이름" value="${ sessionScope.party.pname }" maxlength="10"/>
 		                 				</c:if>
 		                 			
 		                 				<h6 align="left">닉네임</h6>
-		                 				<input type="text" name="nickname" class="input-text" placeholder="닉네임" value="${ sessionScope.account.nickname }"/>
+		                 				<input type="text" name="nickname" class="input-text" placeholder="닉네임" value="${ sessionScope.account.nickname }" maxlength="10"/>
 		                 			
 		                 				<br>
 		                 			
 		                 				<div class="email-input-wrap small">
 											<div class="btn-wrap">
-												<input type="submit" id="saveBtn" class="pwdBtn btn-block-purple" value="설정하기">
+												<input type="submit" id="saveNameBtn" class="pwdBtn btn-block-purple" value="설정하기">
 	                        				</div>
 	                     				</div>
 	                     			

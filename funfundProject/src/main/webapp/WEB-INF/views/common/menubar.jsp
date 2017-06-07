@@ -909,7 +909,7 @@ label.sign-form_title {
 							data-toggle="modal" data-target="#myModal4"
 							style="cursor: pointer"> <c:if
 									test="${!empty sessionScope.account.pimage }">
-									<img style="width: 34px;" class="img-circle img-responsive"
+									<img style="width: 34px; height:34px; max-width: 34px; min-width: 34px; max-height: 34px; min-height: 34px;" class="img-circle img-responsive"
 										src="images/myinfo/<c:out value='${sessionScope.account.pimage }'/>" />
 								</c:if> <c:if test="${empty sessionScope.account.pimage }">
 									<img style="width: 34px;" class="img-circle img-responsive"

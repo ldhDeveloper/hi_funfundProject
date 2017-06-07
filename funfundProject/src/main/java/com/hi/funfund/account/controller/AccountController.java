@@ -338,7 +338,7 @@ public class AccountController {
 	
 	// seller 정보 변경 시작
 	
-	@RequestMapping(value = "changSeller.ao")
+	@RequestMapping(value = "changeSeller.ao")
 	public String changSeller(Attachment vo, HttpServletRequest request) throws  IOException{
 		System.out.println("오니?");
 		
@@ -446,12 +446,15 @@ public class AccountController {
 		}
 		
 		party = accountService.selectResult(ano);
+		account = accountService.selectAccount(ano);
 
 		
 		System.out.println("seller Controller3 ano : " + ano + " party : " + party);
 		
-		session.setAttribute("party", party);
 		
-		return "myinfo/sellerinfo";
+		session.setAttribute("party", party);
+		session.setAttribute("account", account);
+		
+		return "redirect:/sellerinfo.ao";
 	}
 }

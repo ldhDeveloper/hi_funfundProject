@@ -66,7 +66,7 @@
 }
 
 .mgrade {
-	width: 80%;
+	width: 70%;
 	position: relation;
 	z-index: 20px;
 	background-color: #3DB8CC;
@@ -184,8 +184,13 @@
 		                 				<input type="text" name="pname" class="mnameText" placeholder="이름" value="${ sessionScope.party.pname }" readonly/>
 		                 			</c:if>
 						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">개인 일반 회원 <!-- 회원 등급이 들어갈 곳  --></label></div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input type="button" class="mbtn1" value="투자 회원 신청" onclick="return goSellerinfo();"></div>
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">${ sessionScope.account.idtype }</label></div>
+						
+						<c:choose>
+        					<c:when test="${ sessionScope.account.idtype == '일반회원' || sessionScope.account.idtype == '승인요청'}">
+								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input type="button" class="mbtn1" value="투자 회원 신청" onclick='location.href="sellerinfo.ao"'></div>
+							</c:when>
+						</c:choose>
 					</div>
 				</div>
 				
@@ -204,7 +209,13 @@
     						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       							<ul class="nav navbar-nav">
       								<li><a href="myinfo.ao" class="otherActive">회원 정보 설정</a></li>
-      								<li style="display:none;"><a class="otherActive" id="goSellerinfo" style="cursor:pointer;">판매자 정보 변경</a></li>
+      								
+      								<c:choose>
+        									<c:when test="${ sessionScope.account.idtype == '판매자'}">
+        										<li><a href="sellerinfo.ao" class="otherActive">판매자 정보 수정<span class="sr-only">(current)</span></a></li>
+        									</c:when>
+        							</c:choose>
+        								
         							<li class="act"><a class="active" href="puttoproject.ao">찜한 프로젝트<span class="sr-only">(current)</span></a></li>      							        							        							
         							<li><a href="newproject.ao" class="otherActive">개설한 프로젝트</a></li>
         							<li><a href="myfunding.ao" class="otherActive">나의 펀딩 현황</a></li>
