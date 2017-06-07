@@ -87,6 +87,26 @@
 		$(function(){
 			var list = "<c:out value='${alist}'/>"
 			console.log("list : " + list);
+			var today = new Date();
+			var defaultyear = today.getFullYear();
+			var defaultmonth = today.getMonth() + 1;
+			$("#yearbtn").html(defaultyear + "<span class='caret'></span>");
+			$("#monthbtn").html(defaultmonth + "<span class='caret'></span>");
+			$("#yearbtn").val(defaultyear);
+			$("#monthbtn").val(defaultmonth);
+			
+			$("#yeardrop").find("a").click(function(){
+				console.log("year!");
+				$("#yearbtn").html($(this).html() + "<span class='caret'></span>");
+				$("#yearbtn").val($(this).html());
+			});
+			
+			$("#monthdrop").find("a").click(function(){
+				console.log("month!");
+				$("#monthbtn").html($(this).html() + "<span class='caret'></span>");
+				$("#monthbtn").val($(this).html())
+			})
+			
 		});
 	</script>
 		<div class="row" style="top: -7.0rem; position: relative;">
@@ -95,9 +115,10 @@
 				<div class="middle-submenu">
 					<ul class="nav nav-pills middle-submenu"
 						style="width: 900px; align: center;">
-						<li id="info1"><a href="itemconfirm.am">프로젝트 관리</a></li>
-						<li id="info2" class="active-active"><a href="successFundding.am">펀딩금액 관리</a></li>
-						<li id="info3"><a href="#">funfund 현황</a></li>
+						<li id="info1"><a href="sellerconfirm.am">회원 관리</a></li>
+						<li id="info2"><a href="itemconfirm.am">프로젝트 관리</a></li>
+						<li id="info3" class="active-active"><a href="successFundding.am">펀딩금액 관리</a></li>
+						<li id="info4"><a href="#">funfund 현황</a></li>
 					</ul>
 				</div>
 			</div>
@@ -171,16 +192,6 @@
     	<c:forEach var="item" items="${iList }" varStatus="status">
     	<script>
 		$(function(){
-			$("#yeardrop").find("a").click(function(){
-				$("#yearbtn").html($(this).html() + "<span class='caret'></span>");
-				$("#yearbtn").val($(this).html());
-			});
-			
-			$("#monthdrop li a").click(function(){
-				$("#monthbtn").html($(this).html() + "<span class='caret'></span>");
-				$("#monthbtn").val($(this).html())
-			})
-			
 			var ecost = "<c:out value='${item.ecost}'/>";
 			var fundamount = "<c:out value='${item.fundamount}'/>";
 			var persent = Math.round(fundamount * 100 / ecost) + "%";
@@ -243,7 +254,7 @@
 							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
 							<div class="input-group">
 							<span class="input-group-addon">￦</span>
-							<input id="firstprice<c:out value='${status.index }'/>" type="number" class="form-control" value="${item.firstprice }"></div>
+							<input id="firstprice<c:out value='${status.index }'/>" type="number" class="form-control" value="${item.firstprice }" readonly></div>
 							</div>
 						</div>		
 						<div class="row tmargin">	
@@ -252,12 +263,9 @@
 							<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2"><h6>2차금액</h6></div>
 							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><div class="input-group">
 							<span class="input-group-addon">￦</span>
-							<input id="secondprice<c:out value='${status.index }'/>" type="number" class="form-control" value="${item.secondprice }">
+							<input id="secondprice<c:out value='${status.index }'/>" type="number" class="form-control" value="${item.secondprice }" readonly>
 							</div></div>
 						</div>
-						<%-- <div class="row tmargin" style="text-align:center;">
-							<span><input type="button" class="btn btn-success" value="변경하기" onclick="changeStatus(${item.pro_no}, ${status.index});"></span>
-						</div> --%>
 					</td>
       	</tr>
       </c:forEach>
@@ -271,38 +279,6 @@
   	
   	function pDetailOpen(index){
   		$('#infoDetailForm' + index).toggle();
-  	}
-  
-  	
-  	function changeStatus(pro_no, index){
-  		var firstprice = "";
-  		var secondprice = "";
-  		  		
-  		if($('#firstprice' + index).val() != ""){
-  			firstprice = $('#firstprice' + index).val();
-  		} else {
-  			firstprice = null;
-  		}
-  		if($('#secondprice' + index).val() != ""){
-  			secondprice = $('#secondprice' + index).val();
-  		} else {
-  			secondprice = null;
-  		}
-  		
-  		console.log("firstprice : "  + firstprice);
-  		console.log("secondprice : "  + secondprice);
-  	
-  		$.post( "changeBillStatus.am", {"pro_no" : pro_no, "firstprice" : firstprice, "secondprice" : secondprice})
-	  		.done(function(data){
-				if(data > 0){
-					alert("펀딩금액상태 변경에 성공하였습니다.");
-					location.href ="successFundding.am";
-				} else {
-					alert("펀딩금액상태 변경에 실패하였습니다.");
-					location.href ="successFundding.am";
-				}
-	  		});	
-  		
   	}
   	
   	function itemsearch(){
@@ -354,19 +330,20 @@
   						html += "<div class='col-xs-12 col-sm-12 col-md-4 col-lg-4'>";
   						html += "<div class='input-group'>";
   						html += "<span class='input-group-addon'>￦</span>";
-  						html += "<input id='firstprice" + i + "' type='number' class='form-control' value=" + data[i].firstprice + "></div></div></div>";
+  						html += "<input id='firstprice" + i + "' type='number' class='form-control' value=" + data[i].firstprice + " readonly></div></div></div>";
+  						html += "<div class='row tmargin'>";
   						html += "<div class='col-xs-12 col-sm-12 col-md-2 col-lg-2'><h6>2차입금일</h6></div>";
   						html += "<div class='col-xs-12 col-sm-12 col-md-4 col-lg-4'><input id='seconddeposit" + i + "' type='date' class='form-control' value=" + data[i].seconddeposit + " readonly></div>";
   						html += "<div class='col-xs-12 col-sm-12 col-md-2 col-lg-2'><h6>2차금액</h6></div>";
   						html += "<div class='col-xs-12 col-sm-12 col-md-4 col-lg-4'>";
   						html += "<div class='input-group'>";
   						html += "<span class='input-group-addon'>￦</span>";
-						html += "<input id='secondprice" + i + "' type='number' class='form-control' value=" + data[i].secondprice + "></div></div></div></td></tr>";
+						html += "<input id='secondprice" + i + "' type='number' class='form-control' value=" + data[i].secondprice + " readonly></div></div></div></td></tr>";
   					}
   					$("#itembody").html(html);
   				},
   				error : function(error, status){
-  					alert("status : " + status + "\n error" + error);
+  					alert("status : " + status + "\n error : " + error);
   				}
   			})
   		} else {

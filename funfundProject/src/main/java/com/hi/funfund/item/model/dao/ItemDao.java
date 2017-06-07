@@ -193,6 +193,17 @@ public class ItemDao {
 		return iList;
 	}
 
+
+	public List<Item> endeditemsearch(String period) {
+		List<Item> iList = (List<Item>) sqlSession.selectList(nameSpace + "endeditemsearch", period);
+		return iList;
+	}
+
+	public List<Item> yearitemsearch(HashMap<String, String> hmap) {
+		List<Item> iList = (List<Item>) sqlSession.selectList(nameSpace + "yearitemsearch", hmap);
+		return iList;
+	}
+
 	public ItemCount selectItemCount() {
 		ItemCount count = (ItemCount) sqlSession.selectOne(nameSpace + "selectcount");
 		return count;
