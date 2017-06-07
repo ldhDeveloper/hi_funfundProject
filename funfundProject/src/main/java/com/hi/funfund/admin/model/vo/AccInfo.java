@@ -2,7 +2,7 @@ package com.hi.funfund.admin.model.vo;
 
 public class AccInfo implements java.io.Serializable{
 	private int ano;
-	private int id;
+	private String id;
 	private String idtype;
 	private String phone;
 	private String idimage;
@@ -12,10 +12,10 @@ public class AccInfo implements java.io.Serializable{
 	public void setAno(int ano) {
 		this.ano = ano;
 	}
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getIdtype() {
@@ -37,7 +37,7 @@ public class AccInfo implements java.io.Serializable{
 		this.idimage = idimage;
 	}
 	public AccInfo(){}
-	public AccInfo(int ano, int id, String idtype, String phone, String idimage) {
+	public AccInfo(int ano, String id, String idtype, String phone, String idimage) {
 		super();
 		this.ano = ano;
 		this.id = id;

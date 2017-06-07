@@ -19,5 +19,5 @@ public class AdminDao {
 		List<AccInfo> accList = (List<AccInfo>)sqlSession.selectList(nameSpace + "selectRequestSeller");
 		return accList;
 	}
-
+	
 }
