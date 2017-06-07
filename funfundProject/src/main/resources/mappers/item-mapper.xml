@@ -92,6 +92,8 @@
 			                             where ftype='item' and fsubtype='thumbnail') i7 on(i1.pro_no = i7.refno)
                                    left join (select ano, pimage
                                                 from account) ac on (ac.ano=i1.ano)
+                 where i1.pstatus='승인완료'                                                
+                                                
 			]]>
 	</select>
 

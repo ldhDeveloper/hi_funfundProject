@@ -114,7 +114,6 @@ button {
 }
 
 .makerinfo {
-	display: inline-block;
 	padding: 10px;
 	text-align: center;
 }
@@ -253,10 +252,7 @@ button {
 		$(".pay").click(function() {
 			location.href = "reward.fm?pro_no=${item.pro_no}";
 		});
-		$(".makerbox").click(function(){
-			var mno = $(this).children('input').val();
-			location.href = "reward.fm?pro_no=${item.pro_no}&mno="+mno;
-		});
+		
 	});
 </script>
 </head>
@@ -365,14 +361,12 @@ button {
 				style="font-size: 10pt; text-align: left; padding-top: 20px; padding-bottom: 5px; margin-left: 20px;">메이커
 				정보</p>
 			<div class="makerbox2">
-				<div class="makerinfo img">
 					<c:if test="${!empty item.pimage }">
 						<img class="img" src="/funfund/images/myinfo/${item.pimage }">
 					</c:if>
 					<c:if test="${empty item.pimage }">
 						<img class="img" src="/funfund/images/myinfo/dimages.png">
 					</c:if>
-				</div>
 				<div class="makerinfo">${item.cname }</div>
 				<div>
 					<div class="makerinfo">문의처</div>
@@ -405,12 +399,13 @@ button {
 			</div>
 		</div>
 
-		<div class="">
+		<div class="hidden-sm hidden-xs">
 			<p
 				style="font-size: 10pt; text-align: left; padding-bottom: 5px; margin-left: 20px;">리워드선택</p>
-			<c:forEach var="reward" items="${mList}" varStatus="status">
-				<ul class="makerbox pay">
-					<li style="font-size: 15pt;"><strong><fmt:formatNumber
+			<c:forEach var="reward" items="${mList}">
+				<ul class="makerbox">
+					<input type="hidden" value="${reward.mno}">
+					<li style="font-size: 15pt;"class="makerinfo"><strong><fmt:formatNumber
 								var="mcost" value="${reward.mcost}" /> ${mcost}원</strong></li>
 					<li class="makerinfo">작성자이름
 						<dl>${item.pname}</dl>
@@ -421,21 +416,21 @@ button {
 					<li class="makerinfo">리워드 예상일
 						<dl>${reward.mdate}</dl>
 					</li>
-					<li class="makerinfo">제한 수량</li>
+					<li class="makerinfo">제한 수량
 					<dl>${reward.mcount }개
 					</dl>
-					<li class="makerinfo current">현재 
-					<c:set var="result" value="${reward.remain}" /> 
-					<c:if test="${result > 0}">
-					${result }</c:if> 
-					<c:if test="${result <= 0 }">
+					</li>
+					<li class="makerinfo current">현재 <c:set var="result"
+							value="${reward.remain}" /> <c:if test="${result > 0}">
+					${result }</c:if> <c:if test="${result <= 0 }">
 					0
 					</c:if>개 남음
 					</li>
 				</ul>
 			</c:forEach>
 		</div>
-		<div>
+
+		<div class="hidden-sm hidden-xs">
 			<button class="btn-fund pay">펀딩하기</button>
 		</div>
 	</div>
@@ -449,25 +444,20 @@ button {
 		   var result=$(this).find($('.current')).html().replace(regex,'');
 			  if(result> 0){
 				 $(this).css('background-color', '#c6ebd9');
+				 $(this).click(function(){
+						var mno = $(this).children('input').val();
+						location.href = "reward.fm?pro_no=${item.pro_no}&mno="+mno+"&remain="+result;
+					});
 			  }else{
 				 $(this).css('background-color', '#d9d9d9');
 			  }
 			}, function() {
 				$(this).css('background-color', 'white');
-			})
-	   $('.makerbox').click(function() {
-		   var regex = /[^0-9]/g;
-		   var result=$(this).find($('.current')).html().replace(regex,'');
-			  if(result> 0){
-				 $(this).bind('click', true);
-			  }else{
-				 $(this).bind('click', false);
-			  }
 			});
 	   }
+	  
    });
 </script>
-
 
 </body>
 </html>

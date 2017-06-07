@@ -191,5 +191,6 @@ public class ItemDao {
 		List<Item> iList = (List<Item>) sqlSession.selectList(nameSpace + "selectdefaultpast", dDate);
 		return iList;
 	}
+
 	
 }
