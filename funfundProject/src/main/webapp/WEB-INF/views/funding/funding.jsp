@@ -315,16 +315,13 @@ body {
 			interval : 2500
 		});
 		
-		
+		$("#s1").children().eq(0).fadeIn(1000);
+		$("#s1").children().eq(1).fadeIn(1000);
+		$("#s1").children().eq(2).fadeIn(1000);
+		$("#s1").children().eq(3).fadeIn(1000);
 	})
 </script>
-<script>
-(function($){
-    jQuery(document).ready(function(){
-        $('.slideshow').FadeWideBgImg({interval:2000});
-    });
-    }(window.jQuery,window));
-</script>
+
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/menubar.jsp" flush="true" />
@@ -332,19 +329,26 @@ body {
 		<div class="col-lg-2 col-md-0 col-sm-0 col-xs-0"></div>
 		<div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
 
-         <div style="position:absolute">
-				<ul class="slideshow">
-				<c:forEach var="slide" items="${top3List }" varStatus="status">
-					<li><img src="/funfund/images/makeproject/titleimg/${slide.thumbnail }"></li>
-				</c:forEach>
+
+				<ul id="s1">
+				<li><img src="/funfund/images/funding/1.PNG" class="img-responsive"></li>
+				<li><img src="/funfund/images/funding/2.PNG" class="img-responsive"></li>
+				<li><img src="/funfund/images/funding/3.PNG" class="img-responsive"></li>
+				<li><img src="/funfund/images/funding/4.PNG" class="img-responsive"></li>
 				</ul>
-				<ul>
-				<li></li>
-				<li></li>
-				<li></li>
+				
+				<!-- <ul id="s2">
+				<li><img src="/funfund/images/funding/f.png"></li>
+				<li><img src="/funfund/images/funding/s.png"></li>
+				<li><img src="/funfund/images/funding/t.png"></li>
+				<li><img src="/funfund/images/funding/f2.png"></li>
 				</ul>
-			
-		</div>
+				<ul id="s3">
+				<li><img src="/funfund/images/funding/f.png"></li>
+				<li><img src="/funfund/images/funding/s.png"></li>
+				<li><img src="/funfund/images/funding/t.png"></li>
+				<li><img src="/funfund/images/funding/f2.png"></li>
+				</ul> -->
 			<!-- 
 				 슬라이드
 				<div id="myCarousel" class="carousel slide"
