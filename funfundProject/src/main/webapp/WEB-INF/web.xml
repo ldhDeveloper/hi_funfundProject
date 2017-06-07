@@ -194,6 +194,22 @@
 		<servlet-name>admin</servlet-name>
 		<url-pattern>*.am</url-pattern>
 	</servlet-mapping>
+	
+	<!-- alert 요청 서블릿 -->
+	<servlet>
+		<servlet-name>alert</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/config/alert-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>alert</servlet-name>
+		<url-pattern>*.al</url-pattern>
+	</servlet-mapping>
 
 <!-- mail 요청 서블릿 -->
 	<servlet>

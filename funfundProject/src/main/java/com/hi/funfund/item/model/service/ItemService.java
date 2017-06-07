@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.hi.funfund.item.model.vo.Item;
+import com.hi.funfund.item.model.vo.ItemCount;
 import com.hi.funfund.item.model.vo.Itemfund;
 
 public interface ItemService {
@@ -92,10 +93,12 @@ public interface ItemService {
 
 	List<Item> selectdefaultpast(String dDate);
 
+
 	List<Item> endeditemsearch(String period);
 
 	List<Item> yearitemsearch(HashMap<String, String> hmap);
 
+	ItemCount selectitemCount();
 
 
 }

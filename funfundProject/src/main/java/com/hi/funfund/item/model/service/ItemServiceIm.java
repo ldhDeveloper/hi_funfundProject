@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.hi.funfund.item.model.dao.ItemDao;
 import com.hi.funfund.item.model.vo.Item;
+import com.hi.funfund.item.model.vo.ItemCount;
 import com.hi.funfund.item.model.vo.Itemfund;
 
 @Service("itemService")
@@ -119,7 +120,8 @@ public class ItemServiceIm implements ItemService{
 		// TODO Auto-generated method stub
 		return itemDao.top3List();
 	}
-
+    
+	
 	@Override
 	public List<Itemfund> bestList(int pro_no) {
 		return itemDao.bestList(pro_no);
@@ -249,5 +251,9 @@ public class ItemServiceIm implements ItemService{
 		return itemDao.yearitemsearch(hmap);
 	}
 
+  @Override
+	public ItemCount selectitemCount(){
+		return itemDao.selectItemCount();
+	}
 	
 }

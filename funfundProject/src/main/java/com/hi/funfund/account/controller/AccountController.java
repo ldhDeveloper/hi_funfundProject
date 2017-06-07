@@ -33,6 +33,7 @@ import com.hi.funfund.AuthMail.AuthMail;
 import com.hi.funfund.account.model.service.AccountService;
 import com.hi.funfund.account.model.vo.Account;
 import com.hi.funfund.account.model.vo.Party;
+import com.hi.funfund.alert.model.service.AlertService;
 import com.hi.funfund.attachment.model.service.AttachmentService;
 import com.hi.funfund.attachment.model.vo.Attachment;
 import com.hi.funfund.fundlist.model.service.FundListService;
@@ -58,6 +59,9 @@ public class AccountController {
 	@Autowired
 	private FundListService fundListService;
 	
+	@Autowired
+	private AlertService alertService;
+	
 	@RequestMapping("/login.ao")
 	public String login(Party party, Account account, HttpServletRequest request){
 		account = accountService.login(account);
@@ -65,6 +69,9 @@ public class AccountController {
 		HttpSession session = request.getSession(false);
 		if(account != null){
 			Party p = accountService.loginParty(account.getAno());
+			int checknewmsg = alertService.checkNewMessage(account.getAno());
+			System.out.println("새소식체크 : " + checknewmsg);
+			session.setAttribute("checknewmsg", checknewmsg);
 			session.setAttribute("account", account);
 			session.setAttribute("party", p);
 		}

@@ -316,12 +316,12 @@ public class ItemController {
 	}
 	
 	
-	
-	
 
 	@RequestMapping("funding.it")
 	public ModelAndView funding(ModelAndView model) {
 		List<Item> iList = itemService.AllList();
+		List<Item> top3List = itemService.top3List();
+		model.addObject("top3List", top3List);
 		model.addObject("iList", iList);
 		model.setViewName("funding/funding");
 		return model;
