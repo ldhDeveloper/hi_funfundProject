@@ -120,7 +120,8 @@ public class ItemServiceIm implements ItemService{
 		// TODO Auto-generated method stub
 		return itemDao.top3List();
 	}
-
+    
+	
 	@Override
 	public List<Itemfund> bestList(int pro_no) {
 		return itemDao.bestList(pro_no);

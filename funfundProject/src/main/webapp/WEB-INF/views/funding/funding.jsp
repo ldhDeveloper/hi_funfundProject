@@ -8,6 +8,7 @@
 <title>funding</title>
 <script src="/funfund/lib/js/jquery-3.2.1.min.js"></script>
 <link href="/funfund/lib/css/bootstrap.min.css" rel="stylesheet">
+<script src="/funfund/lib/js/jquery.FadeWideBgImg.js"></script>
 <style>
 @media screen and (min-width: 960px) {
 	body {
@@ -98,7 +99,7 @@ button {
 .slide {
 	max-width: 500px;
 	align: left;
-	 display: inline-block;
+	display: inline-block;
 	/* float: left; */
 }
 
@@ -107,8 +108,8 @@ button {
 }
 
 .align {
-   display: inline-block;
-	margin-left:-5px;
+	display: inline-block;
+	margin-left: -5px;
 }
 
 .isize {
@@ -309,9 +310,20 @@ body {
 										}
 									});
 						})
-						
-						$('.carousel').carousel({ interval:2500 });
-	});
+
+		$('.carousel').carousel({
+			interval : 2500
+		});
+		
+		
+	})
+</script>
+<script>
+(function($){
+    jQuery(document).ready(function(){
+        $('.slideshow').FadeWideBgImg({interval:2000});
+    });
+    }(window.jQuery,window));
 </script>
 </head>
 <body>
@@ -319,12 +331,26 @@ body {
 	<div class="titlebar" align="center">
 		<div class="col-lg-2 col-md-0 col-sm-0 col-xs-0"></div>
 		<div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
-		
-				<!-- 슬라이드 -->
+
+         <div style="position:absolute">
+				<ul class="slideshow">
+				<c:forEach var="slide" items="${top3List }" varStatus="status">
+					<li><img src="/funfund/images/makeproject/titleimg/${slide.thumbnail }"></li>
+				</c:forEach>
+				</ul>
+				<ul>
+				<li></li>
+				<li></li>
+				<li></li>
+				</ul>
+			
+		</div>
+			<!-- 
+				 슬라이드
 				<div id="myCarousel" class="carousel slide"
 					data-ride="carousel" style="padding-top: 20px;">
 
-					<!-- Wrapper for slides -->
+					Wrapper for slides
 					<div class="carousel-inner" role="listbox">
 						<div class="item active">
 							<img src="/funfund/images/funding/thumbnail/pr1.jpg">
@@ -341,7 +367,7 @@ body {
 					</div>
 				</div>
 
-				<!-- 오른쪽 이미지(2개) -->
+				오른쪽 이미지(2개)
 				<div class="align hidden-sm hidden-xs" style="position:relative">
 					<img src="/funfund/images/funding/thumbnail/pr4.jpg"
 						class="img-responsive isize">
@@ -362,7 +388,7 @@ body {
 						src="/funfund/images/funding/thumbnail/pr4.jpg"
 						class="img-responsive">
 						<div class="text" style="position:absolute; top:200px;left:50px;"><h5>글 내용2</h5></div> 
-				</div>
+				</div>-->
 		</div>
 	</div>
 
@@ -406,8 +432,8 @@ body {
 								src="/funfund/images/funding/thumbnail/<c:out value="${item.thumbnail }"/>"
 								alt="사진1" style="width: 100%"> <script>
 									$(function() {
-										var ecost = "<c:out value='${item.ecost}'/>";
-										var fundamount = "<c:out value='${item.fundamount}'/>"
+										var ecost = "_$tag_________________________";
+										var fundamount = "_$tag______________________________"
 										var persent = Math.round(fundamount
 												* 100 / ecost);
 										var bar = 0;
@@ -417,7 +443,7 @@ body {
 											bar = persent;
 										}
 										var edate = new Date(
-												"<c:out value='${item.pedate}'/>");
+												"_$tag__________________________");
 										var todate = new Date();
 										var btMs = edate.getTime()
 												- todate.getTime();
@@ -426,37 +452,37 @@ body {
 
 										console.log(persent);
 										$(
-												"#persent<c:out value='${status.index}'/>")
+												"#persent_$tag___________________________")
 												.text(persent);
 										$(
-												"#progressbar<c:out value='${status.index}'/>")
+												"#progressbar_$tag___________________________")
 												.attr("aria-valuenow", persent);
 										$(
-												"#progressbar<c:out value='${status.index}'/>")
+												"#progressbar_$tag___________________________")
 												.css("width", bar + "%");
 										$(
-												"#edate<c:out value='${status.index}'/>")
+												"#edate_$tag___________________________")
 												.text(btDay);
 
 										if (btDay < 0) {
 											$(
-													"#edate<c:out value='${status.index}'/>")
+													"#edate_$tag___________________________")
 													.hide();
 											$(
-													"#yet<c:out value='${status.index}'/>")
+													"#yet_$tag___________________________")
 													.hide();
 											$(
-													"#complete<c:out value='${status.index}'/>")
+													"#complete_$tag___________________________")
 													.show();
 										} else {
 											$(
-													"#complete<c:out value='${status.index}'/>")
+													"#complete_$tag___________________________")
 													.hide();
 											$(
-													"#edate<c:out value='${status.index}'/>")
+													"#edate_$tag___________________________")
 													.show();
 											$(
-													"#yet<c:out value='${status.index}'/>")
+													"#yet_$tag___________________________")
 													.show();
 										}
 									})

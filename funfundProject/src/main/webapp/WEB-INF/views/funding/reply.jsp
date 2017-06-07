@@ -113,7 +113,6 @@ button {
 }
 
 .makerinfo {
-    display: inline-block;
 	padding: 10px;
 	text-align: center;
 }
@@ -378,7 +377,9 @@ textarea {
 			$('#updatereply' + repnum).text(txt);
 			$('#updatereply' + repnum).show();	
 			$('#rebutton'+repnum).show();
-		});
+			$('.replydelete').hide();
+			$('#re'+repnum).hide();
+			});
 		
 		/* $("a[id^=uprepcontent]").click(function(){
 			var repId = $(this).attr("id");
@@ -402,10 +403,6 @@ textarea {
 
 		$(".pay").click(function() {
 			location.href = "reward.fm?pro_no=${item.pro_no}";
-		});
-		$(".makerbox").click(function(){
-			var mno = $(this).children('input').val();
-			location.href = "reward.fm?pro_no=${item.pro_no}&mno="+mno;
 		});
 		
 	});
@@ -470,18 +467,21 @@ textarea {
 							</c:if>
 							
 							<c:if test="${sessionScope.account.ano eq ask.id_no }">
+							<span class="replydelete">
 							 <a id="uprepnum${status.index }" style="cursor:pointer;">수정</a>&nbsp;<a href="delete.ask?ask_no=${ask.ask_no}&pro_no=${param.pro_no}" style="cursor:pointer;">삭제</a>
+							 </span>
 							</c:if>
 						
 						
 							<p id="replynum${status.index }" class="cmtco upcmt" >${ask.ask_content }</p>
-							<textarea class="form-control" id="updatereply${status.index }" style="display:none;"></textarea>
+							<textarea class="form-control" id="updatereply${status.index }" style="display:none; width:80%"></textarea>
 							<%-- <c:set var="acontent" value="$(.form-control).val();"/> --%>
 							<span id="rebutton${status.index}" class="rebtn">
-							<a id="uprepcontent${status.index }" class="val" onclick="updateReply(${status.index }, ${ask.ask_no });" style="cursor:pointer;">수정</a><a style="cursor:pointer;">취소</a></span>
+							<a id="uprepcontent${status.index }" class="val" onclick="updateReply(${status.index }, ${ask.ask_no });" style="cursor:pointer;">수정</a>&nbsp;<a  style="cursor:pointer;"onclick="reset">취소</a></span>
+							<span id="re${status.index }">
 							<span class="cmtda">${ask.ask_date }</span>
-							
 							<a id="recmtbutton">답글달기</a>
+							</span>
 							<form action="reinsert.ask" id="comment-area2"
 								class="comment-area2">
 								<textarea id="acontent2" name="acontent2"
@@ -578,14 +578,12 @@ textarea {
 				style="font-size: 10pt; text-align: left; padding-top: 20px; padding-bottom: 5px; margin-left: 20px;">메이커
 				정보</p>
 			<div class="makerbox2">
-				<div class="makerinfo img">
 					<c:if test="${!empty item.pimage }">
 						<img class="img" src="/funfund/images/myinfo/${item.pimage }">
 					</c:if>
 					<c:if test="${empty item.pimage }">
 						<img class="img" src="/funfund/images/myinfo/dimages.png">
 					</c:if>
-				</div>
 				<div class="makerinfo">${item.cname }</div>
 				<div>
 					<div class="makerinfo">문의처</div>
@@ -619,17 +617,19 @@ textarea {
 		</div>
 
 		<!-- 뷰온버튼 -->
-		<button id="scrollbutton" style="bottom: 50px;"class="hidden-sm hidden-xs">
+		<button id="scrollbutton" style="bottom: 50px; color:gray"
+			class="hidden-sm hidden-xs">
 			<i class="fa fa-angle-up fa-2x" aria-hidden="true"
-				style="display: block;"></i>TOP
+				style="display: block; color:gray;"></i>TOP
 		</button>
 
-		<div class="">
+		<div class="hidden-sm hidden-xs">
 			<p
 				style="font-size: 10pt; text-align: left; padding-bottom: 5px; margin-left: 20px;">리워드선택</p>
-			<c:forEach var="reward" items="${mList}" varStatus="status">
+			<c:forEach var="reward" items="${mList}">
 				<ul class="makerbox">
-					<li style="font-size: 15pt;"><strong><fmt:formatNumber
+					<input type="hidden" value="${reward.mno}">
+					<li style="font-size: 15pt;"class="makerinfo"><strong><fmt:formatNumber
 								var="mcost" value="${reward.mcost}" /> ${mcost}원</strong></li>
 					<li class="makerinfo">작성자이름
 						<dl>${item.pname}</dl>
@@ -640,20 +640,21 @@ textarea {
 					<li class="makerinfo">리워드 예상일
 						<dl>${reward.mdate}</dl>
 					</li>
-					<li class="makerinfo">제한 수량<dl>${reward.mcount }개
-					</dl></li>
-					<li class="makerinfo current">현재 
-					<c:set var="result" value="${reward.remain}" /> 
-					<c:if test="${result > 0}">
-					${result }</c:if> 
-					<c:if test="${result <= 0 }">
+					<li class="makerinfo">제한 수량
+					<dl>${reward.mcount }개
+					</dl>
+					</li>
+					<li class="makerinfo current">현재 <c:set var="result"
+							value="${reward.remain}" /> <c:if test="${result > 0}">
+					${result }</c:if> <c:if test="${result <= 0 }">
 					0
 					</c:if>개 남음
 					</li>
 				</ul>
 			</c:forEach>
 		</div>
-		<div>
+
+		<div class="hidden-sm hidden-xs">
 			<button class="btn-fund pay">펀딩하기</button>
 		</div>
 	</div>
@@ -667,6 +668,10 @@ textarea {
 		   var result=$(this).find($('.current')).html().replace(regex,'');
 			  if(result> 0){
 				 $(this).css('background-color', '#c6ebd9');
+				 $(this).click(function(){
+						var mno = $(this).children('input').val();
+						location.href = "reward.fm?pro_no=${item.pro_no}&mno="+mno+"&remain="+result;
+					});
 			  }else{
 				 $(this).css('background-color', '#d9d9d9');
 			  }
@@ -674,11 +679,9 @@ textarea {
 				$(this).css('background-color', 'white');
 			});
 	   }
+	  
    });
 </script>
-
-
-
 
 </body>
 </html>
