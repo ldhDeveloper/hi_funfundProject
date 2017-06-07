@@ -80,8 +80,7 @@ $(function(){
 	if(img == "") {
 		$("#btnUpdateIdCardImg").hide();
 		$("#btnUploadIdCardImg").show();
-		$("#updateCardImg").removeClass("alert alert-danger");
-		
+		$("#updateCardImg").removeClass("alert alert-success");
 	}
 	
 	else {
@@ -120,8 +119,14 @@ $(function(){
 		                 				<input type="text" name="pname" class="mnameText" placeholder="이름" value="${ sessionScope.party.pname }" readonly/>
 		                 			</c:if>
 						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">개인 일반 회원 <!-- 회원 등급이 들어갈 곳  --></label></div>
-						<div style="display:none;" class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input type="button" class="mbtn1" value="투자 회원 신청" onclick='location.href="investRequest.ao"'></div>
+						<!-- <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">개인 일반 회원 회원 등급이 들어갈 곳 </label></div> -->
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">${ sessionScope.account.idtype }</label></div>
+						
+						<c:choose>
+        					<c:when test="${ sessionScope.account.idtype == '일반회원' || sessionScope.account.idtype == '승인요청'}">
+								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input type="button" class="mbtn1" value="투자 회원 신청" onclick='location.href="sellerinfo.ao"'></div>
+							</c:when>
+						</c:choose>
 					</div>
 				</div>
 				
@@ -140,7 +145,13 @@ $(function(){
     						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       							<ul class="nav navbar-nav">      	
         							<li><a href="myinfo.ao" class="otherActive">회원 정보 설정</a></li>
-        							<li class="act"><a class="active" href="myinfo.do">판매자 정보 입력<span class="sr-only">(current)</span></a></li>
+        							
+        							<c:choose>
+        								<c:when test="${ sessionScope.account.idtype == '판매자'}">
+        									<li class="act"><a class="active" href="sellerinfo.ao">판매자 정보 수정<span class="sr-only">(current)</span></a></li>
+        								</c:when>
+        							</c:choose>
+        							
         							<li><a href="puttoproject.ao" class="otherActive">찜한 프로젝트</a></li>
         							<li><a href="newproject.ao" class="otherActive">개설한 프로젝트</a></li>
         							<li><a href="myfunding.ao" class="otherActive">나의 펀딩 현황</a></li>
@@ -151,118 +162,114 @@ $(function(){
 					
 					<div id="waccountWrap">	    	
 	        			<div class="waccount-wrap">
-	     					<div id="waccountContainer">	       			
-	                			<h2>투자 서비스 신청</h2>
-	                			<h3>추가 정보를 입력하고 크라우드펀딩 투자를 시작해보세요.</h3>
+	     					<div id="waccountContainer">
+	     						
+        							<c:if test="${ sessionScope.account.idtype eq '판매자'}">	       			
+	                					<h2>투자 서비스 신청</h2>
+	                					<h3>추가 정보를 입력하고 크라우드펀딩 투자를 시작해보세요.</h3>
 	                			
-	                			<em class="line"></em>   
-							<div>
-						
-							<form id="sellerChange" action="changSeller.ao" method="post" enctype="multipart/form-data" onsubmit="return saveSeller();">
-		                    	<h5>실명</h5>
-		       					
-		       					<div class="input-area">
-		       						<c:if test="${ empty sessionScope.party.pname }">
-		       							<input type="text" class="input-text" id="name" value=""  placeholder="이름" disabled />
-		       						</c:if>
-		       						
-		       						<c:if test="${ !empty sessionScope.party.pname }">
-		       							<input type="text" class="input-text" id="name" value="${ sessionScope.party.pname }"  placeholder="이름" disabled />
-		       						</c:if>
-		       					</div>
-		       							       					
-		       					<h5>휴대폰 번호</h5>	
-		       						<c:if test="${ empty sessionScope.party.phone }">
-		       							<input type="text" class="input-text" id="phone" name="phone" value=""  placeholder="휴대폰" />                                                            
-	                           		</c:if>
-	                           		
-	                           		<c:if test="${ !empty sessionScope.party.phone }">
-		       							<input type="text" class="input-text" id="phone" name="phone" value="${ sessionScope.party.phone }"  placeholder="휴대폰"/>                                                            
-	                           		</c:if>
-	                           		
-	                           <h5>주민등록번호</h5>
-	       							<p class="sub-text">개인정보는 암호화하여 안전하게 처리하고 있습니다.</p>
-	       					
-	       							<ul class="input-div2">
-	       								<c:if test="${ empty sessionScope.party.id_no }">
-		       								<li><input id="fid_no" type="tel" class="input-text" value="" name="id_no1" maxlength="7" placeholder="주민등록번호 앞자리"/></li>
-		       							</c:if>
-		       							
-		       							<c:if test="${ ! empty sessionScope.party.id_no }"> 
-		       								<li><input id="fid_no" type="tel" class="input-text" value="" name="id_no1" maxlength="7" placeholder="주민등록번호 앞자리" /></li>
-		       							</c:if>
-		       							
-		       							<c:if test="${ empty sessionScope.party.id_no }">
-		       								<li><input id="eid_no" autocomplete="new-password" type="password" class="input-text" name="id_no2" placeholder="주민등록번호 뒷자리" maxlength="7" /></li>
-		       							</c:if>
-		       							
-		       							<c:if test="${ ! empty sessionScope.party.id_no }">
-		       								<li><input id="eid_no" autocomplete="new-password" type="password" class="input-text" name="id_no2" placeholder="주민등록번호 뒷자리" maxlength="7"/></li>
-		       							</c:if>
-		       						</ul>
-	                 		
-	                 				<p id="ssnError" class="error-text">이미 가입한 주민번호입니다.</p>
-	                      			<p id="invalidSsnError" class="error-text">주민등록번호가 올바르지 않습니다.</p>
-	                   				<p id="ssnGenderError" class="error-text"></p>
-	            
-	                     	
-								<h5>주소</h5>
-		       						<p class="sub-text">본인확인이 가능한 주민등록상의 주소를 입력하세요.</p>
-		       				
-		       					<div class="input-area">
-		       						<input type="text" class="input-text1" id="sample6_postcode" name="address1" placeholder="우편번호" readonly/>	&nbsp;&nbsp;
-		       						<input type="button" class="btn-darkgray5" onclick="sample6_execDaumPostcode();" value="우편번호 검색">
-			              			<input type="text" id="sample6_address" name="address2" class="input-text" placeholder="도로명주소" readonly/> 
-			              			<input type="text" id="sample6_address2" name="address3" class="input-text" placeholder="상세주소" />
-                                	<p id="addrError" class="error-text">주소를 검색하세요.</p>
-                                	<br>
-		       					</div>	                        
-	                        
-								<h5>실명확인증표 등록</h5>
-				       				<p class="sub-text">실명과   주민등록번호 확인을 위해, 현재 유효한 주민등록증 또는 면허증의 앞면을 촬영한 사진을 등록하세요.</p>
-				       				       				
-				       				<input type="text" id="imgRoute" class="input-text" placeholder="선택된 파일 없음" readonly/>
-				       				
-				       				<p class="alert alert-success" id="updateCardImg"></p>		       				
-				       				<input type="button" class="btn-darkgray" id="btnUpdateIdCardImg" value="이미지 파일 수정" onclick="document.all.idimage.click();"/>
-				       								       				
-				       				<input id="uploadIdCardImg" class="input-text" type="file" name="idimage" style="display:none;" onchange="document.getElementById('imgRoute').value=this.value;">
-				       				
-				       				<div class="btn-wrap" id="idCardFileUploadBtn">
-				       					<input type="button" class="btn-darkgray" id="btnUploadIdCardImg" value="이미지 파일 등록" onclick="document.all.idimage.click();"/>
-				       				</div>
-				       				
-				       				<c:if test="${ empty sessionScope.party.idimage}">
-										<input type="hidden" name="photoflag" value="insert">
-									</c:if>
-									<c:if test="${ !empty sessionScope.party.idimage}">
-										<input type="hidden" name="photoflag" value="update">
-									</c:if>
-				       		
-				       				<p id="idCardImgError" class="error-text" style="margin-bottom:6px;">실명확인증표를 등록하세요.</p>
-				       				<p class="comment">funfund에서 청약을 하기 위해서는 금융실명법에 따라 실명확인이 필요합니다. funfund는 금융위원회에 정식 등록된 온라인소액투자중개업자로 실명확인을 진행하오니 안심하고 등록해주세요.</p>
+	                					<em class="line"></em>
+	                				</c:if>
+        						 
 							
-									<!-- <input type="hidden" id="temporaryIdCardFileId" />
-									<input type="hidden" id="temporaryIncomeDocFileId" />
-									<input type="hidden" id="temporarySpecialtyDocFileId" />
-									<input type="hidden" id="nickName" name="nickName" value="김진항">
-									<input type="hidden" id="birth" name="birth" value="19891025">
-									<input type="hidden" id="ssn1" name="ssn1" value="891025">
-									<input type="hidden" id="mobileNumber" name="mobileNumber" value="01093533034">
-									<input type="hidden" id="userName" name="userName" value="jinhang89@gmail.com">
-									<input type="hidden" id="acPlusType" name="acPlusType" value="IVT">
-									<input type="hidden" id="compensationCode" name="compensationCode">
-									<input type="hidden" id="hiddenAllowDM" name="allowDmPlus" />
-									<input type="hidden" id="accntType" name="accntType" />
-									<input type="hidden" id="idCardFiles" name="idCardFiles" />
-									<input type="hidden" id="incomeDocFiles" name="incomeDocFiles" />
-									<input type="hidden" id="specialtyDocFiles" name="specialtyDocFiles" /> -->
-		        	    		
-		        	    		
-		        	    		<br><br>
-		        	    		
-		        	    		<input type="submit" class="btn-darkgray3" id="modifyBtn" value="신청하기"> &nbsp;&nbsp; <input type="button" class="btn-darkgray4" id="" value="취소">
-							</form>
+							<div>						
+								<form id="sellerChange" action="changeSeller.ao" method="post" enctype="multipart/form-data" onsubmit="return saveSeller();">
+			                    	<h5>실명</h5>
+			       					
+			       					<div class="input-area">
+			       						<c:if test="${ empty sessionScope.party.pname }">
+			       							<input type="text" class="input-text" id="name" value=""  placeholder="이름" disabled />
+			       						</c:if>
+			       						
+			       						<c:if test="${ !empty sessionScope.party.pname }">
+			       							<input type="text" class="input-text" id="name" value="${ sessionScope.party.pname }"  placeholder="이름" disabled />
+			       						</c:if>
+			       					</div>
+			       							       					
+			       					<h5>휴대폰 번호</h5>	
+			       						<c:if test="${ empty sessionScope.party.phone }">
+			       							<input type="text" class="input-text" id="phone" name="phone" value=""  placeholder="휴대폰" />                                                            
+		                           		</c:if>
+		                           		
+		                           		<c:if test="${ !empty sessionScope.party.phone }">
+			       							<input type="text" class="input-text" id="phone" name="phone" value="${ sessionScope.party.phone }"  placeholder="휴대폰"/>                                                            
+		                           		</c:if>
+		                           		
+		                           <h5>주민등록번호</h5>
+		       							<p class="sub-text">개인정보는 암호화하여 안전하게 처리하고 있습니다.</p>
+		       					
+		       							<ul class="input-div2">
+		       								<c:if test="${ empty sessionScope.party.id_no }">
+			       								<li><input id="fid_no" type="tel" class="input-text" value="" name="id_no1" maxlength="7" placeholder="주민등록번호 앞자리"/></li>
+			       							</c:if>
+			       							
+			       							<c:if test="${ ! empty sessionScope.party.id_no }"> 
+			       								<li><input id="fid_no" type="tel" class="input-text" value="" name="id_no1" maxlength="7" placeholder="주민등록번호 앞자리" /></li>
+			       							</c:if>
+			       							
+			       							<c:if test="${ empty sessionScope.party.id_no }">
+			       								<li><input id="eid_no" autocomplete="new-password" type="password" class="input-text" name="id_no2" placeholder="주민등록번호 뒷자리" maxlength="7" /></li>
+			       							</c:if>
+			       							
+			       							<c:if test="${ ! empty sessionScope.party.id_no }">
+			       								<li><input id="eid_no" autocomplete="new-password" type="password" class="input-text" name="id_no2" placeholder="주민등록번호 뒷자리" maxlength="7"/></li>
+			       							</c:if>
+			       						</ul>
+		                 		
+		                 				<p id="ssnError" class="error-text">이미 가입한 주민번호입니다.</p>
+		                      			<p id="invalidSsnError" class="error-text">주민등록번호가 올바르지 않습니다.</p>
+		                   				<p id="ssnGenderError" class="error-text"></p>
+		            
+		                     	
+									<h5>주소</h5>
+			       						<p class="sub-text">본인확인이 가능한 주민등록상의 주소를 입력하세요.</p>
+			       				
+			       					<div class="input-area">
+			       						<input type="text" class="input-text1" id="sample6_postcode" name="address1" placeholder="우편번호" readonly/>	&nbsp;&nbsp;
+			       						<input type="button" class="btn-darkgray5" onclick="sample6_execDaumPostcode();" value="우편번호 검색">
+				              			<input type="text" id="sample6_address" name="address2" class="input-text" placeholder="도로명주소" readonly/> 
+				              			<input type="text" id="sample6_address2" name="address3" class="input-text" placeholder="상세주소" />
+	                                	<p id="addrError" class="error-text">주소를 검색하세요.</p>
+	                                	<br>
+			       					</div>	                        
+		                        
+									<h5>실명확인증표 등록</h5>
+					       				<p class="sub-text">실명과   주민등록번호 확인을 위해, 현재 유효한 주민등록증 또는 면허증의 앞면을 촬영한 사진을 등록하세요.</p>
+					       				       				
+					       				<input type="text" id="imgRoute" class="input-text" placeholder="선택된 파일 없음" readonly/>
+					       				
+					       				<p class="alert alert-success" id="updateCardImg"></p>		       				
+					       				<input type="button" class="btn-darkgray" id="btnUpdateIdCardImg" value="이미지 파일 수정" onclick="document.all.idimage.click();"/>
+					       								       				
+					       				<input id="uploadIdCardImg" class="input-text" type="file" name="idimage" style="display:none;" onchange="document.getElementById('imgRoute').value=this.value;">
+					       				
+					       				<div class="btn-wrap" id="idCardFileUploadBtn">
+					       					<input type="button" class="btn-darkgray" id="btnUploadIdCardImg" value="이미지 파일 등록" onclick="document.all.idimage.click();"/>
+					       				</div>
+					       				
+					       				<c:if test="${ empty sessionScope.party.idimage}">
+											<input type="hidden" name="photoflag" value="insert">
+										</c:if>
+										<c:if test="${ !empty sessionScope.party.idimage}">
+											<input type="hidden" name="photoflag" value="update">
+										</c:if>
+					       		
+					       				<p id="idCardImgError" class="error-text" style="margin-bottom:6px;">실명확인증표를 등록하세요.</p>
+					       				<p class="comment">funfund에서 청약을 하기 위해서는 금융실명법에 따라 실명확인이 필요합니다. funfund는 금융위원회에 정식 등록된 온라인소액투자중개업자로 실명확인을 진행하오니 안심하고 등록해주세요.</p>
+			        	    		
+			        	    		<br><br>
+			        	    		<c:choose>
+			        	    			<c:when test="${ sessionScope.account.idtype == '일반회원' }">
+			        	    				<input type="submit" class="btn-darkgray3" id="applyBtn" value="신청하기">
+			        	    			</c:when>
+			        	    			
+			        	    			<c:when test="${ sessionScope.account.idtype == '승인요청' || sessionScope.account.idtype == '판매자'}">
+			        	    				<input type="submit" class="btn-darkgray3" id="modifyBtn" value="수정하기">
+			        	    			</c:when>
+			        	    		</c:choose>
+	
+			        	    		&nbsp;&nbsp; <input type="button" class="btn-darkgray4" id="" value="취소">							
+								</form>
 							</div>
 					
 						<em class="line"></em>

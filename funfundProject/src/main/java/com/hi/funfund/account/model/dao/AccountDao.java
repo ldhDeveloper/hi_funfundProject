@@ -118,12 +118,15 @@ public class AccountDao {
 
 	public int updateSeller(int ano, String phone, String id_no, String address) {
 		HashMap<String, String> hmap = new HashMap<String, String>();
+		int result = 0;
+		System.out.println("seller Dao1 ano : " + ano + " phone : " + phone + " id_no : " + id_no + " address : " + address);
 		hmap.put("ano", Integer.toString(ano));
 		hmap.put("phone", phone);
 		hmap.put("id_no", id_no);
 		hmap.put("address", address);
-		int result = sqlSession.update("updateSeller", hmap);
-		System.out.println("seller Dao ano : " + ano + " phone : " + phone + " id_no : " + id_no + " address : " + address);
+		result += sqlSession.update("updateSeller", hmap);
+		result += sqlSession.update("updateIdtype", ano);
+		System.out.println("seller Dao2 ano : " + ano + " phone : " + phone + " id_no : " + id_no + " address : " + address);
 		return result;
 	}
 

@@ -95,7 +95,7 @@ public class AttachmentController {
 				
 			}
 		}	
-		return "home";
+		return "redirect:myinfo.ao";
 	}
 	
 	@RequestMapping("/insertSlide.at")
