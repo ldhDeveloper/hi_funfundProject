@@ -3,9 +3,24 @@
 "-//mybatis.org//DTD mapper 3.0//en"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="alertMapper">
+	<resultMap type="alert" id="alertResult">
+		<id property="al_no" column="al_no" />
+		<result property="al_title" column="al_title" />
+		<result property="al_content" column="al_content" />
+		<result property="al_date" column="al_date" />
+		<result property="s_al_date" column="s_al_date" />
+		<result property="readyn" column="readyn" />
+		<result property="ano" column="ano" />
+
+	</resultMap>
 
 	<select id="checkNewMessage" parameterType="int" resultType="int">
 		select count(al_no) from alert where readyn = 'n' and ano = #{ano}
 	</select>
+	
+	<select id="selectList" parameterType="int" resultMap="alertResult">
+		select al_no,al_title, al_content, to_char(al_date, 'yyyy/mm/dd')as s_al_date, readyn, ano from alert where ano = #{ano} order by al_date desc
+	</select>
+	
 	
 </mapper>
