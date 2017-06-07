@@ -109,7 +109,6 @@ body {
 							class="swiper-pagination-bullet"></span> <span
 							class="swiper-pagination-bullet"></span>
 					</div>
-					<!-- 양옆에 좌우 버튼이 필요하다면 추가하세요 -->
 					
 
 				</div>
