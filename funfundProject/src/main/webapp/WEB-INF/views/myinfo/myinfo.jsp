@@ -289,7 +289,7 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 													
 						<c:choose>
         					<c:when test="${ sessionScope.account.idtype == '일반회원' || sessionScope.account.idtype == '승인요청'}">
-								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input type="button" class="mbtn1" value="투자 회원 신청" onclick='location.href="sellerinfo.ao"'></div>
+								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input id="investApply" type="button" class="mbtn1" value="투자 회원 신청"></div>
 							</c:when>
 						</c:choose>
 						<!-- <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input type="button" class="mbtn1" value="투자 회원 신청" onclick="return goSellerinfo();"></div> -->
@@ -432,6 +432,8 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 	                     				var codeList = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','0','1','2','3','4','5','6','7','8','9'];
  								   
 										var authNumber="";
+										
+										var pwd = "<c:out value='${ sessionScope.account.pwd }'/>";
 	                     			
         								$(function(){ 
         									// 비밀번호
@@ -439,7 +441,7 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
         									$("#oldPwdInput").removeClass("alert alert-danger");
         									$("#newPwdInput").removeClass("alert alert-danger");
         									$("#newPwdInput2").removeClass("alert alert-danger");
-        									$("#newPwdInputSame").removeClass("alert alert-danger");
+        									$("#newPwdInputSame").removeClass("alert alert-danger");       									
         									
         									$("#newPwd2").focusout(function(){
         										if($("#newPwd").val() != "" && $("#newPwd2").val() != "") {
@@ -503,6 +505,19 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
         									$("#emailCheckBtn").click(function() {
         										sendAuthMail();        										
         									});
+        									
+        									$("#investApply").click(function(){
+        										var name ='<c:out value="${sessionScope.party.pname}"/>';
+    											console.log(name)
+        										if(name == "") {
+        											alert("회원정보 설정에서 이름을 반드시 입력하세요!");
+        											return false;
+        										}
+        										
+        										else {
+        											location.href = "sellerinfo.ao";
+        										}
+        									});
         									        									
         									$("#certifyNumBtn").click(function() {
         										if($("#authenticNum").val() == "") {        											
@@ -560,6 +575,15 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
     											return false;
     										}
     										
+    										
+    										
+    										else if($("#oldPwdInput").val() != pwd){
+        										$("#oldPwdInput").addClass("alert alert-danger");
+    											$("#oldPwdInput").html("현재 등록된 비밀번호와 다릅니다.");
+    											console.log($("#oldPwdInput").val());
+    											return false;
+        									}
+    										
     										else if($("#newPwd").val() == "") {
     											$("#newPwdInput").addClass("alert alert-danger");
     											$("#newPwdInput").html("새 비밀번호를 입력해주세요.");
@@ -578,19 +602,6 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
     											return false;
     										}
     									};
-    									
-    									function goSellerinfo() {
-											var name ='<c:out value="${sessionScope.party.pname}"/>';
-											console.log(name)
-    										if(name == "") {
-    											alert("회원정보 설정에서 이름을 반드시 입력하세요!");
-    											return false;
-    										}
-    										
-    										else {
-    											location.href = "sellerinfo.ao";
-    										}															
-										}
         							</script>																			
 								</div>
 							</div>

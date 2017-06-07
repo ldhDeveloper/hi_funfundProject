@@ -124,7 +124,7 @@ $(function(){
 						
 						<c:choose>
         					<c:when test="${ sessionScope.account.idtype == '일반회원' || sessionScope.account.idtype == '승인요청'}">
-								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input type="button" class="mbtn1" value="투자 회원 신청" onclick='location.href="sellerinfo.ao"'></div>
+								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input id="investApply" type="button" class="mbtn1" value="투자 회원 신청"></div>
 							</c:when>
 						</c:choose>
 					</div>
@@ -288,6 +288,19 @@ $(function(){
 <br><br>
 
 <script>
+	$("#investApply").click(function(){
+		var name ='<c:out value="${sessionScope.party.pname}"/>';
+		console.log(name)
+		if(name == "") {
+			alert("회원정보 설정에서 이름을 반드시 입력하세요!");
+			return false;
+		}
+		
+		else {
+			location.href = "sellerinfo.ao";
+		}
+	});
+	
     function sample6_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
