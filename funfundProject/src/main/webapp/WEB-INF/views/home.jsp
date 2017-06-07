@@ -23,6 +23,7 @@
 	}
 }
 
+
 .fun-menu {
 	color: white !important;
 }
@@ -54,6 +55,9 @@ body {
 	-webkit-align-items: center;
 	align-items: center;
 }
+.countbar{
+	padding-left: 50px;
+}
 </style>
 
 <title>home</title>
@@ -64,7 +68,7 @@ body {
 
 
 	<!-- 슬라이드 사진 영역 -->
-	<div class="row">
+	<div class="row" style="max-height:465px;">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="contain"
 				style="padding-left: 0px; padding-right: 0px; width: 100%; clear: both;">
@@ -125,6 +129,44 @@ body {
 			loop : true
 		});
 	</script>
+	
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="background:orange; height:100px; width:100%;color:white">
+				<table style="width:100%;height:100px;text-align:center;valign:middle;">
+					<tr>
+						<td style="valign:middle">
+								누적 펀딩 건수<br>
+								<label class="comma" style="font-size:2em"><c:out value="${count.itemcount}"/></label>건
+						</td>
+						<td>
+								누적 펀딩 금액<br>
+								<label id="comma" style="font-size:2em"></label>원
+						</td>
+						<td>
+								펀딩 모집 성공률<br>
+								<label style="font-size:2em"><c:out value="${count.sucrate}"/></label>%
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	<br style="clear:both"><br>
+	<script>
+	
+	var price = <c:out value="${count.totalprice}"/>;
+	var price2 = numberWithCommas(price);
+	
+	$("#comma").html(price2);
+	
+	function numberWithCommas(x) {
+		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+		
+		
+	
+
+	</script>
+
 
 	<div class="container" style="clear: both">
 		<div class="row" style="margin: 0px 20px 0 20px;">
