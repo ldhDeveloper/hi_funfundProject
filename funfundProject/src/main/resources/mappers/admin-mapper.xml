@@ -12,7 +12,9 @@
 	</resultMap>
 	<select id="selectRequestSeller" resultMap="accInfoResult">
 		<![CDATA[
-			
+			select a.ano as ano, a.id as id, a.idtype as idtype, p.phone as phone, p.idimage as idimage
+			from account a join party p on (a.ano = p.ano)
+			where idtype='승인요청'
 		]]>
 	</select>
 </mapper>

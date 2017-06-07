@@ -88,70 +88,62 @@
 			<div class="col-xs-1 col-sm-1 col-md-2 col-lg-2"></div>
 		</div>
 	</div>
-	<%-- <div class="container">
+ <div class="container">
   <ul class="nav nav-tabs">
   	  <li class="active"><a href="sellerconfirm.am">판매자 승인요청</a></li>
-	  <li><a href="itemconfirm.am">프로젝트 승인요청</a></li>
-	  <li><a href="requestdeleteitem.am">프로젝트 삭제요청</a></li>
-	  <li><a href="resultitem.am">프로젝트 종료관리</a></li>
+	  <li><a href="itemconfirm.am">결제 취소요청</a></li>
  </ul>
   <table class="table table-hover adminTable">
     <thead>
       <tr>
         <th>계정번호</th>
         <th>ID</th>
-        <th>신청자</th>
-        <th>프로젝트상태</th>
-        <th>프로젝트보기</th>
-        <th>프로젝트삭제</th>
+        <th>계정상태</th>
+        <th>휴대폰</th>
+        <th>실명확인증표</th>
+        <th>판매자 승인</th>
+        <th>판매자 승인거부</th>
       </tr>
     </thead>
     <tbody>
-    	<c:forEach var="item" items="${alist }" varStatus="status">
+    	<c:forEach var="item" items="${acList }" varStatus="status">
       	<tr>
-        	<td><c:out value="${item.pro_no }"/></td>
-        	<td><c:out value="${item.pname }"/></td>
-        	<td><c:out value="${item.cname }"/></td>
-        	<td><c:out value="${item.pstatus }"/></td>
-        	<td><input type="button" class="btn btn-primary" value="프로젝트보기" onclick="popen(${item.pro_no})"></td>
-        	<td><span><input type="button" class="btn btn-warnning" value="삭제사유보기" onclick="opendelete(${status.index })"></span></td>        	
-      	</tr>
-      	<tr id="deleteform<c:out value='${status.index }'/>" style="display:none;">
-      		<td>삭제사유</td>
-      		<td colspan="4"><input type="text" class="form-control" id="deletecomment<c:out value='${status.index }'/>" value="${item.icomment }"></td>
-      		<td><input style="position:inline-block;" type="button" class="btn btn-danger" value="프로젝트삭제" onclick="pdelete(${item.pro_no}, ${status.index })"></td>
-      	</tr>
+        	<td><c:out value="${item.ano }"/></td>
+        	<td><c:out value="${item.id }"/></td>
+        	<td><c:out value="${item.idtype }"/></td>
+        	<td><c:out value="${item.phone }"/></td>
+        	<td><button id="showImage" value="${item.idimage }" type="button" class="btn btn-primary">실명확인증표보기</button></td>
+        	<td><input type="button" class="btn btn-success" value="판매자 승인" onclick=""></td>        	
+      		<td><input type="button" class="btn btn-danger" value="판매자 승인거부" onclick=""></td>
+      	</tr>   	
       </c:forEach>
     </tbody>
   </table>
-  <script>
-  	function popen(pro_no){
-  		url = "detail.it?pro_no=" + pro_no;
-  		window.open(url);
-  	}
-  	
-  	function opendelete(index){
-  		$('#deleteform' + index).toggle();
-  	}
-  
-  	function pdelete(pro_no, index){
-  		console.log("pcancel실행");
-  		var comment = $('#deletecomment' + index).val();
-  		console.log(comment);
-  		if(comment != ""){
-  			$.post( "deletestatus.am", {"pro_no" : pro_no, "comment" : comment})
-  	  		.done(function(data){
-  				if(data > 0){
-  					alert("프로젝트 삭제에 성공하였습니다.");
-  					location.href ="requestdeleteitem.am";
-  				} else {
-  					alert("프로젝트 삭제에 실패하였습니다.");
-  					location.href ="requestdeleteitem.am";
-  				}
-  	  		});
-  		}
-  	}
-  </script>
-</div> --%>
+</div>
+<script>
+    		$(function(){
+    			$("#showImage").click(function(){
+    				var image = $(this).val();
+    				$("#idimage").attr("src", "/funfund/images/myinfo/sellerinfo/" + image);
+    	 			$("#pictureModal").modal();
+    			});
+    		})
+</script>
+<div id="pictureModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">실명확인증표</h4>
+      </div>
+      <div class="modal-body">
+        <img id="idimage" src="#" style="width:100%">
+      </div>
+    </div>
+
+  </div>
+</div>
 </body>
 </html>
