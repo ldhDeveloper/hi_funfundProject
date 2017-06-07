@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hi.funfund.alert.model.service.AlertService;
 import com.hi.funfund.item.model.service.ItemService;
 import com.hi.funfund.item.model.vo.Item;
+import com.hi.funfund.item.model.vo.ItemCount;
 
 /**
  * Handles requests for the application home page.
@@ -25,6 +27,7 @@ public class HomeController {
 	@Autowired
 	private ItemService itemService;
 	
+	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -32,7 +35,11 @@ public class HomeController {
 	@RequestMapping(value = "start.do", method = RequestMethod.GET)
 	public ModelAndView home(ModelAndView model) {
 		List<Item> top3List = itemService.top3List();
+		ItemCount count = itemService.selectitemCount();
+		//
+		
 		model.addObject("top3List", top3List);
+		model.addObject("count", count);
 		model.setViewName("home");
 		return model;
 	}

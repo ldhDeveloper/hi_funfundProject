@@ -12,6 +12,7 @@
 		<typeAlias type="com.hi.funfund.fundmenu.model.vo.FundMenuFundList" alias="fundMenufundList" />
 		<typeAlias type="com.hi.funfund.item.model.vo.Item" alias="item" />
 		<typeAlias type="com.hi.funfund.item.model.vo.Itemfund" alias="itemfund" />
+		<typeAlias type="com.hi.funfund.item.model.vo.ItemCount" alias="itemcount" />
 		<typeAlias type="com.hi.funfund.itemask.model.vo.ItemAsk" alias="itemAsk" />
 		<typeAlias type="com.hi.funfund.itemask.model.vo.ItemAskAccount" alias="itemAskAccount" />
 		<typeAlias type="com.hi.funfund.myitem.model.vo.MyItem" alias="myItem" />
@@ -20,6 +21,7 @@
 		<typeAlias type="com.hi.funfund.fundlist.model.vo.Myfunding" alias="myfunding" />
 		<typeAlias type="com.hi.funfund.fundlist.model.vo.Mysponsor" alias="mysponsor" />
 		<typeAlias type="com.hi.funfund.fundlist.model.vo.UpdateSponsor" alias="updatesponsor" />
+		<typeAlias type="com.hi.funfund.alert.model.vo.Alert" alias="alert" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/account-mapper.xml" />
@@ -33,6 +35,7 @@
 		<mapper resource="mappers/notice-mapper.xml" />
 		<mapper resource="mappers/pupdate-mapper.xml" />
 		<mapper resource="mappers/admin-mapper.xml" />
+		<mapper resource="mappers/alert-mapper.xml" />
 	</mappers>
 	
 

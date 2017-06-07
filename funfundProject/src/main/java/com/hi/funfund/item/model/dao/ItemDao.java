@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hi.funfund.item.model.vo.Item;
+import com.hi.funfund.item.model.vo.ItemCount;
 import com.hi.funfund.item.model.vo.Itemfund;
 
 @Repository("itemDao")
@@ -190,6 +191,11 @@ public class ItemDao {
 	public List<Item> selectdefaultpast(String dDate) {
 		List<Item> iList = (List<Item>) sqlSession.selectList(nameSpace + "selectdefaultpast", dDate);
 		return iList;
+	}
+
+	public ItemCount selectItemCount() {
+		ItemCount count = (ItemCount) sqlSession.selectOne(nameSpace + "selectcount");
+		return count;
 	}
 	
 }
