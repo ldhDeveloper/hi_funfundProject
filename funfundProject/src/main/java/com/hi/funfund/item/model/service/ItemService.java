@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.hi.funfund.item.model.vo.Item;
+import com.hi.funfund.item.model.vo.ItemCount;
 import com.hi.funfund.item.model.vo.Itemfund;
 
 public interface ItemService {
@@ -91,6 +92,8 @@ public interface ItemService {
 	int changeBillStatus(HashMap<String, String> hmap);
 
 	List<Item> selectdefaultpast(String dDate);
+
+	ItemCount selectitemCount();
 
 
 
