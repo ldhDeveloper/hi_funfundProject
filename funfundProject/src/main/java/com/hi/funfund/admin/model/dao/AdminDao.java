@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hi.funfund.admin.model.vo.AccInfo;
+import com.hi.funfund.admin.model.vo.CancelInfo;
 
 @Repository("adminDao")
 public class AdminDao {
@@ -18,6 +19,11 @@ public class AdminDao {
 	public List<AccInfo> selectRequestSeller() {
 		List<AccInfo> accList = (List<AccInfo>)sqlSession.selectList(nameSpace + "selectRequestSeller");
 		return accList;
+	}
+
+	public List<CancelInfo> selectCancelInfo() {
+		List<CancelInfo> cList = (List<CancelInfo>) sqlSession.selectList(nameSpace + "selectCancelInfo");
+		return cList;
 	}
 	
 }

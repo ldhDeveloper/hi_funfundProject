@@ -123,7 +123,7 @@ $(function(){
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">${ sessionScope.account.idtype }</label></div>
 						
 						<c:choose>
-        					<c:when test="${ sessionScope.account.idtype == '일반회원' || sessionScope.account.idtype == '승인요청'}">
+        					<c:when test="${ sessionScope.account.idtype == '일반회원' || sessionScope.account.idtype == '승인요청중'}">
 								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input id="investApply" type="button" class="mbtn1" value="투자 회원 신청"></div>
 							</c:when>
 						</c:choose>
@@ -272,7 +272,7 @@ $(function(){
 			        	    				<input type="submit" class="btn-darkgray3" id="applyBtn" value="신청하기">
 			        	    			</c:when>
 			        	    			
-			        	    			<c:when test="${ sessionScope.account.idtype == '승인요청' || sessionScope.account.idtype == '판매자'}">
+			        	    			<c:when test="${ sessionScope.account.idtype == '승인요청중' || sessionScope.account.idtype == '판매자'}">
 			        	    				<input type="submit" class="btn-darkgray3" id="modifyBtn" value="수정하기">
 			        	    			</c:when>
 			        	    		</c:choose>
