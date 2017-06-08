@@ -203,12 +203,18 @@ li {
 				var url = "updateStatus.it";
 				var pro_no = ${pro_no};
 				var pstatus = "승인요청";
+				var itype = "<c:out value='${param.itype}'/>";
 				$.ajax({
 					url:url,
 					data:{"pro_no":pro_no, "pstatus" : pstatus},
 					success:function(){
 						alert("검토 요청 완료!!");
-						document.location.href="newproject.ao";
+						if(itype == 'donation'){
+							document.location.href="newsponproject.ao";
+						}else{
+							document.location.href="newproject.ao";
+						}
+						
 					}
 				});
 				
@@ -333,6 +339,7 @@ li {
 			if(itype == 'donation'){
 				$("[name=category]").find(".re-option").addClass("option-none");
 				$("[name=category]").find(".do-option").removeClass("option-none");
+				$(".do-option").attr("selected", "selected");
 			}
 			if(itype == 'reward'){
 				$("[name=category]").find(".do-option").addClass("option-none");
@@ -496,7 +503,7 @@ li {
 						<div
 							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px; padding: 10px;">
 							<select name="category">
-								<option value="">선택하세요
+								<option value="" class="re-option">선택하세요
 								<option value="테크" class="re-option">테크
 								<option value="패션/뷰티" class="re-option">패션/뷰티
 								<option value="푸드" class="re-option">푸드
@@ -1244,12 +1251,15 @@ li {
 				var cname = $('[name=cname]').val();
 				var cs_email = $('[name=cs_email]').val();
 				var cs_phone = $('[name=cs_phone]').val();
+				console.log('오니?')
+				console.log(refund);
 				
 				$.ajax({
 					url : url,
 					data: {"pname":pname, "pcontent":pcontent, "category":category, "s_psdate":s_psdate, "s_pedate":s_pedate, "pshort":pshort, "ecost":ecost, "refund":refund,
 						"pvideo":pvideo, "cname":cname, "cs_email":cs_email, "cs_phone":cs_phone},
 					success:function(){
+						
 						saveImg();
 					}
 				});
