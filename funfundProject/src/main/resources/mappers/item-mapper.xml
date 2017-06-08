@@ -81,7 +81,7 @@
 			accnum, cname, cs_email, cs_phone from item ]]> -->
 	        <![CDATA[
 	         select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount, i7.thumbnail as thumbnail, ac.pimage
-			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost), 0) as fundamount 
+			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost * fl2.fundcount), 0) as fundamount 
 			from item i2 join fundmenu fm2 on (i2.pro_no = fm2.pro_no)
 			             join fundlist fl2 on (fm2.mno = fl2.mno)
 			group by i2.pro_no) i2 on(i1.pro_no = i2.pro_no)
@@ -114,7 +114,7 @@
 	<select id="selectOne" parameterType="int" resultMap="itemResult">
 	        <![CDATA[
 	        select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount, i7.thumbnail as thumbnail, ac.pimage
-			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost), 0) as fundamount 
+			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost * fl2.fundcount), 0) as fundamount 
 			from item i2 join fundmenu fm2 on (i2.pro_no = fm2.pro_no)
 			             join fundlist fl2 on (fm2.mno = fl2.mno)
 			group by i2.pro_no) i2 on(i1.pro_no = i2.pro_no)
@@ -172,7 +172,7 @@
 			it.fundcount as fundcount, it.supportcount as supportcount, it.upcount as upcount, it.repcount as repcount, it.thumbnail as thumbnail, it.billstatus as billstatus, it.firstdeposit as firstdeposit, it.seconddeposit as seconddeposit, it.firstprice as firstprice, it.secondprice as secondprice, it.icomment as icomment, it.checkacc as checkacc
 						from(SELECT item.*, ROW_NUMBER() OVER (ORDER BY fundcount DESC) rnum
 			     				FROM (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount, i7.thumbnail as thumbnail
-			                  from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost), 0) as fundamount 
+			                  from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost * fl2.fundcount), 0) as fundamount 
 			                  from item i2 join fundmenu fm2 on (i2.pro_no = fm2.pro_no)
 			                               join fundlist fl2 on (fm2.mno = fl2.mno)
 			                  group by i2.pro_no) i2 on(i1.pro_no = i2.pro_no)
@@ -219,7 +219,7 @@
 			accnum, cname, cs_email, cs_phone from item ]]> -->
 	        <![CDATA[
 	        select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount, i7.thumbnail as thumbnail
-			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost), 0) as fundamount 
+			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost * fl2.fundcount), 0) as fundamount 
 			from item i2 join fundmenu fm2 on (i2.pro_no = fm2.pro_no)
 			             join fundlist fl2 on (fm2.mno = fl2.mno)
 			group by i2.pro_no) i2 on(i1.pro_no = i2.pro_no)
@@ -260,7 +260,7 @@
 	<select id="selectMyItems" parameterType="int" resultMap="itemResult">
 		select ia.*
 from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount, i7.thumbnail as thumbnail
-                          from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost), 0) as fundamount 
+                          from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost * fl2.fundcount), 0) as fundamount 
                           from item i2 join fundmenu fm2 on (i2.pro_no = fm2.pro_no)
                                        join fundlist fl2 on (fm2.mno = fl2.mno)
                           group by i2.pro_no) i2 on(i1.pro_no = i2.pro_no)
@@ -289,7 +289,7 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
 	<select id="selectNewProject" parameterType="int" resultMap="itemResult">
 			    <![CDATA[
    select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount, i7.thumbnail as thumbnail, ac.pimage
-			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost), 0) as fundamount 
+			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost * fl2.fundcount), 0) as fundamount 
 										from item i2 join fundmenu fm2 on (i2.pro_no = fm2.pro_no)
 										             join fundlist fl2 on (fm2.mno = fl2.mno)
 										group by i2.pro_no) i2 on(i1.pro_no = i2.pro_no)
@@ -321,7 +321,7 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
 	<select id="selectRequestItem" resultMap="itemResult">
 	        <![CDATA[
 	         select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount, i7.thumbnail as thumbnail, ac.pimage
-			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost), 0) as fundamount 
+			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost * fl2.fundcount), 0) as fundamount 
 			from item i2 join fundmenu fm2 on (i2.pro_no = fm2.pro_no)
 			             join fundlist fl2 on (fm2.mno = fl2.mno)
 			group by i2.pro_no) i2 on(i1.pro_no = i2.pro_no)
@@ -352,7 +352,7 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
 	<select id="selectDeleteRequest" resultMap="itemResult">
 		<![CDATA[
 	         select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount, i7.thumbnail as thumbnail, ac.pimage
-			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost), 0) as fundamount 
+			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost * fl2.fundcount), 0) as fundamount 
 			from item i2 join fundmenu fm2 on (i2.pro_no = fm2.pro_no)
 			             join fundlist fl2 on (fm2.mno = fl2.mno)
 			group by i2.pro_no) i2 on(i1.pro_no = i2.pro_no)
@@ -383,7 +383,7 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
 	<select id="selectEndItem" resultMap="itemResult">
 		<![CDATA[
 	         select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount, i7.thumbnail as thumbnail, ac.pimage
-			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost), 0) as fundamount 
+			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost * fl2.fundcount), 0) as fundamount 
 			from item i2 join fundmenu fm2 on (i2.pro_no = fm2.pro_no)
 			             join fundlist fl2 on (fm2.mno = fl2.mno)
 			group by i2.pro_no) i2 on(i1.pro_no = i2.pro_no)
@@ -458,7 +458,7 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
 	 <select id="selectNewProject2" parameterType="int" resultMap="itemResult">
 		<![CDATA[
 			select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount, i7.thumbnail as thumbnail, ac.pimage
-			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost), 0) as fundamount 
+			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost * fl2.fundcount), 0) as fundamount 
 										from item i2 join fundmenu fm2 on (i2.pro_no = fm2.pro_no)
 										             join fundlist fl2 on (fm2.mno = fl2.mno)
 										group by i2.pro_no) i2 on(i1.pro_no = i2.pro_no)
@@ -489,7 +489,7 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
 	<select id="selectSuccessFundding" resultMap="itemResult">
 		<![CDATA[
 	         select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount, i7.thumbnail as thumbnail, ac.pimage
-			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost), 0) as fundamount 
+			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost * fl2.fundcount), 0) as fundamount 
 			from item i2 join fundmenu fm2 on (i2.pro_no = fm2.pro_no)
 			             join fundlist fl2 on (fm2.mno = fl2.mno)
 			group by i2.pro_no) i2 on(i1.pro_no = i2.pro_no)
@@ -522,7 +522,7 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
 	<select id="selectNewProject3" parameterType="int" resultMap="itemResult">
 		<![CDATA[
 			select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount, i7.thumbnail as thumbnail, ac.pimage
-			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost), 0) as fundamount 
+			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost * fl2.fundcount), 0) as fundamount 
 										from item i2 join fundmenu fm2 on (i2.pro_no = fm2.pro_no)
 										             join fundlist fl2 on (fm2.mno = fl2.mno)
 										group by i2.pro_no) i2 on(i1.pro_no = i2.pro_no)
@@ -554,7 +554,7 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
 	<select id="selectNewProject4" parameterType="int" resultMap="itemResult">
 		<![CDATA[
 			select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount, i7.thumbnail as thumbnail, ac.pimage
-			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost), 0) as fundamount 
+			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost * fl2.fundcount), 0) as fundamount 
 										from item i2 join fundmenu fm2 on (i2.pro_no = fm2.pro_no)
 										             join fundlist fl2 on (fm2.mno = fl2.mno)
 										group by i2.pro_no) i2 on(i1.pro_no = i2.pro_no)
@@ -593,7 +593,7 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
 	<select id="selectdefaultpast" parameterType="String" resultMap="itemResult">
 		<![CDATA[
 			select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount, i7.thumbnail as thumbnail, ac.pimage
-			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost), 0) as fundamount 
+			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost * fl2.fundcount), 0) as fundamount 
 										from item i2 join fundmenu fm2 on (i2.pro_no = fm2.pro_no)
 										             join fundlist fl2 on (fm2.mno = fl2.mno)
 										group by i2.pro_no) i2 on(i1.pro_no = i2.pro_no)
@@ -624,7 +624,7 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
 	<select id="endeditemsearch" parameterType="String" resultMap="itemResult">
 		<![CDATA[
 			select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount, i7.thumbnail as thumbnail, ac.pimage
-			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost), 0) as fundamount 
+			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost * fl2.fundcount), 0) as fundamount 
 										from item i2 join fundmenu fm2 on (i2.pro_no = fm2.pro_no)
 										             join fundlist fl2 on (fm2.mno = fl2.mno)
 										group by i2.pro_no) i2 on(i1.pro_no = i2.pro_no)
@@ -655,7 +655,7 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
 	<select id="yearitemsearch" parameterType="HashMap" resultMap="itemResult">
 		<![CDATA[
 			select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i3.fundcount, 0) as fundcount, nvl(i4.supportcount, 0) as supportcount, nvl(i5.upcount, 0) as upcount, nvl(i6.repcount, 0) as repcount, i7.thumbnail as thumbnail, ac.pimage
-			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost), 0) as fundamount 
+			from item i1 left join (select i2.pro_no, nvl(sum(fm2.mcost * fl2.fundcount), 0) as fundamount 
 										from item i2 join fundmenu fm2 on (i2.pro_no = fm2.pro_no)
 										             join fundlist fl2 on (fm2.mno = fl2.mno)
 										group by i2.pro_no) i2 on(i1.pro_no = i2.pro_no)

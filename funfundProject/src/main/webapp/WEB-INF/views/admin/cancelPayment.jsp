@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>판매자 승인요청</title>
+<title>펀딩 결제취소</title>
 </head>
 <style>
 .itemImage {
@@ -90,31 +90,36 @@
 	</div>
  <div class="container">
   <ul class="nav nav-tabs">
-  	  <li class="active"><a href="sellerconfirm.am">판매자 승인요청</a></li>
-	  <li><a href="cancelpayment.am">결제 취소요청</a></li>
+  	  <li><a href="sellerconfirm.am">판매자 승인요청</a></li>
+	  <li class="active"><a href="cancelpayment.am">결제 취소요청</a></li>
  </ul>
   <table class="table table-hover adminTable">
     <thead>
       <tr>
-        <th>계정번호</th>
-        <th>ID</th>
-        <th>계정상태</th>
-        <th>휴대폰</th>
-        <th>실명확인증표</th>
-        <th>판매자 승인</th>
-        <th>판매자 승인거부</th>
+        <th>주문번호</th>
+        <th>프로젝트명</th>
+        <th>품목명</th>
+        <th>신청일자</th>
+        <th>취소금액</th>
+        <th>결제방법</th>
+        <th>결제자 ID</th>
+        <th>결제취소</th>
+        <th>취소거부</th>
       </tr>
     </thead>
     <tbody>
-    	<c:forEach var="item" items="${acList }" varStatus="status">
+    	<c:forEach var="item" items="${cList }" varStatus="status">
       	<tr>
-        	<td><c:out value="${item.ano }"/></td>
+        	<td id="fund_no${status.index }"><c:out value="${item.fund_no }"/></td>
+        	<td><c:out value="${item.pname }"/></td>
+        	<td><c:out value="${item.mname }"/></td>
+        	<td><c:out value="${item.funddate }"/></td>
+        	<td id="fcost${status.index }"><c:out value="${item.fcost }"/></td>
+        	<td><c:out value="${item.payment }"/></td>
         	<td><c:out value="${item.id }"/></td>
-        	<td><c:out value="${item.idtype }"/></td>
-        	<td><c:out value="${item.phone }"/></td>
-        	<td><button value="${item.idimage }" type="button" class="btn btn-primary showImage">실명확인증표보기</button></td>
-        	<td><input type="button" class="btn btn-success" value="판매자 승인" onclick="approveSeller(${item.ano });"></td>        	
-      		<td><input type="button" class="btn btn-danger" value="판매자 승인거부" onclick="rejectSeller(${item.ano });"></td>
+        	<input id="evi${status.index }" type="hidden" value ="${item.evidence }"/>
+        	<td><button id="appCancel${status.index }" type="button" class="btn btn-success appCancel">결제취소</button></td>
+      		<td><input type="button" class="btn btn-danger" value="판매자 승인거부" onclick="rejectCancel(${item.fund_no });"></td>
       	</tr>   	
       </c:forEach>
     </tbody>
@@ -122,26 +127,41 @@
 </div>
 <script>
     		$(function(){
-    			$(".showImage").click(function(){
-    				var image = $(this).val();
-    				$("#idimage").attr("src", "/funfund/images/myinfo/sellerinfo/" + image);
-    	 			$("#pictureModal").modal();
+    			var access_token ="";
+    			var imp_key = "9856064046040656";
+    			var imp_secret = "GMMpCiJ9gK1p7TzdFSJ1ZnQmktP7ZjrG6d6IwPSMzTcHNLUsEEuE1k1lNQtNaUuh8AZEqSr0LDHzpC14";
+    			$.ajax({
+    				url : "https://api.iamport.kr/users/getToken",
+    				type : "post",
+    				data: {"imp_key" : imp_key, "imp_secret" : imp_secret},
+    				success : function(data){
+    					alert("code : " + data.code + ", token : " + data.response.access_token);
+    				},
+    				error : function(error, status){
+    					alert("error : " + error);
+    				}
+    			});
+    			
+    			$("button[id ^= appCancel]").click(function(){
+    				var id = $(this).attr("id");
+    				var num = id.substr(id.length -1, 1);
+    				console.log("num : " + num);
+ 					var fund_no = $('#fund_no' + num).html();
+ 					var fcost = $('#fcost' + num).html();
+ 					var evidence = $('#evi' + num).val();
+ 					approveCancel(fund_no, evidence, fcost);
     			});
     		})
     		
-    		function approveSeller(ano){
+    		function approveCancel(fund_no, evidence, fcost){
+    			var amount = Number(fcost);
     			$.ajax({
-    				url : "approveSeller.am",
+    				url : "https://api.iamport.kr/payments/cancel",
     				type : "post",
-    				data : {"ano" : ano},
+    				data : {"imp_uid" : evidence, "amount" : amount},
+    				contentType: "application/json",
     				success : function(data){
-    					if(data > 0){
-    						alert("판매자 승인에 성공하였습니다.");
-    						location.href = "sellerconfirm.am";
-    					} else {
-    						alert("판매자 승인에 실패하였습니다.");
-    					}
-    					
+    					alert("code : " + data.code);
     				},
     				error : function(error, status){
     					alert("error : " + error);
@@ -149,11 +169,11 @@
     			});
     		}
     		
-    		function rejectSeller(ano){
+    		function rejectCancel(fund_no){
     			$.ajax({
     				url : "rejectSeller.am",
     				type : "post",
-    				data : {"ano" : ano},
+    				data : {"fund_no" : fund_no},
     				success : function(data){
     					if(data > 0){
     						alert("판매자 거부에 성공하였습니다.");

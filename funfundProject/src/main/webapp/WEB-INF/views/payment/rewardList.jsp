@@ -259,7 +259,8 @@ input[type="checkbox"] {
 		}
 		
 		$("#gotopay").click(function(){
-			gotopay(orderlist, ordercount);
+			var tcost = $("#final-total").html();
+			gotopay(orderlist, ordercount, tcost);
 		});
 	});
 	function sample6_execDaumPostcode() {
@@ -472,12 +473,13 @@ input[type="checkbox"] {
 		<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
 		<script>
 			
-				function gotopay(orderlist, ordercount){
+				function gotopay(orderlist, ordercount, tcost){
 					var rename = $("#rename").val();
 					var rephone = $("#rephone").val();
 					var readdress = $("input[name=address2]").val() + " " + $("input[name=address3]").val();
 					var inputaddress = $("input[name=address1]").val() + "@" + $("input[name=address2]").val() + "@" + $("input[name=address3]").val();
 					var postnum = $("input[name=address1]").val();
+					var cost = Number(tcost);
 					console.log("orderlista : " + orderlist);
 					console.log("ordercounta : " + ordercount);
 					
@@ -488,7 +490,7 @@ input[type="checkbox"] {
 					    pay_method : 'card',
 					    merchant_uid : 'merchant_' + new Date().getTime(),
 					    name : '주문명: <c:out value="${item.pname}"/>',
-					    amount : 100,
+					    amount : cost,
 					    buyer_email : '<c:out value="${sessionScope.account.email}"/>',
 					    buyer_name : rename,
 					    buyer_tel : rephone,
@@ -505,7 +507,7 @@ input[type="checkbox"] {
 					        $.ajax({
 					        	url : "gopayment.fl",
 					        	type : "post",
-					        	data : {"orderlist" : orderlist, "ordercount" : ordercount, "rename" : rename, "rephone" : rephone, "address" : inputaddress, "cardnum" : rsp.apply_num},
+					        	data : {"orderlist" : orderlist, "ordercount" : ordercount, "rename" : rename, "rephone" : rephone, "address" : inputaddress, "cardnum" : rsp.imp_uid},
 					        	success : function(data){
 					        		alert("결제완료!");
 					        		location.href="myfunding.ao";
