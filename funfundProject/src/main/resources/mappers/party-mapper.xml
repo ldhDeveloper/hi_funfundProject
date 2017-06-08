@@ -48,4 +48,16 @@
 			UPDATE PARTY SET phone=#{phone}, id_no=ENCRYPTION_AES.ENC_AES(#{id_no}), address=#{address} WHERE ano=#{ano}
 		]]>
 	</update>
+	
+	<!-- <select id="selectResult" parameterType="int" resultMap="partyResult">
+		<![CDATA[
+			SELECT pno, ano, pname, phone, intro, id_no, president, address, pconfirm, econfirm, idimage FROM PARTY WHERE ano=#{ano} and id_no=ENCRYPTION_AES.ENC_AES(#{id_no})
+		]]>
+	</select> -->
+	
+	<select id="selectResult" parameterType="int" resultMap="partyResult">
+		<![CDATA[
+			SELECT pno, ano, pname, phone, intro, ENCRYPTION_AES.DEC_AES(id_no) AS id_no, president, address, pconfirm, econfirm, idimage FROM PARTY WHERE ano=#{ano}
+		]]>
+	</select>
 </mapper>

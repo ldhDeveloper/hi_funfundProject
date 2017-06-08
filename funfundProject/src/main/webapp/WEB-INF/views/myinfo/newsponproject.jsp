@@ -62,14 +62,14 @@
 }
 
 .mgrade {
-	width: 70%;
+	width: 80%;
 	position: relation;
 	z-index: 20px;
-	background-color: #3DB8CC;
+	/* background-color: #3DB8CC;
 	border-radius: 5px;
 	color: #fff;
 	box-shadow: 2px 2px #AFAFAF;
-	border: none;
+	border: none; */
 	text-align: center;
 	padding-top: 2%;
 	font-size: 1vw;
@@ -332,10 +332,10 @@
 		                 				<input type="text" name="pname" class="mnameText" placeholder="이름" value="${ sessionScope.party.pname }" readonly/>
 		                 			</c:if>
 						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">${ sessionScope.account.idtype }</label></div>
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">회원등급 | ${ sessionScope.account.idtype }</label></div>
 						
 						<c:choose>
-        					<c:when test="${ sessionScope.account.idtype == '일반회원' || sessionScope.account.idtype == '승인요청'}">
+        					<c:when test="${ sessionScope.account.idtype == '일반회원' || sessionScope.account.idtype == '승인요청중'}">
 								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input id="investApply" type="button" class="mbtn1" value="투자 회원 신청"></div>
 							</c:when>
 						</c:choose>
@@ -570,7 +570,19 @@
 <br><br>
 
 <script type="text/javascript">
-	$("#investApply").click(function(){
+$("#investApply").click(function(){
+	var name ='<c:out value="${sessionScope.party.pname}"/>';
+	console.log(name)
+	if(name == "") {
+		alert("회원정보 설정에서 이름을 반드시 입력하세요!                                  이름은 반드시 실명을 입력하셔야 합니다.                                         그렇지 않을 경우 승인이 거부될 수 있습니다.");
+		return false;
+	}
+	
+	else {
+		location.href = "sellerinfo.ao";
+	}
+});
+	/* $("#investApply").click(function(){
 		var name ='<c:out value="${sessionScope.party.pname}"/>';
 		
 		if(name == "") {
@@ -581,7 +593,7 @@
 		else {
 			location.href = "sellerinfo.ao";
 		}
-	});
+	}) */;
 </script>
 
 </body>
