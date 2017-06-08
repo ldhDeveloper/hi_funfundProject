@@ -10,11 +10,30 @@
 		<result property="phone" column="phone" />
 		<result property="idimage" column="idimage" />
 	</resultMap>
+	<resultMap type="cancelInfo" id="cancelInfoResult">
+		<id property="fund_no" column="fund_no" />
+		<result property="pname" column="pname" />
+		<result property="mname" column="mname" />
+		<result property="funddate" column="funddate" />
+		<result property="fcost" column="fcost" />
+		<result property="payment" column="payment" />
+		<result property="evidence" column="evidence" />
+		<result property="id" column="id" />
+	</resultMap>
 	<select id="selectRequestSeller" resultMap="accInfoResult">
 		<![CDATA[
 			select a.ano as ano, a.id as id, a.idtype as idtype, p.phone as phone, p.idimage as idimage
 			from account a join party p on (a.ano = p.ano)
-			where idtype='승인요청'
+			where idtype='승인요청중'
+		]]>
+	</select>
+	<select id="selectCancelInfo" resultMap="cancelInfoResult">
+		<![CDATA[
+			select fl.fund_no as fund_no, i.pname as pname, fm.mname as mname, fl.funddate as funddate, fm.mcost * fl.fundcount as fcost, fl.payment as payment, fl.evidence as evidence, a.id as id  
+			from item i join fundmenu fm on (i.pro_no = fm.pro_no)
+			            join fundlist fl on (fm.mno = fl.mno)
+			            join account a on (fl.ano = a.ano)
+			where fl.funstatus = '취소요청중'
 		]]>
 	</select>
 </mapper>

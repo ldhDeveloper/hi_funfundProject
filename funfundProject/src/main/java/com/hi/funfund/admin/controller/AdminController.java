@@ -18,6 +18,7 @@ import com.hi.funfund.account.model.vo.Account;
 import com.hi.funfund.account.model.vo.Party;
 import com.hi.funfund.admin.model.service.AdminService;
 import com.hi.funfund.admin.model.vo.AccInfo;
+import com.hi.funfund.admin.model.vo.CancelInfo;
 import com.hi.funfund.item.model.service.ItemService;
 import com.hi.funfund.item.model.vo.Item;
 
@@ -128,6 +129,14 @@ public class AdminController {
 		return model;
 	}
 	
+	@RequestMapping(value ="/cancelpayment.am")
+	public ModelAndView selectCancelInfo(ModelAndView model){
+		List<CancelInfo> cList = adminService.selectCancelInfo();
+		model.addObject("cList", cList);
+		model.setViewName("admin/cancelPayment");
+		return model;
+	}
+	
 	@RequestMapping("/pastFundding.am")
 	public ModelAndView selectdefaultpast(ModelAndView model){
 		Calendar today = Calendar.getInstance();
@@ -161,4 +170,20 @@ public class AdminController {
 		
 		return iList;
 	}
+	
+	@RequestMapping(value = "/approveSeller.am", method = RequestMethod.POST)
+	public @ResponseBody int approveSeller(@RequestParam("ano") String anum){
+		int ano = Integer.parseInt(anum);
+		int result = accountService.approveSeller(ano);
+		return result;
+	}
+	
+	
+	@RequestMapping(value = "/rejectSeller.am", method = RequestMethod.POST)
+	public @ResponseBody int rejectSeller(@RequestParam("ano") String anum){
+		int ano = Integer.parseInt(anum);
+		int result = accountService.rejectSeller(ano);
+		return result;
+	}
+	
 }

@@ -15,7 +15,7 @@
 <link href="/funfund/lib/css/common/font.css" rel="stylesheet">
 <style>
 .background {
-	background-color: black;
+	background-color: #000033;
 	padding: 20px;
 	margin: 10px;
 }
@@ -203,7 +203,7 @@ body {
 		
 		var likeList = localStorage.getItem("likeList");
 		console.log("likeList : " + likeList);
-		var pro_no = "_$tag___________________________";
+		var pro_no = "<c:out value='${param.pro_no}'/>";
 		console.log("pro_no : " + pro_no);
 		if (likeList != null && likeList.includes("${param.pro_no}")) {
 			$("#btn-like").hide();

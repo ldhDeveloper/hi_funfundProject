@@ -60,6 +60,10 @@ public interface AccountService {
 	Account createTempPwd(Account account);
 
 	List<Account> selectRequestSeller();
+
+	int approveSeller(int ano);
+
+	int rejectSeller(int ano);
 	
 	//미추가된 함수 : 프로젝트별 후원자 리스트
 
