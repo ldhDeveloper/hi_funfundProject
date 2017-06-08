@@ -61,19 +61,22 @@ margin:auto;
 
 }
 
+
 .ntable {
 width : 800px; 
 margin : auto;
 font-weight:bold;
 text-align:center;
 font-size: 13px;
-border: 1px solid #aaaaaa;
+border: none;
 }
 .column{
-background : #ff9dff;
+background : #f9f9f9;
 width: 70px;
 height: 50px;
-font-size: 20px;
+font-size: 17px;
+border : none;
+color : black;
 }
 
 .details{
@@ -81,6 +84,10 @@ width: 100%;
 border : none;
 height : 50px;
 font-size : 20px;
+text-indent : 20px;
+
+border-top : 1px solid #666;
+border-right : 1px solid #666;
 }
 
 .submit{
@@ -91,7 +98,7 @@ width: 100px !important;
 min-height : 500px !important;
 }
 .insertF {
-border-style : outset;
+
 border-bottom: none;
 }
 </style>
@@ -107,9 +114,10 @@ border-bottom: none;
 <div class="ndetail">
 <form class="insertF" action="#" method="post" onsubmit="return false" >
 <table class="ntable">
-	<tr><td class="column">제목</td><td> 
-<input class="details" id="ntitle" name="ntitle" required></td></tr>
-	<tr><td class="column">이름</td><td><input id="writer"  class="details" value="${account.nickname}" readonly></td></tr>
+	<tr><td class="column" ">제목</td><td> 
+<input class="details" id="ntitle" style="text-indent:30px;" name="ntitle" required></td></tr>
+	<tr><td class="column">이름</td><td><input id="writer" style="text-indent:30px;"
+	  class="details" value="${account.nickname}" readonly></td></tr>
 		<tr><td colspan="2" class="insertContext"><textarea id="froala-editor" required>
 		</textarea></td></tr>
 </table>
@@ -117,6 +125,7 @@ border-bottom: none;
 </form> 
 <div class = "down"></div>
 <script>
+
 function insertN(){
 
 var ncontent =  $('textarea#froala-editor').froalaEditor('html.get');
@@ -124,15 +133,20 @@ var ano = ${account.ano};
 var bname = '${bname}';
 var page = ${page};
 var ntitle = $('input[name=ntitle]').val();
+$.ajax({
+	url :'nInsert.no',
+	data : {"ano" : "${account.ano}", "bname" : '${bname}', "ntitle" : ntitle, "ncontent" : ncontent, "page" : '${page}' },
+	success : function(){
+		location.href= "nList.no?bname=${bname}&page=${page}";
+	}
+});
 
-
- location.href = "nInsert.no?ano=${account.ano}&bname=${bname}&ntitle="+ntitle+"&ncontent="+ncontent+"&page=${page}";
 
 
 	
 }
 </script>
-<script type="text/javascript" src="/funfund/langs/ko.js">
+
  <script type="text/javascript"
   src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script type="text/javascript" 

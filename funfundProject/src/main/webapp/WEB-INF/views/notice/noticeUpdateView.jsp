@@ -47,6 +47,8 @@ $(function() {
 background : #666;
 text-align : center;
 color: white;
+height : 100px;
+ vertical-align: middle;
 }
 
 .ndetail{
@@ -62,23 +64,26 @@ margin : auto;
 font-weight:bold;
 text-align:center;
 font-size: 13px;
-border: 1px solid #aaaaaa;
+border: none;
 }
 .column{
-background : #ffbb99;
+background : #f9f9f9;
 width: 70px;
 height: 50px;
 font-size: 17px;
-border : 1px solid gray;
+border : none;
+color : black;
 }
 .details{
 width: 100%;
-
+border : none;
 height : 50px;
 font-size : 20px;
+text-indent : 20px;
+border-top : 1px solid #666;
+border-right : 1px solid #666;
 }
 form {
-border-style : outset;
 border-bottom: none;
 }
 .submit{
@@ -105,7 +110,7 @@ min-height : 500px !important;
 	<tr><td class="column">제목</td><td> 
 <input class="details" id="ntitle" name="ntitle" value='${n.ntitle}' required> </td></tr>
 	<tr><td class="column">이름</td><td><input id="writer"  class="details" value="${account.nickname}" readonly></td></tr>
-	<tr><td class="column">작성일시</td><td><input id="ndate"  type='date'  class="details" value="${n.ndate}" readonly></td></tr>
+	<tr><td class="column">작성일시</td><td><input id="ndate"  type='date' class="details" value="${n.ndate}" readonly></td></tr>
 	<tr><td class="column">조회수</td><td><input id="readCount" type="number" class="details" value='${n.readcount}' readonly></td></tr>
 	<tr><td class="column">내용</td>
 		<td><textarea id="froala-editor" required>
@@ -113,7 +118,7 @@ min-height : 500px !important;
 		</textarea></td></tr>
 
 </table>
-<button onclick="updateN()">수정</button><button onclick="window.history.go(-1)">목록으로</button>
+<button class="btn btn-default" onclick="updateN()">수정</button><a class="btn btn-default" href="nList.no?bname=${n.bname }&page=${page}">목록으로</a>
 </form> 
 <div class = "down"></div>
 <script>

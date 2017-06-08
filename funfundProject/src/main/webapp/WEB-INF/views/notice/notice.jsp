@@ -13,60 +13,42 @@
 <title>Insert title here</title>
 <script>
 $(function(){
-	
-	$('.panel-heading').hover(function(){
-		$(this).css('cursor', 'pointer');
-	});
-	$('.panel-heading').click(function(){
-		var cname = $(this).siblings("div:first").attr("class");
-		if(cname =="panel-collapse collapse"){
-			$(this).siblings().attr("class", "panel-collapse collapse in");
-		} else {
-			$(this).siblings().attr("class", "panel-collapse collapse");
-		}
-		
-	});
-	
 
-	
 	switch('${bname}'){
-	case '공지사항' :$('#no').css({"background": "#00CCA3", "border-color" : "#00CCA3", "color": "#fff" });
+	case '공지사항' :
+		var admin = '${account.idtype}';
+		$('#no').css({"background": "#00CCA3", "border-color" : "#00CCA3", "color": "#fff" });
 		$('#bTitle').text('공지사항');
 		$('#bComent').text('펀펀드의 공지사항입니다.');
 		$("#searchBar").children("form").children("#searchCategory").html(
 		"<option value='ntitle'>제목</option>");	
-		if('${account.idtype}' == "관리자"){
+		if( admin == '관리자'){
 		$("#searchBar").children("form").html($("#searchBar").children("form").html()
 				+" &nbsp; <a class='btn btn-default' href='nInsertView.no?bname=${bname}&page=${page}'>글쓰기</a>");
 		}
-		break;
-		
-		
-	
-	 case 'FnQ' : $('#fnq').css({"background": "#00CCA3", "border-color" : "#00CCA3", "color": "#fff" });
+		break;	
+	   case 'FnQ' : $('#fnq').css({"background": "#00CCA3", "border-color" : "#00CCA3", "color": "#fff" });
 					$('#bTitle').text('FnQ');
 			     	$('#bComent').text('자주묻는 질문입니다.');
+			     	
 					$('.nListContainer').html( 
-			  										"<div class='panel-group' id='accordion'>"+
-			  										"<c:forEach var='nlist' items='${nList}' varStatus='status'>" +
-			  										"<div class='panel panel-default'>"+
-			  										"<div class='panel-heading'>"+
-			  										"<h4 class='panel-title'>"+
-			  										"<a href='#collapse2' class='fontfamily1' style='text-decoration: none;'>${nlist.ntitle}</a>"+
-			  										"</h4>"+
-			  										"</div>"+
-			  										"<div id='collapse2' class='panel-collapse collapse'>"+
-			  										"<div class='panel-body fontfamily2'>${nlist.ncontent}</div>"+
-			  										"</div>"+
-			  										"</div>"+
-			  										"</c:forEach>" +
-			  										"</div>"
-			  										
-											);
-					$("#pageBar").attr('hidden', true);
-					$("#searchBar").attr('hidden', true);
-	// 아코디언과 내용
-		break; 
+			  				"<hr><div class='panel-group' id='accordion'>"+
+			  				"<c:forEach var='nlist' items='${nList}' varStatus='status'>" +
+						  	"<div class='panel panel-default'>"+
+						  	"<div class='panel-heading'>"+
+						  	"<h4 class='panel-title'>"+
+						  	"<a href='#collapse2' class='fontfamily1' style='text-decoration:none;'>${nlist.ntitle}</a></h4>"+
+						  	"</div>"+
+						  	"<div id='collapse2' class='panel-collapse collapse'>"+
+						   	"<div class='panel-body fontfamily2'>${nlist.ncontent}</div>"+  
+						  	"</div>"+
+						  	"</div>"+
+						  	"</c:forEach>" +
+						  	"</div>"); 
+					$("#pageBar").remove();
+					$("#searchBar").remove();
+				// 아코디언과 내용
+				break;  
 	case 'QnA' :$('#qna').css({"background": "#00CCA3", "border-color" : "#00CCA3", "color": "#fff" });
 	$('#bTitle').text('QnA');
 	$('#bComent').text('사용자와의 소통이 이루어 집니다.');
@@ -77,11 +59,21 @@ $(function(){
 				+" &nbsp; <a class='btn btn-default' href='nInsertView.no?bname=${bname}&page=${page}'>글쓰기</a>");
 		}
 		break;
-	}
+	};
 	
+	$('.panel-heading').hover(function(){
+		$(this).css('cursor', 'pointer');
+	});
+	$('.panel-heading').click(function(){
+		var cname = $(this).siblings("div:first").attr("class");
+		if(cname =="panel-collapse collapse"){
+			$(this).siblings("div:first").attr("class", "panel-collapse collapse in");
+		} else {
+			$(this).siblings("div:first").attr("class", "panel-collapse collapse");
+		}
+		
+	});
 
-	
-	
 });
 
 </script>
@@ -140,9 +132,9 @@ button.accordion.active, button.accordion:hover {
 }
 /* Style the accordion panel. Note: hidden by default */
 div.panel {
-    padding: 0 18px;
+    
     background-color: white;
-    display: none;
+    display: block;
 }
 
 
@@ -156,6 +148,7 @@ width:970px;
 margin:auto;
 padding:24px;
 display : block;
+min-height : 900px;
 }
 .nList:hover {
 background : RGB(245,247,250);
@@ -168,7 +161,6 @@ line-height:22.5px;
 text-size-adjust:100%;
 background : RGB(96,101,106);
 height : 150px;
-
 }
 .FnQtitle{ display: block;}
 .FnQcontent{
@@ -182,16 +174,12 @@ font-weight:500;
 letter-spacing:-0.72px;
 line-height:44px;
 margin-bottom:8px;
-
-
 }
 .noticeTitle{
-
 text-align : center;
 color: white;
     padding: 15px 16px;
 }
-
 em{
 	font-style : normal;
     display: inline-block;
@@ -310,7 +298,6 @@ display:none;}
 					<div align="center" id="searchBar">
 						<form action="nList.no"  onsubmit="return checkOption();" > 
 							<select id="searchCategory">
-							
 	 						</select>
 		 					<input type="text" name="ntitle" placeholder="내용을 입력하세요" required>
 	 						<input type="hidden" name="bname" value="${bname}">

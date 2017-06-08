@@ -33,7 +33,6 @@ import com.hi.funfund.AuthMail.AuthMail;
 import com.hi.funfund.account.model.service.AccountService;
 import com.hi.funfund.account.model.vo.Account;
 import com.hi.funfund.account.model.vo.Party;
-import com.hi.funfund.alert.model.service.AlertService;
 import com.hi.funfund.attachment.model.service.AttachmentService;
 import com.hi.funfund.attachment.model.vo.Attachment;
 import com.hi.funfund.fundlist.model.service.FundListService;
@@ -59,24 +58,24 @@ public class AccountController {
 	@Autowired
 	private FundListService fundListService;
 	
-	@Autowired
-	private AlertService alertService;
-	
 	@RequestMapping("/login.ao")
-	public String login(Party party, Account account, HttpServletRequest request){
+	public ModelAndView login(Party party, Account account, HttpServletRequest request, ModelAndView model){
+		String address= "";
 		account = accountService.login(account);
 		
 		HttpSession session = request.getSession(false);
 		if(account != null){
 			Party p = accountService.loginParty(account.getAno());
-			int checknewmsg = alertService.checkNewMessage(account.getAno());
-			System.out.println("새소식체크 : " + checknewmsg);
-			session.setAttribute("checknewmsg", checknewmsg);
 			session.setAttribute("account", account);
 			session.setAttribute("party", p);
+			
+			model.setViewName("redirect:/");
+		}else{
+			model.setViewName("home");
+			model.addObject("loginFail", "아이디나 비번이 맞지 않습니다.");
 		}
-		//mv.setViewName("home");
-		return "redirect:/";
+		
+		return model;
 	}
 	
 	@RequestMapping(value = "/loginWithApi.ao") // 타 사이트 정보로 회원가입
@@ -378,7 +377,7 @@ public class AccountController {
 	
 	// seller 정보 변경 시작
 	
-	@RequestMapping(value = "changeSeller.ao")
+	@RequestMapping(value = "changSeller.ao")
 	public String changSeller(Attachment vo, HttpServletRequest request) throws  IOException{
 		System.out.println("오니?");
 		
@@ -486,15 +485,12 @@ public class AccountController {
 		}
 		
 		party = accountService.selectResult(ano);
-		account = accountService.selectAccount(ano);
 
 		
 		System.out.println("seller Controller3 ano : " + ano + " party : " + party);
 		
-		
 		session.setAttribute("party", party);
-		session.setAttribute("account", account);
 		
-		return "redirect:/sellerinfo.ao";
+		return "myinfo/sellerinfo";
 	}
 }
