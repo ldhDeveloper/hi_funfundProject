@@ -9,11 +9,19 @@
 <script src="/funfund/lib/js/jquery-3.2.1.min.js"></script>
 <link href="/funfund/lib/css/bootstrap.min.css" rel="stylesheet">
 <script src="/funfund/lib/js/jquery.FadeWideBgImg.js"></script>
+<script type="text/javascript" src="/funfund/lib/js/fadeSlideShow.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="/funfund/lib/css/demoStyleSheet.css" />
 <style>
-@media screen and (min-width: 960px) {
+@media screen and (min-width:0px) and (max-width: 960px)  {
 	body {
 		background-color: lightgreen;
 	}
+	
+	.titlebar {
+	  height: 800px !important;
+	}
+	
 }
 
 @media screen and (min-width: 720px) {
@@ -34,7 +42,7 @@
 	align: center;
 	padding: 20px;
 	width: 100%;
-	height: 400px;
+	height: 600px;
 }
 
 .titlebar2 {
@@ -120,6 +128,14 @@ button {
 
 body {
 	font-family: myFirstFont !important;
+}
+
+.simg {
+	position: relative;
+}
+
+.simg>ul {
+	position: absolute;
 }
 </style>
 <script>
@@ -314,41 +330,64 @@ body {
 		$('.carousel').carousel({
 			interval : 2500
 		});
-		
-		$("#s1").children().eq(0).fadeIn(1000);
-		$("#s1").children().eq(1).fadeIn(1000);
-		$("#s1").children().eq(2).fadeIn(1000);
-		$("#s1").children().eq(3).fadeIn(1000);
+
+		/*  $('.simg ul:gt(0)').hide();
+		 setInterval(function(){$('.simg :first-child').fadeOut().next('img').fadeIn().end().appendTo('.simg');}, 3000); */
+
+		/*   jQuery('#s1').fadeSlideShow(); */
+
+		$(".simg > ul:gt(0)").hide();
+
+		setInterval(function() {
+			$('.simg > ul:first').fadeOut(500).next().fadeIn(500).end()
+					.appendTo('.simg');
+		}, 5000);
+
 	})
 </script>
-
+<script>
+	
+</script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/menubar.jsp" flush="true" />
 	<div class="titlebar" align="center">
 		<div class="col-lg-2 col-md-0 col-sm-0 col-xs-0"></div>
-		<div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+		<div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 simg">
 
+          
+			<ul id="s1">
+				<li><img src="/funfund/images/funding/b.PNG"
+					class="img-responsive"></li>
+				<li><img src="/funfund/images/funding/ll.PNG"
+					class="img-responsive"></li>
+				<li><img src="/funfund/images/funding/t2.PNG"
+					class="img-responsive"></li>
+				<li><img src="/funfund/images/funding/sss.PNG"
+					class="img-responsive"></li>
+			</ul>
 
-				<ul id="s1">
-				<li><img src="/funfund/images/funding/1.PNG" class="img-responsive"></li>
-				<li><img src="/funfund/images/funding/2.PNG" class="img-responsive"></li>
-				<li><img src="/funfund/images/funding/3.PNG" class="img-responsive"></li>
-				<li><img src="/funfund/images/funding/4.PNG" class="img-responsive"></li>
-				</ul>
-				
-				<!-- <ul id="s2">
-				<li><img src="/funfund/images/funding/f.png"></li>
-				<li><img src="/funfund/images/funding/s.png"></li>
-				<li><img src="/funfund/images/funding/t.png"></li>
-				<li><img src="/funfund/images/funding/f2.png"></li>
-				</ul>
-				<ul id="s3">
-				<li><img src="/funfund/images/funding/f.png"></li>
-				<li><img src="/funfund/images/funding/s.png"></li>
-				<li><img src="/funfund/images/funding/t.png"></li>
-				<li><img src="/funfund/images/funding/f2.png"></li>
-				</ul> -->
+			<ul id="s2">
+				<li><img src="/funfund/images/funding/b2.PNG"
+					class="img-responsive"></li>
+				<li><img src="/funfund/images/funding/o.PNG"
+					class="img-responsive"></li>
+				<li><img src="/funfund/images/funding/ff.PNG"
+					class="img-responsive"></li>
+				<li><img src="/funfund/images/funding/hh.PNG"
+					class="img-responsive"></li>
+			</ul>
+
+			<ul id="s3">
+				<li><img src="/funfund/images/funding/b3.PNG"
+					class="img-responsive"></li>
+				<li><img src="/funfund/images/funding/t.PNG"
+					class="img-responsive"></li>
+				<li><img src="/funfund/images/funding/gg.PNG"
+					class="img-responsive"></li>
+				<li><img src="/funfund/images/funding/jj.PNG"
+					class="img-responsive"></li>
+			</ul>
 			<!-- 
 				 슬라이드
 				<div id="myCarousel" class="carousel slide"

@@ -16,10 +16,16 @@
 
 @media screen and (min-width:1px) and (max-width:767px) {
 	.contain {
-		top: -20px;
+		top: 0px;
 	}
-	.container {
-		padding-top: 50px !important;
+	.ti2{
+	   font-size:7pt;
+	}
+	.ti{
+	  font-size:10pt !important;
+	}
+	.carousel-caption{
+	     padding-bottom: 0px !important;
 	}
 }
 
@@ -58,6 +64,11 @@ body {
 .countbar{
 	padding-left: 50px;
 }
+
+.ti{
+	  font-size:18pt ;
+	}
+	
 </style>
 
 <title>home</title>
@@ -80,24 +91,24 @@ body {
 						<div class="swiper-slide">
 							<img src="images/home/slide1.gif" style="width: 100%; max-height:540px;" class="img-responsive">
 							<div class="carousel-caption">
-								<p style="font-size:15pt">즐거움을 펀딩하라!</p>
-								<p>enjoy funding funny!</p>
+								<p class="ti">즐거움을 펀딩하라!</p>
+								<p class="ti2">enjoy funding funny!</p>
 							</div>
 						</div>
 
 						<div class="swiper-slide">
 							<img src="images/home/slide2.gif" style="width: 100%;max-height:540px;"class="img-responsive">
 							<div class="carousel-caption">
-								<p style="font-size:15pt">아름다움을 펀딩하라!</p>
-								<p>enjoy funding beautiful!</p>
+								<p class="ti">아름다움을 펀딩하라!</p>
+								<p class="ti2">enjoy funding beautiful!</p>
 							</div>
 						</div>
 
 						<div class="swiper-slide">
 							<img src="images/home/slide3.gif" style="width: 100%;max-height:540px;"class="img-responsive">
 							<div class="carousel-caption">
-								<p style="font-size:15pt">여유로움을 펀딩하라!</p>
-								<p>Enjoy funding relaxedly!</p>
+								<p class="ti">여유로움을 펀딩하라!</p>
+								<p class="ti2">Enjoy funding relaxedly!</p>
 							</div>
 						</div>
 
@@ -135,15 +146,15 @@ body {
 					<tr>
 						<td style="valign:middle">
 								누적 펀딩 건수<br>
-								<label class="comma" style="font-size:2em"><c:out value="${count.itemcount}"/></label>건
+								<label class="comma" style="font-size:1.5em"><c:out value="${count.itemcount}"/></label>건
 						</td>
 						<td>
 								누적 펀딩 금액<br>
-								<label id="comma" style="font-size:2em"></label>원
+								<label id="comma" style="font-size:1.5em"></label>원
 						</td>
 						<td>
 								펀딩 모집 성공률<br>
-								<label style="font-size:2em"><c:out value="${count.sucrate}"/></label>%
+								<label style="font-size:1.5em"><c:out value="${count.sucrate}"/></label>%
 						</td>
 					</tr>
 				</table>
