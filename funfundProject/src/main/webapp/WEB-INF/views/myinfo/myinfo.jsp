@@ -63,14 +63,14 @@
 }
 
 .mgrade {
-	width: 70%;
+	width: 80%;
 	position: relation;
 	z-index: 20px;
-	background-color: #3DB8CC;
-	border-radius: 5px;
-	color: #fff;
-	box-shadow: 2px 2px #AFAFAF;
-	border: none;
+	/* background-color: #3DB8CC; */
+	/* border-radius: 5px; */
+	/* color: #fff; */
+	/* box-shadow: 2px 2px #AFAFAF; */
+	/* border: 1px solid #3DB8CC; */
 	text-align: center;
 	padding-top: 2%;
 	font-size: 1vw;
@@ -285,13 +285,22 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 		                 	</div>
 						</div>						
 						
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">${ sessionScope.account.idtype }</label></div>
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">회원등급 | ${ sessionScope.account.idtype }</label></div>
 													
-						<c:choose>
+						<%-- <c:choose>
         					<c:when test="${ sessionScope.account.idtype == '일반회원' || sessionScope.account.idtype == '승인요청'}">
 								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input id="investApply" type="button" class="mbtn1" value="투자 회원 신청"></div>
 							</c:when>
-						</c:choose>
+						</c:choose> --%>
+						
+						<%-- <div style="margin-top:20px;">
+		                 		<c:if test="${empty sessionScope.account.pimage }">
+		                 			<button id="insertphoto" class="btn btn-info" onclick="photosubmit();">사진추가하기</button>
+		                 		</c:if>
+		                 		<c:if test="${!empty sessionScope.account.pimage }">
+		                 			<button id="updatephoto" class="btn btn-info" onclick="photosubmit();">사진변경하기</button>
+		                 		</c:if>
+		                </div> --%>
 						<!-- <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input type="button" class="mbtn1" value="투자 회원 신청" onclick="return goSellerinfo();"></div> -->
 					</div>
 				</div>
@@ -309,7 +318,13 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 
 								<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 									<ul class="nav navbar-nav">
-										<li class="act"><a class="active" href="myinfo.ao">회원 정보 설정<span class="sr-only">(current)</span></a></li>										
+										<li class="act"><a class="active" href="myinfo.ao">회원 정보 설정<span class="sr-only">(current)</span></a></li>									
+										
+										<c:choose>
+        									<c:when test="${ sessionScope.account.idtype == '일반회원' || sessionScope.account.idtype == '승인요청중'}">
+												<li><a id="investApply" class="otherActive" style="cursor:pointer;">투자 회원 신청</a></li>
+											</c:when>
+										</c:choose>
 										
 										<!-- c:if문 걸어서 일반회원이 아닐때만 조건문  -->
 										<!-- <li style="display:none;"><a class="otherActive" style="cursor:pointer;">판매자 정보 변경</a></li> -->
@@ -320,6 +335,8 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
         								</c:choose>																				
 										
 										<li><a href="puttoproject.ao" class="otherActive">찜한 프로젝트</a></li>
+										
+										
 										
 										<c:choose>
         									<c:when test="${ sessionScope.account.idtype == '판매자'}">
@@ -343,7 +360,7 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 								<div class="email-input-wrap">
 									<form action="changeMyinfo.ao" method="post">
 									
-										<h6 align="left">이름</h6>
+										<h6 align="left">이름 (반드시 실명을 입력해주세요.)</h6>
 										<c:if test="${ empty sessionScope.party.pname}">
 		                 					<input type="text" name="name" class="input-text" placeholder="이름" value=""/>
 		                 				</c:if>
@@ -558,7 +575,7 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
         										var name ='<c:out value="${sessionScope.party.pname}"/>';
     											console.log(name)
         										if(name == "") {
-        											alert("회원정보 설정에서 이름을 반드시 입력하세요!");
+        											alert("회원정보 설정에서 이름을 반드시 입력하세요!                                  이름은 반드시 실명을 입력하셔야 합니다.                                         그렇지 않을 경우 승인이 거부될 수 있습니다.");
         											return false;
         										}
         										

@@ -58,6 +58,7 @@
 	width: 40%;
 	background-color: #F8F8F8;
 }
+
 </style>
 </head>
 <body>
@@ -119,14 +120,15 @@ $(function(){
 		                 				<input type="text" name="pname" class="mnameText" placeholder="이름" value="${ sessionScope.party.pname }" readonly/>
 		                 			</c:if>
 						</div>
-						<!-- <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">개인 일반 회원 회원 등급이 들어갈 곳 </label></div> -->
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">${ sessionScope.account.idtype }</label></div>
 						
-						<c:choose>
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">회원등급 | ${ sessionScope.account.idtype }</label></div>
+						<%-- <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">${ sessionScope.account.idtype }</label></div> --%>
+						
+						<%-- <c:choose>
         					<c:when test="${ sessionScope.account.idtype == '일반회원' || sessionScope.account.idtype == '승인요청중'}">
 								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input id="investApply" type="button" class="mbtn1" value="투자 회원 신청"></div>
 							</c:when>
-						</c:choose>
+						</c:choose> --%>
 					</div>
 				</div>
 				
@@ -147,6 +149,12 @@ $(function(){
         							<li><a href="myinfo.ao" class="otherActive">회원 정보 설정</a></li>
         							
         							<c:choose>
+        									<c:when test="${ sessionScope.account.idtype == '일반회원' || sessionScope.account.idtype == '승인요청중'}">
+        										<li class="act"><a class="active" href="sellerinfo.ao">투자 회원 신청<span class="sr-only">(current)</span></a></li>
+											</c:when>
+									</c:choose>
+        							
+        							<c:choose>
         								<c:when test="${ sessionScope.account.idtype == '판매자'}">
         									<li class="act"><a class="active" href="sellerinfo.ao">판매자 정보 수정<span class="sr-only">(current)</span></a></li>
         								</c:when>
@@ -161,8 +169,6 @@ $(function(){
 										</c:when>
 									</c:choose>
         							
-        							<!-- <li><a href="puttoproject.ao" class="otherActive">찜한 프로젝트</a></li> -->
-        							<li><a href="newproject.ao" class="otherActive">개설한 프로젝트</a></li>
         							<li><a href="myfunding.ao" class="otherActive">나의 펀딩 현황</a></li>
       							</ul>
     						</div>
@@ -244,7 +250,26 @@ $(function(){
 		                        
 									<h5>실명확인증표 등록</h5>
 					       				<p class="sub-text">실명과   주민등록번호 확인을 위해, 현재 유효한 주민등록증 또는 면허증의 앞면을 촬영한 사진을 등록하세요.</p>
-					       				       				
+					       				
+					       				<br>
+					       				
+					       				<c:if test="${ empty sessionScope.party.idimage}">
+											<input type="hidden" name="photoflag" value="insert">
+										</c:if>
+										
+										<c:if test="${ !empty sessionScope.party.idimage}">
+											<input type="hidden" name="photoflag" value="update">
+										</c:if>
+					       				
+					       				<c:if test="${ empty sessionScope.party.idimage}">
+					       					<img id="imgRoute" class="idImage" src="images/myinfo/sellerinfo/idcardimg.png"  style="max-width: 398px; max-height: 200px; width: 398px; heigh: 200px; background-color:#fff;">
+					       				</c:if>
+					       				
+					       				<c:if test="${ ! empty sessionScope.party.idimage}">
+					       					<img id="imgRoute" class="idImage" src="images/myinfo/sellerinfo/<c:out value='${ sessionScope.party.idimage }'/>"  style="max-width: 398px; max-height: 200px; width: 398px; heigh: 200px; background-color:#fff;">
+					       				</c:if>
+					       				
+					       				<br><br>				
 					       				<input type="text" id="imgRoute" class="input-text" placeholder="선택된 파일 없음" readonly/>
 					       				
 					       				<p class="alert alert-success" id="updateCardImg"></p>		       				
@@ -297,18 +322,18 @@ $(function(){
 <br><br>
 
 <script>
-	$("#investApply").click(function(){
-		var name ='<c:out value="${sessionScope.party.pname}"/>';
-		console.log(name)
-		if(name == "") {
-			alert("회원정보 설정에서 이름을 반드시 입력하세요!");
-			return false;
-		}
-		
-		else {
-			location.href = "sellerinfo.ao";
-		}
-	});
+$("#investApply").click(function(){
+	var name ='<c:out value="${sessionScope.party.pname}"/>';
+	console.log(name)
+	if(name == "") {
+		alert("회원정보 설정에서 이름을 반드시 입력하세요!                                  이름은 반드시 실명을 입력하셔야 합니다.                                         그렇지 않을 경우 승인이 거부될 수 있습니다.");
+		return false;
+	}
+	
+	else {
+		location.href = "sellerinfo.ao";
+	}
+});
 	
     function sample6_execDaumPostcode() {
         new daum.Postcode({
