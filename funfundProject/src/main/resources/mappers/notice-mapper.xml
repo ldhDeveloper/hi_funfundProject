@@ -90,8 +90,8 @@
 	<insert id="insert" parameterType="notice">
 	<choose>
 	<when test="ntitle !=null">
-	insert into notice(nno, ntitle, ncontent, ndate, upbno, readcount, ano, bname)
-	values(seq_nno.nextval, #{ntitle}, #{ncontent}, sysdate, 0, 0, #{ano}, #{bname})
+	insert into notice(nno, ntitle, ncontent, ndate, upbno, readcount, ano, bname, nreply_lev)
+	values(seq_nno.nextval, #{ntitle}, #{ncontent}, sysdate, 0, 0, #{ano}, #{bname}, 0)
 	</when>
 	<when test="nreply_lev == 1">
 	insert into notice(nno, ncontent, ndate, upbno, readcount, ano, bname, nreply_lev, replybno)
@@ -106,7 +106,7 @@
 	
 	<delete id="delete" parameterType="int">
 	delete from notice
-	where nno = #{nno} or upbno = #{nno}
+	where nno = #{nno} or replybno = #{nno}
 	</delete>
 	
 </mapper>

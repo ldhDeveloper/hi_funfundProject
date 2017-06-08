@@ -28,7 +28,6 @@ public class NoticeController {
 	@RequestMapping(value="nList.no",  method=RequestMethod.GET)
 	public ModelAndView notice(Notice notice, @RequestParam("page") int page,
 								 ModelAndView model){
-			System.out.println("notice get"+ notice.getNtitle());
 			HashMap map = new HashMap();
 			map.put("bname", notice.getBname());
 			int sNum = page * 10 +1 -10;
@@ -46,8 +45,6 @@ public class NoticeController {
 			model.setViewName("notice/notice");
 		return model;
 	}
-
-	
 	@RequestMapping("nInsertView.no")
 	public ModelAndView Write(@RequestParam("bname") String bname, @RequestParam("page") int page, ModelAndView model  ){
 		model.addObject("bname", bname );
@@ -55,7 +52,6 @@ public class NoticeController {
 		model.setViewName("notice/ninsert");
 		return model;
 	}
-	
 	@RequestMapping("nDetail.no")
 	public ModelAndView selectDetailList(Notice notice,
 			@RequestParam("page") int page, ModelAndView model){
@@ -65,7 +61,7 @@ public class NoticeController {
 		Notice n = noticeService.selectOne(notice.getNno());
 		model.addObject("page", page);
 		model.addObject("nList", nList );
-		System.out.println(nList);
+	
 		model.addObject("replyCount", replyCount );
 		model.addObject("n", n);
 		model.setViewName("notice/nDetail");
@@ -112,12 +108,14 @@ public class NoticeController {
 	}
 	@RequestMapping("nInsert.no")
 	public ModelAndView insert(Notice notice, @RequestParam("page") String page){
+		notice.setNcontent( notice.getNcontent().replaceAll("\"", "\'"));
 		int result = noticeService.insert(notice);
 		String address = null;
+		notice.setNtitle(null);
+		ModelAndView modela = new ModelAndView();
 		ModelAndView model = null;
 		if(result >0){
-			
-			model = notice(notice, Integer.valueOf(page), model);
+			model = notice(notice, Integer.valueOf(page), modela);
 			
 		}
 		return model;

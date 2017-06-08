@@ -18,7 +18,7 @@ public class NoticeDao {
 	public List<Notice> selectList(HashMap map) {
 		
 		List<Notice> nList = sqlSession.selectList(nameSpace+"selectList", map);
-		System.out.println(nList);
+		
 		
 		return nList;
 	}
@@ -46,7 +46,6 @@ public class NoticeDao {
 		return sqlSession.delete(nameSpace+"delete", nno);
 	}
 	public int insert(Notice notice) {
-		
 		
 		return sqlSession.insert(nameSpace+"insert", notice);
 	}

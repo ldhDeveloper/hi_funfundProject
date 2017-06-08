@@ -86,6 +86,9 @@ font-size: 13px;
 .title{
 
 font-size: 22px;
+background : #24B3A8;
+color : white;
+height : 40px;
 }
 .ncontent{
 
@@ -154,8 +157,8 @@ function insertReply(lev, upbno, replybno){
 	var top = new Number(1);
 	var date = new Date(2017, 01, 01, 01, 01, 01, 01);
 	var comparedDate = new Date(); 
-	alert(date);
 	var edgenum = "";
+	var order = new Number(1);
 	$.ajax({
 		url : "replyInsert.no",
 		data : {"ncontent" : ncontent, "ano" : ano, "upbno" : upbno, "bname": bname, "nreply_lev" : lev, "page" : page, "replybno" : replybno},
@@ -225,8 +228,6 @@ function insertReply(lev, upbno, replybno){
 										"<p style='text-indent:50px;'>" +data[i].ncontent +"</p><p>" +
 										data[i].ndate+
 										"</p><input type='hidden'  value='"+ data[i].nno+ "'>"+
-										"<button id='addreply' class='admin btn btn-default' onclick='createReplyForm(" +i +", " + data[i].upbno + ", " + data[i].nno +" )'>답글달기</button>" +
-										
 										"</div></div><br>";
 								}else{
 									replylist  =
@@ -237,7 +238,6 @@ function insertReply(lev, upbno, replybno){
 										"<p style='text-indent:50px;'>" +data[i].ncontent +"</p><p>" +
 										data[i].ndate+
 										"</p><input type='hidden'  value='"+ data[i].nno+ "'>"+
-										"<button id='addreply' class='admin btn btn-default' onclick='createReplyForm(" +i +", " + data[i].upbno + ", " + data[i].nno +" )'>답글달기</button>" +
 										"<button id='redact' class='btn btn-default' onclick='redactForm(" +i+ "," + data[i].nno + ")'>댓글수정</button>" +
 										"<a class='btn btn-default' href='nDelete.no?nno=" +data[i].nno +"&bname=" +data[i].bname + "&upbno=" +data[i].upbno +"&page=${page}' >댓글삭제</a>" + 
 										"</div></div><br>";
@@ -252,7 +252,6 @@ function insertReply(lev, upbno, replybno){
 									"<p style='text-indent:50px;'> " +data[i].ncontent +"</p><p>" +
 									data[i].ndate+
 									"</p><input type='hidden'  value='"+ data[i].nno+ "'>"+
-									 "<button id='addreply' class='admin btn btn-default' onclick='createReplyForm(" +i +", " + data[i].upbno + ", " + data[i].nno +" )'>답글달기</button>" +
 									"</div></div><br>";
 							}else{
 								replylist = 
@@ -263,7 +262,6 @@ function insertReply(lev, upbno, replybno){
 									"<p style='text-indent:50px;'> " +data[i].ncontent +"</p><p>" +
 									data[i].ndate+
 									"</p><input type='hidden'  value='"+ data[i].nno+ "'>"+
-									 "<button id='addreply' class='admin btn btn-default' onclick='createReplyForm(" +i +", " + data[i].upbno + ", " + data[i].nno +" )'>답글달기</button>" +
 									"<button id='redact' class='btn btn-default' onclick='redactForm(" +i+ "," + data[i].nno + ")'>댓글수정</button>" +
 									"<a class='btn btn-default' href='nDelete.no?nno=" +data[i].nno +"&bname=" +data[i].bname + "&upbno=" +data[i].upbno +"&page=${page}' >댓글삭제</a>"+ 
 									"</div></div><br>";
@@ -281,6 +279,7 @@ function insertReply(lev, upbno, replybno){
 						comparedDate.setHours(0);
 						comparedDate.setMinutes(0);
 						comparedDate.setSeconds(0);
+						comparedDate.setMilliseconds(order++);
 						if( date < comparedDate ){
 							date = data[i].ndate;
 						edgenum = i;}
@@ -344,7 +343,7 @@ function createReplyForm(index, upbno, replybno){
 				<p class="categoryName"><a class="nDetailCategory">&lt; ${n.bname} </a></p>
 			</div>
 		<br>
-		<p class="title">&nbsp; &nbsp; ${n.ntitle}</p>
+		<p class="title" >&nbsp; &nbsp; ${n.ntitle}</p>
 		
 		<p class ="nInfo">
 		<c:if test="${empty reply.pimage }"> <img class="nImage" src="/funfund/images/myinfo/dimages.png"></c:if>
@@ -357,8 +356,8 @@ function createReplyForm(index, upbno, replybno){
 			<div id="nDetailContent"> ${n.ncontent}</div>
 			<div class="buttons">
 				<c:if test="${account.ano eq n.ano }">
-				<a href="goUpdateView.no?nno=${n.nno}&page=${page}">수정하기</a>
-				<a href="nDelete.no?ntitle=${n.ntitle}&nno=${n.nno}&bname=${n.bname}&page=${page}">삭제하기</a></c:if>
+				<a  class="btn btn-default" href="goUpdateView.no?nno=${n.nno}&page=${page}">수정하기</a>
+				<a  class="btn btn-default" href="nDelete.no?ntitle=${n.ntitle}&nno=${n.nno}&bname=${n.bname}&page=${page}">삭제하기</a></c:if>
 			</div>
 		</div>
 		<div class="col-lg-4 col-md-0 col-sm-0 col-xs-0" > </div>
@@ -382,14 +381,14 @@ function createReplyForm(index, upbno, replybno){
 			<c:forEach var="reply" items="${ nList}" varStatus="status">
 			<div id="replyContent${status.index}" class="replyContent replyContent${status.index}">
 				<c:if test="${reply.nreply_lev ==2 }">
-				<div class='replylev2'>
+				<div class='replylev2'> 
 				</c:if>
 					<p>
 					<c:if test="${empty reply.pimage }"> <img class="rImage" src="/funfund/images/myinfo/dimages.png"></c:if>
 					<c:if test="${!empty reply.pimage }"> <img class="rImage" src="${reply.pimage}"></c:if>
 					${reply.nickname}</p><br>
 					<p class='rcontent' style="text-indent:50px;"> ${reply.ncontent}</p><br>
-					<p>${reply.ndate}</p>
+					<p style="color:#cac4c4">${reply.ndate}</p>
 					<input type="hidden" name="nno"  value="${reply.nno}">
 					<c:if test="${!empty account }">
 					<c:if test="${!empty account && reply.nreply_lev == 1 }"> <!-- 관리자 확인 조건 account.idtype== '관리자' -->
