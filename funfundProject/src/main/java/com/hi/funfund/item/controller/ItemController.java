@@ -327,6 +327,35 @@ public class ItemController {
 		return model;
 	}
 
+	@RequestMapping(value = "preview.it")
+	public ModelAndView preViewList(ModelAndView model, HttpServletRequest request) {
+		int pro_no = Integer.parseInt(request.getParameter("pro_no"));
+		Item item = itemService.selectOne2(pro_no);
+		List<Itemfund> bestList = itemService.bestList(pro_no);
+		List<FundMenu> mList = fundMenuService.selectList(pro_no);
+		List<ItemAsk> aList = itemAskService.selectList(pro_no);
+		List<Attachment> sList = attachmentService.selectimgList(pro_no);
+		System.out.println("sList:"+sList);
+		if (item.getPvideo() != null || item.getPvideo() == "") {
+			// youtube 주소
+			String vaddress = item.getPvideo();
+			String[] pvideoAddress = vaddress.split("/");
+			vaddress = pvideoAddress[pvideoAddress.length - 1];
+			item.setPvideo(vaddress);
+		};
+		if(request.getParameter("preview") != null){
+			model.addObject("preview", true);
+		}
+		
+		model.addObject("item", item);
+		model.addObject("mList", mList);
+		model.addObject("aList", aList);
+		model.addObject("bestList", bestList);
+		model.addObject("sList", sList);
+		model.setViewName("funding/preView");
+		return model;
+	}
+	
 	@RequestMapping(value = "detail.it")
 	public ModelAndView fundingdetailList(ModelAndView model, HttpServletRequest request) {
 		int pro_no = Integer.parseInt(request.getParameter("pro_no"));

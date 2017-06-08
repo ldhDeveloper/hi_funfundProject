@@ -865,6 +865,11 @@ label.sign-form_title {
     border-radius: 4px;
     margin-left:20px;
 }
+
+ul{
+ list-style:none;
+ dacoration:none;
+}
 /* .navbar-default .navbar-toggle .icon-bar {
 	background-color: orange;
 } */

@@ -68,6 +68,18 @@ input[type="checkbox"] {
     padding-top: 1%;
     padding-left: 4.5%;
 }
+
+.btn-warning {
+    color: #fff;
+    background-color: #ff9966 !important;
+    border-color: #f4e7fe !important;
+}
+
+.btn-warning hover{
+    color: #fff;
+    background-color: #f4e7fe !important;
+    border-color: #ff9966 !important;
+}
 </style>
 <script src="/funfund/lib/js/jquery-3.2.1.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -80,7 +92,7 @@ input[type="checkbox"] {
 		
 		
 		$(".widjet").mouseenter(function(){
-			$(this).css("background", "#ffd9b3");
+			$(this).css("background", "#ffddcc");
 			$(this).css("cursor", "pointer");
 			$(this).css("color", "white");
 			$(this).find("[class^=ordercount]").css("color", "black");
@@ -235,7 +247,7 @@ input[type="checkbox"] {
 						var mcost = data[i].mcost;
 						
 						
-						$("#show-area").html($("#show-area").html() + "<tr style='border-radius:5px;border:1px violet solid;padding-left:50px;background:rgba(255,0,255,0.2);'>"
+						$("#show-area").html($("#show-area").html() + "<tr style='border-radius:5px;border:1px #ddb6fb solid;padding-left:50px;'>"
 								+ "<td><br>리워드명 : "+ mname + "<br>"
 								+ "상세설명 : " + mcontent + "<br><br>"
 								+ "</td>"
@@ -361,9 +373,9 @@ input[type="checkbox"] {
 								<td style="width:200px;min-width:150px;text-align:center;align:center;">
 									<div id="plusminus" style="display:none" class="amount">
 										주문수량<br>
-										<i class="fa fa-minus-square fa-2x minus-btn" aria-hidden="true" style="color:violet" id="minus"></i>
+										<i class="fa fa-minus-square fa-2x minus-btn" aria-hidden="true" style="color:#ddb6fb" id="minus"></i>
 										<input type="text" value="1" size="2" style="text-align:center;" class="ordercount<c:out value='${status.index}'/>" name="fundcount">
-										<i class="fa fa-plus-square fa-2x plus-btn" aria-hidden="true" style="color:violet" id="plus"></i>
+										<i class="fa fa-plus-square fa-2x plus-btn" aria-hidden="true" style="color:#ddb6fb" id="plus"></i>
 									</div>
 								
 									
@@ -389,7 +401,7 @@ input[type="checkbox"] {
 			<div class="col-lg-1"></div>
 			<div class="col-lg-10">
 				<table style="width:100%;" align="center">
-					<tr style="background:#ffd9b3;">
+					<tr style="background:#ddb6fb;">
 						<th colspan="4" style="color:white;text-align:center;height:50px;">
 							<label >주문내역</label>
 						</th>
@@ -406,20 +418,20 @@ input[type="checkbox"] {
 						<td style="width:15%;text-align:right;"><label id="sub-total">0</label><label>&nbsp; 원</label></td>
 					</tr>
 					
-					<tr style="center;height:30px;background:#ffd9b3;">
+					<tr style="center;height:30px;background:#f4e7fe;">
 						<td>펀딩금액</td>
 						<td></td>
 						<td></td>
 						<td style="text-align:right;"><label id="funding-total">0</label><label>&nbsp; 원</label></td>
 					</tr>
-					<tr style="center;height:30px;background:#ffd9b3;">
+					<tr style="center;height:30px;background:#f4e7fe;">
 						<td>추가 후원금</td>
 						<td></td>
 						<td></td>
 						<td style="text-align:right;"><label id="plus-total">0</label><label>&nbsp; 원</label></td>
 					</tr>
 					
-					<tr style="center;height:50px;background:#ffd9b3;">
+					<tr style="center;height:50px;background:#f4e7fe;">
 						<th>최종결제금액</th>
 						<td></td>
 						<td></td>

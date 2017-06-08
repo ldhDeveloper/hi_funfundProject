@@ -108,5 +108,7 @@ public interface ItemService {
 
 	List<Item> selectNewSponProject4(int ano);
 
+	Item selectOne2(int pro_no);
+
 
 }

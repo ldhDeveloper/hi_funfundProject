@@ -18,17 +18,20 @@
 	.contain {
 		top: 0px;
 	}
-	.ti2{
-	   font-size:7pt;
+	.ti2 {
+		font-size: 7pt;
 	}
-	.ti{
-	  font-size:10pt !important;
+	.ti {
+		font-size: 10pt !important;
 	}
-	.carousel-caption{
-	     padding-bottom: 0px !important;
+	.carousel-caption {
+		padding-bottom: 0px !important;
 	}
 }
 
+.tbar {
+	top: -70px;
+}
 
 .fun-menu {
 	color: white !important;
@@ -61,14 +64,14 @@ body {
 	-webkit-align-items: center;
 	align-items: center;
 }
-.countbar{
+
+.countbar {
 	padding-left: 50px;
 }
 
-.ti{
-	  font-size:18pt ;
-	}
-	
+.ti {
+	font-size: 18pt;
+}
 </style>
 
 <title>home</title>
@@ -79,17 +82,19 @@ body {
 
 
 	<!-- 슬라이드 사진 영역 -->
-	<div class="row" style="max-height:465px;">
+	<div class="row" style="max-height: 535px;">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="contain"
 				style="padding-left: 0px; padding-right: 0px; width: 100%; clear: both;">
+
 				<!-- Slider main container -->
 				<div class="swiper-container">
 					<!-- Additional required wrapper -->
 					<div class="swiper-wrapper">
 						<!-- 슬라이더 입니다. -->
 						<div class="swiper-slide">
-							<img src="images/home/slide1.gif" style="width: 100%; max-height:540px;" class="img-responsive">
+							<img src="images/home/slide1.gif"
+								style="width: 100%; max-height: 540px;" class="img-responsive">
 							<div class="carousel-caption">
 								<p class="ti">즐거움을 펀딩하라!</p>
 								<p class="ti2">enjoy funding funny!</p>
@@ -97,7 +102,8 @@ body {
 						</div>
 
 						<div class="swiper-slide">
-							<img src="images/home/slide2.gif" style="width: 100%;max-height:540px;"class="img-responsive">
+							<img src="images/home/slide2.gif"
+								style="width: 100%; max-height: 540px;" class="img-responsive">
 							<div class="carousel-caption">
 								<p class="ti">아름다움을 펀딩하라!</p>
 								<p class="ti2">enjoy funding beautiful!</p>
@@ -105,7 +111,8 @@ body {
 						</div>
 
 						<div class="swiper-slide">
-							<img src="images/home/slide3.gif" style="width: 100%;max-height:540px;"class="img-responsive">
+							<img src="images/home/slide3.gif"
+								style="width: 100%; max-height: 540px;" class="img-responsive">
 							<div class="carousel-caption">
 								<p class="ti">여유로움을 펀딩하라!</p>
 								<p class="ti2">Enjoy funding relaxedly!</p>
@@ -120,12 +127,12 @@ body {
 							class="swiper-pagination-bullet"></span> <span
 							class="swiper-pagination-bullet"></span>
 					</div>
-					
 
 				</div>
 			</div>
 		</div>
 	</div>
+
 
 	<script src="/funfund/lib/js/swiper.jquery.min.js"></script>
 	<script>
@@ -134,52 +141,66 @@ body {
 			slidesPerView : 1,
 			paginationClickable : true,
 			spaceBetween : 30,
-			autoplay:5000,
-			autoplayDisableOnInteraction: false, 
+			autoplay : 5000,
+			autoplayDisableOnInteraction : false,
 			loop : true
 		});
 	</script>
-	
-		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="background:orange; height:100px; width:100%;color:white">
-				<table style="width:100%;height:100px;text-align:center;valign:middle;">
 
-					<tr><td style="width:20%;"></td>
-						<td>
-							<div style="float:left"><i class="fa fa-bar-chart fa-4x" aria-hidden="true"></i></div>
-							<div style="float:left;margin-left:10px;">누적 펀딩 건수<br><label class="comma" style="font-size:2em"><c:out value="${count.itemcount}"/></label>건</div>
-							
-						</td>
-						<td>
-							<div style="float:left"><i class="fa fa-money fa-4x" aria-hidden="true"></i></div>
-							<div style="float:left;margin-left:10px;">누적 펀딩 금액<br><label id="comma" style="font-size:2em"></label>원</div>
+	<div class="hidden-xs col-sm-12 col-md-12 col-lg-12 tbar"
+		style="background: orange; height: 100px; width: 100%; color: white;">
+		<table
+			style="width: 100%; height: 100px; text-align: center; valign: middle;">
 
-						</td>
-						
-						<td>
-							<div style="float:left"><i class="fa fa-pie-chart fa-4x" aria-hidden="true"></i></div>
-							<div style="float:left;margin-left:10px;">펀딩 모집 성공률<br><label style="font-size:2em"><c:out value="${count.sucrate}"/></label>%</div>
-						</td>
-						<td style="width:10%"><td>
-					</tr>
-				</table>
-			</div>
-		</div>
-	<br style="clear:both"><br>
+			<tr>
+				<td style="width: 20%;"></td>
+				<td>
+					<div style="float: left">
+						<i class="fa fa-bar-chart fa-4x" aria-hidden="true"></i>
+					</div>
+					<div style="float: left; margin-left: 10px;">
+						누적 펀딩 건수<br> <label class="comma" style="font-size: 2em"><c:out
+								value="${count.itemcount}" /></label>건
+					</div>
+
+				</td>
+				<td>
+					<div style="float: left">
+						<i class="fa fa-money fa-4x" aria-hidden="true"></i>
+					</div>
+					<div style="float: left; margin-left: 10px;">
+						누적 펀딩 금액<br> <label id="comma" style="font-size: 2em"></label>원
+					</div>
+
+				</td>
+
+				<td>
+					<div style="float: left">
+						<i class="fa fa-pie-chart fa-4x" aria-hidden="true"></i>
+					</div>
+					<div style="float: left; margin-left: 10px;">
+						펀딩 모집 성공률<br> <label style="font-size: 2em"><c:out
+								value="${count.sucrate}" /></label>%
+					</div>
+				</td>
+				<td style="width: 10%">
+				<td>
+			</tr>
+		</table>
+	</div>
+
+	<br style="clear: both">
+	<br>
+
 	<script>
-	
-	var price = <c:out value="${count.totalprice}"/>;
-	var price2 = numberWithCommas(price);
-	
-	$("#comma").html(price2);
-	
-	function numberWithCommas(x) {
-		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-	}
-		
-		
-	
+		var price = <c:out value="${count.totalprice}"/>;
+		var price2 = numberWithCommas(price);
 
+		$("#comma").html(price2);
+
+		function numberWithCommas(x) {
+			return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		}
 	</script>
 
 
