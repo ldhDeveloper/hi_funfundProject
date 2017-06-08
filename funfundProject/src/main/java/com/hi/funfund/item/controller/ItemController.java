@@ -408,6 +408,8 @@ public class ItemController {
 		return model;
 	}
 	
+	// 개설한 리워드형 프로젝트 시작
+	
 	@RequestMapping(value = "inwrite.it")
 	public ModelAndView newproject2(ModelAndView model, HttpSession session, HttpServletRequest request){
 		session = request.getSession(false);
@@ -450,4 +452,49 @@ public class ItemController {
 		return model;
 	}
 	
+	/* ########################################### 구 분################################################ */
+	
+	// 개설한 후원형 프로젝트 시작
+	
+	@RequestMapping(value = "dinwrite.it")
+	public ModelAndView newsponproject2(ModelAndView model, HttpSession session, HttpServletRequest request){
+		session = request.getSession(false);
+		Account account = (Account)session.getAttribute("account");
+		int ano = account.getAno();
+		
+		List <Item> dList = itemService.selectNewSponProject2(ano);
+			
+		model.addObject("dList", dList);
+		model.setViewName("myinfo/newsponproject2");
+			
+		return model;
+	}
+	
+	@RequestMapping(value = "dongoing.it")
+	public ModelAndView newsponproject3(ModelAndView model, HttpSession session, HttpServletRequest request){	
+		session = request.getSession(false);
+		Account account = (Account)session.getAttribute("account");
+		int ano = account.getAno();
+		
+		List <Item> dList = itemService.selectNewSponProject3(ano);
+			
+		model.addObject("dList", dList);
+		model.setViewName("myinfo/newsponproject3");
+			
+		return model;
+	}	
+
+	@RequestMapping(value = "ddeadline.it")
+	public ModelAndView newsponproject4(ModelAndView model, HttpSession session, HttpServletRequest request){
+		session = request.getSession(false);
+		Account account = (Account)session.getAttribute("account");
+		int ano = account.getAno();
+		
+		List <Item> dList = itemService.selectNewSponProject4(ano);
+			
+		model.addObject("dList", dList);
+		model.setViewName("myinfo/newsponproject4");
+			
+		return model;
+	}			
 }
