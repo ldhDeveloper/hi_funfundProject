@@ -926,7 +926,18 @@ label.sign-form_title {
 			</table>
 		</div>
 	</div>
-
+		<script>
+			$(function(){
+				$("#message").mouseover().css("cursor", "pointer");
+				
+				$("#message").click(function(){
+					var url = "messagelist.al?pro_no=${pro_no}";
+					window.open(url, "", "width=400, height=300, left=600, top=200, status=0, location=0");
+				});
+					
+				
+			});
+		</script>
 	<!-- 모바일 메뉴바 -->
 	<div class="row middle-menubar hidden-lg hidden-md hidden-sm">
 		<c:if test="${empty sessionScope.account.id}">
@@ -1375,7 +1386,7 @@ body{
 							<li><a href="nList.no?bname=공지사항&page=1">고객센터</a></li>
 							<li><a href="myinfo.ao">회원정보보기</a>
 							<c:if test="${sessionScope.account.idtype eq '관리자' }">
-							<li class="hidden-xs"><a href="itemconfirm.am">관리자</a>
+							<li class="hidden-xs"><a href="sellerconfirm.am">관리자</a>
 							</li>
 							</c:if>
 						</ul>

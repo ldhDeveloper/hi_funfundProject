@@ -233,6 +233,20 @@ public class AccountController {
 		return model;
 	}
 	
+	@RequestMapping(value = "newsponproject.ao")
+	public ModelAndView newsponproject(ModelAndView model, HttpSession session, HttpServletRequest request){
+		session = request.getSession(false);
+		Account account = (Account)session.getAttribute("account");
+		int ano = account.getAno();
+		
+		List <Item> dList = itemService.selectSupportProject(ano);
+			
+		model.addObject("dList", dList);
+		model.setViewName("myinfo/newsponproject");
+			
+		return model;
+	}
+	
 	@RequestMapping(value = "myfunding.ao")	
 	public ModelAndView myfunding(ModelAndView model, HttpSession session, HttpServletRequest request) {
 		session = request.getSession(false);
@@ -284,9 +298,8 @@ public class AccountController {
 		return "myinfo/myinfo";
 	}
 	
-	// myinfo 비밀번호 변경 시작
-	
-	@RequestMapping(value = "changePwd.ao")
+	// myinfo 비밀번호 변경 시작	
+	/*@RequestMapping(value = "changePwd.ao")
 	public ModelAndView changePwd(ModelAndView model, HttpSession session, HttpServletRequest request) {
 		System.out.println("오니?");
 		session = request.getSession(false);
@@ -312,7 +325,27 @@ public class AccountController {
 		model.setViewName("myinfo/myinfo");	
 		
 		return model;
-	}		
+	}*/	
+	
+	@RequestMapping(value = "changePwd.ao", method=RequestMethod.POST)
+	public @ResponseBody int changePwd(HttpServletRequest request, @RequestParam("oldPwd") String oldPwd, @RequestParam("newPwd") String newPwd, @RequestParam("ano") int ano) {
+		System.out.println("비밀번호 오니?");
+		int result = 0;
+		
+		System.out.println("PWD Controller1 ano : " + ano + " oldPwd : " + oldPwd);
+		
+		Account account2 = accountService.selectOldPwd(ano, oldPwd);
+		
+		System.out.println("PWD Controller2 ano : " + ano + " oldPwd : " + oldPwd);
+		
+		if(account2 != null) {
+			result = accountService.updatePwd(ano, newPwd);
+			
+			System.out.println("PWD Controller3 ano : " + ano + " newPwd : " + newPwd);
+		}
+		
+		return result;
+	}
 	// myinfo 비밀번호 변경 끝
 	
 	

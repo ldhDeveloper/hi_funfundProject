@@ -56,7 +56,7 @@
 
 	<select id="selectOldPwd" parameterType="hashmap" resultMap="accountResult">
 		<![CDATA[			
-			SELECT ano, id, ENCRYPTION_AES.DEC_AES(pwd) AS pwd, email, pimage, idtype, idtoken, seller, outyn, nickname FROM ACCOUNT WHERE ano=#{ano} 
+			SELECT ano, id, pwd, email, pimage, idtype, idtoken, seller, outyn, nickname FROM ACCOUNT WHERE ano=#{ano} and pwd=ENCRYPTION_AES.ENC_AES(#{oldPwd})
 		]]>
 	</select>
 
@@ -128,10 +128,16 @@
 	</delete>
 	<select id="selectRequestSeller">
 		select * from account 
-		where idtype='승인요청'
+		where idtype='승인요청중'
 	</select>
 	
 	<update id="updateIdtype" parameterType="int">
-		update account set idtype='승인요청' where ano=#{ano}
+		update account set idtype='승인요청중' where ano=#{ano}
+	</update>
+	<update id="approveSeller" parameterType="int">
+		update account set idtype='판매자' where ano=#{ano}
+	</update>
+	<update id="rejectSeller" parameterType="int">
+		update account set idtype='일반회원' where ano=#{ano}
 	</update>
 </mapper>

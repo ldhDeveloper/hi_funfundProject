@@ -15,7 +15,7 @@
 <link href="/funfund/lib/css/common/font.css" rel="stylesheet">
 <style>
 .background {
-	background-color: black;
+	background-color: #000033;
 	padding: 20px;
 	margin: 10px;
 }

@@ -123,7 +123,7 @@ $(function(){
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">${ sessionScope.account.idtype }</label></div>
 						
 						<c:choose>
-        					<c:when test="${ sessionScope.account.idtype == '일반회원' || sessionScope.account.idtype == '승인요청'}">
+        					<c:when test="${ sessionScope.account.idtype == '일반회원' || sessionScope.account.idtype == '승인요청중'}">
 								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input id="investApply" type="button" class="mbtn1" value="투자 회원 신청"></div>
 							</c:when>
 						</c:choose>
@@ -153,6 +153,15 @@ $(function(){
         							</c:choose>
         							
         							<li><a href="puttoproject.ao" class="otherActive">찜한 프로젝트</a></li>
+										
+									<c:choose>
+        								<c:when test="${ sessionScope.account.idtype == '판매자'}">
+											<li><a href="newproject.ao" class="otherActive">개설한 리워드형 프로젝트</a></li>
+											<li><a href="newsponproject.ao" class="otherActive">개설한 후원형 프로젝트</a></li>
+										</c:when>
+									</c:choose>
+        							
+        							<!-- <li><a href="puttoproject.ao" class="otherActive">찜한 프로젝트</a></li> -->
         							<li><a href="newproject.ao" class="otherActive">개설한 프로젝트</a></li>
         							<li><a href="myfunding.ao" class="otherActive">나의 펀딩 현황</a></li>
       							</ul>
@@ -200,7 +209,7 @@ $(function(){
 		       					
 		       							<ul class="input-div2">
 		       								<c:if test="${ empty sessionScope.party.id_no }">
-			       								<li><input id="fid_no" type="tel" class="input-text" value="" name="id_no1" maxlength="7" placeholder="주민등록번호 앞자리"/></li>
+			       								<li><input id="fid_no" type="tel" class="input-text" value="" name="id_no1" maxlength="6" placeholder="주민등록번호 앞자리"/></li>
 			       							</c:if>
 			       							
 			       							<c:if test="${ ! empty sessionScope.party.id_no }"> 
@@ -263,7 +272,7 @@ $(function(){
 			        	    				<input type="submit" class="btn-darkgray3" id="applyBtn" value="신청하기">
 			        	    			</c:when>
 			        	    			
-			        	    			<c:when test="${ sessionScope.account.idtype == '승인요청' || sessionScope.account.idtype == '판매자'}">
+			        	    			<c:when test="${ sessionScope.account.idtype == '승인요청중' || sessionScope.account.idtype == '판매자'}">
 			        	    				<input type="submit" class="btn-darkgray3" id="modifyBtn" value="수정하기">
 			        	    			</c:when>
 			        	    		</c:choose>

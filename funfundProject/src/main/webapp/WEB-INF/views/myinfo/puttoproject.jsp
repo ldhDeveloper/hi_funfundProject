@@ -215,9 +215,17 @@
         										<li><a href="sellerinfo.ao" class="otherActive">판매자 정보 수정<span class="sr-only">(current)</span></a></li>
         									</c:when>
         							</c:choose>
+        							
+        							<li class="act"><a class="active" href="puttoproject.ao">찜한 프로젝트<span class="sr-only">(current)</span></a></li>
+										
+									<c:choose>
+        								<c:when test="${ sessionScope.account.idtype == '판매자'}">
+											<li><a href="newproject.ao" class="otherActive">개설한 리워드형 프로젝트</a></li>
+											<li><a href="newsponproject.ao" class="otherActive">개설한 후원형 프로젝트</a></li>
+										</c:when>
+									</c:choose>
         								
-        							<li class="act"><a class="active" href="puttoproject.ao">찜한 프로젝트<span class="sr-only">(current)</span></a></li>      							        							        							
-        							<li><a href="newproject.ao" class="otherActive">개설한 프로젝트</a></li>
+        							<!-- <li class="act"><a class="active" href="puttoproject.ao">찜한 프로젝트<span class="sr-only">(current)</span></a></li> -->      							        							        							        							
         							<li><a href="myfunding.ao" class="otherActive">나의 펀딩 현황</a></li>
       							</ul>
     						</div>

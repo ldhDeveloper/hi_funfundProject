@@ -25,6 +25,7 @@
 	color: #fff;
 	font-size: 2vw;
 	padding-top: 1.5%;
+	padding-bottom: 1.5%;
 }
 
 .minfo {
@@ -227,6 +228,11 @@
     
 }
 
+.DStart {
+	background-color: #d9edf7 !important;
+    width: 88.3%;  
+}
+
 .sidelist {
 	background-color: #DFF0D8 !important;
 	color: #3C763D;	
@@ -240,6 +246,55 @@
 
 .pcontents {
 	border: 1px solid #DFF0D8;
+	width: 88.3%;
+	border-bottom-right-radius: 4px !important;
+	border-bottom-left-radius: 4px !important;
+}
+
+/* supportproject list */
+
+.mainDlist {
+	background-color: #3DB8CC !important;
+	color: white;
+}
+
+.mdlist:hover {
+	background-color: #3DB8CC !important;
+	color: white;
+}
+
+.dlistStart {
+	
+}
+
+.dlStart {
+    background-color: #DFF0D8 !important;
+    width: 88.3%;   
+    
+}
+
+.DStart {
+	background-color: #d9edf7 !important;
+    width: 88.3%;  
+}
+
+.sideDlist {
+	background-color: #DFF0D8 !important;
+	color: #31708f;
+}
+
+.sdlist {
+	background-color: #d9edf7 !important;
+}
+
+.sdlist:hover {
+	background-color: #4C85C3 !important;
+	color: white;
+	border-radius: 0px !important;	
+}
+
+.dcontents {
+	border: 1px solid #d9edf7;
 	width: 88.3%;
 	border-bottom-right-radius: 4px !important;
 	border-bottom-left-radius: 4px !important;
@@ -310,13 +365,20 @@
         							</c:choose>
         							
         							<li><a href="puttoproject.ao" class="otherActive">찜한 프로젝트</a></li>
-        							<li class="act"><a class="active" href="newproject.ao">개설한 프로젝트<span class="sr-only">(current)</span></a></li>      							        							        							        							
+										
+									<c:choose>
+        								<c:when test="${ sessionScope.account.idtype == '판매자'}">
+											<li class="act"><a class="active" href="newproject.ao">개설한 리워드형 프로젝트<span class="sr-only">(current)</span></a></li>
+											<li><a href="newsponproject.ao" class="otherActive">개설한 후원형 프로젝트</a></li>
+										</c:when>
+									</c:choose>
+									
+        							<!-- <li class="act"><a class="active" href="newproject.ao">개설한 프로젝트<span class="sr-only">(current)</span></a></li>  -->     							        							        							        							
         							<li><a href="myfunding.ao" class="otherActive">나의 펀딩 현황</a></li>
       							</ul>
     						</div>
   						</div>
 					</nav>
-					
 					
 					<c:if test="${ empty iList }"> 
 					<div class="panel-group">
@@ -475,24 +537,7 @@
 					    									}
 					    								});
 												 </script>
-				    							</c:forEach>
-				    							
-				    							<script type="text/javascript">
-							    					$("#investApply").click(function(){
-														var name ='<c:out value="${sessionScope.party.pname}"/>';
-														console.log(name);
-														console.log("오니?");
-														if(name == "") {
-															alert("회원정보 설정에서 이름을 반드시 입력하세요!");
-															console.log("오긴 오니?");
-															return false;
-														}
-														
-														else {
-															location.href = "sellerinfo.ao";
-														}
-													});
-						    					</script>				    											    							
+				    							</c:forEach>				    											    											    							
 			    							</div>
 									</div> 
 								</div>
@@ -500,32 +545,30 @@
       						</div>
       					</div>
       				</div>
-      				</c:if>     				
-      			</div>	  
-						
-						
-			   						   						
-    						
-
-    					
-    					<br>
-      					
-      						<div class="well">   					   					
-    							<div class="panel panel-info">
-      								<div class="panel-heading">후원형 프로젝트</div>
-      								<div class="panel-body">아직 참여한 프로젝트가 없습니다.</div>
-    							</div>
-    						</div>
-    					 									
-  						<br><br><br>						
-					</div>																					
-				</div>				
-			</div>
-		</div>
+      				</c:if>     			
+      			</div>	  	
+    			<br><br><br><br>						
+			</div>																					
+		</div>				
 	</div>
 </div>
 
 <br><br>
+
+<script type="text/javascript">
+	$("#investApply").click(function(){
+		var name ='<c:out value="${sessionScope.party.pname}"/>';
+		
+		if(name == "") {
+			alert("회원정보 설정에서 이름을 반드시 입력하세요!");
+			return false;
+		}
+														
+		else {
+			location.href = "sellerinfo.ao";
+		}
+	});
+</script>
 
 </body>
 </html>

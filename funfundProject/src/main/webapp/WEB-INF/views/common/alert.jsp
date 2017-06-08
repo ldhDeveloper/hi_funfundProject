@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -17,6 +17,8 @@ body{
 </style>
 <script>
 	$(function(){
+		
+		
 		var ano = ${sessionScope.account.ano};
 		
 		$.ajax({
@@ -27,7 +29,7 @@ body{
 		  		for(var i = 0; i < length; i++){
 		  			if(data.alist[i].readyn == 'n'){
 		  				$("#msglist").html($("#msglist").html() 
-		  			  		+ "<tr><td align='center'><input type='checkbox'></td><td>관리자</td><td>"
+		  			  		+ "<tr><td align='center'><input type='checkbox' value='"+ data.alist[i].al_no +"'></td><td>관리자</td><td class='title' onclick='clickmsg(this);'>"
 		  			  		+ data.alist[i].al_title 
 		  			  		+ " &nbsp; <label style='background:red;color:white;font-size:0.7em;'>&nbsp; N &nbsp;</label>"
 		  			  		+ "</td><td>" 
@@ -35,20 +37,25 @@ body{
 		  			  		+ "</td></tr>" );
 		  			}else{
 		  				$("#msglist").html($("#msglist").html() 
-			  			  		+ "<tr><td align='center'><input type='checkbox'></td><td>관리자</td><td>"
-			  			  		+ data.alist[i].al_title 
-			  			  		+ "</td><td>" 
-			  			  		+ data.alist[i].s_al_date 
-			  			  		+ "</td></tr>" );
+			  			  	+ "<tr><td align='center'><input type='checkbox' value='"+ data.alist[i].al_no +"'></td><td>관리자</td><td class='title' onclick='clickmsg(this);'>"
+			  			  	+ data.alist[i].al_title 
+			  			  	+ "</td><td>" 
+			  			  	+ data.alist[i].s_al_date 
+			  			  	+ "</td></tr>" );
 		  			}
 		  		}
-		  			
-		  		
 		  	}
 		});
+
+
+		
+		
 	});
+	function myFunction(){
+		alert("쪽지 닫기!");
+	}
 </script>
-<body>
+<body onunload="myFunction()">
 	<div style="text-align:center;background:orange;color:white;height:50px;valign:middle;padding-top:15px;">쪽 지
 	
 	</div>
@@ -62,8 +69,57 @@ body{
 		<tr><td align="center"><input type="checkbox"></td><td>관리자</td><td>게시물 등록 완료!</td><td>2017-06-07</td></tr> -->
 	</table>
 	<div align="right" style="backgroung:orange;">
-		<button class="btn btn-xs btn-default" >전체선택</button><button class="btn btn-xs btn-danger">삭제</button>
+		<button class="btn btn-xs btn-success" id="allcheck" onclick='allcheck();'>전체선택</button><button class="btn btn-xs btn-warning" style="display:none" id="alldecheck" onclick='alldecheck();'>선택해제</button>
+		<button class="btn btn-xs btn-danger" id="delete" onclick="deletechecked();">삭제</button>
 	</div>
+	<script>
+		$(function(){
+			$('td').mouseover().css("cursor", "pointer");
+		});
+	
+	
+		function clickmsg(x){
+			var al_no = $(x).parent().find("input[type=checkbox]").val();
+			console.log(al_no);
+			location.href="selectone.al?al_no="+al_no;
+		}
+		
+		function allcheck(){
+			$('input[type=checkbox]').each(function(){
+				this.checked = true;
+				
+			});
+			
+			$("#allcheck").hide();
+			$("#alldecheck").show();
+		}
+		function alldecheck(){
+			$('input[type=checkbox]').each(function(){
+				this.checked = false;
+				
+			});
+			
+			$("#allcheck").show();
+			$("#alldecheck").hide();
+		}
+		function deletechecked(){
+			var nolist = new Array();
+			var i = 0;
+			$('input[type=checkbox]').each(function(){
+				if(this.checked){
+					nolist[i] = $(this).val();
+					i++;
+				}
+			});
+			console.log(nolist);
+			if(nolist.length != 0){
+				location.href="deletechecked.al?nolist="+nolist;
+			}
+			
+			
+			
+		}
+	</script>
 	<hr>
 	<footer>
 	<div align="center">
@@ -80,5 +136,6 @@ body{
 		</div>
 	</div>
 	</footer>
+
 </body>
 </html>

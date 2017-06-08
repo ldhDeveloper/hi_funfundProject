@@ -209,5 +209,26 @@ public class ItemDao {
 		return count;
 	}
 
+	public List<Item> selectSupportProject(int ano) {
+		List<Item> dList = (List<Item>) sqlSession.selectList(nameSpace + "selectSupportProject", ano);
+		return dList;
+	}
+
+	// 개설한 후원형 프로젝트
+	public List<Item> selectNewSponProject2(int ano) {
+		List<Item> dList = (List<Item>) sqlSession.selectList(nameSpace + "selectNewSponProject2", ano);
+		return dList;
+	}
+
+	public List<Item> selectNewSponProject3(int ano) {
+		List<Item> dList = (List<Item>) sqlSession.selectList(nameSpace + "selectNewSponProject3", ano);
+		return dList;
+	}
+
+	public List<Item> selectNewSponProject4(int ano) {
+		List<Item> dList = (List<Item>) sqlSession.selectList(nameSpace + "selectNewSponProject4", ano);
+		return dList;
+	}
+
 	
 }
