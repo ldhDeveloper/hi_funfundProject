@@ -436,8 +436,8 @@ body {
 								src="/funfund/images/funding/thumbnail/<c:out value="${item.thumbnail }"/>"
 								alt="사진1" style="width: 100%"> <script>
 									$(function() {
-										var ecost = "_$tag_________________________";
-										var fundamount = "_$tag______________________________"
+										var ecost = "<c:out value='${item.ecost}'/>";
+										var fundamount = "<c:out value='${item.fundamount}'/>"
 										var persent = Math.round(fundamount
 												* 100 / ecost);
 										var bar = 0;
@@ -447,7 +447,7 @@ body {
 											bar = persent;
 										}
 										var edate = new Date(
-												"_$tag__________________________");
+												"<c:out value='${item.pedate}'/>");
 										var todate = new Date();
 										var btMs = edate.getTime()
 												- todate.getTime();
@@ -456,37 +456,37 @@ body {
 
 										console.log(persent);
 										$(
-												"#persent_$tag___________________________")
+												"#persent<c:out value='${status.index}'/>")
 												.text(persent);
 										$(
-												"#progressbar_$tag___________________________")
+												"#progressbar<c:out value='${status.index}'/>")
 												.attr("aria-valuenow", persent);
 										$(
-												"#progressbar_$tag___________________________")
+												"#progressbar<c:out value='${status.index}'/>")
 												.css("width", bar + "%");
 										$(
-												"#edate_$tag___________________________")
+												"#edate<c:out value='${status.index}'/>")
 												.text(btDay);
 
 										if (btDay < 0) {
 											$(
-													"#edate_$tag___________________________")
+													"#edate<c:out value='${status.index}'/>")
 													.hide();
 											$(
-													"#yet_$tag___________________________")
+													"#yet<c:out value='${status.index}'/>")
 													.hide();
 											$(
-													"#complete_$tag___________________________")
+													"#complete<c:out value='${status.index}'/>")
 													.show();
 										} else {
 											$(
-													"#complete_$tag___________________________")
+													"#complete<c:out value='${status.index}'/>")
 													.hide();
 											$(
-													"#edate_$tag___________________________")
+													"#edate<c:out value='${status.index}'/>")
 													.show();
 											$(
-													"#yet_$tag___________________________")
+													"#yet<c:out value='${status.index}'/>")
 													.show();
 										}
 									})
