@@ -22,5 +22,16 @@
 		select al_no,al_title, al_content, to_char(al_date, 'yyyy/mm/dd')as s_al_date, readyn, ano from alert where ano = #{ano} order by al_date desc
 	</select>
 	
+	<select id="selectOne" parameterType="int" resultMap="alertResult">
+		select al_no,al_title, al_content, to_char(al_date, 'yyyy/mm/dd')as s_al_date, readyn, ano from alert where al_no = #{al_no}
+	</select>
+	
+	<update id="updateReadyn" parameterType="int">
+		update alert set readyn = 'y' where al_no = #{al_no}
+	</update>
+	
+	<delete id="deleteAlert" parameterType="int">
+		delete alert where al_no = #{al_no}
+	</delete>
 	
 </mapper>
