@@ -56,7 +56,7 @@
 
 	<select id="selectOldPwd" parameterType="hashmap" resultMap="accountResult">
 		<![CDATA[			
-			SELECT ano, id, ENCRYPTION_AES.DEC_AES(pwd) AS pwd, email, pimage, idtype, idtoken, seller, outyn, nickname FROM ACCOUNT WHERE ano=#{ano} 
+			SELECT ano, id, pwd, email, pimage, idtype, idtoken, seller, outyn, nickname FROM ACCOUNT WHERE ano=#{ano} and pwd=ENCRYPTION_AES.ENC_AES(#{oldPwd})
 		]]>
 	</select>
 

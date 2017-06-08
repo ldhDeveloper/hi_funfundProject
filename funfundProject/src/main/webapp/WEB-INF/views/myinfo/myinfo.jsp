@@ -317,10 +317,17 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
         									<c:when test="${ sessionScope.account.idtype == '판매자'}">
         										<li><a href="sellerinfo.ao" class="otherActive">판매자 정보 수정</a></li>
         									</c:when>
-        								</c:choose>
+        								</c:choose>																				
 										
 										<li><a href="puttoproject.ao" class="otherActive">찜한 프로젝트</a></li>
-										<li><a href="newproject.ao" class="otherActive">개설한 프로젝트</a></li>
+										
+										<c:choose>
+        									<c:when test="${ sessionScope.account.idtype == '판매자'}">
+												<li><a href="newproject.ao" class="otherActive">개설한 리워드형 프로젝트</a></li>
+												<li><a href="newsponproject.ao" class="otherActive">개설한 후원형 프로젝트</a></li>
+											</c:when>
+										</c:choose>
+										
 										<li><a href="myfunding.ao" class="otherActive">나의 펀딩 현황</a></li>
 									</ul>
 								</div>
@@ -394,7 +401,7 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 	                        		
 	                        		<em class="line"></em>             			                        	                     	
 									
-									<form action="changePwd.ao" method="post" onsubmit="return savePwd();">	
+									<!-- <form action="changePwd.ao" method="post" onsubmit="return savePwd();">	 -->
 										<div id="accountWrap">
             	            				<div id="newContainer">
                 								<div class="account-wrap">
@@ -422,10 +429,10 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 						
 										<div class="email-input-wrap small">
 											<div class="btn-wrap">
-												<input type="submit" id="saveBtn" class="pwdBtn btn-block-purple" value="설정하기">
+												<input type="submit" id="savePwdBtn" class="pwdBtn btn-block-purple" value="설정하기">
 	                        				</div>
 	                     				</div>	                     			
-	                     			</form>	
+	                     			<!-- </form>	 -->
 	                     			
 	                     			<script>
 	                     				// 인증번호
@@ -436,7 +443,46 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 										var pwd = "<c:out value='${ sessionScope.account.pwd }'/>";
 	                     			
         								$(function(){ 
-        									// 비밀번호
+        									// 비밀번호 
+        									
+        									$("#savePwdBtn").click(function(){
+        										if($("#oldPwd").val() == "") {
+        											$("#oldPwdInput").addClass("alert alert-danger");
+        											$("#oldPwdInput").html("현재 비밀번호를 입력해주세요.");
+        											return false;
+        										}
+        										        										
+        										else if($("#newPwd").val() == "") {
+        											$("#newPwdInput").addClass("alert alert-danger");
+        											$("#newPwdInput").html("새 비밀번호를 입력해주세요.");
+        											return false;
+        										}
+        										
+        										else if($("#newPwd2").val() == "") {
+        											$("#newPwdInput2").addClass("alert alert-danger");
+        											$("#newPwdInput2").html("새 비밀번호를 입력해주세요.");
+        											return false;
+        										}
+        										
+        										else {
+        											$.ajax({
+        												url: "changePwd.ao",
+        												type: "post",
+        												data: {"oldPwd" : $("#oldPwd").val(), 
+        													   "newPwd" : $("#newPwd").val(), 
+        													   "ano" : "${ sessionScope.account.ano }"},
+        												success: function(data){
+        													if(data > 0) {
+        														alert("비밀번호 변경이 되었습니다.");
+            													location.href="myinfo.ao";
+        													}
+        													else {
+        														alert("비밀번호를 변경할 수 없습니다. 뭔가 잘못되었나봐요.");
+        													}        													
+        												}
+        											});
+        										}
+        									});
         									
         									$("#oldPwdInput").removeClass("alert alert-danger");
         									$("#newPwdInput").removeClass("alert alert-danger");
@@ -455,6 +501,8 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
             											$("#gicon").removeClass("glyphicon-ok-circle");
             											$("#gicon").addClass("glyphicon-remove-circle");
             											$("#gicon").css("color", "red");
+            											$("#newPwdInputSame").addClass("alert alert-danger");
+            											$("#newPwdInputSame").html("새 비밀번호를 동일하게 입력해주세요");
             											return false;
             										}
         										}
@@ -568,40 +616,25 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
     										});    										
         								}        								
         								
-        								function savePwd (){
+        								/* function savePwd (){
     										if($("#oldPwd").val() == "") {
     											$("#oldPwdInput").addClass("alert alert-danger");
     											$("#oldPwdInput").html("현재 비밀번호를 입력해주세요.");
     											return false;
     										}
     										
-    										
-    										
-    										else if($("#oldPwdInput").val() != pwd){
-        										$("#oldPwdInput").addClass("alert alert-danger");
-    											$("#oldPwdInput").html("현재 등록된 비밀번호와 다릅니다.");
-    											console.log($("#oldPwdInput").val());
-    											return false;
-        									}
-    										
-    										else if($("#newPwd").val() == "") {
+    										if($("#newPwd").val() == "") {
     											$("#newPwdInput").addClass("alert alert-danger");
     											$("#newPwdInput").html("새 비밀번호를 입력해주세요.");
     											return false;
     										}
     										
-    										else if($("#newPwd2").val() == "") {
+    										if($("#newPwd2").val() == "") {
     											$("#newPwdInput2").addClass("alert alert-danger");
     											$("#newPwdInput2").html("새 비밀번호를 입력해주세요.");
     											return false;
     										}
-    										
-    										else if($("#newPwd").val() != $("#newPwd2").val()) {
-    											$("#newPwdInputSame").addClass("alert alert-danger");
-    											$("#newPwdInputSame").html("새 비밀번호를 동일하게 입력해주세요");
-    											return false;
-    										}
-    									};
+    									}; */
         							</script>																			
 								</div>
 							</div>

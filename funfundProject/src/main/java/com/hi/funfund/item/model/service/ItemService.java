@@ -100,5 +100,13 @@ public interface ItemService {
 
 	ItemCount selectitemCount();
 
+	List<Item> selectSupportProject(int ano);
+
+	List<Item> selectNewSponProject2(int ano);
+
+	List<Item> selectNewSponProject3(int ano);
+
+	List<Item> selectNewSponProject4(int ano);
+
 
 }

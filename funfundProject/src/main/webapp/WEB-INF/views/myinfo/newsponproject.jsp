@@ -25,6 +25,7 @@
 	color: #fff;
 	font-size: 2vw;
 	padding-top: 1.5%;
+	padding-bottom: 1.5%;
 }
 
 .minfo {
@@ -205,6 +206,8 @@
 	padding : 0px !important;
 }
 
+/* newproject list */
+
 .mainlist {
 	background-color: #31C698 !important;
 	color: white;
@@ -221,8 +224,13 @@
 
 .lStart {
     background-color: #DFF0D8 !important;
-    width: 88.3%;
+    width: 88.3%;   
     
+}
+
+.DStart {
+	background-color: #d9edf7 !important;
+    width: 88.3%;  
 }
 
 .sidelist {
@@ -238,6 +246,55 @@
 
 .pcontents {
 	border: 1px solid #DFF0D8;
+	width: 88.3%;
+	border-bottom-right-radius: 4px !important;
+	border-bottom-left-radius: 4px !important;
+}
+
+/* supportproject list */
+
+.mainDlist {
+	background-color: #3DB8CC !important;
+	color: white;
+}
+
+.mdlist:hover {
+	background-color: #3DB8CC !important;
+	color: white;
+}
+
+.dlistStart {
+	
+}
+
+.dlStart {
+    background-color: #DFF0D8 !important;
+    width: 88.3%;   
+    
+}
+
+.DStart {
+	background-color: #d9edf7 !important;
+    width: 88.3%;  
+}
+
+.sideDlist {
+	background-color: #DFF0D8 !important;
+	color: #31708f;
+}
+
+.sdlist {
+	background-color: #d9edf7 !important;
+}
+
+.sdlist:hover {
+	background-color: #4C85C3 !important;
+	color: white;
+	border-radius: 0px !important;	
+}
+
+.dcontents {
+	border: 1px solid #d9edf7;
 	width: 88.3%;
 	border-bottom-right-radius: 4px !important;
 	border-bottom-left-radius: 4px !important;
@@ -276,7 +333,7 @@
 		                 			</c:if>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">${ sessionScope.account.idtype }</label></div>
-						<!-- <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input type="button" class="mbtn1" value="투자 회원 신청" onclick="return goSellerinfo();"></div> -->
+						
 						<c:choose>
         					<c:when test="${ sessionScope.account.idtype == '일반회원' || sessionScope.account.idtype == '승인요청'}">
 								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input id="investApply" type="button" class="mbtn1" value="투자 회원 신청"></div>
@@ -300,6 +357,7 @@
     						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       							<ul class="nav navbar-nav">
       								<li><a href="myinfo.ao" class="otherActive">회원 정보 설정</a></li>
+      								
       								<c:choose>
         									<c:when test="${ sessionScope.account.idtype == '판매자'}">
         										<li><a href="sellerinfo.ao" class="otherActive">판매자 정보 수정<span class="sr-only">(current)</span></a></li>
@@ -310,73 +368,57 @@
 										
 									<c:choose>
         								<c:when test="${ sessionScope.account.idtype == '판매자'}">
-											<li class="act"><a class="active" href="newproject.ao">개설한 리워드형 프로젝트<span class="sr-only">(current)</span></a></li>
-											<li><a href="newsponproject.ao" class="otherActive">개설한 후원형 프로젝트</a></li>
+											<li><a href="newproject.ao" class="otherActive">개설한 리워드형 프로젝트</a></li>
+											<li class="act"><a class="active" href="newsponproject.ao">개설한 후원형 프로젝트<span class="sr-only">(current)</span></a></li>											
 										</c:when>
 									</c:choose>
-									     							        							        							        							
+									
+        							<!-- <li class="act"><a class="active" href="newproject.ao">개설한 프로젝트<span class="sr-only">(current)</span></a></li>  -->     							        							        							        							
         							<li><a href="myfunding.ao" class="otherActive">나의 펀딩 현황</a></li>
       							</ul>
     						</div>
   						</div>
-					</nav>
-					
-					<br>
-					<c:if test="${ empty iList }"> 
+					</nav>					
+      				 
+      				<c:if test="${ empty dList }"> 
 					<div class="panel-group">
 						<div class="well">												
-    						<div class="panelStart1 panel panel-success">    						
-      							<div class="panel-heading">리워드형 프로젝트</div>
-      							
-      							<br>
-      							
-      							<div class="listStart container">
-			  						<ul class="lStart nav nav-pills">
-			    						<li class="sidelist"><a class="slist" href="newproject.ao">모두보기</a></li>
-			    						<li class="sidelist"><a class="slist" href="inwrite.it">작성중</a></li>
-			    						<li class="sidelist"><a class="slist" href="ongoing.it">진행중</a></li>
-			    						<li class="mainlist"><a class="mlist">펀딩종료</a></li>
-								  	</ul>
-								  	
-								  	<div class="pcontents">
-										<div class="panel-body">아직 마감된 프로젝트가 없습니다.</div>			      							
-									</div>
-									
-									<br> 
-								</div> 						      							
+    						<div class="panelStart1 panel panel-info">    						
+      							<div class="panel-heading">후원형 프로젝트</div> 
+      							     							  							
+      							<div class="panel-body">아직 개설한 프로젝트가 없습니다.</div>								      							
       						</div>
       					</div>
       				</div>
-      				</c:if>	  
-						
-						
-					<c:if test="${ ! empty iList }"> 
+      				</c:if>
+      				
+      				<c:if test="${ ! empty dList }"> 
 					<div class="panel-group">
 						<div class="well">												
-    						<div class="panelStart1 panel panel-success">    						
-      							<div class="panel-heading">리워드형 프로젝트</div> 
+    						<div class="panelStart1 panel panel-info">    						
+      							<div class="panel-heading">후원형 프로젝트</div> 
       							
       							<br>
       							
-      							<div class="listStart container">
-			  						<ul class="lStart nav nav-pills">
-			    						<li class="sidelist"><a class="slist" href="newproject.ao">모두보기</a></li>
-			    						<li class="sidelist"><a class="slist" href="inwrite.it">작성중</a></li>
-			    						<li class="sidelist"><a class="slist" href="ongoing.it">진행중</a></li>
-			    						<li class="mainlist"><a class="mlist">펀딩종료</a></li>
+      							<div class="dlistStart container">
+			  						<ul class="DStart nav nav-pills">
+			    						<li class="mainDlist"><a class="mdlist">모두보기</a></li>
+			    						<li class="sideDlist"><a class="sdlist" href="dinwrite.it">작성중</a></li>
+			    						<li class="sideDlist"><a class="sdlist" href="dongoing.it">진행중</a></li>
+			    						<li class="sideDlist"><a class="sdlist" href="ddeadline.it">후원종료</a></li>
 								  	</ul>
 								  	
-								  	<div class="pcontents">
+								  	<div class="dcontents">
 								  		<br>
-										<!-- 펀딩종료일 때  -->
-			      						<div class="row myItemList">
-				      							<c:forEach var="item" items="${ iList }" varStatus="status">
+										<!-- 모두보기 때  -->
+			      							<div class="row myItemList">
+				      							<c:forEach var="item" items="${ dList }" varStatus="status">
 					      							<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">     							
-					      								<div id="itempanel<c:out value='${status.index}'/>" class="panel">
-					      									<div id="conitemper<c:out value='${status.index}'/>" class="panel-heading">${ item.pstatus }</div>
-					      									<div id="enditemper<c:out value='${status.index}'/>" class="panel-body">
+					      								<div id="ditempanel<c:out value='${status.index}'/>" class="panel">
+					      									<div id="dconitemper<c:out value='${status.index}'/>" class="panel-heading">${ item.pstatus }</div>
+					      									<div id="denditemper<c:out value='${status.index}'/>" class="panel-body">
 					      										<div class="thumbnail" align="center">      										
-						      										<a id="displace<c:out value='${status.index}'/>" href="#"> 
+						      										<a id="ddisplace<c:out value='${status.index}'/>" href="#"> 
 						      											
 						      											<c:if test="${ empty item.thumbnail }">
 						      													<img alt="이미지를 넣으세요" src="/funfund/images/funding/thumbnail/plusImage.png" style="width: 100%;margin-bottom:2%;">
@@ -386,8 +428,8 @@
 						      													<img alt="이미지를 넣으세요" src="/funfund/images/makeproject/titleimg/<c:out value="${item.thumbnail}"/>" style="width: 100%;margin-bottom:2%;">      											
 						      											</c:if>
 						      												
-						      												<div id="progress<c:out value='${status.index}'/>" class="progress" style="display:none;">
-						  													<div id="progressbar<c:out value='${status.index}'/>" 
+						      												<div id="dprogress<c:out value='${status.index}'/>" class="progress" style="display:none;">
+						  													<div id="dprogressbar<c:out value='${status.index}'/>" 
 						  														 class="w3-red progress-bar progress-bar-striped active" 
 						  														 role="progressbar" 
 						  														 aria-valuenow="70" aria-valuemin="0" aria-valuemax="<c:out value="${item.ecost}"/>" 
@@ -395,14 +437,14 @@
 						  														 <span class="sr-only"></span>
 																		</div>
 																		
-																		<p id="pTag" style="display:none;">
-																			<span style="display:none;" id="persent<c:out value='${status.index}'/>"></span>% &nbsp;&nbsp; <span><c:out value="${item.fundamount }"/></span>원 달성 &nbsp;&nbsp; 
-																			<span style="display:none;" id="edate<c:out value='${status.index}'/>"></span>
-																			<span style="display:none;" id="yet<c:out value='${status.index}'/>">일 남음</span>
-																			<span style="display:none;" id="complete<c:out value='${status.index}'/>">펀딩종료</span>
+																		<p id="dTag" style="display:none;">
+																			<span style="display:none;" id="dpersent<c:out value='${status.index}'/>"></span>% &nbsp;&nbsp; <span><c:out value="${item.fundamount }"/></span>원 달성 &nbsp;&nbsp; 
+																			<span style="display:none;" id="dedate<c:out value='${status.index}'/>"></span>
+																			<span style="display:none;" id="dyet<c:out value='${status.index}'/>">일 남음</span>
+																			<span style="display:none;" id="dcomplete<c:out value='${status.index}'/>">펀딩종료</span>
 																		</p>     
 																													
-						      										 	<div class="caption<c:out value='${status.index}'/>">
+						      										 	<div class="dcaption<c:out value='${status.index}'/>">
 						            										<p>${ item.pname }</p>
 						            										<span>${ item.category }</span>            										
 						          										</div>	 
@@ -432,83 +474,115 @@
 														    
 														    var pstatus = "<c:out value='${item.pstatus}'/>";
 													    	
-					    								    $("#persent<c:out value='${status.index}'/>").html(persent);
-					    									$("#progressbar<c:out value='${status.index}'/>").attr("aria-valuenow", persent);
-					    									$("#progressbar<c:out value='${status.index}'/>").css("width", bar + "%");
-					    									$("#edate<c:out value='${status.index}'/>").text(btDay);					    																		
+					    								    $("#dpersent<c:out value='${status.index}'/>").html(persent);
+					    									$("#dprogressbar<c:out value='${status.index}'/>").attr("aria-valuenow", persent);
+					    									$("#dprogressbar<c:out value='${status.index}'/>").css("width", bar + "%");
+					    									$("#dedate<c:out value='${status.index}'/>").text(btDay);
+					    																		
+					    									if(pstatus == "작성중") {	
+					    										$(".dcaption<c:out value='${status.index}'/>").css("margin-top", "38.5px");
+					    										$(".dcaption<c:out value='${status.index}'/>").css("margin-bottom", "38.5px");
+					    										$("#ditempanel<c:out value='${status.index}'/>").css("border", "1px solid #E91E63");
+					    										$("#dconitemper<c:out value='${status.index}'/>").addClass("w3-pink");    										
+					    										$("#displace<c:out value='${status.index}'/>").attr("href", "update.it?pro_no=${ item.pro_no }&flag=true");
+					    									}
 					    									
-					    									if(pstatus == "펀딩종료") {
-					    										$("#progress<c:out value='${status.index}'/>").css("margin-top", "5px");
-					    										$(".caption<c:out value='${status.index}'/>").css("margin-bottom", "31px");
-					    										$("#itempanel<c:out value='${status.index}'/>").removeClass("panel-warning");
-					    										$("#itempanel<c:out value='${status.index}'/>").removeClass("bg-danger");
-					    										$("#itempanel<c:out value='${status.index}'/>").addClass("panel-default");
-					    										$("#progress<c:out value='${status.index}'/>").show();
-					    										$("#progressbar<c:out value='${status.index}'/>").show();
-					    										$("#progressbar<c:out value='${status.index}'/>").html(persent+"%");
-					    										$("#persent<c:out value='${status.index}'/>").show();
-					    										$("#edate<c:out value='${status.index}'/>").show();
-					    										$("#yet<c:out value='${status.index}'/>").show();
-					    										$("#pTag").show();
-					    										
-					    										$("#progressbar<c:out value='${status.index}'/>").addClass("w3-gray");
-					    										
+					    									else if (pstatus == "승인요청") {
+					    										$(".dcaption<c:out value='${status.index}'/>").css("margin-top", "38.5px");
+					    										$(".dcaption<c:out value='${status.index}'/>").css("margin-bottom", "38.5px");
+					    										$("#ditempanel<c:out value='${status.index}'/>").css("border", "1px solid #9C27B0");
+					    										$("#dconitemper<c:out value='${status.index}'/>").addClass("w3-purple");
 					    										$("#displace<c:out value='${status.index}'/>").attr("href", "javascript:");
 					    									}
 					    									
+					    									else if(pstatus == "승인완료") {
+					    										$("#dconitemper<c:out value='${status.index}'/>").html("진행중");
+					    										$("#ditempanel<c:out value='${status.index}'/>").css("border", "1px solid #F44336");
+					    										$("#dconitemper<c:out value='${status.index}'/>").addClass("w3-red");
+					    										$("#dprogress<c:out value='${status.index}'/>").show();
+					    										$("#dprogressbar<c:out value='${status.index}'/>").show();
+					    										$("#dprogressbar<c:out value='${status.index}'/>").html(persent+"%");
+					    										$("#dpersent<c:out value='${status.index}'/>").show();
+					    										$("#dedate<c:out value='${status.index}'/>").show();
+					    										$("#dyet<c:out value='${status.index}'/>").show();
+					    										$("#dTag").show();
+					    										$("#ddisplace<c:out value='${status.index}'/>").attr("href", "myproject.fl?pro_no=<c:out value="${item.pro_no}"/>");
+					    									}
+					    									
+					    									else if(pstatus == "펀딩종료") {
+					    										$("#dprogress<c:out value='${status.index}'/>").css("margin-top", "5px");
+					    										$(".dcaption<c:out value='${status.index}'/>").css("margin-bottom", "30px");
+					    										$("#ditempanel<c:out value='${status.index}'/>").removeClass("panel-warning");
+					    										$("#ditempanel<c:out value='${status.index}'/>").removeClass("bg-danger");
+					    										$("#ditempanel<c:out value='${status.index}'/>").addClass("panel-default");
+					    										$("#dprogress<c:out value='${status.index}'/>").show();
+					    										$("#dprogressbar<c:out value='${status.index}'/>").show();
+					    										$("#dprogressbar<c:out value='${status.index}'/>").html(persent+"%");
+					    										$("#dpersent<c:out value='${status.index}'/>").show();
+					    										$("#dedate<c:out value='${status.index}'/>").show();
+					    										$("#dyet<c:out value='${status.index}'/>").show();
+					    										$("#dTag").show();
+					    										
+					    										$("#dprogressbar<c:out value='${status.index}'/>").addClass("w3-gray");
+					    										
+					    										$("#ddisplace<c:out value='${status.index}'/>").attr("href", "javascript:");
+					    									}
+					    									
 					    									else if(btDay<0) {
-					    										$("#complete<c:out value='${status.index}'/>").show();
+					    										$("#dcomplete<c:out value='${status.index}'/>").show();
 					    									}
 					    									
 					    									else if(btDay>=0) {
-					    										$("#complete<c:out value='${status.index}'/>").hide();
+					    										$("#dcomplete<c:out value='${status.index}'/>").hide();
 					    									}
 					    								});
 												 </script>
-				    							</c:forEach>				    											    							
-			    							</div>	
+					    							
+				    							</c:forEach>				    											    											    							
+			    							</div>
 									</div> 
 								</div>
 								<br>																    							  							     														      							
       						</div>
       					</div>
       				</div>
-      				</c:if>
-
-    					
-    					<br>
-<!--       					
-      						<div class="well">   					   					
+      				</c:if>     				
+      			
+      			</div>	  
+	
+	
+    			<br>
+    			
+      			
+      						<!-- <div class="well">   					   					
     							<div class="panel panel-info">
       								<div class="panel-heading">후원형 프로젝트</div>
       								<div class="panel-body">아직 참여한 프로젝트가 없습니다.</div>
     							</div>
     						</div> -->
-    						
-    						<script type="text/javascript">
-	    					$("#investApply").click(function(){
-								var name ='<c:out value="${sessionScope.party.pname}"/>';
-								console.log(name);
-								console.log("오니?");
-								if(name == "") {
-									alert("회원정보 설정에서 이름을 반드시 입력하세요!");
-									console.log("오긴 오니?");
-									return false;
-								}
-								
-								else {
-									location.href = "sellerinfo.ao";
-								}
-							});
-    					</script>
-    					 															
+    					 									
+  						<br><br><br>						
 					</div>																					
 				</div>				
 			</div>
 		</div>
-	</div>
 
-<br>
+<br><br>
+
+<script type="text/javascript">
+	$("#investApply").click(function(){
+		var name ='<c:out value="${sessionScope.party.pname}"/>';
+		
+		if(name == "") {
+			alert("회원정보 설정에서 이름을 반드시 입력하세요!");
+			return false;
+		}
+														
+		else {
+			location.href = "sellerinfo.ao";
+		}
+	});
+</script>
 
 </body>
 </html>

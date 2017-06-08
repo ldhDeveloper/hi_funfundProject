@@ -303,8 +303,16 @@
         										<li><a href="sellerinfo.ao" class="otherActive">판매자 정보 수정<span class="sr-only">(current)</span></a></li>
         									</c:when>
         							</c:choose>
+        							
         							<li><a href="puttoproject.ao" class="otherActive">찜한 프로젝트</a></li>
-        							<li class="act"><a class="active" href="newproject.ao">개설한 프로젝트<span class="sr-only">(current)</span></a></li>      							        							        							        							
+										
+									<c:choose>
+        								<c:when test="${ sessionScope.account.idtype == '판매자'}">
+											<li class="act"><a class="active" href="newproject.ao">개설한 리워드형 프로젝트<span class="sr-only">(current)</span></a></li>
+											<li><a href="newsponproject.ao" class="otherActive">개설한 후원형 프로젝트</a></li>
+										</c:when>
+									</c:choose>
+									     							        							        							        							
         							<li><a href="myfunding.ao" class="otherActive">나의 펀딩 현황</a></li>
       							</ul>
     						</div>
@@ -316,9 +324,24 @@
 					<div class="panel-group">
 						<div class="well">												
     						<div class="panelStart1 panel panel-success">    						
-      							<div class="panel-heading">리워드형 프로젝트</div> 
-      							     							  							
-      							<div class="panel-body">아직 개설한 프로젝트가 없습니다.</div>								      							
+      							<div class="panel-heading">리워드형 프로젝트</div>
+      							
+      							<br>
+      							
+      							<div class="listStart container">
+			  						<ul class="lStart nav nav-pills">
+			    						<li class="sidelist"><a class="slist" href="newproject.ao">모두보기</a></li>
+			    						<li class="sidelist"><a class="slist" href="inwrite.it">작성중</a></li>
+			    						<li class="mainlist"><a class="mlist">진행중</a></li>
+			    						<li class="sidelist"><a class="slist" href="deadline.it">펀딩종료</a></li>
+								  	</ul>
+								  	
+								  	<div class="pcontents">
+										<div class="panel-body">아직 진행중인 프로젝트가 없습니다.</div>			      							
+									</div>
+									
+									<br> 
+								</div> 						      							
       						</div>
       					</div>
       				</div>

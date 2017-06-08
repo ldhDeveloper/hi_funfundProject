@@ -144,7 +144,7 @@ public class ItemServiceIm implements ItemService{
 		return itemDao.selectMyItems(ano);
 	}
 	
-	// 개설한 프로젝트
+	// 개설한 리워드형 프로젝트
 	@Override
 	public List<Item> selectNewProject(int ano) {
 		return itemDao.selectNewProject(ano);
@@ -255,5 +255,28 @@ public class ItemServiceIm implements ItemService{
 	public ItemCount selectitemCount(){
 		return itemDao.selectItemCount();
 	}
+
+@Override
+public List<Item> selectSupportProject(int ano) {
+	return itemDao.selectSupportProject(ano);
+}
+
+
+// 개설한 후원형 프로젝트
+
+@Override
+public List<Item> selectNewSponProject2(int ano) {
+	return itemDao.selectNewSponProject2(ano);
+}
+
+@Override
+public List<Item> selectNewSponProject3(int ano) {
+	return itemDao.selectNewSponProject3(ano);
+}
+
+@Override
+public List<Item> selectNewSponProject4(int ano) {
+	return itemDao.selectNewSponProject4(ano);
+}
 	
 }
