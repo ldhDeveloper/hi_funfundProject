@@ -13,6 +13,8 @@
 <result property="readcount" column="readcount"/>
 <result property="nickname" column="nickname" />
 <result property="ano" column="ano" />
+<result property="nreply_lev" column="nreply_lev" />
+<result property="replybno" column="replybno" />
 </resultMap> 
 
 	<select id="selectList" parameterType="HashMap" resultMap="noticeResult">
@@ -20,18 +22,18 @@
 		<when test='ntitle == null'><!-- 게시판리스트검색 -->
 			select ranks, nno, ntitle, ncontent, ndate, upbno, bname, readcount, ano, nickname from
 		(select rank() over(order by nno desc) ranks, nno, ntitle, ncontent, ndate, upbno, bname, readcount, n.ano ano, nickname
-		 from notice n , account a where a.ano=n.ano and (upbno = 0 and bname = #{bname})) where ranks between #{sNum} and #{eNum} 
+		 from notice n , account a where a.ano=n.ano and (upbno = 0 and bname = #{bname} and nreply_lev = 0)) where ranks between #{sNum} and #{eNum} 
 		</when>
 		<when test="ntitle != null"><!-- 제목으로 리스트검색 -->
 		select ranks, nno, ntitle, ncontent, ndate, upbno, bname, readcount, ano, nickname from
 		(select rank() over(order by nno desc) ranks, nno,  ntitle, ncontent, ndate, upbno, bname, readcount, n.ano ano, nickname
-		 from notice n ,  account a where a.ano=n.ano and (upbno = 0 and bname = #{bname})) where ranks between #{sNum} and #{eNum} 
+		 from notice n ,  account a where a.ano=n.ano and (upbno = 0 and bname = #{bname} and nreply_lev = 0)) where ranks between #{sNum} and #{eNum} 
 		 and ntitle like '%'||#{ntitle}||'%'
 		</when>
 		<when test="nickname != null"><!-- 작성자로 리스트검색 -->
 		select ranks, nno, ntitle, ncontent, ndate, upbno, bname, readcount, ano, nickname from
 		(select rank() over(order by nno desc) ranks, nno,  ntitle, ncontent, ndate, upbno, bname, readcount, n.ano ano, nickname
-		 from notice n ,  account a where a.ano=n.ano and (upbno = 0 and bname = #{bname})) where ranks between #{sNum} and #{eNum} 
+		 from notice n ,  account a where a.ano=n.ano and (upbno = 0 and bname = #{bname} and nreply_lev = 0)) where ranks between #{sNum} and #{eNum} 
 		 and nickname like '%'||#{nickname}||'%'
 		</when>
 		</choose>
@@ -55,8 +57,9 @@
 	
 	<select id="selectDetailList" parameterType="int" resultMap="noticeResult" >
 
-		select nno, ntitle, ncontent, ndate, upbno, bname, readcount, n.ano ano, nickname, pimage
-		from notice n, account a where n.ano = a.ano and upbno = #{nno} order by ndate desc
+		select  nno, ntitle, ncontent, ndate, upbno, bname, readcount, n.ano ano, nickname, pimage, nreply_lev, replybno
+		from notice n, account a where n.ano = a.ano and (upbno = #{upbno} or
+		 upbno in (select nno from notice where upbno = #{upbno}))order by replybno desc, nno
 
 	</select>
 	
@@ -90,10 +93,14 @@
 	insert into notice(nno, ntitle, ncontent, ndate, upbno, readcount, ano, bname)
 	values(seq_nno.nextval, #{ntitle}, #{ncontent}, sysdate, 0, 0, #{ano}, #{bname})
 	</when>
-	<otherwise>
-	insert into notice(nno, ncontent, ndate, upbno, readcount, ano, bname)
-	values(seq_nno.nextval, #{ncontent}, sysdate, #{upbno}, 0, #{ano}, #{bname})
-	</otherwise>
+	<when test="nreply_lev == 1">
+	insert into notice(nno, ncontent, ndate, upbno, readcount, ano, bname, nreply_lev, replybno)
+	values(seq_nno.nextval, #{ncontent}, sysdate, #{upbno}, 0, #{ano}, #{bname}, #{nreply_lev}, seq_nno.currval)
+	</when>
+	<when test="nreply_lev == 2">
+	insert into notice(nno, ncontent, ndate, upbno, readcount, ano, bname, nreply_lev, replybno)
+	values(seq_nno.nextval, #{ncontent}, sysdate, #{upbno}, 0, #{ano}, #{bname}, #{nreply_lev}, #{replybno})
+	</when>
 	</choose>
 	</insert>
 	

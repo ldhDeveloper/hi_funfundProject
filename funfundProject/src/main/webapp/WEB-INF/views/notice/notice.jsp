@@ -14,18 +14,7 @@
 <script>
 $(function(){
 	
-	$('.panel-heading').hover(function(){
-		$(this).css('cursor', 'pointer');
-	});
-	$('.panel-heading').click(function(){
-		var cname = $(this).siblings("div:first").attr("class");
-		if(cname =="panel-collapse collapse"){
-			$(this).siblings().attr("class", "panel-collapse collapse in");
-		} else {
-			$(this).siblings().attr("class", "panel-collapse collapse");
-		}
-		
-	});
+
 	
 
 	
@@ -43,11 +32,12 @@ $(function(){
 		
 		
 	
-	 case 'FnQ' : $('#fnq').css({"background": "#00CCA3", "border-color" : "#00CCA3", "color": "#fff" });
+	  case 'FnQ' : $('#fnq').css({"background": "#00CCA3", "border-color" : "#00CCA3", "color": "#fff" });
 					$('#bTitle').text('FnQ');
 			     	$('#bComent').text('자주묻는 질문입니다.');
 					$('.nListContainer').html( 
-			  										"<div class='panel-group' id='accordion'>"+
+								
+			  									 	"<hr><div class='panel-group' id='accordion'>"+
 			  										"<c:forEach var='nlist' items='${nList}' varStatus='status'>" +
 			  										"<div class='panel panel-default'>"+
 			  										"<div class='panel-heading'>"+
@@ -60,9 +50,7 @@ $(function(){
 			  										"</div>"+
 			  										"</div>"+
 			  										"</c:forEach>" +
-			  										"</div>"
-			  										
-											);
+			  										"</div>"); 
 					$("#pageBar").attr('hidden', true);
 					$("#searchBar").attr('hidden', true);
 	// 아코디언과 내용
@@ -79,6 +67,18 @@ $(function(){
 		break;
 	}
 	
+	$('.panel-heading').hover(function(){
+		$(this).css('cursor', 'pointer');
+	});
+	$('.panel-heading').click(function(){
+		var cname = $(this).siblings("div:first").attr("class");
+		if(cname =="panel-collapse collapse"){
+			$(this).siblings("div:first").attr("class", "panel-collapse collapse in");
+		} else {
+			$(this).siblings("div:first").attr("class", "panel-collapse collapse");
+		}
+		
+	});
 
 	
 	
@@ -140,9 +140,9 @@ button.accordion.active, button.accordion:hover {
 }
 /* Style the accordion panel. Note: hidden by default */
 div.panel {
-    padding: 0 18px;
+    
     background-color: white;
-    display: none;
+    display: block;
 }
 
 
