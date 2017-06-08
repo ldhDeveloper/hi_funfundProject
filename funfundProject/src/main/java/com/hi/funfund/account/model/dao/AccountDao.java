@@ -168,4 +168,14 @@ public class AccountDao {
 		List<Account> alist = (List<Account>) sqlSession.selectList("selectRequestSeller");
 		return alist;
 	}
+
+	public int approveSeller(int ano) {
+		int result = sqlSession.update("approveSeller", ano);
+		return result;
+	}
+
+	public int rejectSeller(int ano) {
+		int result = sqlSession.update("rejectSeller", ano);
+		return result;
+	}
 }

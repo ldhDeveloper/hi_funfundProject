@@ -169,4 +169,14 @@ public class AccountServiceIm implements AccountService {
 	public List<Account> selectRequestSeller() {
 		return accountDao.selectRequestSeller();
 	}
+
+	@Override
+	public int approveSeller(int ano) {
+		return accountDao.approveSeller(ano);
+	}
+
+	@Override
+	public int rejectSeller(int ano) {
+		return accountDao.rejectSeller(ano);
+	}
 }

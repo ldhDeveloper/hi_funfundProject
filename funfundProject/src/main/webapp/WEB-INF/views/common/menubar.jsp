@@ -1393,7 +1393,7 @@ body{
 							<li><a href="nList.no?bname=공지사항&page=1">고객센터</a></li>
 							<li><a href="myinfo.ao">회원정보보기</a>
 							<c:if test="${sessionScope.account.idtype eq '관리자' }">
-							<li class="hidden-xs"><a href="itemconfirm.am">관리자</a>
+							<li class="hidden-xs"><a href="sellerconfirm.am">관리자</a>
 							</li>
 							</c:if>
 						</ul>
