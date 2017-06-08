@@ -22,4 +22,19 @@ public class AlertDao {
 		return sqlSession.selectList(nameSpace + "selectList", ano);
 	}
 
+	public Alert selectOne(int al_no) {
+		
+		return (Alert) sqlSession.selectOne(nameSpace + "selectOne", al_no);
+	}
+
+	public int updateReadyn(int al_no) {
+		
+		return sqlSession.update(nameSpace + "updateReadyn", al_no);
+	}
+
+	public int deleteAlert(int al_no) {
+		
+		return sqlSession.delete(nameSpace + "deleteAlert", al_no);
+	}
+
 }

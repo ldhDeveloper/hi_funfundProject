@@ -35,5 +35,39 @@ public class AlertController {
 		return model;
 	}
 	
+	@RequestMapping("selectone.al")
+	public ModelAndView selectOne(ModelAndView model, @RequestParam("al_no")int al_no){
+		System.out.println(al_no);
+		
+		Alert alert = alertService.selectOne(al_no);
+		int result = alertService.updateReadyn(al_no);
+		
+		
+		model.addObject("alert", alert);
+		model.setViewName("common/alertdetail");
+		return model;
+	}
+	
+	@RequestMapping("deletechecked.al")
+	public ModelAndView deleteChecked(ModelAndView model, @RequestParam("nolist")int[] nolist){
+		System.out.println(nolist[0]);
+		
+		for(int i = 0; i < nolist.length; i++){
+			int result = alertService.deleteAlert(nolist[i]);
+		}
+	
+
+		model.setViewName("common/alert");
+		return model;
+	}
+	@RequestMapping("deleteone.al")
+	public ModelAndView deleteOne(ModelAndView model, @RequestParam("al_no")int al_no){
+		
+		int result = alertService.deleteAlert(al_no);
+	
+
+		model.setViewName("common/alert");
+		return model;
+	}
 
 }

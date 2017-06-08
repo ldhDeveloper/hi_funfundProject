@@ -25,4 +25,16 @@ public class AlertServiceIm implements AlertService{
 	public List<Alert> selectList(int ano){
 		return alertDao.selectList(ano);
 	}
+	
+	public Alert selectOne(int al_no){
+		return alertDao.selectOne(al_no);
+	}
+	
+	public int updateReadyn(int al_no){
+		return alertDao.updateReadyn(al_no);
+	}
+	
+	public int deleteAlert(int al_no){
+		return alertDao.deleteAlert(al_no);
+	}
 }

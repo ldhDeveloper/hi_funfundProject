@@ -132,19 +132,22 @@ body {
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="background:orange; height:100px; width:100%;color:white">
 				<table style="width:100%;height:100px;text-align:center;valign:middle;">
-					<tr>
-						<td style="valign:middle">
-								누적 펀딩 건수<br>
-								<label class="comma" style="font-size:2em"><c:out value="${count.itemcount}"/></label>건
+					<tr><td style="width:20%;"></td>
+						<td>
+							<div style="float:left"><i class="fa fa-bar-chart fa-4x" aria-hidden="true"></i></div>
+							<div style="float:left;margin-left:10px;">누적 펀딩 건수<br><label class="comma" style="font-size:2em"><c:out value="${count.itemcount}"/></label>건</div>
+							
 						</td>
 						<td>
-								누적 펀딩 금액<br>
-								<label id="comma" style="font-size:2em"></label>원
+							<div style="float:left"><i class="fa fa-money fa-4x" aria-hidden="true"></i></div>
+							<div style="float:left;margin-left:10px;">누적 펀딩 금액<br><label id="comma" style="font-size:2em"></label>원</div>
 						</td>
+						
 						<td>
-								펀딩 모집 성공률<br>
-								<label style="font-size:2em"><c:out value="${count.sucrate}"/></label>%
+							<div style="float:left"><i class="fa fa-pie-chart fa-4x" aria-hidden="true"></i></div>
+							<div style="float:left;margin-left:10px;">펀딩 모집 성공률<br><label style="font-size:2em"><c:out value="${count.sucrate}"/></label>%</div>
 						</td>
+						<td style="width:10%"><td>
 					</tr>
 				</table>
 			</div>

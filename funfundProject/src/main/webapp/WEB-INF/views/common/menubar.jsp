@@ -935,6 +935,8 @@ label.sign-form_title {
 		
 		<script>
 			$(function(){
+				$("#message").mouseover().css("cursor", "pointer");
+				
 				$("#message").click(function(){
 					var url = "messagelist.al?pro_no=${pro_no}";
 					window.open(url, "", "width=400, height=300, left=600, top=200, status=0, location=0");
