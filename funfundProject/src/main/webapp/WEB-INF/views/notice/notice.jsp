@@ -289,9 +289,9 @@ display:none;}
 					<!-- 1.여기까지 db에서 불러와서 포문으로 풀어넣기 -->
 					<div class="downbar" id="pageBar" align="center">
 						<br>
-						<fmt:parseNumber var = "pageCount" value = "${listCount}" type="number"/>
-						<c:set var ="pageNumber" value="${pageCount/10 +1}"/>
-						<c:forEach var="i" begin='1' end="${pageNumber}">
+						<fmt:parseNumber var = "pageCount" value = "${page/10 }" integerOnly="true" type="number"/>
+						<c:set var ="pageNumber" value="${pageCount +1}"/>
+						<c:forEach var="i" begin='${pageNumber}' end="${pageNumber +9}">
 							<a class="nPage" href="nList.no?bname=${bname}&page=${i}">${i}</a> &nbsp;
 						</c:forEach>						
 					</div>

@@ -1,5 +1,6 @@
 package com.hi.funfund.alert.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -17,9 +18,9 @@ public class AlertDao {
 		return (int) sqlSession.selectOne(nameSpace + "checkNewMessage", ano);
 	}
 
-	public List<Alert> selectList(int ano) {
+	public List<Alert> selectList(HashMap map) {
 		
-		return sqlSession.selectList(nameSpace + "selectList", ano);
+		return sqlSession.selectList(nameSpace + "selectList", map);
 	}
 
 	public Alert selectOne(int al_no) {
