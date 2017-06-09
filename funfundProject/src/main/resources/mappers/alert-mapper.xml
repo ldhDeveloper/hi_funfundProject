@@ -17,15 +17,13 @@
 	<select id="checkNewMessage" parameterType="int" resultType="int">
 		select count(al_no) from alert where readyn = 'n' and ano = #{ano}
 	</select>
-	
 	<select id="selectList" parameterType="int" resultMap="alertResult">
 	  select  al_no,al_title, al_content, s_al_date, readyn, ano from (
   		select rnum, al_no,al_title, al_content, s_al_date, readyn, ano from (
 			select rownum rnum, al_no,al_title, al_content, s_al_date, readyn, ano from (
-				select al_no,al_title, al_content, to_char(al_date, 'yyyy/mm/dd')as s_al_date, readyn, ano from alert where ano = 20 order by al_date desc )))
+				select al_no,al_title, al_content, to_char(al_date, 'yyyy/mm/dd')as s_al_date, readyn, ano from alert where ano = #{ano} order by al_date desc )))
 	 			where rnum between #{sNum} and #{eNum}
 	</select>
-	
 	<select id="selectOne" parameterType="int" resultMap="alertResult">
 		select al_no,al_title, al_content, to_char(al_date, 'yyyy/mm/dd')as s_al_date, readyn, ano from alert where al_no = #{al_no}
 	</select>
@@ -41,4 +39,8 @@
 	<insert id="insertAlert" parameterType="alert">
 		insert into alert values(seq_al_no.nextval, #{al_title}, #{al_content}, sysdate, 'N', #{ano})
 	</insert>
+	
+	<select id="getMessageCount" parameterType="int" resultType="int">
+		select count(*) from alert where ano = #{ano}
+	</select>
 </mapper>
