@@ -20,16 +20,15 @@
 	margin: 10px;
 }
 
-ul {
+.makerbox ul {
 	list-style: none;
 	padding: 10px;
 	width: 100%;
 	align: center;
 }
 
-li {
+.makerbox ul li {
 	text-align: center;
-	display: inline-block;
 }
 
 .font {

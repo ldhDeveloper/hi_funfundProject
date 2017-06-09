@@ -278,6 +278,7 @@ input[type="checkbox"] {
 			var tcost = $("#final-total").html();
 			gotopay(orderlist, ordercount, tcost);
 		});
+		
 	});
 	function sample6_execDaumPostcode() {
         new daum.Postcode({
@@ -320,6 +321,12 @@ input[type="checkbox"] {
             }
         }).open();
     }
+	
+	//오늘은 체크되게 해보자!
+	function checkbox(){
+		
+	}
+	
 </script>
 </head>
 <body>
