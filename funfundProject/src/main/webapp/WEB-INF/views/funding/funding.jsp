@@ -19,7 +19,7 @@
 	}
 	
 	.titlebar {
-	  height: 800px !important;
+	  height: 840px !important;
 	}
 	
 }
@@ -58,12 +58,12 @@
 	padding: 10px;
 }
 
-ul {
+.simg ul {
 	list-style: none;
 	align: center;
 }
 
-li {
+.simg ul li {
 	display: inline-block;
 	align: center;
 	float: left;
@@ -357,7 +357,7 @@ body {
 
           
 			<ul id="s1">
-				<li><img src="/funfund/images/funding/b.PNG"
+				<li><img src="/funfund/images/funding/l.png"
 					class="img-responsive"></li>
 				<li><img src="/funfund/images/funding/ll.PNG"
 					class="img-responsive"></li>
@@ -368,7 +368,7 @@ body {
 			</ul>
 
 			<ul id="s2">
-				<li><img src="/funfund/images/funding/b2.PNG"
+				<li><img src="/funfund/images/funding/l2.png"
 					class="img-responsive"></li>
 				<li><img src="/funfund/images/funding/o.PNG"
 					class="img-responsive"></li>
@@ -379,13 +379,13 @@ body {
 			</ul>
 
 			<ul id="s3">
-				<li><img src="/funfund/images/funding/b3.PNG"
+				<li><img src="/funfund/images/funding/l3.png"
 					class="img-responsive"></li>
 				<li><img src="/funfund/images/funding/t.PNG"
 					class="img-responsive"></li>
-				<li><img src="/funfund/images/funding/gg.PNG"
+				<li><img src="/funfund/images/funding/g.PNG"
 					class="img-responsive"></li>
-				<li><img src="/funfund/images/funding/jj.PNG"
+				<li><img src="/funfund/images/funding/ss.PNG"
 					class="img-responsive"></li>
 			</ul>
 			<!-- 

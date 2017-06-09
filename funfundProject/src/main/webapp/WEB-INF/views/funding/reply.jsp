@@ -15,7 +15,7 @@
 	margin: 10px;
 }
 
-ul {
+.makerbox ul {
 	list-style: none;
 	float: left;
 	padding: 10px;
@@ -23,9 +23,8 @@ ul {
 	align: center;
 }
 
-li {
+.makerbox li {
 	text-align: center;
-	display:inline-block;
 }
 
 .font {
