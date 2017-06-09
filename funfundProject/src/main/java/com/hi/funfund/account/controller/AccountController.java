@@ -350,6 +350,7 @@ public class AccountController {
 	// seller 정보 변경 시작
 	
 	@RequestMapping(value = "changeSeller.ao")
+
 	public ModelAndView changSeller(ModelAndView model, Attachment vo, HttpServletRequest request) throws  IOException{
 		System.out.println("오니?");
 		

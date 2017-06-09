@@ -31,7 +31,7 @@ body{
 		  		for(var i = 0; i < length; i++){
 		  			if(data.alist[i].readyn == 'n'){
 		  				$("#msglist").html($("#msglist").html() 
-		  			  		+ "<tr><td align='center'><input type='checkbox' value='"+ data.alist[i].al_no +"'></td><td>관리자</td><td class='title' onclick='clickmsg(this);'>"
+		  			  		+ "<tr style='cursor:pointer'><td align='center'><input type='checkbox' value='"+ data.alist[i].al_no +"'></td><td>관리자</td><td class='title' onclick='clickmsg(this);'>"
 		  			  		+ data.alist[i].al_title 
 		  			  		+ " &nbsp; <label style='background:red;color:white;font-size:0.7em;'>&nbsp; N &nbsp;</label>"
 		  			  		+ "</td><td>" 
@@ -39,7 +39,7 @@ body{
 		  			  		+ "</td></tr>" );
 		  			}else{
 		  				$("#msglist").html($("#msglist").html() 
-			  			  	+ "<tr><td align='center'><input type='checkbox' value='"+ data.alist[i].al_no +"'></td><td>관리자</td><td class='title' onclick='clickmsg(this);'>"
+			  			  	+ "<tr style='cursor:pointer'><td align='center'><input type='checkbox' value='"+ data.alist[i].al_no +"'></td><td>관리자</td><td class='title' onclick='clickmsg(this);'>"
 			  			  	+ data.alist[i].al_title 
 			  			  	+ "</td><td>" 
 			  			  	+ data.alist[i].s_al_date 

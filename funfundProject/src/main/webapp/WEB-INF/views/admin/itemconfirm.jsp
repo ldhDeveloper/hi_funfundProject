@@ -140,7 +140,7 @@
   		$('#rejectform' + index).toggle();
   	}
   	
-  	function pconfirm(pro_no){
+  	function pconfirm(pro_no, ano){
   		$.post( "confirmstatus.am", {"pro_no" : pro_no})
   		.done(function(data){
 			if(data > 0){
@@ -153,7 +153,7 @@
   		});
   	}
   	
-  	function pcancel(pro_no, index){
+  	function pcancel(pro_no, index, ano){
   		console.log("pcancel실행");
   		var comment = $('#rejectcomment' + index).val();
   		console.log(comment);

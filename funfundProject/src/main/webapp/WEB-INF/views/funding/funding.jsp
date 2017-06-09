@@ -472,7 +472,7 @@ body {
 					<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 						<div class="thumbnail" align="center">
 							<a href="detail.it?pro_no=<c:out value="${item.pro_no}"/>"> <img
-								src="/funfund/images/funding/thumbnail/<c:out value="${item.thumbnail }"/>"
+								src="/funfund/images/makeproject/titleimg/<c:out value="${item.thumbnail }"/>"
 								alt="사진1" style="width: 100%"> <script>
 									$(function() {
 										var ecost = "<c:out value='${item.ecost}'/>";
@@ -549,7 +549,7 @@ body {
 								</p>
 
 								<div class="caption">
-									<p>${item.pshort }</p>
+									<p>${item.pname }</p>
 									<span><c:out value="${item.category}" /></span>
 								</div>
 							</a>

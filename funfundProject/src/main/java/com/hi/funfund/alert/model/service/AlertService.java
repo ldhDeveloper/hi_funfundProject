@@ -17,4 +17,6 @@ public interface AlertService {
 
 	int deleteAlert(int al_no);
 
+	int insertAlert(Alert al);
+
 }

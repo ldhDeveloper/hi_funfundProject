@@ -298,7 +298,7 @@
 													  <div class="panel-body">
 													    <div class="thumbnail" align="center">
 														<a href="detail.it?pro_no=<c:out value="${item.pro_no}"/>"> <img
-															src="/funfund/images/funding/thumbnail/<c:out value="${item.thumbnail }"/>" alt="사진1"
+															src="/funfund/images/makeproject/titleimg/<c:out value="${item.thumbnail }"/>" alt="사진1"
 															style="width: 100%">
 																							<div id="progress<c:out value='${status.index}'/>" class="progress">
 																<div class="progress-bar progress-bar-warning"
@@ -317,7 +317,7 @@
 							
 															<div class="caption">
 																<p>
-																	<c:out value="${item.pcontent }" />
+																	<c:out value="${item.pname }" />
 																</p>
 																<span><c:out value="${item.category}" /></span>
 															</div>

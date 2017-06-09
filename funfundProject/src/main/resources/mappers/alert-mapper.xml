@@ -38,4 +38,7 @@
 		delete alert where al_no = #{al_no}
 	</delete>
 	
+	<insert id="insertAlert" parameterType="alert">
+		insert into alert values(seq_al_no.nextval, #{al_title}, #{al_content}, sysdate, 'N', #{ano})
+	</insert>
 </mapper>
