@@ -26,8 +26,6 @@ body{
 			url:"selectlist.al?page=1&ano="+ano,
 		  	success:function(data){
 		  		var length = data.alist.length;
-		  		
-		  		alert(page);
 		  		for(var i = 0; i < length; i++){
 		  			if(data.alist[i].readyn == 'n'){
 		  				$("#msglist").html($("#msglist").html() 
@@ -60,13 +58,17 @@ body{
 	
 	function changePage(x){
 		var ano = ${sessionScope.account.ano};
+		
+		$("#msglist").html("<br>");
 		$.ajax({
 			url:"selectlist.al?page="+ x +"&ano=" + ano,
 		  	success:function(data){
+		 		var totalMessageNumber = data.messageCount; //페이징처리위한 변수
 		  		var length = data.alist.length;
 		  		var page = parseInt(x / 5) * 5;
-		  		alert(page);
 		  		var lpagegap =  "";
+		  		alert(x);
+		  		$('.btn-group').html();
 		  		for(var i = 0; i < length; i++){
 		  			$('.btn-group').html(
 		  			"<button type='button' class='btn btn-warning btn-xs' onclick='changePage(1)'><<</button>"+
@@ -89,7 +91,7 @@ body{
 			  			  	+ "</td></tr>" );
 		  			}
 		  			$('.btn-group').html($('.btn-group').html() + 
-		  					"<button type='button' class='btn btn-warning btn-xs' onclick='changePage("+ i+page + ");'>"+ i +"</button>");
+		  					"<button type='button' class='btn btn-warning btn-xs' onclick='changePage("+  + ");'>"+ i +"</button>");
 		  			
 		  		}
 		  	}
@@ -169,15 +171,7 @@ body{
 	<footer>
 	<div align="center">
 		<div class="btn-group" align="center">
-  			<button type="button" class="btn btn-warning btn-xs"><<</button>
-  			<button type="button" class="btn btn-warning btn-xs"><</button>
-  			<button type="button" class="btn btn-warning btn-xs">1</button>
-  			<button type="button" class="btn btn-warning btn-xs">2</button>
-  			<button type="button" class="btn btn-warning btn-xs">3</button>
-  			<button type="button" class="btn btn-warning btn-xs">4</button>
-  			<button type="button" class="btn btn-warning btn-xs">5</button>
-  			<button type="button" class="btn btn-warning btn-xs">></button>
-  			<button type="button" class="btn btn-warning btn-xs">>></button>
+  			
 		</div>
 	</div>
 	</footer>

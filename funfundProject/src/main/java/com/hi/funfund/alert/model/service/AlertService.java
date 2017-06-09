@@ -19,4 +19,6 @@ public interface AlertService {
 
 	int insertAlert(Alert al);
 
+	int getmessageCount(int ano);
+
 }

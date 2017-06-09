@@ -29,15 +29,18 @@ public class AlertController {
 	
 	@RequestMapping("selectlist.al")
 	public ModelAndView selectList(ModelAndView model, Alert alert, @RequestParam("ano")int ano, @RequestParam("page") int page ){
-		int sNum = page * 10 - 9;
-		int eNum = sNum + 9;
+		int sNum = page * 4 - 3;
+		int eNum = sNum + 3;
 		HashMap map = new HashMap();
 		map.put("sNum", sNum);
 		map.put("eNum", eNum);
 		map.put("page", page);
+		map.put("ano", ano);
 		List<Alert> alist = alertService.selectList(map);
+		int messageCount = alertService.getmessageCount(ano);
 		System.out.println(alist);
 		model.addObject("alist", alist);
+		model.addObject("totalMessageNumber", messageCount);
 		model.setViewName("jsonView");
 		return model;
 	}

@@ -43,4 +43,10 @@ public class AlertServiceIm implements AlertService{
 	public int insertAlert(Alert al) {
 		return alertDao.insertAlert(al);
 	}
+
+	@Override
+	public int getmessageCount(int ano) {
+		
+		return alertDao.getMessageCount(ano);
+	}
 }

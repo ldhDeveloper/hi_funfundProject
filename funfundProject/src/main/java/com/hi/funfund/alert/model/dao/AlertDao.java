@@ -43,4 +43,9 @@ public class AlertDao {
 		return sqlSession.insert(nameSpace + "insertAlert", al);
 	}
 
+	public int getMessageCount(int ano) {
+		
+		return (int)sqlSession.selectOne(nameSpace + "getMessageCount", ano);
+	}
+
 }
