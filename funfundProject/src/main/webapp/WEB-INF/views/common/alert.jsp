@@ -16,16 +16,18 @@ body{
 }
 </style>
 <script>
+
 	$(function(){
 		
 		
 		var ano = ${sessionScope.account.ano};
 		
 		$.ajax({
-			url:"selectlist.al?ano=" + ano,
+			url:"selectlist.al?page=1&ano="+ano,
 		  	success:function(data){
 		  		var length = data.alist.length;
 		  		
+		  		alert(page);
 		  		for(var i = 0; i < length; i++){
 		  			if(data.alist[i].readyn == 'n'){
 		  				$("#msglist").html($("#msglist").html() 
@@ -43,6 +45,10 @@ body{
 			  			  	+ data.alist[i].s_al_date 
 			  			  	+ "</td></tr>" );
 		  			}
+		  		
+		  			$('.btn-group').html($('.btn-group').html() + 
+		  					"<button type='button' class='btn btn-warning btn-xs' onclick='changePage("+ i + ");'>"+ i +"</button>");
+		  			
 		  		}
 		  	}
 		});
@@ -51,6 +57,45 @@ body{
 		
 		
 	});
+	
+	function changePage(x){
+		var ano = ${sessionScope.account.ano};
+		$.ajax({
+			url:"selectlist.al?page="+ x +"&ano=" + ano,
+		  	success:function(data){
+		  		var length = data.alist.length;
+		  		var page = parseInt(x / 5) * 5;
+		  		alert(page);
+		  		var lpagegap =  "";
+		  		for(var i = 0; i < length; i++){
+		  			$('.btn-group').html(
+		  			"<button type='button' class='btn btn-warning btn-xs' onclick='changePage(1)'><<</button>"+
+		  			"<button type='button' class='btn btn-warning btn-xs' onclick='changePage("+  + ")'><</button>");
+		  			
+		  			if(data.alist[i].readyn == 'n'){
+		  				$("#msglist").html($("#msglist").html() 
+		  			  		+ "<tr><td align='center'><input type='checkbox' value='"+ data.alist[i].al_no +"'></td><td>관리자</td><td class='title' onclick='clickmsg(this);'>"
+		  			  		+ data.alist[i].al_title 
+		  			  		+ " &nbsp; <label style='background:red;color:white;font-size:0.7em;'>&nbsp; N &nbsp;</label>"
+		  			  		+ "</td><td>" 
+		  			  		+ data.alist[i].s_al_date 
+		  			  		+ "</td></tr>" );
+		  			}else{
+		  				$("#msglist").html($("#msglist").html() 
+			  			  	+ "<tr><td align='center'><input type='checkbox' value='"+ data.alist[i].al_no +"'></td><td>관리자</td><td class='title' onclick='clickmsg(this);'>"
+			  			  	+ data.alist[i].al_title 
+			  			  	+ "</td><td>" 
+			  			  	+ data.alist[i].s_al_date 
+			  			  	+ "</td></tr>" );
+		  			}
+		  			$('.btn-group').html($('.btn-group').html() + 
+		  					"<button type='button' class='btn btn-warning btn-xs' onclick='changePage("+ i+page + ");'>"+ i +"</button>");
+		  			
+		  		}
+		  	}
+		});
+	}
+	
 	function myFunction(){
 		alert("쪽지 닫기!");
 	}
