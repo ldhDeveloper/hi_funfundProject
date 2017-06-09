@@ -37,4 +37,9 @@ public class AlertDao {
 		return sqlSession.delete(nameSpace + "deleteAlert", al_no);
 	}
 
+	public int insertAlert(Alert al) {
+		
+		return sqlSession.insert(nameSpace + "insertAlert", al);
+	}
+
 }

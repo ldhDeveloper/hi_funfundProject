@@ -377,7 +377,7 @@ public class AccountController {
 	
 	// seller 정보 변경 시작
 	
-	@RequestMapping(value = "changSeller.ao")
+	@RequestMapping(value = "changeSeller.ao")
 	public String changSeller(Attachment vo, HttpServletRequest request) throws  IOException{
 		System.out.println("오니?");
 		

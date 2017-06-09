@@ -19,6 +19,8 @@ import com.hi.funfund.account.model.vo.Party;
 import com.hi.funfund.admin.model.service.AdminService;
 import com.hi.funfund.admin.model.vo.AccInfo;
 import com.hi.funfund.admin.model.vo.CancelInfo;
+import com.hi.funfund.alert.model.service.AlertService;
+import com.hi.funfund.alert.model.vo.Alert;
 import com.hi.funfund.item.model.service.ItemService;
 import com.hi.funfund.item.model.vo.Item;
 
@@ -33,6 +35,9 @@ public class AdminController {
 	
 	@Autowired
 	private AccountService accountService;
+	
+	@Autowired
+	private AlertService alertService;
 	
 	@RequestMapping("/itemconfirm.am")
 	public ModelAndView selectRequestItem(ModelAndView mv, HttpServletRequest request){
@@ -74,6 +79,7 @@ public class AdminController {
 	public @ResponseBody int updateConfirmStatus(@RequestParam("pro_no") String prono){
 		int pro_no = Integer.parseInt(prono);
 		int result = itemService.updateConfirmStatus(pro_no);
+		
 		return result;
 	}
 	
@@ -175,6 +181,11 @@ public class AdminController {
 	public @ResponseBody int approveSeller(@RequestParam("ano") String anum){
 		int ano = Integer.parseInt(anum);
 		int result = accountService.approveSeller(ano);
+		Alert al = new Alert();
+		al.setAl_title("판매자 변경 승인");
+		al.setAl_content("판매자 등급변경 요청이 승인되었습니다.");
+		al.setAno(ano);
+		result += alertService.insertAlert(al);
 		return result;
 	}
 	

@@ -37,4 +37,9 @@ public class AlertServiceIm implements AlertService{
 	public int deleteAlert(int al_no){
 		return alertDao.deleteAlert(al_no);
 	}
+
+	@Override
+	public int insertAlert(Alert al) {
+		return alertDao.insertAlert(al);
+	}
 }
