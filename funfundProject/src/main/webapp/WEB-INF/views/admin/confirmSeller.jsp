@@ -98,6 +98,8 @@
       <tr>
         <th>계정번호</th>
         <th>ID</th>
+        <th>이름</th>
+        <th>주민등록번호</th>
         <th>계정상태</th>
         <th>휴대폰</th>
         <th>실명확인증표</th>
@@ -110,6 +112,8 @@
       	<tr>
         	<td><c:out value="${item.ano }"/></td>
         	<td><c:out value="${item.id }"/></td>
+        	<td><c:out value="${item.pname}"/></td>
+        	<td><c:out value="${item.id_no }"/></td>
         	<td><c:out value="${item.idtype }"/></td>
         	<td><c:out value="${item.phone }"/></td>
         	<td><button value="${item.idimage }" type="button" class="btn btn-primary showImage">실명확인증표보기</button></td>

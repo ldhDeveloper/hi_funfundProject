@@ -940,7 +940,7 @@ ul{
 				$("#message").mouseover().css("cursor", "pointer");
 				
 				$("#message").click(function(){
-					var url = "messagelist.al?pro_no=${pro_no}";
+					var url = "selectlist.al?ano=" + ${sessionScope.account.ano} + "&page=1";
 					window.open(url, "", "width=400, height=300, left=600, top=200, status=0, location=0");
 				});
 					

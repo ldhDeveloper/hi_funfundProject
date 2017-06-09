@@ -6,6 +6,8 @@
 	<resultMap type="accInfo" id="accInfoResult">
 		<id property="ano" column="ano" />
 		<result property="id" column="id" />
+		<result property="pname" column="pname" />
+		<result property="id_no" column="id_no" />
 		<result property="idtype" column="idtype" />
 		<result property="phone" column="phone" />
 		<result property="idimage" column="idimage" />
@@ -22,7 +24,7 @@
 	</resultMap>
 	<select id="selectRequestSeller" resultMap="accInfoResult">
 		<![CDATA[
-			select a.ano as ano, a.id as id, a.idtype as idtype, p.phone as phone, p.idimage as idimage
+			select a.ano as ano, a.id as id, p.pname as pname, ENCRYPTION_AES.DEC_AES(p.id_no) AS id_no, a.idtype as idtype, p.phone as phone, p.idimage as idimage
 			from account a join party p on (a.ano = p.ano)
 			where idtype='승인요청중'
 		]]>
