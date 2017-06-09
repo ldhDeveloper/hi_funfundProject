@@ -79,7 +79,14 @@ public class AdminController {
 	public @ResponseBody int updateConfirmStatus(@RequestParam("pro_no") String prono){
 		int pro_no = Integer.parseInt(prono);
 		int result = itemService.updateConfirmStatus(pro_no);
-		
+		Item item = itemService.selectOne(pro_no);
+		int ano = item.getAno();
+		String pname = item.getPname();
+		Alert al = new Alert();
+		al.setAl_title(pname + " 프로젝트 승인");
+		al.setAl_content(pname + "프로젝트가 승인되었습니다.");
+		al.setAno(ano);
+		result += alertService.insertAlert(al);
 		return result;
 	}
 	
@@ -89,6 +96,14 @@ public class AdminController {
 		hmap.put("pro_no", pro_no);
 		hmap.put("comment", comment);
 		int result = itemService.updateRejectStatus(hmap);
+		Item item = itemService.selectOne(Integer.parseInt(pro_no));
+		int ano = item.getAno();
+		String pname = item.getPname();
+		Alert al = new Alert();
+		al.setAl_title(pname + " 프로젝트 거부");
+		al.setAl_content(pname + "프로젝트가 거부되었습니다.");
+		al.setAno(ano);
+		result += alertService.insertAlert(al);
 		return result;
 	}
 	
@@ -98,6 +113,14 @@ public class AdminController {
 		hmap.put("pro_no", pro_no);
 		hmap.put("comment", comment);
 		int result = itemService.updateDeleteStatus(hmap);
+		Item item = itemService.selectOne(Integer.parseInt(pro_no));
+		int ano = item.getAno();
+		String pname = item.getPname();
+		Alert al = new Alert();
+		al.setAl_title(pname + " 프로젝트 삭제승인");
+		al.setAl_content(pname + "프로젝트가 삭제가 승인되었습니다.");
+		al.setAno(ano);
+		result += alertService.insertAlert(al);
 		return result;
 	}
 	
@@ -106,6 +129,14 @@ public class AdminController {
 		int pro_no = Integer.parseInt(prono);
 		System.out.println("pro_no : " + pro_no);
 		int result = itemService.updateSuccessStatus(pro_no);
+		Item item = itemService.selectOne(pro_no);
+		int ano = item.getAno();
+		String pname = item.getPname();
+		Alert al = new Alert();
+		al.setAl_title(pname + " 프로젝트 펀딩성공");
+		al.setAl_content(pname + "프로젝트의 펀딩이 성공하였습니다.");
+		al.setAno(ano);
+		result += alertService.insertAlert(al);
 		return result;
 	}
 	
@@ -115,6 +146,14 @@ public class AdminController {
 		hmap.put("pro_no", pro_no);
 		hmap.put("comment", comment);
 		int result = itemService.updateFailStatus(hmap);
+		Item item = itemService.selectOne(Integer.parseInt(pro_no));
+		int ano = item.getAno();
+		String pname = item.getPname();
+		Alert al = new Alert();
+		al.setAl_title(pname + " 프로젝트 펀딩실패");
+		al.setAl_content(pname + "프로젝트의 펀딩이 실패하였습니다.");
+		al.setAno(ano);
+		result += alertService.insertAlert(al);
 		return result;
 	}
 	
@@ -194,6 +233,11 @@ public class AdminController {
 	public @ResponseBody int rejectSeller(@RequestParam("ano") String anum){
 		int ano = Integer.parseInt(anum);
 		int result = accountService.rejectSeller(ano);
+		Alert al = new Alert();
+		al.setAl_title("판매자 변경 거부");
+		al.setAl_content("판매자 등급변경 요청이 거부되었습니다.");
+		al.setAno(ano);
+		result += alertService.insertAlert(al);
 		return result;
 	}
 	

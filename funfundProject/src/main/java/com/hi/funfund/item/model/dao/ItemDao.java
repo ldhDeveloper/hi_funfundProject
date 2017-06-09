@@ -9,6 +9,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.hi.funfund.alert.model.service.AlertService;
+import com.hi.funfund.alert.model.vo.Alert;
+import com.hi.funfund.item.model.service.ItemService;
 import com.hi.funfund.item.model.vo.Item;
 import com.hi.funfund.item.model.vo.ItemCount;
 import com.hi.funfund.item.model.vo.Itemfund;
@@ -19,6 +22,12 @@ public class ItemDao {
 	private static final String nameSpace = "itemMapper.";
 	@Autowired
 	private SqlSessionTemplate sqlSession;
+	
+	@Autowired
+	ItemService itemService;
+	
+	@Autowired
+	AlertService alertService;
 	
 	public int insertRewardItem(Item item){
 		int pro_no = 0;
@@ -182,8 +191,24 @@ public class ItemDao {
 		System.out.println("firstprice : " + hmap.get("firstprice"));
 		if(hmap.get("secondprice") != ""){
 			result += sqlSession.update(nameSpace + "changeSecondBillStatus", hmap);
+			Item item = itemService.selectOne(Integer.parseInt(hmap.get("pro_no")));
+			int ano = item.getAno();
+			String pname = item.getPname();
+			Alert al = new Alert();
+			al.setAl_title(pname + " 프로젝트 펀딩종료");
+			al.setAl_content(pname + "프로젝트의 펀딩이 종료하였습니다.");
+			al.setAno(ano);
+			result += alertService.insertAlert(al);
 		}else if(hmap.get("firstprice") != ""){
 			result += sqlSession.update(nameSpace + "changeFirstBillStatus", hmap);
+			Item item = itemService.selectOne(Integer.parseInt(hmap.get("pro_no")));
+			int ano = item.getAno();
+			String pname = item.getPname();
+			Alert al = new Alert();
+			al.setAl_title(pname + " 프로젝트 1차입금");
+			al.setAl_content(pname + "프로젝트의 1차입금 하였습니다.");
+			al.setAno(ano);
+			result += alertService.insertAlert(al);
 		}
 		return result;
 	}

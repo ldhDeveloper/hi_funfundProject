@@ -56,7 +56,7 @@
 
 	<select id="selectOldPwd" parameterType="hashmap" resultMap="accountResult">
 		<![CDATA[			
-			SELECT ano, id, ENCRYPTION_AES.DEC_AES(pwd) AS pwd, email, pimage, idtype, idtoken, seller, outyn, nickname FROM ACCOUNT WHERE ano=#{ano} 
+			SELECT ano, id, pwd, email, pimage, idtype, idtoken, seller, outyn, nickname FROM ACCOUNT WHERE ano=#{ano} and pwd=ENCRYPTION_AES.ENC_AES(#{oldPwd})
 		]]>
 	</select>
 
@@ -85,26 +85,33 @@
 	</update>
 
 	<select id="selectWithEmail" parameterType="account" resultMap="accountResult">
-	<![CDATA[
+
+		<choose>
+		<when test="email !=null">
 			SELECT * FROM ACCOUNT WHERE email = #{email}
-		]]>
+			</when>
+			<otherwise>
+			SELECT * FROM ACCOUNT WHERE id = #{id}
+			</otherwise>
+		</choose>
 	</select>
 	
 	<insert id="insertThirdParty" parameterType="account">
-	<![CDATA[
+	<choose>
+	<when test="pimage != null">
 			INSERT INTO	ACCOUNT (ano, id, email, pimage, idtype, idtoken, seller, outyn, nickname)
 			VALUES(seq_ano.nextval, #{id}, #{email}, #{pimage}, '일반회원', #{idtoken},'N', 'N', #{nickname})	
-		]]>
+		</when>
+		<otherwise>
+			INSERT INTO	ACCOUNT (ano, id, email,  idtype, idtoken, seller, outyn, nickname)
+			VALUES(seq_ano.nextval, #{id}, #{email}, '일반회원', #{idtoken},'N', 'N', #{nickname})	
+		</otherwise>
+		</choose>
 		<selectKey keyProperty="ano" resultType="Integer" order="AFTER">
 			select seq_ano.currval from dual
 		</selectKey>
 	</insert>
-
-	<select id="selectResult" parameterType="int" resultMap="partyResult">
-		<![CDATA[
-			SELECT pno, ano, pname, phone, intro, ENCRYPTION_AES.DEC_AES(id_no) AS id_no, president, address, pconfirm, econfirm, idimage FROM PARTY WHERE ano=#{ano}
-		]]>
-	</select>
+	
 	<update id="changePwd" parameterType="Account">
 	UPDATE ACCOUNT
 	SET PWD = ENCRYPTION_AES.ENC_AES(#{pwd}) WHERE EMAIL = #{email}
@@ -114,4 +121,18 @@
 	delete from notice
 	where nno = #{nno} and upbno = #{upbno}
 	</delete>
+	<select id="selectRequestSeller">
+		select * from account 
+		where idtype='승인요청중'
+	</select>
+	
+	<update id="updateIdtype" parameterType="int">
+		update account set idtype='승인요청중' where ano=#{ano}
+	</update>
+	<update id="approveSeller" parameterType="int">
+		update account set idtype='판매자' where ano=#{ano}
+	</update>
+	<update id="rejectSeller" parameterType="int">
+		update account set idtype='일반회원' where ano=#{ano}
+	</update>
 </mapper>
