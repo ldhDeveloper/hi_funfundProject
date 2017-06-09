@@ -265,7 +265,10 @@ public ModelAndView selectList(ModelAndView model){
 		int fund_no = Integer.parseInt(request.getParameter("fund_no"));
 		String recname = request.getParameter("recname");
 		String rephone = request.getParameter("rephone");
-		String deladdress = request.getParameter("deladdress");
+		String deladdress1 = request.getParameter("deladdress1");
+		String deladdress2 = request.getParameter("deladdress2");
+		String deladdress3 = request.getParameter("deladdress3");
+		String deladdress = deladdress1 + "@" + deladdress2 + "@" + deladdress3;
 		
 		System.out.println("deliveryChange controller 1 fund_no : " + fund_no + " recname : " + recname + " rephone : " + rephone + " deladdress : " + deladdress);
 		
