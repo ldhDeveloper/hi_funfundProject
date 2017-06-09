@@ -89,6 +89,11 @@ public class ItemServiceIm implements ItemService{
 	public Item selectOne(int pro_no) {
 		return itemDao.selectOne(pro_no);                                                                                                                                            
 	}
+	
+	@Override
+	public Item selectOne2(int pro_no) {
+		return itemDao.selectOne2(pro_no);                                                                                                                                            
+	}
 
 	@Override
 	public List selectOngoingItemList(Date today) {

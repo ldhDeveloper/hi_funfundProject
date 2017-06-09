@@ -82,7 +82,7 @@
 	<select id="selectslideImage" parameterType="int" resultMap="attachmentResult">
 	   select fno, refname, ftype, refno, fsubtype, nvl(fnum, 0) as fnum
 	   from attachment
-	   where ftype='item' and fsubtype='makerimg' and refno=#{pro_no}
+	   where ftype='item' and fsubtype='slideimg' and refno=#{pro_no}
 	   order by ftype, fnum
 	</select>
 </mapper>

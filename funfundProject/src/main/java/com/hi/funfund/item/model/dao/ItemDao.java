@@ -230,5 +230,10 @@ public class ItemDao {
 		return dList;
 	}
 
+	public Item selectOne2(int pro_no) {
+		Item result = (Item) sqlSession.selectOne(nameSpace+"selectOne2", pro_no); 
+		return result;
+	}
+
 	
 }
