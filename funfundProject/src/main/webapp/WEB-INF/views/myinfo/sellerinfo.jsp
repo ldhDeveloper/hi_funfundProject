@@ -66,18 +66,18 @@
 
 <script type="text/javascript">
 $(function(){
-	var str ='<c:out value="${sessionScope.party.id_no}"/>';
+	var str ='<c:out value="${seller.id_no}"/>';
 	var result = str.split('-');
 	$("#fid_no").val(result[0]);
 	$("#eid_no").val(result[1]);
 
-	var add ='<c:out value="${sessionScope.party.address}"/>';
+	var add ='<c:out value="${seller.address}"/>';
 	var aResult = add.split('@');
 	$("#sample6_postcode").val(aResult[0]);
 	$("#sample6_address").val(aResult[1]);
 	$("#sample6_address2").val(aResult[2]);
 	
-	var img = '<c:out value="${sessionScope.party.idimage}"/>';
+	var img = '<c:out value="${seller.idimage}"/>';
 	if(img == "") {
 		$("#btnUpdateIdCardImg").hide();
 		$("#btnUploadIdCardImg").show();
@@ -188,25 +188,25 @@ $(function(){
         						 
 							
 							<div>						
-								<form id="sellerChange" action="changeSeller.ao" method="post" enctype="multipart/form-data" onsubmit="return saveSeller();">
+								<form id="sellerChange" action="changeSeller.ao" method="post" enctype="multipart/form-data">
 			                    	<h5>실명</h5>
 			       					
 			       					<div class="input-area">
-			       						<c:if test="${ empty sessionScope.party.pname }">
+			       						<c:if test="${ empty seller.pname }">
 			       							<input type="text" class="input-text" id="name" value=""  placeholder="이름" disabled />
 			       						</c:if>
 			       						
-			       						<c:if test="${ !empty sessionScope.party.pname }">
+			       						<c:if test="${ !empty seller.pname }">
 			       							<input type="text" class="input-text" id="name" value="${ sessionScope.party.pname }"  placeholder="이름" disabled />
 			       						</c:if>
 			       					</div>
 			       							       					
 			       					<h5>휴대폰 번호</h5>	
-			       						<c:if test="${ empty sessionScope.party.phone }">
+			       						<c:if test="${ empty seller.phone }">
 			       							<input type="text" class="input-text" id="phone" name="phone" value=""  placeholder="휴대폰" />                                                            
 		                           		</c:if>
 		                           		
-		                           		<c:if test="${ !empty sessionScope.party.phone }">
+		                           		<c:if test="${ !empty seller.phone }">
 			       							<input type="text" class="input-text" id="phone" name="phone" value="${ sessionScope.party.phone }"  placeholder="휴대폰"/>                                                            
 		                           		</c:if>
 		                           		
@@ -214,19 +214,19 @@ $(function(){
 		       							<p class="sub-text">개인정보는 암호화하여 안전하게 처리하고 있습니다.</p>
 		       					
 		       							<ul class="input-div2">
-		       								<c:if test="${ empty sessionScope.party.id_no }">
+		       								<c:if test="${ empty seller.id_no }">
 			       								<li><input id="fid_no" type="tel" class="input-text" value="" name="id_no1" maxlength="6" placeholder="주민등록번호 앞자리"/></li>
 			       							</c:if>
 			       							
-			       							<c:if test="${ ! empty sessionScope.party.id_no }"> 
+			       							<c:if test="${ ! empty seller.id_no }"> 
 			       								<li><input id="fid_no" type="tel" class="input-text" value="" name="id_no1" maxlength="7" placeholder="주민등록번호 앞자리" /></li>
 			       							</c:if>
 			       							
-			       							<c:if test="${ empty sessionScope.party.id_no }">
+			       							<c:if test="${ empty seller.id_no }">
 			       								<li><input id="eid_no" autocomplete="new-password" type="password" class="input-text" name="id_no2" placeholder="주민등록번호 뒷자리" maxlength="7" /></li>
 			       							</c:if>
 			       							
-			       							<c:if test="${ ! empty sessionScope.party.id_no }">
+			       							<c:if test="${ ! empty seller.id_no }">
 			       								<li><input id="eid_no" autocomplete="new-password" type="password" class="input-text" name="id_no2" placeholder="주민등록번호 뒷자리" maxlength="7"/></li>
 			       							</c:if>
 			       						</ul>
@@ -250,26 +250,7 @@ $(function(){
 		                        
 									<h5>실명확인증표 등록</h5>
 					       				<p class="sub-text">실명과   주민등록번호 확인을 위해, 현재 유효한 주민등록증 또는 면허증의 앞면을 촬영한 사진을 등록하세요.</p>
-					       				
-					       				<br>
-					       				
-					       				<c:if test="${ empty sessionScope.party.idimage}">
-											<input type="hidden" name="photoflag" value="insert">
-										</c:if>
-										
-										<c:if test="${ !empty sessionScope.party.idimage}">
-											<input type="hidden" name="photoflag" value="update">
-										</c:if>
-					       				
-					       				<c:if test="${ empty sessionScope.party.idimage}">
-					       					<img id="imgRoute" class="idImage" src="images/myinfo/sellerinfo/idcardimg.png"  style="max-width: 398px; max-height: 200px; width: 398px; heigh: 200px; background-color:#fff;">
-					       				</c:if>
-					       				
-					       				<c:if test="${ ! empty sessionScope.party.idimage}">
-					       					<img id="imgRoute" class="idImage" src="images/myinfo/sellerinfo/<c:out value='${ sessionScope.party.idimage }'/>"  style="max-width: 398px; max-height: 200px; width: 398px; heigh: 200px; background-color:#fff;">
-					       				</c:if>
-					       				
-					       				<br><br>				
+					       				       				
 					       				<input type="text" id="imgRoute" class="input-text" placeholder="선택된 파일 없음" readonly/>
 					       				
 					       				<p class="alert alert-success" id="updateCardImg"></p>		       				
@@ -281,10 +262,10 @@ $(function(){
 					       					<input type="button" class="btn-darkgray" id="btnUploadIdCardImg" value="이미지 파일 등록" onclick="document.all.idimage.click();"/>
 					       				</div>
 					       				
-					       				<c:if test="${ empty sessionScope.party.idimage}">
+					       				<c:if test="${ empty seller.idimage}">
 											<input type="hidden" name="photoflag" value="insert">
 										</c:if>
-										<c:if test="${ !empty sessionScope.party.idimage}">
+										<c:if test="${ !empty seller.idimage}">
 											<input type="hidden" name="photoflag" value="update">
 										</c:if>
 					       		
@@ -310,9 +291,7 @@ $(function(){
 					
 					</div>
 					</div>
-					</div>
-					
-										
+					</div>										
 				</div>				
 			</div>
 		</div>
