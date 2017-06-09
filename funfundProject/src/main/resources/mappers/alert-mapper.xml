@@ -19,7 +19,11 @@
 	</select>
 	
 	<select id="selectList" parameterType="int" resultMap="alertResult">
-		select al_no,al_title, al_content, to_char(al_date, 'yyyy/mm/dd')as s_al_date, readyn, ano from alert where ano = #{ano} order by al_date desc
+	  select  al_no,al_title, al_content, s_al_date, readyn, ano from (
+  		select rnum, al_no,al_title, al_content, s_al_date, readyn, ano from (
+			select rownum rnum, al_no,al_title, al_content, s_al_date, readyn, ano from (
+				select al_no,al_title, al_content, to_char(al_date, 'yyyy/mm/dd')as s_al_date, readyn, ano from alert where ano = 20 order by al_date desc )))
+	 			where rnum between #{sNum} and #{eNum}
 	</select>
 	
 	<select id="selectOne" parameterType="int" resultMap="alertResult">

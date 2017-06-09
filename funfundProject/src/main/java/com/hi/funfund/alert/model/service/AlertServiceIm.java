@@ -1,5 +1,6 @@
 package com.hi.funfund.alert.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,8 @@ public class AlertServiceIm implements AlertService{
 		return alertDao.checkNewMessage(ano);
 	}
 	
-	public List<Alert> selectList(int ano){
-		return alertDao.selectList(ano);
+	public List<Alert> selectList(HashMap map){
+		return alertDao.selectList(map);
 	}
 	
 	public Alert selectOne(int al_no){

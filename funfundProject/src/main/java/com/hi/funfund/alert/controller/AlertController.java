@@ -1,5 +1,6 @@
 package com.hi.funfund.alert.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,14 @@ public class AlertController {
 	}
 	
 	@RequestMapping("selectlist.al")
-	public ModelAndView selectList(ModelAndView model, Alert alert, @RequestParam("ano")int ano){
-		List<Alert> alist = alertService.selectList(ano);
+	public ModelAndView selectList(ModelAndView model, Alert alert, @RequestParam("ano")int ano, @RequestParam("page") int page ){
+		int sNum = page * 10 - 9;
+		int eNum = sNum + 9;
+		HashMap map = new HashMap();
+		map.put("sNum", sNum);
+		map.put("eNum", eNum);
+		map.put("page", page);
+		List<Alert> alist = alertService.selectList(map);
 		System.out.println(alist);
 		model.addObject("alist", alist);
 		model.setViewName("jsonView");

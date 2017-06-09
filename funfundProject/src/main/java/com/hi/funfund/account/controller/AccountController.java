@@ -190,8 +190,14 @@ public class AccountController {
 	}
 	
 	@RequestMapping(value = "sellerinfo.ao")
-	public String sellerinfo(){
-		return "myinfo/sellerinfo";
+	public ModelAndView sellerinfo(ModelAndView model, HttpSession session, HttpServletRequest request){
+		session = request.getSession(false);
+		Account account = (Account)session.getAttribute("account");
+		int ano = account.getAno();
+		Party party = accountService.selectResult(ano);
+		model.addObject("party", party);
+		model.setViewName("myinfo/sellerinfo");
+		return model;
 	}
 	
 	@RequestMapping(value = "joinproject.ao")
@@ -211,11 +217,6 @@ public class AccountController {
 		System.out.println("마이프로젝트 리스트 : " + iList);
 		return model;
 	}
-	
-	/*@RequestMapping(value = "newproject.ao")
-	public String newproject(){
-		return "myinfo/newproject";
-	}*/
 	
 	// 개설한 프로젝트 리스트 가져오기
 	
@@ -298,35 +299,6 @@ public class AccountController {
 		return "myinfo/myinfo";
 	}
 	
-	// myinfo 비밀번호 변경 시작	
-	/*@RequestMapping(value = "changePwd.ao")
-	public ModelAndView changePwd(ModelAndView model, HttpSession session, HttpServletRequest request) {
-		System.out.println("오니?");
-		session = request.getSession(false);
-		Account account = (Account)session.getAttribute("account");
-		
-		int ano = account.getAno();
-		String oldPwd = request.getParameter("oldPwd");
-		String newPwd = request.getParameter("newPwd");
-		
-		System.out.println("PWD Controller1 ano : " + ano + " oldPwd : " + oldPwd);
-		
-		Account account2 = accountService.selectOldPwd(ano, oldPwd);
-		
-		System.out.println("PWD Controller2 ano : " + ano + " oldPwd : " + oldPwd);
-		
-		if(account2 != null) {
-			int result = accountService.updatePwd(ano, newPwd);
-			
-			System.out.println("PWD Controller3 ano : " + ano + " newPwd : " + newPwd);
-		}
-		
-		model.addObject("account", account2);
-		model.setViewName("myinfo/myinfo");	
-		
-		return model;
-	}*/	
-	
 	@RequestMapping(value = "changePwd.ao", method=RequestMethod.POST)
 	public @ResponseBody int changePwd(HttpServletRequest request, @RequestParam("oldPwd") String oldPwd, @RequestParam("newPwd") String newPwd, @RequestParam("ano") int ano) {
 		System.out.println("비밀번호 오니?");
@@ -378,7 +350,8 @@ public class AccountController {
 	// seller 정보 변경 시작
 	
 	@RequestMapping(value = "changeSeller.ao")
-	public String changSeller(Attachment vo, HttpServletRequest request) throws  IOException{
+
+	public ModelAndView changSeller(ModelAndView model, Attachment vo, HttpServletRequest request) throws  IOException{
 		System.out.println("오니?");
 		
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
@@ -474,23 +447,19 @@ public class AccountController {
 				System.out.println("seller idimage Controller ano : " + ano + " rfileName : " + rfileName);
 				
 				//페이지에 나타나는 사진이미지를 갱신해주기위해 account 객체를 조회하여 세션의 account에 덮어씀
-				if(result > 0){
-					Party p = accountService.loginParty(ano);
-					session = request.getSession(false);
-					session.setAttribute("party", p);	
+				if(result > 0){				
+					party = accountService.selectResult(ano);
+						
 				} else {
 					System.out.println("업로드 실패");
 				}				
 			}
 		}
 		
-		party = accountService.selectResult(ano);
-
-		
 		System.out.println("seller Controller3 ano : " + ano + " party : " + party);
 		
-		session.setAttribute("party", party);
-		
-		return "myinfo/sellerinfo";
+		model.addObject("seller", party);
+		model.setViewName("myinfo/sellerinfo");
+		return model;
 	}
 }
