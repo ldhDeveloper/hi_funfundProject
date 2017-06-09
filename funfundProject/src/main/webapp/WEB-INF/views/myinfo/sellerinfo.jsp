@@ -192,11 +192,11 @@ $(function(){
 			                    	<h5>실명</h5>
 			       					
 			       					<div class="input-area">
-			       						<c:if test="${ empty seller.pname }">
+			       						<c:if test="${ empty sessionScope.party.pname }">
 			       							<input type="text" class="input-text" id="name" value=""  placeholder="이름" disabled />
 			       						</c:if>
 			       						
-			       						<c:if test="${ !empty seller.pname }">
+			       						<c:if test="${ !empty sessionScope.party.pname }">
 			       							<input type="text" class="input-text" id="name" value="${ sessionScope.party.pname }"  placeholder="이름" disabled />
 			       						</c:if>
 			       					</div>
@@ -207,7 +207,7 @@ $(function(){
 		                           		</c:if>
 		                           		
 		                           		<c:if test="${ !empty seller.phone }">
-			       							<input type="text" class="input-text" id="phone" name="phone" value="${ sessionScope.party.phone }"  placeholder="휴대폰"/>                                                            
+			       							<input type="text" class="input-text" id="phone" name="phone" value="${ seller.phone  }"  placeholder="휴대폰"/>                                                            
 		                           		</c:if>
 		                           		
 		                           <h5>주민등록번호</h5>
