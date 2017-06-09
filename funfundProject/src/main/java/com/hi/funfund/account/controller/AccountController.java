@@ -194,8 +194,12 @@ public class AccountController {
 		session = request.getSession(false);
 		Account account = (Account)session.getAttribute("account");
 		int ano = account.getAno();
-		Party party = accountService.selectResult(ano);
-		model.addObject("party", party);
+		if(!account.getIdtype().equals("일반회원")){
+			Party party = accountService.selectResult(ano);
+			model.addObject("seller", party);
+			/*account = accountService.selectAccount(ano);
+			session.setAttribute("account", account);*/
+		}
 		model.setViewName("myinfo/sellerinfo");
 		return model;
 	}
@@ -457,7 +461,8 @@ public class AccountController {
 		}
 		
 		System.out.println("seller Controller3 ano : " + ano + " party : " + party);
-		
+		account = accountService.selectAccount(ano);
+		session.setAttribute("account", account);
 		model.addObject("seller", party);
 		model.setViewName("myinfo/sellerinfo");
 		return model;
