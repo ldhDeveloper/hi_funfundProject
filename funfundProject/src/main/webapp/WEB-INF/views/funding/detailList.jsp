@@ -523,10 +523,8 @@ body {
 					</li>
 					
 					<li class="makerinfo current">현재 <c:set var="result"
-							value="${reward.remain}" /> <c:if test="${result > 0}">
-					${result }</c:if> <c:if test="${result <= 0 }">
-					0
-					</c:if>개 남음
+							value="${reward.remain}" /> 
+					${result }개 남음
 					</li>
 				</ul>
 			</c:forEach>

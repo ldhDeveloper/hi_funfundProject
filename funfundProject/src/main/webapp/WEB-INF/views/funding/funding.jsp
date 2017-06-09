@@ -19,7 +19,7 @@
 	}
 	
 	.titlebar {
-	  height: 840px !important;
+	  height: 870px !important;
 	}
 	
 }

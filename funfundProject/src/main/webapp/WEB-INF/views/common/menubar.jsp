@@ -856,9 +856,7 @@ label.sign-form_title {
     position: relative;
     float: right;
     padding: 9px 10px;
-    margin-top: 8px;
     margin-right: 15px;
-    margin-bottom: 8px;
     background-color: transparent;
     background-image: none;
     border: 1px solid transparent;
@@ -887,7 +885,7 @@ ul{
 				style="widht: 400px; height: 70px; cursor: pointer"
 				onclick="home();">
 		</div>
-		<div class="col-lg-5 col-md-3 col-sm-2">&nbsp;</div>
+		<div class="col-lg-5 col-md-7 col-sm-8"></div>
 		<div class="col-lg-5 col-md-7 col-sm-8">
 			<table style="width: 610px">
 				<tr>
@@ -909,13 +907,14 @@ ul{
 							href="funding.it">프로젝트 둘러보기</a></td>
 						<td style="width: 80px;"><a class="fun-menu"
 							href="nList.no?bname=공지사항&page=1">고객센터</a></td>
-						<td style="width : 80px;"><a class="fun-menu"
+						<td style="width : 70px;"><a class="fun-menu"
 							data-toggle="modal" data-target="#myModal4"
 							style="cursor: pointer"> <c:if
 									test="${!empty sessionScope.account.pimage }">
-									<img style="width: 34px;" class="img-circle img-responsive"
+									<img style="width: 34px; height:34px;" class="img-circle img-responsive"
 										src="images/myinfo/<c:out value='${sessionScope.account.pimage }'/>" />
-								</c:if> <c:if test="${empty sessionScope.account.pimage }">
+								</c:if> 
+								<c:if test="${empty sessionScope.account.pimage }">
 									<img style="width: 34px;" class="img-circle img-responsive"
 										src="images/myinfo/basic.png" />
 								</c:if></a></td>
@@ -986,7 +985,7 @@ ul{
 				<div class="container-fluid">
 					<!-- Brand and toggle get grouped for better mobile display -->
 					<div class="row navbar-header">
-						<div style="float: right; padding-right: 30px; padding-top: 12px; vertical-align:middle;">
+						<div style="float: right; padding-right: 0px; padding-top: 12px; vertical-align:middle;">
 						<button type="button" class="navbar-toggle collapsed"
 							data-toggle="modal"
 							data-target="#myModal4" aria-expanded="false">
@@ -996,14 +995,14 @@ ul{
 							<a class="fun-menu2" data-toggle="modal" data-target="#myModal4"
 								style="cursor: pointer"><c:if
 									test="${!empty sessionScope.account.pimage }">
-									<img style="width: 34px;vertical-align:middle; "  class="img-circle img-responsive"
+									<img style="width: 34px; height:34px;vertical-align:middle; margin-top:6px;"  class="img-circle img-responsive"
 										src="images/myinfo/<c:out value='${sessionScope.account.pimage }'/>" />
 								</c:if> <c:if test="${empty sessionScope.account.pimage }">
 									<img style="width: 34px;vertical-align:middle; " class="img-circle img-responsive"
 										src="images/myinfo/basic.png" />
 								</c:if>
 							</a> <a class="fun-menu2" data-toggle="modal" data-target="#myModal4"
-								style="cursor: pointer;"><c:out
+								style="cursor: pointer; padding-top:10px; margin-left:5px;"><c:out
 									value="${sessionScope.account.nickname}" /></a>
 						</div>
 

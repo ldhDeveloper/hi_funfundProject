@@ -33,13 +33,13 @@
 		<result property="remain" column="remain" />
 	</resultMap>
 	<select id="selectMlist" parameterType="int" resultMap="fundMenuResult">
-		select f2.mno, mname, mcost, f2.pro_no, mcontent, mdate, mnum, mcount, delyn, dcost , fundcount, (mcount - f1.fundcount) as remain
-		from (select sum(fundcount)fundcount, mno
-		         from fundlist
-		         group by mno) f1
-		right join fundmenu f2 on f1.mno=f2.mno
-		where f2.pro_no = #{pro_no}
-		order by f2.mno
+select mno, mname, mcost, pro_no, mcontent, mdate, mnum, mcount, delyn, dcost, fundcount , (mcount - fundcount) as remain
+from (select fm.mno as mno, mname, mcost, fm.pro_no as pro_no, mcontent, mdate, mnum, mcount, delyn, dcost , nvl(f1.fundcount, 0) as fundcount 
+from fundmenu fm left join (select sum(fundcount) as fundcount, mno
+                            from fundlist
+                            group by mno) f1 on f1.mno=fm.mno)
+where pro_no=#{pro_no}
+order by mno
 	</select>
 	
 	<select id="selectMlist2" parameterType="int" resultMap="fundMenuResult">
