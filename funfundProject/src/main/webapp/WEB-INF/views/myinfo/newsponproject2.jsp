@@ -511,40 +511,7 @@
 					    										$("#dconitemper<c:out value='${status.index}'/>").addClass("w3-purple");
 					    										$("#displace<c:out value='${status.index}'/>").attr("href", "javascript:");
 					    									}
-					    									
-					    									else if(pstatus == "승인완료") {
-					    										$("#dconitemper<c:out value='${status.index}'/>").html("진행중");
-					    										$("#ditempanel<c:out value='${status.index}'/>").css("border", "1px solid #F44336");
-					    										$("#dconitemper<c:out value='${status.index}'/>").addClass("w3-red");
-					    										$("#dprogress<c:out value='${status.index}'/>").show();
-					    										$("#dprogressbar<c:out value='${status.index}'/>").show();
-					    										$("#dprogressbar<c:out value='${status.index}'/>").html(persent+"%");
-					    										$("#dpersent<c:out value='${status.index}'/>").show();
-					    										$("#dedate<c:out value='${status.index}'/>").show();
-					    										$("#dyet<c:out value='${status.index}'/>").show();
-					    										$("#dTag").show();
-					    										$("#ddisplace<c:out value='${status.index}'/>").attr("href", "myproject.fl?pro_no=<c:out value="${item.pro_no}"/>");
-					    									}
-					    									
-					    									else if(pstatus == "펀딩종료") {
-					    										$("#dprogress<c:out value='${status.index}'/>").css("margin-top", "5px");
-					    										$(".dcaption<c:out value='${status.index}'/>").css("margin-bottom", "30px");
-					    										$("#ditempanel<c:out value='${status.index}'/>").removeClass("panel-warning");
-					    										$("#ditempanel<c:out value='${status.index}'/>").removeClass("bg-danger");
-					    										$("#ditempanel<c:out value='${status.index}'/>").addClass("panel-default");
-					    										$("#dprogress<c:out value='${status.index}'/>").show();
-					    										$("#dprogressbar<c:out value='${status.index}'/>").show();
-					    										$("#dprogressbar<c:out value='${status.index}'/>").html(persent+"%");
-					    										$("#dpersent<c:out value='${status.index}'/>").show();
-					    										$("#dedate<c:out value='${status.index}'/>").show();
-					    										$("#dyet<c:out value='${status.index}'/>").show();
-					    										$("#dTag").show();
-					    										
-					    										$("#dprogressbar<c:out value='${status.index}'/>").addClass("w3-gray");
-					    										
-					    										$("#ddisplace<c:out value='${status.index}'/>").attr("href", "javascript:");
-					    									}
-					    									
+					    																	
 					    									else if(btDay<0) {
 					    										$("#dcomplete<c:out value='${status.index}'/>").show();
 					    									}

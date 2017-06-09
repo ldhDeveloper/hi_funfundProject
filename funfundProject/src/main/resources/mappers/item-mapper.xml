@@ -547,7 +547,7 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
                                      where ftype='item' and fsubtype='thumbnail') i7 on(i1.pro_no = i7.refno)
                                      left join (select ano, pimage
                                                   from account) ac on (ac.ano=i1.ano)
-    		where i1.pstatus='작성중' or i1.pstatus='승인요청' and i1.ano=#{ano} and i1.category <> '후원'
+    		where i1.pstatus in ('작성중', '승인요청') and i1.ano=#{ano} and i1.category <> '후원'
 		]]>
 	</select>
 	<select id="selectSuccessFundding" resultMap="itemResult">
@@ -779,7 +779,7 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
                                      where ftype='item' and fsubtype='thumbnail') i7 on(i1.pro_no = i7.refno)
                                      left join (select ano, pimage
                                                   from account) ac on (ac.ano=i1.ano)
-    		where i1.pstatus='작성중' or i1.pstatus='승인요청' and i1.ano=#{ano} and i1.category='후원'
+    		where i1.pstatus in ('작성중', '승인요청') and i1.ano=#{ano} and i1.category='후원'
 		]]>
 	</select>	
 

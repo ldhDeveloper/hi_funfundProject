@@ -468,16 +468,6 @@
       					</div>
       				</div>
       				</c:if>
-
-    					
-    					<br>
-      					
-      						<div class="well">   					   					
-    							<div class="panel panel-info">
-      								<div class="panel-heading">후원형 프로젝트</div>
-      								<div class="panel-body">아직 참여한 프로젝트가 없습니다.</div>
-    							</div>
-    						</div>
     						
     						<script type="text/javascript">
     						$("#investApply").click(function(){
@@ -507,8 +497,7 @@
 								}
 							}); */
     					</script>
-    					 									
-  						<br><br><br>						
+					
 					</div>																					
 				</div>				
 			</div>
