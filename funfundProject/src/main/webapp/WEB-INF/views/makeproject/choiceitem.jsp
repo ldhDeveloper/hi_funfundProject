@@ -47,6 +47,15 @@ img{
 <script>
 	$(function(){
 		var ano = ${sessionScope.account.ano};
+		if('${sessionScope.account.idtype}' == '일반'){
+		var x = confirm("판매자로 등록이 되지않으셨습니다. \n 판매자로 등록 후 이용하실 수 있습니다. \n 판매자로 등록하시겠습니까");
+		if(x){
+			location.href = "myinfo.ao";
+		}else{
+			location.href = "start.do";
+		}
+		
+		}
 		$.ajax({
 			url:"checkproject.it?ano=" + ano,
 			success:function(data){
