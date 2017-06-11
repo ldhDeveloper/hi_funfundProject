@@ -179,6 +179,41 @@
 	border-bottom: 3px solid #dff0d8;
 }
 
+/* 후원 */
+.mfsth {
+	text-align: center;
+	padding-top: 1.5% !important;
+	padding-bottom: 1.5% !important;
+}
+
+.mfstd, .spedate {
+	text-align: center;
+	cursor:pointer;
+	border-bottom: 1px solid #D9EDF7;
+	padding-top: 1.5% !important;
+	padding-bottom: 1.5% !important;
+	
+}
+
+.sstate {
+	border: none;
+	border-radius: 15px;
+	background-color: #E25253;
+	width: 40%;
+	height: 25px;
+	color: white;
+	padding: 2%;
+}
+
+.mfstdrL {
+	border-bottom : 1px solid #ddd;
+}
+
+.mfsthr {
+	border-top: 3px solid #D9EDF7;
+	border-bottom: 3px solid #D9EDF7;
+}
+
 </style>
 
 
@@ -192,7 +227,11 @@
 	$(function() {
 		$(".mftdrL").click(function() {
 			location.href = "myfundingDetail.fl?fund_no=" + $(this).find(".fundNo").val();
-		});	
+		});
+		
+		$(".mfstdrL").click(function() {
+			location.href = "myfundingSponDetail.fl?fund_no=" + $(this).find(".fundNo").val();
+		});
 	});	
 </script>
 
@@ -332,8 +371,7 @@
 															$("#progress<c:out value='${status.index}'/>").html("마 감").css({"background-color" : "#C1C1C1", "color" : "#F1F1F1"});		
 														}																						
 													});
-												</script>
-												
+												</script>												
       											</c:forEach>
     										</tbody>   										
   										</table>
@@ -355,7 +393,59 @@
     					   					
     						<div class="panel panel-info">
       							<div class="panel-heading">후원형 프로젝트</div>
-      							<div class="panel-body">아직 참여한 프로젝트가 없습니다.</div>
+      							
+      							<c:if test="${ empty mfsList }">
+      								<div class="panel-body">아직 참여한 프로젝트가 없습니다.</div>
+      							</c:if>
+      							
+      							<c:if test="${ ! empty mfsList }">
+      							<br>	
+									<div class="tableStart">
+										<table class="table table-hover">
+    										<thead>
+      											<tr class="mfsthr">
+        											<th class="mfsth">참여 프로젝트</th>
+        											<th class="mfsth">마감날짜</th>
+        											<th class="mfsth">금액</th>
+        											<th class="mfsth">결제상태</th>
+      											</tr>
+    										</thead>
+   
+    										<tbody>
+    											<c:forEach var="sponList" items="${ mfsList }" varStatus="status">
+    																							
+    											<tr class="mfstdrL">
+      												<td class="mfstd" style="display:none;"><input class="fundNo" type="hidden" value="<c:out value='${ sponList.fund_no }'/>"/></td>
+        											<td class="mfstd"><b class="sstate" id="sprogress<c:out value='${status.index}'/>"></b>&nbsp;&nbsp;&nbsp;${ sponList.pname }</td>
+        											<td class="spedate">${ sponList.pedate }</td>
+        											<td class="mfstd">${ sponList.sumcost }원</td>
+        											<td class="mfstd">${ sponList.funstatus }</td>
+      											</tr>
+      											
+      											<script type="text/javascript">
+													$(function(){
+														var d = new Date();
+														var pedate = new Date("<c:out value='${sponList.pedate}'/>");
+														
+														var today = new Date(d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());										
+														
+														var progress = pedate.getTime() - today.getTime();				
+					
+														if(progress >= 0) {
+															$("#sprogress<c:out value='${status.index}'/>").html("진행중");		
+														}
+													
+														else {
+															$("#sprogress<c:out value='${status.index}'/>").html("마 감").css({"background-color" : "#C1C1C1", "color" : "#F1F1F1"});		
+														}																						
+													});
+												</script>      											
+      											</c:forEach>
+    										</tbody>   										
+  										</table>
+  										<br><br><br>  										
+  									</div>
+  								</c:if>    							
     						</div>
     						
     						<script type="text/javascript">

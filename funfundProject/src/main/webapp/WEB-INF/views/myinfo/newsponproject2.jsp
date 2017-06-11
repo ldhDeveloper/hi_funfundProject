@@ -65,8 +65,8 @@
 	width: 80%;
 	position: relation;
 	z-index: 20px;
-	background-color: #3DB8CC;
-	/* border-radius: 5px;
+	/* background-color: #3DB8CC;
+	border-radius: 5px;
 	color: #fff;
 	box-shadow: 2px 2px #AFAFAF;
 	border: none; */
@@ -445,25 +445,27 @@
 						      													<img alt="이미지를 넣으세요" src="/funfund/images/makeproject/titleimg/<c:out value="${item.thumbnail}"/>" style="width: 100%;margin-bottom:2%;">      											
 						      											</c:if>
 						      												
-						      												<div id="dprogress<c:out value='${status.index}'/>" class="progress" style="display:none;">
-						  													<div id="dprogressbar<c:out value='${status.index}'/>" 
-						  														 class="w3-red progress-bar progress-bar-striped active" 
-						  														 role="progressbar" 
-						  														 aria-valuenow="70" aria-valuemin="0" aria-valuemax="<c:out value="${item.ecost}"/>" 
-						  														 style="width: 70%;"></div>
-						  														 <span class="sr-only"></span>
-																		</div>
-																		
-																		<p id="dTag" style="display:none;">
-																			<span style="display:none;" id="dpersent<c:out value='${status.index}'/>"></span>% &nbsp;&nbsp; <span><c:out value="${item.fundamount }"/></span>원 달성 &nbsp;&nbsp; 
-																			<span style="display:none;" id="dedate<c:out value='${status.index}'/>"></span>
-																			<span style="display:none;" id="dyet<c:out value='${status.index}'/>">일 남음</span>
-																			<span style="display:none;" id="dcomplete<c:out value='${status.index}'/>">펀딩종료</span>
-																		</p>     
-																													
-						      										 	<div class="dcaption<c:out value='${status.index}'/>">
-						            										<p>${ item.pname }</p>
-						            										<span>${ item.category }</span>            										
+						      											<div id="size" style="height:125px; max-height:125px;">	
+							      											<div id="dprogress<c:out value='${status.index}'/>" class="progress" style="display:none;">
+							  													<div id="dprogressbar<c:out value='${status.index}'/>" 
+							  														 class="w3-red progress-bar progress-bar-striped active" 
+							  														 role="progressbar" 
+							  														 aria-valuenow="70" aria-valuemin="0" aria-valuemax="<c:out value="${item.ecost}"/>" 
+							  														 style="width: 70%;"></div>
+							  														 <span class="sr-only"></span>
+																			</div>
+																			
+																			<p id="dTag" style="display:none;">
+																				<span style="display:none;" id="dpersent<c:out value='${status.index}'/>"></span>% &nbsp;&nbsp; <span><c:out value="${item.fundamount }"/></span>원 달성 &nbsp;&nbsp; 
+																				<span style="display:none;" id="dedate<c:out value='${status.index}'/>"></span>
+																				<span style="display:none;" id="dyet<c:out value='${status.index}'/>">일 남음</span>
+																				<span style="display:none;" id="dcomplete<c:out value='${status.index}'/>">후원종료</span>
+																			</p>     
+																														
+							      										 	<div class="dcaption<c:out value='${status.index}'/>">
+							            										<p>${ item.pname }</p>
+							            										<span>${ item.category }</span>            										
+							          										</div>
 						          										</div>	 
 						          									</a>
 					      										</div>
@@ -497,27 +499,17 @@
 					    									$("#dedate<c:out value='${status.index}'/>").text(btDay);
 					    																		
 					    									if(pstatus == "작성중") {	
-					    										$(".dcaption<c:out value='${status.index}'/>").css("margin-top", "38.5px");
-					    										$(".dcaption<c:out value='${status.index}'/>").css("margin-bottom", "38.5px");
+					    										$(".dcaption<c:out value='${status.index}'/>").css("padding-top", "37px");
 					    										$("#ditempanel<c:out value='${status.index}'/>").css("border", "1px solid #E91E63");
 					    										$("#dconitemper<c:out value='${status.index}'/>").addClass("w3-pink");    										
 					    										$("#displace<c:out value='${status.index}'/>").attr("href", "update.it?pro_no=${ item.pro_no }&flag=true");
 					    									}
 					    									
 					    									else if (pstatus == "승인요청") {
-					    										$(".dcaption<c:out value='${status.index}'/>").css("margin-top", "38.5px");
-					    										$(".dcaption<c:out value='${status.index}'/>").css("margin-bottom", "38.5px");
+					    										$(".dcaption<c:out value='${status.index}'/>").css("padding-top", "37px");
 					    										$("#ditempanel<c:out value='${status.index}'/>").css("border", "1px solid #9C27B0");
 					    										$("#dconitemper<c:out value='${status.index}'/>").addClass("w3-purple");
 					    										$("#displace<c:out value='${status.index}'/>").attr("href", "javascript:");
-					    									}
-					    																	
-					    									else if(btDay<0) {
-					    										$("#dcomplete<c:out value='${status.index}'/>").show();
-					    									}
-					    									
-					    									else if(btDay>=0) {
-					    										$("#dcomplete<c:out value='${status.index}'/>").hide();
 					    									}
 					    								});
 												 </script>

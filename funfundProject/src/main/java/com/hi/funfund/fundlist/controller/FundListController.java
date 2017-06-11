@@ -242,6 +242,19 @@ public ModelAndView selectList(ModelAndView model){
 		return model;
 	}
 	
+	// myfundingDetail.fl 상세 페이지 select
+	
+	@RequestMapping(value = "myfundingSponDetail.fl")
+	public ModelAndView myfundingSponDetail(ModelAndView model, HttpSession session, HttpServletRequest request) {		
+		int fund_no = Integer.parseInt(request.getParameter("fund_no"));		
+		
+		Myfunding myfundingSpon = fundListService.selectMyfundingSponDetail(fund_no);
+		
+		model.addObject("myfundingSpon", myfundingSpon);
+		model.setViewName("myinfo/myfundingSponDetail");
+		
+		return model;
+	}
 	
 	// joinCancle.fl 참여 취소
 	

@@ -90,4 +90,12 @@ public class FundListDao {
 		}
 		return result;
 	}
+	public List<Myfunding> selectMyfundingSpon(int ano) {
+		List<Myfunding> list = sqlSession.selectList(nameSpace+"selectMyfundingSpon", ano);
+		return list;
+	}
+	public Myfunding selectMyfundingSponDetail(int fund_no) {
+		Myfunding myfunding = (Myfunding)sqlSession.selectOne("selectMyfundingSponDetail", fund_no);
+		return myfunding;
+	}
 }
