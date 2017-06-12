@@ -22,25 +22,16 @@ public class FundListServiceIm implements FundListService {
 
 	@Override
 	public List<FundList> selectList() {
-	
-		
-		
 		return fundListDao.selectList();
 	}
 
 	@Override
 	public int insert(FundList fList) {
-		
-		
-		
 		return fundListDao.insert(fList);
 	}
 
 	@Override
-	public int update(FundList fList) {
-		
-		
-		
+	public int update(FundList fList) {		
 		return fundListDao.update(fList);
 	}
 
@@ -85,6 +76,17 @@ public class FundListServiceIm implements FundListService {
 	@Override
 	public int insertFundingList(ArrayList<HashMap<String, String>> alist) {
 		return fundListDao.insertFundingList(alist);
+	}
+	
+	// 후원형 myfunding
+	@Override
+	public List<Myfunding> selectMyfundingSpon(int ano) {
+		return fundListDao.selectMyfundingSpon(ano);
+	}
+
+	@Override
+	public Myfunding selectMyfundingSponDetail(int fund_no) {
+		return fundListDao.selectMyfundingSponDetail(fund_no);
 	}
 
 

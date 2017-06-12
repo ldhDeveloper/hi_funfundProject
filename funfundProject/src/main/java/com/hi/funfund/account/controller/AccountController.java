@@ -259,8 +259,10 @@ public class AccountController {
 		int ano = account.getAno();
 		
 		List <Myfunding> mfList = fundListService.selectMyfunding(ano);
+		List <Myfunding> mfsList = fundListService.selectMyfundingSpon(ano);
 		
 		model.addObject("mfList", mfList);
+		model.addObject("mfsList", mfsList);
 		model.setViewName("myinfo/myfunding");
 		
 		return model;

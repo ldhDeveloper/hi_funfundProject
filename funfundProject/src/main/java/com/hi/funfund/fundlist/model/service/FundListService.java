@@ -32,5 +32,9 @@ public interface FundListService {
 	int updateDelivery(int fund_no, String recname, String rephone, String deladdress);
 
 	int insertFundingList(ArrayList<HashMap<String, String>> alist);
+
+	List<Myfunding> selectMyfundingSpon(int ano);
+
+	Myfunding selectMyfundingSponDetail(int fund_no);
 	
 }

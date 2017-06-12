@@ -514,7 +514,7 @@ input[type="checkbox"] {
 					    pay_method : 'card',
 					    merchant_uid : 'merchant_' + new Date().getTime(),
 					    name : '주문명: <c:out value="${item.pname}"/>',
-					    amount : cost,
+					    amount : 100,
 					    buyer_email : '<c:out value="${sessionScope.account.email}"/>',
 					    buyer_name : rename,
 					    buyer_tel : rephone,
