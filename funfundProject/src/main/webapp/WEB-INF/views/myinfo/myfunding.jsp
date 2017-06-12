@@ -171,7 +171,7 @@
 	width: 40%;
 	height: 25px;
 	color: white;
-	padding: 2%;
+	padding: 0.8%;
 }
 
 .mfthr {
@@ -202,7 +202,7 @@
 	width: 40%;
 	height: 25px;
 	color: white;
-	padding: 2%;
+	padding: 0.8%;
 }
 
 .mfstdrL {
@@ -246,10 +246,10 @@
 					<div class="row">
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
 						<c:if test="${empty sessionScope.account.pimage }">
-						<img class="img-circle img-responsive" src="images/myinfo/basic.png" style="max-width:170px;max-height:170px; width:170px; heigh:150px;"><!-- 사진 값이 들어갈 곳  -->
+						<img class="img-circle img-responsive" src="images/myinfo/basic.png" style="max-width:170px;max-height:170px; width:170px; height:150px;"><!-- 사진 값이 들어갈 곳  -->
 						</c:if>
 						<c:if test="${!empty sessionScope.account.pimage }">
-						<img class="img-circle img-responsive" src="images/myinfo/<c:out value='${sessionScope.account.pimage }'/>" style="max-width:170px;max-height:170px; width:170px; heigh:150px;"><!-- 사진 값이 들어갈 곳  -->
+						<img class="img-circle img-responsive" src="images/myinfo/<c:out value='${sessionScope.account.pimage }'/>" style="max-width:170px;max-height:170px; width:170px; height:150px;"><!-- 사진 값이 들어갈 곳  -->
 						</c:if>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow mname" align="center">
@@ -375,18 +375,16 @@
       											</c:forEach>
     										</tbody>   										
   										</table>
-  										<br><br><br>
+  										<br><br>
   										
   									</div>
   									
   									</c:if>
   									
     						</div>
-    					</div>
-    					
-    					<br>
-      					
-      					<div class="well">
+    						
+    						<br>
+    						
     						<div class="alert alert-info">
   								<h6>* 참여프로젝트를 클릭하시면 참여상세 내역에서 마감날짜/청약상태 등을 보실 수 있습니다.</h6>
 							</div>
@@ -443,10 +441,14 @@
       											</c:forEach>
     										</tbody>   										
   										</table>
-  										<br><br><br>  										
+  										<br><br> 										
   									</div>
   								</c:if>    							
     						</div>
+    					</div>
+    					
+    		
+      					
     						
     						<script type="text/javascript">
     						$("#investApply").click(function(){
@@ -462,7 +464,7 @@
 								}
 							});
     					</script>
-    					</div>
+    					
   					</div>										
 				</div>				
 			</div>

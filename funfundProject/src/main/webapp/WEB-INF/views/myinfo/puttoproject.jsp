@@ -25,7 +25,7 @@
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 	width: 100%;
-	height: 80px;
+
 	color: #fff;
 	font-size: 2vw;
 	padding-top: 1.5%;
@@ -39,7 +39,7 @@
 	border-right: 1px solid #ddd;
 	background-color: #F8F8F8;
 	width: 100%;
-	height : 20%;
+
 	padding-top: 3%;
 	padding-left: 8%;
 	padding-right: 8%;
@@ -102,7 +102,7 @@
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 	width: 100%;
-	height : 900px;
+
 	padding-top: 2%;
 }
 
@@ -170,10 +170,10 @@
 					<div class="row">
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
 						<c:if test="${empty sessionScope.account.pimage }">
-						<img class="img-circle img-responsive" src="images/myinfo/basic.png" style="max-width:170px;max-height:170px; width:170px; heigh:150px;"><!-- 사진 값이 들어갈 곳  -->
+						<img class="img-circle img-responsive" src="images/myinfo/basic.png" style="max-width:170px;max-height:170px; width:170px; height:150px;"><!-- 사진 값이 들어갈 곳  -->
 						</c:if>
 						<c:if test="${!empty sessionScope.account.pimage }">
-						<img class="img-circle img-responsive" src="images/myinfo/<c:out value='${sessionScope.account.pimage }'/>" style="max-width:170px;max-height:170px; width:170px; heigh:150px;"><!-- 사진 값이 들어갈 곳  -->
+						<img class="img-circle img-responsive" src="images/myinfo/<c:out value='${sessionScope.account.pimage }'/>" style="max-width:170px;max-height:170px; width:170px; height:150px;"><!-- 사진 값이 들어갈 곳  -->
 						</c:if>
 						</div><div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow mname" align="center">
 							회원명 | <c:if test="${ empty sessionScope.party.pname}">
@@ -291,7 +291,7 @@
 										});										
 									</script>
       										<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 myListMargin">
-      											<div id="itempanel<c:out value='${status.index}'/>" class="panel panel-default">
+      											<div id="itempanel<c:out value='${status.index}'/>" class="panel panel-default" style="height:430px; max-height:430px;">
       													
 													  <div id="conitemper<c:out value='${status.index}'/>" class="panel-heading panel-primary">진행중</div>
 													  <div id="enditemper<c:out value='${status.index}'/>" class="panel-heading ">펀딩 종료</div>
@@ -300,7 +300,8 @@
 														<a href="detail.it?pro_no=<c:out value="${item.pro_no}"/>"> <img
 															src="/funfund/images/makeproject/titleimg/<c:out value="${item.thumbnail }"/>" alt="사진1"
 															style="width: 100%">
-																							<div id="progress<c:out value='${status.index}'/>" class="progress">
+															
+															<div id="progress<c:out value='${status.index}'/>" class="progress">
 																<div class="progress-bar progress-bar-warning"
 																	id="progressbar<c:out value='${status.index}'/>"
 																	role="progressbar" aria-valuenow="60" aria-valuemin="0"
@@ -321,6 +322,7 @@
 																</p>
 																<span><c:out value="${item.category}" /></span>
 															</div>
+															
 														</a>
 													</div>
 													  </div>
@@ -331,17 +333,103 @@
       								</c:if>
       							</div>
     						</div>
-    					</div>
-    		    					
-    					<br>
-    					
-    					<div class="well">  					
+    						
+    						<br><br>
+    						
     						<div class="panel panel-info">
       							<div class="panel-heading">찜한 후원형 프로젝트</div>
+      							
+      							<div class="row myItemList">
+      							
+      							<c:if test="${empty sList}">
       							<div class="panel-body">아직 찜한 프로젝트가 없습니다.</div>
+      							</c:if>
+      							
+      							<c:if test="${!empty sList }">
+      								<c:forEach var="spon" items="${sList }" varStatus="status">
+      										<script>
+										$(function(){
+											var ecost = "<c:out value='${spon.ecost}'/>";
+											var fundamount = "<c:out value='${spon.fundamount}'/>"
+											var persent = Math.round(fundamount * 100 / ecost);
+											var bar=0;
+											if(persent > 100){
+												bar=100;
+											} else {
+												bar=persent;
+											}
+											var edate = new Date("<c:out value='${spon.pedate}'/>");
+											var todate = new Date();
+											var btMs = edate.getTime() - todate.getTime() ;
+										    var btDay = Math.round(btMs / (1000*60*60*24)) ;
+
+											console.log(persent);
+											$("#spersent<c:out value='${status.index}'/>").text(persent);
+											$("#sprogressbar<c:out value='${status.index}'/>").attr("aria-valuenow", persent);
+											$("#sprogressbar<c:out value='${status.index}'/>").css("width", bar + "%");
+											$("#sedate<c:out value='${status.index}'/>").text(btDay);
+											
+											if(btDay < 0){
+												$("#sedate<c:out value='${status.index}'/>").hide();
+												$("#syet<c:out value='${status.index}'/>").hide();
+												$("#scomplete<c:out value='${status.index}'/>").show();
+												$("#sconitemper<c:out value='${status.index}'/>").hide();
+												$("#senditemper<c:out value='${status.index}'/>").show();
+											} else {
+												$("#scomplete<c:out value='${status.index}'/>").hide();
+												$("#sedate<c:out value='${status.index}'/>").show();
+												$("#syet<c:out value='${status.index}'/>").show();
+												$("#sconitemper<c:out value='${status.index}'/>").show();
+												$("#senditemper<c:out value='${status.index}'/>").hide();
+												$("#sitempanel<c:out value='${status.index}'/>").removeClass("panel-default");
+												$("#sitempanel<c:out value='${status.index}'/>").addClass("panel-primary");
+											}
+										});										
+									</script>
+      										<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 myListMargin">
+      											<div id="sitempanel<c:out value='${status.index}'/>" class="panel panel-default">
+      													
+													  <div id="sconitemper<c:out value='${status.index}'/>" class="panel-heading panel-primary">진행중</div>
+													  <div id="senditemper<c:out value='${status.index}'/>" class="panel-heading ">펀딩 종료</div>
+													  <div class="panel-body">
+													    <div class="thumbnail" align="center">
+														<a href="detail.it?pro_no=<c:out value="${spon.pro_no}"/>"> <img
+															src="/funfund/images/makeproject/titleimg/<c:out value="${spon.thumbnail }"/>" alt="사진1"
+															style="width: 100%">
+															
+															<div id="sprogress<c:out value='${status.index}'/>" class="progress">
+																<div class="progress-bar progress-bar-warning"
+																	id="sprogressbar<c:out value='${status.index}'/>"
+																	role="progressbar" aria-valuenow="60" aria-valuemin="0"
+																	aria-valuemax="<c:out value="${spon.ecost}"/>" style="width: 60%;">
+																	<span class="sr-only"></span>
+																</div>
+															</div>
+															<p>
+																<span id="spersent<c:out value='${status.index}'/>"></span> % &nbsp;&nbsp; <span><c:out value="${spon.fundamount }"/></span>원 달성 &nbsp;&nbsp; 
+																<span id="sedate<c:out value='${status.index}'/>"></span>
+																<span id="syet<c:out value='${status.index}'/>">일 남음</span>
+																<span id="scomplete<c:out value='${status.index}'/>">펀딩종료</span>
+															</p>
+							
+															<div class="scaption">
+																<p>
+																	<c:out value="${spon.pname }" />
+																</p>
+																<span><c:out value="${spon.category}" /></span>
+															</div>
+														</a>
+													</div>
+													  </div>
+												</div>
+      										</div>
+      									
+      								</c:forEach>
+      								</c:if>
+      							</div>	
     						</div>
     					</div>
-    					
+   					    					
     					<script type="text/javascript">
     					$("#investApply").click(function(){
 							var name ='<c:out value="${sessionScope.party.pname}"/>';

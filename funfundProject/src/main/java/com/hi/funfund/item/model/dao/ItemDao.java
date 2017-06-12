@@ -260,5 +260,8 @@ public class ItemDao {
 		return result;
 	}
 
-	
+	public List<Item> selectMySponItems(int ano) {
+		List<Item> dList = (List<Item>) sqlSession.selectList(nameSpace + "selectMySponItems", ano);
+		return dList;
+	}	
 }

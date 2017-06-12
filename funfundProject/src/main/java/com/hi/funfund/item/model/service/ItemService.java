@@ -110,5 +110,7 @@ public interface ItemService {
 
 	Item selectOne2(int pro_no);
 
+	List<Item> selectMySponItems(int ano);
+
 
 }
