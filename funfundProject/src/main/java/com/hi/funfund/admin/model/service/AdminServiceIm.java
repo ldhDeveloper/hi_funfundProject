@@ -32,5 +32,10 @@ public class AdminServiceIm implements AdminService{
 	public List<ProfitHash> totalProfit(String year) {
 		return adminDao.totalProfit(year);
 	}
+
+	@Override
+	public List<ProfitHash> categoryProfit(String year) {
+		return adminDao.categoryProfit(year);
+	}
 	
 }

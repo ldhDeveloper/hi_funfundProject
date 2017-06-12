@@ -1,94 +1,94 @@
 package com.hi.funfund.admin.model.vo;
 
 public class ProfitInfo implements java.io.Serializable{
-	private int jan;
-	private int feb;
-	private int mar;
-	private int apr;
-	private int may;
-	private int jun;
-	private int jul;
-	private int aug;
-	private int sep;
-	private int oct;
-	private int nov;
-	private int dec;
+	private long jan;
+	private long feb;
+	private long mar;
+	private long apr;
+	private long may;
+	private long jun;
+	private long jul;
+	private long aug;
+	private long sep;
+	private long oct;
+	private long nov;
+	private long dec;
 	
-	public int getJan() {
+	public long getJan() {
 		return jan;
 	}
-	public void setJan(int jan) {
+	public void setJan(long jan) {
 		this.jan = jan;
 	}
-	public int getFeb() {
+	public long getFeb() {
 		return feb;
 	}
-	public void setFeb(int feb) {
+	public void setFeb(long feb) {
 		this.feb = feb;
 	}
-	public int getMar() {
+	public long getMar() {
 		return mar;
 	}
-	public void setMar(int mar) {
+	public void setMar(long mar) {
 		this.mar = mar;
 	}
-	public int getApr() {
+	public long getApr() {
 		return apr;
 	}
-	public void setApr(int apr) {
+	public void setApr(long apr) {
 		this.apr = apr;
 	}
-	public int getMay() {
+	public long getMay() {
 		return may;
 	}
-	public void setMay(int may) {
+	public void setMay(long may) {
 		this.may = may;
 	}
-	public int getJun() {
+	public long getJun() {
 		return jun;
 	}
-	public void setJun(int jun) {
+	public void setJun(long jun) {
 		this.jun = jun;
 	}
-	public int getJul() {
+	public long getJul() {
 		return jul;
 	}
-	public void setJul(int jul) {
+	public void setJul(long jul) {
 		this.jul = jul;
 	}
-	public int getAug() {
+	public long getAug() {
 		return aug;
 	}
-	public void setAug(int aug) {
+	public void setAug(long aug) {
 		this.aug = aug;
 	}
-	public int getSep() {
+	public long getSep() {
 		return sep;
 	}
-	public void setSep(int sep) {
+	public void setSep(long sep) {
 		this.sep = sep;
 	}	
-	public int getOct() {
+	public long getOct() {
 		return oct;
 	}
-	public void setOct(int oct) {
+	public void setOct(long oct) {
 		this.oct = oct;
 	}
-	public int getNov() {
+	public long getNov() {
 		return nov;
 	}
-	public void setNov(int nov) {
+	public void setNov(long nov) {
 		this.nov = nov;
 	}
-	public int getDec() {
+	public long getDec() {
 		return dec;
 	}
-	public void setDec(int dec) {
+	public void setDec(long dec) {
 		this.dec = dec;
 	}
 	public ProfitInfo(){}
-	public ProfitInfo(int jan, int feb, int mar, int apr, int may, int jun, int jul, int aug, int sep, int oct, int nov,
-			int dec) {
+	public ProfitInfo(long jan, long feb, long mar, long apr, long may, long jun, long jul, long aug, long sep, long oct, long nov,
+			long dec) {
 		super();
 		this.jan = jan;
 		this.feb = feb;

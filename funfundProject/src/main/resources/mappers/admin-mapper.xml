@@ -22,6 +22,10 @@
 		<result property="evidence" column="evidence" />
 		<result property="id" column="id" />
 	</resultMap>
+	<resultMap type="profitHash" id="profitHashResult">
+		<id property="cname" column="cname" />
+		<result property="sumcost" column="sumcost" />
+	</resultMap>
 	<select id="selectRequestSeller" resultMap="accInfoResult">
 		<![CDATA[
 			select a.ano as ano, a.id as id, p.pname as pname, ENCRYPTION_AES.DEC_AES(p.id_no) AS id_no, a.idtype as idtype, p.phone as phone, p.idimage as idimage
@@ -36,6 +40,26 @@
 			            join fundlist fl on (fm.mno = fl.mno)
 			            join account a on (fl.ano = a.ano)
 			where fl.funstatus = '취소요청중'
+		]]>
+	</select>
+	<select id="totalProfit" parameterType="String" resultMap="profitHashResult">
+		<![CDATA[
+			select to_char(i.pedate,'mm') as cname, sum(nvl(fm.mcost,0) * nvl(fl.fundcount,0)) as sumcost
+			from item i join fundmenu fm on (i.pro_no = fm.pro_no)
+			            join fundlist fl on (fm.mno = fl.mno)
+			where to_char(i.pedate, 'yyyy') = #{year}
+			group by to_char(i.pedate,'mm')
+			order by edate
+		]]>
+	</select>
+	<select id="categoryProfit" parameterType="String" resultMap="profitHashResult">
+		<![CDATA[
+			select i.category as cname, sum(nvl(fm.mcost,0) * nvl(fl.fundcount,0)) as sumcost
+		      from item i join fundmenu fm on (i.pro_no = fm.pro_no)
+		                  join fundlist fl on (fm.mno = fl.mno)
+		      where to_char(i.pedate, 'yyyy') = #{year}
+		      group by i.category
+		      order by sumcost desc
 		]]>
 	</select>
 </mapper>

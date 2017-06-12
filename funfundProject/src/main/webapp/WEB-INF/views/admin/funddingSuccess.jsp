@@ -90,7 +90,7 @@
 						<li id="info1"><a href="sellerconfirm.am">회원 관리</a></li>
 						<li id="info2"><a href="itemconfirm.am">프로젝트 관리</a></li>
 						<li id="info3" class="active-active"><a href="successFundding.am">펀딩금액 관리</a></li>
-						<li id="info4"><a href="#">funfund 현황</a></li>
+						<li id="info4"><a href="totalProfit.am">funfund 현황</a></li>
 					</ul>
 				</div>
 			</div>

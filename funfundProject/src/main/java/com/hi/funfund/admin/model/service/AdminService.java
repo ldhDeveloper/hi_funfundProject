@@ -14,4 +14,6 @@ public interface AdminService {
 
 	List<ProfitHash> totalProfit(String year);
 
+	List<ProfitHash> categoryProfit(String year);
+
 }
