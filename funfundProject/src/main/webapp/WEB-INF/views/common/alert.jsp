@@ -18,14 +18,18 @@ body{
 <script>
 
 	$(function(){
-		
-		
-		var ano = ${sessionScope.account.ano};
-		
+		/* var ano = ${sessionScope.account.ano};
 		$.ajax({
 			url:"selectlist.al?page=1&ano="+ano,
 		  	success:function(data){
 		  		var length = data.alist.length;
+		 		var messageCount = data.totalMessageNumber;
+		 		var endPage = parseInt(messageCount / 4) + 1;
+		 		var totalMessageNumber = data.totalMessageNumber; //전체 메세지수
+		 		var currentPageGap = 1;
+		  		var startPage =  (currentPageGap * 4 ) - 3 ; // i값을 더하므로 실제로는 1,6,11식으로 시작
+		  		var  endPage =  startPage + 3;
+		  		var finalPage = parseInt(totalMessageNumber/ 3) + 1;
 		  		for(var i = 0; i < length; i++){
 		  			if(data.alist[i].readyn == 'n'){
 		  				$("#msglist").html($("#msglist").html() 
@@ -42,38 +46,43 @@ body{
 			  			  	+ "</td><td>" 
 			  			  	+ data.alist[i].s_al_date 
 			  			  	+ "</td></tr>" );
-		  			}
-		  		
-		  			$('.btn-group').html($('.btn-group').html() + 
-		  					"<button type='button' class='btn btn-warning btn-xs' onclick='changePage("+ i + ");'>"+ i +"</button>");
-		  			
+		  			}		
 		  		}
+
+		  		$('.btn-group').html("<button type='button' class='btn btn-warning btn-xs' onclick='changePage(1);'> << </button>" +
+  				"<button type='button' class='btn btn-warning btn-xs'><</button>");
+		  		for(var i = 1; i<= endPage; i++){
+			  		$('.btn-group').html($('.btn-group').html() + 
+		  					"<button type='button' class='btn btn-warning btn-xs' onclick='changePage("+ i + ");'>"+ i +"</button>");
+		  		}
+		  		$('.btn-group').html($('.btn-group').html() + 
+		  				"<button type='button' class='btn btn-warning btn-xs' onclick='changePage(2);'> > </button>" +
+		  				"<button type='button' class='btn btn-warning btn-xs' onclick='changePage("+endPage+");'> >> </button>" 
+		  				 );
 		  	}
-		});
-
-
-		
-		
+		}); */
+		changePage(1);
 	});
 	
 	function changePage(x){
 		var ano = ${sessionScope.account.ano};
 		
-		$("#msglist").html("<br>");
 		$.ajax({
 			url:"selectlist.al?page="+ x +"&ano=" + ano,
 		  	success:function(data){
-		 		var totalMessageNumber = data.messageCount; //페이징처리위한 변수
+		  		$("#msglist").html("<br>");
+		 		var totalMessageNumber = data.totalMessageNumber; //전체 메세지수
 		  		var length = data.alist.length;
-		  		var page = parseInt(x / 5) * 5;
-		  		var lpagegap =  "";
-		  		alert(x);
-		  		$('.btn-group').html();
+		 		var currentPageGap = parseInt(x / 4) + 1;
+		  		var startPage =  (currentPageGap * 4 ) -3 ; // i값을 더하므로 실제로는 1,6,11식으로 시작
+		  		var  endPage =  startPage + 3;
+		  		var finalPage = parseInt(totalMessageNumber/ 3) +1;
+				if(endPage > finalPage){
+					endPage = finalPage;
+				}
+		  		
+		  		
 		  		for(var i = 0; i < length; i++){
-		  			$('.btn-group').html(
-		  			"<button type='button' class='btn btn-warning btn-xs' onclick='changePage(1)'><<</button>"+
-		  			"<button type='button' class='btn btn-warning btn-xs' onclick='changePage("+  + ")'><</button>");
-		  			
 		  			if(data.alist[i].readyn == 'n'){
 		  				$("#msglist").html($("#msglist").html() 
 		  			  		+ "<tr><td align='center'><input type='checkbox' value='"+ data.alist[i].al_no +"'></td><td>관리자</td><td class='title' onclick='clickmsg(this);'>"
@@ -90,10 +99,22 @@ body{
 			  			  	+ data.alist[i].s_al_date 
 			  			  	+ "</td></tr>" );
 		  			}
-		  			$('.btn-group').html($('.btn-group').html() + 
-		  					"<button type='button' class='btn btn-warning btn-xs' onclick='changePage("+  + ");'>"+ i +"</button>");
-		  			
+		  			}
+		  		
+		  		$('.btn-group').html("<button type='button' class='btn btn-warning btn-xs' onclick='changePage(1);'><<</button>");
+		  		if(x=1){
+		  			$('.btn-group').html($('.btn-group').html() + "<button type='button' class='btn btn-warning btn-xs'><</button>");
+		  		}else{
+		  			$('.btn-group').html($('.btn-group').html() + "<button type='button' class='btn btn-warning btn-xs' onclick='changePage("+ x-1 + "); ><</button>");
 		  		}
+		  		for(var i = 1; i<= endPage; i++){
+			  		$('.btn-group').html($('.btn-group').html() + 
+		  					"<button type='button' class='btn btn-warning btn-xs' onclick='changePage("+ i + ");'>"+ i +"</button>");
+		  		}
+		  		$('.btn-group').html($('.btn-group').html() + 
+		  				"<button type='button' class='btn btn-warning btn-xs' onclick='changePage("+i+1 +");'> > </button>" +
+		  				"<button type='button' class='btn btn-warning btn-xs' onclick='changePage("+finalPage+");'> >> </button>" 
+		  				 );
 		  	}
 		});
 	}
