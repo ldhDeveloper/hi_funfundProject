@@ -24,6 +24,8 @@
 		<typeAlias type="com.hi.funfund.admin.model.vo.AccInfo" alias="accInfo" />
 		<typeAlias type="com.hi.funfund.alert.model.vo.Alert" alias="alert" />
 		<typeAlias type="com.hi.funfund.admin.model.vo.CancelInfo" alias="cancelInfo" />
+		<typeAlias type="com.hi.funfund.admin.model.vo.ProfitInfo" alias="profitInfo" />
+		<typeAlias type="com.hi.funfund.admin.model.vo.ProfitHash" alias="ProfitHash" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="mappers/account-mapper.xml" />

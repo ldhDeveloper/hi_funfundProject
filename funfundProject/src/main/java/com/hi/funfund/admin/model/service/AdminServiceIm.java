@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import com.hi.funfund.admin.model.dao.AdminDao;
 import com.hi.funfund.admin.model.vo.AccInfo;
 import com.hi.funfund.admin.model.vo.CancelInfo;
+import com.hi.funfund.admin.model.vo.ProfitHash;
+import com.hi.funfund.admin.model.vo.ProfitInfo;
+
 
 @Service("adminService")
 public class AdminServiceIm implements AdminService{
@@ -25,6 +28,9 @@ public class AdminServiceIm implements AdminService{
 		return adminDao.selectCancelInfo();
 	}
 
+	@Override
+	public List<ProfitHash> totalProfit(String year) {
+		return adminDao.totalProfit(year);
+	}
 	
-
 }
