@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.hi.funfund.admin.model.vo.AccInfo;
 import com.hi.funfund.admin.model.vo.CancelInfo;
+import com.hi.funfund.admin.model.vo.ProfitHash;
 
 @Repository("adminDao")
 public class AdminDao {
@@ -24,6 +25,11 @@ public class AdminDao {
 	public List<CancelInfo> selectCancelInfo() {
 		List<CancelInfo> cList = (List<CancelInfo>) sqlSession.selectList(nameSpace + "selectCancelInfo");
 		return cList;
+	}
+
+	public List<ProfitHash> totalProfit(String year) {
+		List<ProfitHash> pList = (List<ProfitHash>) sqlSession.selectList(nameSpace + "totalProfit");
+		return pList;
 	}
 	
 }

@@ -19,6 +19,7 @@ import com.hi.funfund.account.model.vo.Party;
 import com.hi.funfund.admin.model.service.AdminService;
 import com.hi.funfund.admin.model.vo.AccInfo;
 import com.hi.funfund.admin.model.vo.CancelInfo;
+import com.hi.funfund.admin.model.vo.ProfitHash;
 import com.hi.funfund.alert.model.service.AlertService;
 import com.hi.funfund.alert.model.vo.Alert;
 import com.hi.funfund.item.model.service.ItemService;
@@ -241,4 +242,11 @@ public class AdminController {
 		return result;
 	}
 	
+	@RequestMapping(value= "/totalProfit.am", method = RequestMethod.POST)
+	public @ResponseBody ModelAndView totalProfit(ModelAndView model, @RequestParam("year") String year){
+		List <ProfitHash> plist = adminService.totalProfit(year);
+		model.addObject("plist", plist);
+		model.setViewName("admin/totalprofit");
+		return model;
+	}
 }
