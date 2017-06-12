@@ -216,7 +216,9 @@ public class AccountController {
 		int ano = account.getAno();
 		System.out.println("마이 리스트 ano : " + ano);
 		List<Item> iList = itemService.selectMyItems(ano);
+		List<Item> sList = itemService.selectMySponItems(ano);
 		model.addObject("iList", iList);
+		model.addObject("sList", sList);
 		model.setViewName("myinfo/puttoproject");
 		System.out.println("마이프로젝트 리스트 : " + iList);
 		return model;

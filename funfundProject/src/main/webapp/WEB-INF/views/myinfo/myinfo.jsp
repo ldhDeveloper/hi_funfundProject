@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style type="text/css">
 .container{
@@ -24,7 +23,7 @@
 	width: 100%;
 	height: 80px;
 	color: #fff;
-	font-size: 2vw;
+	font-size: 26pt;
 	padding-top: 1.5%;
 }
 
@@ -38,8 +37,8 @@
 	width: 100%;
 	height : 20%;
 	padding-top: 3%;
-	padding-left: 8%;
-	padding-right: 8%;
+	/* padding-left: 8%;
+	padding-right: 8%; */
 	padding-bottom: 3%;
 }
 
@@ -63,32 +62,41 @@
 }
 
 .mgrade {
-	width: 80%;
-	position: relation;
-	z-index: 20px;
-	/* background-color: #3DB8CC; */
-	/* border-radius: 5px; */
-	/* color: #fff; */
-	/* box-shadow: 2px 2px #AFAFAF; */
-	/* border: 1px solid #3DB8CC; */
+	width: 200px;
 	text-align: center;
 	padding-top: 2%;
-	font-size: 1vw;
+	font-size: 14pt;
+	padding-left: 5%;
+	color: #4D525B;
 }
 
-.mbtn1 {
+.nameId {
+	font-size: 14pt;
+	width: 200px;
+	padding-top: 1.8%;
+}
+
+.mnameText {
+	border: none;
+	color: #4D525B;
+	width: 40%;
+	background-color: #F8F8F8;
+}
+
+.imgBtn {
+	margin-left: 10%;
 	position: relation;
 	z-index: 20px;
 	background-color: #3DB8CC;
 	border-radius: 5px;
-	width: 80%;
+	width: 100px;
 	color: #fff;
 	box-shadow: 2px 2px #AFAFAF;
 	border: none;
 	text-align: center;
 	font-weight: bold;
-	font-size: 1vw;
-	padding-top: 2%;
+	font-size: 14pt;
+	padding-top: 0.8%;
 }
 
 .mmenu {
@@ -104,7 +112,6 @@
 }
 
 .mh3 {
-	/* font-size: 1.5vw; */
 	padding-left : 30%;
 }
 
@@ -198,21 +205,13 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 
 .line{display:block;margin:40px 0;width:100%;height:1px;background:#ddd}
 
-.mnameText {
-	border: none;
-	color: #4D525B;
-	width: 40%;
-	background-color: #F8F8F8;
-}
+
+
+
 
 .glyphicon {
 	color: #50E3C2;
 }
-
-/* .testAlert {
-	height: 40px;
-	padding-top: 1%;
-} */
 </style>
 
 <title>Insert title here</title>
@@ -239,10 +238,10 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 									<input type="hidden" name="photoflag" value="update">
 								</c:if>
 								<c:if test="${empty sessionScope.account.pimage }">
-									<img id="profileimage" class="img-circle img-responsive" src="images/myinfo/basic.png" style="max-width:170px;min-width:170px;min-height:170px;max-height:170px; width:170px; heigh:150px; cursor:pointer" onclick="document.all.uploadFile.click();">
+									<img id="profileimage" class="img-circle img-responsive" src="images/myinfo/basic.png" style="margin-left: 10%; width:80%; height:130px; cursor:pointer" onclick="document.all.uploadFile.click();">
 								</c:if>
 								<c:if test="${!empty sessionScope.account.pimage }">
-									<img id="profileimage" class="img-circle img-responsive" src="images/myinfo/<c:out value='${sessionScope.account.pimage }'/>" style="min-width:170px;min-height:170px;max-width:170px;max-height:170px; width:170px; heigh:150px; cursor:pointer" onclick="document.all.uploadFile.click();">
+									<img id="profileimage" class="img-circle img-responsive" src="images/myinfo/<c:out value='${sessionScope.account.pimage }'/>" style="margin-left: 30%; margin-right: 30%; width:80%; height:120%; cursor:pointer" onclick="document.all.uploadFile.click();">
 								</c:if>
 							</form>
 						</div>
@@ -264,7 +263,7 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 						</script>
 						
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow mname" align="center">
-							<div>
+							<label class="nameId">
 							회원명 | <c:if test="${ empty sessionScope.party.pname}">
 		                 				<input type="text" name="pname" class="mnameText" placeholder="이름" value="${ sessionScope.account.nickname }" readonly/>
 		                 			</c:if>
@@ -272,20 +271,31 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 		                 			<c:if test="${ !empty sessionScope.party.pname}">
 		                 				<input type="text" name="pname" class="mnameText" placeholder="이름" value="${ sessionScope.party.pname }" readonly/>
 		                 			</c:if>
-		       
-							</div>
+		       					</label>
 							
-							<div style="margin-top:20px;">
+							
+							<%-- <div style="margin-top:20px;">
 		                 		<c:if test="${empty sessionScope.account.pimage }">
-		                 			<button id="insertphoto" class="btn btn-info" onclick="photosubmit();">사진추가하기</button>
+		                 			<button id="insertphoto" class="btn btn-info" onclick="photosubmit();">사진추가</button>
 		                 		</c:if>
 		                 		<c:if test="${!empty sessionScope.account.pimage }">
-		                 			<button id="updatephoto" class="btn btn-info" onclick="photosubmit();">사진변경하기</button>
+		                 			<button id="updatephoto" class="btn btn-info" onclick="photosubmit();">사진변경</button>
 		                 		</c:if>
-		                 	</div>
+		                 	</div> --%>
 						</div>						
 						
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">회원등급 | ${ sessionScope.account.idtype }</label></div>
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow"><label class="mgrade">회원등급 | ${ sessionScope.account.idtype }</label></div>
+						
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center">
+						<div>
+		                 		<c:if test="${empty sessionScope.account.pimage }">
+		                 			<button id="insertphoto" class="imgBtn" onclick="photosubmit();">사진추가</button>
+		                 		</c:if>
+		                 		<c:if test="${!empty sessionScope.account.pimage }">
+		                 			<button id="updatephoto" class="imgBtn" onclick="photosubmit();">사진변경</button>
+		                 		</c:if>
+		                 </div>
+		                 </div>
 													
 						<%-- <c:choose>
         					<c:when test="${ sessionScope.account.idtype == '일반회원' || sessionScope.account.idtype == '승인요청'}">

@@ -283,5 +283,10 @@ public List<Item> selectNewSponProject3(int ano) {
 public List<Item> selectNewSponProject4(int ano) {
 	return itemDao.selectNewSponProject4(ano);
 }
+
+@Override
+public List<Item> selectMySponItems(int ano) {
+	return itemDao.selectMySponItems(ano);
+}
 	
 }

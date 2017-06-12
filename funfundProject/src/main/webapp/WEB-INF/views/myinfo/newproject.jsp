@@ -413,8 +413,9 @@
 										<!-- 모두보기 때  -->
 			      							<div class="row myItemList">
 				      							<c:forEach var="item" items="${ iList }" varStatus="status">
-					      							<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">     							
-					      								<div id="itempanel<c:out value='${status.index}'/>" class="panel">
+					      							<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+					      							<div id="overwrap">    							
+					      								<div id="itempanel<c:out value='${status.index}'/>" class="panel" style="position:relative;z-index:10;">
 					      									<div id="conitemper<c:out value='${status.index}'/>" class="panel-heading">${ item.pstatus }</div>
 					      									<div id="enditemper<c:out value='${status.index}'/>" class="panel-body">
 					      										<div class="thumbnail" align="center">      										
@@ -425,7 +426,7 @@
 						      											</c:if>
 						      											
 						      											<c:if test="${ ! empty item.thumbnail }">
-						      													<img alt="이미지를 넣으세요" src="/funfund/images/makeproject/titleimg/<c:out value="${item.thumbnail}"/>" style="width: 100%;margin-bottom:2%;">      											
+						      													<img id="imageIn" alt="이미지를 넣으세요" src="/funfund/images/makeproject/titleimg/<c:out value="${item.thumbnail}"/>" style="width: 100%;margin-bottom:2%;">      											
 						      											</c:if>
 						      											
 						      											<div id="size" style="height:125px; max-height:125px;">	
@@ -454,7 +455,8 @@
 					      										</div>
 					      									</div>
 					    								</div>					    								
-					    								<br>					    								
+					    								<br>
+					    								</div>					    									    								
 					    							</div>
 					    							
 					    							<script type="text/javascript">    								
@@ -511,20 +513,57 @@
 					    									}
 					    									
 					    									else if(btDay < 0) {
-					    										$("#conitemper<c:out value='${status.index}'/>").html("펀딩종료");
-					    										$("#itempanel<c:out value='${status.index}'/>").removeClass("panel-warning");
-					    										$("#itempanel<c:out value='${status.index}'/>").removeClass("bg-danger");
-					    										$("#itempanel<c:out value='${status.index}'/>").addClass("panel-default");
-					    										$("#progress<c:out value='${status.index}'/>").show();
-					    										$("#progressbar<c:out value='${status.index}'/>").show();
-					    										$("#progressbar<c:out value='${status.index}'/>").html(persent+"%");
-					    										$("#persent<c:out value='${status.index}'/>").show();
-					    										$("#edate<c:out value='${status.index}'/>").hide();
-					    										$("#yet<c:out value='${status.index}'/>").hide();
-					    										$("#complete<c:out value='${status.index}'/>").show();
-					    										$("#pTag").show();		
-					    										$("#progressbar<c:out value='${status.index}'/>").addClass("w3-gray");					    										
-					    										$("#displace<c:out value='${status.index}'/>").attr("href", "javascript:");
+					    										if(pstatus == "펀딩성공"){
+					    											$("#conitemper<c:out value='${status.index}'/>").html("펀딩성공");
+						    										$("#itempanel<c:out value='${status.index}'/>").removeClass("panel-warning");
+						    										$("#itempanel<c:out value='${status.index}'/>").removeClass("bg-danger");
+						    										$("#itempanel<c:out value='${status.index}'/>").addClass("panel-default");
+						    										$("#progress<c:out value='${status.index}'/>").show();
+						    										$("#progressbar<c:out value='${status.index}'/>").show();
+						    										$("#progressbar<c:out value='${status.index}'/>").html(persent+"%");
+						    										$("#persent<c:out value='${status.index}'/>").show();
+						    										$("#edate<c:out value='${status.index}'/>").hide();
+						    										$("#yet<c:out value='${status.index}'/>").hide();
+						    										$("#complete<c:out value='${status.index}'/>").show();
+						    										$("#pTag").show();		
+						    										$("#progressbar<c:out value='${status.index}'/>").addClass("w3-gray");					    										
+						    										$("#displace<c:out value='${status.index}'/>").attr("href", "javascript:");
+					    										}
+					    										
+					    										else if (pstatus == "펀딩실패") {
+					    											$("#conitemper<c:out value='${status.index}'/>").html("펀딩실패");
+					    											$("#imageIn").src = "/funfund/images/myinfo/fail.png/";
+						    										$("#itempanel<c:out value='${status.index}'/>").removeClass("panel-warning");
+						    										$("#itempanel<c:out value='${status.index}'/>").removeClass("bg-danger");
+						    										$("#itempanel<c:out value='${status.index}'/>").addClass("panel-default");
+						    										$("#progress<c:out value='${status.index}'/>").show();
+						    										$("#progressbar<c:out value='${status.index}'/>").show();
+						    										$("#progressbar<c:out value='${status.index}'/>").html(persent+"%");
+						    										$("#persent<c:out value='${status.index}'/>").show();
+						    										$("#edate<c:out value='${status.index}'/>").hide();
+						    										$("#yet<c:out value='${status.index}'/>").hide();
+						    										$("#complete<c:out value='${status.index}'/>").show();
+						    										$("#pTag").show();		
+						    										$("#progressbar<c:out value='${status.index}'/>").addClass("w3-gray");					    										
+						    										$("#displace<c:out value='${status.index}'/>").attr("href", "javascript:");
+					    										}
+					    										
+					    										else {
+					    											$("#conitemper<c:out value='${status.index}'/>").html("펀딩종료");
+						    										$("#itempanel<c:out value='${status.index}'/>").removeClass("panel-warning");
+						    										$("#itempanel<c:out value='${status.index}'/>").removeClass("bg-danger");
+						    										$("#itempanel<c:out value='${status.index}'/>").addClass("panel-default");
+						    										$("#progress<c:out value='${status.index}'/>").show();
+						    										$("#progressbar<c:out value='${status.index}'/>").show();
+						    										$("#progressbar<c:out value='${status.index}'/>").html(persent+"%");
+						    										$("#persent<c:out value='${status.index}'/>").show();
+						    										$("#edate<c:out value='${status.index}'/>").hide();
+						    										$("#yet<c:out value='${status.index}'/>").hide();
+						    										$("#complete<c:out value='${status.index}'/>").show();
+						    										$("#pTag").show();		
+						    										$("#progressbar<c:out value='${status.index}'/>").addClass("w3-gray");					    										
+						    										$("#displace<c:out value='${status.index}'/>").attr("href", "javascript:");
+					    										}
 					    									}					    														   
 					    								});
 												 </script>
