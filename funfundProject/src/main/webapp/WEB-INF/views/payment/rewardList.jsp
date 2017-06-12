@@ -75,10 +75,10 @@ input[type="checkbox"] {
     border-color: #f4e7fe !important;
 }
 
-.btn-warning hover{
-    color: #fff;
-    background-color: #f4e7fe !important;
-    border-color: #ff9966 !important;
+.btn-default {
+    color: #333;
+    background-color: #fd !important;
+    border-color: #e2 !important;
 }
 </style>
 <script src="/funfund/lib/js/jquery-3.2.1.min.js"></script>
@@ -355,8 +355,8 @@ input[type="checkbox"] {
 					<div id="choiceitem<c:out value='${status.index}'/>" style="border:1px #e2e2e2 solid; border-radius:5px; max-width:800px; max-height:230px;" class="widjet">
 						
 						<table>
-							<tr>
-								<td style="width:90px;" class="click-area">
+							<tr >
+								<td style="width:100px;padding:10px;" align="center" class="click-area" >
 									<input class="flag" type="checkbox" name="choice" value="<c:out value="${fundMenu.mno}"/>">
 									<input type="hidden" class="mnum<c:out value='${status.index}'/>" value="<c:out value='${fundMenu.mnum}'/>">
 									<input type="hidden" class="mno<c:out value='${status.index}'/>" value="<c:out value="${fundMenu.mno}"/>">
@@ -370,23 +370,20 @@ input[type="checkbox"] {
 									<i class="fa fa-3x fa-square-o unchecked" aria-hidden="true" style="color:#ff9966"></i>
 									<i class="fa fa-3x fa-check-square-o checked" aria-hidden="true" style="color:#ff9966;display:none"></i>
 								</td>
-								<td style="width:50%">
+								<td style="width:600px;">
 									<h4><c:out value="${fundMenu.mcost}"/>원 펀딩합니다.</h4>
 									<label><c:out value="${fundMenu.mname}"/></label>
 									<p><c:out value="${fundMenu.mcontent}"/></p><br>
 									배송비 : <c:out value="${fundMenu.dcost}"/> | 예상 배송일 : <c:out value="${fundMenu.mdate}"/><br>
 									제한 수량 : <c:out value="${fundMenu.mcount}"/> | 남은 수량 : <c:out value="${fundMenu.remain}"/><br><br>
 								</td>
-								<td style="width:200px;min-width:150px;text-align:center;align:center;">
+								<td style="width:150px;text-align:center;">
 									<div id="plusminus" style="display:none" class="amount">
 										주문수량<br>
 										<i class="fa fa-minus-square fa-2x minus-btn" aria-hidden="true" style="color:#ddb6fb" id="minus"></i>
 										<input type="text" value="1" size="2" style="text-align:center;" class="ordercount<c:out value='${status.index}'/>" name="fundcount">
 										<i class="fa fa-plus-square fa-2x plus-btn" aria-hidden="true" style="color:#ddb6fb" id="plus"></i>
 									</div>
-								
-									
-									
 								</td>
 							</tr>
 						</table>
@@ -397,8 +394,8 @@ input[type="checkbox"] {
 		</div>
 	</div> 
 	
-	<div align="center">
-		추가 후원 금액 : <input type="text" value="0" id="plusreward" style="text-align:right"> 원
+	<div align="center" >
+		추가 후원 금액 : <input type="text" value="0" id="plusreward" style="text-align:right;"> 원
 	</div>
 	<br>
 	<hr>
@@ -407,42 +404,42 @@ input[type="checkbox"] {
 		<div class="container">
 			<div class="col-lg-1"></div>
 			<div class="col-lg-10">
-				<table style="width:100%;" align="center">
+				<table style="width:920px; text-align:center;">
 					<tr style="background:#ddb6fb;">
 						<th colspan="4" style="color:white;text-align:center;height:50px;">
-							<label >주문내역</label>
+							<label style="font-size:15pt;">주문내역</label>
 						</th>
 					</tr>
 				</table>
-				<table  style="width:100%;" id="show-area">
-				
+				<table  style="width:920px; text-align:center" id="show-area">
 				</table>
-				<table style="width:100%;"align="center">
-					<tr style="center;height:50px;">
-						<td style="width:30%">&nbsp;</td>
-						<td style="width:40%">&nbsp;</td>
-						<td style="width:15%"><label>소계 : </label></td>
-						<td style="width:15%;text-align:right;"><label id="sub-total">0</label><label>&nbsp; 원</label></td>
+				
+				<table style="width:920px;">
+					<tr style="height:50px;">
+						<td style="width:30%;">&nbsp;</td>
+						<td style="width:40%;">&nbsp;</td>
+						<td style="width:15%;"><label>소계 : </label></td>
+						<td style="width:15%; text-align:right;padding-right:20px;"><label id="sub-total">0</label><label>&nbsp; 원</label></td>
 					</tr>
 					
-					<tr style="center;height:30px;background:#f4e7fe;">
-						<td>펀딩금액</td>
+					<tr style="height:30px;background:#f4e7fe;">
+						<td style="padding-left:20px;padding-top:15px;">펀딩금액</td>
 						<td></td>
 						<td></td>
-						<td style="text-align:right;"><label id="funding-total">0</label><label>&nbsp; 원</label></td>
+						<td style="text-align:right;padding-right:20px;padding-top:15px;"><label id="funding-total">0</label><label>&nbsp; 원</label></td>
 					</tr>
-					<tr style="center;height:30px;background:#f4e7fe;">
-						<td>추가 후원금</td>
+					<tr style="height:30px;background:#f4e7fe;">
+						<td style="padding-left:20px;">추가 후원금</td>
 						<td></td>
 						<td></td>
-						<td style="text-align:right;"><label id="plus-total">0</label><label>&nbsp; 원</label></td>
+						<td style="text-align:right;padding-right:20px;"><label id="plus-total">0</label><label>&nbsp; 원</label></td>
 					</tr>
 					
-					<tr style="center;height:50px;background:#f4e7fe;">
-						<th>최종결제금액</th>
+					<tr style="height:50px;background:#f4e7fe;">
+						<td style="font-size:13pt;padding-left:20px;">최종결제금액</td>
 						<td></td>
 						<td></td>
-						<td style="text-align:right;"><label id="final-total">0</label><label>&nbsp; 원</label></td>
+						<td style="text-align:right;padding-right:20px;"><strong id="final-total" style="font-size:13pt">0</strong><strong style="font-size:13pt">&nbsp; 원</strong></td>
 					</tr>
 				</table>
 			</div>
@@ -550,6 +547,8 @@ input[type="checkbox"] {
 			
 		</script>
 	</div>
+
+<jsp:include page="/WEB-INF/views/common/footer.jsp" flush="true" />
 
 
 </body>

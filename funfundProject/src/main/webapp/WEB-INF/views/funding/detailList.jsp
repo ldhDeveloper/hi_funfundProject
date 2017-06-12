@@ -355,8 +355,14 @@ body {
 
 			</div>
 		</c:if>
+		
+		<div id="content">${item.pshort}</div>
 		<!-- 게시글작성영역 -->
 		<div id="content"></div>
+		<br><br>
+		<div align="left">
+		<p style="font-size:12pt;color:orange"><strong>프로젝트 환불정책</strong></p>
+		${item.refund}</div>
 	</div>
 
 	<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
@@ -400,7 +406,7 @@ body {
 			</p>
 			<p class="info">${item.fundamount }원의펀딩</p>
 			<p class="info">${item.supportcount }명의서포터</p>
-			<button class="btn-fund pay">펀딩하기</button>
+			<button class="btn-fund pay hidden-xs">펀딩하기</button>
 		</div>
 
 		<div class="">
