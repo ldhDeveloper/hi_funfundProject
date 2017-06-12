@@ -103,8 +103,10 @@ public class NoticeController {
 			}else{
 			model.addObject("message","댓글삭제" );
 			}
-			model.setViewName("jsonView");
+		}else{
+			model.addObject("message", "이미 삭제된 게시물입니다.");
 		}
+		model.setViewName("jsonView");
 		return model;
 	}
 	@RequestMapping("nInsert.no")

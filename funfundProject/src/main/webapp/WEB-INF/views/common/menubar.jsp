@@ -155,7 +155,7 @@ function showMymodal(){
 										nickname = profile.getName();
 										email = profile.getEmail();
 										pimage = profile.getImageUrl();
-										/* alert(auth2.currentUser.getAuthResponse().id_token); */
+										
 										idtoken = auth2.currentUser.get()
 												.getId();
 										access_token = "없음";
@@ -186,7 +186,7 @@ function showMymodal(){
 	function loginWithKakao() {
 		Kakao.Auth.login({
 			success : function(authObj) {//로그인시도
-				//alert(JSON.stringify(authObj));
+				
 				access_token = authObj.access_token;
 				Kakao.API.request({
 					url : '/v1/user/me',
@@ -194,7 +194,7 @@ function showMymodal(){
 						nickname = res.properties.nickname;
 						email = res.kaccount_email;
 						pimage = res.properties.profile_image;
-						alert(JSON.stringify(res));
+						
 						idtoken = res.id;
 						loginWithThirdParty(email, nickname, idtoken,
 								access_token, pimage);
@@ -457,7 +457,7 @@ a.forget_pw:hover {
 	margin: auto;
 	height: 71px;
 	background-image:
-		url(https://dauuuwinla3.cloudfront.net/resources/v2/img/title_login.png);
+		url(images/common/logo.png);
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-size: 284px 71px;
@@ -469,7 +469,7 @@ a.forget_pw:hover {
 	margin: auto;
 	height: 71px;
 	background-image:
-		url(https://dauuuwinla3.cloudfront.net/resources/v2/img/title_signup.png);
+			url(images/common/logo.png);
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-size: 284px 71px;
@@ -1350,7 +1350,11 @@ ul{
     src: url('fonts/NanumBarunGothic.ttf');
     font-weight: bold;
 }
-
+@font-face{
+	font-family: sunflower;
+	src : url('fonts/210_sunflowerB.ttf');
+	font-style: italic;
+}
 body{
 	font-family:myFirstFont;
 }

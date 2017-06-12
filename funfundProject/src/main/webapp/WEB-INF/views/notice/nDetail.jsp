@@ -227,12 +227,14 @@ function ndelete(nno, upbno){
 			url : "nDelete.no",
 				
 			data : {"nno" : nno, "bname" : '{$n.bname}', "upbno" :upbno, "page" : '${page}', "ntitle" : '${n.ntitle}' },
-
 			contentType : "application/json",
 			success : function(data){
 				if(data.message == '댓글삭제'){
 					 location.href="nDetail.no?nno=${n.nno}&bname='${n.bname}'&page=${page}";	
+				}else if('본글삭제'){
+					location.href="nList.no?bname=${n.bname }&page=${page}";
 				}else{
+					alert(data.message);
 					location.href="nList.no?bname=${n.bname }&page=${page}";
 				}
 					}	
