@@ -1,30 +1,30 @@
 package com.hi.funfund.admin.model.vo;
 
 public class ProfitHash implements java.io.Serializable{
-	private String edate;
-	private int sumcost;
+	private String cname;
+	private long sumcost;
 	
-	public String getEdate() {
-		return edate;
+	public String getCname() {
+		return cname;
 	}
-	public void setEdate(String edate) {
-		this.edate = edate;
+	public void setCname(String cname) {
+		this.cname = cname;
 	}
-	public int getSumcost() {
+	public long getSumcost() {
 		return sumcost;
 	}
-	public void setSumcost(int sumcost) {
+	public void setSumcost(long sumcost) {
 		this.sumcost = sumcost;
 	}
 	
 	public ProfitHash(){}
-	public ProfitHash(String edate, int sumcost) {
+	public ProfitHash(String cname, long sumcost) {
 		super();
-		this.edate = edate;
+		this.cname = cname;
 		this.sumcost = sumcost;
 	}
 	@Override
 	public String toString() {
-		return "ProfitHash [edate=" + edate + ", sumcost=" + sumcost + "]";
+		return "ProfitHash [cname=" + cname + ", sumcost=" + sumcost + "]";
 	}
 }

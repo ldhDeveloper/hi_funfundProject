@@ -57,6 +57,7 @@
 	border-bottom : 1px solid #dddddd;
 }
 </style>
+
 <body>
 	<jsp:include page="/WEB-INF/views/common/menubar.jsp" flush="true" />
 	<div style="background-color:#F6F5F5">
@@ -72,11 +73,54 @@
 			</div>
 		</div>
 	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 	<script>
-		$(function(){
-			var list = "<c:out value='${alist}'/>"
-			console.log("list : " + list);
+	$(function(){
+		var ctx = document.getElementById('profitline').getContext("2d");
+		var profitline = new Chart(ctx, {
+		    type: 'line', 
+		    data: {
+		    	labels: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+		        datasets: [{
+		            label: "My First dataset",
+		            backgroundColor: 'rgb(255, 99, 132)',
+		            borderColor: 'rgb(255, 99, 132)',
+		            data: [<c:out value="${pi.jan}"/>, <c:out value="${pi.feb}"/>, <c:out value="${pi.mar}"/>, <c:out value="${pi.apr}"/>, <c:out value="${pi.may}"/>, <c:out value="${pi.jun}"/>,
+		            	<c:out value="${pi.jul}"/>, <c:out value="${pi.aug}"/>, <c:out value="${pi.sep}"/>, <c:out value="${pi.jan}"/>, <c:out value="${pi.oct}"/>, <c:out value="${pi.nov}"/>, <c:out value="${pi.dec}"/>],
+		        }]
+		    },
+
+		    // Configuration options go here
+		    options: {}
 		});
+		
+		var ctx2 = document.getElementById('profitcircle').getContext("2d");
+		var data2 = {
+				labels : [ assetname[0], assetname[1],
+						assetname[2], assetname[3],
+						assetname[4] ],
+				datasets : [ {
+					data : [ assetvalue[0], assetvalue[1],
+							assetvalue[2], assetvalue[3],
+							assetvalue[4] ],
+					backgroundColor : [ "#FF6384",
+							"#36A2EB", "#FFCE56",
+							"#4BC0C0", "#E7E9ED" ],
+					hoverBackgroundColor : [ "#FF6384",
+							"#36A2EB", "#FFCE56",
+							"#4BC0C0", "#E7E9ED" ]
+				} ]
+			};
+			doughnutChart = new Chart(ctx2, {
+				type : 'doughnut',
+				data : data2,
+				options : {
+					animation : {
+						animateScale : true
+					}
+				}
+			});
+	})
 	</script>
 		<div class="row" style="top: -7.0rem; position: relative;">
 			<div class="col-xs-1 col-sm-1 col-md-2 col-lg-2"></div>
@@ -87,7 +131,7 @@
 						<li id="info1"><a href="sellerconfirm.am">회원 관리</a></li>
 						<li id="info2" class="active-active"><a href="itemconfirm.am">프로젝트 관리</a></li>
 						<li id="info3"><a href="successFundding.am">펀딩금액 관리</a></li>
-						<li id="info4"><a href="#">funfund 현황</a></li>
+						<li id="info4"><a href="totalProfit.am">funfund 현황</a></li>
 					</ul>
 				</div>
 			</div>
@@ -96,67 +140,30 @@
 	</div>
 	<div class="container">
   <ul class="nav nav-tabs">
-	  <li><a href="itemconfirm.am">프로젝트 승인요청</a></li>
-	  <li class="active"><a href="requestdeleteitem.am">프로젝트 삭제요청</a></li>
+	  <li class="active"><a href="totalProfit.am">수익금 통계</a></li>
+	  <li><a href="requestdeleteitem.am">프로젝트 삭제요청</a></li>
 	  <li><a href="resultitem.am">프로젝트 종료관리</a></li>
  </ul>
-  <table class="table table-hover adminTable">
-    <thead>
-      <tr>
-        <th>프로젝트번호</th>
-        <th>프로젝트명</th>
-        <th>신청자</th>
-        <th>프로젝트상태</th>
-        <th>프로젝트보기</th>
-        <th>프로젝트삭제</th>
-      </tr>
-    </thead>
-    <tbody>
-    	<c:forEach var="item" items="${alist }" varStatus="status">
-      	<tr>
-        	<td><c:out value="${item.pro_no }"/></td>
-        	<td><c:out value="${item.pname }"/></td>
-        	<td><c:out value="${item.cname }"/></td>
-        	<td><c:out value="${item.pstatus }"/></td>
-        	<td><input type="button" class="btn btn-primary" value="프로젝트보기" onclick="popen(${item.pro_no})"></td>
-        	<td><span><input type="button" class="btn btn-warnning" value="삭제사유보기" onclick="opendelete(${status.index })"></span></td>        	
-      	</tr>
-      	<tr id="deleteform<c:out value='${status.index }'/>" style="display:none;">
-      		<td>삭제사유</td>
-      		<td colspan="4"><input type="text" class="form-control" id="deletecomment<c:out value='${status.index }'/>" value="${item.icomment }"></td>
-      		<td><input style="position:inline-block;" type="button" class="btn btn-danger" value="프로젝트삭제" onclick="pdelete(${item.pro_no}, ${status.index })"></td>
-      	</tr>
-      </c:forEach>
-    </tbody>
-  </table>
-  <script>
-  	function popen(pro_no){
-  		url = "detail.it?pro_no=" + pro_no;
-  		window.open(url);
-  	}
-  	
-  	function opendelete(index){
-  		$('#deleteform' + index).toggle();
-  	}
-  
-  	function pdelete(pro_no, index){
-  		console.log("pcancel실행");
-  		var comment = $('#deletecomment' + index).val();
-  		console.log(comment);
-  		if(comment != ""){
-  			$.post( "deletestatus.am", {"pro_no" : pro_no, "comment" : comment})
-  	  		.done(function(data){
-  				if(data > 0){
-  					alert("프로젝트 삭제에 성공하였습니다.");
-  					location.href ="requestdeleteitem.am";
-  				} else {
-  					alert("프로젝트 삭제에 실패하였습니다.");
-  					location.href ="requestdeleteitem.am";
-  				}
-  	  		});
-  		}
-  	}
-  </script>
+  <div class="col-xs-12 col-sm-6 col-lg-6">
+  		<div class="panel panel-primary">
+	  		<div class="panel-heading">Panel heading without title</div>
+	  		<div class="panel-body">
+	    		<canvas id="profitline" width="520px" height="520px">
+	    		
+	    		</canvas>
+	  		</div>
+		</div>
+  </div>
+  <div class="col-xs-12 col-sm-6 col-lg-6">
+  		<div class="panel panel-primary">
+	  		<div class="panel-heading">Panel heading without title</div>
+	  		<div class="panel-body">
+	    		<canvas id="profitcircle" width="520px" height="520px">
+	    		
+	    		</canvas>
+	  		</div>
+		</div>
+  </div>
 </div>
 </body>
 </html>

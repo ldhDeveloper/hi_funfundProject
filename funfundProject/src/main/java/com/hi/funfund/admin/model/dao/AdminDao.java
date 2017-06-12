@@ -28,8 +28,13 @@ public class AdminDao {
 	}
 
 	public List<ProfitHash> totalProfit(String year) {
-		List<ProfitHash> pList = (List<ProfitHash>) sqlSession.selectList(nameSpace + "totalProfit");
+		List<ProfitHash> pList = (List<ProfitHash>) sqlSession.selectList(nameSpace + "totalProfit", year);
 		return pList;
+	}
+
+	public List<ProfitHash> categoryProfit(String year) {
+		List<ProfitHash> cList = (List<ProfitHash>) sqlSession.selectList(nameSpace + "categoryProfit", year);
+		return cList;
 	}
 	
 }

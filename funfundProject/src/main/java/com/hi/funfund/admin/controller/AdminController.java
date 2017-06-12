@@ -1,5 +1,6 @@
 package com.hi.funfund.admin.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,7 @@ import com.hi.funfund.admin.model.service.AdminService;
 import com.hi.funfund.admin.model.vo.AccInfo;
 import com.hi.funfund.admin.model.vo.CancelInfo;
 import com.hi.funfund.admin.model.vo.ProfitHash;
+import com.hi.funfund.admin.model.vo.ProfitInfo;
 import com.hi.funfund.alert.model.service.AlertService;
 import com.hi.funfund.alert.model.vo.Alert;
 import com.hi.funfund.item.model.service.ItemService;
@@ -242,10 +244,36 @@ public class AdminController {
 		return result;
 	}
 	
-	@RequestMapping(value= "/totalProfit.am", method = RequestMethod.POST)
-	public @ResponseBody ModelAndView totalProfit(ModelAndView model, @RequestParam("year") String year){
+	@RequestMapping(value= "/totalProfit.am")
+	public ModelAndView totalProfit(ModelAndView model){
+		ProfitInfo pi = null;
+		Date today = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
+		String year = sdf.format(today);
 		List <ProfitHash> plist = adminService.totalProfit(year);
-		model.addObject("plist", plist);
+		if(plist != null){
+			pi = new ProfitInfo(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+			for(ProfitHash ph : plist){
+				System.out.println("cname : " + ph.getCname() + ", sumcost : " + ph.getSumcost() );
+				switch(ph.getCname()){
+				case "01" : pi.setJan(ph.getSumcost()); break;
+				case "02" : pi.setFeb(ph.getSumcost()); break;
+				case "03" : pi.setMar(ph.getSumcost()); break;
+				case "04" : pi.setApr(ph.getSumcost()); break;
+				case "05" : pi.setMay(ph.getSumcost()); break;
+				case "06" : pi.setJun(ph.getSumcost()); break;
+				case "07" : pi.setJul(ph.getSumcost()); break;
+				case "08" : pi.setAug(ph.getSumcost()); break;
+				case "09" : pi.setSep(ph.getSumcost()); break;
+				case "10" : pi.setOct(ph.getSumcost()); break;
+				case "11" : pi.setNov(ph.getSumcost()); break;
+				case "12" : pi.setDec(ph.getSumcost()); break;
+				}
+			}
+		}
+		List <ProfitHash> cList = adminService.categoryProfit(year);
+		model.addObject("pi", pi);
+		model.addObject("cList", cList);
 		model.setViewName("admin/totalprofit");
 		return model;
 	}
