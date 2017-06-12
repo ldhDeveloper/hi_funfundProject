@@ -338,8 +338,8 @@ button {
 				<c:out value="${ fundamount * 100 / ecost}" />
 				% 달성
 			</p>
-			<p class="info">${item.fundamount }원의펀딩</p>
-			<p class="info">${item.supportcount }명의서포터</p>
+			<p class="info"><fmt:formatNumber var="fundamount" value="${item.fundamount }"/>${fundamount }원의 펀딩</p>
+			<p class="info">${item.supportcount }명의 서포터</p>
 			<button class="btn-fund pay">펀딩하기</button>
 		</div>
 		<div style="text-align: center;">
@@ -388,7 +388,7 @@ button {
 									class="img">
 							</p>
 							<p>${bestList.nickname }</p>
-							<p>${bestList.mcost }원펀딩</p>
+							<p><fmt:formatNumber var="mcost"  value="${bestList.mcost }"/> ${mcost}원 펀딩</p>
 						</div>
 					</c:forEach>
 				</c:if>

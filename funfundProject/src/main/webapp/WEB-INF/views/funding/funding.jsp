@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -144,7 +145,7 @@ body {
 			$(".btn").removeClass("clickbtn");
 			$(this).addClass("clickbtn");
 		});
-		NumberFormat fmt1 = NumberFormat.getCurrencyInstance();
+		
 		$("#selectAll")
 				.click(
 						function() {
@@ -195,7 +196,7 @@ body {
 												html += '<div class="thumbnail" align="center">';
 												html += '<a href="detail.it?pro_no='
 														+ pro_no + '">';
-												html += '<img src="/funfund/images/funding/thumbnail/'
+												html += '<img src="/funfund/images/makeproject/titleimg/'
 														+ thumbnail
 														+ '" alt="사진1" style="width: 100%">';
 												html += '<div id="progress' + i + '" class="progress">';
@@ -332,10 +333,6 @@ body {
 			interval : 2500
 		});
 
-		/*  $('.simg ul:gt(0)').hide();
-		 setInterval(function(){$('.simg :first-child').fadeOut().next('img').fadeIn().end().appendTo('.simg');}, 3000); */
-
-		/*   jQuery('#s1').fadeSlideShow(); */
 
 		$(".simg > ul:gt(0)").hide();
 
@@ -389,50 +386,6 @@ body {
 				<li><img src="/funfund/images/funding/ss.PNG"
 					class="img-responsive"></li>
 			</ul>
-			<!-- 
-				 슬라이드
-				<div id="myCarousel" class="carousel slide"
-					data-ride="carousel" style="padding-top: 20px;">
-
-					Wrapper for slides
-					<div class="carousel-inner" role="listbox">
-						<div class="item active">
-							<img src="/funfund/images/funding/thumbnail/pr1.jpg">
-							<div class="carousel-caption">아아</div>
-						</div>
-						<div class="item ">
-							<img src="/funfund/images/funding/thumbnail/pr2.jpg">
-							<div class="carousel-caption">이이</div>
-						</div>
-						<div class="item ">
-							<img src="/funfund/images/funding/thumbnail/pr3.jpg">
-							<div class="carousel-caption">오오</div>
-						</div>
-					</div>
-				</div>
-
-				오른쪽 이미지(2개)
-				<div class="align hidden-sm hidden-xs" style="position:relative">
-					<img src="/funfund/images/funding/thumbnail/pr4.jpg"
-						class="img-responsive isize">
-						<div class="text" style="position:absolute; top:40px;left:50px;"><h5>글 내용</h5></div> 
-					<img
-						src="/funfund/images/funding/thumbnail/pr4.jpg"
-						class="img-responsive isize">
-						<div class="text" style="position:absolute; top:200px;left:50px;"><h5>글 내용2</h5></div> 
-				</div>
-			
-		</div>
-		<div class="col-lg-2 col-md-12 col-sm-12 col-xs-12 hidden-lg hidden-md  " style="margin-top:-5px;">
-				 <div style="display: inline-block; position:relative; max-width: 250px !important;">
-					<img src="/funfund/images/funding/thumbnail/pr4.jpg"
-						class="img-responsive" >
-						<div class="text" style="position:absolute; top:40px;left:50px;"><h5>글 내용</h5></div> 
-					<img
-						src="/funfund/images/funding/thumbnail/pr4.jpg"
-						class="img-responsive">
-						<div class="text" style="position:absolute; top:200px;left:50px;"><h5>글 내용2</h5></div> 
-				</div>-->
 		</div>
 	</div>
 
@@ -454,8 +407,8 @@ body {
 				<button id="selectGame" class="btn selcategory" value="game">게임</button>
 				<button id="selectTrip" class="btn selcategory" value="trip">여행</button>
 				<button id="selectSport" class="btn selcategory" value="sport">스포츠</button>
-				<button id="selectPinterest" class="btn selcategory"
-					value="pinterest">공익</button>
+				<button id="selectSupport" class="btn selcategory"
+					value="support">후원</button>
 			</div>
 		</div>
 	</div>
@@ -542,7 +495,7 @@ body {
 								</div>
 								<p>
 									<span id="persent<c:out value='${status.index}'/>"></span> %
-									&nbsp;&nbsp; <span><c:out value="${item.fundamount }" /></span>원
+									&nbsp;&nbsp; <span><fmt:formatNumber var="fundamount"  value="${item.fundamount }"/>${fundamount }</span>원
 									달성 &nbsp;&nbsp; <span
 										id="edate<c:out value='${status.index}'/>"></span> <span
 										id="yet<c:out value='${status.index}'/>">일 남음</span> <span

@@ -480,7 +480,7 @@ body {
 			<p
 				style="font-size: 10pt; text-align: left; padding-top: 20px; padding-bottom: 5px; margin-left: 20px;"
 				class="hidden-sm hidden-xs">베스트 서포터</p>
-			<div class="makerbox2 hidden-sm hidden-xs"">
+			<div class="makerbox2 hidden-sm hidden-xs">
 				<c:if test="${!empty bestList}">
 					<c:forEach var="bestList" items="${bestList }">
 						<div class="supportinfo">
@@ -489,7 +489,7 @@ body {
 									class="img">
 							</p>
 							<p>${bestList.nickname }</p>
-							<p>${bestList.mcost }원펀딩</p>
+							<p><fmt:formatNumber var="mcost"  value="${bestList.mcost }"/> ${mcost}원 펀딩</p>
 						</div>
 					</c:forEach>
 				</c:if>
