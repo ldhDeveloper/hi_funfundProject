@@ -94,17 +94,18 @@ public class NoticeController {
 		
 	}
 	@RequestMapping("nDelete.no")
-	public String delete(Notice notice, ModelAndView model, @RequestParam("page") int page){
+	public ModelAndView delete(Notice notice, ModelAndView model, @RequestParam("page") int page){
+		System.out.println("notice : "+notice);
 		int result = noticeService.delete(notice.getNno());
-		String address = null;
 		if(result >0){
 			if(notice.getNtitle() !=null){
-			address = "redirect:/nList.no?bname="+notice.getBname()+"&page=1";
+			model.addObject("message","본글삭제" );
 			}else{
-			address = "redirect:/nDetail.no?nno="+notice.getUpbno()+"&bname="+notice.getBname()+"&page="+page;
+			model.addObject("message","댓글삭제" );
 			}
+			model.setViewName("jsonView");
 		}
-		return address;
+		return model;
 	}
 	@RequestMapping("nInsert.no")
 	public ModelAndView insert(Notice notice, @RequestParam("page") String page){

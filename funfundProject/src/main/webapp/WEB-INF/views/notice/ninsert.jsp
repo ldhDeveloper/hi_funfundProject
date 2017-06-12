@@ -128,11 +128,13 @@ border-bottom: none;
 
 function insertN(){
 
+
 var ncontent =  $('textarea#froala-editor').froalaEditor('html.get');
 var ano = ${account.ano};
 var bname = '${bname}';
 var page = ${page};
 var ntitle = $('input[name=ntitle]').val();
+
 $.ajax({
 	url :'nInsert.no',
 	data : {"ano" : "${account.ano}", "bname" : '${bname}', "ntitle" : ntitle, "ncontent" : ncontent, "page" : '${page}' },
@@ -140,10 +142,6 @@ $.ajax({
 		location.href= "nList.no?bname=${bname}&page=${page}";
 	}
 });
-
-
-
-	
 }
 </script>
 
