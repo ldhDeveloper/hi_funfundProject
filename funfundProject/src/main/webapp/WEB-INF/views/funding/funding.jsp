@@ -144,6 +144,7 @@ body {
 			$(".btn").removeClass("clickbtn");
 			$(this).addClass("clickbtn");
 		});
+		NumberFormat fmt1 = NumberFormat.getCurrencyInstance();
 		$("#selectAll")
 				.click(
 						function() {
@@ -165,7 +166,7 @@ body {
 																/ ecost);
 												var bar = 0;
 												var category = data[i].category;
-												var pcontent = data[i].pcontent;
+												var pshort= data[i].pshort;
 												var thumbnail = data[i].thumbnail;
 												if (persent > 100) {
 													bar = 100;
@@ -218,7 +219,7 @@ body {
 												html += '<span id="yet' + i +'" style="display:' + funding + '">일 남음</span>';
 												html += '<spen id="complete' + i + '" style="display:' + ending + '">펀딩종료</spen>';
 												html += '</p><div class="caption"><p>'
-														+ pcontent + '</p>';
+														+ pshort + '</p>';
 												html += '<span>'
 														+ category
 														+ '</span></div></a></div></div>';
@@ -258,7 +259,7 @@ body {
 																/ ecost);
 												var bar = 0;
 												var category = data[i].category;
-												var pcontent = data[i].pcontent;
+												var pshort = data[i].pshort;
 												var thumbnail = data[i].thumbnail;
 												if (persent > 100) {
 													bar = 100;
@@ -311,7 +312,7 @@ body {
 												html += '<span id="yet' + i +'" style="display:' + funding + '">일 남음</span>';
 												html += '<spen id="complete' + i + '" style="display:' + ending + '">펀딩종료</spen>';
 												html += '</p><div class="caption"><p>'
-														+ pcontent + '</p>';
+														+ pshort + '</p>';
 												html += '<span>'
 														+ category
 														+ '</span></div></a></div></div>';

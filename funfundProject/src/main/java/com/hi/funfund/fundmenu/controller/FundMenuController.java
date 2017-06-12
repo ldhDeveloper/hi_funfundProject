@@ -32,11 +32,13 @@ public class FundMenuController {
 	private ItemService itemService;
 
 	@RequestMapping("reward.fm")
-	public ModelAndView selectList(int pro_no, ModelAndView model) {
+	public ModelAndView selectList(int pro_no, ModelAndView model, HttpServletRequest request) {
 		List<FundMenu> mList = fundMenuService.selectList(pro_no);
 		Item item = itemService.selectOne(pro_no);
+		String checkmno= request.getParameter("mno");
 		model.addObject("mList", mList);
 		model.addObject("item", item);
+		model.addObject("checkmno", checkmno);
 		System.out.println("itemController : " + item);
 		System.out.println("mlistController : " + mList);
 		model.setViewName("payment/rewardList");

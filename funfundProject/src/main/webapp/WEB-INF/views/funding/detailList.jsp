@@ -404,8 +404,8 @@ body {
 				<c:out value="${ fundamount * 100 / ecost}" />
 				% 달성
 			</p>
-			<p class="info">${item.fundamount }원의펀딩</p>
-			<p class="info">${item.supportcount }명의서포터</p>
+			<p class="info"><fmt:formatNumber var="fundamount" value="${item.fundamount }"/>${fundamount }원의 펀딩</p>
+			<p class="info">${item.supportcount }명의 서포터</p>
 			<button class="btn-fund pay hidden-xs">펀딩하기</button>
 		</div>
 
@@ -552,7 +552,7 @@ body {
 				 $(this).css('background-color', '#c6ebd9');
 				 $(this).click(function(){
 						var mno = $(this).children('input').val();
-						location.href = "reward.fm?pro_no=${item.pro_no}&mno="+mno+"&remain="+result;
+						location.href = "reward.fm?pro_no=${item.pro_no}&mno="+(i-1)+"&remain="+result;
 					});
 			  }else{
 				 $(this).css('background-color', '#d9d9d9');

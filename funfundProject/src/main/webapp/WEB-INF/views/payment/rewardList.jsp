@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,13 +85,14 @@ input[type="checkbox"] {
 <script src="/funfund/lib/js/jquery-3.2.1.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
+	var plustotal = 0;
+	var orderlist = new Array();
+	var ordercount = new Array();
 	$(function() {
-		var plustotal = 0;
-		var orderlist = new Array();
-		var ordercount = new Array();
+		
 		$(".checked").hide();
 		
-		
+	
 		$(".widjet").mouseenter(function(){
 			$(this).css("background", "#ffddcc");
 			$(this).css("cursor", "pointer");
@@ -102,6 +104,7 @@ input[type="checkbox"] {
 			$(this).css("background", "white");
 			$(this).css("color", "black");
 			$(this).find("[class^=ordercount]").css("color", "black");
+			$(this).find("i").css("color", "#ff9966");
 		});
 		
 		$(".amount").find(".plus-btn").click(function(){
@@ -161,7 +164,7 @@ input[type="checkbox"] {
 			 orderlist = arr;
 			 showlist(arr, ordercount, plustotal);
 			 
-		});
+		}); 
 		
 		$("#plusreward").change(function(){
 			var length = $('input:checkbox[name="choice"]:checked').length;
@@ -184,6 +187,50 @@ input[type="checkbox"] {
 			 orderlist = arr;
 			 showlist(arr, ordercount, plustotal);
 		});
+		function showlist(arr, ordercount, plustotal){
+			console.log("array : " + arr);
+			console.log("ordercount : " + ordercount);
+			$.ajax({
+				url:"selectlist.fl",
+				data:{"arr": arr},
+				dataType: 'json',
+				success:function(data){
+					console.log("length : " + data.length);
+					var subtotal = 0;
+					
+					for(var i = 0; i < data.length; i++){
+						var mname = data[i].mname;
+						var mcontent = data[i].mcontent;
+						var fundcount = data[i].fundcount;
+						var mcost = data[i].mcost;
+						
+						
+						$("#show-area").html($("#show-area").html() + "<tr style='border-radius:5px;border:1px #ddb6fb solid;padding-left:50px;'>"
+								+ "<td><br>리워드명 : "+ mname + "<br>"
+								+ "상세설명 : " + mcontent + "<br><br>"
+								+ "</td>"
+								+ "<td><label>주문 수량 : &nbsp;</label><label>" + ordercount[i] + "</label><label>&nbsp; 개</label></td>"
+								+ "<td><label>금액 : &nbsp;</label><label>" + (ordercount[i] * mcost) + "</label><label>&nbsp; 원</label></td>"
+								+ "</tr>");
+					
+						subtotal += (ordercount[i] * mcost);
+					}
+					$("#sub-total").html(0);
+					$("#sub-total").html(Number($("#sub-total").html()) + subtotal);
+					
+					$("#funding-total").html(0);
+					$("#funding-total").html(subtotal);
+					
+					finaltotal = Number(subtotal) + Number(plustotal);
+					
+					$("#final-total").html(0);
+					$("#final-total").html(finaltotal);
+					
+				}
+					
+			});
+			
+		}
 		
 		$("[class^=ordercount]").change(function(){
 			var length = $('input:checkbox[name="choice"]:checked').length;
@@ -229,50 +276,7 @@ input[type="checkbox"] {
 			 showlist(arr, ordercount, plustotal);
 		});
 		
-		function showlist(arr, ordercount, plustotal){
-			console.log("array : " + arr);
-			console.log("ordercount : " + ordercount);
-			$.ajax({
-				url:"selectlist.fl",
-				data:{"arr": arr},
-				dataType: 'json',
-				success:function(data){
-					console.log("length : " + data.length);
-					var subtotal = 0;
-					
-					for(var i = 0; i < data.length; i++){
-						var mname = data[i].mname;
-						var mcontent = data[i].mcontent;
-						var fundcount = data[i].fundcount;
-						var mcost = data[i].mcost;
-						
-						
-						$("#show-area").html($("#show-area").html() + "<tr style='border-radius:5px;border:1px #ddb6fb solid;padding-left:50px;'>"
-								+ "<td><br>리워드명 : "+ mname + "<br>"
-								+ "상세설명 : " + mcontent + "<br><br>"
-								+ "</td>"
-								+ "<td><label>주문 수량 : &nbsp;</label><label>" + ordercount[i] + "</label><label>&nbsp; 개</label></td>"
-								+ "<td><label>금액 : &nbsp;</label><label>" + (ordercount[i] * mcost) + "</label><label>&nbsp; 원</label></td>"
-								+ "</tr>");
-					
-						subtotal += (ordercount[i] * mcost);
-					}
-					$("#sub-total").html(0);
-					$("#sub-total").html(Number($("#sub-total").html()) + subtotal);
-					
-					$("#funding-total").html(0);
-					$("#funding-total").html(subtotal);
-					
-					finaltotal = Number(subtotal) + Number(plustotal);
-					
-					$("#final-total").html(0);
-					$("#final-total").html(finaltotal);
-					
-				}
-					
-			});
-			
-		}
+		
 		
 		$("#gotopay").click(function(){
 			var tcost = $("#final-total").html();
@@ -322,10 +326,15 @@ input[type="checkbox"] {
         }).open();
     }
 	
-	//오늘은 체크되게 해보자!
-	function checkbox(){
-		
+	
+	window.onload = function(){
+		var cmno = "${checkmno}";
+		if(cmno != null){
+			console.log("cmno : " + cmno);
+			$('#choiceitem' + cmno).trigger("click");
+		}
 	}
+	
 	
 </script>
 </head>
@@ -380,9 +389,9 @@ input[type="checkbox"] {
 								<td style="width:150px;text-align:center;">
 									<div id="plusminus" style="display:none" class="amount">
 										주문수량<br>
-										<i class="fa fa-minus-square fa-2x minus-btn" aria-hidden="true" style="color:#ddb6fb" id="minus"></i>
+										<i class="fa fa-minus-square fa-2x minus-btn" aria-hidden="true" style="color:#ff9966" id="minus"></i>
 										<input type="text" value="1" size="2" style="text-align:center;" class="ordercount<c:out value='${status.index}'/>" name="fundcount">
-										<i class="fa fa-plus-square fa-2x plus-btn" aria-hidden="true" style="color:#ddb6fb" id="plus"></i>
+										<i class="fa fa-plus-square fa-2x plus-btn" aria-hidden="true" style="color:#ff9966" id="plus"></i>
 									</div>
 								</td>
 							</tr>
