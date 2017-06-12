@@ -71,16 +71,23 @@ body{
 			url:"selectlist.al?page="+ x +"&ano=" + ano,
 		  	success:function(data){
 		  		$("#msglist").html("<br>");
+		  		
 		 		var totalMessageNumber = data.totalMessageNumber; //전체 메세지수
 		  		var length = data.alist.length;
 		 		var currentPageGap = parseInt(x / 4) + 1;
 		  		var startPage =  (currentPageGap * 4 ) -3 ; // i값을 더하므로 실제로는 1,6,11식으로 시작
 		  		var  endPage =  startPage + 3;
-		  		var finalPage = parseInt(totalMessageNumber/ 3) +1;
+		  		var finalPage;
+		  		if(totalMessageNumber % 3 == 0){
+		  		finalPage = parseInt(totalMessageNumber/ 3);	
+		  		}else{
+		  		finalPage = parseInt(totalMessageNumber/ 3) +1;
+		  		}
+		  		
 				if(endPage > finalPage){
 					endPage = finalPage;
 				}
-		  		
+		  		console.log(finalPage);
 		  		
 		  		for(var i = 0; i < length; i++){
 		  			if(data.alist[i].readyn == 'n'){
@@ -102,17 +109,23 @@ body{
 		  			}
 		  		
 		  		$('.btn-group').html("<button type='button' class='btn btn-warning btn-xs' onclick='changePage(1);'><<</button>");
-		  		if(x=1){
+		  		if(parseInt(x) == 1){
 		  			$('.btn-group').html($('.btn-group').html() + "<button type='button' class='btn btn-warning btn-xs'><</button>");
 		  		}else{
-		  			$('.btn-group').html($('.btn-group').html() + "<button type='button' class='btn btn-warning btn-xs' onclick='changePage("+ x-1 + "); ><</button>");
+		  			$('.btn-group').html($('.btn-group').html() + "<button type='button' class='btn btn-warning btn-xs' onclick='changePage("+ (x-1) + ");' ><</button>");
 		  		}
 		  		for(var i = 1; i<= endPage; i++){
 			  		$('.btn-group').html($('.btn-group').html() + 
 		  					"<button type='button' class='btn btn-warning btn-xs' onclick='changePage("+ i + ");'>"+ i +"</button>");
 		  		}
-		  		$('.btn-group').html($('.btn-group').html() + 
-		  				"<button type='button' class='btn btn-warning btn-xs' onclick='changePage("+i+1 +");'> > </button>" +
+		  		if(x >=finalPage){
+		  			$('.btn-group').html($('.btn-group').html() + 
+			  				"<button type='button' class='btn btn-warning btn-xs' onclick='changePage("+finalPage +");'> > </button>" );	
+		  		}else{
+		  			$('.btn-group').html($('.btn-group').html() + 
+			  				"<button type='button' class='btn btn-warning btn-xs' onclick='changePage("+(x+1) +");'> > </button>");
+		  		}
+		  		$('.btn-group').html($('.btn-group').html() +
 		  				"<button type='button' class='btn btn-warning btn-xs' onclick='changePage("+finalPage+");'> >> </button>" 
 		  				 );
 		  	}

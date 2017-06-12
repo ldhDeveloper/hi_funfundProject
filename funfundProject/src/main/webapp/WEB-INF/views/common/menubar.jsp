@@ -939,7 +939,7 @@ ul{
 				$("#message").mouseover().css("cursor", "pointer");
 				
 				$("#message").click(function(){
-					var url = "selectlist.al?ano=" + ${sessionScope.account.ano} + "&page=1";
+					var url = "messagelist.al";
 					window.open(url, "", "width=400, height=300, left=600, top=200, status=0, location=0");
 				});
 					
@@ -1405,7 +1405,6 @@ body{
 					</div>
 					<div></div>
 				</div>
-
 			</div>
 			<!-- modal-content -->
 		</div>

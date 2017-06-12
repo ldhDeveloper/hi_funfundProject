@@ -29,8 +29,8 @@ public class AlertController {
 	
 	@RequestMapping("selectlist.al")
 	public ModelAndView selectList(ModelAndView model, Alert alert, @RequestParam("ano")int ano, @RequestParam("page") int page ){
-		int sNum = page * 4 - 3;
-		int eNum = sNum + 3;
+		int sNum = page * 3 - 2;
+		int eNum = sNum + 2;
 		HashMap map = new HashMap();
 		map.put("sNum", sNum);
 		map.put("eNum", eNum);
