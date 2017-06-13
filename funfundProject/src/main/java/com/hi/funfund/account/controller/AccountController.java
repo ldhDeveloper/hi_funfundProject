@@ -66,15 +66,15 @@ public class AccountController {
 	public ModelAndView login(Party party, Account account, HttpServletRequest request, ModelAndView model){
 		String address= "";
 		account = accountService.login(account);
-		int count = alertService.checkNewMessage(account.getAno());
+		
 		
 		HttpSession session = request.getSession(false);
 		if(account != null){
+			int count = alertService.checkNewMessage(account.getAno());
 			Party p = accountService.loginParty(account.getAno());
 			session.setAttribute("account", account);
 			session.setAttribute("party", p);
 			session.setAttribute("checknewmsg", count);
-			
 			model.setViewName("redirect:/");
 		}else{
 			model.setViewName("home");
