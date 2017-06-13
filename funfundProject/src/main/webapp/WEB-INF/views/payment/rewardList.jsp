@@ -396,6 +396,9 @@ input[type="checkbox"] {
 								</td>
 							</tr>
 						</table>
+						
+						
+						
 					</div>
 					<br>
 				</c:forEach>
@@ -411,8 +414,8 @@ input[type="checkbox"] {
 	
 	<div class="row">
 		<div class="container">
-			<div class="col-lg-1"></div>
-			<div class="col-lg-10">
+			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+			<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
 				<table style="width:920px; text-align:center;">
 					<tr style="background:#ddb6fb;">
 						<th colspan="4" style="color:white;text-align:center;height:50px;">
@@ -452,7 +455,7 @@ input[type="checkbox"] {
 					</tr>
 				</table>
 			</div>
-			<div class="col-lg-1"></div>
+			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
 		</div>
 	</div>
 	

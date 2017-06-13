@@ -61,7 +61,6 @@ public class NoticeController {
 		Notice n = noticeService.selectOne(notice.getNno());
 		model.addObject("page", page);
 		model.addObject("nList", nList );
-	
 		model.addObject("replyCount", replyCount );
 		model.addObject("n", n);
 		model.setViewName("notice/nDetail");
@@ -80,22 +79,21 @@ public class NoticeController {
 	
 	
 	@RequestMapping("nUpdate.no")
-	public String update(Notice notice, @RequestParam("page") int page){
+	public ModelAndView update(Notice notice, @RequestParam("page") int page, ModelAndView model){
 		int result = noticeService.update(notice);
-		String address = null;
 		if(result >0){
-			if(notice.getNtitle() != null){
-			address = "redirect:/nDetail.no?nno=" +notice.getNno() +"&bname="+notice.getBname()+"&page="+page;	
-			}else{
-				address = "redirect:/nDetail.no?nno=" +notice.getUpbno() +"&bname="+notice.getBname()+"&page="+page;		
+			model.addObject("message", "success");
 			}
+		else{
+			model.addObject("message", "failed");
 			}
-		return address;
+		model.setViewName("jsonView");
+		return model;
 		
 	}
 	@RequestMapping("nDelete.no")
 	public ModelAndView delete(Notice notice, ModelAndView model, @RequestParam("page") int page){
-		System.out.println("notice : "+notice);
+		
 		int result = noticeService.delete(notice.getNno());
 		if(result >0){
 			if(notice.getNtitle() !=null){

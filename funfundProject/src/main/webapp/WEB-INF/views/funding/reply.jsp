@@ -146,8 +146,8 @@ button {
 	width: 3%;
 	text-align: center;
 	display: none;
-	border-radius:10px;
-	border:none;
+	border-radius: 10px;
+	border: none;
 }
 
 #btn-like {
@@ -174,7 +174,7 @@ button {
 	box-sizing: border-box !important;
 }
 
-#comment-area2 textarea {
+.comment-area2 textarea {
 	display: block;
 	margin-bottom: 10px;
 	margin-left: 20px;
@@ -253,13 +253,6 @@ textarea {
 	margin-top: 10px;
 }
 
-#recmtbutton {
-	display: inline-block;
-	color: #92;
-	cursor:pointer;
-	color:orange;
-}
-
 .supportinfo {
 	display: inline-block;
 	padding: 15px;
@@ -279,22 +272,19 @@ textarea {
 	background: orange;
 }
 
-
-
 .img {
 	display: inline-block;
 	vertical-align: middle;
-	margin:5px;
+	margin: 5px;
 	width: 40px;
 	height: 40px;
 }
 
-.warning{
- background-color: #ff9800;
- border:none;
- color:white ;
- width:12%;
- height:100%;
+.warning {
+	background-color: #ff9800;
+	border: none;
+	color: white;
+	height: 100%;
 }
 
 </style>
@@ -361,9 +351,11 @@ textarea {
 	});
 
 	$(function() {
-		$('.comment-area2').hide();
-		$('#recmtbutton').click(function() {
-			$(this).siblings('.comment-area2' ).toggle();
+		$('.dapgle').hide();
+		$('[id^=recmtbutton]').click(function() {
+			var repId = $(this).attr("id");
+			var repnum = repId.substr(repId.length - 1, 1);
+			$('#comment-area'+repnum).toggle();
 		});
 
         $('.rebtn').hide();
@@ -442,11 +434,11 @@ textarea {
 			<p>${fn:length(aList) }개의댓글이달렸습니다.</p>
 			<form id="comment-area" action="coinsert.ask">
 				<textarea id="acontent" name="acontent" style="overflow-y: hidden;"
-					rows="3" cols="50" maxlength="140;" placeholder="댓글을 입력하세요"></textarea>
+					rows="3" cols="50" maxlength="140" placeholder="댓글을 입력하세요"></textarea>
 				<div id="upload">
-					<input type="submit"  class="warning" value="댓글달기"><input type="hidden"
-						value="${param.pro_no}" name="pro_no"><input type="hidden"
-						value="${ask.ask_no}" name="ask_no">
+					<input type="submit" class="warning" value="댓글달기"><input
+						type="hidden" value="${param.pro_no}" name="pro_no"><input
+						type="hidden" value="${ask.ask_no}" name="ask_no">
 				</div>
 			</form>
 
@@ -454,66 +446,73 @@ textarea {
 				<div id="comment-box">
 					<c:forEach var="ask" items="${aList}" varStatus="status">
 						<c:if test="${ask.ask_type eq '댓글' }">
+							<c:if test="${!empty ask.pimage }">
+								<img class="img" src="/funfund/images/myinfo/${ask.pimage }">
+							</c:if>
+							<c:if test="${empty ask.pimage }">
+								<img class="img" src="/funfund/images/myinfo/dimages.png">
+							</c:if>
+							<span class="cmtId">${ask.nickname }</span>
+							<c:if test="${ask.idtype eq '메이커' }">
+								<span class="cmtst">메이커</span>
+							</c:if>
+
+							<c:if test="${sessionScope.account.ano eq ask.id_no }">
+								<span class="replydelete"> <a
+									id="uprepnum${status.index }" style="cursor: pointer;">수정</a>&nbsp;<a
+									href="delete.ask?ask_no=${ask.ask_no}&pro_no=${param.pro_no}"
+									style="cursor: pointer;">삭제</a>
+								</span>
+							</c:if>
+
+
+							<p id="replynum${status.index }" class="cmtco upcmt">${ask.ask_content }</p>
+							<textarea class="form-control" id="updatereply${status.index }"
+								style="display: none; width: 80%"></textarea>
+							<span id="rebutton${status.index}" class="rebtn"> <a
+								id="uprepcontent${status.index }" class="val"
+								onclick="updateReply(${status.index }, ${ask.ask_no });"
+								style="cursor: pointer;">수정</a></span>
+							<span id="re${status.index }"> <span class="cmtda">${ask.ask_date }</span>
+
+								<a id="recmtbutton${status.index }"
+								style="display: inline-block; color: #92; cursor: pointer; color: orange;">답글달기</a>
+							</span>
+							<form action="reinsert.ask" id="comment-area${status.index }"
+								class="dapgle">
+								<textarea id="acontent2" name="acontent2"
+									style="overflow-y: hidden;" rows="3" cols="50" maxlength="140;"
+									placeholder="답글을 입력하세요"></textarea>
+								<div id="upload">
+									<input type="submit" class="warning" value="답글달기"> <input
+										type="hidden" value="${param.pro_no}" name="pro_no"> <input
+										type="hidden" value="${ask.ask_no}" name="upask_no">
+								</div>
+							</form>
+
+							<hr>
+						</c:if>
+
+						<c:if test="${ask.ask_type eq '답글' }">
+							<div id="comment-box2">
 								<c:if test="${!empty ask.pimage }">
 									<img class="img" src="/funfund/images/myinfo/${ask.pimage }">
 								</c:if>
 								<c:if test="${empty ask.pimage }">
 									<img class="img" src="/funfund/images/myinfo/dimages.png">
 								</c:if>
-							<span class="cmtId">${ask.nickname }</span>
-							<c:if test="${ask.idtype eq '메이커' }">
-								<span class="cmtst">메이커</span>
-							</c:if>
-							
-							<c:if test="${sessionScope.account.ano eq ask.id_no }">
-							<span class="replydelete">
-							 <a id="uprepnum${status.index }" style="cursor:pointer;">수정</a>&nbsp;<a href="delete.ask?ask_no=${ask.ask_no}&pro_no=${param.pro_no}" style="cursor:pointer;">삭제</a>
-							 </span>
-							</c:if>
-						
-						
-							<p id="replynum${status.index }" class="cmtco upcmt" >${ask.ask_content }</p>
-							<textarea class="form-control" id="updatereply${status.index }" style="display:none; width:80%"></textarea>
-							<%-- <c:set var="acontent" value="$(.form-control).val();"/> --%>
-							<span id="rebutton${status.index}" class="rebtn">
-							<a id="uprepcontent${status.index }" class="val" onclick="updateReply(${status.index }, ${ask.ask_no });" style="cursor:pointer;">수정</a>&nbsp;<a  style="cursor:pointer;"onclick="reset">취소</a></span>
-							<span id="re${status.index }">
-							<span class="cmtda">${ask.ask_date }</span>
-							<a id="recmtbutton">답글달기</a>
-							</span>
-							<form action="reinsert.ask" id="comment-area2"
-								class="comment-area2">
-								<textarea id="acontent2" name="acontent2"
-									style="overflow-y: hidden;" rows="3" cols="50" maxlength="140;"
-									placeholder="답글을 입력하세요"></textarea>
-								<div id="upload">
-									<input type="submit" class="warning" value="답글달기"> <input type="hidden"
-										value="${param.pro_no}" name="pro_no"> <input
-										type="hidden" value="${ask.ask_no}" name="upask_no">
-								</div>
-							</form>
-							
-							<hr>
-						</c:if>
-						
-						<c:if test="${ask.ask_type eq '답글' }">
-							<div id="comment-box2">
-									<c:if test="${!empty ask.pimage }">
-										<img class="img" src="/funfund/images/myinfo/${ask.pimage }">
-									</c:if>
-									<c:if test="${empty ask.pimage }">
-										<img class="img" src="/funfund/images/myinfo/dimages.png">
-									</c:if>
 								<span class="cmtId">${ask.nickname }</span>
 								<c:if test="${ask.idtype eq '메이커' }">
 									<span class="cmtst">메이커</span>
 								</c:if>
+								<c:if test="${sessionScope.account.ano eq ask.id_no }">
+									<a style="cursor: pointer;">수정</a>&nbsp;<a
+										href="redelete.ask?ask_no=${ask.ask_no}&pro_no=${param.pro_no}">삭제</a>
+									<input type="hidden" value="${ask.pro_no }" name="pro_no">
+								</c:if>
 								<p class="cmtco">${ask.ask_content }</p>
 								<span class="cmtda">${ask.ask_date }</span>
-								<c:if test="${sessionScope.account.ano eq ask.id_no }">
-							 <a style="cursor:pointer;">수정</a>&nbsp;<a href="redelete.ask?ask_no=${ask.ask_no}&pro_no=${param.pro_no}">삭제</a>
-							 <input type="hidden" value="${ask.pro_no }" name="pro_no">
-							</c:if>
+								
 							</div>
 						</c:if>
 					</c:forEach>
@@ -540,14 +539,15 @@ textarea {
 				</script>
 			</p>
 			<div id="progress" class="progress">
-			    <c:set var="ecost" value="${item.ecost }" />
+				<c:set var="ecost" value="${item.ecost }" />
 				<c:set var="fundamount" value="${item.fundamount}" />
 				<c:set var="present" value="${ fundamount * 100 / ecost}" />
-				
+
 				<div class="progress-bar progress-bar-warning"
 					id="progressbar<c:out value='${status.index}'/>" role="progressbar"
 					aria-valuenow="60" aria-valuemin="0"
-					aria-valuemax="<c:out value="${item.ecost}"/>" style="width:${present}%;">
+					aria-valuemax="<c:out value="${item.ecost}"/>"
+					style="width:${present}%;">
 					<span class="sr-only"></span>
 				</div>
 			</div>
@@ -555,8 +555,11 @@ textarea {
 				<c:out value="${ fundamount * 100 / ecost}" />
 				% 달성
 			</p>
-			<p class="info"><fmt:formatNumber var="fundamount" value="${item.fundamount }"/>${fundamount }원의 펀딩</p>
-			<p class="info">${item.supportcount }명의 서포터</p>
+			<p class="info">
+				<fmt:formatNumber var="fundamount" value="${item.fundamount }" />${fundamount }원의
+				펀딩
+			</p>
+			<p class="info">${item.supportcount }명의서포터</p>
 			<button class="btn-fund pay">펀딩하기</button>
 		</div>
 		<div style="text-align: center;">
@@ -564,11 +567,8 @@ textarea {
 				<i class="fa fa-heart-o" aria-hidden="true"></i>
 			</button>
 			<button class="btn btn-default backpink" id="btn-nonlike"
-					style="display: none;">
-					<i class="fa fa-heart-o" aria-hidden="true"></i>
-				</button>
-			<button class="btn btn-default" id="btn-share">
-				<i class="fa fa-share" aria-hidden="true"></i>
+				style="display: none;">
+				<i class="fa fa-heart-o" aria-hidden="true"></i>
 			</button>
 		</div>
 
@@ -577,12 +577,14 @@ textarea {
 				style="font-size: 10pt; text-align: left; padding-top: 20px; padding-bottom: 5px; margin-left: 20px;">메이커
 				정보</p>
 			<div class="makerbox2">
+				<p>
 					<c:if test="${!empty item.pimage }">
 						<img class="img" src="/funfund/images/myinfo/${item.pimage }">
 					</c:if>
 					<c:if test="${empty item.pimage }">
 						<img class="img" src="/funfund/images/myinfo/dimages.png">
 					</c:if>
+				</p>
 				<div class="makerinfo">${item.cname }</div>
 				<div>
 					<div class="makerinfo">문의처</div>
@@ -601,11 +603,19 @@ textarea {
 					<c:forEach var="bestList" items="${bestList }">
 						<div class="supportinfo">
 							<p>
-								<img src="/funfund/images/myinfo/${bestList.pimage }"
-									class="img">
+								<c:if test="${!empty bestList.pimage }">
+									<img src="/funfund/images/myinfo/${bestList.pimage }"
+										class="img">
+								</c:if>
+								<c:if test="${empty bestList.pimage }">
+									<img class="img" src="/funfund/images/myinfo/dimages.png">
+								</c:if>
 							</p>
 							<p>${bestList.nickname }</p>
-							<p><fmt:formatNumber var="mcost"  value="${bestList.mcost }"/> ${mcost}원 펀딩</p>
+							<p>
+								<fmt:formatNumber var="mcost" value="${bestList.mcost }" />
+								${mcost}원 펀딩
+							</p>
 						</div>
 					</c:forEach>
 				</c:if>
@@ -616,10 +626,10 @@ textarea {
 		</div>
 
 		<!-- 뷰온버튼 -->
-		<button id="scrollbutton" style="bottom: 50px; color:gray"
+		<button id="scrollbutton" style="bottom: 50px; color: gray"
 			class="hidden-sm hidden-xs">
 			<i class="fa fa-angle-up fa-2x" aria-hidden="true"
-				style="display: block; color:gray;"></i>TOP
+				style="display: block; color: gray;"></i>TOP
 		</button>
 
 		<div class="hidden-sm hidden-xs">
@@ -628,7 +638,7 @@ textarea {
 			<c:forEach var="reward" items="${mList}">
 				<ul class="makerbox">
 					<input type="hidden" value="${reward.mno}">
-					<li style="font-size: 15pt;"class="makerinfo"><strong><fmt:formatNumber
+					<li style="font-size: 15pt;" class="makerinfo"><strong><fmt:formatNumber
 								var="mcost" value="${reward.mcost}" /> ${mcost}원</strong></li>
 					<li class="makerinfo">작성자이름
 						<dl>${item.pname}</dl>
@@ -640,8 +650,8 @@ textarea {
 						<dl>${reward.mdate}</dl>
 					</li>
 					<li class="makerinfo">제한 수량
-					<dl>${reward.mcount }개
-					</dl>
+						<dl>${reward.mcount }개
+						</dl>
 					</li>
 					<li class="makerinfo current">현재 <c:set var="result"
 							value="${reward.remain}" /> <c:if test="${result > 0}">
@@ -658,7 +668,9 @@ textarea {
 		</div>
 	</div>
 
-<script>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" flush="true" />
+
+	<script>
    $(function(){
 	   
 	   for(var i=0; i<${fn:length(mList)}; i++){

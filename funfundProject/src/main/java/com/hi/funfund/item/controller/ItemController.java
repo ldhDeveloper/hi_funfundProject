@@ -375,6 +375,7 @@ public class ItemController {
 		System.out.println("upresult : " + result);
 		Item item = itemService.selectOne(pro_no);
 		List<Itemfund> bestList = itemService.bestList(pro_no);
+		System.out.println("bestList: "+bestList);
 		List<FundMenu> mList = fundMenuService.selectList(pro_no);
 		List<ItemAsk> aList = itemAskService.selectList(pro_no);
 		List<Attachment> sList = attachmentService.selectimgList(pro_no);

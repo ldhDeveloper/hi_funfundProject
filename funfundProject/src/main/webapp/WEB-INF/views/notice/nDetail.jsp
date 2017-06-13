@@ -6,7 +6,7 @@ pageEncoding="utf-8"/>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>게시판 상세보기</title>
 
 <style>
 body {
@@ -18,6 +18,7 @@ line-height : 1px;
     min-height: 600px;
     height: auto;
 }
+
 .category{
     padding: 15px 10px 10px 10px;
     border-bottom: 1px solid #e4e4e4;
@@ -179,36 +180,37 @@ function insertReply(lev, upbno, replybno){
 						data[i].ndate+
 						"</p><input type='hidden'  value='"+ data[i].nno+ "'>";
 					}else{
-					 replylist += "<p><img class='rImage' src='"+data[i].pimage + "'>"+ 
+					 replylist += "<p><img class='rImage' src='images/myinfo/"+data[i].pimage + "'>"+ 
 					 	data[i].nickname +"</p>" +
 						"<p style='text-indent:50px;'>" +data[i].ncontent +"</p><p>" +
 						data[i].ndate+
 						"</p><input type='hidden'  value='"+ data[i].nno+ "'>";
 					}
-					if(data[i].ano !='${account.ano}'){
-						replylist +=
-						"<button id='addreply' class='admin btn btn-default' onclick='createReplyForm(" + i + ", " + data[i].upbno +" )'>답글달기</button>"; 
-					}else{
-						var bname = '${n.bname}';
-						replylist +=
-						"<button id='addreply' class='admin btn btn-default' onclick='createReplyForm(" + i + ", " + data[i].upbno + ", " + data[i].nno +" )'>답글달기</button>" +
+					var ano = parseInt('${account.ano}');
+					if(data[i].nreply_lev == '1'){
+						replylist +="<button id='addreply' class='admin btn btn-default' onclick='createReplyForm(" + i + ", " + data[i].upbno + ", " + data[i].nno +" )'>답글달기</button>"; 
+					}
+					if(data[i].ano == ano){
 						"<button id='redact' class='btn btn-default' onclick='redactForm(" + i + "," + data[i].nno + data[i].ano+ ")'>댓글수정</button>" +
 						"<button class='btn btn-default' oncilck='ndelete(" + data[i].nno + ", ${n.nno})'>댓글삭제</button>" + 
 						"</div><br>";
 					}
+					
 					$('#replyList').html($('#replyList').html() + replylist);
-					if(data[i].ano == '${account.ano}'){
+					var ano = parseInt('${account.ano}');
+					if(data[i].ano == ano){
 						comparedDate.setFullYear(data[i].ndate.slice(0, 4));
 						comparedDate.setDate(data[i].ndate.slice(8, 10));
 						comparedDate.setMonth(data[i].ndate.slice(5, 7));
 						comparedDate.setHours(0);
 						comparedDate.setMinutes(0);
-						comparedDate.setSeconds(0);
-						comparedDate.setMilliseconds(order++);
+						comparedDate.setSeconds(order++);
 						if( date < comparedDate ){
 							date = data[i].ndate;
 						edgenum = i;}
 						} 
+					
+					
 					if('${account.idtype}' != '관리자'){
 						$('#addreply').remove();
 					}
@@ -239,13 +241,10 @@ function ndelete(nno, upbno){
 				}
 					}	
 				});
-	
 	}else{
 		$.ajax({
 			url : "nDelete.no",
-				
 			data : {"nno" : nno, "bname" : '{$n.bname}', "upbno" :upbno, "page" : '${page}' },
-
 			contentType : "application/json",
 			success : function(data){
 				if(data.message == '댓글삭제'){
@@ -278,8 +277,23 @@ function updateReply(x){
 	var bname =  "${n.bname}";
 	var upbno = ${n.nno};
 	var ncontent = $(division).children('textarea').val();
-	
-	location.href="nUpdate.no?ano="+ano+"&bname="+bname+"&ncontent="+ncontent +"&upbno="+upbno+"&page=${page}&nno="+nno;
+	var page = parseInt('${page}');
+	/* location.href="nUpdate.no?ano="+ano+"&bname="+bname+"&ncontent="+ncontent +"&upbno="+upbno+"&page=${page}&nno="+nno; */
+	$.ajax({
+		url : "nUpdate.no",
+		data : {"ano" : ano, "bname" : bname, "ncontent" : ncontent, "upbno" : upbno, "page" : page, "nno" : nno},
+		contentType : "application/json",
+		success : function(data){
+			if(data.message == 'success'){
+				location.href= "nDetail.no?nno=${n.nno}&bname='${n.bname}'&page=${page}";	
+			}else{
+				alert("댓글이 존재하지 않습니다.");
+				location.href="nList.no?bname=${n.bname}&page=${page}";
+			}
+		
+		}
+		
+	});
 }
 function createReplyForm(index, upbno, replybno){
 	/* if('${account.idtype}' == '관리자'){ */
@@ -306,8 +320,8 @@ function createReplyForm(index, upbno, replybno){
 		<p class="title" >&nbsp; &nbsp; ${n.ntitle}</p>
 		
 		<p class ="nInfo">
-		<c:if test="${empty reply.pimage }"> <img class="nImage" src="/funfund/images/myinfo/dimages.png"></c:if>
-			<c:if test="${!empty reply.pimage }"> <img class="nImage" src="${n.pimage}"></c:if>
+		<c:if test="${empty n.pimage }"> <img class="nImage" src="/funfund/images/myinfo/dimages.png"></c:if>
+			<c:if test="${!empty n.pimage}"> <img class="nImage" src="images/myinfo/${n.pimage}"></c:if>
 		<span>${n.nickname}</span>
 		<p></p>
 		<span class="nDate">${n.ndate}</span>
@@ -335,9 +349,9 @@ function createReplyForm(index, upbno, replybno){
 			<%-- <c:if test="${!empty account}"> --%>
 			<textarea id="ncontent" class='ncontent' name="ncontent" rows="6" cols="77" style="overflow-y:hidden" maxlength="150px" required ></textarea>
 			<br>
-			<!-- 제약조건 -->
+			<c:if test="${!empty sessionScope.account }">
 			<button class="replyButton" onclick="insertReply(1, ${n.nno}, 0);">작성하기</button>
-			
+			</c:if>
 			<%-- </c:if> --%>
 			<div id="replyList">
 			<br><br>
@@ -349,16 +363,16 @@ function createReplyForm(index, upbno, replybno){
 				</c:if>
 					<p>
 					<c:if test="${empty reply.pimage }"> <img class="rImage" src="/funfund/images/myinfo/dimages.png"></c:if>
-					<c:if test="${!empty reply.pimage }"> <img class="rImage" src="${reply.pimage}"></c:if>
+					<c:if test="${!empty reply.pimage }"> <img class="rImage" src="images/myinfo/${reply.pimage}"></c:if>
 					${reply.nickname}</p><br>
 					<p class='rcontent' style="text-indent:50px;"> ${reply.ncontent}</p><br>
 					<p style="color:#cac4c4">${reply.ndate}</p>
 					<input type="hidden" name="nno"  value="${reply.nno}">
-					<c:if test="${!empty account }">
-					<c:if test="${!empty account && reply.nreply_lev == 1 }"> <!-- 관리자 확인 조건 account.idtype== '관리자' -->
+					<c:if test="${! empty account && reply.nreply_lev == 1 }"> <!-- 관리자 확인 조건 account.idtype== '관리자' -->
 					<button id='addreply' class="btn btn-default" onclick="createReplyForm(${status.index}, ${reply.upbno} ,${ reply.nno})">답글달기</button>
 					</c:if>
-					<button id='redact' class="btn btn-default" onclick="redactForm(${status.index}, ${ reply.nno}, ${reply.ano })" >댓글수정</button>
+					<c:if test="${account.ano eq reply.ano }">
+					<button id='redact' class="btn btn-default" onclick="redactForm(${status.index}, ${ reply.nno}, ${reply.ano})" >댓글수정</button>
 					<button class="btn btn-default" onclick="ndelete(${reply.nno}, ${reply.upbno})" >댓글삭제</button>
 					</c:if>
 				<c:if test="${reply.nreply_lev ==2}">

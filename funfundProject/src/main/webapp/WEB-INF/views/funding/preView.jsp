@@ -194,7 +194,7 @@ body {
 	<div class="row background">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<h4 align="center" class="font">
-				<em>${item.category }</em> <strong>${item.pshort }</strong> 프로젝트
+				<em>${item.category }</em> 프로젝트
 			</h4>
 		</div>
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -231,7 +231,7 @@ body {
 					<c:forEach var="slide" items="${sList}" varStatus="status">
 
 						<c:choose>
-							<c:when test="${status.index == 0 }">
+							<c:when test="${status.first }">
 								<div class="item active">
 									<img
 										src="/funfund/images/makeproject/slideimg/${slide.refname}">
@@ -246,35 +246,34 @@ body {
 							</c:otherwise>
 						</c:choose>
 
-						<%-- 	<c:if test="${status.index == 0 }">
-							<div class="item active">
-								<img src="/funfund/images/makeproject/slideimg/${slide.refname}">
-							</div>
-						</c:if>
-
-						<c:if test="${status.index != 0 }">
-							<div class="item">
-								<img src="/funfund/images/makeproject/slideimg/${slide.refname}">
-							</div>
-						</c:if> --%>
-
+						<!-- control -->
+						<a class="left carousel-control" href="#myCarousel" role="button"
+							data-slide="prev"> <span
+							class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+							<span class="sr-only">Previous</span>
+						</a>
+						<a class="right carousel-control" href="#myCarousel" role="button"
+							data-slide="next"> <span
+							class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+							<span class="sr-only">Next</span>
+						</a>
+						
 					</c:forEach>
-					<!-- control -->
-					<a class="left carousel-control" href="#myCarousel" role="button"
-						data-slide="prev"> <span
-						class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-						<span class="sr-only">Previous</span>
-					</a> <a class="right carousel-control" href="#myCarousel" role="button"
-						data-slide="next"> <span
-						class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-						<span class="sr-only">Next</span>
-					</a>
 				</div>
 
 			</div>
 		</c:if>
+
+		<div id="content">${item.pshort}</div>
 		<!-- 게시글작성영역 -->
 		<div id="content"></div>
+		<br> <br>
+		<div align="left">
+			<p style="font-size: 12pt; color: orange">
+				<strong>프로젝트 환불정책</strong>
+			</p>
+			${item.refund}
+		</div>
 	</div>
 
 	<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
@@ -302,9 +301,6 @@ body {
 				<button class="btn btn-default backpink" id="btn-nonlike"
 					style="display: none;">
 					<i class="fa fa-heart-o" aria-hidden="true"></i>
-				</button>
-				<button class="btn btn-default" id="btn-share" onclick="link();">
-					<i class="fa fa-share" aria-hidden="true"></i>
 				</button>
 			</div>
 		</div>

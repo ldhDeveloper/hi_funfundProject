@@ -10,7 +10,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.4.js"></script> <!-- 아임포트 본인 인증 -->
-<title>Insert title here</title>
+<title>즐거움이 가득한 공간 펀펀드!</title>
 <script>
 $(function(){
 
@@ -66,6 +66,7 @@ $(function(){
 	});
 	$('.panel-heading').click(function(){
 		var cname = $(this).siblings("div:first").attr("class");
+		
 		if(cname =="panel-collapse collapse"){
 			$(this).siblings("div:first").attr("class", "panel-collapse collapse in");
 		} else {
@@ -122,7 +123,7 @@ button.accordion {
 	background: -webkit-linear-gradient(#ffffff, #b0e0e6);
 	background: -o-linear-gradient(#ffffff, #b0e0e6);
 	background: -moz-linear-gradient(#ffffff, #b0e0e6);
-	background: linear-gradient(#ffffff, #b0e0e6);
+	background: linear-gradient(180deg, #ffffff, rgba(4, 176, 255, 0.25));
 	border: solid 1px #2a82a3;
 	height: 52px;
 	border-radius: 4px;

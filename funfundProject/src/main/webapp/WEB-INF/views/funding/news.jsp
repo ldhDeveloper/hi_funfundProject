@@ -350,9 +350,6 @@ button {
 					style="display: none;">
 					<i class="fa fa-heart-o" aria-hidden="true"></i>
 				</button>
-			<button class="btn btn-default" id="btn-share">
-				<i class="fa fa-share" aria-hidden="true"></i>
-			</button>
 		</div>
 
 		<div class="">
@@ -360,12 +357,14 @@ button {
 				style="font-size: 10pt; text-align: left; padding-top: 20px; padding-bottom: 5px; margin-left: 20px;">메이커
 				정보</p>
 			<div class="makerbox2">
+			<p>
 					<c:if test="${!empty item.pimage }">
 						<img class="img" src="/funfund/images/myinfo/${item.pimage }">
 					</c:if>
 					<c:if test="${empty item.pimage }">
 						<img class="img" src="/funfund/images/myinfo/dimages.png">
 					</c:if>
+					</p>
 				<div class="makerinfo">${item.cname }</div>
 				<div>
 					<div class="makerinfo">문의처</div>
@@ -384,8 +383,13 @@ button {
 					<c:forEach var="bestList" items="${bestList }">
 						<div class="supportinfo">
 							<p>
-								<img src="/funfund/images/myinfo/${bestList.pimage }"
+								<c:if test="${!empty bestList.pimage }">
+									<img src="/funfund/images/myinfo/${bestList.pimage }"
 									class="img">
+								</c:if>
+								<c:if test="${empty bestList.pimage }">
+									<img class="img" src="/funfund/images/myinfo/dimages.png">
+								</c:if>
 							</p>
 							<p>${bestList.nickname }</p>
 							<p><fmt:formatNumber var="mcost"  value="${bestList.mcost }"/> ${mcost}원 펀딩</p>
@@ -433,6 +437,7 @@ button {
 			<button class="btn-fund pay">펀딩하기</button>
 		</div>
 	</div>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" flush="true" />
 
 <script>
    $(function(){

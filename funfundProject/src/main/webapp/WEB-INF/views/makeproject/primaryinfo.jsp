@@ -196,10 +196,10 @@ li {
 			});
 			$("#showpage").click(function(){
 				var url = "preview.it?pro_no=${pro_no}";
-				window.open(url, "", "channelmode");
+				window.open(url, "", "");
 			});
 			
-			$("#sendadmin").click(function(){
+			$(".sendadmin").click(function(){
 				var url = "updateStatus.it";
 				var pro_no = ${pro_no};
 				var pstatus = "승인요청";
@@ -232,9 +232,8 @@ li {
 			<li id="info3"><a href="#">스토리</a></li>
 			<li id="info4"><a href="#">메이커정보</a></li>
 			<li id="info5"><a href="#">정산</a></li>
-			<li id="showpage" style="margin-left: 20px;"><a
-				<%-- href="detail.it?pro_no=${pro_no }" --%>>미리보기</a></li>
-			<li id="sendadmin" style="margin-left: 20px;"><a href="#">검토
+			<li id="showpage" style="margin-left: 20px;cursor:pointer;"><a> 미리보기</a></li>
+			<li class="sendadmin" style="margin-left: 20px;"><a href="#">검토
 					요청하기</a></li>
 		</ul>
 	</div>
@@ -1290,8 +1289,7 @@ li {
 		</script>
 		&nbsp; &nbsp;
 		<button id="nextorsave" class="btn btn-warning" value="1">다음단계로</button>
-		<button id="saveall" class="btn btn-warning"
-			onclick="document.getElementById('frm').submit();">저장하기</button>
+		<button id="saveall" class="btn btn-warning sendadmin">검토 요청하기</button>
 	</div>
 	<form id="fileForm" method="post" enctype="multipart/form-data"
 		onsubmit="return false;">
