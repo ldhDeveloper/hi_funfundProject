@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ page session="false"%>
 <!DOCTYPE html>
 <html>
@@ -280,7 +281,8 @@ body {
 							</div>
 							<p>
 								<span id="persent<c:out value='${status.index}'/>"></span> %
-								&nbsp;&nbsp; <span><c:out value="${item.fundamount }" /></span>원
+								<fmt:formatNumber var= "amountNumber" value="${item.fundamount}" type="currency" />
+								&nbsp;&nbsp; <span><c:out value="${amountNumber }" /></span>원
 								달성 &nbsp;&nbsp; <span id="edate<c:out value='${status.index}'/>"></span>
 								<span id="yet<c:out value='${status.index}'/>">일 남음</span>
 								<spen id="complete<c:out value='${status.index}'/>">펀딩종료</spen>

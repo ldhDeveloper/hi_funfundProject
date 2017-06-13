@@ -140,6 +140,11 @@ body {
 }
 </style>
 <script>
+//돈콤마찍어주는 정규식
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 	$(function() {
 		$('.btn').click(function() {
 			$(".btn").removeClass("clickbtn");
@@ -155,12 +160,13 @@ body {
 										type : "get",
 										async : true,
 										success : function(data) {
-											console.log(data);
+											
 											var html = "";
 											for (var i = 0; i < data.length; i++) {
 												var pro_no = data[i].pro_no;
 												var ecost = data[i].ecost;
-												var fundamount = data[i].fundamount;
+												var fundamount = numberWithCommas(data[i].fundamount);
+											   
 												var pedate = data[i].pedate;
 												var persent = Math
 														.round(fundamount * 100
@@ -178,11 +184,11 @@ body {
 												var todate = new Date();
 												var btMs = edate.getTime()
 														- todate.getTime();
-												console.log("btMs : " + btMs);
+										
 												var btDay = Math
 														.round(btMs
 																/ (1000 * 60 * 60 * 24));
-												console.log("btDay : " + btDay);
+												
 												var funding = "";
 												var ending = "";
 												if (btDay < 0) {
@@ -248,12 +254,13 @@ body {
 										},
 										async : true,
 										success : function(data) {
-											console.log(data);
+										
 											var html = "";
 											for (var i = 0; i < data.length; i++) {
 												var pro_no = data[i].pro_no;
 												var ecost = data[i].ecost;
-												var fundamount = data[i].fundamount;
+												var fundamount = numberWithCommas(data[i].fundamount);
+												
 												var pedate = data[i].pedate;
 												var persent = Math
 														.round(fundamount * 100
@@ -271,11 +278,11 @@ body {
 												var todate = new Date();
 												var btMs = edate.getTime()
 														- todate.getTime();
-												console.log("btMs : " + btMs);
+											
 												var btDay = Math
 														.round(btMs
 																/ (1000 * 60 * 60 * 24));
-												console.log("btDay : " + btDay);
+												
 												var funding = "";
 												var ending = "";
 												if (btDay < 0) {
@@ -431,8 +438,12 @@ body {
 									$(function() {
 										var ecost = "<c:out value='${item.ecost}'/>";
 										var fundamount = "<c:out value='${item.fundamount}'/>"
+									
 										var persent = Math.round(fundamount
 												* 100 / ecost);
+									
+									 
+										
 										var bar = 0;
 										if (persent > 100) {
 											bar = 100;
@@ -447,7 +458,7 @@ body {
 										var btDay = Math.round(btMs
 												/ (1000 * 60 * 60 * 24));
 
-										console.log(persent);
+									
 										$(
 												"#persent<c:out value='${status.index}'/>")
 												.text(persent);

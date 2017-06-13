@@ -35,9 +35,9 @@ $(function(){
 			  				"<hr><div class='panel-group' id='accordion'>"+
 			  				"<c:forEach var='nlist' items='${nList}' varStatus='status'>" +
 						  	"<div class='panel panel-default'>"+
-						  	"<div class='panel-heading'>"+
+						  	"<div class='panel-heading' style='font-family:Godo;'>"+
 						  	"<h4 class='panel-title'>"+
-						  	"<a href='#collapse2' class='fontfamily1' style='text-decoration:none;'>${nlist.ntitle}</a></h4>"+
+						  	"<a href='#collapse2' class='fontfamily1'>${nlist.ntitle}</a></h4>"+
 						  	"</div>"+
 						  	"<div id='collapse2' class='panel-collapse collapse'>"+
 						   	"<div class='panel-body fontfamily2'>${nlist.ncontent}</div>"+  
@@ -100,6 +100,13 @@ function checkOption(){
 
 </script>
 <style>
+@font-face {
+  font-family: 'Godo';
+  font-style: normal;
+  font-weight: 400;
+  src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff') format('woff');
+}
+
 button.accordion {
     background-color: #eee;
     color: #444;
@@ -120,8 +127,8 @@ button.accordion {
 	height: 52px;
 	border-radius: 4px;
 	padding-top: 0.8%;
-	font-size: 12pt;
-	box-shadow: 3px 3px 5px silver;
+	box-shadow: 3px 3px 5px #d1d0d8;
+
 }
 button.accordion.active, button.accordion:hover {
     background-color: #ddd;
@@ -159,7 +166,7 @@ taxt-decoration : none;
 height:150px;
 line-height:22.5px;
 text-size-adjust:100%;
-background : RGB(96,101,106);
+background : #ffc796;
 height : 150px;
 }
 .FnQtitle{ display: block;}
@@ -221,7 +228,7 @@ margin: auto;
 .paging li {
 float : left;
 }
-button {   
+.noticebutton {   
  display: inline-block;
     padding: 0 12px;
     width : 10%;
@@ -272,9 +279,9 @@ display:none;}
 		<div class="col-lg-12 col-md-12 col-xs-12">
 			<div class="nlist">
 				<p class="totalN">총 ${listCount} 건수 </p>
-					<button onclick="category(1);" id="no">공지사항</button>
-	 				<button onclick="category(2);" id="fnq">FnQ</button>
-	 				<button onclick="category(3);" id="qna">QnA</button>
+					<button class="noticebutton" onclick="category(1);" id="no">공지사항</button>
+	 				<button class="noticebutton" onclick="category(2);" id="fnq">FnQ</button>
+	 				<button class="noticebutton" onclick="category(3);" id="qna">QnA</button>
 					<!-- 1.여기서부터  -->
 					<div class="nListContainer">
 					<hr>
