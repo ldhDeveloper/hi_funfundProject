@@ -224,13 +224,13 @@
 
 .lStart {
     background-color: #DFF0D8 !important;
-    width: 88.3%;   
+    width: 83%;   
     
 }
 
 .DStart {
 	background-color: #d9edf7 !important;
-    width: 88.3%;  
+    width: 83%;  
 }
 
 .sidelist {
@@ -415,7 +415,7 @@
 				      							<c:forEach var="item" items="${ iList }" varStatus="status">
 					      							<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
 					      							<div id="overwrap">    							
-					      								<div id="itempanel<c:out value='${status.index}'/>" class="panel" style="position:relative;z-index:10;">
+					      								<div id="itempanel<c:out value='${status.index}'/>" class="panel">
 					      									<div id="conitemper<c:out value='${status.index}'/>" class="panel-heading">${ item.pstatus }</div>
 					      									<div id="enditemper<c:out value='${status.index}'/>" class="panel-body">
 					      										<div class="thumbnail" align="center">      										
@@ -426,7 +426,15 @@
 						      											</c:if>
 						      											
 						      											<c:if test="${ ! empty item.thumbnail }">
-						      													<img id="imageIn" alt="이미지를 넣으세요" src="/funfund/images/makeproject/titleimg/<c:out value="${item.thumbnail}"/>" style="width: 100%;margin-bottom:2%;">      											
+						      											<div style="position:relative;">	
+						      												<div style="position:absolute;">
+						      													<img id="imageIn" alt="이미지를 넣으세요" src="/funfund/images/makeproject/titleimg/<c:out value="${item.thumbnail}"/>" style="width: 100%;margin-bottom:2%; position:relative; z-index:1">
+						      												</div>
+						      												<div style="position:absolute;">
+						      													<img id="imageIn2" alt="이미지를 넣으세요" src="/funfund/images/myinfo/newproject/success.png" style="width: 100%;margin-bottom:2%; position:relative; z-index:600">     	
+						      												</div>
+						      												<img id="imageIn3" src="/funfund/images/myinfo/newproject/blank.png" style="width: 100%;margin-bottom:2%;">
+						      											</div>											
 						      											</c:if>
 						      											
 						      											<div id="size" style="height:125px; max-height:125px;">	
@@ -484,6 +492,7 @@
 					    									$("#edate<c:out value='${status.index}'/>").text(btDay);
 					    																		
 					    									if(pstatus == "작성중") {
+					    										$("#imageIn2").hide();
 					    										$(".caption<c:out value='${status.index}'/>").css("padding-top", "37px");
 					    										$("#itempanel<c:out value='${status.index}'/>").css("border", "1px solid #E91E63");
 					    										$("#conitemper<c:out value='${status.index}'/>").addClass("w3-pink");    										
@@ -491,6 +500,7 @@
 					    									}
 					    									
 					    									else if (pstatus == "승인요청") {
+					    										$("#imageIn2").hide();
 					    										$(".caption<c:out value='${status.index}'/>").css("padding-top", "37px");
 					    										$("#itempanel<c:out value='${status.index}'/>").css("border", "1px solid #9C27B0");
 					    										$("#conitemper<c:out value='${status.index}'/>").addClass("w3-purple");
@@ -498,6 +508,7 @@
 					    									}
 					    									
 					    									else if(btDay >= 0) {
+					    										$("#imageIn2").hide();
 					    										$("#conitemper<c:out value='${status.index}'/>").html("진행중");
 					    										$("#itempanel<c:out value='${status.index}'/>").css("border", "1px solid #F44336");
 					    										$("#conitemper<c:out value='${status.index}'/>").addClass("w3-red");
@@ -514,6 +525,7 @@
 					    									
 					    									else if(btDay < 0) {
 					    										if(pstatus == "펀딩성공"){
+					    											$("#imageIn2").show();
 					    											$("#conitemper<c:out value='${status.index}'/>").html("펀딩성공");
 						    										$("#itempanel<c:out value='${status.index}'/>").removeClass("panel-warning");
 						    										$("#itempanel<c:out value='${status.index}'/>").removeClass("bg-danger");
