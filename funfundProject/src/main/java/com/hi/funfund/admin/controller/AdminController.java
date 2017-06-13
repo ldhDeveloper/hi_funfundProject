@@ -20,6 +20,7 @@ import com.hi.funfund.account.model.vo.Party;
 import com.hi.funfund.admin.model.service.AdminService;
 import com.hi.funfund.admin.model.vo.AccInfo;
 import com.hi.funfund.admin.model.vo.CancelInfo;
+import com.hi.funfund.admin.model.vo.CategoryProfit;
 import com.hi.funfund.admin.model.vo.ProfitHash;
 import com.hi.funfund.admin.model.vo.ProfitInfo;
 import com.hi.funfund.alert.model.service.AlertService;
@@ -272,8 +273,27 @@ public class AdminController {
 			}
 		}
 		List <ProfitHash> cList = adminService.categoryProfit(year);
+		CategoryProfit cp = null;
+		if(cList != null){
+			cp = new CategoryProfit();
+			for(int i =0; i < cList.size(); i++){
+				switch(cList.get(i).getCname()){
+				case "tech" : cp.setTech(cList.get(i).getSumcost()); break;
+				case "beauty" : cp.setBeauty(cList.get(i).getSumcost()); break;
+				case "food" : cp.setFood(cList.get(i).getSumcost()); break;
+				case "design" : cp.setDesign(cList.get(i).getSumcost()); break;
+				case "art" : cp.setArt(cList.get(i).getSumcost()); break;
+				case "game" : cp.setGame(cList.get(i).getSumcost()); break;
+				case "trip" : cp.setTrip(cList.get(i).getSumcost()); break;
+				case "sport" : cp.setSport(cList.get(i).getSumcost()); break;
+				case "pinterest" : cp.setPinterest(cList.get(i).getSumcost()); break;
+				}
+			}
+			
+		}
+		
 		model.addObject("pi", pi);
-		model.addObject("cList", cList);
+		model.addObject("cp", cp);
 		model.setViewName("admin/totalprofit");
 		return model;
 	}

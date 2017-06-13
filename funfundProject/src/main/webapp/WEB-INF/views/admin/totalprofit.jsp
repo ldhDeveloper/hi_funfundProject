@@ -93,22 +93,21 @@
 		    // Configuration options go here
 		    options: {}
 		});
-		
+	
 		var ctx2 = document.getElementById('profitcircle').getContext("2d");
 		var data2 = {
-				labels : [ assetname[0], assetname[1],
-						assetname[2], assetname[3],
-						assetname[4] ],
+				labels : [ "테크", "패션/뷰티", "푸드", "디자인", "예술",
+						"게임", "여행", "스포츠", "후원"],
 				datasets : [ {
-					data : [ assetvalue[0], assetvalue[1],
-							assetvalue[2], assetvalue[3],
-							assetvalue[4] ],
-					backgroundColor : [ "#FF6384",
+					data : [ <c:out value="${cp.tech}"/>, <c:out value="${cp.beauty}"/>,
+						<c:out value="${cp.food}"/>, <c:out value="${cp.design}"/>, <c:out value="${cp.art}"/>,
+							<c:out value="${cp.game}"/>, <c:out value="${cp.trip}"/>, <c:out value="${cp.sport}"/>, <c:out value="${cp.pinterest}"/> ],
+					backgroundColor : [ "#F44336",
+							"#D9D0D3", "#FF9800",
+							"#FFEB3B", "#4CAF50", "#9C27B0", "#00BCD4", "#FFEB3B", "#009688" ]
+					/* hoverBackgroundColor : [ "#FF6384",
 							"#36A2EB", "#FFCE56",
-							"#4BC0C0", "#E7E9ED" ],
-					hoverBackgroundColor : [ "#FF6384",
-							"#36A2EB", "#FFCE56",
-							"#4BC0C0", "#E7E9ED" ]
+							"#4BC0C0", "#E7E9ED" ] */
 				} ]
 			};
 			doughnutChart = new Chart(ctx2, {
@@ -146,7 +145,7 @@
  </ul>
   <div class="col-xs-12 col-sm-6 col-lg-6">
   		<div class="panel panel-primary">
-	  		<div class="panel-heading">Panel heading without title</div>
+	  		<div class="panel-heading">전체 수익</div>
 	  		<div class="panel-body">
 	    		<canvas id="profitline" width="520px" height="520px">
 	    		
@@ -156,7 +155,7 @@
   </div>
   <div class="col-xs-12 col-sm-6 col-lg-6">
   		<div class="panel panel-primary">
-	  		<div class="panel-heading">Panel heading without title</div>
+	  		<div class="panel-heading">카테고리별 수익</div>
 	  		<div class="panel-body">
 	    		<canvas id="profitcircle" width="520px" height="520px">
 	    		
