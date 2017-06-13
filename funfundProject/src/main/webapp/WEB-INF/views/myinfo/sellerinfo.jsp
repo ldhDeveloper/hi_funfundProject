@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link rel="stylesheet" type="text/css" href="/funfund/lib/css/sellerinfo.css">
 
@@ -13,6 +12,18 @@
 <title>sellerinfo</title>
 
 <style type="text/css">
+.container{
+	width: 100%;
+	padding-left: -15px !important;
+	padding-right: -15px !important;
+}
+
+.row {
+	width: 100%;
+	margin-left: 0px !important;
+	margin-right: 0px !important;
+}
+
 .act {
 	background-color: #28B5A9;	
 }
@@ -43,7 +54,7 @@
 .mlabel {
 	height: 80px;
 	color: #fff;
-	font-size: 2vw;
+	font-size: 26pt;
 	padding-top: 1.5%;
 }
 
@@ -57,6 +68,12 @@
 	color: #4D525B;
 	width: 40%;
 	background-color: #F8F8F8;
+}
+
+.nameId {
+	font-size: 14pt;
+	width: 200px;
+	padding-top: 1.8%;
 }
 
 </style>
@@ -94,12 +111,13 @@ $(function(){
 
 </script>
 
-<br><br>
+<div class="hidden-xs" style="height:50px;">&nbsp;</div>
 <div class="container">
 	<div class="row">
-		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">	
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				<div class="mlabel" align="center">회원 정보 보기</div>
+				<div class="mlabel" align="center">
+					<div class="hidden-lg hidden-md" style="height:10px;">&nbsp;</div>
+					회원 정보 보기
+				</div>
 				
 				<div class="minfo">
 					<div class="row">
@@ -112,6 +130,7 @@ $(function(){
 						</c:if>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow mname" align="center">
+						<!-- <label class="nameId"> -->
 							회원명 | <c:if test="${ empty sessionScope.party.pname}">
 		                 				<input type="text" name="pname" class="mnameText" placeholder="이름" value="${ sessionScope.account.nickname }" readonly/>
 		                 			</c:if>
@@ -119,6 +138,7 @@ $(function(){
 		                 			<c:if test="${ !empty sessionScope.party.pname}">
 		                 				<input type="text" name="pname" class="mnameText" placeholder="이름" value="${ sessionScope.party.pname }" readonly/>
 		                 			</c:if>
+		              <!--   </label> -->
 						</div>
 						
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">회원등급 | ${ sessionScope.account.idtype }</label></div>
@@ -292,9 +312,8 @@ $(function(){
 					</div>
 					</div>
 					</div>										
-				</div>				
-			</div>
-		</div>
+				</div>
+				
 	</div>
 </div>
 

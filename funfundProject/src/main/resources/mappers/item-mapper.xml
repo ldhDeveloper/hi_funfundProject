@@ -673,7 +673,7 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
 			                             where ftype='item' and fsubtype='thumbnail') i7 on(i1.pro_no = i7.refno)
                                    left join (select ano, pimage
                                                 from account) ac on (ac.ano=i1.ano)
-    		where i1.pstatus='펀딩종료' and i1.ano=#{ano} and i1.category <> '후원'			
+    		where i1.pstatus in ('펀딩종료', '펀딩성공', '펀딩실패') and i1.ano=#{ano} and i1.category <> '후원'			
 		]]>    
 	</select>
 	
@@ -873,7 +873,7 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
 			                             where ftype='item' and fsubtype='thumbnail') i7 on(i1.pro_no = i7.refno)
                                    left join (select ano, pimage
                                                 from account) ac on (ac.ano=i1.ano)
-    		where i1.pstatus='펀딩종료' and i1.ano=#{ano} and i1.category='후원'			
+    		where i1.pstatus in ('펀딩종료', '펀딩성공', '펀딩실패') and i1.ano=#{ano} and i1.category='후원'			
 		]]>    
 	</select>
 </mapper>
