@@ -81,6 +81,22 @@ input[type="checkbox"] {
     background-color: #fd !important;
     border-color: #e2 !important;
 }
+
+@media screen and (min-width:1px) and (max-width: 960px)  {
+	td:nth-child(1) {
+      width:62px !important;
+   }
+   td:nth-child(2) {
+      width:100px !important;
+   }	
+   td:nth-child(3) {
+      width:0px !omportant;
+   }
+   .tb {
+     width:360px !important;
+   }
+}
+
 </style>
 <script src="/funfund/lib/js/jquery-3.2.1.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -378,13 +394,14 @@ input[type="checkbox"] {
 									<input type="hidden" class="dcost<c:out value='${status.index}'/>" value="<c:out value="${fundMenu.dcost}"/>">
 									<i class="fa fa-3x fa-square-o unchecked" aria-hidden="true" style="color:#ff9966"></i>
 									<i class="fa fa-3x fa-check-square-o checked" aria-hidden="true" style="color:#ff9966;display:none"></i>
+		 
 								</td>
 								<td style="width:600px;">
 									<h4><c:out value="${fundMenu.mcost}"/>원 펀딩합니다.</h4>
 									<label><c:out value="${fundMenu.mname}"/></label>
 									<p><c:out value="${fundMenu.mcontent}"/></p><br>
-									배송비 : <c:out value="${fundMenu.dcost}"/> | 예상 배송일 : <c:out value="${fundMenu.mdate}"/><br>
-									제한 수량 : <c:out value="${fundMenu.mcount}"/> | 남은 수량 : <c:out value="${fundMenu.remain}"/><br><br>
+									<p>배송비 : <c:out value="${fundMenu.dcost}"/> | 예상 배송일 : <c:out value="${fundMenu.mdate}"/><br>
+									       제한 수량 : <c:out value="${fundMenu.mcount}"/> | 남은 수량 : <c:out value="${fundMenu.remain}"/><br><br></p>
 								</td>
 								<td style="width:150px;text-align:center;">
 									<div id="plusminus" style="display:none" class="amount">
@@ -414,9 +431,9 @@ input[type="checkbox"] {
 	
 	<div class="row">
 		<div class="container">
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-			<div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-				<table style="width:920px; text-align:center;">
+			<div class="col-lg-1 col-md-1 col-sm-1"></div>
+			<div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+				<table style="width:920px; text-align:center;" class="tb">
 					<tr style="background:#ddb6fb;">
 						<th colspan="4" style="color:white;text-align:center;height:50px;">
 							<label style="font-size:15pt;">주문내역</label>
@@ -455,7 +472,7 @@ input[type="checkbox"] {
 					</tr>
 				</table>
 			</div>
-			<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+			<div class="col-lg-1 col-md-1 col-sm-1"></div>
 		</div>
 	</div>
 	

@@ -15,7 +15,7 @@
 	top: -70px;
 }
 
-@media screen and (min-width:1px) and (max-width:767px) {
+@media screen and (min-width:1px) and (max-width:900px) {
 	.contain {
 		top: 0px;
 	}
