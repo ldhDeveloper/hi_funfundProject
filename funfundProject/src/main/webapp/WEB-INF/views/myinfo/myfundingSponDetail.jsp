@@ -9,10 +9,14 @@
 <style type="text/css">
 .container{
 	width: 100%;
+	padding-left: -15px !important;
+	padding-right: -15px !important;
 }
 
 .row {
 	width: 100%;
+	margin-left: 0px !important;
+	margin-right: 0px !important;
 }
 
 .mlabel {
@@ -310,8 +314,6 @@ label {
 <br><br>
 <div class="container">
 	<div class="row">
-		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">	
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<div class="mlabel" align="center">회원 정보 보기</div>
 				
 				<div class="minfo">
@@ -608,12 +610,10 @@ label {
     					<br>
   					</div>										
 				</div>				
-			</div>
-		</div>
 	</div>
 </div>
 
 <br><br>
-
+<jsp:include page="/WEB-INF/views/common/footer.jsp" flush="true"/>
 </body>
 </html>

@@ -4,30 +4,30 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <style type="text/css">
 .container{
 	width: 100%;
+	padding-left: -15px !important;
+	padding-right: -15px !important;
 }
 
 .row {
 	width: 100%;
+	margin-left: 0px !important;
+	margin-right: 0px !important;	
 }
 
 .mlabel {
 	border: 1px solid #ddd;
 	background-color: #24B3A8;
-	/* background: -webkit-linear-gradient(left top, #24B3A8, #58CEB0, #2AC594);
-	background: -o-linear-gradient(bottom right, #24B3A8, #58CEB0, #2AC594);
-	background: -moz-linear-gradient(bottom right, #24B3A8, #58CEB0, #2AC594); */
 	background: linear-gradient(to right, #24B3A8, #58CEB0, #2AC594);
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 	width: 100%;
 	height: 80px;
 	color: #fff;
-	font-size: 2vw;
+	font-size: 26pt;
 	padding-top: 1.5%;
 }
 
@@ -76,7 +76,7 @@
 	border: none; */
 	text-align: center;
 	padding-top: 2%;
-	font-size: 1vw;
+	color: #4A4A4A;
 }
 
 .mbtn1 {
@@ -238,26 +238,37 @@
 .joinProject {
 	border-top: 4px solid #DFF0D8;
 	border-bottom: 4px solid #DFF0D8;
-	padding-left: 10%;
 	float: center;
 }
 
 .jpth {
 	border-top: 4px solid #DFF0D8;
 	border-bottom: 4px solid #DFF0D8;
-	padding-left: 10%;
-	width: 20%;
+	width: 15%;
+	text-align: center;
+	padding-top: 1.5% !important;
+	padding-bottom: 1.5% !important;
+	padding-left : 0px !important;
+	padding-right : 0px !important;
+}
+
+.jpth1 {
+	border-top: 4px solid #DFF0D8;
+	border-bottom: 4px solid #DFF0D8;
+	width: 40%;
+	text-align: center;
+	padding-top: 1.5% !important;
+	padding-bottom: 1.5% !important;
+	padding-left : 0px !important;
+	padding-right : 0px !important;
+}
+
+.jptd {
 	text-align: center;
 	padding-top: 1.5% !important;
 	padding-bottom: 1.5% !important;
 }
 
-.jptd {
-	width: 20%;
-	text-align: center;
-	padding-top: 1.5% !important;
-	padding-bottom: 1.5% !important;
-}
 
 .joinProjecttr, .paymenttr, .mdtrf {
 	border-bottom: 1px solid #DFF0D8;
@@ -297,8 +308,15 @@
 	text-size: 2vw;
 } 
 
-label {
+/* label {
 	font-size: 1vw;
+} */
+
+.nameId {
+	font-size: 14pt;
+	width: 200px;
+	padding-top: 1.8%;
+	color: #4A4A4A;
 }
 </style>
 
@@ -307,12 +325,13 @@ label {
 <body>
 <jsp:include page="/WEB-INF/views/common/menubar.jsp" flush="true"/>
 
-<br><br>
+<div class="hidden-xs" style="height:85px;">&nbsp;</div>
 <div class="container">
 	<div class="row">
-		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">	
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				<div class="mlabel" align="center">회원 정보 보기</div>
+				<div class="mlabel" align="center">
+					<div class="hidden-lg hidden-md" style="height:10px;">&nbsp;</div>
+					회원 정보 보기
+				</div>
 				
 				<div class="minfo">
 					<div class="row">
@@ -324,7 +343,7 @@ label {
 						<img class="img-circle img-responsive" src="images/myinfo/<c:out value='${sessionScope.account.pimage }'/>" style="max-width:170px;max-height:170px; width:170px; heigh:150px;"><!-- 사진 값이 들어갈 곳  -->
 						</c:if>
 						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow mname" align="center">
+						<label class="nameId">
 							회원명 | <c:if test="${ empty sessionScope.party.pname}">
 		                 				<input type="text" name="pname" class="mnameText" placeholder="이름" value="${ sessionScope.account.nickname }" readonly/>
 		                 			</c:if>
@@ -332,7 +351,7 @@ label {
 		                 			<c:if test="${ !empty sessionScope.party.pname}">
 		                 				<input type="text" name="pname" class="mnameText" placeholder="이름" value="${ sessionScope.party.pname }" readonly/>
 		                 			</c:if>
-						</div>
+		       				</label>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">회원등급 | ${ sessionScope.account.idtype }</label></div>
 						<%-- <c:choose>
         					<c:when test="${ sessionScope.account.idtype == '일반회원' || sessionScope.account.idtype == '승인요청'}">
@@ -351,7 +370,7 @@ label {
         							<span class="bar">▼</span>
       							</button>
       							
-      							<a class="hidden-lg hidden-md navbar-brand">회원 메뉴</a>
+      							<a class="hidden-lg hidden-md navbar-brand" style="font-size: 25pt; padding-top: 6%; padding-left: 10%;">회원 메뉴</a>
     						</div>
 
     						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -396,13 +415,15 @@ label {
       							<div class="panel-heading">리워드형 프로젝트</div>
       							<!-- <div class="panel-body">아직 참여한 프로젝트가 없습니다.</div> -->
       							
-      							<br><br>
+      							<br><br><br>
       							
       							
   									
   							<div class="tableStart">
   									
-  								<h3 align="center">결제 정보 변경 및 취소</h3>
+  								<h2 align="center">결제 정보 변경 및 취소</h2>
+  								
+  								<br><br><br>
       							
       							<form action="joinCancle.fl" method="post" enctype="multipart/form-data">
       							<input type="hidden" value="${ myfunding.fund_no }" name="fund_no">
@@ -412,7 +433,7 @@ label {
     										<thead class="paddingGo">								
       											<tr class="joinProject">
         											<th class="jpth">주문번호</th>
-        											<th class="jpth">리워드 프로젝트</th>
+        											<th class="jpth1">리워드 프로젝트</th>
         											<th class="jpth">마감날짜</th>
         											<th class="jpth">참여금액</th>
         											<th class="jpth">결제상태</th>
@@ -608,12 +629,10 @@ label {
     					<br>
   					</div>										
 				</div>				
-			</div>
-		</div>
 	</div>
 </div>
 
 <br><br>
-
+<jsp:include page="/WEB-INF/views/common/footer.jsp" flush="true"/>
 </body>
 </html>

@@ -52,28 +52,44 @@
 }
 
 .mlabel {
+		border: 1px solid #ddd;
+	background-color: #24B3A8;
+	background: linear-gradient(to right, #24B3A8, #58CEB0, #2AC594);
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	width: 100%;
 	height: 80px;
 	color: #fff;
 	font-size: 26pt;
 	padding-top: 1.5%;
 }
 
-.btn-darkgray3{display:inline-block;width:48%;height:44px;font-size:13px;line-height:46px;text-align:center;color:#fff;background:#50E3C2;border:none;box-sizing:border-box}
-.btn-darkgray4{display:inline-block;width:48%;height:44px;font-size:13px;line-height:46px;text-align:center;color:#fff;background:#FBAF2C;border:none;box-sizing:border-box}
+.btn-darkgray3{display:inline-block;width:47.5%;height:44px;font-size:13px;line-height:46px;text-align:center;color:#fff;background:#50E3C2;border:none;box-sizing:border-box}
+.btn-darkgray4{display:inline-block;width:47.5%;height:44px;font-size:13px;line-height:46px;text-align:center;color:#fff;background:#FBAF2C;border:none;box-sizing:border-box}
 .btn-darkgray5{display:inline-block;width:48%;height:44px;font-size:13px;line-height:46px;text-align:center;color:#fff;background:#50E3C2;border:none;box-sizing:border-box;}
-.input-text1{box-sizing:border-box;display:inline-block;width:48%;margin-bottom:7px;height:45px;line-height:48px;font-size:13px;color:#4a4a4a;background:#fff;border:1px solid #e4e4e4;outline:none;padding-top:1%;padding-left:4.5%}
+.input-text1{box-sizing:border-box;display:inline-block;width:46.5%;margin-bottom:7px;height:45px;line-height:48px;font-size:13px;color:#4a4a4a;background:#fff;border:1px solid #e4e4e4;outline:none;padding-left:4.5%}
 .input-text2{box-sizing:border-box;display:inline-block;width:100%;margin-bottom:7px;height:27px;line-height:30px;font-size:13px;color:#4a4a4a;background:#fff;border:1px solid #e4e4e4;outline:none;padding-top:1%;padding-left:4.5%}
 .mnameText {
 	border: none;
-	color: #4D525B;
 	width: 40%;
 	background-color: #F8F8F8;
+	color: #4A4A4A;
+}
+
+.mgrade {
+	width: 200px;
+	text-align: center;
+	padding-top: 2%;
+	font-size: 14pt;
+	padding-left: 5%;
+	color: #4A4A4A;
 }
 
 .nameId {
 	font-size: 14pt;
 	width: 200px;
 	padding-top: 1.8%;
+	color: #4A4A4A;
 }
 
 </style>
@@ -111,7 +127,7 @@ $(function(){
 
 </script>
 
-<div class="hidden-xs" style="height:50px;">&nbsp;</div>
+<div class="hidden-xs" style="height:85px;">&nbsp;</div>
 <div class="container">
 	<div class="row">
 				<div class="mlabel" align="center">
@@ -130,7 +146,7 @@ $(function(){
 						</c:if>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow mname" align="center">
-						<!-- <label class="nameId"> -->
+						<label class="nameId">
 							회원명 | <c:if test="${ empty sessionScope.party.pname}">
 		                 				<input type="text" name="pname" class="mnameText" placeholder="이름" value="${ sessionScope.account.nickname }" readonly/>
 		                 			</c:if>
@@ -138,7 +154,7 @@ $(function(){
 		                 			<c:if test="${ !empty sessionScope.party.pname}">
 		                 				<input type="text" name="pname" class="mnameText" placeholder="이름" value="${ sessionScope.party.pname }" readonly/>
 		                 			</c:if>
-		              <!--   </label> -->
+		              	</label>
 						</div>
 						
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">회원등급 | ${ sessionScope.account.idtype }</label></div>
@@ -161,7 +177,7 @@ $(function(){
         							<span class="bar">▼</span>
       							</button>
       							
-      							<a class="hidden-lg hidden-md navbar-brand">회원 메뉴</a>
+      							<a class="hidden-lg hidden-md navbar-brand" style="font-size: 25pt; padding-top: 6%; padding-left: 10%;">회원 메뉴</a>
     						</div>
 
     						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -199,12 +215,14 @@ $(function(){
 	        			<div class="waccount-wrap">
 	     					<div id="waccountContainer">
 	     						
-        							<c:if test="${ sessionScope.account.idtype eq '판매자'}">	       			
+        						<c:choose>
+        							<c:when test="${ sessionScope.account.idtype == '일반회원' || sessionScope.account.idtype == '승인요청중'}">	       			
 	                					<h2>투자 서비스 신청</h2>
 	                					<h3>추가 정보를 입력하고 크라우드펀딩 투자를 시작해보세요.</h3>
 	                			
 	                					<em class="line"></em>
-	                				</c:if>
+	                				</c:when>
+	                			</c:choose>
         						 
 							
 							<div>						
@@ -261,6 +279,7 @@ $(function(){
 			       				
 			       					<div class="input-area">
 			       						<input type="text" class="input-text1" id="sample6_postcode" name="address1" placeholder="우편번호" readonly/>	&nbsp;&nbsp;
+			       						<!-- <div class="hidden-lg hidden-md" style="line-height:20px;">&nbsp;</div> -->
 			       						<input type="button" class="btn-darkgray5" onclick="sample6_execDaumPostcode();" value="우편번호 검색">
 				              			<input type="text" id="sample6_address" name="address2" class="input-text" placeholder="도로명주소" readonly/> 
 				              			<input type="text" id="sample6_address2" name="address3" class="input-text" placeholder="상세주소" />
@@ -379,6 +398,6 @@ $("#investApply").click(function(){
 		$("#imageform").submit();
 	}
 </script>
-
+<jsp:include page="/WEB-INF/views/common/footer.jsp" flush="true"/>
 </body>
 </html>

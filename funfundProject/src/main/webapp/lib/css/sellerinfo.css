@@ -59,16 +59,9 @@
 	color: #4D525B;
 }
 
-.mgrade {
-	width: 200px;
-	text-align: center;
-	padding-top: 2%;
-	font-size: 14pt;
-	padding-left: 5%;
-	color: #4D525B;
-}
 
-.mbtn1 {
+
+/* .mbtn1 {
 	position: relation;
 	z-index: 20px;
 	background-color: #3DB8CC;
@@ -81,7 +74,7 @@
 	font-weight: bold;
 	font-size: 14pt;
 	padding-top: 2%;
-}
+} */
 
 .mmenu {
 	border-bottom: 1px solid #ddd;
@@ -113,7 +106,7 @@
 .waccount-wrap .comment{margin-bottom:10px;font-size:11px;line-height:14px;color:#4a4a4a;}
 .waccount-wrap a.line-link{display:block;margin-bottom:10px;font-size:11px;line-height:14px;color:#4a4a4a;text-decoration:underline}
 .waccount-wrap .box-notice{margin-bottom:10px;padding:15px;font-size:12px;line-height:16px;color:#4a4a4a;background:#e7e7e7}
-.waccount-wrap .btn-darkgray{display:block;width:100%;height:44px;font-size:13px;line-height:46px;text-align:center;color:#fff;background:#50E3C2;border:none;box-sizing:border-box}
+.waccount-wrap .btn-darkgray{display:block;width:99%;height:44px;font-size:13px;line-height:46px;text-align:center;color:#fff;background:#50E3C2;border:none;box-sizing:border-box}
 .waccount-wrap .btn-darkgray2{display:block;width:100%;padding:10px 0;font-size:13px;line-height:20px;text-align:center;color:#fff;background:#50E3C2;border:none;box-sizing:border-box}
 .waccount-wrap .btn-mint{display:block;width:100%;height:46px;font-size:13px;line-height:44px;text-align:center;color:#fff;background:#23dbab;border:none;box-sizing:border-box}
 .waccount-wrap .btn-mint2{display:block;width:100%;padding:10px 0;font-size:13px;line-height:20px;text-align:center;color:#fff;background:#23dbab;border:none;box-sizing:border-box}
@@ -235,7 +228,7 @@ label.input-check-rnd{font-size:12px;color:#9b9b9b;}
 label.input-check-rnd.active{color:#50e3c2;}
 label.input-check-rnd input[type=checkbox]{margin-right:8px;width:15px;height:15px;vertical-align:middle;border:2px solid #e7e7e7;border-radius:50%;background:#fff;-webkit-appearance: none;-moz-appearance: none;}
 label.input-check-rnd input[type=checkbox]:checked{border-color:#50e3c2;background:url(/resources/static/img/common/radio_mint_check.png) no-repeat center center #50e3c2;background-size:10px 6px}
-.input-text{box-sizing:border-box;display:block;width:100%;padding:0 17px;margin-bottom:7px;height:46px;line-height:45px;font-size:13px;color:#4a4a4a;background:#fff;border:1px solid #e4e4e4;outline:none}
+.input-text{box-sizing:border-box;display:block;width:99%;padding:0 17px;margin-bottom:7px;height:46px;line-height:45px;font-size:13px;color:#4a4a4a;background:#fff;border:1px solid #e4e4e4;outline:none}
 .input-text::-ms-clear{display: none;}
 .input-text:focus{border-color:#50e3c2;outline:none}
 .input-text.error{border-color:#d0021b;}

@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style type="text/css">
 .container{
@@ -253,9 +252,10 @@
 <br><br>
 <div class="container">
 	<div class="row">
-		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">	
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				<div class="mlabel" align="center">회원 정보 보기</div>
+				<div class="mlabel" align="center">
+					<div class="hidden-lg hidden-md" style="height:10px;">&nbsp;</div>
+					회원 정보 보기
+				</div>
 				
 				<div class="minfo">
 					<div class="row">
@@ -268,6 +268,7 @@
 						</c:if>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow mname" align="center">
+							<label class="nameId">
 							회원명 | <c:if test="${ empty sessionScope.party.pname}">
 		                 				<input type="text" name="pname" class="mnameText" placeholder="이름" value="${ sessionScope.account.nickname }" readonly/>
 		                 			</c:if>
@@ -275,6 +276,7 @@
 		                 			<c:if test="${ !empty sessionScope.party.pname}">
 		                 				<input type="text" name="pname" class="mnameText" placeholder="이름" value="${ sessionScope.party.pname }" readonly/>
 		                 			</c:if>
+		       				</label>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">회원등급 | ${ sessionScope.account.idtype }</label></div>
 						
@@ -295,7 +297,7 @@
         							<span class="bar">▼</span>
       							</button>
       							
-      							<a class="hidden-lg hidden-md navbar-brand">회원 메뉴</a>
+      							<a class="hidden-lg hidden-md navbar-brand" style="font-size: 25pt; padding-top: 6%; padding-left: 10%;">회원 메뉴</a>
     						</div>
 
     						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -505,13 +507,11 @@
 						});
     					</script>						
 					</div>																					
-				</div>				
-			</div>
 		</div>
 	</div>
 
 
 <br><br>
-
+<jsp:include page="/WEB-INF/views/common/footer.jsp" flush="true"/>
 </body>
 </html>
