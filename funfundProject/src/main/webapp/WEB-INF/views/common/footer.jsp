@@ -11,7 +11,6 @@
 }
 
 .footerbox {
-	padding: 10px;
 	color: gray;
 	margin-bottom: 10px;
 }

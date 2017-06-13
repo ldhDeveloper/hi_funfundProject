@@ -33,6 +33,7 @@ import com.hi.funfund.AuthMail.AuthMail;
 import com.hi.funfund.account.model.service.AccountService;
 import com.hi.funfund.account.model.vo.Account;
 import com.hi.funfund.account.model.vo.Party;
+import com.hi.funfund.alert.model.service.AlertService;
 import com.hi.funfund.attachment.model.service.AttachmentService;
 import com.hi.funfund.attachment.model.vo.Attachment;
 import com.hi.funfund.fundlist.model.service.FundListService;
@@ -58,16 +59,21 @@ public class AccountController {
 	@Autowired
 	private FundListService fundListService;
 	
+	@Autowired
+	private AlertService alertService;
+	
 	@RequestMapping("/login.ao")
 	public ModelAndView login(Party party, Account account, HttpServletRequest request, ModelAndView model){
 		String address= "";
 		account = accountService.login(account);
+		int count = alertService.checkNewMessage(account.getAno());
 		
 		HttpSession session = request.getSession(false);
 		if(account != null){
 			Party p = accountService.loginParty(account.getAno());
 			session.setAttribute("account", account);
 			session.setAttribute("party", p);
+			session.setAttribute("checknewmsg", count);
 			
 			model.setViewName("redirect:/");
 		}else{
