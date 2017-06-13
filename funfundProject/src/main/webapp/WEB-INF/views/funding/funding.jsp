@@ -173,7 +173,7 @@ function numberWithCommas(x) {
 																/ ecost);
 												var bar = 0;
 												var category = data[i].category;
-												var pshort= data[i].pshort;
+												var pname= data[i].pname;
 												var thumbnail = data[i].thumbnail;
 												if (persent > 100) {
 													bar = 100;
@@ -226,7 +226,7 @@ function numberWithCommas(x) {
 												html += '<span id="yet' + i +'" style="display:' + funding + '">일 남음</span>';
 												html += '<spen id="complete' + i + '" style="display:' + ending + '">펀딩종료</spen>';
 												html += '</p><div class="caption"><p>'
-														+ pshort + '</p>';
+														+ pname + '</p>';
 												html += '<span>'
 														+ category
 														+ '</span></div></a></div></div>';
@@ -267,7 +267,7 @@ function numberWithCommas(x) {
 																/ ecost);
 												var bar = 0;
 												var category = data[i].category;
-												var pshort = data[i].pshort;
+												var pname = data[i].pname;
 												var thumbnail = data[i].thumbnail;
 												if (persent > 100) {
 													bar = 100;
@@ -320,7 +320,7 @@ function numberWithCommas(x) {
 												html += '<span id="yet' + i +'" style="display:' + funding + '">일 남음</span>';
 												html += '<spen id="complete' + i + '" style="display:' + ending + '">펀딩종료</spen>';
 												html += '</p><div class="caption"><p>'
-														+ pshort + '</p>';
+														+ pname + '</p>';
 												html += '<span>'
 														+ category
 														+ '</span></div></a></div></div>';
@@ -527,6 +527,7 @@ function numberWithCommas(x) {
 			</div>
 		</div>
 	</div>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" flush="true" />
 
 </body>
 </html>

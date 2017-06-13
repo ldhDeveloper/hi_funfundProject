@@ -103,12 +103,11 @@ button {
 .makerbox {
 	padding: 20px 19px 20px;
 	border: 1px solid #eaeaea;
-	margin-bottom:20px;
+	margin-bottom: 20px;
 	width: 100%;
 	display: inline-block;
 	text-align: center;
 }
-
 
 .makerbox2 {
 	padding: 20px 19px 20px;
@@ -285,7 +284,8 @@ body {
 	<div class="row background">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<h4 align="center" class="font">
-				<em style="border:1px orange !important;">${item.category }</em> <strong>${item.pshort }</strong> 프로젝트
+				<em style="border: 1px orange !important;">${item.category }</em>
+				프로젝트
 			</h4>
 		</div>
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -355,14 +355,18 @@ body {
 
 			</div>
 		</c:if>
-		
+
 		<div id="content">${item.pshort}</div>
 		<!-- 게시글작성영역 -->
 		<div id="content"></div>
-		<br><br>
+		<br>
+		<br>
 		<div align="left">
-		<p style="font-size:12pt;color:orange"><strong>프로젝트 환불정책</strong></p>
-		${item.refund}</div>
+			<p style="font-size: 12pt; color: orange">
+				<strong>프로젝트 환불정책</strong>
+			</p>
+			${item.refund}
+		</div>
 	</div>
 
 	<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
@@ -389,14 +393,15 @@ body {
 
 			</p>
 			<div id="progress" class="progress">
-			    <c:set var="ecost" value="${item.ecost }" />
+				<c:set var="ecost" value="${item.ecost }" />
 				<c:set var="fundamount" value="${item.fundamount}" />
 				<c:set var="present" value="${ fundamount * 100 / ecost}" />
-				
+
 				<div class="progress-bar progress-bar-warning"
 					id="progressbar<c:out value='${status.index}'/>" role="progressbar"
 					aria-valuenow="60" aria-valuemin="0"
-					aria-valuemax="<c:out value="${item.ecost}"/>" style="width:${present}%;">
+					aria-valuemax="<c:out value="${item.ecost}"/>"
+					style="width:${present}%;">
 					<span class="sr-only"></span>
 				</div>
 			</div>
@@ -404,9 +409,12 @@ body {
 				<c:out value="${ fundamount * 100 / ecost}" />
 				% 달성
 			</p>
-			<p class="info"><fmt:formatNumber var="fundamount" value="${item.fundamount }"/>${fundamount }원의 펀딩</p>
-			<p class="info">${item.supportcount }명의 서포터</p>
-			<button class="btn-fund pay hidden-xs">펀딩하기</button>
+			<p class="info">
+				<fmt:formatNumber var="fundamount" value="${item.fundamount }" />${fundamount }원의
+				펀딩
+			</p>
+			<p class="info">${item.supportcount }명의서포터</p>
+			<button class="btn-fund pay ">펀딩하기</button>
 		</div>
 
 		<div class="">
@@ -417,9 +425,6 @@ body {
 				<button class="btn btn-default backpink" id="btn-nonlike"
 					style="display: none;">
 					<i class="fa fa-heart-o" aria-hidden="true"></i>
-				</button>
-				<button class="btn btn-default" id="btn-share" onclick="link();">
-					<i class="fa fa-share" aria-hidden="true"></i>
 				</button>
 			</div>
 		</div>
@@ -462,12 +467,14 @@ body {
 				style="font-size: 10pt; text-align: left; padding-top: 20px; padding-bottom: 5px; margin-left: 20px;">메이커
 				정보</p>
 			<div class="makerbox2">
-					<c:if test="${!empty item.pimage }">
-						<img class="img" src="/funfund/images/myinfo/${item.pimage }">
-					</c:if>
-					<c:if test="${empty item.pimage }">
-						<img class="img" src="/funfund/images/myinfo/dimages.png">
-					</c:if>
+			<p>
+				<c:if test="${!empty item.pimage }">
+					<img class="img" src="/funfund/images/myinfo/${item.pimage }">
+				</c:if>
+				<c:if test="${empty item.pimage }">
+					<img class="img" src="/funfund/images/myinfo/dimages.png">
+				</c:if>
+				</p>
 				<div class="makerinfo">${item.cname }</div>
 				<div>
 					<div class="makerinfo">문의처</div>
@@ -485,11 +492,19 @@ body {
 					<c:forEach var="bestList" items="${bestList }">
 						<div class="supportinfo">
 							<p>
-								<img src="/funfund/images/myinfo/${bestList.pimage }"
+								<c:if test="${!empty bestList.pimage }">
+									<img src="/funfund/images/myinfo/${bestList.pimage }"
 									class="img">
+								</c:if>
+								<c:if test="${empty bestList.pimage }">
+									<img class="img" src="/funfund/images/myinfo/dimages.png">
+								</c:if>
 							</p>
 							<p>${bestList.nickname }</p>
-							<p><fmt:formatNumber var="mcost"  value="${bestList.mcost }"/> ${mcost}원 펀딩</p>
+							<p>
+								<fmt:formatNumber var="mcost" value="${bestList.mcost }" />
+								${mcost}원 펀딩
+							</p>
 						</div>
 					</c:forEach>
 				</c:if>
@@ -500,10 +515,10 @@ body {
 		</div>
 
 		<!-- 뷰온버튼 -->
-		<button id="scrollbutton" style="bottom: 50px; color:gray"
+		<button id="scrollbutton" style="bottom: 50px; color: gray"
 			class="hidden-sm hidden-xs">
 			<i class="fa fa-angle-up fa-2x" aria-hidden="true"
-				style="display: block; color:gray;"></i>TOP
+				style="display: block; color: gray;"></i>TOP
 		</button>
 
 		<div class="hidden-sm hidden-xs">
@@ -524,22 +539,22 @@ body {
 						<dl>${reward.mdate}</dl>
 					</li>
 					<li class="makerinfo">제한 수량
-					<dl>${reward.mcount }개
-					</dl>
+						<dl>${reward.mcount }개
+						</dl>
 					</li>
-					
+
 					<li class="makerinfo current">현재 <c:set var="result"
-							value="${reward.remain}" /> 
-					${result }개 남음
+							value="${reward.remain}" /> ${result }개 남음
 					</li>
 				</ul>
 			</c:forEach>
 		</div>
 
 		<div class="hidden-sm hidden-xs">
-			<button class="btn-fund pay">펀딩하기</button>
+			<button class="btn-fund pay hidden-xs">펀딩하기</button>
 		</div>
 	</div>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" flush="true" />
 
 	<script>
    $(function(){
@@ -552,7 +567,7 @@ body {
 				 $(this).css('background-color', '#c6ebd9');
 				 $(this).click(function(){
 						var mno = $(this).children('input').val();
-						location.href = "reward.fm?pro_no=${item.pro_no}&mno="+(i-1)+"&remain="+result;
+						location.href = "reward.fm?pro_no=${item.pro_no}&mno="+(mno-1)+"&remain="+result;
 					});
 			  }else{
 				 $(this).css('background-color', '#d9d9d9');

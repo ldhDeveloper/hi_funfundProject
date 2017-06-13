@@ -922,7 +922,7 @@ ul{
 							style="cursor: pointer"><c:out
 									value="${sessionScope.account.nickname}" /></a></td> --%>
 						<c:if test="${sessionScope.checknewmsg ne 0}">
-							<td style="width : 50px;"><a class="fun-menu"><i class="fa fa-envelope-open-o fa-2x" aria-hidden="true" id="message"><label style="background:red; color:white;font-size:0.5em;border-radius:10px;position:relative;top:-10px;left:-15px;">&nbsp;<c:out value="${sessionScope.checknewmsg }"/>&nbsp;</label></i></a></td>
+							<td style="width : 50px;"><a class="fun-menu"><i class="fa fa-envelope-open-o fa-2x" aria-hidden="true" id="message"><label style="background:red; color:white;font-size:0.5em;border-radius:10px;position:relative;top:-10px;left:-15px;">&nbsp;N&nbsp;</label></i></a></td>
 						</c:if>
 						<c:if test="${sessionScope.checknewmsg eq 0}">
 							<td style="width : 50px;"><a class="fun-menu"><i class="fa fa-envelope-open-o fa-2x" aria-hidden="true" id="message"></i></a></td>
