@@ -1,13 +1,17 @@
 @CHARSET "UTF-8";
 
 <style type="text/css">
-.container{
+/* .container{
 	width: 100%;
+	padding-left: -15px !important;
+	padding-right: -15px !important;
 }
 
 .row {
 	width: 100%;
-}
+	margin-left: 0px !important;
+	margin-right: 0px !important;
+} */
 
 .mlabel {
 	border: 1px solid #ddd;
@@ -49,7 +53,6 @@
 .mname {
 	position: relation;
 	z-index: 10px;
-	font-size : 1vw;
 	font-weight: bold;
 	width: 60%;
 	text-align: center;
@@ -57,17 +60,12 @@
 }
 
 .mgrade {
-	width: 80%;
-	position: relation;
-	z-index: 20px;
-	/* background-color: #3DB8CC; */
-	/* border-radius: 5px; */
-	/* color: #fff; */
-	/* box-shadow: 2px 2px #AFAFAF; */
-	/* border: 1px solid #3DB8CC; */
+	width: 200px;
 	text-align: center;
 	padding-top: 2%;
-	font-size: 1vw;
+	font-size: 14pt;
+	padding-left: 5%;
+	color: #4D525B;
 }
 
 .mbtn1 {
@@ -81,7 +79,7 @@
 	border: none;
 	text-align: center;
 	font-weight: bold;
-	font-size: 1vw;
+	font-size: 14pt;
 	padding-top: 2%;
 }
 

@@ -444,7 +444,25 @@
 						      											</c:if>
 						      											
 						      											<c:if test="${ ! empty item.thumbnail }">
-						      													<img alt="이미지를 넣으세요" src="/funfund/images/makeproject/titleimg/<c:out value="${item.thumbnail}"/>" style="width: 100%;margin-bottom:2%;">      											
+							      											<div style="position:relative;">	
+							      												<div style="position:absolute;">
+							      													<img id="imageIn" alt="이미지를 넣으세요" src="/funfund/images/makeproject/titleimg/<c:out value="${item.thumbnail}"/>" style="width: 100%;margin-bottom:2%; position:relative; z-index:1">
+							      												</div>
+							      												
+							      												<c:if test="${ item.pstatus eq '펀딩성공' }">						      												
+							      													<div style="position:absolute;">
+							      														<img id="imageIn2" alt="이미지를 넣으세요" src="/funfund/images/myinfo/newproject/success.png" style="width: 100%;margin-bottom:2%; position:relative; z-index:600;">     	
+							      													</div>
+							      												</c:if>
+							      												
+							      												<c:if test="${ item.pstatus eq '펀딩실패' }">						      												
+							      													<div style="position:absolute;">
+							      														<img id="imageIn3" alt="이미지를 넣으세요" src="/funfund/images/myinfo/newproject/fail.png" style="width: 100%;margin-bottom:2%; position:relative; z-index:600;">     	
+							      													</div>
+							      												</c:if>
+							      												
+							      												<img id="imageIn3" src="/funfund/images/myinfo/newproject/blank.png" style="width: 100%;margin-bottom:2%;">
+							      											</div>											
 						      											</c:if>
 						      												
 						      											<div id="size" style="height:125px; max-height:125px;">	
@@ -457,12 +475,10 @@
 							  														 <span class="sr-only"></span>
 																			</div>
 																			
-																			<p id="dTag" style="display:none;">
-																				<span style="display:none;" id="dpersent<c:out value='${status.index}'/>"></span>% &nbsp;&nbsp; <span><c:out value="${item.fundamount }"/></span>원 달성 &nbsp;&nbsp; 
-																				<span style="display:none;" id="dedate<c:out value='${status.index}'/>"></span>
-																				<span style="display:none;" id="dyet<c:out value='${status.index}'/>">일 남음</span>
-																				<span style="display:none;" id="dcomplete<c:out value='${status.index}'/>">후원종료</span>
-																			</p>     
+																			<span  style="display:none;" id="dper<c:out value='${status.index}'/>"><span style="display:none;" id="dpersent<c:out value='${status.index}'/>"></span>% &nbsp;&nbsp;<span><c:out value="${item.fundamount }"/></span>원 달성 &nbsp;&nbsp;</span>																																								  
+																			<span style="display:none;" id="dedate<c:out value='${status.index}'/>"></span>
+																			<span style="display:none;" id="dyet<c:out value='${status.index}'/>">일 남음</span>
+																			<span style="display:none;" id="dcomplete<c:out value='${status.index}'/>">펀딩종료</span>      
 																														
 							      										 	<div class="dcaption<c:out value='${status.index}'/>">
 							            										<p>${ item.pname }</p>
@@ -500,21 +516,58 @@
 					    									$("#dprogressbar<c:out value='${status.index}'/>").css("width", bar + "%");
 					    									$("#dedate<c:out value='${status.index}'/>").text(btDay);
 					    																		
-					    									if(btDay < 0) {
-					    										$("#dconitemper<c:out value='${status.index}'/>").html("후원종료");
-					    										$("#ditempanel<c:out value='${status.index}'/>").removeClass("panel-warning");
-					    										$("#ditempanel<c:out value='${status.index}'/>").removeClass("bg-danger");
-					    										$("#ditempanel<c:out value='${status.index}'/>").addClass("panel-default");
-					    										$("#dprogress<c:out value='${status.index}'/>").show();
-					    										$("#dprogressbar<c:out value='${status.index}'/>").show();
-					    										$("#dprogressbar<c:out value='${status.index}'/>").html(persent+"%");
-					    										$("#dpersent<c:out value='${status.index}'/>").show();
-					    										$("#dedate<c:out value='${status.index}'/>").hide();
-					    										$("#dyet<c:out value='${status.index}'/>").hide();
-					    										$("#dcomplete<c:out value='${status.index}'/>").show();
-					    										$("#dTag").show();		
-					    										$("#dprogressbar<c:out value='${status.index}'/>").addClass("w3-gray");					    										
-					    										$("#ddisplace<c:out value='${status.index}'/>").attr("href", "javascript:");
+					    									if(btDay < 0) {																    									
+					    										if(pstatus == "펀딩성공"){
+					    											$("#dconitemper<c:out value='${status.index}'/>").html("펀딩성공");
+						    										$("#ditempanel<c:out value='${status.index}'/>").removeClass("panel-warning");
+						    										$("#ditempanel<c:out value='${status.index}'/>").removeClass("bg-danger");
+						    										$("#ditempanel<c:out value='${status.index}'/>").addClass("panel-default");
+						    										$("#dprogress<c:out value='${status.index}'/>").show();
+						    										$("#dprogressbar<c:out value='${status.index}'/>").show();
+						    										$("#dprogressbar<c:out value='${status.index}'/>").html(persent+"%");
+						    										$("#dper<c:out value='${status.index}'/>").show();
+						    										$("#dpersent<c:out value='${status.index}'/>").show();
+						    										$("#dedate<c:out value='${status.index}'/>").hide();
+						    										$("#dyet<c:out value='${status.index}'/>").hide();
+						    										$("#dcomplete<c:out value='${status.index}'/>").show();						    											
+						    										$("#dprogressbar<c:out value='${status.index}'/>").addClass("w3-gray");					    										
+						    										$("#ddisplace<c:out value='${status.index}'/>").attr("href", "javascript:");
+					    										}
+					    										
+					    										else if (pstatus == "펀딩실패") {					    											
+					    											$("#dconitemper<c:out value='${status.index}'/>").html("펀딩실패");
+					    											$("#dimageIn").src = "/funfund/images/myinfo/fail.png/";
+						    										$("#ditempanel<c:out value='${status.index}'/>").removeClass("panel-warning");
+						    										$("#ditempanel<c:out value='${status.index}'/>").removeClass("bg-danger");
+						    										$("#ditempanel<c:out value='${status.index}'/>").addClass("panel-default");
+						    										$("#dprogress<c:out value='${status.index}'/>").show();
+						    										$("#dprogressbar<c:out value='${status.index}'/>").show();
+						    										$("#dprogressbar<c:out value='${status.index}'/>").html(persent+"%");
+						    										$("#dper<c:out value='${status.index}'/>").show();
+						    										$("#dpersent<c:out value='${status.index}'/>").show();
+						    										$("#dedate<c:out value='${status.index}'/>").hide();
+						    										$("#dyet<c:out value='${status.index}'/>").hide();
+						    										$("#dcomplete<c:out value='${status.index}'/>").show();						    											
+						    										$("#dprogressbar<c:out value='${status.index}'/>").addClass("w3-gray");					    										
+						    										$("#ddisplace<c:out value='${status.index}'/>").attr("href", "javascript:");
+					    										}
+					    										
+					    										else {										
+					    											$("#dconitemper<c:out value='${status.index}'/>").html("펀딩종료");
+						    										$("#ditempanel<c:out value='${status.index}'/>").removeClass("panel-warning");
+						    										$("#ditempanel<c:out value='${status.index}'/>").removeClass("bg-danger");
+						    										$("#ditempanel<c:out value='${status.index}'/>").addClass("panel-default");
+						    										$("#dprogress<c:out value='${status.index}'/>").show();
+						    										$("#dprogressbar<c:out value='${status.index}'/>").show();
+						    										$("#dprogressbar<c:out value='${status.index}'/>").html(persent+"%");
+						    										$("#dper<c:out value='${status.index}'/>").show();
+						    										$("#dpersent<c:out value='${status.index}'/>").show();
+						    										$("#dedate<c:out value='${status.index}'/>").hide();
+						    										$("#dyet<c:out value='${status.index}'/>").hide();
+						    										$("#dcomplete<c:out value='${status.index}'/>").show();					    											
+						    										$("#dprogressbar<c:out value='${status.index}'/>").addClass("w3-gray");					    										
+						    										$("#ddisplace<c:out value='${status.index}'/>").attr("href", "javascript:");
+					    										}
 					    									}
 					    								});
 												 </script>

@@ -12,6 +12,8 @@
 
 .row {
 	width: 100%;
+	margin-left: 0px !important;
+	margin-right: 0px !important;
 }
 
 .mlabel {
@@ -53,8 +55,7 @@
 
 .mname {
 	position: relation;
-	z-index: 10px;
-	font-size : 1vw;
+	z-index: 10px;	
 	font-weight: bold;
 	width: 60%;
 	text-align: center;
@@ -212,19 +213,22 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 .glyphicon {
 	color: #50E3C2;
 }
+
 </style>
 
 <title>Insert title here</title>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/menubar.jsp" flush="true"/>
-
-<br><br>
-<div class="container">
+<div class="hidden-xs" style="height:50px;">&nbsp;</div>
+<div class="container">	
 	<div class="row">
-		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">	
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				<div class="mlabel" align="center">회원 정보 보기</div>
+		<!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> -->	
+			<!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> -->
+				<div class="mlabel" align="center">
+					<div class="hidden-lg hidden-md" style="height:10px;">&nbsp;</div>
+					회원 정보 보기
+				</div>
 				
 				<div class="minfo">
 					<div class="row">
@@ -323,7 +327,7 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 										<span class="sr-only">Toggle navigation</span> 
 										<span class="bar">▼</span>
 									</button>
-									<a class="hidden-lg hidden-md navbar-brand">회원 메뉴</a>
+									<a class="hidden-lg hidden-md navbar-brand" style="font-size: 25pt; padding-top: 6%; padding-left: 10%;">회원 메뉴</a>
 								</div>
 
 								<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -667,8 +671,8 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 							</div>
 						</div>				
 					</div>				
-				</div>
-			</div>
+				<!-- </div> -->
+			<!-- </div> -->
 		</div>
 	</div>
 
