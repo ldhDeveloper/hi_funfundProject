@@ -284,9 +284,9 @@ textarea {
 	background-color: #ff9800;
 	border: none;
 	color: white;
-	width: 15%;
 	height: 100%;
 }
+
 </style>
 <script src="/funfund/lib/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
@@ -434,7 +434,7 @@ textarea {
 			<p>${fn:length(aList) }개의댓글이달렸습니다.</p>
 			<form id="comment-area" action="coinsert.ask">
 				<textarea id="acontent" name="acontent" style="overflow-y: hidden;"
-					rows="3" cols="50" maxlength="140;" placeholder="댓글을 입력하세요"></textarea>
+					rows="3" cols="50" maxlength="140" placeholder="댓글을 입력하세요"></textarea>
 				<div id="upload">
 					<input type="submit" class="warning" value="댓글달기"><input
 						type="hidden" value="${param.pro_no}" name="pro_no"><input
