@@ -26,15 +26,22 @@
 		<result property="address" column="address" />
 		<result property="pconfirm" column="pconfirm" />
 		<result property="econfirm" column="econfirm" />
+		<result property="likecategory" column="likecategory" />
 	</resultMap>
 	<select id="login" parameterType="account" resultMap="accountResult">
 		<![CDATA[
-			SELECT
-				*
-			FROM
-				ACCOUNT
-			WHERE
-				ID = #{id}	 AND PWD = ENCRYPTION_AES.ENC_AES(#{pwd})
+			select a.*, c.likecategory
+			from (SELECT
+							*
+						FROM
+							ACCOUNT
+						WHERE
+							ID = #{id} AND PWD = ENCRYPTION_AES.ENC_AES(#{pwd})) a 
+			join (select b.ano as ano, max(b.cname) as likecategory
+			      from (select ano, max(value) as value from 
+			      vi_likeinfo
+			      group by ano) a join vi_likeinfo b on (a.ano = b.ano and a.value = b.value)
+			      group by b.ano) c on (a.ano = c.ano)
 		]]>
 	</select>
 	<insert id="signupAccount" parameterType="account">
@@ -42,21 +49,37 @@
 			INSERT INTO	ACCOUNT (ano, id, pwd, email, idtype, seller, outyn, nickname)
 			VALUES(seq_ano.nextval, #{id}, ENCRYPTION_AES.ENC_AES(#{pwd}), #{id}, '일반회원', 'N', 'N', #{nickname})	
 		]]>
+		<selectKey keyProperty="ano" resultType="Integer" order="AFTER">
+			select seq_ano.currval from dual
+		</selectKey>
 	</insert>
 	<select id="loginParty" parameterType="int" resultMap="partyResult">
 		<![CDATA[
-			SELECT
-				* 
-			FROM
-				PARTY
-			WHERE
-				ANO = #{ano}
+		select a.*, c.likecategory
+			from (SELECT
+						* 
+					FROM
+						PARTY
+					WHERE
+						ANO = #{ano}) a 
+			join (select b.ano as ano, max(b.cname) as likecategory
+				      from (select ano, max(value) as value from 
+				      vi_likeinfo
+				      group by ano) a join vi_likeinfo b on (a.ano = b.ano and a.value = b.value)
+				      group by b.ano) c on (a.ano = c.ano)	
 		]]>
 	</select>
 
 	<select id="selectOldPwd" parameterType="hashmap" resultMap="accountResult">
-		<![CDATA[			
-			SELECT ano, id, pwd, email, pimage, idtype, idtoken, seller, outyn, nickname FROM ACCOUNT WHERE ano=#{ano} and pwd=ENCRYPTION_AES.ENC_AES(#{oldPwd})
+		<![CDATA[	
+		select a.*, c.likecategory
+			from (		
+			SELECT ano, id, pwd, email, pimage, idtype, idtoken, seller, outyn, nickname FROM ACCOUNT WHERE ano=#{ano} and pwd=ENCRYPTION_AES.ENC_AES(#{oldPwd})) a 
+			join (select b.ano as ano, max(b.cname) as likecategory
+			      from (select ano, max(value) as value from 
+			      vi_likeinfo
+			      group by ano) a join vi_likeinfo b on (a.ano = b.ano and a.value = b.value)
+			      group by b.ano) c on (a.ano = c.ano)
 		]]>
 	</select>
 
@@ -74,7 +97,14 @@
 
 	<select id="selectAccount" parameterType="int" resultMap="accountResult">
 		<![CDATA[
-			SELECT * FROM ACCOUNT WHERE ano = #{ano}
+			select a.*, c.likecategory
+			from (
+			SELECT * FROM ACCOUNT WHERE ano = #{ano}) a 
+			join (select b.ano as ano, max(b.cname) as likecategory
+			      from (select ano, max(value) as value from 
+			      vi_likeinfo
+			      group by ano) a join vi_likeinfo b on (a.ano = b.ano and a.value = b.value)
+			      group by b.ano) c on (a.ano = c.ano)
 		]]>
 	</select>
 	
@@ -88,10 +118,24 @@
 
 		<choose>
 		<when test="email !=null">
-			SELECT * FROM ACCOUNT WHERE email = #{email}
+		select a.*, c.likecategory
+			from (
+			SELECT * FROM ACCOUNT WHERE email = #{email}) a 
+			join (select b.ano as ano, max(b.cname) as likecategory
+			      from (select ano, max(value) as value from 
+			      vi_likeinfo
+			      group by ano) a join vi_likeinfo b on (a.ano = b.ano and a.value = b.value)
+			      group by b.ano) c on (a.ano = c.ano)
 			</when>
 			<otherwise>
-			SELECT * FROM ACCOUNT WHERE id = #{id}
+			select a.*, c.likecategory
+			from (
+			SELECT * FROM ACCOUNT WHERE id = #{id}) a 
+			join (select b.ano as ano, max(b.cname) as likecategory
+			      from (select ano, max(value) as value from 
+			      vi_likeinfo
+			      group by ano) a join vi_likeinfo b on (a.ano = b.ano and a.value = b.value)
+			      group by b.ano) c on (a.ano = c.ano)
 			</otherwise>
 		</choose>
 	</select>
@@ -134,5 +178,17 @@
 	</update>
 	<update id="rejectSeller" parameterType="int">
 		update account set idtype='일반회원' where ano=#{ano}
+	</update>
+	<insert id="createLikeInfo" parameterType="int">
+		insert into likeinfo values(#{result}, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+	</insert>
+	<update id="upCategory" parameterType="HashMap">
+		update likeinfo set ${category} = (select ${category} 
+                            from likeinfo
+                            where ano = #{ano}) + 1
+		where ano = #{ano}
+	</update>
+	<update id="tempUp" parameterType="int">
+		update likeinfo set tech = 1
 	</update>
 </mapper>

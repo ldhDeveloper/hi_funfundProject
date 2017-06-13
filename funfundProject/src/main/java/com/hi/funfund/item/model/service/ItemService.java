@@ -112,5 +112,8 @@ public interface ItemService {
 
 	List<Item> selectMySponItems(int ano);
 
+	String selectCategory(int pro_no);
+
+	List<Item> category3List(String likecategory);
 
 }

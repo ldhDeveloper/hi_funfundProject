@@ -519,7 +519,7 @@ input[type="checkbox"] {
 					IMP.init('imp47847979'); 
 					
 					IMP.request_pay({
-					    pg : 'uplus', // version 1.1.0부터 지원.
+					    pg : 'danal_tpay', // version 1.1.0부터 지원.
 					    pay_method : 'card',
 					    merchant_uid : 'merchant_' + new Date().getTime(),
 					    name : '주문명: <c:out value="${item.pname}"/>',
@@ -529,7 +529,7 @@ input[type="checkbox"] {
 					    buyer_tel : rephone,
 					    buyer_addr : readdress,
 					    buyer_postcode : readdress,
-					    m_redirect_url : 'http://127.0.0.1:9998/funfund/reward.fm?pro_no='
+					    m_redirect_url : 'http://192.168.30.9:9998/funfund/myfunding.ao',
 					}, function(rsp) {
 					    if ( rsp.success ) {
 					        var msg = '결제가 완료되었습니다.';

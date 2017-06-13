@@ -49,7 +49,7 @@
 			            join fundlist fl on (fm.mno = fl.mno)
 			where to_char(i.pedate, 'yyyy') = #{year}
 			group by to_char(i.pedate,'mm')
-			order by edate
+			order by cname
 		]]>
 	</select>
 	<select id="categoryProfit" parameterType="String" resultMap="profitHashResult">

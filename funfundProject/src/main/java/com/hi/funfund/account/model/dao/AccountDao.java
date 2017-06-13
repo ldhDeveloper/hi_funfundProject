@@ -23,6 +23,9 @@ public class AccountDao {
 
 	public int insert(Account account) {
 		int result = sqlSession.insert("signupAccount", account);
+		System.out.println("resultano : " + account.getAno());
+		result = sqlSession.insert("createLikeInfo", account.getAno());
+		
 		/*if(result > 0){
 			sqlSession.commit();
 		}*/
@@ -90,6 +93,8 @@ public class AccountDao {
 		if(user == null){
 			account.setId(account.getEmail());
 			 result = sqlSession.insert("accountMapper.insertThirdParty", account);
+			 //System.out.println("ano : " + account.getAno());
+			 result = sqlSession.insert("createLikeInfo", account.getAno());
 			 if(result > 0){
 				 user = account;
 			 }
@@ -178,4 +183,14 @@ public class AccountDao {
 		int result = sqlSession.update("rejectSeller", ano);
 		return result;
 	}
+	
+	public int upCategory(HashMap<String, String> hmap) {
+		int result = sqlSession.update("upCategory", hmap); 
+		return result;
+	}
+
+	public int tempUp(int ano) {
+		int result = sqlSession.update("tempUp", ano); 
+		return result;
+	}	
 }

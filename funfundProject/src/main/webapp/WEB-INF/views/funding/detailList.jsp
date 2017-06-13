@@ -409,12 +409,9 @@ body {
 				<c:out value="${ fundamount * 100 / ecost}" />
 				% 달성
 			</p>
-			<p class="info">
-				<fmt:formatNumber var="fundamount" value="${item.fundamount }" />${fundamount }원의
-				펀딩
-			</p>
-			<p class="info">${item.supportcount }명의서포터</p>
-			<button class="btn-fund pay ">펀딩하기</button>
+			<p class="info"><fmt:formatNumber var="fundamount" value="${item.fundamount }"/>${fundamount }원의 펀딩</p>
+			<p class="info">${item.supportcount }명의 서포터</p>
+			<button class="btn-fund pay">펀딩하기</button>
 		</div>
 
 		<div class="">

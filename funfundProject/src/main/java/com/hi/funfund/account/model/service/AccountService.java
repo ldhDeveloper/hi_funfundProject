@@ -1,5 +1,6 @@
 package com.hi.funfund.account.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -64,6 +65,10 @@ public interface AccountService {
 	int approveSeller(int ano);
 
 	int rejectSeller(int ano);
+
+	int upCategory(HashMap<String, String> hmap);
+
+	int tempUp(int ano);
 	
 	//미추가된 함수 : 프로젝트별 후원자 리스트
 
