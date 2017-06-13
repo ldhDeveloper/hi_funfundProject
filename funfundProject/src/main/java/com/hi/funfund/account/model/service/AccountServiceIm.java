@@ -1,5 +1,6 @@
 package com.hi.funfund.account.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -178,5 +179,17 @@ public class AccountServiceIm implements AccountService {
 	@Override
 	public int rejectSeller(int ano) {
 		return accountDao.rejectSeller(ano);
+	}
+
+	@Override
+	public int upCategory(HashMap<String, String> hmap) {
+		// TODO Auto-generated method stub
+		return accountDao.upCategory(hmap);
+	}
+
+	@Override
+	public int tempUp(int ano) {
+		// TODO Auto-generated method stub
+		return accountDao.tempUp(ano);
 	}
 }

@@ -288,5 +288,18 @@ public List<Item> selectNewSponProject4(int ano) {
 public List<Item> selectMySponItems(int ano) {
 	return itemDao.selectMySponItems(ano);
 }
+
+@Override
+public String selectCategory(int pro_no) {
+	return itemDao.selectCategory(pro_no);
+}
+
+@Override
+public List<Item> category3List(String likecategory) {
+	return itemDao.category3List(likecategory);
+}
+
+
+
 	
 }

@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hi.funfund.account.model.vo.Account;
 import com.hi.funfund.alert.model.service.AlertService;
 import com.hi.funfund.item.model.service.ItemService;
 import com.hi.funfund.item.model.vo.Item;
@@ -33,12 +37,18 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "start.do", method = RequestMethod.GET)
-	public ModelAndView home(ModelAndView model) {
+	public ModelAndView home(ModelAndView model, HttpSession session, HttpServletRequest request) {
+		session = request.getSession(false);
+		Account a = (Account) session.getAttribute("account");
 		List<Item> top3List = itemService.top3List();
+		List<Item> category3List = null;
+		if(a != null){
+		category3List = itemService.category3List(a.getLikecategory());
+		}
 		ItemCount count = itemService.selectitemCount();
-		//
 		
 		model.addObject("top3List", top3List);
+		model.addObject("category3List", category3List);
 		model.addObject("count", count);
 		model.setViewName("home");
 		return model;

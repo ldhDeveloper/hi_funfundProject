@@ -35,6 +35,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hi.funfund.HomeController;
+import com.hi.funfund.account.model.service.AccountService;
 import com.hi.funfund.account.model.vo.Account;
 import com.hi.funfund.attachment.model.service.AttachmentService;
 import com.hi.funfund.attachment.model.vo.Attachment;
@@ -60,6 +61,8 @@ public class ItemController {
 	private ItemAskService itemAskService;
 	@Autowired
 	private AttachmentService attachmentService;
+	@Autowired
+	private AccountService accountService;
 
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
@@ -357,8 +360,19 @@ public class ItemController {
 	}
 	
 	@RequestMapping(value = "detail.it")
-	public ModelAndView fundingdetailList(ModelAndView model, HttpServletRequest request) {
+	public ModelAndView fundingdetailList(ModelAndView model, HttpServletRequest request, HttpSession session) {
 		int pro_no = Integer.parseInt(request.getParameter("pro_no"));
+		String category = itemService.selectCategory(pro_no);
+		session = request.getSession(false);
+		Account a = (Account) session.getAttribute("account");
+		HashMap<String, String> hmap = new HashMap<String, String>();
+		hmap.put("ano", Integer.toString(a.getAno()));
+		System.out.println("ano : " + Integer.toString(a.getAno()));
+		hmap.put("category", category);
+		System.out.println("category : " + category);
+		int result = accountService.upCategory(hmap);
+		//int result = accountService.tempUp(a.getAno());
+		System.out.println("upresult : " + result);
 		Item item = itemService.selectOne(pro_no);
 		List<Itemfund> bestList = itemService.bestList(pro_no);
 		List<FundMenu> mList = fundMenuService.selectList(pro_no);

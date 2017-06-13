@@ -263,5 +263,16 @@ public class ItemDao {
 	public List<Item> selectMySponItems(int ano) {
 		List<Item> dList = (List<Item>) sqlSession.selectList(nameSpace + "selectMySponItems", ano);
 		return dList;
-	}	
+	}
+
+	public String selectCategory(int pro_no) {
+		String result = (String) sqlSession.selectOne(nameSpace + "selectCateName", pro_no);
+		return result;
+	}
+
+	public List<Item> category3List(String category) {
+		List<Item> cList = (List<Item>) sqlSession.selectList(nameSpace + "category3List", category);
+		return cList;
+	}
+
 }

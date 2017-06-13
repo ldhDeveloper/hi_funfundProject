@@ -182,4 +182,13 @@
 	<insert id="createLikeInfo" parameterType="int">
 		insert into likeinfo values(#{result}, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 	</insert>
+	<update id="upCategory" parameterType="HashMap">
+		update likeinfo set ${category} = (select ${category} 
+                            from likeinfo
+                            where ano = #{ano}) + 1
+		where ano = #{ano}
+	</update>
+	<update id="tempUp" parameterType="int">
+		update likeinfo set tech = 1
+	</update>
 </mapper>
