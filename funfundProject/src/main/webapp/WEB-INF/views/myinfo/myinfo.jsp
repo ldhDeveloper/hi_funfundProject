@@ -68,18 +68,19 @@
 	padding-top: 2%;
 	font-size: 14pt;
 	padding-left: 5%;
-	color: #4D525B;
+	color: #4A4A4A;
 }
 
 .nameId {
 	font-size: 14pt;
 	width: 200px;
 	padding-top: 1.8%;
+	color: #4A4A4A;
 }
 
 .mnameText {
 	border: none;
-	color: #4D525B;
+	/* color: #4D525B; */
 	width: 40%;
 	background-color: #F8F8F8;
 }
@@ -113,7 +114,7 @@
 }
 
 .mh3 {
-	padding-left : 30%;
+	padding-left : 24%;
 }
 
 .fun-menu{
@@ -163,7 +164,7 @@
 
 @media screen and (min-width: 1000px){
 .account-wrap {
-    width: 350px;
+    width: 400px;
     margin: 0 auto;
     padding-top: 3%;
 	}
@@ -220,7 +221,7 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/menubar.jsp" flush="true"/>
-<div class="hidden-xs" style="height:50px;">&nbsp;</div>
+<div class="hidden-xs" style="height:85px;">&nbsp;</div>
 <div class="container">	
 	<div class="row">
 		<!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> -->	
@@ -275,7 +276,7 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 		                 			<c:if test="${ !empty sessionScope.party.pname}">
 		                 				<input type="text" name="pname" class="mnameText" placeholder="이름" value="${ sessionScope.party.pname }" readonly/>
 		                 			</c:if>
-		       					</label>
+		       				</label>
 							
 							
 							<%-- <div style="margin-top:20px;">
@@ -365,8 +366,9 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 							</div>
 						</nav>
 
+				<div class="paddingshot" style="padding-top: 35px; padding-bottom: 35px; padding-right: 20px; padding-left: 20px;">
 						<div class="account-wrap">
-							<h3 class="mh3">기본 정보 설정</h3>
+							<h2 class="mh3">기본 정보 설정</h2>
 						
 							<br>
 						
@@ -436,7 +438,8 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 										<div id="accountWrap">
             	            				<div id="newContainer">
                 								<div class="account-wrap">
-                    								<h3 class="mh32">비밀번호 설정</h3>
+                    								<h2 class="mh32">비밀번호 설정</h2>
+                    								<br>
                     								<div class="email-input-wrap">                  								
                         								<input type="password" id="oldPwd" name="oldPwd" class="input-text" placeholder="현재 비밀번호" />
                         								                        								
@@ -669,6 +672,7 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
         							</script>																			
 								</div>
 							</div>
+						</div>
 						</div>				
 					</div>				
 				<!-- </div> -->
@@ -677,6 +681,6 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 	</div>
 
 <br><br>
-
+<jsp:include page="/WEB-INF/views/common/footer.jsp" flush="true"/>
 </body>
 </html>

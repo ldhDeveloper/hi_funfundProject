@@ -4,30 +4,30 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style type="text/css">
 .container{
 	width: 100%;
+	padding-left: -15px !important;
+	padding-right: -15px !important;	
 }
 
 .row {
 	width: 100%;
+	margin-left: 0px !important;
+	margin-right: 0px !important;
 }
 
 .mlabel {
 	border: 1px solid #ddd;
 	background-color: #24B3A8;
-	/* background: -webkit-linear-gradient(left top, #24B3A8, #58CEB0, #2AC594);
-	background: -o-linear-gradient(bottom right, #24B3A8, #58CEB0, #2AC594);
-	background: -moz-linear-gradient(bottom right, #24B3A8, #58CEB0, #2AC594); */
 	background: linear-gradient(to right, #24B3A8, #58CEB0, #2AC594);
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 	width: 100%;
 	height: 80px;
 	color: #fff;
-	font-size: 2vw;
+	font-size: 26pt;
 	padding-top: 1.5%;
 }
 
@@ -58,7 +58,6 @@
 .mname {
 	position: relation;
 	z-index: 10px;
-	font-size : 1vw;
 	font-weight: bold;
 	width: 60%;
 	text-align: center;
@@ -76,7 +75,8 @@
 	border: none; */
 	text-align: center;
 	padding-top: 2%;
-	font-size: 1vw;
+	font-size: 14pt;
+	color: #4A4A4A;
 }
 
 .mbtn1 {
@@ -102,7 +102,6 @@
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 	width: 100%;
-	height : 900px;
 	padding-top: 2%;
 }
 
@@ -140,10 +139,18 @@
 	background-color: #F8F8F8;
 }
 
+.mfth1{
+	text-align: center;
+	padding-top: 1.5% !important;
+	padding-bottom: 1.5% !important;
+	width: 45%;
+}
+
 .mfth {
 	text-align: center;
 	padding-top: 1.5% !important;
 	padding-bottom: 1.5% !important;
+	width: 15%;
 }
 
 .mftd, .pedate {
@@ -169,7 +176,6 @@
 	border-radius: 15px;
 	background-color: #E25253;
 	width: 40%;
-	height: 25px;
 	color: white;
 	padding: 0.8%;
 }
@@ -180,10 +186,18 @@
 }
 
 /* 후원 */
+.mfsth1 {
+	text-align: center;
+	padding-top: 1.5% !important;
+	padding-bottom: 1.5% !important;
+	width: 45%;
+}
+
 .mfsth {
 	text-align: center;
 	padding-top: 1.5% !important;
 	padding-bottom: 1.5% !important;
+	width: 15%;
 }
 
 .mfstd, .spedate {
@@ -200,7 +214,6 @@
 	border-radius: 15px;
 	background-color: #E25253;
 	width: 40%;
-	height: 25px;
 	color: white;
 	padding: 0.8%;
 }
@@ -213,7 +226,12 @@
 	border-top: 3px solid #D9EDF7;
 	border-bottom: 3px solid #D9EDF7;
 }
-
+.nameId {
+	font-size: 14pt;
+	width: 200px;
+	padding-top: 1.8%;
+	color: #4A4A4A;
+}
 </style>
 
 
@@ -235,12 +253,13 @@
 	});	
 </script>
 
-<br><br>
+<div class="hidden-xs" style="height:85px;">&nbsp;</div>
 <div class="container">
 	<div class="row">
-		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">	
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				<div class="mlabel" align="center">회원 정보 보기</div>
+				<div class="mlabel" align="center">
+					<div class="hidden-lg hidden-md" style="height:10px;">&nbsp;</div>
+					회원 정보 보기
+				</div>
 				
 				<div class="minfo">
 					<div class="row">
@@ -253,6 +272,7 @@
 						</c:if>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow mname" align="center">
+							<label class="nameId">
 							회원명 | <c:if test="${ empty sessionScope.party.pname}">
 		                 				<input type="text" name="pname" class="mnameText" placeholder="이름" value="${ sessionScope.account.nickname }" readonly/>
 		                 			</c:if>
@@ -260,6 +280,7 @@
 		                 			<c:if test="${ !empty sessionScope.party.pname}">
 		                 				<input type="text" name="pname" class="mnameText" placeholder="이름" value="${ sessionScope.party.pname }" readonly/>
 		                 			</c:if>
+		       				</label>
 						</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">회원등급 | ${ sessionScope.account.idtype }</label></div>
 						<%-- <c:choose>
@@ -279,7 +300,7 @@
         							<span class="bar">▼</span>
       							</button>
       							
-      							<a class="hidden-lg hidden-md navbar-brand">회원 메뉴</a>
+      							<a class="hidden-lg hidden-md navbar-brand" style="font-size: 25pt; padding-top: 6%; padding-left: 10%;">회원 메뉴</a>
     						</div>
 
     						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -336,10 +357,10 @@
 										<table class="table table-hover">
     										<thead>
       											<tr class="mfthr">
-        											<th class="mfth">참여 프로젝트</th>
+        											<th class="mfth1">참여 프로젝트</th>
         											<th class="mfth">마감날짜</th>
         											<th class="mfth">금액</th>
-        											<th class="mfth">결제상태</th>
+        											<th class="mfth">결제</th>
       											</tr>
     										</thead>
    
@@ -402,10 +423,10 @@
 										<table class="table table-hover">
     										<thead>
       											<tr class="mfsthr">
-        											<th class="mfsth">참여 프로젝트</th>
+        											<th class="mfsth1">참여 프로젝트</th>
         											<th class="mfsth">마감날짜</th>
         											<th class="mfsth">금액</th>
-        											<th class="mfsth">결제상태</th>
+        											<th class="mfsth">결제</th>
       											</tr>
     										</thead>
    
@@ -440,8 +461,7 @@
 												</script>      											
       											</c:forEach>
     										</tbody>   										
-  										</table>
-  										<br><br> 										
+  										</table>										
   									</div>
   								</c:if>    							
     						</div>
@@ -467,12 +487,10 @@
     					
   					</div>										
 				</div>				
-			</div>
-		</div>
 	</div>
 </div>
 
-<br><br>
-
+<br><br><br>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" flush="true"/>
 </body>
 </html>

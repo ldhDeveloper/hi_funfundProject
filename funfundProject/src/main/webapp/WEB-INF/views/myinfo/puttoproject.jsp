@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style type="text/css">
 .container{
@@ -13,10 +12,12 @@
 
 .row {
 	width: 100%;
+	margin-left: 0px !important;
+	margin-right: 0px !important;
 }
 
 .mlabel {
-	border: 1px solid #ddd;
+	/* border: 1px solid #ddd;
 	background-color: #24B3A8;
 	/* background: -webkit-linear-gradient(left top, #24B3A8, #58CEB0, #2AC594);
 	background: -o-linear-gradient(bottom right, #24B3A8, #58CEB0, #2AC594);
@@ -28,6 +29,16 @@
 
 	color: #fff;
 	font-size: 2vw;
+	padding-top: 1.5%; */
+	border: 1px solid #ddd;
+	background-color: #24B3A8;
+	background: linear-gradient(to right, #24B3A8, #58CEB0, #2AC594);
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	width: 100%;
+	height: 80px;
+	color: #fff;
+	font-size: 26pt;
 	padding-top: 1.5%;
 }
 
@@ -76,7 +87,8 @@
 	border: none; */
 	text-align: center;
 	padding-top: 2%;
-	font-size: 1vw;
+	font-size: 14pt;
+	color: #4A4A4A;
 }
 
 .mbtn1 {
@@ -149,6 +161,13 @@
 	margin-top : 15px !important;
 	margin-bottom : 15px !important;
 }
+
+.nameId {
+	font-size: 14pt;
+	width: 200px;
+	padding-top: 1.8%;
+	color: #4A4A4A;
+}
 </style>
 <script>
 
@@ -159,12 +178,13 @@
 <body>
 <jsp:include page="/WEB-INF/views/common/menubar.jsp" flush="true"/>
 
-<br><br>
+<div class="hidden-xs" style="height:85px;">&nbsp;</div>
 <div class="container">
 	<div class="row">
-		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">	
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				<div class="mlabel" align="center">회원 정보 보기</div>
+				<div class="mlabel" align="center">
+					<div class="hidden-lg hidden-md" style="height:10px;">&nbsp;</div>
+					회원 정보 보기
+				</div>
 				
 				<div class="minfo">
 					<div class="row">
@@ -176,6 +196,7 @@
 						<img class="img-circle img-responsive" src="images/myinfo/<c:out value='${sessionScope.account.pimage }'/>" style="max-width:170px;max-height:170px; width:170px; height:150px;"><!-- 사진 값이 들어갈 곳  -->
 						</c:if>
 						</div><div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow mname" align="center">
+							<label class="nameId">
 							회원명 | <c:if test="${ empty sessionScope.party.pname}">
 		                 				<input type="text" name="pname" class="mnameText" placeholder="이름" value="${ sessionScope.account.nickname }" readonly/>
 		                 			</c:if>
@@ -183,6 +204,7 @@
 		                 			<c:if test="${ !empty sessionScope.party.pname}">
 		                 				<input type="text" name="pname" class="mnameText" placeholder="이름" value="${ sessionScope.party.pname }" readonly/>
 		                 			</c:if>
+		       				</label>
 						</div>
 						
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">회원등급 | ${ sessionScope.account.idtype }</label></div>
@@ -206,7 +228,7 @@
         							<span class="bar">▼</span>
       							</button>
       							
-      							<a class="hidden-lg hidden-md navbar-brand">회원 메뉴</a>
+      							<a class="hidden-lg hidden-md navbar-brand" style="font-size: 25pt; padding-top: 6%; padding-left: 10%;">회원 메뉴</a>
     						</div>
 
     						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -387,7 +409,7 @@
 										});										
 									</script>
       										<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 myListMargin">
-      											<div id="sitempanel<c:out value='${status.index}'/>" class="panel panel-default">
+      											<div id="sitempanel<c:out value='${status.index}'/>" class="panel panel-default" style="height:430px; max-height:430px;">
       													
 													  <div id="sconitemper<c:out value='${status.index}'/>" class="panel-heading panel-primary">진행중</div>
 													  <div id="senditemper<c:out value='${status.index}'/>" class="panel-heading ">펀딩 종료</div>
@@ -445,13 +467,11 @@
 						});
     					</script>
   					</div>										
-				</div>				
-			</div>
-		</div>
+				</div>							
 	</div>
 </div>
 
 <br><br>
-
+<jsp:include page="/WEB-INF/views/common/footer.jsp" flush="true"/>
 </body>
 </html>
