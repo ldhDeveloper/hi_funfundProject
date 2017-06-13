@@ -481,7 +481,7 @@ textarea {
 							<form action="reinsert.ask" id="comment-area${status.index }"
 								class="dapgle">
 								<textarea id="acontent2" name="acontent2"
-									style="overflow-y: hidden;" rows="3" cols="50" maxlength="140;"
+									style="overflow-y: hidden;width: 100%;" rows="3" cols="50" maxlength="140;"
 									placeholder="답글을 입력하세요"></textarea>
 								<div id="upload">
 									<input type="submit" class="warning" value="답글달기"> <input
