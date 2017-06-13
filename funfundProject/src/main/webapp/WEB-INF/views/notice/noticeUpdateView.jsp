@@ -126,7 +126,20 @@ function updateN(){
 
 var ncontent =  $('textarea#froala-editor').froalaEditor('html.get');
 var ntitle = $('input[name=ntitle]').val();
-location.href = "nUpdate.no?nno=${n.nno}&bname=${n.bname}&ntitle="+ntitle+"&ncontent="+ncontent+"&page=${page}";	
+var nno = parseInt('${n.nno}');
+var page = parseInt('${page}');
+$.ajax({
+		url : "nUpdate.no",
+		data : {"nno" : nno, "bname" : "${n.bname}", "ntitle" : ntitle, "ncontent" : ncontent, "page" : page},
+		success : function(data){
+				if(data.message = 'success'){
+					location.href= "nDetail.no?nno=${n.nno}&bname='${n.bname}'&page=${page}";
+				}else{
+					alert("게시물이 존재하지 않습니다.");
+					location.href="nList.no?bname=${n.bname}&page=${page}";
+				}
+			}
+		});	
 }
 </script>
 <script type="text/javascript" src="/funfund/lib/froala_editor_2.5.1/js/languages/ko.js">
