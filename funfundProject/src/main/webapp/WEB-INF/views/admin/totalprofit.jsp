@@ -140,8 +140,6 @@
 	<div class="container">
   <ul class="nav nav-tabs">
 	  <li class="active"><a href="totalProfit.am">수익금 통계</a></li>
-	  <li><a href="requestdeleteitem.am">프로젝트 삭제요청</a></li>
-	  <li><a href="resultitem.am">프로젝트 종료관리</a></li>
  </ul>
   <div class="col-xs-12 col-sm-6 col-lg-6">
   		<div class="panel panel-primary">

@@ -406,7 +406,7 @@ body {
 			</p>
 			<p class="info"><fmt:formatNumber var="fundamount" value="${item.fundamount }"/>${fundamount }원의 펀딩</p>
 			<p class="info">${item.supportcount }명의 서포터</p>
-			<button class="btn-fund pay hidden-xs">펀딩하기</button>
+			<button class="btn-fund pay">펀딩하기</button>
 		</div>
 
 		<div class="">

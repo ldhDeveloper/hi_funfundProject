@@ -23,6 +23,7 @@ public class AccountDao {
 
 	public int insert(Account account) {
 		int result = sqlSession.insert("signupAccount", account);
+		result += sqlSession.insert("createLikeInfo", result);
 		/*if(result > 0){
 			sqlSession.commit();
 		}*/
@@ -90,6 +91,7 @@ public class AccountDao {
 		if(user == null){
 			account.setId(account.getEmail());
 			 result = sqlSession.insert("accountMapper.insertThirdParty", account);
+			 result += sqlSession.insert("createLikeInfo");
 			 if(result > 0){
 				 user = account;
 			 }

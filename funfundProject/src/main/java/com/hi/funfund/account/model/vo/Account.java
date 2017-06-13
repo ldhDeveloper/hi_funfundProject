@@ -14,9 +14,15 @@ public class Account implements Serializable {
 	private String seller;
 	private String outyn;
 	private String nickname;
+	private String likecategory;
 	
 	
-	
+	public String getLikecategory() {
+		return likecategory;
+	}
+	public void setLikecategory(String likecategory) {
+		this.likecategory = likecategory;
+	}
 	public String getOutyn() {
 		return outyn;
 	}
@@ -81,7 +87,7 @@ public class Account implements Serializable {
 		super();
 	}
 	public Account(int ano, String id, String pwd, String email, String pimage, String idtype, String idtoken,
-			String seller, String outyn, String nickname, String refname) {
+			String seller, String outyn, String nickname, String likecategory) {
 		super();
 		this.ano = ano;
 		this.id = id;
@@ -93,12 +99,14 @@ public class Account implements Serializable {
 		this.seller = seller;
 		this.outyn = outyn;
 		this.nickname = nickname;
+		this.likecategory = likecategory;
 	}
 	@Override
 	public String toString() {
 		return "Account [ano=" + ano + ", id=" + id + ", pwd=" + pwd + ", email=" + email + ", pimage=" + pimage
 				+ ", idtype=" + idtype + ", idtoken=" + idtoken + ", seller=" + seller + ", outyn=" + outyn
-				+ ", nickname=" + nickname + "]";
+				+ ", nickname=" + nickname + ", likecategory=" + likecategory + "]";
 	}
+	
 	
 }
