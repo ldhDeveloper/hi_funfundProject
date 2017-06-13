@@ -413,7 +413,7 @@ function numberWithCommas(x) {
 				<button id="selectArt" class="btn selcategory" value="art">예술</button>
 				<button id="selectGame" class="btn selcategory" value="game">게임</button>
 				<button id="selectTrip" class="btn selcategory" value="trip">여행</button>
-				<button id="selectSport" class="btn selcategory" value="sport">스포츠</button>
+				<button id="selectSport" class="btn selcategory" value="sports">스포츠</button>
 				<button id="selectSupport" class="btn selcategory"
 					value="support">후원</button>
 			</div>

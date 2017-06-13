@@ -503,14 +503,14 @@ li {
 							style="width: 450px; border: 1px solid #ddd; height: 50px; background: #f8f8f8; margin-left: 10px; padding: 10px;">
 							<select name="category">
 								<option value="" class="re-option">선택하세요
-								<option value="테크" class="re-option">테크
-								<option value="패션/뷰티" class="re-option">패션/뷰티
-								<option value="푸드" class="re-option">푸드
-								<option value="디자인" class="re-option">디자인제품
-								<option value="예술" class="re-option">예술
-								<option value="게임" class="re-option">게임
-								<option value="여행" class="re-option">여행
-								<option value="스포츠" class="re-option">스포츠
+								<option value="tech" class="re-option">테크
+								<option value="beauty" class="re-option">패션/뷰티
+								<option value="food" class="re-option">푸드
+								<option value="design" class="re-option">디자인제품
+								<option value="art" class="re-option">예술
+								<option value="game" class="re-option">게임
+								<option value="trip" class="re-option">여행
+								<option value="sport" class="re-option">스포츠
 								<option value="후원" class="do-option option-none">후원
 							</select>
 						</div>
