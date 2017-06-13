@@ -281,7 +281,7 @@ body {
 							</div>
 							<p>
 								<span id="persent<c:out value='${status.index}'/>"></span> %
-								<fmt:formatNumber var= "amountNumber" value="${item.fundamount}" type="currency" />
+								<fmt:formatNumber var= "amountNumber" value="${item.fundamount}" />
 								&nbsp;&nbsp; <span><c:out value="${amountNumber }" /></span>원
 								달성 &nbsp;&nbsp; <span id="edate<c:out value='${status.index}'/>"></span>
 								<span id="yet<c:out value='${status.index}'/>">일 남음</span>
