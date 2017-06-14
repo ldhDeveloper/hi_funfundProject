@@ -4,15 +4,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style type="text/css">
 .container{
 	width: 100%;
+	padding-left: -15px !important;
+	padding-right: -15px !important;
 }
 
 .row {
 	width: 100%;
+	margin-left: 0px !important;
+	margin-right: 0px !important;
 }
 
 .mlabel {
@@ -23,7 +26,7 @@
 	border-top-right-radius: 10px;
 	width: 100%;
 	color: #fff;
-	font-size: 2vw;
+	font-size: 26pt;
 	padding-top: 1.5%;
 	padding-bottom: 1.5%;
 }
@@ -54,7 +57,6 @@
 .mname {
 	position: relation;
 	z-index: 10px;
-	font-size : 1vw;
 	font-weight: bold;
 	width: 60%;
 	text-align: center;
@@ -72,7 +74,8 @@
 	border: none; */
 	text-align: center;
 	padding-top: 2%;
-	font-size: 1vw;
+	color: #4A4A4A;
+	font-size: 14pt;
 }
 
 .mbtn1 {
@@ -218,19 +221,15 @@
 	color: white;
 }
 
-.listStart {
-	
-}
-
 .lStart {
     background-color: #DFF0D8 !important;
-    width: 88.3%;   
+    width: 100%;   
     
 }
 
 .DStart {
 	background-color: #d9edf7 !important;
-    width: 88.3%;  
+    width: 100%; 
 }
 
 .sidelist {
@@ -246,7 +245,7 @@
 
 .pcontents {
 	border: 1px solid #DFF0D8;
-	width: 88.3%;
+	width: 100%;
 	border-bottom-right-radius: 4px !important;
 	border-bottom-left-radius: 4px !important;
 }
@@ -275,7 +274,7 @@
 
 .DStart {
 	background-color: #d9edf7 !important;
-    width: 88.3%;  
+    width: 100%; 
 }
 
 .sideDlist {
@@ -295,9 +294,16 @@
 
 .dcontents {
 	border: 1px solid #d9edf7;
-	width: 88.3%;
+	width: 100%;
 	border-bottom-right-radius: 4px !important;
 	border-bottom-left-radius: 4px !important;
+}
+
+.nameId {
+	font-size: 14pt;
+	width: 200px;
+	padding-top: 1.8%;
+	color: #4A4A4A;
 }
 </style>
 
@@ -305,8 +311,7 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/menubar.jsp" flush="true"/>
-
-<br><br>
+<div class="hidden-xs" style="height:85px;">&nbsp;</div>
 <div class="container">
 	<div class="row">
 				<div class="mlabel" align="center">
@@ -393,7 +398,7 @@
       							
       							<br> 
       							     							  							
-      							<div class="dlistStart container">
+      							<div class="dlistStart" style="margin: 0px 15px 0px 15px;">
 			  						<ul class="DStart nav nav-pills">
 			    						<li class="sideDlist"><a class="sdlist" href="newsponproject.ao">모두보기</a></li>
 			    						<li class="sideDlist"><a class="sdlist" href="dinwrite.it">작성중</a></li>
@@ -422,7 +427,7 @@
       							
       							<br>
       							
-      							<div class="dlistStart container">
+      							<div class="dlistStart" style="margin: 0px 15px 0px 15px;">
 			  						<ul class="DStart nav nav-pills">
 			    						<li class="sideDlist"><a class="sdlist" href="newsponproject.ao">모두보기</a></li>
 			    						<li class="sideDlist"><a class="sdlist" href="dinwrite.it">작성중</a></li>

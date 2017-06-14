@@ -57,7 +57,6 @@
 .mname {
 	position: relation;
 	z-index: 10px;
-	font-size : 1vw;
 	font-weight: bold;
 	width: 60%;
 	text-align: center;
