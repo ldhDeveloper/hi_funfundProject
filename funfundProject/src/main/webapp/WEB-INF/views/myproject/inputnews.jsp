@@ -132,5 +132,7 @@
  
     <!-- Initialize the editor. -->
     <script> $(function() { $('textarea').froalaEditor() }); </script>
+    
+    <jsp:include page="/WEB-INF/views/common/footer.jsp" flush="true"/>
 </body>
 </html>

@@ -1535,6 +1535,6 @@ li {
 					});
 		}
 	</script>
-	
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" flush="true"/>
 </body>
 </html>
