@@ -139,11 +139,11 @@
 	</div>
 	<div class="container">
   <ul class="nav nav-tabs">
-	  <li class="active"><a href="totalProfit.am">수익금 통계</a></li>
+	  <li class="active"><a href="totalProfit.am">펀딩 통계</a></li>
  </ul>
   <div class="col-xs-12 col-sm-6 col-lg-6">
   		<div class="panel panel-primary">
-	  		<div class="panel-heading">전체 수익</div>
+	  		<div class="panel-heading">월별 펀딩금액</div>
 	  		<div class="panel-body">
 	    		<canvas id="profitline" width="520px" height="520px">
 	    		
