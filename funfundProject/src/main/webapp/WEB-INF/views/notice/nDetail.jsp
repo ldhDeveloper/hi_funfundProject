@@ -152,12 +152,9 @@ function insertReply(lev, upbno, replybno){
 	var bname = '${n.bname}';
 	var page = '${page}';
 	var replybno = replybno;
-	var contentlist = "";
 	var top = new Number(1);
-	var date = new Date(2017, 01, 01, 01, 01, 01, 01);
-	var comparedDate = new Date(); 
-	var edgenum = "";
-	var order = new Number(1);
+	var newestNno = new Number(1);
+	var newestReply = new Number(1);
 	var replylist = "";
 	$.ajax({
 		url : "replyInsert.no",
@@ -199,21 +196,18 @@ function insertReply(lev, upbno, replybno){
 					$('#replyList').html($('#replyList').html() + replylist);
 					var ano = parseInt('${account.ano}');
 					if(data[i].ano == ano){
-						comparedDate.setFullYear(data[i].ndate.slice(0, 4));
-						comparedDate.setDate(data[i].ndate.slice(8, 10));
-						comparedDate.setMonth(data[i].ndate.slice(5, 7));
-						comparedDate.setHours(0);
-						comparedDate.setMinutes(0);
-						comparedDate.setSeconds(order++);
-						if( date < comparedDate ){
-							date = data[i].ndate;
-						edgenum = i;}
+							if(data[i].nno > newestNno){
+							 newestNno = data[i].nno;
+							 newestReply = i;
+							 console.log(newestReply);
+							}
 						} 
+					
 					if('${account.idtype}' != '관리자'){
 						$('#addreply').remove();
 					}
 				} 
-			 	top = $('#replyContent' +edgenum).offset().top;	
+			 	top = $('#replyContent' +newestReply).offset().top;	
 			 	$('body').scrollTop(top - 300);
 			 $('.replylev2').children('#addreply').remove();
 			}
