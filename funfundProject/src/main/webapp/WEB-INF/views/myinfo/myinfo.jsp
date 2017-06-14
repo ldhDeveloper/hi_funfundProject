@@ -681,6 +681,8 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 	</div>
 
 <br><br>
-<jsp:include page="/WEB-INF/views/common/footer.jsp" flush="true"/>
+<footer>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" flush="true" />
+</footer>
 </body>
 </html>
