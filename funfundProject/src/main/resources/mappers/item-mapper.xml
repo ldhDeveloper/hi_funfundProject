@@ -314,7 +314,7 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
                                             left join (select refno, refname as thumbnail 
                                                        from attachment
                                                        where ftype='item' and fsubtype='thumbnail') i7 on(i1.pro_no = i7.refno)) ia on (mi1.pro_no = ia.pro_no)
-							where mi1.ano = #{ano} and ia.category != 'pinterest' and category != '후원'
+							where mi1.ano = #{ano} and ia.category != 'pinterest' and category != 'support'
 	</select>
 	
 	<select id="selectMySponItems" parameterType="int" resultMap="itemResult">
@@ -343,7 +343,7 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
                                             left join (select refno, refname as thumbnail 
                                                        from attachment
                                                        where ftype='item' and fsubtype='thumbnail') i7 on(i1.pro_no = i7.refno)) ia on (mi1.pro_no = ia.pro_no)
-							where mi1.ano = #{ano} and ia.category != 'pinterest' and category='후원' 
+							where mi1.ano = #{ano} and ia.category != 'pinterest' and category='support' 
 	</select>
 	
 	<select id="selectNewProject" parameterType="int" resultMap="itemResult">
@@ -374,7 +374,7 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
 					                             where ftype='item' and fsubtype='thumbnail') i7 on(i1.pro_no = i7.refno)
 		                                   left join (select ano, pimage
 		                                                from account) ac on (ac.ano=i1.ano)
-		    where i1.ano=#{ano} and i1.category <> '후원'
+		    where i1.ano=#{ano} and i1.category <> 'support'
 	  ]]>
 	</select>
 	
@@ -406,7 +406,7 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
 					                             where ftype='item' and fsubtype='thumbnail') i7 on(i1.pro_no = i7.refno)
 		                                   left join (select ano, pimage
 		                                                from account) ac on (ac.ano=i1.ano)
-		    where i1.ano=#{ano} and i1.category = '후원'
+		    where i1.ano=#{ano} and i1.category = 'support'
 	    ]]>
 	</select>
 	
@@ -577,7 +577,7 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
                                      where ftype='item' and fsubtype='thumbnail') i7 on(i1.pro_no = i7.refno)
                                      left join (select ano, pimage
                                                   from account) ac on (ac.ano=i1.ano)
-    		where i1.pstatus in ('작성중', '승인요청') and i1.ano=#{ano} and i1.category <> '후원'
+    		where i1.pstatus in ('작성중', '승인요청') and i1.ano=#{ano} and i1.category <> 'support'
 		]]>
 	</select>
 	<select id="selectSuccessFundding" resultMap="itemResult">
@@ -641,7 +641,7 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
 			                             where ftype='item' and fsubtype='thumbnail') i7 on(i1.pro_no = i7.refno)
                                    left join (select ano, pimage
                                                 from account) ac on (ac.ano=i1.ano)
-    		where i1.pstatus='승인완료' and i1.ano=#{ano} and i1.category <> '후원'	
+    		where i1.pstatus='승인완료' and i1.ano=#{ano} and i1.category <> 'support'	
 		]]>
 	</select>	
 		
@@ -673,7 +673,7 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
 			                             where ftype='item' and fsubtype='thumbnail') i7 on(i1.pro_no = i7.refno)
                                    left join (select ano, pimage
                                                 from account) ac on (ac.ano=i1.ano)
-    		where i1.pstatus in ('펀딩종료', '펀딩성공', '펀딩실패') and i1.ano=#{ano} and i1.category <> '후원'			
+    		where i1.pstatus in ('펀딩종료', '펀딩성공', '펀딩실패') and i1.ano=#{ano} and i1.category <> 'support'			
 		]]>    
 	</select>
 	
@@ -779,7 +779,7 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
 		]]> 
 	</select>
 	
-	<!-- 개설한 후원형 프로젝트  -->
+	<!-- 개설한 support형 프로젝트  -->
 	
 	<select id="selectNewSponProject2" parameterType="int" resultMap="itemResult">
 		<![CDATA[
@@ -809,7 +809,7 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
                                      where ftype='item' and fsubtype='thumbnail') i7 on(i1.pro_no = i7.refno)
                                      left join (select ano, pimage
                                                   from account) ac on (ac.ano=i1.ano)
-    		where i1.pstatus in ('작성중', '승인요청') and i1.ano=#{ano} and i1.category='후원'
+    		where i1.pstatus in ('작성중', '승인요청') and i1.ano=#{ano} and i1.category='support'
 		]]>
 	</select>	
 
@@ -841,7 +841,7 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
 			                             where ftype='item' and fsubtype='thumbnail') i7 on(i1.pro_no = i7.refno)
                                    left join (select ano, pimage
                                                 from account) ac on (ac.ano=i1.ano)
-    		where i1.pstatus='승인완료' and i1.ano=#{ano} and i1.category='후원'	
+    		where i1.pstatus='승인완료' and i1.ano=#{ano} and i1.category='support'	
 		]]>
 	</select>	
 		
@@ -873,7 +873,7 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
 			                             where ftype='item' and fsubtype='thumbnail') i7 on(i1.pro_no = i7.refno)
                                    left join (select ano, pimage
                                                 from account) ac on (ac.ano=i1.ano)
-    		where i1.pstatus in ('펀딩종료', '펀딩성공', '펀딩실패') and i1.ano=#{ano} and i1.category='후원'			
+    		where i1.pstatus in ('펀딩종료', '펀딩성공', '펀딩실패') and i1.ano=#{ano} and i1.category='support'			
 		]]>    
 	</select>
 	<select id="selectCateName" parameterType="int" resultType="String">

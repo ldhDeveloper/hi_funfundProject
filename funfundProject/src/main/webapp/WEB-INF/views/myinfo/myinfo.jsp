@@ -58,21 +58,18 @@
 	z-index: 10px;	
 	font-weight: bold;
 	width: 60%;
-	text-align: center;
 	color: #4D525B;
 }
 
 .mgrade {
 	width: 200px;
-	text-align: center;
 	padding-top: 2%;
-	font-size: 14pt;
-	padding-left: 5%;
+	font-size: 1.3em;
 	color: #4A4A4A;
 }
 
 .nameId {
-	font-size: 14pt;
+	font-size: 1.3em;
 	width: 200px;
 	padding-top: 1.8%;
 	color: #4A4A4A;
@@ -97,7 +94,7 @@
 	border: none;
 	text-align: center;
 	font-weight: bold;
-	font-size: 14pt;
+	font-size: 13pt;
 	padding-top: 0.8%;
 }
 
@@ -233,7 +230,7 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 				
 				<div class="minfo">
 					<div class="row">
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+						<div class="col-lg-3 col-md-3 col-sm-7 col-xs-7">
 							<form id="imageform" action="imgUpload.at" method="post" enctype="multipart/form-data">
 								<input id="profileimagefile" type="file" name="uploadFile" style="display:none;" onchange="LoadImg(this);">
 								<c:if test="${ empty sessionScope.account.pimage}">
@@ -243,10 +240,10 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 									<input type="hidden" name="photoflag" value="update">
 								</c:if>
 								<c:if test="${empty sessionScope.account.pimage }">
-									<img id="profileimage" class="img-circle img-responsive" src="images/myinfo/basic.png" style="margin-left: 10%; width:80%; height:130px; cursor:pointer" onclick="document.all.uploadFile.click();">
+									<img id="profileimage" class="img-circle img-responsive" src="images/myinfo/basic.png" style="margin-left: 40%; max-width:170px;max-height:170px; min-width:170px; min-height:170px;width:170px; heigh:170px; cursor:pointer" onclick="document.all.uploadFile.click();">
 								</c:if>
 								<c:if test="${!empty sessionScope.account.pimage }">
-									<img id="profileimage" class="img-circle img-responsive" src="images/myinfo/<c:out value='${sessionScope.account.pimage }'/>" style="margin-left: 30%; margin-right: 30%; width:80%; height:120%; cursor:pointer" onclick="document.all.uploadFile.click();">
+									<img id="profileimage" class="img-circle img-responsive" src="images/myinfo/<c:out value='${sessionScope.account.pimage }'/>"  style="margin-left: 40%;  min-width:170px; min-height:170px; max-width:170px;max-height:170px; width:170px; heigh:170px; cursor:pointer" onclick="document.all.uploadFile.click();">
 								</c:if>
 							</form>
 						</div>
@@ -267,8 +264,19 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 							}
 						</script>
 						
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow mname" align="center">
-							<label class="nameId">
+						<div class="col-lg-3 col-md-3 col-sm-7 col-xs-11 mrow" align="center">
+						<div>
+		                 		<c:if test="${empty sessionScope.account.pimage }">
+		                 			<button id="insertphoto" class="imgBtn" onclick="photosubmit();">사진추가</button>
+		                 		</c:if>
+		                 		<c:if test="${!empty sessionScope.account.pimage }">
+		                 			<button id="updatephoto" class="imgBtn" onclick="photosubmit();">사진변경</button>
+		                 		</c:if>
+		                 </div>
+		                 </div>
+						
+						<div class="col-lg-3 col-md-3 col-sm-7 col-xs-12 mrow mname" align="center">
+							<label class="nameId"><b class="hidden-lg hidden-md" style="margin-left: 6%;">&nbsp;</b>
 							회원명 | <c:if test="${ empty sessionScope.party.pname}">
 		                 				<input type="text" name="pname" class="mnameText" placeholder="이름" value="${ sessionScope.account.nickname }" readonly/>
 		                 			</c:if>
@@ -289,9 +297,9 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 		                 	</div> --%>
 						</div>						
 						
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow"><label class="mgrade">회원등급 | ${ sessionScope.account.idtype }</label></div>
+						<div class="col-lg-3 col-md-3 col-sm-7 col-xs-12 mrow"><b class="hidden-lg hidden-md" style="margin-left: 24%;">&nbsp;</b><label class="mgrade">회원등급 | ${ sessionScope.account.idtype }</label></div>
 						
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center">
+						<%-- <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center">
 						<div>
 		                 		<c:if test="${empty sessionScope.account.pimage }">
 		                 			<button id="insertphoto" class="imgBtn" onclick="photosubmit();">사진추가</button>
@@ -300,7 +308,7 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
 		                 			<button id="updatephoto" class="imgBtn" onclick="photosubmit();">사진변경</button>
 		                 		</c:if>
 		                 </div>
-		                 </div>
+		                 </div> --%>
 													
 						<%-- <c:choose>
         					<c:when test="${ sessionScope.account.idtype == '일반회원' || sessionScope.account.idtype == '승인요청'}">

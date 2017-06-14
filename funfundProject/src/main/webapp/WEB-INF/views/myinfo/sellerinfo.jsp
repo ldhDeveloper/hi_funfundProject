@@ -52,7 +52,7 @@
 }
 
 .mlabel {
-		border: 1px solid #ddd;
+	border: 1px solid #ddd;
 	background-color: #24B3A8;
 	background: linear-gradient(to right, #24B3A8, #58CEB0, #2AC594);
 	border-top-left-radius: 10px;
@@ -61,6 +61,7 @@
 	color: #fff;
 	font-size: 26pt;
 	padding-top: 1.5%;
+	padding-bottom: 1%;
 }
 
 .btn-darkgray3{display:inline-block;width:47.5%;height:44px;font-size:13px;line-height:46px;text-align:center;color:#fff;background:#50E3C2;border:none;box-sizing:border-box}
@@ -79,16 +80,18 @@
 	width: 200px;
 	text-align: center;
 	padding-top: 2%;
-	font-size: 14pt;
+	font-size: 1.3em;
 	padding-left: 5%;
 	color: #4A4A4A;
+	margin-left: 80%;
 }
 
 .nameId {
-	font-size: 14pt;
+	font-size: 1.3em;
 	width: 200px;
 	padding-top: 1.8%;
 	color: #4A4A4A;
+	margin-left: 40%;
 }
 
 </style>
@@ -136,16 +139,16 @@ $(function(){
 				
 				<div class="minfo">
 					<div class="row">
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-7">
 						<c:if test="${empty sessionScope.account.pimage }">
-						<img class="img-circle img-responsive" src="images/myinfo/basic.png" style="max-width:170px;max-height:170px; width:170px; heigh:150px;"><!-- 사진 값이 들어갈 곳  -->
+						<img class="img-circle img-responsive" src="images/myinfo/basic.png" style="margin-left:30%; max-width:170px;max-height:170px; min-width:170px; min-height:170px;width:170px; heigh:170px;"><!-- 사진 값이 들어갈 곳  -->
 						</c:if>
 						<c:if test="${!empty sessionScope.account.pimage }">
-						<img class="img-circle img-responsive" src="images/myinfo/<c:out value='${sessionScope.account.pimage }'/>" style="max-width:170px;max-height:170px; width:170px; heigh:150px;"><!-- 사진 값이 들어갈 곳  -->
+						<img class="img-circle img-responsive" src="images/myinfo/<c:out value='${sessionScope.account.pimage }'/>" style="margin-left:30%; max-width:170px;max-height:170px; min-width:170px; min-height:170px;width:170px; heigh:170px;"><!-- 사진 값이 들어갈 곳  -->
 						</c:if>
 						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow mname" align="center">
-						<label class="nameId">
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-11 mrow mname" align="center">
+						<label class="nameId"><b class="hidden-lg hidden-md" style="margin-left: -65%;">&nbsp;</b>
 							회원명 | <c:if test="${ empty sessionScope.party.pname}">
 		                 				<input type="text" name="pname" class="mnameText" placeholder="이름" value="${ sessionScope.account.nickname }" readonly/>
 		                 			</c:if>
@@ -156,7 +159,7 @@ $(function(){
 		              	</label>
 						</div>
 						
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">회원등급 | ${ sessionScope.account.idtype }</label></div>
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-11 mrow" align="center"><b class="hidden-lg hidden-md" style="margin-left: -80%;">&nbsp;</b><label class="mgrade">회원등급 | ${ sessionScope.account.idtype }</label></div>
 						<%-- <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">${ sessionScope.account.idtype }</label></div> --%>
 						
 						<%-- <c:choose>
