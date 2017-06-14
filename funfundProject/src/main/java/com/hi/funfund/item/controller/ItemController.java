@@ -364,15 +364,17 @@ public class ItemController {
 		int pro_no = Integer.parseInt(request.getParameter("pro_no"));
 		String category = itemService.selectCategory(pro_no);
 		session = request.getSession(false);
-		Account a = (Account) session.getAttribute("account");
-		HashMap<String, String> hmap = new HashMap<String, String>();
-		hmap.put("ano", Integer.toString(a.getAno()));
-		System.out.println("ano : " + Integer.toString(a.getAno()));
-		hmap.put("category", category);
-		System.out.println("category : " + category);
-		int result = accountService.upCategory(hmap);
-		//int result = accountService.tempUp(a.getAno());
-		System.out.println("upresult : " + result);
+		if(session.getAttribute("account") != null){
+			Account a = (Account) session.getAttribute("account");
+			HashMap<String, String> hmap = new HashMap<String, String>();
+			hmap.put("ano", Integer.toString(a.getAno()));
+			System.out.println("ano : " + Integer.toString(a.getAno()));
+			hmap.put("category", category);
+			System.out.println("category : " + category);
+			int result = accountService.upCategory(hmap);
+			//int result = accountService.tempUp(a.getAno());
+			System.out.println("upresult : " + result);
+		}
 		Item item = itemService.selectOne(pro_no);
 		List<Itemfund> bestList = itemService.bestList(pro_no);
 		System.out.println("bestList: "+bestList);
