@@ -349,7 +349,7 @@ public class AccountController {
 		ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Mail.xml");
 		
 	    AuthMail mm = (AuthMail) context.getBean("mailMail");
-	    mm.sendMail("from@no-spam.com", email, "Funfund에서 이메일 인증번호를 발송합니다.", "인증번호는 " + authNumber + " 입니다.");
+	    mm.sendMail("from@no-spam.com", email, "Funfund에서 이메일 인증번호를 발송합니다.", "☆★☆ 인증번호는 << " + authNumber + " >> 입니다.☆★☆ 인증번호를 정확하게 기입해주세요! ^-^");
 	    
 	    return;
 	}

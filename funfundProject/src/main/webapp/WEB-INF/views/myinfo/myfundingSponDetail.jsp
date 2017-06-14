@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <style type="text/css">
 .container{
@@ -22,17 +21,14 @@
 .mlabel {
 	border: 1px solid #ddd;
 	background-color: #24B3A8;
-	/* background: -webkit-linear-gradient(left top, #24B3A8, #58CEB0, #2AC594);
-	background: -o-linear-gradient(bottom right, #24B3A8, #58CEB0, #2AC594);
-	background: -moz-linear-gradient(bottom right, #24B3A8, #58CEB0, #2AC594); */
 	background: linear-gradient(to right, #24B3A8, #58CEB0, #2AC594);
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 	width: 100%;
-	height: 80px;
 	color: #fff;
-	font-size: 2vw;
+	font-size: 26pt;
 	padding-top: 1.5%;
+	padding-bottom: 1%;	
 }
 
 .minfo {
@@ -43,7 +39,6 @@
 	border-right: 1px solid #ddd;
 	background-color: #F8F8F8;
 	width: 100%;
-	height : 20%;
 	padding-top: 3%;
 	padding-left: 8%;
 	padding-right: 8%;
@@ -62,7 +57,6 @@
 .mname {
 	position: relation;
 	z-index: 10px;
-	font-size : 1vw;
 	font-weight: bold;
 	width: 60%;
 	text-align: center;
@@ -80,7 +74,10 @@
 	border: none; */
 	text-align: center;
 	padding-top: 2%;
-	font-size: 1vw;
+	color: #4A4A4A;
+	font-size: 1.3em;
+	padding-left: 5%;
+	margin-left: 80%;
 }
 
 .mbtn1 {
@@ -106,7 +103,6 @@
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 	width: 100%;
-	height : 900px;
 	padding-top: 2%;
 }
 
@@ -160,7 +156,6 @@
 .tableStart {
 	width: 98%;
 	padding-left: 2%;
-	height: 100%;
 }
 
 .state {
@@ -168,7 +163,6 @@
 	border-radius: 15px;
 	background-color: #E25253;
 	width: 40%;
-	height: 25px;
 	color: white;
 	padding: 2%;
 }
@@ -247,17 +241,28 @@
 }
 
 .jpth {
-	border-top: 4px solid #D9EDF7;
-	border-bottom: 4px solid #D9EDF7;
-	padding-left: 10%;
-	width: 20%;
+	border-top: 4px solid #DFF0D8;
+	border-bottom: 4px solid #DFF0D8;
+	width: 15%;
 	text-align: center;
 	padding-top: 1.5% !important;
 	padding-bottom: 1.5% !important;
+	padding-left : 0px !important;
+	padding-right : 0px !important;
+}
+
+.jpth1 {
+	border-top: 4px solid #DFF0D8;
+	border-bottom: 4px solid #DFF0D8;
+	width: 40%;
+	text-align: center;
+	padding-top: 1.5% !important;
+	padding-bottom: 1.5% !important;
+	padding-left : 0px !important;
+	padding-right : 0px !important;
 }
 
 .jptd {
-	width: 20%;
 	text-align: center;
 	padding-top: 1.5% !important;
 	padding-bottom: 1.5% !important;
@@ -275,7 +280,6 @@
 	border: none;
 	border-radius: 20px;
 	box-shadow: 2px 2px #ddd;
-	height: 30px;
 	text-size: 2vw;	
 }
 
@@ -286,7 +290,6 @@
 	border: none;
 	border-radius: 20px;
 	box-shadow: 2px 2px #ddd;
-	height: 30px;
 	text-size: 2vw;	
 }
 
@@ -297,12 +300,15 @@
 	border: none;
 	border-radius: 20px;
 	box-shadow: 2px 2px #ddd;
-	height: 30px;
 	text-size: 2vw;
 } 
 
-label {
-	font-size: 1vw;
+.nameId {
+	font-size: 1.3em;
+	width: 200px;
+	padding-top: 1.8%;
+	color: #4A4A4A;
+	margin-left: 40%;
 }
 </style>
 
@@ -311,22 +317,23 @@ label {
 <body>
 <jsp:include page="/WEB-INF/views/common/menubar.jsp" flush="true"/>
 
-<br><br>
+<div class="hidden-xs" style="height:85px;">&nbsp;</div>
 <div class="container">
 	<div class="row">
 				<div class="mlabel" align="center">회원 정보 보기</div>
 				
 				<div class="minfo">
 					<div class="row">
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-7">
 						<c:if test="${empty sessionScope.account.pimage }">
-						<img class="img-circle img-responsive" src="images/myinfo/basic.png" style="max-width:170px;max-height:170px; width:170px; heigh:150px;"><!-- 사진 값이 들어갈 곳  -->
+						<img class="img-circle img-responsive" src="images/myinfo/basic.png" style="margin-left:30%; max-width:170px;max-height:170px; min-width:170px; min-height:170px;width:170px; heigh:170px;"><!-- 사진 값이 들어갈 곳  -->
 						</c:if>
 						<c:if test="${!empty sessionScope.account.pimage }">
-						<img class="img-circle img-responsive" src="images/myinfo/<c:out value='${sessionScope.account.pimage }'/>" style="max-width:170px;max-height:170px; width:170px; heigh:150px;"><!-- 사진 값이 들어갈 곳  -->
+						<img class="img-circle img-responsive" src="images/myinfo/<c:out value='${sessionScope.account.pimage }'/>" style="margin-left:30%; max-width:170px;max-height:170px; min-width:170px; min-height:170px;width:170px; heigh:170px;"><!-- 사진 값이 들어갈 곳  -->
 						</c:if>
 						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow mname" align="center">
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-11 mrow mname" align="center">
+						<label class="nameId"><b class="hidden-lg hidden-md" style="margin-left: -65%;">&nbsp;</b>
 							회원명 | <c:if test="${ empty sessionScope.party.pname}">
 		                 				<input type="text" name="pname" class="mnameText" placeholder="이름" value="${ sessionScope.account.nickname }" readonly/>
 		                 			</c:if>
@@ -334,8 +341,9 @@ label {
 		                 			<c:if test="${ !empty sessionScope.party.pname}">
 		                 				<input type="text" name="pname" class="mnameText" placeholder="이름" value="${ sessionScope.party.pname }" readonly/>
 		                 			</c:if>
-						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">회원등급 | ${ sessionScope.account.idtype }</label></div>
+		       			</label>
+		       			</div>
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-11 mrow" align="center"><b class="hidden-lg hidden-md" style="margin-left: -80%;">&nbsp;</b><label class="mgrade">회원등급 | ${ sessionScope.account.idtype }</label></div>
 						<%-- <c:choose>
         					<c:when test="${ sessionScope.account.idtype == '일반회원' || sessionScope.account.idtype == '승인요청'}">
 								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input id="investApply" type="button" class="mbtn1" value="투자 회원 신청"></div>
@@ -353,7 +361,7 @@ label {
         							<span class="bar">▼</span>
       							</button>
       							
-      							<a class="hidden-lg hidden-md navbar-brand">회원 메뉴</a>
+      							<a class="hidden-lg hidden-md navbar-brand" style="font-size: 25pt; padding-top: 6%; padding-left: 10%;">회원 메뉴</a>
     						</div>
 
     						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -404,7 +412,9 @@ label {
   									
   							<div class="tableStart">
   									
-  								<h3 align="center">결제 정보 변경 및 취소</h3>
+  								<h2 align="center">결제 정보 변경 및 취소</h2>
+  								
+  								<br><br><br>
       							
       							<form action="joinCancle.fl" method="post" enctype="multipart/form-data">
       							<input type="hidden" value="${ myfundingSpon.fund_no }" name="fund_no">
@@ -414,7 +424,7 @@ label {
     										<thead class="paddingGo">								
       											<tr class="joinProject">
         											<th class="jpth">주문번호</th>
-        											<th class="jpth">리워드 프로젝트</th>
+        											<th class="jpth1">리워드 프로젝트</th>
         											<th class="jpth">마감날짜</th>
         											<th class="jpth">참여금액</th>
         											<th class="jpth">결제상태</th>
@@ -602,12 +612,10 @@ label {
   											});
   										</script>
   									</div>  								
-  								
-  								<br>
     						</div>
     					</div>
     					
-    					<br>
+    					
   					</div>										
 				</div>				
 	</div>

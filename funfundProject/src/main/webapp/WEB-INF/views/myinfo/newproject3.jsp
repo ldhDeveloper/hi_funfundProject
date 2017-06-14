@@ -56,7 +56,6 @@
 .mname {
 	position: relation;
 	z-index: 10px;
-	font-size : 1vw;
 	font-weight: bold;
 	width: 60%;
 	text-align: center;
@@ -74,15 +73,18 @@
 	border: none; */
 	text-align: center;
 	padding-top: 2%;
-	font-size:14pt;
 	color: #4A4A4A;
+	font-size: 1.3em;
+	padding-left: 5%;
+	margin-left: 80%;
 }
 
 .nameId {
-	font-size: 14pt;
+	font-size: 1.3em;
 	width: 200px;
 	padding-top: 1.8%;
 	color: #4A4A4A;
+	margin-left: 40%;
 }
 
 .mbtn1 {
@@ -96,7 +98,6 @@
 	border: none;
 	text-align: center;
 	font-weight: bold;
-	font-size: 1vw;
 	padding-top: 2%;
 }
 
@@ -275,16 +276,16 @@
 				
 				<div class="minfo">
 					<div class="row">
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-7">
 						<c:if test="${empty sessionScope.account.pimage }">
-						<img class="img-circle img-responsive" src="images/myinfo/basic.png" style="max-width:170px;max-height:170px; width:170px; heigh:150px;"><!-- 사진 값이 들어갈 곳  -->
+						<img class="img-circle img-responsive" src="images/myinfo/basic.png" style="margin-left:30%; max-width:170px;max-height:170px; min-width:170px; min-height:170px;width:170px; heigh:170px;"><!-- 사진 값이 들어갈 곳  -->
 						</c:if>
 						<c:if test="${!empty sessionScope.account.pimage }">
-						<img class="img-circle img-responsive" src="images/myinfo/<c:out value='${sessionScope.account.pimage }'/>" style="max-width:170px;max-height:170px; width:170px; heigh:150px;"><!-- 사진 값이 들어갈 곳  -->
+						<img class="img-circle img-responsive" src="images/myinfo/<c:out value='${sessionScope.account.pimage }'/>" style="margin-left:30%; max-width:170px;max-height:170px; min-width:170px; min-height:170px;width:170px; heigh:170px;"><!-- 사진 값이 들어갈 곳  -->
 						</c:if>
 						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow mname" align="center">
-							<label class="nameId">
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-11 mrow mname" align="center">
+							<label class="nameId"><b class="hidden-lg hidden-md" style="margin-left: -65%;">&nbsp;</b>
 							회원명 | <c:if test="${ empty sessionScope.party.pname}">
 		                 				<input type="text" name="pname" class="mnameText" placeholder="이름" value="${ sessionScope.account.nickname }" readonly/>
 		                 			</c:if>
@@ -294,7 +295,8 @@
 		                 			</c:if>
 		       				</label>
 						</div>
-						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">회원등급 | ${ sessionScope.account.idtype }</label></div>
+						
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-11 mrow" align="center"><b class="hidden-lg hidden-md" style="margin-left: -80%;">&nbsp;</b><label class="mgrade">회원등급 | ${ sessionScope.account.idtype }</label></div>
 						<c:choose>
         					<c:when test="${ sessionScope.account.idtype == '일반회원' || sessionScope.account.idtype == '승인요청중'}">
 								<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><input id="investApply" type="button" class="mbtn1" value="투자 회원 신청"></div>
@@ -432,7 +434,7 @@
 							  														 <span class="sr-only"></span>
 																			</div>
 																			
-																			<span  style="display:none;" id="per<c:out value='${status.index}'/>"><span style="display:none;" id="persent<c:out value='${status.index}'/>"></span>% &nbsp;&nbsp;<span><c:out value="${item.fundamount }"/></span>원 달성 &nbsp;&nbsp;</span>																																								  
+																			<span style="display:none;" id="per<c:out value='${status.index}'/>"><span style="display:none;" id="persent<c:out value='${status.index}'/>"></span>% &nbsp;&nbsp;<span id="comma<c:out value='${status.index}'/>"><c:out value="${item.fundamount }"/></span>원 달성 &nbsp;&nbsp;</span>																																								  
 																			<span style="display:none;" id="edate<c:out value='${status.index}'/>"></span>
 																			<span style="display:none;" id="yet<c:out value='${status.index}'/>">일 남음</span>
 																			<span style="display:none;" id="complete<c:out value='${status.index}'/>">펀딩종료</span>    
@@ -450,9 +452,16 @@
 					    							</div>
 					    							
 					    							<script type="text/javascript">    								
+						    							function numberWithCommas(x) {
+															return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+														}
+						    							
 													    $(function(){ 
 													    	var ecost = "<c:out value='${item.ecost}'/>";
-															var fundamount = "<c:out value='${item.fundamount}'/>"
+													    	var fundamount = "<c:out value='${item.fundamount}'/>"																
+															var price2 = numberWithCommas(fundamount);
+	
+															$("#comma<c:out value='${status.index}'/>").html(price2);
 															var persent = Math.round(fundamount * 100 / ecost);
 															var bar=0;
 															if(persent > 100){
