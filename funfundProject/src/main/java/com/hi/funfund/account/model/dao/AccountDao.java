@@ -95,8 +95,9 @@ public class AccountDao {
 			 result = sqlSession.insert("accountMapper.insertThirdParty", account);
 			 //System.out.println("ano : " + account.getAno());
 			 result = sqlSession.insert("createLikeInfo", account.getAno());
+			 
 			 if(result > 0){
-				 user = account;
+				 user = (Account) sqlSession.selectOne("selectAccount", account.getAno());
 			 }
 		}else{
 			if(user.getIdtoken() == null ){

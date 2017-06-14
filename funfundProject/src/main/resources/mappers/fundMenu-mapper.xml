@@ -55,7 +55,7 @@ order by mno
 	<insert id="insertFM" parameterType="FundMenu">
 		insert into fundmenu values
 		(seq_mno.nextval, #{mname, jdbcType=VARCHAR}, #{mcost,
-		jdbcType=INTEGER}, #{pro_no}, #{mcontent, jdbcType=VARCHAR}, to_date(#{s_mdate,jdbcType=VARCHAR}, 'yyyy-mm-dd'), #{mnum}, #{mcount, jdbcType=INTEGER}
+		jdbcType=INTEGER}, #{pro_no}, #{mcontent, jdbcType=VARCHAR}, to_date(#{s_mdate,jdbcType=VARCHAR}, 'yyyy-mm-dd'), #{mnum}, #{mcount, jdbcType=INTEGER})
 	</insert>
 
 	<update id="updateFM" parameterType="FundMenu">
