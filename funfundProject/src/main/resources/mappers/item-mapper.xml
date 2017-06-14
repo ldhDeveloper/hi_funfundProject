@@ -67,7 +67,7 @@
 
 	<insert id="insert" parameterType="Item">
 		<![CDATA[
-			insert into item values(seq_pro_no.nextval, #{ano}, null, null, null, null, null, null, 0, #{refund, jdbcType=VARCHAR}, null, '작성중', 0, null, null, null, null, null, null, null, null, null, null, 0, 0, null, '미인증')
+			insert into item values(seq_pro_no.nextval, #{ano}, null, null, null, null, null, null, 0, #{refund, jdbcType=VARCHAR}, null, '작성중', 0, null, null, null, null, null, null, null, null, null, 0, 0, null, '미인증')
 		]]>
 
 		<selectKey keyProperty="pro_no" resultType="Integer" order="AFTER">

@@ -140,11 +140,11 @@ body {
 }
 
 .catename{
-	border: 1px solid #6D696A;
+	border: 1px solid #000033;
     padding: 5px 10px 5px 10px;
     color: white;
     border-radius: 10px;
-    background-color: #6D696A;
+    background-color: #000033;
 }
 </style>
 <script>
@@ -316,7 +316,7 @@ function numberWithCommas(x) {
 												html += '<div class="thumbnail" align="center">';
 												html += '<a href="detail.it?pro_no='
 														+ pro_no + '"> ';
-												html += '<img src="/funfund/images/funding/thumbnail/'
+												html += '<img src="/funfund/images/makeproject/titleimg/'
 														+ thumbnail
 														+ '" alt="사진1" style="width: 100%">';
 												html += '<div id="progress' + i + '" class="progress">';
@@ -382,36 +382,36 @@ function numberWithCommas(x) {
 
           
 			<ul id="s1">
-				<li><img src="/funfund/images/funding/l.png"
-					class="img-responsive"></li>
-				<li><img src="/funfund/images/funding/ll.PNG"
-					class="img-responsive"></li>
-				<li><img src="/funfund/images/funding/t2.PNG"
-					class="img-responsive"></li>
-				<li><img src="/funfund/images/funding/sss.PNG"
-					class="img-responsive"></li>
+				<li><a href="detail.it?pro_no=50"><img src="/funfund/images/funding/l.png"
+					class="img-responsive"></a></li>
+				<li><a href="detail.it?pro_no=10"><img src="/funfund/images/funding/ll.PNG"
+					class="img-responsive"></a></li>
+				<li><a href="detail.it?pro_no=51"><img src="/funfund/images/funding/t2.PNG"
+					class="img-responsive"></a></li>
+				<li><a href="detail.it?pro_no=8"><img src="/funfund/images/funding/sss.PNG"
+					class="img-responsive"></a></li>
 			</ul>
 
 			<ul id="s2">
-				<li><img src="/funfund/images/funding/l2.png"
-					class="img-responsive"></li>
-				<li><img src="/funfund/images/funding/o.PNG"
-					class="img-responsive"></li>
-				<li><img src="/funfund/images/funding/ff.PNG"
-					class="img-responsive"></li>
-				<li><img src="/funfund/images/funding/hh.PNG"
-					class="img-responsive"></li>
+				<li><a href="detail.it?pro_no=38"><img src="/funfund/images/funding/l2.png"
+					class="img-responsive"></a></li>
+				<li><a href="detail.it?pro_no=11"><img src="/funfund/images/funding/o.PNG"
+					class="img-responsive"></a></li>
+				<li><a><img src="/funfund/images/funding/ff.PNG"
+					class="img-responsive"></a></li>
+				<li><a href="detail.it?pro_no=31 "><img src="/funfund/images/funding/hh.PNG"
+					class="img-responsive"></a></li>
 			</ul>
 
 			<ul id="s3">
-				<li><img src="/funfund/images/funding/l3.png"
-					class="img-responsive"></li>
-				<li><img src="/funfund/images/funding/t.PNG"
-					class="img-responsive"></li>
-				<li><img src="/funfund/images/funding/g.PNG"
-					class="img-responsive"></li>
-				<li><img src="/funfund/images/funding/ss.PNG"
-					class="img-responsive"></li>
+				<li><a href="detail.it?pro_no=29"><img src="/funfund/images/funding/l3.png"
+					class="img-responsive"></a></li>
+				<li><a href="detail.it?pro_no=11"><img src="/funfund/images/funding/t.PNG"
+					class="img-responsive"></a></li>
+				<li><a href="detail.it?pro_no=11"><img src="/funfund/images/funding/g.PNG"
+					class="img-responsive"></a></li>
+				<li><a href="detail.it?pro_no=19"><img src="/funfund/images/funding/ss.PNG"
+					class="img-responsive"></a></li>
 			</ul>
 		</div>
 	</div>
@@ -433,7 +433,7 @@ function numberWithCommas(x) {
 				<button id="selectArt" class="btn selcategory" value="art">예술</button>
 				<button id="selectGame" class="btn selcategory" value="game">게임</button>
 				<button id="selectTrip" class="btn selcategory" value="trip">여행</button>
-				<button id="selectSport" class="btn selcategory" value="sports">스포츠</button>
+				<button id="selectSport" class="btn selcategory" value="sport">스포츠</button>
 				<button id="selectSupport" class="btn selcategory"
 					value="support">후원</button>
 			</div>
