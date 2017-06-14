@@ -232,7 +232,7 @@
 
 .lStart {
     background-color: #DFF0D8 !important;
-    width: 88.3%;      
+    width:100%;      
 }
 
 .sidelist {
@@ -248,9 +248,16 @@
 
 .pcontents {
 	border: 1px solid #DFF0D8;
-	width: 88.3%;
+	width: 100%;
 	border-bottom-right-radius: 4px !important;
 	border-bottom-left-radius: 4px !important;
+}
+
+.nameId {
+	font-size: 14pt;
+	width: 200px;
+	padding-top: 1.8%;
+	color: #4A4A4A;
 }
 </style>
 
@@ -341,7 +348,7 @@
       							
       							<br>
       							
-      							<div class="listStart container">
+      							<div class="listStart" style="margin: 0px 15px 0px 15px;">
 			  						<ul class="lStart nav nav-pills">
 			    						<li class="sidelist"><a class="slist" href="newproject.ao">모두보기</a></li>
 			    						<li class="sidelist"><a class="slist" href="inwrite.it">작성중</a></li>
@@ -369,7 +376,7 @@
       							
       							<br>
       							
-      							<div class="listStart container">
+      							<div class="listStart" style="margin: 0px 15px 0px 15px;">
 			  						<ul class="lStart nav nav-pills">
 			    						<li class="sidelist"><a class="slist" href="newproject.ao">모두보기</a></li>
 			    						<li class="sidelist"><a class="slist" href="inwrite.it">작성중</a></li>
@@ -479,7 +486,61 @@
 					    										$("#yet<c:out value='${status.index}'/>").show();
 					    										$("#complete<c:out value='${status.index}'/>").hide();					    									
 					    										$("#displace<c:out value='${status.index}'/>").attr("href", "myproject.fl?pro_no=<c:out value="${item.pro_no}"/>");
-					    									}					    									    									
+					    									}
+					    									
+					    									else if(btDay < 0) {																    									
+					    										if(pstatus == "펀딩성공"){
+					    											$("#conitemper<c:out value='${status.index}'/>").html("펀딩성공");
+						    										$("#itempanel<c:out value='${status.index}'/>").removeClass("panel-warning");
+						    										$("#itempanel<c:out value='${status.index}'/>").removeClass("bg-danger");
+						    										$("#itempanel<c:out value='${status.index}'/>").addClass("panel-default");
+						    										$("#progress<c:out value='${status.index}'/>").show();
+						    										$("#progressbar<c:out value='${status.index}'/>").show();
+						    										$("#progressbar<c:out value='${status.index}'/>").html(persent+"%");
+						    										$("#per<c:out value='${status.index}'/>").show();
+						    										$("#persent<c:out value='${status.index}'/>").show();
+						    										$("#edate<c:out value='${status.index}'/>").hide();
+						    										$("#yet<c:out value='${status.index}'/>").hide();
+						    										$("#complete<c:out value='${status.index}'/>").show();						    											
+						    										$("#progressbar<c:out value='${status.index}'/>").addClass("w3-gray");					    										
+						    										$("#displace<c:out value='${status.index}'/>").attr("href", "javascript:");
+					    										}
+					    										
+					    										else if (pstatus == "펀딩실패") {					    											
+					    											$("#conitemper<c:out value='${status.index}'/>").html("펀딩실패");
+					    											$("#imageIn").src = "/funfund/images/myinfo/fail.png/";
+						    										$("#itempanel<c:out value='${status.index}'/>").removeClass("panel-warning");
+						    										$("#itempanel<c:out value='${status.index}'/>").removeClass("bg-danger");
+						    										$("#itempanel<c:out value='${status.index}'/>").addClass("panel-default");
+						    										$("#progress<c:out value='${status.index}'/>").show();
+						    										$("#progressbar<c:out value='${status.index}'/>").show();
+						    										$("#progressbar<c:out value='${status.index}'/>").html(persent+"%");
+						    										$("#per<c:out value='${status.index}'/>").show();
+						    										$("#persent<c:out value='${status.index}'/>").show();
+						    										$("#edate<c:out value='${status.index}'/>").hide();
+						    										$("#yet<c:out value='${status.index}'/>").hide();
+						    										$("#complete<c:out value='${status.index}'/>").show();						    											
+						    										$("#progressbar<c:out value='${status.index}'/>").addClass("w3-gray");					    										
+						    										$("#displace<c:out value='${status.index}'/>").attr("href", "javascript:");
+					    										}
+					    										
+					    										else {										
+					    											$("#conitemper<c:out value='${status.index}'/>").html("펀딩종료");
+						    										$("#itempanel<c:out value='${status.index}'/>").removeClass("panel-warning");
+						    										$("#itempanel<c:out value='${status.index}'/>").removeClass("bg-danger");
+						    										$("#itempanel<c:out value='${status.index}'/>").addClass("panel-default");
+						    										$("#progress<c:out value='${status.index}'/>").show();
+						    										$("#progressbar<c:out value='${status.index}'/>").show();
+						    										$("#progressbar<c:out value='${status.index}'/>").html(persent+"%");
+						    										$("#per<c:out value='${status.index}'/>").show();
+						    										$("#persent<c:out value='${status.index}'/>").show();
+						    										$("#edate<c:out value='${status.index}'/>").hide();
+						    										$("#yet<c:out value='${status.index}'/>").hide();
+						    										$("#complete<c:out value='${status.index}'/>").show();					    											
+						    										$("#progressbar<c:out value='${status.index}'/>").addClass("w3-gray");					    										
+						    										$("#displace<c:out value='${status.index}'/>").attr("href", "javascript:");
+					    										}
+					    									}
 					    								});
 												 </script>
 				    							</c:forEach>				    											    							
@@ -528,6 +589,8 @@
 	</div>
 
 <br><br>
-<jsp:include page="/WEB-INF/views/common/footer.jsp" flush="true"/>
+<footer>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" flush="true" />
+</footer>
 </body>
 </html>

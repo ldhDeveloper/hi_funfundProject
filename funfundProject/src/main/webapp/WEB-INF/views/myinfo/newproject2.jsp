@@ -74,7 +74,8 @@
 	border: none; */
 	text-align: center;
 	padding-top: 2%;
-	font-size: 1vw;
+	color: #4A4A4A;
+	font-size: 14pt;
 }
 
 .mbtn1 {
@@ -514,6 +515,8 @@
 
 
 <br><br>
-<jsp:include page="/WEB-INF/views/common/footer.jsp" flush="true"/>
+<footer>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" flush="true" />
+</footer>
 </body>
 </html>

@@ -633,6 +633,8 @@
 </div>
 
 <br><br>
-<jsp:include page="/WEB-INF/views/common/footer.jsp" flush="true"/>
+<footer>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" flush="true" />
+</footer>
 </body>
 </html>
