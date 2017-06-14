@@ -133,6 +133,7 @@ li {
 .nav>li>a:active{
 	background-color:orange;
 }
+
 </style>
 
 
@@ -1281,7 +1282,7 @@ li {
 						processData : false,
 			            contentType : false,
 						success:function(){
-							alert("임시저장 성공!!")
+							alert("임시저장 성공!!");
 						}
 					});	
 				}

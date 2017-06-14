@@ -138,6 +138,14 @@ body {
 .simg>ul {
 	position: absolute;
 }
+
+.catename{
+	border: 1px solid #6D696A;
+    padding: 5px 10px 5px 10px;
+    color: white;
+    border-radius: 10px;
+    background-color: #6D696A;
+}
 </style>
 <script>
 //돈콤마찍어주는 정규식
@@ -225,9 +233,9 @@ function numberWithCommas(x) {
 														+ btDay + '</span>';
 												html += '<span id="yet' + i +'" style="display:' + funding + '">일 남음</span>';
 												html += '<spen id="complete' + i + '" style="display:' + ending + '">펀딩종료</spen>';
-												html += '</p><div class="caption"><p>'
+												html += '</p><div class="caption"><p style="height:45px;">'
 														+ pname + '</p>';
-												html += '<span>'
+												html += '<span class="catename">'
 														+ category
 														+ '</span></div></a></div></div>';
 											}
@@ -319,9 +327,9 @@ function numberWithCommas(x) {
 														+ btDay + '</span>';
 												html += '<span id="yet' + i +'" style="display:' + funding + '">일 남음</span>';
 												html += '<spen id="complete' + i + '" style="display:' + ending + '">펀딩종료</spen>';
-												html += '</p><div class="caption"><p>'
+												html += '</p><div class="caption"><p style="height:45px;">'
 														+ pname + '</p>';
-												html += '<span>'
+												html += '<span class="catename">'
 														+ category
 														+ '</span></div></a></div></div>';
 											}
@@ -514,8 +522,8 @@ function numberWithCommas(x) {
 								</p>
 
 								<div class="caption">
-									<p>${item.pname }</p>
-									<span><c:out value="${item.category}" /></span>
+									<p style="height:45px;">${item.pname }</p>
+									<span class="catename"><c:out value="${item.category}" /></span>
 								</div>
 							</a>
 						</div>
