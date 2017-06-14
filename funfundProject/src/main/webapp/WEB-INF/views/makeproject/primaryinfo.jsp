@@ -512,7 +512,7 @@ li {
 								<option value="game" class="re-option">게임
 								<option value="trip" class="re-option">여행
 								<option value="sport" class="re-option">스포츠
-								<option value="후원" class="do-option option-none">후원
+								<option value="support" class="do-option option-none">후원
 							</select>
 						</div>
 					</td>

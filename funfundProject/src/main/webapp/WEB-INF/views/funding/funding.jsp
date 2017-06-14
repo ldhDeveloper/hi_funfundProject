@@ -174,11 +174,17 @@ function numberWithCommas(x) {
 												var pro_no = data[i].pro_no;
 												var ecost = data[i].ecost;
 												var fundamount = numberWithCommas(data[i].fundamount);
-											   
+												var fundamount2 = data[i].fundamount;
+												console.log("fundamount"+fundamount);
+												console.log("fundamount2"+fundamount2);
+												console.log("ecost"+ecost);
 												var pedate = data[i].pedate;
 												var persent = Math
-														.round(fundamount * 100
+														.round(fundamount2 * 100
 																/ ecost);
+												var persent2 = numberWithCommas(persent);
+												console.log("오니");
+												console.log("persent:"+persent);
 												var bar = 0;
 												var category = data[i].category;
 												var pname= data[i].pname;
@@ -225,7 +231,7 @@ function numberWithCommas(x) {
 												html += '<span class="sr-only"></span>';
 												html += '</div></div><p>';
 												html += '<span id="persent' + i +'">'
-														+ persent
+														+ persent2
 														+ '</span> % &nbsp;&nbsp; <span>'
 														+ fundamount
 														+ '</span>원 달성 &nbsp;&nbsp;';
@@ -268,11 +274,17 @@ function numberWithCommas(x) {
 												var pro_no = data[i].pro_no;
 												var ecost = data[i].ecost;
 												var fundamount = numberWithCommas(data[i].fundamount);
-												
+												var fundamount2 = data[i].fundamount;
+												console.log("fundamount"+fundamount);
+												console.log("fundamount2"+fundamount2);
+												console.log("ecost"+ecost);
 												var pedate = data[i].pedate;
 												var persent = Math
-														.round(fundamount * 100
+														.round(fundamount2 * 100
 																/ ecost);
+												var persent2 = numberWithCommas(persent);
+												console.log("오니");
+												console.log("persent:"+persent);
 												var bar = 0;
 												var category = data[i].category;
 												var pname = data[i].pname;
@@ -319,7 +331,7 @@ function numberWithCommas(x) {
 												html += '<span class="sr-only"></span>';
 												html += '</div></div><p>';
 												html += '<span id="persent' + i +'">'
-														+ persent
+														+ persent2
 														+ '</span> % &nbsp;&nbsp; <span>'
 														+ fundamount
 														+ '</span>원 달성 &nbsp;&nbsp;';

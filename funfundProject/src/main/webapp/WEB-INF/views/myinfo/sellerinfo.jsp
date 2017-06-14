@@ -58,7 +58,6 @@
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 	width: 100%;
-	height: 80px;
 	color: #fff;
 	font-size: 26pt;
 	padding-top: 1.5%;
@@ -398,6 +397,8 @@ $("#investApply").click(function(){
 		$("#imageform").submit();
 	}
 </script>
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp" flush="true"/>
+
 </body>
 </html>

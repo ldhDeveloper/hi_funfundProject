@@ -4,15 +4,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style type="text/css">
 .container{
 	width: 100%;
+	padding-left: -15px !important;
+	padding-right: -15px !important;
 }
 
 .row {
 	width: 100%;
+	margin-left: 0px !important;
+	margin-right: 0px !important;
 }
 
 .mlabel {
@@ -23,7 +26,7 @@
 	border-top-right-radius: 10px;
 	width: 100%;
 	color: #fff;
-	font-size: 2vw;
+	font-size: 26pt;
 	padding-top: 1.5%;
 }
 
@@ -71,7 +74,15 @@
 	border: none; */
 	text-align: center;
 	padding-top: 2%;
-	font-size: 1vw;
+	font-size:14pt;
+	color: #4A4A4A;
+}
+
+.nameId {
+	font-size: 14pt;
+	width: 200px;
+	padding-top: 1.8%;
+	color: #4A4A4A;
 }
 
 .mbtn1 {
@@ -247,8 +258,7 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/menubar.jsp" flush="true"/>
-
-<br><br>
+<div class="hidden-xs" style="height:85px;">&nbsp;</div>
 <div class="container">
 	<div class="row">
 				<div class="mlabel" align="center">
