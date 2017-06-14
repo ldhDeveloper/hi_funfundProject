@@ -73,6 +73,14 @@ body {
 .ti {
 	font-size: 18pt;
 }
+
+.catename{
+	border: 1px solid #6D696A;
+    padding: 5px 10px 5px 10px;
+    color: white;
+    border-radius: 10px;
+    background-color: #6D696A;
+}
 </style>
 
 <title>home</title>
@@ -204,9 +212,11 @@ body {
 		}
 	</script>
 
-
+	
 	<div class="container" style="clear: both">
 	<c:if test="${!empty category3List }">
+	<div class="row" style="background-image:url('/funfund/images/barimg.png'); text-align:center; color:white; background-size:cover;"><h3 style="margin-top:15px;">관심 프로젝트</h3></div>
+	<br><br>
 		<div class="row" style="margin: 0px 20px 0 20px;">
 			<c:forEach var="item" items="${category3List}" varStatus="status">
 				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -290,19 +300,22 @@ body {
 							</p>
 
 							<div class="caption">
-								<p>
+								<p style="height:45px;">
 									<c:out value="${item.pname }" />
 								</p>
-								<span><c:out value="${item.category}" /></span>
+								<span class="catename"><c:out value="${item.category}" /></span>
 							</div>
 						</a>
 					</div>
 				</div>
 			</c:forEach>
 		</div>
-			</c:if>
+			</c:if>	
+		<br>
+		<div class="row" style="background-image:url('/funfund/images/barimg2.png'); text-align:center; color:white; background-size:cover;"><h3 style="margin-top:15px;">TOP 3</h3></div>
+		<br><br>	
 		<div class="row" style="margin: 0px 20px 0 20px;">
-			<c:forEach var="item" items="${top3List}" varStatus="status">
+				<c:forEach var="item" items="${top3List}" varStatus="status">
 				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 					<div class="thumbnail" align="center">
 						<a href="detail.it?pro_no=<c:out value="${item.pro_no}"/>"> <img
@@ -384,19 +397,19 @@ body {
 							</p>
 
 							<div class="caption">
-								<p>
+								<p style="height:45px;">
 									<c:out value="${item.pname }" />
 								</p>
-								<span><c:out value="${item.category}" /></span>
+								<span class="catename"><c:out value="${item.category}" /></span>
 							</div>
 						</a>
 					</div>
 				</div>
 			</c:forEach>
 		</div>
-	</div>
-
-	
-	<jsp:include page="/WEB-INF/views/common/footer.jsp" flush="true" />
+		</div>
 </body>
+<footer>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" flush="true" />
+</footer>
 </html>
