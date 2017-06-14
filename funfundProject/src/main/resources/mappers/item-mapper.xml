@@ -198,7 +198,7 @@
 			<![CDATA[
 			select it.pro_no as pro_no, it.ano as ano, it.pname as pname, it.pcontent as pcontent, it.category as category,
 			it.psdate as psdate, it.pedate as pedate, it.pshort as pshort, it.ecost as ecost, it.refund as refund, it.pvideo as pvideo,
-			it.pstatus as pstatus, it.likecount as likecount, it.sharelink as sharelink, it.bankcode as bankcode, it.accpnm as accpnm,
+			it.pstatus as pstatus, it.likecount as likecount, it.bankcode as bankcode, it.accpnm as accpnm,
 			it.accnum as accnum, it.cname as cname, it.cs_email as cs_email, it.cs_phone as cs_phone, it.fundamount as fundamount, 
 			it.fundcount as fundcount, it.supportcount as supportcount, it.upcount as upcount, it.repcount as repcount, it.thumbnail as thumbnail, it.billstatus as billstatus, it.firstdeposit as firstdeposit, it.seconddeposit as seconddeposit, it.firstprice as firstprice, it.secondprice as secondprice, it.icomment as icomment, it.checkacc as checkacc
 						from(SELECT item.*, ROW_NUMBER() OVER (ORDER BY fundcount DESC) rnum
@@ -886,7 +886,7 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
 			<![CDATA[
 			select it.pro_no as pro_no, it.ano as ano, it.pname as pname, it.pcontent as pcontent, it.category as category,
 			it.psdate as psdate, it.pedate as pedate, it.pshort as pshort, it.ecost as ecost, it.refund as refund, it.pvideo as pvideo,
-			it.pstatus as pstatus, it.likecount as likecount, it.sharelink as sharelink, it.bankcode as bankcode, it.accpnm as accpnm,
+			it.pstatus as pstatus, it.likecount as likecount, it.bankcode as bankcode, it.accpnm as accpnm,
 			it.accnum as accnum, it.cname as cname, it.cs_email as cs_email, it.cs_phone as cs_phone, it.fundamount as fundamount, 
 			it.fundcount as fundcount, it.supportcount as supportcount, it.upcount as upcount, it.repcount as repcount, it.thumbnail as thumbnail, it.billstatus as billstatus, it.firstdeposit as firstdeposit, it.seconddeposit as seconddeposit, it.firstprice as firstprice, it.secondprice as secondprice, it.icomment as icomment, it.checkacc as checkacc
 						from(SELECT item.*, ROW_NUMBER() OVER (ORDER BY fundcount DESC) rnum
