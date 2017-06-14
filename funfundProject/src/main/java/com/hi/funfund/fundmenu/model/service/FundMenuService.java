@@ -23,4 +23,6 @@ public interface FundMenuService {
 	FundMenu selectOne(int parseInt);
 	ArrayList<FundMenu> selectList2(int pro_no);
 
+	int deleteReward(int mno);
+
 }

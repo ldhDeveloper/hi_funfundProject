@@ -16,4 +16,8 @@ public interface AdminService {
 
 	List<ProfitHash> categoryProfit(String year);
 
+	int approveCancel(int fund_no);
+
+	int rejectCancel(int fund_no);
+
 }

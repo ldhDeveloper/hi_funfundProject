@@ -705,7 +705,7 @@ li {
 												+ data.fmenulist[i].mcount
 												+ "</td><td>"
 												+ data.fmenulist[i].s_mdate
-												+ "</td><td><button class='btn btn-xs btn-success'>수정</button>&nbsp; <button class='btn btn-xs btn-danger'>삭제</button></td></tr>")
+												+ "</td><td><button class='btn btn-xs btn-danger' onclick='delReward(" + data.fmenulist[i].mnum + ");'>삭제</button></td></tr>")
 
 							}
 							
@@ -742,6 +742,12 @@ li {
 														"mcontent" : mcontent
 													},
 													success : function(data) {
+														$("[name=mname]").val("");
+														$("[name=mcost]").val("");
+														$("[name=mnum]").val(Number(mnum)+1);
+														$("[name=s_mdate]").val("");
+														$("[name=mcount]").val("");
+														$("[name=mcontent]").val("");
 														var i = Number(data.fmlist.length) - 1;
 														console.log($(data));
 														console
@@ -752,7 +758,7 @@ li {
 																		$(
 																				"#rlist")
 																				.html()
-																				+ "<tr><td>"
+																				+ "<tr style='text-align:left'><td>"
 																				+ data.fmlist[i].mnum
 																				+ "</td><td>"
 																				+ data.fmlist[i].mname
@@ -762,13 +768,44 @@ li {
 																				+ data.fmlist[i].mcount
 																				+ "</td><td>"
 																				+ data.fmlist[i].s_mdate
-																				+ "</td><td><button class='btn btn-xs btn-success'>수정</button>&nbsp; <button class='btn btn-xs btn-danger'>삭제</button></td></tr>")
+																				+ "</td><td><button class='btn btn-xs btn-danger' onclick='delReward("+ pro_no + ", " + data.fmlist[i].mno + ");'>삭제</button></td></tr>")
 
 													}
 
 												});
 									});
 				});
+				
+			function delReward(pro_no, mno){
+				$.ajax({
+					url : "deleteReward.it",
+					type : "POST",
+					async : true,
+					data : {
+						"pro_no" : pro_no,
+						"mno" : mno
+					},
+					success : function(data) {
+						var html = "<tr style='text-align:left'><td>순서</td><td>리워드명</td><td>금액</td><td>제한수량</td><td>배송예정일</td><td>수정/삭제</td></tr>";
+						for(var i = 0; i < data.length; i++){
+							html += "<tr><td>";
+							html += data[i].mnum;
+							html += "</td><td>";
+							html += data[i].mname;
+							html += "</td><td>";
+							html += data[i].mcost;
+							html += "</td><td>";
+							html += data[i].mcount;
+							html += "</td><td>";
+							html += data[i].s_mdate;
+							html += "</td><td><button class='btn btn-xs btn-danger' onclick='delReward(" + pro_no + ", " + data[i].mno + ");'>삭제</button></td></tr>";		
+						}
+						$("[name=mnum]").val($("[name=mnum]").val()-1);
+						$("#rlist").html(html);										
+					}
+
+				});
+			}
 			</script>
 		</div>
 

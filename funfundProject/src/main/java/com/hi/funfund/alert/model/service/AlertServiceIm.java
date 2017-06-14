@@ -20,7 +20,9 @@ public class AlertServiceIm implements AlertService{
 	AlertDao alertDao;
 	
 	public int checkNewMessage(int ano){
-		return alertDao.checkNewMessage(ano);
+		int count = alertDao.checkNewMessage(ano);
+		System.out.println("msgcount : " + count);
+		return count;
 	}
 	
 	public List<Alert> selectList(HashMap map){

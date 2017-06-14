@@ -37,5 +37,16 @@ public class AdminServiceIm implements AdminService{
 	public List<ProfitHash> categoryProfit(String year) {
 		return adminDao.categoryProfit(year);
 	}
+
+	@Override
+	public int approveCancel(int fund_no) {
+		return adminDao.approveCancel(fund_no);
+	}
+
+	@Override
+	public int rejectCancel(int fund_no) {
+		// TODO Auto-generated method stub
+		return adminDao.rejectCancel(fund_no);
+	}
 	
 }

@@ -21,6 +21,7 @@
 		<result property="payment" column="payment" />
 		<result property="evidence" column="evidence" />
 		<result property="id" column="id" />
+		<result property="ano" column="ano" />
 	</resultMap>
 	<resultMap type="profitHash" id="profitHashResult">
 		<id property="cname" column="cname" />
@@ -35,7 +36,7 @@
 	</select>
 	<select id="selectCancelInfo" resultMap="cancelInfoResult">
 		<![CDATA[
-			select fl.fund_no as fund_no, i.pname as pname, fm.mname as mname, fl.funddate as funddate, fm.mcost * fl.fundcount as fcost, fl.payment as payment, fl.evidence as evidence, a.id as id  
+			select fl.fund_no as fund_no, i.pname as pname, fm.mname as mname, fl.funddate as funddate, fm.mcost * fl.fundcount as fcost, fl.payment as payment, fl.evidence as evidence, a.id as id, a.ano as ano  
 			from item i join fundmenu fm on (i.pro_no = fm.pro_no)
 			            join fundlist fl on (fm.mno = fl.mno)
 			            join account a on (fl.ano = a.ano)
@@ -62,4 +63,12 @@
 		      order by sumcost desc
 		]]>
 	</select>
+	<update id="approveCancel" parameterType="int">
+		update fundlist set funstatus = '결제취소'
+		where fund_no = #{fund_no}
+	</update>
+	<update id="rejectCancel" parameterType="int">
+		update fundlist set funstatus = '결제완료'
+		where fund_no = #{fund_no}
+	</update>
 </mapper>

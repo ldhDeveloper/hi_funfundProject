@@ -82,4 +82,8 @@ public class FundMenuDao {
 		FundMenu fm = (FundMenu) sqlSession.selectOne(nameSpace + "selectFM", mno);
 		return fm;
 	}
+	public int deleteReward(int mno) {
+		int result = sqlSession.delete(nameSpace + "deleteReward", mno);
+		return result;
+	}
 }

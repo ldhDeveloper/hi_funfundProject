@@ -245,6 +245,32 @@ public class AdminController {
 		return result;
 	}
 	
+	@RequestMapping(value = "/approveCancel.am", method = RequestMethod.POST)
+	public @ResponseBody int approveCancel(@RequestParam("fund_no") String fund_no, @RequestParam("pname") String pname
+			, @RequestParam("mname") String mname, @RequestParam("fcost") String fcost, @RequestParam("ano") String ano){
+		int fund_noo = Integer.parseInt(fund_no);
+		int result = adminService.approveCancel(fund_noo);
+		Alert al = new Alert();
+		al.setAl_title("펀딩결제 취소승인");
+		al.setAl_content(pname + " - " + mname + "\n펀딩의 결제가 취소되었습니다.\n펀딩번호 : " + fund_no + "\n취소금액 : " + fcost);
+		al.setAno(Integer.parseInt(ano));
+		result += alertService.insertAlert(al);
+		return result;
+	}
+	
+	@RequestMapping(value = "/rejectCancel.am", method = RequestMethod.POST)
+	public @ResponseBody int rejectCancel(@RequestParam("fund_no") String fund_no, @RequestParam("pname") String pname
+			, @RequestParam("mname") String mname, @RequestParam("ano") String ano){
+		int fund_noo = Integer.parseInt(fund_no);
+		int result = adminService.rejectCancel(fund_noo);
+		Alert al = new Alert();
+		al.setAl_title("펀딩결제 취소거부");
+		al.setAl_content(pname + " - " + mname + "\n펀딩의 결제가 취소가 거부되었습니다.\n펀딩번호 : " + fund_no + "\n자세한 내용은 고객센터에 문의바랍니다.");
+		al.setAno(Integer.parseInt(ano));
+		result += alertService.insertAlert(al);
+		return result;
+	}
+	
 	@RequestMapping(value= "/totalProfit.am")
 	public ModelAndView totalProfit(ModelAndView model){
 		ProfitInfo pi = null;

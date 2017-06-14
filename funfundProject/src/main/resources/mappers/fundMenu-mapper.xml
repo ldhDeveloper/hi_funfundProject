@@ -70,4 +70,8 @@ order by mno
 		from fundmenu 
 		where mno = #{mno}
 	</select>
+	<delete id="deleteReward" parameterType="int">
+		delete from fundmenu
+		where mno = #{mno}
+	</delete>
 </mapper>

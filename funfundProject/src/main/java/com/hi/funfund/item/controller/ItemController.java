@@ -151,6 +151,16 @@ public class ItemController {
 
 		return model;
 	}
+	
+	@RequestMapping("deleteReward.it")
+	public @ResponseBody ArrayList<FundMenu> deleteRewardItem(@RequestParam("pro_no") String pro_no, @RequestParam("mno") String mno){
+		int result = fundMenuService.deleteReward(Integer.parseInt(mno));
+		ArrayList<FundMenu> fmlist = null;
+		if(result > 0){
+			fmlist = fundMenuService.selectList2(Integer.parseInt(pro_no));
+		}
+		return fmlist;
+	}
 
 	@RequestMapping(value = "selectAll.it", method = RequestMethod.GET)
 	public @ResponseBody List<Item> selectAllItem() {

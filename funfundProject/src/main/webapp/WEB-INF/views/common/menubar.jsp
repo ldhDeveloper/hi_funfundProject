@@ -936,6 +936,8 @@ ul{
 	</div>
 		<script>
 			$(function(){
+				console.log("msg_count : " + ${sessionScope.checknewmsg});
+				
 				$("#message").mouseover().css("cursor", "pointer");
 				
 				$("#message").click(function(){
