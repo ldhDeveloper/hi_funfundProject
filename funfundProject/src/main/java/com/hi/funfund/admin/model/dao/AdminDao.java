@@ -36,5 +36,15 @@ public class AdminDao {
 		List<ProfitHash> cList = (List<ProfitHash>) sqlSession.selectList(nameSpace + "categoryProfit", year);
 		return cList;
 	}
+
+	public int approveCancel(int fund_no) {
+		int result = sqlSession.update(nameSpace + "approveCancel", fund_no);
+		return result;
+	}
+
+	public int rejectCancel(int fund_no) {
+		int result = sqlSession.update(nameSpace + "rejectCancel", fund_no);
+		return result;
+	}
 	
 }

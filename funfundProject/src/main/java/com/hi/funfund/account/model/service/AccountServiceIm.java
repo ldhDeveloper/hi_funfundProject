@@ -192,4 +192,5 @@ public class AccountServiceIm implements AccountService {
 		// TODO Auto-generated method stub
 		return accountDao.tempUp(ano);
 	}
+
 }

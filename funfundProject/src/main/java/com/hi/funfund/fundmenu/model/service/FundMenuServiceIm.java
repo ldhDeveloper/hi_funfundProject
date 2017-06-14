@@ -55,4 +55,9 @@ public class FundMenuServiceIm implements FundMenuService {
 	public FundMenu selectOne(int mno){
 		return fundMenuDao.selectOne(mno);
 	}
+	@Override
+	public int deleteReward(int mno) {
+		return fundMenuDao.deleteReward(mno);
+	}
+	
 }

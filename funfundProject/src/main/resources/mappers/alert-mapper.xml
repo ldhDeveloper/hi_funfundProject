@@ -15,7 +15,7 @@
 	</resultMap>
 
 	<select id="checkNewMessage" parameterType="int" resultType="int">
-		select count(al_no) from alert where readyn = 'n' and ano = #{ano}
+		select count(al_no) from alert where readyn = 'N' and ano = #{ano}
 	</select>
 	<select id="selectList" parameterType="int" resultMap="alertResult">
 	  select  al_no,al_title, al_content, s_al_date, readyn, ano from (

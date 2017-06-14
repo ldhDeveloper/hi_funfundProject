@@ -111,16 +111,17 @@
     <tbody>
     	<c:forEach var="item" items="${cList }" varStatus="status">
       	<tr>
+      		<input id="ano${status.index }" type="hidden" value="${item.ano }" />
         	<td id="fund_no${status.index }"><c:out value="${item.fund_no }"/></td>
-        	<td><c:out value="${item.pname }"/></td>
-        	<td><c:out value="${item.mname }"/></td>
+        	<td id="pname${status.index }"><c:out value="${item.pname }"/></td>
+        	<td id="mname${status.index }"><c:out value="${item.mname }"/></td>
         	<td><c:out value="${item.funddate }"/></td>
         	<td id="fcost${status.index }"><c:out value="${item.fcost }"/></td>
         	<td><c:out value="${item.payment }"/></td>
         	<td><c:out value="${item.id }"/></td>
         	<input id="evi${status.index }" type="hidden" value ="${item.evidence }"/>
         	<td><button id="appCancel${status.index }" type="button" class="btn btn-success appCancel">결제취소</button></td>
-      		<td><input type="button" class="btn btn-danger" value="판매자 승인거부" onclick="rejectCancel(${item.fund_no });"></td>
+      		<td><input id="rejCancel${status.index }" type="button" class="btn btn-danger" value="판매자 승인거부" onclick="rejectCancel(${item.fund_no });"></td>
       	</tr>   	
       </c:forEach>
     </tbody>
@@ -128,67 +129,57 @@
 </div>
 <script>
     		$(function(){
-    			var access_token ="";
-    			var imp_key = "9856064046040656";
-    			var imp_secret = "GMMpCiJ9gK1p7TzdFSJ1ZnQmktP7ZjrG6d6IwPSMzTcHNLUsEEuE1k1lNQtNaUuh8AZEqSr0LDHzpC14";
-    			$.ajax({
-    				url : "https://api.iamport.kr/users/getToken",
-    				type : "post",
-    				data: {"imp_key" : imp_key, "imp_secret" : imp_secret},
-    				success : function(data){
-    					alert("code : " + data.code + ", token : " + data.response.access_token);
-    				},
-    				error : function(error, status){
-    					alert("error : " + error);
-    				}
-    			});
-    			
     			$("button[id ^= appCancel]").click(function(){
     				var id = $(this).attr("id");
     				var num = id.substr(id.length -1, 1);
-    				console.log("num : " + num);
  					var fund_no = $('#fund_no' + num).html();
+ 					var pname = $('#pname' + num).html();
+ 					var mname = $('#mname' + num).html();
  					var fcost = $('#fcost' + num).html();
- 					var evidence = $('#evi' + num).val();
- 					approveCancel(fund_no, evidence, fcost);
+ 					var ano = $('#ano' + num).val();
+ 					$.ajax({
+ 	    				url : "approveCancel.am",
+ 	    				type : "post",
+ 	    				data : {"fund_no" : fund_no, "pname" : pname, "mname" : mname, "fcost" : fcost, "ano" : ano},
+ 	    				success : function(data){
+ 	    					if(data > 0){
+ 	    						alert("결제취소 승인에 성공하였습니다.");
+ 	    					location.href = "cancelpayment.am";
+ 	    					} else {
+ 	    						alert("결제취소 승인에 실패하였습니다.");
+ 	    					}
+ 	    				},
+ 	    				error : function(error, status){
+ 	    					alert("error : " + error);
+ 	    				}
+ 	    			});
+    			});
+    			$("input[id ^= rejCancel]").click(function(){
+    				var id = $(this).attr("id");
+    				var num = id.substr(id.length -1, 1);
+ 					var fund_no = $('#fund_no' + num).html();
+ 					var pname = $('#pname' + num).html();
+ 					var mname = $('#mname' + num).html();
+ 					var ano = $('#ano' + num).val();
+ 					$.ajax({
+ 	    				url : "rejectCancel.am",
+ 	    				type : "post",
+ 	    				data : {"fund_no" : fund_no, "pname" : pname, "mname" : mname, "ano" : ano},
+ 	    				success : function(data){
+ 	    					if(data > 0){
+ 	    						alert("결제취소 거부에 성공하였습니다.");
+ 	    						location.href = "cancelpayment.am";
+ 	    					} else {
+ 	    						alert("결제취소 거부에 실패하였습니다.");
+ 	    					}
+ 	    					
+ 	    				},
+ 	    				error : function(error, status){
+ 	    					alert("error : " + error);
+ 	    				}
+ 	    			});
     			});
     		})
-    		
-    		function approveCancel(fund_no, evidence, fcost){
-    			var amount = Number(fcost);
-    			$.ajax({
-    				url : "https://api.iamport.kr/payments/cancel",
-    				type : "post",
-    				data : {"imp_uid" : evidence, "amount" : amount},
-    				contentType: "application/json",
-    				success : function(data){
-    					alert("code : " + data.code);
-    				},
-    				error : function(error, status){
-    					alert("error : " + error);
-    				}
-    			});
-    		}
-    		
-    		function rejectCancel(fund_no){
-    			$.ajax({
-    				url : "rejectSeller.am",
-    				type : "post",
-    				data : {"fund_no" : fund_no},
-    				success : function(data){
-    					if(data > 0){
-    						alert("판매자 거부에 성공하였습니다.");
-    						location.href = "sellerconfirm.am";
-    					} else {
-    						alert("판매자 거부에 실패하였습니다.");
-    					}
-    					
-    				},
-    				error : function(error, status){
-    					alert("error : " + error);
-    				}
-    			});
-    		}
 </script>
 <div id="pictureModal" class="modal fade" role="dialog">
   <div class="modal-dialog">

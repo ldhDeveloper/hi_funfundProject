@@ -11,6 +11,14 @@ public class CancelInfo implements java.io.Serializable{
 	private String payment;
 	private String evidence;
 	private String id;
+	private int ano;
+	
+	public int getAno() {
+		return ano;
+	}
+	public void setAno(int ano) {
+		this.ano = ano;
+	}
 	public int getFund_no() {
 		return fund_no;
 	}
@@ -62,7 +70,7 @@ public class CancelInfo implements java.io.Serializable{
 	
 	public CancelInfo(){}
 	public CancelInfo(int fund_no, String pname, String mname, Date funddate, int fcost, String payment,
-			String evidence, String id) {
+			String evidence, String id, int ano) {
 		super();
 		this.fund_no = fund_no;
 		this.pname = pname;
@@ -72,12 +80,15 @@ public class CancelInfo implements java.io.Serializable{
 		this.payment = payment;
 		this.evidence = evidence;
 		this.id = id;
+		this.ano = ano;
 	}
 	@Override
 	public String toString() {
 		return "CancelInfo [fund_no=" + fund_no + ", pname=" + pname + ", mname=" + mname + ", funddate=" + funddate
-				+ ", fcost=" + fcost + ", payment=" + payment + ", evidence=" + evidence + ", id=" + id + "]";
+				+ ", fcost=" + fcost + ", payment=" + payment + ", evidence=" + evidence + ", id=" + id + ", ano=" + ano
+				+ "]";
 	}
+	
 	
 	
 }
