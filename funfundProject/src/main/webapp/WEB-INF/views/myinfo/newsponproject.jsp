@@ -223,8 +223,7 @@
 }
 
 .lStart {
-    background-color: #DFF0D8 !important;
-    width: 88.3%;   
+    background-color: #DFF0D8 !important;  
     
 }
 
@@ -246,7 +245,6 @@
 
 .pcontents {
 	border: 1px solid #DFF0D8;
-	width: 88.3%;
 	border-bottom-right-radius: 4px !important;
 	border-bottom-left-radius: 4px !important;
 }

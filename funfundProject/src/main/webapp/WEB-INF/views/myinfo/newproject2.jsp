@@ -8,10 +8,13 @@
 <style type="text/css">
 .container{
 	width: 100%;
+	padding-right: -15px !important;	
 }
 
 .row {
 	width: 100%;
+	margin-left: 0px !important;
+	margin-right: 0px !important;
 }
 
 .mlabel {
@@ -21,8 +24,9 @@
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 	width: 100%;
+	height: 80px;
 	color: #fff;
-	font-size: 2vw;
+	font-size: 26pt;
 	padding-top: 1.5%;
 }
 
@@ -215,13 +219,13 @@
 }
 
 .listStart {
-	
+
 }
 
 .lStart {
-    background-color: #DFF0D8 !important;
-    width: 88.3%;    
+    background-color: #DFF0D8 !important;  
     border-top-right-radius: 4px !important;
+    margin-right: 0px !important;  
     
 }
 
@@ -238,7 +242,6 @@
 
 .pcontents {
 	border: 1px solid #DFF0D8;
-	width: 88.3%;
 	border-bottom-right-radius: 4px !important;
 	border-bottom-left-radius: 4px !important;
 }
@@ -248,8 +251,7 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/menubar.jsp" flush="true"/>
-
-<br><br>
+<div class="hidden-xs" style="height:85px;">&nbsp;</div>
 <div class="container">
 	<div class="row">
 				<div class="mlabel" align="center">
@@ -318,7 +320,7 @@
   						</div>
 					</nav>
 					
-					<br>
+					
 					<c:if test="${ empty iList }"> 
 					<div class="panel-group">
 						<div class="well">												
@@ -327,7 +329,7 @@
       							
       							<br>
       							
-      							<div class="listStart container">
+      							<div class="listStart" style="margin: 0px 15px 0px 15px;">
 			  						<ul class="lStart nav nav-pills">
 			    						<li class="sidelist"><a class="slist" href="newproject.ao">모두보기</a></li>
 			    						<li class="mainlist"><a class="mlist">작성중</a></li>
@@ -355,7 +357,7 @@
       							
       							<br>
       							
-      							<div class="listStart container">
+      							<div class="listStart" style="margin: 0px 15px 0px 15px;"">
 			  						<ul class="lStart nav nav-pills">
 			    						<li class="sidelist"><a class="slist" href="newproject.ao">모두보기</a></li>
 			    						<li class="mainlist"><a class="mlist" href="inwrite.it">작성중</a></li>
