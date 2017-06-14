@@ -84,17 +84,14 @@ input[type="checkbox"] {
 }
 
 @media screen and (min-width:1px) and (max-width: 960px)  {
-	td:nth-child(1) {
-      width:62px !important;
-   }
-   td:nth-child(2) {
-      width:100px !important;
-   }	
-   td:nth-child(3) {
-      width:0px !omportant;
-   }
    .tb {
-     width:360px !important;
+     width:300px !important;
+   }
+    .tb2 {
+     width:300px !important;
+   }
+    .tb3 {
+     width:300px !important;
    }
 }
 
@@ -237,17 +234,11 @@ input[type="checkbox"] {
 					
 						subtotal += (ordercount[i] * mcost);
 					}
-					$("#sub-total").html(0);
-					$("#sub-total").html(numberWithCommas($("#sub-total").html()) + subtotal);
-
-
-					$("#funding-total").html(0);
-					$("#funding-total").html(subtotal);
-					
-					finaltotal = Number(subtotal) + Number(plustotal);
+					var finaltotal = Number(subtotal) + Number(plustotal);
+					var finaltotal2 = numberWithCommas(finaltotal);
 					
 					$("#final-total").html(0);
-					$("#final-total").html(finaltotal);
+					$("#final-total").html(finaltotal2);
 					
 				}
 					
@@ -388,7 +379,7 @@ input[type="checkbox"] {
 						
 						<table>
 							<tr >
-								<td style="width:100px;padding:10px;" align="center" class="click-area" >
+								<td style="width:100px;padding:10px;" align="center" class="click-area">
 									<input class="flag" type="checkbox" name="choice" value="<c:out value="${fundMenu.mno}"/>">
 									<input type="hidden" class="mnum<c:out value='${status.index}'/>" value="<c:out value='${fundMenu.mnum}'/>">
 									<input type="hidden" class="mno<c:out value='${status.index}'/>" value="<c:out value="${fundMenu.mno}"/>">
@@ -402,7 +393,7 @@ input[type="checkbox"] {
 		 
 								</td>
 								<td style="width:600px;">
-									<h4><fmt:formatNumber value="${fundMenu.mcost}"/> 원 펀딩합니다.</h4>
+									<p style="font-size:1.1em; padding:5px"><strong><fmt:formatNumber value="${fundMenu.mcost}"/></strong> 원 펀딩합니다.</p>
 									<label><c:out value="${fundMenu.mname}"/></label>
 									<p><c:out value="${fundMenu.mcontent}"/></p><br>
 									<p>예상 배송일 : <c:out value="${fundMenu.mdate}"/><br>
@@ -411,9 +402,9 @@ input[type="checkbox"] {
 								<td style="width:150px;text-align:center;">
 									<div id="plusminus" style="display:none" class="amount">
 										주문수량<br>
-										<i class="fa fa-minus-square fa-2x minus-btn" aria-hidden="true" style="color:#ff9966" id="minus"></i>
+										<i class="fa fa-minus-square fa-2x minus-btn hidden-xs" aria-hidden="true" style="color:#ff9966" id="minus"></i>
 										<input type="text" value="1" size="2" style="text-align:center;" class="ordercount<c:out value='${status.index}'/>" name="fundcount">
-										<i class="fa fa-plus-square fa-2x plus-btn" aria-hidden="true" style="color:#ff9966" id="plus"></i>
+										<i class="fa fa-plus-square fa-2x plus-btn hidden-xs" aria-hidden="true" style="color:#ff9966" id="plus"></i>
 									</div>
 								</td>
 							</tr>
@@ -438,39 +429,19 @@ input[type="checkbox"] {
 				<table style="width:920px; text-align:center;" class="tb">
 					<tr style="background:#ddb6fb;">
 						<th colspan="4" style="color:white;text-align:center;height:50px;">
-							<label style="font-size:15pt;">주문내역</label>
+							<label style="font-size:1.1em;">주문내역</label>
 						</th>
 					</tr>
 				</table>
-				<table  style="width:920px; text-align:center" id="show-area">
+				<table  style="width:920px; text-align:center" id="show-area" class="tb2">
 				</table>
 				
-				<table style="width:920px;">
-					<tr style="height:50px;">
-						<td style="width:30%;">&nbsp;</td>
-						<td style="width:40%;">&nbsp;</td>
-						<td style="width:15%;"><label>소계 : </label></td>
-						<td style="width:15%; text-align:right;padding-right:20px;"><label id="sub-total">0</label><label>&nbsp; 원</label></td>
-					</tr>
-					
-					<tr style="height:30px;background:#f4e7fe;">
-						<td style="padding-left:20px;padding-top:15px;">펀딩금액</td>
-						<td></td>
-						<td></td>
-						<td style="text-align:right;padding-right:20px;padding-top:15px;"><label id="funding-total">0</label><label>&nbsp; 원</label></td>
-					</tr>
-					<tr style="height:30px;background:#f4e7fe;">
-						<td style="padding-left:20px;">추가 후원금</td>
-						<td></td>
-						<td></td>
-						<td style="text-align:right;padding-right:20px;"><label id="plus-total">0</label><label>&nbsp; 원</label></td>
-					</tr>
+				<table style="width:920px;" class="tb3">
+					<tr style="height:20px;"></tr>
 					
 					<tr style="height:50px;background:#f4e7fe;">
-						<td style="font-size:13pt;padding-left:20px;">최종결제금액</td>
-						<td></td>
-						<td></td>
-						<td style="text-align:right;padding-right:20px;"><strong id="final-total" style="font-size:13pt">0</strong><strong style="font-size:13pt">&nbsp; 원</strong></td>
+						<td style="font-size:1em;padding-left:20px;"colspan="2">최종결제금액</td>
+						<td style="text-align:right;padding-right:20px;"colspan="2"><strong id="final-total" style="font-size:1em">0</strong><strong style="font-size:13pt">&nbsp; 원</strong></td>
 					</tr>
 				</table>
 			</div>

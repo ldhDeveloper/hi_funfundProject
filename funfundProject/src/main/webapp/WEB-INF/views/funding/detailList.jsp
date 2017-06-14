@@ -176,6 +176,7 @@ button {
 body {
 	font-family: myFirstFont !important;
 }
+
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -284,7 +285,8 @@ body {
 	<div class="row background">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<h4 align="center" class="font">
-				<em style="border: 1px orange !important;">${item.category }</em>
+				<span class="catename"><c:out value="${item.category}" /></span>
+				${item.pshort}
 				프로젝트
 			</h4>
 		</div>
@@ -355,8 +357,7 @@ body {
 
 			</div>
 		</c:if>
-
-		<div id="content">${item.pshort}</div>
+		
 		<!-- 게시글작성영역 -->
 		<div id="content"></div>
 		<br>
@@ -425,39 +426,6 @@ body {
 				</button>
 			</div>
 		</div>
-
-
-		<script>
-			/* 
-
-			function linkWithKakaoTalk(){
-			Kakao.Auth.login({
-			//// Additional scope is needed to send memeo chat.
-			scope: "PROFILE,TALK_MESSAGE",
-			success: function(res) {
-			Kakao.API.request({
-			url: '/v2/api/talk/memo/send',
-			data: {
-			template_id: '4046',
-			args: '{"${USER_NAME}": "developer","${AGE}": 20}'
-			},
-			success: function(res) {
-			alert('success!');
-			console.log(res);
-			},
-			fail: function(error) {
-			alert('error! \n' + JSON.stringify(error));
-			console.log(error);
-			}
-			})
-			},
-			fail: function(error) {
-			console.log(error);
-			}
-			});
-			
-			} */
-		</script>
 
 		<div class="">
 			<p
