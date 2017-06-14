@@ -17,15 +17,13 @@ public class FundMenu implements Serializable {
 	private String s_mdate;
 	private Integer mnum;
 	private Integer mcount;
-	private String delyn;
-	private String dcost;
 	private Integer fundcount;
 	private int remain;
 	
 	public FundMenu(){}
 
 	public FundMenu(int mno, String mname, Integer mcost, int pro_no, String mcontent, Date mdate, String s_mdate,
-			Integer mnum, Integer mcount, String delyn, String dcost, Integer fundcount, int remain) {
+			Integer mnum, Integer mcount, Integer fundcount, int remain) {
 		super();
 		this.mno = mno;
 		this.mname = mname;
@@ -36,8 +34,6 @@ public class FundMenu implements Serializable {
 		this.s_mdate = s_mdate;
 		this.mnum = mnum;
 		this.mcount = mcount;
-		this.delyn = delyn;
-		this.dcost = dcost;
 		this.fundcount = fundcount;
 		this.remain = remain;
 	}
@@ -76,14 +72,6 @@ public class FundMenu implements Serializable {
 
 	public Integer getMcount() {
 		return mcount;
-	}
-
-	public String getDelyn() {
-		return delyn;
-	}
-
-	public String getDcost() {
-		return dcost;
 	}
 
 	public Integer getFundcount() {
@@ -129,15 +117,6 @@ public class FundMenu implements Serializable {
 	public void setMcount(Integer mcount) {
 		this.mcount = mcount;
 	}
-
-	public void setDelyn(String delyn) {
-		this.delyn = delyn;
-	}
-
-	public void setDcost(String dcost) {
-		this.dcost = dcost;
-	}
-
 	public void setFundcount(Integer fundcount) {
 		this.fundcount = fundcount;
 	}
@@ -150,8 +129,11 @@ public class FundMenu implements Serializable {
 	public String toString() {
 		return "FundMenu [mno=" + mno + ", mname=" + mname + ", mcost=" + mcost + ", pro_no=" + pro_no + ", mcontent="
 				+ mcontent + ", mdate=" + mdate + ", s_mdate=" + s_mdate + ", mnum=" + mnum + ", mcount=" + mcount
-				+ ", delyn=" + delyn + ", dcost=" + dcost + ", fundcount=" + fundcount + ", remain=" + remain + "]";
+				+ ", fundcount=" + fundcount + ", remain=" + remain + "]";
 	}
+
+	
+
 
 	
 	

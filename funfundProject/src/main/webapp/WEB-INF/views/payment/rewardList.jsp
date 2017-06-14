@@ -232,13 +232,13 @@ input[type="checkbox"] {
 								+ "상세설명 : " + mcontent + "<br><br>"
 								+ "</td>"
 								+ "<td><label>주문 수량 : &nbsp;</label><label>" + ordercount[i] + "</label><label>&nbsp; 개</label></td>"
-								+ "<td><label>금액 : &nbsp;</label><label>" + (ordercount[i] * mcost) + "</label><label>&nbsp; 원</label></td>"
+								+ "<td><label>금액 : &nbsp;</label><label>" + numberWithCommas(ordercount[i] * mcost) + "</label><label>&nbsp; 원</label></td>"
 								+ "</tr>");
 					
 						subtotal += (ordercount[i] * mcost);
 					}
 					$("#sub-total").html(0);
-					$("#sub-total").html(Number($("#sub-total").html()) + subtotal);
+					$("#sub-total").html(numberWithCommas($("#sub-total").html()) + subtotal);
 
 
 					$("#funding-total").html(0);
@@ -397,8 +397,6 @@ input[type="checkbox"] {
 									<input type="hidden" class="mcontent<c:out value='${status.index}'/>" value="<c:out value="${fundMenu.mcontent}"/>">
 									<input type="hidden" class="mdate<c:out value='${status.index}'/>" value="<c:out value="${fundMenu.mdate}"/>">
 									<input type="hidden" class="mcount<c:out value='${status.index}'/>" value="<c:out value="${fundMenu.mcount}"/>">
-									<input type="hidden" class="delyn<c:out value='${status.index}'/>" value="<c:out value="${fundMenu.delyn}"/>">
-									<input type="hidden" class="dcost<c:out value='${status.index}'/>" value="<c:out value="${fundMenu.dcost}"/>">
 									<i class="fa fa-3x fa-square-o unchecked" aria-hidden="true" style="color:#ff9966"></i>
 									<i class="fa fa-3x fa-check-square-o checked" aria-hidden="true" style="color:#ff9966;display:none"></i>
 		 
@@ -407,7 +405,7 @@ input[type="checkbox"] {
 									<h4><fmt:formatNumber value="${fundMenu.mcost}"/> 원 펀딩합니다.</h4>
 									<label><c:out value="${fundMenu.mname}"/></label>
 									<p><c:out value="${fundMenu.mcontent}"/></p><br>
-									<p>배송비 : <c:out value="${fundMenu.dcost}"/> | 예상 배송일 : <c:out value="${fundMenu.mdate}"/><br>
+									<p>예상 배송일 : <c:out value="${fundMenu.mdate}"/><br>
 									       제한 수량 : <c:out value="${fundMenu.mcount}"/> | 남은 수량 : <c:out value="${fundMenu.remain}"/><br><br></p>
 								</td>
 								<td style="width:150px;text-align:center;">

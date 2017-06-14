@@ -15,8 +15,6 @@ public class FundMenuFundList {
 	private Date mdate;
 	private Integer mnum;
 	private Integer mcount;
-	private String delyn;
-	private String dcost;
 	private int remain;
 
 	public FundMenuFundList() {
@@ -24,7 +22,7 @@ public class FundMenuFundList {
 	}
 
 	public FundMenuFundList(int mno, String mname, Integer mcost, int pro_no, String mcontent, Date mdate, Integer mnum,
-			Integer mcount, String delyn, String dcost, int remain) {
+			Integer mcount, String dcost, int remain) {
 		super();
 		this.mno = mno;
 		this.mname = mname;
@@ -34,8 +32,6 @@ public class FundMenuFundList {
 		this.mdate = mdate;
 		this.mnum = mnum;
 		this.mcount = mcount;
-		this.delyn = delyn;
-		this.dcost = dcost;
 		this.remain = remain;
 	}
 
@@ -102,23 +98,7 @@ public class FundMenuFundList {
 	public void setMcount(Integer mcount) {
 		this.mcount = mcount;
 	}
-
-	public String getDelyn() {
-		return delyn;
-	}
-
-	public void setDelyn(String delyn) {
-		this.delyn = delyn;
-	}
-
-	public String getDcost() {
-		return dcost;
-	}
-
-	public void setDcost(String dcost) {
-		this.dcost = dcost;
-	}
-
+	
 	public int getRemain() {
 		return remain;
 	}
@@ -130,9 +110,11 @@ public class FundMenuFundList {
 	@Override
 	public String toString() {
 		return "FundMenuFundList [mno=" + mno + ", mname=" + mname + ", mcost=" + mcost + ", pro_no=" + pro_no
-				+ ", mcontent=" + mcontent + ", mdate=" + mdate + ", mnum=" + mnum + ", mcount=" + mcount + ", delyn="
-				+ delyn + ", dcost=" + dcost + ", remain=" + remain + "]";
+				+ ", mcontent=" + mcontent + ", mdate=" + mdate + ", mnum=" + mnum + ", mcount=" + mcount + ", remain="
+				+ remain + "]";
 	}
+
+
 
 	
 
