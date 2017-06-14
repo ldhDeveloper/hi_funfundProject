@@ -227,7 +227,7 @@ body {
 								$(function() {
 
 									var ecost = "<c:out value='${item.ecost}'/>";
-									var fundamount = "<c:out value='${item.fundamount}'/>"
+									var fundamount = "<c:out value='${item.fundamount}'/>";
 									var persent = Math.round(fundamount * 100
 											/ ecost);
 									var bar = 0;
@@ -246,36 +246,36 @@ body {
 
 									//console.log(persent);
 									$(
-											"#persent<c:out value='${status.index}'/>")
+											"#cpersent<c:out value='${status.index}'/>")
 											.text(persent);
 									$(
-											"#progressbar<c:out value='${status.index}'/>")
+											"#cprogressbar<c:out value='${status.index}'/>")
 											.attr("aria-valuenow", persent);
 									$(
-											"#progressbar<c:out value='${status.index}'/>")
+											"#cprogressbar<c:out value='${status.index}'/>")
 											.css("width", bar + "%");
-									$("#edate<c:out value='${status.index}'/>")
+									$("#cedate<c:out value='${status.index}'/>")
 											.text(btDay);
 
 									if (btDay < 0) {
 										$(
-												"#edate<c:out value='${status.index}'/>")
+												"#cedate<c:out value='${status.index}'/>")
 												.hide();
 										$(
-												"#yet<c:out value='${status.index}'/>")
+												"#cyet<c:out value='${status.index}'/>")
 												.hide();
 										$(
-												"#complete<c:out value='${status.index}'/>")
+												"#ccomplete<c:out value='${status.index}'/>")
 												.show();
 									} else {
 										$(
-												"#complete<c:out value='${status.index}'/>")
+												"#ccomplete<c:out value='${status.index}'/>")
 												.hide();
 										$(
-												"#edate<c:out value='${status.index}'/>")
+												"#cedate<c:out value='${status.index}'/>")
 												.show();
 										$(
-												"#yet<c:out value='${status.index}'/>")
+												"#cyet<c:out value='${status.index}'/>")
 												.show();
 									}
 								})
@@ -283,7 +283,7 @@ body {
 							<div id="progress<c:out value='${status.index}'/>"
 								class="progress">
 								<div class="progress-bar progress-bar-warning"
-									id="progressbar<c:out value='${status.index}'/>"
+									id="cprogressbar<c:out value='${status.index}'/>"
 									role="progressbar" aria-valuenow="60" aria-valuemin="0"
 									aria-valuemax="<c:out value="${item.ecost}"/>"
 									style="width: 60%;">
@@ -291,12 +291,12 @@ body {
 								</div>
 							</div>
 							<p>
-								<span id="persent<c:out value='${status.index}'/>"></span> %
+								<span id="cpersent<c:out value='${status.index}'/>"></span> %
 								<fmt:formatNumber var= "amountNumber" value="${item.fundamount}" type="currency" />
 								&nbsp;&nbsp; <span><c:out value="${amountNumber }" /></span>원
-								달성 &nbsp;&nbsp; <span id="edate<c:out value='${status.index}'/>"></span>
-								<span id="yet<c:out value='${status.index}'/>">일 남음</span>
-								<spen id="complete<c:out value='${status.index}'/>">펀딩종료</spen>
+								달성 &nbsp;&nbsp; <span id="cedate<c:out value='${status.index}'/>"></span>
+								<span id="cyet<c:out value='${status.index}'/>">일 남음</span>
+								<spen id="ccomplete<c:out value='${status.index}'/>">펀딩종료</spen>
 							</p>
 
 							<div class="caption">
