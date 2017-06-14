@@ -13,6 +13,10 @@
 <link href="/funfund/lib/font-awesome/font-awesome/css/font-awesome.css"
 	rel="stylesheet">
 <link href="/funfund/lib/css/common/font.css" rel="stylesheet">
+<!-- bxSlider Javascript file -->
+<script src="/funfund/lib/js/jquery.bxslider.min.js"></script>
+<!-- bxSlider CSS file -->
+<link href="/funfund/lib/css/jquery.bxslider.css" rel="stylesheet" />
 <style>
 .background {
 	background-color: #000033;
@@ -176,30 +180,16 @@ button {
 body {
 	font-family: myFirstFont !important;
 }
-
+.catename{
+	border: 1px solid #ffa500;
+    padding: 5px 10px 5px 10px;
+    color: white;
+    border-radius: 10px;
+    background-color: #ffa500;
+}
 </style>
 <script type="text/javascript">
 	$(function() {
-		/* $('#btn-like').click(function() {
-			if ($(this).hasClass("backpink")) {
-				$(this).removeClass("backpink");
-			} else {
-				$(this).addClass("backpink");
-			}
-		}).hover(function() {
-			if ($(this).hasClass("backpink")) {
-				$(this).removeClass("backpink");
-			} else {
-				$(this).addClass("backpink");
-			}
-		}); */
-		/* var preview = '${preview}';
-		 if(preview != null){
-			$('a').attr("href", "#");
-			$('button').attr('disabled', true);
-		
-		 } */
-		
 		var likeList = localStorage.getItem("likeList");
 		console.log("likeList : " + likeList);
 		var pro_no = "<c:out value='${param.pro_no}'/>";
@@ -277,7 +267,17 @@ body {
        
 	})
 	
-	
+</script>
+<script>
+  window.onload = function(){
+	  
+	  $('.bxslider').bxSlider({
+		  mode:'horizontal', //default : 'horizontal', options: 'horizontal', 'vertical', 'fade'
+		  speed:1000, //default:500 이미지변환 속도
+		  auto: true //default:false 자동 시작
+		});
+	  
+  }
 </script>
 </head>
 <body>
@@ -309,7 +309,7 @@ body {
 
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 box2"
 		style="padding: 10px;" align="center">
-		<!-- video or slide작성영역 -->
+		<!-- video 작성 영역 -->
 		<c:if test="${!empty item.pvideo}">
 			<div class="embed-responsive embed-responsive-16by9">
 				<iframe width="560" height="315"
@@ -317,53 +317,42 @@ body {
 					allowfullscreen></iframe>
 			</div>
 		</c:if>
+		<!-- 슬라이드 작성 영역 -->
 		<c:if test="${empty item.pvideo}">
-			<div id="myCarousel" class="carousel slide" data-ride="carousel"
-				style="padding-top: 20px;">
-
-				<div class="carousel-inner" role="listbox">
+			<div style="width:630px; height:400px;padding-top: 20px;">
+				<ul class="bxslider" >
 					<c:forEach var="slide" items="${sList}" varStatus="status">
 
 						<c:choose>
 							<c:when test="${status.first }">
-								<div class="item active">
+								<li>
 									<img
 										src="/funfund/images/makeproject/slideimg/${slide.refname}">
-								</div>
+								</li>
 							</c:when>
 
 							<c:otherwise>
-								<div class="item">
+								<li>
 									<img
 										src="/funfund/images/makeproject/slideimg/${slide.refname}">
-								</div>
+								</li>
 							</c:otherwise>
 						</c:choose>
 
-						<!-- control -->
-						<a class="left carousel-control" href="#myCarousel" role="button"
-							data-slide="prev"> <span
-							class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-							<span class="sr-only">Previous</span>
-						</a>
-						<a class="right carousel-control" href="#myCarousel" role="button"
-							data-slide="next"> <span
-							class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-							<span class="sr-only">Next</span>
-						</a>
-
 					</c:forEach>
-				</div>
+				</ul>
 
 			</div>
 		</c:if>
 		
+		<div id="content" style="font-size:13pt; color:orange;">${item.pshort}</div>
+		
 		<!-- 게시글작성영역 -->
-		<div id="content"></div>
+		<div id="content">${item.pcontent }</div>
 		<br>
 		<br>
-		<div align="left">
-			<p style="font-size: 12pt; color: orange">
+		<div align="left" style="margin-bottom:20px">
+			<p style="font-size:13pt; color: orange">
 				<strong>프로젝트 환불정책</strong>
 			</p>
 			${item.refund}

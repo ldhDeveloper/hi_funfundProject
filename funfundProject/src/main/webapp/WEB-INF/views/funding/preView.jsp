@@ -13,6 +13,10 @@
 <link href="/funfund/lib/font-awesome/font-awesome/css/font-awesome.css"
 	rel="stylesheet">
 <link href="/funfund/lib/css/common/font.css" rel="stylesheet">
+<!-- bxSlider Javascript file -->
+<script src="/funfund/lib/js/jquery.bxslider.min.js"></script>
+<!-- bxSlider CSS file -->
+<link href="/funfund/lib/css/jquery.bxslider.css" rel="stylesheet" />
 <style>
 .background {
 	background-color: #000033;
@@ -172,6 +176,8 @@ button {
 body {
 	font-family: myFirstFont !important;
 }
+
+
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -189,12 +195,26 @@ body {
 
 	})
 </script>
+<script>
+  window.onload = function(){
+	  
+	  $('.bxslider').bxSlider({
+		  mode:'horizontal', //default : 'horizontal', options: 'horizontal', 'vertical', 'fade'
+		  speed:1000, //default:500 이미지변환 속도
+		  auto: true //default:false 자동 시작
+		});
+	  
+  }
+</script>
+
 </head>
 <body>
 	<div class="row background">
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<h4 align="center" class="font">
-				<em>${item.category }</em> 프로젝트
+				<span class="catename"><c:out value="${item.category}" /></span>
+				${item.pshort}
+				프로젝트
 			</h4>
 		</div>
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -222,44 +242,31 @@ body {
 					src="https://www.youtube.com/embed/${item.pvideo }" frameborder="0"
 					allowfullscreen></iframe>
 			</div>
-		</c:if>
+		</c:if>		
+		
 		<c:if test="${empty item.pvideo}">
-			<div id="myCarousel" class="carousel slide" data-ride="carousel"
-				style="padding-top: 20px;">
-
-				<div class="carousel-inner" role="listbox">
+			<div style="width:630px; height:400px;padding-top: 20px;">
+				<ul class="bxslider" >
 					<c:forEach var="slide" items="${sList}" varStatus="status">
 
 						<c:choose>
 							<c:when test="${status.first }">
-								<div class="item active">
+								<li>
 									<img
 										src="/funfund/images/makeproject/slideimg/${slide.refname}">
-								</div>
+								</li>
 							</c:when>
 
 							<c:otherwise>
-								<div class="item">
+								<li>
 									<img
 										src="/funfund/images/makeproject/slideimg/${slide.refname}">
-								</div>
+								</li>
 							</c:otherwise>
 						</c:choose>
 
-						<!-- control -->
-						<a class="left carousel-control" href="#myCarousel" role="button"
-							data-slide="prev"> <span
-							class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-							<span class="sr-only">Previous</span>
-						</a>
-						<a class="right carousel-control" href="#myCarousel" role="button"
-							data-slide="next"> <span
-							class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-							<span class="sr-only">Next</span>
-						</a>
-						
 					</c:forEach>
-				</div>
+				</ul>
 
 			</div>
 		</c:if>
