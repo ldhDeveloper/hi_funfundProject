@@ -3,6 +3,7 @@
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -104,6 +105,10 @@ input[type="checkbox"] {
 	var plustotal = 0;
 	var orderlist = new Array();
 	var ordercount = new Array();
+	//돈콤마찍어주는 정규식
+	function numberWithCommas(x) {
+	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
 	$(function() {
 		
 		$(".checked").hide();
@@ -218,6 +223,7 @@ input[type="checkbox"] {
 						var mname = data[i].mname;
 						var mcontent = data[i].mcontent;
 						var fundcount = data[i].fundcount;
+						
 						var mcost = data[i].mcost;
 						
 						
@@ -233,7 +239,8 @@ input[type="checkbox"] {
 					}
 					$("#sub-total").html(0);
 					$("#sub-total").html(Number($("#sub-total").html()) + subtotal);
-					
+
+
 					$("#funding-total").html(0);
 					$("#funding-total").html(subtotal);
 					
@@ -397,7 +404,7 @@ input[type="checkbox"] {
 		 
 								</td>
 								<td style="width:600px;">
-									<h4><c:out value="${fundMenu.mcost}"/>원 펀딩합니다.</h4>
+									<h4><fmt:formatNumber value="${fundMenu.mcost}"/> 원 펀딩합니다.</h4>
 									<label><c:out value="${fundMenu.mname}"/></label>
 									<p><c:out value="${fundMenu.mcontent}"/></p><br>
 									<p>배송비 : <c:out value="${fundMenu.dcost}"/> | 예상 배송일 : <c:out value="${fundMenu.mdate}"/><br>
@@ -423,9 +430,6 @@ input[type="checkbox"] {
 		</div>
 	</div> 
 	
-	<div align="center" >
-		추가 후원 금액 : <input type="text" value="0" id="plusreward" style="text-align:right;"> 원
-	</div>
 	<br>
 	<hr>
 	
