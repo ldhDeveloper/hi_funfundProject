@@ -25,7 +25,6 @@
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 	width: 100%;
-	height: 80px;
 	color: #fff;
 	font-size: 26pt;
 	padding-top: 1.5%;
@@ -39,7 +38,6 @@
 	border-right: 1px solid #ddd;
 	background-color: #F8F8F8;
 	width: 100%;
-	height : 20%;
 	padding-top: 3%;
 	padding-left: 8%;
 	padding-right: 8%;
@@ -77,6 +75,7 @@
 	text-align: center;
 	padding-top: 2%;
 	color: #4A4A4A;
+	font-size: 14pt;
 }
 
 .mbtn1 {
@@ -102,7 +101,6 @@
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 	width: 100%;
-	height : 900px;
 	padding-top: 2%;
 }
 
@@ -156,7 +154,6 @@
 .tableStart {
 	width: 98%;
 	padding-left: 2%;
-	height: 100%;
 }
 
 .state {
@@ -164,7 +161,6 @@
 	border-radius: 15px;
 	background-color: #E25253;
 	width: 40%;
-	height: 25px;
 	color: white;
 	padding: 2%;
 }
@@ -282,7 +278,6 @@
 	border: none;
 	border-radius: 20px;
 	box-shadow: 2px 2px #ddd;
-	height: 30px;
 	text-size: 2vw;	
 }
 
@@ -293,7 +288,6 @@
 	border: none;
 	border-radius: 20px;
 	box-shadow: 2px 2px #ddd;
-	height: 30px;
 	text-size: 2vw;	
 }
 
@@ -304,7 +298,6 @@
 	border: none;
 	border-radius: 20px;
 	box-shadow: 2px 2px #ddd;
-	height: 30px;
 	text-size: 2vw;
 } 
 
@@ -343,6 +336,7 @@
 						<img class="img-circle img-responsive" src="images/myinfo/<c:out value='${sessionScope.account.pimage }'/>" style="max-width:170px;max-height:170px; width:170px; heigh:150px;"><!-- 사진 값이 들어갈 곳  -->
 						</c:if>
 						</div>
+						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow mname" align="center">
 						<label class="nameId">
 							회원명 | <c:if test="${ empty sessionScope.party.pname}">
 		                 				<input type="text" name="pname" class="mnameText" placeholder="이름" value="${ sessionScope.account.nickname }" readonly/>
@@ -352,6 +346,7 @@
 		                 				<input type="text" name="pname" class="mnameText" placeholder="이름" value="${ sessionScope.party.pname }" readonly/>
 		                 			</c:if>
 		       				</label>
+		       			</div>
 						<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 mrow" align="center"><label class="mgrade">회원등급 | ${ sessionScope.account.idtype }</label></div>
 						<%-- <c:choose>
         					<c:when test="${ sessionScope.account.idtype == '일반회원' || sessionScope.account.idtype == '승인요청'}">
