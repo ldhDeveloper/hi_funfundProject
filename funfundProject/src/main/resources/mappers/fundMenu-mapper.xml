@@ -13,8 +13,6 @@
 		<result property="s_mdate" column="s_mdate" />
 		<result property="mnum" column="mnum" />
 		<result property="mcount" column="mcount" />
-		<result property="delyn" column="delyn" />
-		<result property="dcost" column="dcost" />
 		<result property="remain" column="remain" />
 		<result property="fundcount" column="fundcount" />
 	</resultMap>
@@ -28,13 +26,11 @@
 		<result property="mdate" column="mdate" />
 		<result property="mnum" column="mnum" />
 		<result property="mcount" column="mcount" />
-		<result property="delyn" column="delyn" />
-		<result property="dcost" column="dcost" />
 		<result property="remain" column="remain" />
 	</resultMap>
 	<select id="selectMlist" parameterType="int" resultMap="fundMenuResult">
-select mno, mname, mcost, pro_no, mcontent, mdate, mnum, mcount, delyn, dcost, fundcount , (mcount - fundcount) as remain
-from (select fm.mno as mno, mname, mcost, fm.pro_no as pro_no, mcontent, mdate, mnum, mcount, delyn, dcost , nvl(f1.fundcount, 0) as fundcount 
+select mno, mname, mcost, pro_no, mcontent, mdate, mnum, mcount, fundcount , (mcount - fundcount) as remain
+from (select fm.mno as mno, mname, mcost, fm.pro_no as pro_no, mcontent, mdate, mnum, mcount,nvl(f1.fundcount, 0) as fundcount 
 from fundmenu fm left join (select sum(fundcount) as fundcount, mno
                             from fundlist
                             group by mno) f1 on f1.mno=fm.mno)
@@ -43,7 +39,7 @@ order by mno
 	</select>
 	
 	<select id="selectMlist2" parameterType="int" resultMap="fundMenuResult">
-		select f2.mno, mname, mcost, f2.pro_no, mcontent, to_char(mdate, 'yyyy-mm-dd')as s_mdate, mnum, mcount, delyn, dcost , fundcount, (mcount - f1.fundcount) as remain
+		select f2.mno, mname, mcost, f2.pro_no, mcontent, to_char(mdate, 'yyyy-mm-dd')as s_mdate, mnum, mcount,fundcount, (mcount - f1.fundcount) as remain
 		from (select sum(fundcount)fundcount, mno
 		         from fundlist
 		         group by mno) f1
@@ -59,8 +55,7 @@ order by mno
 	<insert id="insertFM" parameterType="FundMenu">
 		insert into fundmenu values
 		(seq_mno.nextval, #{mname, jdbcType=VARCHAR}, #{mcost,
-		jdbcType=INTEGER}, #{pro_no}, #{mcontent, jdbcType=VARCHAR}, to_date(#{s_mdate,jdbcType=VARCHAR}, 'yyyy-mm-dd'), #{mnum}, #{mcount, jdbcType=INTEGER}, #{delyn,
-		jdbcType=VARCHAR}, #{dcost, jdbcType=INTEGER})
+		jdbcType=INTEGER}, #{pro_no}, #{mcontent, jdbcType=VARCHAR}, to_date(#{s_mdate,jdbcType=VARCHAR}, 'yyyy-mm-dd'), #{mnum}, #{mcount, jdbcType=INTEGER}
 	</insert>
 
 	<update id="updateFM" parameterType="FundMenu">
@@ -71,7 +66,7 @@ order by mno
 		where mno=#{mno}
 	</update>
 	<select id="selectFM" parameterType="int" resultMap="fundMenuResult">
-		select mno, mname, mcost, pro_no, mcontent, to_char(mdate, 'yyyy-mm-dd')as s_mdate, mnum, mcount, delyn, dcost
+		select mno, mname, mcost, pro_no, mcontent, to_char(mdate, 'yyyy-mm-dd')as s_mdate, mnum, mcount
 		from fundmenu 
 		where mno = #{mno}
 	</select>
