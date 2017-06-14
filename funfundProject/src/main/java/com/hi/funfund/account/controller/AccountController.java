@@ -148,10 +148,10 @@ public class AccountController {
 	public ModelAndView changePw(Account account, ModelAndView model ){	
 		Account ac = accountService.createTempPwd(account);
 		model.addObject("tempEmail", ac.getEmail());
+		ac.setAno(120);
 		model.addObject("ano", ac.getAno());
 		sendTempPwd(ac);
 		model.setViewName("home");
-		
 		return model;
 	}
 	

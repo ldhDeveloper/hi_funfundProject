@@ -187,15 +187,15 @@ function insertReply(lev, upbno, replybno){
 						"</p><input type='hidden'  value='"+ data[i].nno+ "'>";
 					}
 					var ano = parseInt('${account.ano}');
-					if(data[i].nreply_lev == '1'){
+					if(data[i].nreply_lev == '1' && ano == 1){
 						replylist +="<button id='addreply' class='admin btn btn-default' onclick='createReplyForm(" + i + ", " + data[i].upbno + ", " + data[i].nno +" )'>답글달기</button>"; 
 					}
+				
 					if(data[i].ano == ano){
-						"<button id='redact' class='btn btn-default' onclick='redactForm(" + i + "," + data[i].nno + data[i].ano+ ")'>댓글수정</button>" +
+						replylist += "<button id='redact' class='btn btn-default' onclick='redactForm(" + i + "," + data[i].nno + data[i].ano+ ")'>댓글수정</button>" +
 						"<button class='btn btn-default' oncilck='ndelete(" + data[i].nno + ", ${n.nno})'>댓글삭제</button>" + 
 						"</div><br>";
 					}
-					
 					$('#replyList').html($('#replyList').html() + replylist);
 					var ano = parseInt('${account.ano}');
 					if(data[i].ano == ano){
@@ -209,12 +209,9 @@ function insertReply(lev, upbno, replybno){
 							date = data[i].ndate;
 						edgenum = i;}
 						} 
-					
-					
 					if('${account.idtype}' != '관리자'){
 						$('#addreply').remove();
 					}
-					
 				} 
 			 	top = $('#replyContent' +edgenum).offset().top;	
 			 	$('body').scrollTop(top - 300);

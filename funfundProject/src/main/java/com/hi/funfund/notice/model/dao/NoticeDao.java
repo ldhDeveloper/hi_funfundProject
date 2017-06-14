@@ -46,7 +46,7 @@ public class NoticeDao {
 		return sqlSession.delete(nameSpace+"delete", nno);
 	}
 	public int insert(Notice notice) {
-		
+		System.out.println(notice);
 		return sqlSession.insert(nameSpace+"insert", notice);
 	}
 	public int getListCount(Notice notice) {
