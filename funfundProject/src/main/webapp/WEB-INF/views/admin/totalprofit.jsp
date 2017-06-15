@@ -85,8 +85,11 @@
 		            label: "My First dataset",
 		            backgroundColor: 'rgb(255, 99, 132)',
 		            borderColor: 'rgb(255, 99, 132)',
-		            data: [<c:out value="${pi.jan}"/>, <c:out value="${pi.feb}"/>, <c:out value="${pi.mar}"/>, <c:out value="${pi.apr}"/>, <c:out value="${pi.may}"/>, <c:out value="${pi.jun}"/>,
-		            	<c:out value="${pi.jul}"/>, <c:out value="${pi.aug}"/>, <c:out value="${pi.sep}"/>, <c:out value="${pi.jan}"/>, <c:out value="${pi.oct}"/>, <c:out value="${pi.nov}"/>, <c:out value="${pi.dec}"/>],
+		            data: [<c:out value="${pi.jan}"/>, <c:out value="${pi.feb}"/>, <c:out value="${pi.mar}"/>, 
+		            	<c:out value="${pi.apr}"/>, <c:out value="${pi.may}"/>, <c:out value="${pi.jun}"/>,
+		            	<c:out value="${pi.jul}"/>, <c:out value="${pi.aug}"/>, <c:out value="${pi.sep}"/>, 
+		            	<c:out value="${pi.jan}"/>, <c:out value="${pi.oct}"/>, <c:out value="${pi.nov}"/>, 
+		            	<c:out value="${pi.dec}"/>],
 		        }]
 		    },
 
@@ -101,7 +104,8 @@
 				datasets : [ {
 					data : [ <c:out value="${cp.tech}"/>, <c:out value="${cp.beauty}"/>,
 						<c:out value="${cp.food}"/>, <c:out value="${cp.design}"/>, <c:out value="${cp.art}"/>,
-							<c:out value="${cp.game}"/>, <c:out value="${cp.trip}"/>, <c:out value="${cp.sport}"/>, <c:out value="${cp.pinterest}"/> ],
+							<c:out value="${cp.game}"/>, <c:out value="${cp.trip}"/>, <c:out value="${cp.sport}"/>, 
+							<c:out value="${cp.pinterest}"/> ],
 					backgroundColor : [ "#F44336",
 							"#D9D0D3", "#FF9800",
 							"#FFEB3B", "#4CAF50", "#9C27B0", "#00BCD4", "#FFEB3B", "#009688" ]
