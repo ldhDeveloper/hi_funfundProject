@@ -695,7 +695,7 @@ li {
 										$(
 												"#rlist")
 												.html()
-												+ "<tr><td>"
+												+ "<tr style='text-align:left'><td>"
 												+ data.fmenulist[i].mnum
 												+ "</td><td>"
 												+ data.fmenulist[i].mname
@@ -788,7 +788,7 @@ li {
 					success : function(data) {
 						var html = "<tr style='text-align:left'><td>순서</td><td>리워드명</td><td>금액</td><td>제한수량</td><td>배송예정일</td><td>수정/삭제</td></tr>";
 						for(var i = 0; i < data.length; i++){
-							html += "<tr><td>";
+							html += "<tr style='text-align:left'><td>";
 							html += data[i].mnum;
 							html += "</td><td>";
 							html += data[i].mname;
