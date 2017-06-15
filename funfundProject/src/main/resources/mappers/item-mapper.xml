@@ -237,7 +237,7 @@
 		desc) as rank
 		from item i join fundmenu fm on (i.pro_no=fm.pro_no)
 		join fundlist fl on (fm.mno=fl.mno)
-		where i.pro_no = #{pro_no}
+		where i.pro_no = #{pro_no} and fl.funstatus='결제완료'
 		group by fl.ano) a2
 		on (a.ano = a2.ano)
 		where rank <=3
@@ -877,7 +877,7 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
 		]]>    
 	</select>
 	<select id="selectCateName" parameterType="int" resultType="String">
-		select category 
+	  select category 
       from item
       where pro_no = #{pro_no}
 	</select>

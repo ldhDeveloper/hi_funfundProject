@@ -159,11 +159,9 @@ function numberWithCommas(x) {
 			$(this).addClass("clickbtn");
 		});
 		
-		$("#selectAll")
-				.click(
+		$("#selectAll").click(
 						function() {
-							$
-									.ajax({
+							$.ajax({
 										url : "selectAll.it",
 										type : "get",
 										async : true,
@@ -256,11 +254,9 @@ function numberWithCommas(x) {
 									});
 						});
 
-		$(".selcategory")
-				.click(
+		$(".selcategory").click(
 						function() {
-							$
-									.ajax({
+							$.ajax({
 										url : "selectCategory.it",
 										type : "get",
 										data : {
@@ -275,16 +271,9 @@ function numberWithCommas(x) {
 												var ecost = data[i].ecost;
 												var fundamount = numberWithCommas(data[i].fundamount);
 												var fundamount2 = data[i].fundamount;
-												console.log("fundamount"+fundamount);
-												console.log("fundamount2"+fundamount2);
-												console.log("ecost"+ecost);
 												var pedate = data[i].pedate;
-												var persent = Math
-														.round(fundamount2 * 100
-																/ ecost);
+												var persent = Math.round(fundamount2 * 100/ ecost);
 												var persent2 = numberWithCommas(persent);
-												console.log("오니");
-												console.log("persent:"+persent);
 												var bar = 0;
 												var category = data[i].category;
 												var pname = data[i].pname;
@@ -298,11 +287,7 @@ function numberWithCommas(x) {
 												var todate = new Date();
 												var btMs = edate.getTime()
 														- todate.getTime();
-											
-												var btDay = Math
-														.round(btMs
-																/ (1000 * 60 * 60 * 24));
-												
+												var btDay = Math.round(btMs/ (1000 * 60 * 60 * 24));
 												var funding = "";
 												var ending = "";
 												if (btDay < 0) {
@@ -397,18 +382,18 @@ function numberWithCommas(x) {
 					class="img-responsive"></a></li>
 				<li><a href="detail.it?pro_no=11"><img src="/funfund/images/funding/o.PNG"
 					class="img-responsive"></a></li>
-				<li><a><img src="/funfund/images/funding/ff.PNG"
+				<li><a href="detail.it?pro_no=88"><img src="/funfund/images/funding/ff.PNG"
 					class="img-responsive"></a></li>
-				<li><a href="detail.it?pro_no=31 "><img src="/funfund/images/funding/hh.PNG"
+				<li><a href="detail.it?pro_no=31"><img src="/funfund/images/funding/hh.PNG"
 					class="img-responsive"></a></li>
 			</ul>
 
 			<ul id="s3">
 				<li><a href="detail.it?pro_no=29"><img src="/funfund/images/funding/l3.png"
 					class="img-responsive"></a></li>
-				<li><a href="detail.it?pro_no=11"><img src="/funfund/images/funding/t.PNG"
+				<li><a href="detail.it?pro_no=86"><img src="/funfund/images/funding/t.PNG"
 					class="img-responsive"></a></li>
-				<li><a href="detail.it?pro_no=11"><img src="/funfund/images/funding/g.PNG"
+				<li><a href="detail.it?pro_no=87"><img src="/funfund/images/funding/g.PNG"
 					class="img-responsive"></a></li>
 				<li><a href="detail.it?pro_no=19"><img src="/funfund/images/funding/ss.PNG"
 					class="img-responsive"></a></li>

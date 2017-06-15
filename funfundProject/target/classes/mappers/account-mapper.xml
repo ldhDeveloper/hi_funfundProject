@@ -55,18 +55,12 @@
 	</insert>
 	<select id="loginParty" parameterType="int" resultMap="partyResult">
 		<![CDATA[
-		select a.*, c.likecategory
-			from (SELECT
-						* 
-					FROM
-						PARTY
-					WHERE
-						ANO = #{ano}) a 
-			join (select b.ano as ano, max(b.cname) as likecategory
-				      from (select ano, max(value) as value from 
-				      vi_likeinfo
-				      group by ano) a join vi_likeinfo b on (a.ano = b.ano and a.value = b.value)
-				      group by b.ano) c on (a.ano = c.ano)	
+		SELECT
+		* 
+		FROM
+		PARTY
+		WHERE
+		ANO = #{ano}	
 		]]>
 	</select>
 
