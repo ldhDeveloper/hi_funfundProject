@@ -187,11 +187,13 @@ function insertReply(lev, upbno, replybno){
 					if(data[i].nreply_lev == '1' && ano == 1){
 						replylist +="<button id='addreply' class='admin btn btn-default' onclick='createReplyForm(" + i + ", " + data[i].upbno + ", " + data[i].nno +" )'>답글달기</button>"; 
 					}
-				
 					if(data[i].ano == ano){
 						replylist += "<button id='redact' class='btn btn-default' onclick='redactForm(" + i + "," + data[i].nno + data[i].ano+ ")'>댓글수정</button>" +
 						"<button class='btn btn-default' oncilck='ndelete(" + data[i].nno + ", ${n.nno})'>댓글삭제</button>" + 
 						"</div><br>";
+					}
+					if('${account.idtype}' != '관리자'){
+						$('#addreply').remove();
 					}
 					$('#replyList').html($('#replyList').html() + replylist);
 					var ano = parseInt('${account.ano}');
@@ -202,10 +204,6 @@ function insertReply(lev, upbno, replybno){
 							 console.log(newestReply);
 							}
 						} 
-					
-					if('${account.idtype}' != '관리자'){
-						$('#addreply').remove();
-					}
 				} 
 			 	top = $('#replyContent' +newestReply).offset().top;	
 			 	$('body').scrollTop(top - 300);
@@ -213,92 +211,83 @@ function insertReply(lev, upbno, replybno){
 			}
 		});
 }
-
 function ndelete(nno, upbno){
-	if(nno == upbno){
-		$.ajax({
-			url : "nDelete.no",
-				
-			data : {"nno" : nno, "bname" : '{$n.bname}', "upbno" :upbno, "page" : '${page}', "ntitle" : '${n.ntitle}' },
-			contentType : "application/json",
-			success : function(data){
-				if(data.message == '댓글삭제'){
-					 location.href="nDetail.no?nno=${n.nno}&bname='${n.bname}'&page=${page}";	
-				}else if('본글삭제'){
-					location.href="nList.no?bname=${n.bname }&page=${page}";
-				}else{
-					alert(data.message);
-					location.href="nList.no?bname=${n.bname }&page=${page}";
-				}
-					}	
-				});
-	}else{
-		$.ajax({
-			url : "nDelete.no",
-			data : {"nno" : nno, "bname" : '{$n.bname}', "upbno" :upbno, "page" : '${page}' },
-			contentType : "application/json",
-			success : function(data){
-				if(data.message == '댓글삭제'){
-					 location.href="nDetail.no?nno=${n.nno}&bname='${n.bname}'&page=${page}";	
-				}else{
-					location.href="nList.no?bname=${n.bname }&page=${page}";
-				}
-					}	
-				});
-	}
-	
+			if(nno == upbno){
+				$.ajax({
+					url : "nDelete.no",
+					data : {"nno" : nno, "bname" : '{$n.bname}', "upbno" :upbno, "page" : '${page}', "ntitle" : '${n.ntitle}' },
+					contentType : "application/json",
+					success : function(data){
+						if(data.message == '댓글삭제'){
+							 location.href="nDetail.no?nno=${n.nno}&bname='${n.bname}'&page=${page}";	
+						}else if('본글삭제'){
+							location.href="nList.no?bname=${n.bname }&page=${page}";
+						}else{
+							alert(data.message);
+							location.href="nList.no?bname=${n.bname }&page=${page}";
+						}
+							}	
+						});
+			}else{
+				$.ajax({
+					url : "nDelete.no",
+					data : {"nno" : nno, "bname" : '{$n.bname}', "upbno" :upbno, "page" : '${page}' },
+					contentType : "application/json",
+					success : function(data){
+						if(data.message == '댓글삭제'){
+							 location.href="nDetail.no?nno=${n.nno}&bname='${n.bname}'&page=${page}";	
+						}else{
+							location.href="nList.no?bname=${n.bname }&page=${page}";
+						}
+							}	
+						});
+			}
 	}
 function redactForm(index, y, ano){
- var division =  '.replyContent' + index;
- var content = $(division).children('.rcontent').text();
-	$(division).html(
-			$(division).html() +
-			"<textarea id='redactContent' class='ncontent' name='redactContent' rows='6' cols='77' style='overflow-y:hidden' maxlength='150px'>" +
-	   		  content +  "</textarea>"+
-				"<input type='hidden' name='nno' value= " + y + ">" +
-				   "<br><button onclick='updateReply("+ index + ");'>수정</button>"
-	);	
-	$(division).children('#addreply').attr('disabled', true);
-	$(division).children('#redact').attr('disabled', true);
+			 var division =  '.replyContent' + index;
+			 var content = $(division).children('.rcontent').text();
+				$(division).html(
+						$(division).html() +
+						"<textarea id='redactContent' class='ncontent' name='redactContent' rows='6' cols='77' style='overflow-y:hidden' maxlength='150px'>" +
+				   		  content +  "</textarea>"+
+							"<input type='hidden' name='nno' value= " + y + ">" +
+							   "<br><button onclick='updateReply("+ index + ");'>수정</button>"
+				);	
+				$(division).children('#addreply').attr('disabled', true);
+				$(division).children('#redact').attr('disabled', true);
 }
 function updateReply(x){
-	var division =  '.replyContent' + x;
-	var nno = $(division).children('input[name=nno]').val();
-	var ano = '${account.ano}';
-	var bname =  "${n.bname}";
-	var upbno = ${n.nno};
-	var ncontent = $(division).children('textarea').val();
-	var page = parseInt('${page}');
-	/* location.href="nUpdate.no?ano="+ano+"&bname="+bname+"&ncontent="+ncontent +"&upbno="+upbno+"&page=${page}&nno="+nno; */
-	$.ajax({
-		url : "nUpdate.no",
-		data : {"ano" : ano, "bname" : bname, "ncontent" : ncontent, "upbno" : upbno, "page" : page, "nno" : nno},
-		contentType : "application/json",
-		success : function(data){
-			if(data.message == 'success'){
-				location.href= "nDetail.no?nno=${n.nno}&bname='${n.bname}'&page=${page}";	
-			}else{
-				alert("댓글이 존재하지 않습니다.");
-				location.href="nList.no?bname=${n.bname}&page=${page}";
-			}
-		
+			var division =  '.replyContent' + x;
+			var nno = $(division).children('input[name=nno]').val();
+			var ano = '${account.ano}';
+			var bname =  "${n.bname}";
+			var upbno = ${n.nno};
+			var ncontent = $(division).children('textarea').val();
+			var page = parseInt('${page}');
+			$.ajax({
+				url : "nUpdate.no",
+				data : {"ano" : ano, "bname" : bname, "ncontent" : ncontent, "upbno" : upbno, "page" : page, "nno" : nno},
+				contentType : "application/json",
+				success : function(data){
+					if(data.message == 'success'){
+						location.href= "nDetail.no?nno=${n.nno}&bname='${n.bname}'&page=${page}";	
+					}else{
+						alert("댓글이 존재하지 않습니다.");
+						location.href="nList.no?bname=${n.bname}&page=${page}";
+					}
+				}	
+			});
 		}
-		
-	});
-}
 function createReplyForm(index, upbno, replybno){
-	/* if('${account.idtype}' == '관리자'){ */
-	var division =  '.replyContent' + index;
-	$(division).html(
-			$(division).html()
-			+"<textarea id='rereplyContent' class='ncontent' placeholder='대댓글을 입력하세요' name='rereplyContent' rows='6' cols='77' style='overflow-y:hidden' maxlength='150px'>" +
-	    	  "</textarea>" +
-			  "<br><button onclick='insertReply(2, "+ upbno + ", "+ replybno + ");'>답글등록</button>"
-	);	
-	$(division).children('#addreply').attr('disabled', true);
-	$(division).children('#redact').attr('disabled', true);
-
-	
+			var division =  '.replyContent' + index;
+			$(division).html(
+					$(division).html()
+					+"<textarea id='rereplyContent' class='ncontent' placeholder='대댓글을 입력하세요' name='rereplyContent' rows='6' cols='77' style='overflow-y:hidden' maxlength='150px'>" +
+			    	  "</textarea>" +
+					  "<br><button onclick='insertReply(2, "+ upbno + ", "+ replybno + ");'>답글등록</button>"
+			);	
+			$(division).children('#addreply').attr('disabled', true);
+			$(division).children('#redact').attr('disabled', true);
 }	
 </script>
 <div class="container">
