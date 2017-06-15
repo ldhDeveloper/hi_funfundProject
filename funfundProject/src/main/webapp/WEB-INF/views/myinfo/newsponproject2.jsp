@@ -303,6 +303,13 @@
 	border-bottom-right-radius: 4px !important;
 	border-bottom-left-radius: 4px !important;
 }
+
+.catename{
+    padding: 5px 8px 5px 8px;
+    color: white;
+    border-radius: 10px;
+    background-color: #3DB8CC;
+}
 </style>
 
 <title>Insert title here</title>
@@ -425,7 +432,7 @@
       							
       							<br>
       							
-      							<div class="dlistStart container">
+      							<div class="dlistStart" style="margin: 0px 15px 0px 15px;">
 			  						<ul class="DStart nav nav-pills">
 			    						<li class="sideDlist"><a class="sdlist" href="newsponproject.ao">모두보기</a></li>
 			    						<li class="mainDlist"><a class="mdlist">작성중</a></li>
@@ -471,7 +478,7 @@
 							      											</div>											
 						      											</c:if>
 						      												
-						      											<div id="size" style="height:125px; max-height:125px;">	
+						      											<div id="size" style="height:140px; max-height:140px;">	
 							      											<div id="dprogress<c:out value='${status.index}'/>" class="progress" style="display:none;">
 							  													<div id="dprogressbar<c:out value='${status.index}'/>" 
 							  														 class="w3-red progress-bar progress-bar-striped active" 
@@ -488,7 +495,7 @@
 																														
 							      										 	<div class="dcaption<c:out value='${status.index}'/>">
 							            										<p>${ item.pname }</p>
-							            										<span>${ item.category }</span>            										
+							            										<span class="catename"><c:out value="${item.category}" /></span>            										
 							          										</div>
 						          										</div>	 
 						          									</a>
