@@ -28,6 +28,7 @@ $(function(){
 		}
 		break;	
 	   case 'FnQ' : $('#fnq').css({"background": "#00CCA3", "border-color" : "#00CCA3", "color": "#fff" });
+	   
 					$('#bTitle').text('FnQ');
 			     	$('#bComent').text('자주묻는 질문입니다.');
 			     	
@@ -128,6 +129,7 @@ button.accordion {
 	height: 52px;
 	border-radius: 4px;
 	padding-top: 0.8%;
+	weight : 60%;
 	box-shadow: 3px 3px 5px #d1d0d8;
 
 }
@@ -152,7 +154,7 @@ color : rgb(124, 130, 136);
 
 }
 .nlist{
-width:970px;
+width:inherit;
 margin:auto;
 padding:24px;
 display : block;
@@ -240,6 +242,12 @@ float : left;
     border: 1px solid #e4e4e4;
     background: #fff;
 }
+@media screen and (max-width: 992px){
+.noticebutton{
+width : 18%;
+}
+}
+
 .FnQcontainer{
 display : block;
 background : gray;
