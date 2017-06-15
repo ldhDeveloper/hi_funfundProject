@@ -310,6 +310,14 @@
 	border-bottom-right-radius: 4px !important;
 	border-bottom-left-radius: 4px !important;
 }
+
+.catename{
+    padding: 5px 8px 5px 8px;
+    color: white;
+    border-radius: 10px;
+    background-color: #3DB8CC;
+}
+
 </style>
 
 <title>Insert title here</title>
@@ -461,7 +469,7 @@
 							      											</div>											
 						      											</c:if>
 						      												
-						      											<div id="size" style="height:130px; max-height:130px;">	
+						      											<div id="size" style="height:140px; max-height:140px;">	
 							      											<div id="dprogress<c:out value='${status.index}'/>" class="progress" style="display:none;">
 							  													<div id="dprogressbar<c:out value='${status.index}'/>" 
 							  														 class="w3-red progress-bar progress-bar-striped active" 
@@ -478,7 +486,7 @@
 																														
 							      										 	<div class="dcaption<c:out value='${status.index}'/>">
 							            										<p>${ item.pname }</p>
-							            										<span>${ item.category }</span>            										
+							            										<span class="catename"><c:out value="${item.category}" /></span>            										
 							          										</div>
 						          										</div>	 
 						          									</a>

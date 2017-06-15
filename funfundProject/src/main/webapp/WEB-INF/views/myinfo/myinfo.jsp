@@ -506,6 +506,10 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
         											return false;
         										}
         										
+        										else if($("#newPwd").val() != $("#newPwd2").val()) {
+        											return false;
+        										}
+        										
         										else {
         											$.ajax({
         												url: "changePwd.ao",
@@ -519,7 +523,7 @@ a.btn-block-purple.disable, button.btn-block-mint.disable{background:rgba(80, 22
             													location.href="myinfo.ao";
         													}
         													else {
-        														alert("비밀번호를 변경할 수 없습니다. 뭔가 잘못되었나봐요.");
+        														alert("비밀번호를 변경할 수 없습니다. 기존의 비밀번호와 입력하신 현재 비밀번호가 일치 하지 않습니다.");
         													}        													
         												}
         											});
