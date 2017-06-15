@@ -121,7 +121,7 @@
         	<td><c:out value="${item.id }"/></td>
         	<input id="evi${status.index }" type="hidden" value ="${item.evidence }"/>
         	<td><button id="appCancel${status.index }" type="button" class="btn btn-success appCancel">결제취소</button></td>
-      		<td><input id="rejCancel${status.index }" type="button" class="btn btn-danger" value="판매자 승인거부" onclick="rejectCancel(${item.fund_no });"></td>
+      		<td><input id="rejCancel${status.index }" type="button" class="btn btn-danger" value="결제취소거부" onclick="rejectCancel(${item.fund_no });"></td>
       	</tr>   	
       </c:forEach>
     </tbody>
