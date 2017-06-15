@@ -52,17 +52,15 @@ height : 100px;
 }
 
 .ndetail{
-width:970px;
+width:inherit;
 margin:auto;
 padding:80px;
-text-align: right;
 }
-
 .ntable {
 width : 800px; 
 margin : auto;
 font-weight:bold;
-text-align:center;
+
 font-size: 13px;
 border: none;
 }
@@ -116,14 +114,14 @@ min-height : 500px !important;
 		<td><textarea id="froala-editor" required>
 		${n.ncontent}
 		</textarea></td></tr>
-
+	<tr><td></td><td style="text-align:right;"> <button class="btn btn-default" onclick="updateN()">수정</button><a class="btn btn-default" href="nList.no?bname=${n.bname }&page=${page}">목록으로</a></td></tr>
 </table>
-<button class="btn btn-default" onclick="updateN()">수정</button><a class="btn btn-default" href="nList.no?bname=${n.bname }&page=${page}">목록으로</a>
 </form> 
+
+
 <div class = "down"></div>
 <script>
 function updateN(){
-
 var ncontent =  $('textarea#froala-editor').froalaEditor('html.get');
 var ntitle = $('input[name=ntitle]').val();
 var nno = parseInt('${n.nno}');
