@@ -22,7 +22,8 @@ $(function() {
 		  theme: 'Royal',
 		  heightMin : '900',
 		  heightMax : '1500',
-		  language : 'fr',
+		  toolbarbottom : false,
+		  zIndex : 2002,
 		  direction: 'ltr',
 		  toolbarButtons : ['fullscreen', 
 			  				'bold', 'italic', 'underline',
@@ -50,23 +51,18 @@ color: white;
 }
 
 .ndetail{
-width:970px;
+width:inherit;
 margin:auto;
-padding:80px;
-text-align: right;
 }
 .ntable {
 width:800px;
 margin:auto;
 
 }
-
-
 .ntable {
 width : 800px; 
 margin : auto;
 font-weight:bold;
-text-align:center;
 font-size: 13px;
 border: none;
 }
