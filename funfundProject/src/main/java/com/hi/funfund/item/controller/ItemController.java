@@ -373,6 +373,9 @@ public class ItemController {
 	public ModelAndView fundingdetailList(ModelAndView model, HttpServletRequest request, HttpSession session) {
 		int pro_no = Integer.parseInt(request.getParameter("pro_no"));
 		String category = itemService.selectCategory(pro_no);
+		if(category.equals("support")){
+			category = "pinterest";
+		}
 		session = request.getSession(false);
 		if(session.getAttribute("account") != null){
 			Account a = (Account) session.getAttribute("account");
