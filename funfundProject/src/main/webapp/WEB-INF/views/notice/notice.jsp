@@ -13,38 +13,41 @@
 <title>즐거움이 가득한 공간 펀펀드!</title>
 <script>
 $(function(){
-	switch('${bname}'){
-	case '공지사항' :	var admin = '${account.idtype}';
-					$('#no').css({"background": "#00CCA3", "border-color" : "#00CCA3", "color": "#fff" });
-					$('#bTitle').text('공지사항');
-					$('#bComent').text('펀펀드의 공지사항입니다.');
-					$("#searchBar").children("form").children("#searchCategory").html("<option value='ntitle'>제목</option>");	
-					if( admin == '관리자'){
-						$("#searchBar").children("form").html($("#searchBar").children("form").html()
-							+" &nbsp; <a class='btn btn-default' href='nInsertView.no?bname=${bname}&page=${page}'>글쓰기</a>");
-					}
-					break;	
-	case 'FnQ' : 	$('#fnq').css({"background": "#00CCA3", "border-color" : "#00CCA3", "color": "#fff" });
-					$('#bTitle').text('FnQ');
-			     	$('#bComent').text('자주묻는 질문입니다.');
-					$('.nListContainer').html( 
-			  									"<hr><div class='panel-group' id='accordion'>"+
-			  									"<c:forEach var='nlist' items='${nList}' varStatus='status'>" +
-											  	"<div class='panel panel-default'>"+
-											  	"<div class='panel-heading' style='font-family:Godo;'>"+
-											  	"<h4 class='panel-title'>"+
-											  	"<a href='#collapse2' class='fontfamily1'>${nlist.ntitle}</a></h4>"+
-											  	"</div>"+
-											  	"<div id='collapse2' class='panel-collapse collapse'>"+
-											   	"<div class='panel-body fontfamily2'>${nlist.ncontent}</div>"+  
-											  	"</div>"+
-											  	"</div>"+
-											  	"</c:forEach>" +
-											  	"</div>"); 
-					$("#pageBar").remove();
-					$("#searchBar").remove();
-					break;  
-	case 'QnA' :	$('#qna').css({"background": "#00CCA3", "border-color" : "#00CCA3", "color": "#fff" });
+	if( '${bname}' == '공지사항'){
+		var admin = '${account.idtype}';
+		console.log("admin " + admin);
+		$('#no').css({"background": "#00CCA3", "border-color" : "#00CCA3", "color": "#fff" });
+		$('#bTitle').text('공지사항');
+		$('#bComent').text('펀펀드의 공지사항입니다.');
+		$("#searchBar").children("form").children("#searchCategory").html("<option value='ntitle'>제목</option>");	
+		if( admin == '관리자'){
+			$("#searchBar").children("form").html($("#searchBar").children("form").html()
+				+" &nbsp; <a class='btn btn-default' href='nInsertView.no?bname=${bname}&page=${page}'>글쓰기</a>");
+		}
+	}
+	else if('${bname}' == 'FnQ'){
+		$('#fnq').css({"background": "#00CCA3", "border-color" : "#00CCA3", "color": "#fff" });
+		$('#bTitle').text('FnQ');
+     	$('#bComent').text('자주묻는 질문입니다.');
+		$('.nListContainer').html( 
+  									"<hr><div class='panel-group' id='accordion'>"+
+  									"<c:forEach var='nlist' items='${nList}' varStatus='status'>" +
+								  	"<div class='panel panel-default'>"+
+								  	"<div class='panel-heading' style='font-family:Godo;'>"+
+								  	"<h4 class='panel-title'>"+
+								  	"<a href='#collapse2' class='fontfamily1'>${nlist.ntitle}</a></h4>"+
+								  	"</div>"+
+								  	"<div id='collapse2' class='panel-collapse collapse'>"+
+								   	"<div class='panel-body fontfamily2'>${nlist.ncontent}</div>"+  
+								  	"</div>"+
+								  	"</div>"+
+								  	"</c:forEach>" +
+								  	"</div>"); 
+		$("#pageBar").remove();
+		$("#searchBar").remove();
+	}else{
+
+		$('#qna').css({"background": "#00CCA3", "border-color" : "#00CCA3", "color": "#fff" });
 					$('#bTitle').text('QnA');
 					$('#bComent').text('사용자와의 소통이 이루어 집니다.');
 					$("#searchBar").children("form").children("#searchCategory").html(
@@ -52,9 +55,11 @@ $(function(){
 					if('${account}' != ""){
 						$("#searchBar").children("form").html($("#searchBar").children("form").html()
 								+" &nbsp; <a class='btn btn-default' href='nInsertView.no?bname=${bname}&page=${page}'>글쓰기</a>");
-						}
-						break;
-					};
+						}	
+	}	
+		
+					
+				
 	
 	$('.panel-heading').hover(function(){
 		$(this).css('cursor', 'pointer');

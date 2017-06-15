@@ -173,13 +173,13 @@ function insertReply(lev, upbno, replybno){
 					if(data[i].pimage == null){
 						replylist +=  "<p><img class='rImage' src='/funfund/images/myinfo/dimages.png'>" +
 						data[i].nickname +"</p><br>" +
-						"<p style='text-indent:50px;'>" +data[i].ncontent +"</p><br><p>" +
+						"<p class='rcontent' style='text-indent:50px;'>" +data[i].ncontent +"</p><br><p>" +
 						data[i].ndate+
 						"</p><input type='hidden'  value='"+ data[i].nno+ "'>";
 					}else{
 					 replylist += "<p><img class='rImage' src='images/myinfo/"+data[i].pimage + "'>"+ 
 					 	data[i].nickname +"</p>" +
-						"<p style='text-indent:50px;'>" +data[i].ncontent +"</p><p>" +
+						"<p class='rcontent' style='text-indent:50px;'>" +data[i].ncontent +"</p><p>" +
 						data[i].ndate+
 						"</p><input type='hidden'  value='"+ data[i].nno+ "'>";
 					}
@@ -188,7 +188,7 @@ function insertReply(lev, upbno, replybno){
 						replylist +="<button id='addreply' class='admin btn btn-default' onclick='createReplyForm(" + i + ", " + data[i].upbno + ", " + data[i].nno +" )'>답글달기</button>"; 
 					}
 					if(data[i].ano == ano){
-						replylist += "<button id='redact' class='btn btn-default' onclick='redactForm(" + i + "," + data[i].nno + data[i].ano+ ")'>댓글수정</button>" +
+						replylist += "<button id='redact' class='btn btn-default' onclick='redactForm(" + i + "," + data[i].nno + ", " + data[i].ano+ ")'>댓글수정</button>" +
 						"<button class='btn btn-default' oncilck='ndelete(" + data[i].nno + ", ${n.nno})'>댓글삭제</button>" + 
 						"</div><br>";
 					}
@@ -209,6 +209,7 @@ function insertReply(lev, upbno, replybno){
 			 	$('body').scrollTop(top - 300);
 			 $('.replylev2').children('#addreply').remove();
 			}
+		
 		});
 }
 function ndelete(nno, upbno){
@@ -269,6 +270,7 @@ function updateReply(x){
 				data : {"ano" : ano, "bname" : bname, "ncontent" : ncontent, "upbno" : upbno, "page" : page, "nno" : nno},
 				contentType : "application/json",
 				success : function(data){
+					console.log('${data}');
 					if(data.message == 'success'){
 						location.href= "nDetail.no?nno=${n.nno}&bname='${n.bname}'&page=${page}";	
 					}else{

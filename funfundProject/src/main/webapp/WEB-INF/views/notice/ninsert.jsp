@@ -116,8 +116,9 @@ border-bottom: none;
 	  class="details" value="${account.nickname}" readonly></td></tr>
 		<tr><td colspan="2" class="insertContext"><textarea id="froala-editor" required>
 		</textarea></td></tr>
+		<tr><td></td><td style="text-align:right;"><button class="btn btn-default" onclick="insertN()">작성</button></td></tr>
 </table>
-<button class="btn btn-default" onclick="insertN()">작성</button>
+
 </form> 
 <div class = "down"></div>
 <script>
