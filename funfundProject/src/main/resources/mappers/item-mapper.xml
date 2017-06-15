@@ -314,7 +314,6 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
                                                        from attachment
                                                        where ftype='item' and fsubtype='thumbnail') i7 on(i1.pro_no = i7.refno)) ia on (mi1.pro_no = ia.pro_no)
 							where mi1.ano = #{ano} and ia.category != 'pinterest' and category != 'support'
-							order by i1.pro_no desc	
 	</select>
 	
 	<select id="selectMySponItems" parameterType="int" resultMap="itemResult">
@@ -344,7 +343,6 @@ from myitem mi1 left join (select i1.*, nvl(i2.fundamount, 0) fundamount , nvl(i
                                                        from attachment
                                                        where ftype='item' and fsubtype='thumbnail') i7 on(i1.pro_no = i7.refno)) ia on (mi1.pro_no = ia.pro_no)
 							where mi1.ano = #{ano} and ia.category != 'pinterest' and category='support' 
-							order by i1.pro_no desc	
 	</select>
 	
 	<select id="selectNewProject" parameterType="int" resultMap="itemResult">
