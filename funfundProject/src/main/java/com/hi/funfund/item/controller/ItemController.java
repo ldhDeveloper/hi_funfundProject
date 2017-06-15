@@ -381,6 +381,7 @@ public class ItemController {
 			System.out.println("ano : " + Integer.toString(a.getAno()));
 			hmap.put("category", category);
 			System.out.println("category : " + category);
+			System.out.println("hmap : " + hmap);
 			int result = accountService.upCategory(hmap);
 			//int result = accountService.tempUp(a.getAno());
 			System.out.println("upresult : " + result);
