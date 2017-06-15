@@ -29,7 +29,7 @@
 	</resultMap>
 	<select id="selectRequestSeller" resultMap="accInfoResult">
 		<![CDATA[
-			select a.ano as ano, a.id as id, p.pname as pname, ENCRYPTION_AES.DEC_AES(p.id_no) AS id_no, a.idtype as idtype, p.phone as phone, p.idimage as idimage
+			select a.ano as ano, a.id as id, p.pname as pname, substr(ENCRYPTION_AES.DEC_AES(p.id_no), 1, 6) AS id_no, a.idtype as idtype, p.phone as phone, p.idimage as idimage
 			from account a join party p on (a.ano = p.ano)
 			where idtype='승인요청중'
 		]]>

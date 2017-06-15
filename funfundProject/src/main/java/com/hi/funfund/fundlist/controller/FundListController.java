@@ -94,8 +94,8 @@ public class FundListController {
 	}
 
 @RequestMapping(value = "exportExcel.fl", method = RequestMethod.POST)
-public @ResponseBody String exportExcel(@RequestParam int pro_no, HttpServletRequest request, HttpServletResponse response) throws Exception{
-	System.out.println("오니?!?");
+public @ResponseBody String exportExcel(@RequestParam int pro_no, HttpServletRequest request,
+		HttpServletResponse response) throws Exception{
 	System.out.println("pro_no : " + pro_no);
 	String filePath ="";
 	List<Mysponsor> mlist = fundListService.selectSponsorList(pro_no);
@@ -429,10 +429,7 @@ public ModelAndView selectList(ModelAndView model){
 	
 	@RequestMapping(value = "fileDown.fl")
 	public ModelAndView fileDownLoad(ModelAndView model, HttpServletRequest request) {
-		System.out.println("파일오니?");
-		
 		String f = request.getParameter("downloadFile");
-		System.out.println("f나와 : " + f);
 		File file = new File(f);
 		model.addObject("downloadFile", file);
 		model.setViewName("fileDownloadView");
@@ -440,7 +437,8 @@ public ModelAndView selectList(ModelAndView model){
 	}
 	
 	@RequestMapping(value = "importExcel.fl", method=RequestMethod.POST)
-	public @ResponseBody List<Mysponsor> importExcelLoad(Mysponsor mysponsor, HttpServletRequest request) throws  IOException{
+	public @ResponseBody List<Mysponsor> importExcelLoad(Mysponsor mysponsor,
+			HttpServletRequest request) throws  IOException{
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest)request;
 		MultipartFile fileObj = multipartRequest.getFile("fileObj");
 		

@@ -130,7 +130,6 @@
 							href="mynewsup.up?pro_no=${proItem.pro_no }">새소식</a></li>
 						<li id="info3"><a
 							href="myprojectnews.fl?pro_no=${proItem.pro_no }">새소식쓰기</a></li>
-						<li id="info4"><a href="#">댓글</a></li>
 					</ul>
 				</div>
 			</div>
