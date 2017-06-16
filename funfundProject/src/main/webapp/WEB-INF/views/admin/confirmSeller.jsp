@@ -113,7 +113,7 @@
         	<td><c:out value="${item.ano }"/></td>
         	<td><c:out value="${item.id }"/></td>
         	<td><c:out value="${item.pname}"/></td>
-        	<td id=""><c:out value="${item.id_no }"/>-*******</td>
+        	<td id=""><c:out value="${item.id_no }"/>******</td>
         	<td><c:out value="${item.idtype }"/></td>
         	<td><c:out value="${item.phone }"/></td>
         	<td><button value="${item.idimage }" type="button" class="btn btn-primary showImage">실명확인증표보기</button></td>
