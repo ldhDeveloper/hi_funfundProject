@@ -82,7 +82,7 @@
 		    data: {
 		    	labels: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
 		        datasets: [{
-		            label: "My First dataset",
+		            label: "월별 수익",
 		            backgroundColor: 'rgb(255, 99, 132)',
 		            borderColor: 'rgb(255, 99, 132)',
 		            data: [<c:out value="${pi.jan}"/>, <c:out value="${pi.feb}"/>, <c:out value="${pi.mar}"/>, 
