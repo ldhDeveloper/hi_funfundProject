@@ -235,6 +235,7 @@ body {
 
 	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 box2"
 		style="padding: 10px;" align="center">
+		<div style="width:640px; height: 500px;">
 		<!-- video or slide작성영역 -->
 		<c:if test="${!empty item.pvideo}">
 			<div class="embed-responsive embed-responsive-16by9">
@@ -270,7 +271,7 @@ body {
 
 			</div>
 		</c:if>
-
+</div>
 		<div id="content">${item.pshort}</div>
 		<!-- 게시글작성영역 -->
 		<div id="content"></div>
